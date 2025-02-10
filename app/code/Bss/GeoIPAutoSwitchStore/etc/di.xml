@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_GeoIPAutoSwitchStore
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2016-2024 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="Bss\GeoIPAutoSwitchStore\Model\Validation\BlackListInterface" type="Bss\GeoIPAutoSwitchStore\Model\Validation\BlackList"/>
+	<preference for="Bss\GeoIPAutoSwitchStore\Model\Validation\DefaultRedirectInterface" type="Bss\GeoIPAutoSwitchStore\Model\Validation\DefaultRedirect"/>
+	<preference for="Bss\GeoIPAutoSwitchStore\Model\Validation\SkipRedirectInterface" type="Bss\GeoIPAutoSwitchStore\Model\Validation\SkipRedirect"/>
+	<virtualType name="Bss\GeoIPAutoSwitchStore\Model\Logger\Handler" type="\Magento\Framework\Logger\Handler\Base">
+		<arguments>
+			<argument name="fileName" xsi:type="string">/var/log/geoip-debug.log</argument>
+		</arguments>
+	</virtualType>
+	<virtualType name="Bss\GeoIPAutoSwitchStore\Model\Logger\Logger" type="Magento\Framework\Logger\Monolog">
+		<arguments>
+			<argument name="handlers" xsi:type="array">
+				<item name="debug" xsi:type="object">Bss\GeoIPAutoSwitchStore\Model\Logger\Handler</item>
+			</argument>
+		</arguments>
+	</virtualType>
+	<virtualType name="Bss\GeoIPAutoSwitchStore\App\Helper\Context" type="Magento\Framework\App\Helper\Context">
+		<arguments>
+			<argument name="logger" xsi:type="object">Bss\GeoIPAutoSwitchStore\Model\Logger\Logger</argument>
+		</arguments>
+	</virtualType>
+	<type name="Bss\GeoIPAutoSwitchStore\Helper\Config">
+		<arguments>
+			<argument name="context" xsi:type="object">Bss\GeoIPAutoSwitchStore\App\Helper\Context</argument>
+		</arguments>
+	</type>
+</config>

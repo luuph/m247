@@ -74,6 +74,6 @@ atlassian*
 .DS_Store
 /backup/
 **/.git
-app/code/*/*/.git/
-app/code/*/*/.git/*
+/app/code/*/*/.git/
+/app/code/*/*/.git/*
 

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Social Login Base for Magento 2
+ */-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="formkey"/>
+    <body>
+        <referenceContainer name="content">
+            <container name="am-social-analytic" htmlTag="div" htmlClass="am-social-analytic" before="-">
+                <block class="Magento\Backend\Block\Template" name="amsociallogin-analytic"
+                       template="Amasty_SocialLogin::analytic-loader.phtml" />
+            </container>
+
+            <block class="Magento\Framework\View\Element\Template"
+                   name="amsl.adv.repbuilder"
+                   template="Amasty_SocialLogin::advertise/report_builder.phtml"
+                   after="-">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">
+                        Amasty\SocialLogin\ViewModel\ReportBuilder\Advertise
+                    </argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

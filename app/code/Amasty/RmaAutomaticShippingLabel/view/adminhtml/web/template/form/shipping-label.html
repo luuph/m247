@@ -1,0 +1,49 @@
+<div class="admin__field" visible="visible" css="$data.additionalClasses">
+    <label class="admin__field-label" if="$data.label" attr="for: uid" visible="$data.labelVisible" data-amshiping-js="generate">
+        <span class="amrma-label" translate="label" attr="'data-config-scope': $data.scopeLabel"/>
+    </label>
+
+    <div class="admin__field-control" css="'_with-tooltip': $data.tooltip">
+        <div class="file-uploader" data-role="drop-zone" css="_loading: isLoading">
+            <!-- ko foreach: $data.value -->
+            <div class="amshipping-file-container">
+                <a class="amshipping-link" target="_blank" data-bind="text: name, attr: {href: url}"></a>
+                <span class="amshipping-remove" click="$parent.removeFile.bind($parent, $data)"></span>
+            </div>
+            <!-- /ko -->
+            <div class="amshipping-upload-container">
+                <button class="amrma-button" translate="'Generate'" ifnot="value().length" click="$data.generateLabel"></button>
+                <button class="amrma-button" translate="'View Package'" if="value().length && hasLabel(value())" click="$data.viewPackage"></button>
+            </div>
+            <div class="file-uploader-area" ifnot="value().length">
+                <input type="file" afterRender="onElementRender" attr="id: uid, name: inputName, multiple: isMultipleFiles" disable="disabled" />
+                <label attr="for: uid">
+                    <span translate="'or'"></span>
+                    <span class="amshipping-link" translate="'Add a file'"></span>
+                    <span translate="'to upload shipping label'"></span>
+                </label>
+
+                <span class="file-uploader-spinner"/>
+                <render args="fallbackResetTpl" if="$data.showFallbackReset && $data.isDifferedFromDefault"/>
+            </div>
+
+            <render args="tooltipTpl" if="$data.tooltip"/>
+
+            <div class="admin__field-note" if="$data.notice" attr="id: noticeId">
+                <span html="notice"/>
+            </div>
+
+            <label class="admin__field-error" if="error" attr="for: uid" text="error"/>
+
+            <div if="isMultipleFiles" class="file-uploader-summary">
+                <label attr="for: uid"
+                       class="file-uploader-placeholder"
+                       css="'placeholder-' + placeholderType">
+                    <span class="file-uploader-placeholder-text"
+                          translate="'Click here or drag and drop to add files.'"/>
+                </label>
+            </div>
+        </div>
+        <render args="$data.service.template" if="$data.hasService()"/>
+    </div>
+</div>

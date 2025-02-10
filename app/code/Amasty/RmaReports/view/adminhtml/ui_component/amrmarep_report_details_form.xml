@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2023 Amasty (https://www.amasty.com)
+ * @package Reports for RMA (Add-On) for Magento 2
+ */-->
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">amrmarep_report_details_form.amrmarep_report_details_form_data_source</item>
+            <item name="deps" xsi:type="string">amrmarep_report_details_form.amrmarep_report_details_form_data_source</item>
+        </item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">amrmarep_report_details_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Overview</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <dataSource name="amrmarep_report_overview_form.amrmarep_report_overview_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Amasty\RmaReports\Model\Report\DataProvider\DetailsForm</argument>
+            <argument name="name" xsi:type="string">amrmarep_report_details_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <fieldset name="filters">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="additionalClasses" xsi:type="string">amrma-filters-container</item>
+                <item name="template" xsi:type="string">Amasty_Rma/form/rma_fieldset</item>
+            </item>
+        </argument>
+        <field name="date_range">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Amasty\RmaReports\Model\OptionSource\Date</item>
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="elementTmpl" xsi:type="string">Amasty_RmaReports/form/element/select</item>
+                    <item name="component" xsi:type="string">Amasty_RmaReports/js/form/element/select</item>
+                    <item name="label" xsi:type="string" translate="true">Date Range:</item>
+                    <item name="dataType" xsi:type="string">select</item>
+                    <item name="labelVisible" xsi:type="boolean">true</item>
+                    <item name="additionalClasses" xsi:type="string">amrma-date-select</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="switcherConfig" xsi:type="array">
+                        <item name="enabled" xsi:type="boolean">true</item>
+                        <item name="rules" xsi:type="array">
+                            <item name="0" xsi:type="array">
+                                <item name="value" xsi:type="string">1</item>
+                                <item name="actions" xsi:type="array">
+                                    <item name="0" xsi:type="array">
+                                        <item name="target" xsi:type="string">amrmarep_report_details_form.amrmarep_report_details_form.filters.start_date</item>
+                                        <item name="callback" xsi:type="string">hide</item>
+                                    </item>
+                                    <item name="1" xsi:type="array">
+                                        <item name="target" xsi:type="string">amrmarep_report_details_form.amrmarep_report_details_form.filters.end_date</item>
+                                        <item name="callback" xsi:type="string">hide</item>
+                                    </item>
+                                </item>
+                            </item>
+                            <item name="1" xsi:type="array">
+                                <item name="value" xsi:type="string">2</item>
+                                <item name="actions" xsi:type="array">
+                                    <item name="0" xsi:type="array">
+                                        <item name="target" xsi:type="string">amrmarep_report_details_form.amrmarep_report_details_form.filters.start_date</item>
+                                        <item name="callback" xsi:type="string">hide</item>
+                                    </item>
+                                    <item name="1" xsi:type="array">
+                                        <item name="target" xsi:type="string">amrmarep_report_details_form.amrmarep_report_details_form.filters.end_date</item>
+                                        <item name="callback" xsi:type="string">hide</item>
+                                    </item>
+                                </item>
+                            </item>
+                            <item name="2" xsi:type="array">
+                                <item name="value" xsi:type="string">3</item>
+                                <item name="actions" xsi:type="array">
+                                    <item name="0" xsi:type="array">
+                                        <item name="target" xsi:type="string">amrmarep_report_details_form.amrmarep_report_details_form.filters.start_date</item>
+                                        <item name="callback" xsi:type="string">hide</item>
+                                    </item>
+                                    <item name="1" xsi:type="array">
+                                        <item name="target" xsi:type="string">amrmarep_report_details_form.amrmarep_report_details_form.filters.end_date</item>
+                                        <item name="callback" xsi:type="string">hide</item>
+                                    </item>
+                                </item>
+                            </item>
+                            <item name="3" xsi:type="array">
+                                <item name="value" xsi:type="number">4</item>
+                                <item name="actions" xsi:type="array">
+                                    <item name="0" xsi:type="array">
+                                        <item name="target" xsi:type="string">amrmarep_report_details_form.amrmarep_report_details_form.filters.start_date</item>
+                                        <item name="callback" xsi:type="string">show</item>
+                                    </item>
+                                    <item name="1" xsi:type="array">
+                                        <item name="target" xsi:type="string">amrmarep_report_details_form.amrmarep_report_details_form.filters.end_date</item>
+                                        <item name="callback" xsi:type="string">show</item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="start_date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="component" xsi:type="string">Amasty_RmaReports/js/form/element/date</item>
+                    <item name="label" xsi:type="string" translate="true">From:</item>
+                    <item name="imports" xsi:type="array">
+                        <item name="endDate" xsi:type="string">${ $.provider }:data.end_date</item>
+                        <item name="startDate" xsi:type="string">${ $.provider }:data.start_date</item>
+                    </item>
+                    <item name="additionalClasses" xsi:type="string">amrma-start-date amrma-date-input</item>
+                    <item name="formElement" xsi:type="string">date</item>
+                    <item name="source" xsi:type="string">page</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="dataScope" xsi:type="string">start_date</item>
+                </item>
+            </argument>
+        </field>
+        <field name="end_date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="component" xsi:type="string">Amasty_RmaReports/js/form/element/date</item>
+                    <item name="label" xsi:type="string" translate="true">To:</item>
+                    <item name="imports" xsi:type="array">
+                        <item name="startDate" xsi:type="string">${ $.provider }:data.start_date</item>
+                        <item name="endDate" xsi:type="string">${ $.provider }:data.end_date</item>
+                    </item>
+                    <item name="additionalClasses" xsi:type="string">amrma-end-date amrma-date-input</item>
+                    <item name="formElement" xsi:type="string">date</item>
+                    <item name="source" xsi:type="string">page</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                    <item name="dataScope" xsi:type="string">end_date</item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+    <fieldset name="requests_details">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="additionalClasses" xsi:type="string">amrma-requests-container</item>
+                <item name="template" xsi:type="string">Amasty_Rma/form/rma_fieldset</item>
+            </item>
+        </argument>
+        <field name="requests-stat">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">container</item>
+                    <item name="addAllowed" xsi:type="boolean">true</item>
+                    <item name="isAdmin" xsi:type="boolean">true</item>
+                    <item name="imports" xsi:type="array">
+                        <item name="startDate" xsi:type="string">${ $.provider }:data.start_date</item>
+                        <item name="endDate" xsi:type="string">${ $.provider }:data.end_date</item>
+                        <item name="dateRange" xsi:type="string">${ $.provider }:data.date_range</item>
+                        <item name="items" xsi:type="string">${ $.provider }:data.items</item>
+                    </item>
+                    <item name="exports" xsi:type="array">
+                        <item name="startDate" xsi:type="string">${ "requests-stat" }:params.start_date</item>
+                        <item name="endDate" xsi:type="string">${ "requests-stat" }:params.end_date</item>
+                        <item name="dateRange" xsi:type="string">${ "requests-stat" }:params.date_range</item>
+                        <item name="items" xsi:type="string">${ "requests-stat" }:params.items</item>
+                    </item>
+                    <item name="component" xsi:type="string">Amasty_RmaReports/js/reports</item>
+                    <item name="template" xsi:type="string">Amasty_RmaReports/amrma-requests-overview</item>
+                    <item name="dataUrl" xsi:type="url" path="amrmarep/report/reportData"/>
+                    <item name="pageType" xsi:type="string">details</item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+    <fieldset name="listing_container">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true"></item>
+                <item name="template" xsi:type="string">Amasty_Rma/form/fieldset</item>
+            </item>
+        </argument>
+        <insertListing name="details_listing">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="autoRender" xsi:type="boolean">true</item>
+                    <item name="selectionsProvider" xsi:type="string">amrmarep_report_details_listing.amrmarep_report_details_listing.amrmarep_report_details_listing_manage_columns.ids</item>
+                    <item name="externalProvider" xsi:type="string">amrmarep_report_details_listing.amrmarep_report_details_listing_data_source</item>
+                    <item name="ns" xsi:type="string">amrmarep_report_details_listing</item>
+                    <item name="imports" xsi:type="array">
+                        <item name="startDate" xsi:type="string">${ $.provider }:data.start_date</item>
+                        <item name="endDate" xsi:type="string">${ $.provider }:data.end_date</item>
+                        <item name="dateRange" xsi:type="string">${ $.provider }:data.date_range</item>
+                        <item name="items" xsi:type="string">${ $.externalProvider }:data.items</item>
+                    </item>
+                    <item name="externalFilterMode" xsi:type="boolean">true</item>
+                    <item name="exports" xsi:type="array">
+                        <item name="startDate" xsi:type="string">${ $.externalProvider }:params.start_date</item>
+                        <item name="endDate" xsi:type="string">${ $.externalProvider }:params.end_date</item>
+                        <item name="dateRange" xsi:type="string">${ $.externalProvider }:params.date_range</item>
+                        <item name="items" xsi:type="string">${ $.provider }:data.items</item>
+                    </item>
+                    <item name="realTimeLink" xsi:type="boolean">true</item>
+                    <item name="dataLinks" xsi:type="array">
+                        <item name="imports" xsi:type="boolean">true</item>
+                        <item name="exports" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </insertListing>
+    </fieldset>
+</form>

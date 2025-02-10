@@ -1,0 +1,49 @@
+Reports,Rapporti
+Overview,Panoramica
+"Reports in details","Rapporti in dettaglio"
+RMA,RMA
+"7 Days","7 giorni"
+"30 Days","30 giorni"
+"Last Year","L'anno scorso"
+"Custom Date","Data personalizzata"
+Statistics,Statistiche
+"Total Requests","Richieste totali"
+"The number of closed RMA requests for the set period of time.","Il numero di richieste RMA chiuse per il periodo di tempo impostato."
+"Percentage of Returns","Percentuale di resi"
+"The ratio between the number of submitted RMA requests and the number of orders. It helps to understand the number of returns for the same number of orders. The less is the value, the better the situation with returns is.","Il rapporto tra il numero di richieste RMA presentate e il numero di ordini. Aiuta a capire il numero di resi per lo stesso numero di ordini. Minore è il valore, migliore è la situazione con i rendimenti."
+Lead-time,"Tempi di consegna"
+"A time period starting from the RMA request submission and ending when RMA request gets to the 'Completed' state. The less is the lead-time, the better your return process is. This is the average value for the set period.","Un periodo di tempo che inizia dall'invio della richiesta RMA e termina quando la richiesta RMA raggiunge lo stato ""Completato"". Minore è il tempo di consegna, migliore è il processo di restituzione. Questo è il valore medio per il periodo impostato."
+Rating,Valutazione
+"Some of the RMA requests are rated by customers. This is the average value for the set period.","Alcune delle richieste RMA sono valutate dai clienti. Questo è il valore medio per il periodo impostato."
+"Delivery by store","Consegna in negozio"
+"Shows how many items were delivered back from customers at the expense of the store.","Mostra quanti articoli sono stati restituiti dai clienti a spese del negozio."
+"Top Reasons","Principali motivi"
+"Top Return Reasons for the set period.","Principali motivi di restituzione per il periodo impostato."
+"Changes have been made to this section that have not been saved.","Sono state apportate modifiche a questa sezione che non sono state salvate."
+"This tab contains invalid data. Please resolve this before saving.","Questa scheda contiene dati non validi. Si prega di risolvere questo problema prima di salvare."
+"RMA Reports","Rapporti RMA"
+"Date Range:","Intervallo di date:"
+From:,Da:
+To:,Per:
+"Request Items Resolution","Richiedi la risoluzione degli articoli"
+"Request Items Condition","Richiedi la condizione degli articoli"
+"Request Items Reason","Motivo della richiesta degli articoli"
+"RMA ID","ID RMA"
+Customer,Cliente
+Manager,Gestore
+"Lead Time","Tempi di consegna"
+"Request Items SKU","Richiedi articoli SKU"
+Total,Totale
+"Suspicious Items","Oggetti sospetti"
+"The report helps to detect suspicious items in a few clicks. Please, set the needed Return Reason and you will see the list of items that were returned back for the set time period and reason. The chosen return reason will be saved and set by default next time you load the page. Sort the columns for the ease of use.","Il rapporto aiuta a rilevare elementi sospetti in pochi clic. Per favore, imposta il motivo di reso necessario e vedrai l'elenco degli articoli che sono stati restituiti per il periodo di tempo e il motivo impostati. Il motivo del reso scelto verrà salvato e impostato per impostazione predefinita al prossimo caricamento della pagina. Ordina le colonne per facilità d'uso."
+"Return Reason","Motivo del reso"
+"Suspicious Customers","Clienti sospetti"
+"The report helps to detect suspicious customers in a few clicks. Please, set the needed Return Resolution and you will see the list of customers that submit a lot of returns or bring profit to the store for the set time period and reason. The chosen return reason will be saved and set by default next time you load the page. Sort the columns for the ease of use.","Il rapporto aiuta a rilevare i clienti sospetti in pochi clic. Per favore, imposta la risoluzione di reso necessaria e vedrai l'elenco dei clienti che inviano molti resi o portano profitto al negozio per il periodo di tempo e il motivo stabiliti. Il motivo del reso scelto verrà salvato e impostato per impostazione predefinita al prossimo caricamento della pagina. Ordina le colonne per facilità d'uso."
+"Return Resolution","Risoluzione di ritorno"
+Item,Elemento
+"Returned, times","Restituito, volte"
+Price,Prezzo
+Name,Nome
+"Orders Qty","Ordini Qtà"
+"RMA Qty","Qtà RMA"
+Profit,Profitto

@@ -1,0 +1,65 @@
+/*Custom Css Mageplaza_TableRateShipping */
+.table-checkout-shipping-method tbody .col {
+    vertical-align: middle;
+}
+
+.table-checkout-shipping-method tbody .col.col-method > img {
+    max-height: 32px;
+    vertical-align: middle;
+}
+
+.mp-row-comment .mp-col-comment {
+    border: none;
+    padding-top: 0;
+}
+
+/*compatible with Weltpixel Theme*/
+@media screen and (max-width: 767px) {
+    .table-checkout-shipping-method tbody td:first-child {
+        width: unset;
+    }
+}
+
+td.col.col-price {
+    max-width: 100px !important;
+}
+
+td[class="col col-carrier"] {
+    max-width: 120px !important;
+}
+
+@media only screen and (max-width: 1500px){
+    td[class="col col-carrier"] {
+        max-width: 0px !important;
+        padding: 0px !important;
+    }
+    td.col.col-price {
+        max-width: 60px !important;
+        padding-left: 0px !important;
+    }
+    td[class="col col-method"]{
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+    .table-checkout-shipping-method tbody td:first-child{
+        max-width:30px !important;
+    }
+}
+.table-checkout-shipping-method tbody .col.col-method > img{
+    max-height: 48px !important;
+}
+
+tr.row.mp-row-comment {
+    display: table-row !important;
+}
+
+td.col.col-method {
+    display: flex;
+    align-items: center;
+}
+
+td.col.col-price {
+    display: flex;
+    align-items: center;
+}
+/*Custom Css Mageplaza_TableRateShipping */

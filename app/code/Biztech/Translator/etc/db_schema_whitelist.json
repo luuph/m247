@@ -1,0 +1,69 @@
+{
+    "translator_cron": {
+        "column": {
+            "id": true,
+            "store_id": true,
+            "cron_date": true,
+            "update_cron_date": true,
+            "cron_name": true,
+            "product_ids": true,
+            "lang_from": true,
+            "lang_to": true,
+            "status": true,
+            "is_abort": true,
+            "is_console": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "translator_logcron": {
+        "column": {
+            "trans_id": true,
+            "cron_job_code": true,
+            "cron_date": true,
+            "status": true,
+            "product_id": true,
+            "remain_limit": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "translate_in_all_storeview": {
+        "column": {
+            "id": true,
+            "store_ids": true,
+            "cron_name": true,
+            "product_ids": true,
+            "succeed_store_ids": true,
+            "lang_from": true,
+            "lang_to": true,
+            "status": true,
+            "is_abort": true,
+            "cron_date": true,
+            "update_cron_date": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "translate_newly_added_product": {
+        "column": {
+            "id": true,
+            "store_ids": true,
+            "cron_name": true,
+            "product_ids": true,
+            "succeed_store_ids": true,
+            "lang_from": true,
+            "lang_to": true,
+            "status": true,
+            "is_abort": true,
+            "cron_date": true,
+            "update_cron_date": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

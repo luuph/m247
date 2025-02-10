@@ -1,0 +1,192 @@
+//
+//  Amasty RMA Reports
+//  ____________________________________________
+
+//
+//  Variables
+//  _____________________________________________
+
+@amrma-icon__question: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTciIGhlaWdodD0iMTciIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iOC41IiBjeT0iOC41IiByPSI4LjUiIGZpbGw9IiMzODlERkUiLz48cGF0aCBkPSJNNy40ODggMTAuMDc0YzAtLjYwNi4wNzUtMS4wODkuMjI2LTEuNDQ5LjE1LS4zNi40NDYtLjc1NC44ODktMS4xODMuNDQ2LS40MzMuNzI5LS43NC44NDctLjkyMi4xODItLjI3OC4yNzQtLjU4LjI3NC0uOTAzIDAtLjQyOC0uMTA3LS43NTQtLjMyMi0uOTc3LS4yMS0uMjI4LS41Mi0uMzQyLS45My0uMzQyLS4zOTEgMC0uNzA4LjExMi0uOTUuMzM1LS4yMzcuMjE5LS4zNTUuNTE3LS4zNTUuODk1SDUuNTA2Yy4wMDktLjgwNi4yODItMS40NDQuODItMS45MTQuNTQyLS40NyAxLjI1OC0uNzA0IDIuMTQ3LS43MDQuOTE2IDAgMS42MjkuMjMzIDIuMTQuNjk3LjUxNC40NjUuNzcyIDEuMTE1Ljc3MiAxLjk0OSAwIC43NDItLjM0NyAxLjQ3NC0xLjA0IDIuMTk0bC0uODQuODI3Yy0uMy4zNDItLjQ1Ni44NDEtLjQ2NSAxLjQ5N0g3LjQ4OHpNNy4zNzIgMTIuMmMwLS4yNjkuMDg0LS40ODUuMjUzLS42NS4xNjktLjE2OC4zOTYtLjI1Mi42ODQtLjI1Mi4yOTEgMCAuNTIxLjA4Ni42OS4yNmEuODcuODcgMCAwMS4yNTMuNjQyYzAgLjI1LS4wODIuNDYtLjI0Ni42My0uMTY0LjE2OC0uMzk3LjI1Mi0uNjk3LjI1Mi0uMzAxIDAtLjUzNC0uMDg0LS42OTgtLjI1M2EuODguODggMCAwMS0uMjM5LS42Mjl6IiBmaWxsPSIjZmZmIi8+PC9zdmc+');
+
+//
+//  Common
+//  ----------------------------------------------
+
+& when (@media-common = true) {
+    .amrma-flex-container {
+        display: flex;
+    }
+
+    .amrma-statistics-block {
+        & {
+            flex-basis: 77%;
+            margin-right: 30px;
+            padding: 20px;
+            max-height: 450px;
+            border-radius: 20px;
+            box-shadow: 0 6px 25px rgba(218, 225, 241, .5);
+        }
+
+        &.-full {
+            flex-basis: 100%;
+        }
+    }
+
+    .btn-filters-block {
+        display: flex;
+    }
+
+    .amrma-btn-container {
+        & {
+            position: relative;
+            display: flex;
+            flex-basis: 20%;
+            justify-content: space-between;
+            box-sizing: border-box;
+            margin: 5px;
+            padding: 5px 15px;
+            border: 2px solid rgba(95, 146, 247, .3);
+            border-radius: 5px;
+            background-color: #f7faff;
+            cursor: pointer;
+            transition: background-color .4s;
+        }
+
+        &:hover,
+        &.-checked {
+            color: #fff;
+            background: #5f92f7;
+        }
+
+        .amrma-name {
+            align-self: center;
+            margin-right: 20px;
+            max-width: 130px;
+        }
+
+        .amrma-count {
+            align-self: center;
+            font-weight: 600;
+        }
+    }
+
+    .amrma-reasons-block {
+        & {
+            flex-basis: 23%;
+            padding: 20px 20px 0;
+            width: 380px;
+            border-radius: 20px;
+            box-shadow: 0 6px 25px rgba(218, 225, 241, .5);
+        }
+
+        .amrma-title {
+            display: inline;
+            margin-bottom: 0;
+        }
+    }
+
+    .amrma-tooltip-container {
+        & {
+            position: absolute;
+            bottom: 55px;
+            left: 0;
+            display: none;
+            padding: 10px;
+            width: 250px;
+            border-radius: 6px;
+            background: #fff;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, .15);
+        }
+
+        .amrma-question-container:hover &,
+        .amrma-btn-container:hover & {
+            display: block;
+        }
+
+        &:after {
+            position: absolute;
+            bottom: -8px;
+            left: 20px;
+            width: 18px;
+            height: 18px;
+            background: #fff;
+            content: '';
+            transform: rotate(45deg);
+        }
+
+        & > .amrma-title {
+            display: block;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+            font-weight: 600;
+        }
+
+        & > .amrma-text {
+            color: #575757;
+            font-weight: 400;
+            font-size: 12px;
+        }
+    }
+
+    .amrma-question-container {
+        position: relative;
+        display: inline;
+        padding: 0 17px;
+        width: 17px;
+        height: 17px;
+        background: @amrma-icon__question no-repeat center;
+    }
+
+    .amrma-chart-legend {
+        min-height: 200px;
+    }
+
+    .amrma-chart-container {
+        & {
+            min-height: 180px;
+        }
+
+        &.-statistics {
+            min-height: 300px;
+        }
+    }
+
+    .amrma-content-container {
+        padding: 20px;
+        width: 100%;
+    }
+
+    .amrma-main-container {
+        display: flex;
+        flex-direction: row;
+        border-top: 1px solid #d7dbe9;
+    }
+
+    .amrma-body-container .notices-wrapper {
+        display: none;
+    }
+
+    .amrma-filters-container .amrma-admin__fieldset {
+        & {
+            display: flex;
+        }
+
+        .admin__field {
+            display: flex;
+            margin: 0;
+        }
+
+        & .amrma-start-date,
+        & .amrma-date-select {
+            margin-right: 20px;
+        }
+
+        .admin__field-label {
+            margin-right: 10px;
+        }
+    }
+
+    .amrmarep-report-index ._has-datepicker + .ui-datepicker-trigger {
+        z-index: 0;
+    }
+}

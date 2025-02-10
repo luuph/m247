@@ -1,4 +1,0 @@
-0000000000000000000000000000000000000000 e6551f3b367257a8a41eb08c870a51af9ed96959 Hai Luu <luuph@bsscommerce.com> 1730789508 +0700	clone: from ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-hide-price.git
-e6551f3b367257a8a41eb08c870a51af9ed96959 e6551f3b367257a8a41eb08c870a51af9ed96959 Hai Luu <luuph@bsscommerce.com> 1730803760 +0700	reset: moving to HEAD
-e6551f3b367257a8a41eb08c870a51af9ed96959 e6551f3b367257a8a41eb08c870a51af9ed96959 Hai Luu <luuph@bsscommerce.com> 1730803781 +0700	checkout: moving from master to BSupport-7615
-e6551f3b367257a8a41eb08c870a51af9ed96959 a4642f8eee6072b305e24e633aa7fb00d37e5dd1 Hai Luu <luuph@bsscommerce.com> 1730803834 +0700	commit: BSupport-7615: Fix not show add to quote button when hideprice configurable product

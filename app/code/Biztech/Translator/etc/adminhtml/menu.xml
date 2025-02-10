@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!-- Copyright © 2016 store.biztechconsultancy.com. All Rights Reserved. -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Backend/etc/menu.xsd">
+    <menu>
+        <add id="Biztech_Translator::biztech_translatorindex" title="AppJetty Translator" module="Biztech_Translator" sortOrder="20" dependsOnModule="Biztech_Translator"  resource="Biztech_Translator::biztech_translatorindex"/>
+    	<add id="Biztech_Translator::manage" title="Manage Translation" action="translator/translator/index" module="Biztech_Translator" sortOrder="10" dependsOnModule="Biztech_Translator" parent="Biztech_Translator::biztech_translatorindex" resource="Biztech_Translator::biztech_translatorindex"/>
+       	<add id="Biztech_Translator::biztech_translatorcron" title="Bulk Product Translation" module="Biztech_Translator" sortOrder="30" dependsOnModule="Biztech_Translator" action="translator/cron/index" parent="Biztech_Translator::biztech_translatorindex" resource="Biztech_Translator::biztech_translatorindex"/>
+       	<add id="Biztech_Translator::biztech_masstranslateinallstore" title="Bulk Product Translation in Multiple store" module="Biztech_Translator" sortOrder="40" dependsOnModule="Biztech_Translator" action="translator/cron/masstranslateinmultistore" parent="Biztech_Translator::biztech_translatorindex" resource="Biztech_Translator::biztech_translatorindex"/>
+       	<add id="Biztech_Translator::biztech_newlyaddedproducttranslateinallstore" title="Newly Added Product Translation in Multiple store" module="Biztech_Translator" sortOrder="40" dependsOnModule="Biztech_Translator" action="translator/cron/newlyaddedproducttranslateinmultistore" parent="Biztech_Translator::biztech_translatorindex" resource="Biztech_Translator::biztech_translatorindex"/>
+    </menu>
+</config>

@@ -1,0 +1,23 @@
+<div class="amshipping-package-header">
+    <span class="amshipping-title" data-bind="text: $parents[1].getPackageLabel($index())"></span>
+</div>
+<table class="amshipping-table-block -package">
+    <thead class="amshipping-thead">
+    <tr>
+        <!-- ko foreach: $data.packageLabels -->
+            <!-- ko if: isHidden !== 'true' -->
+            <th scope="col" class="col amshipping-col" data-bind="text: $data.label"></th>
+            <!-- /ko -->
+        <!-- /ko -->
+    </tr>
+    </thead>
+    <tbody class="amshipping-tbody">
+    <tr class="amshipping-row">
+        <!-- ko foreach: $data.packageLabels -->
+            <!-- ko if: isHidden !== 'true' -->
+            <td class="col amshipping-col" data-bind="text: $data.value"></td>
+            <!-- /ko -->
+        <!-- /ko -->
+    </tr>
+    </tbody>
+</table>

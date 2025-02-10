@@ -1,0 +1,182 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2023 Amasty (https://www.amasty.com)
+ * @package RMA API for Magento 2 (System)
+ */-->
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <!-- RMA Status -->
+    <route url="/V1/amasty_rma/rma_status/get/:statusId" method="GET">
+        <service class="Amasty\Rma\Api\StatusRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="Amasty_Rma::status" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_rma/rma_status/list" method="GET">
+        <service class="Amasty\RmaApi\Api\StatusFinderInterface" method="getList"/>
+        <resources>
+            <resource ref="Amasty_Rma::status" />
+        </resources>
+    </route>
+
+    <!-- RMA Resolution -->
+    <route url="/V1/amasty_rma/rma_resolution/get/:resolutionId" method="GET">
+        <service class="Amasty\Rma\Api\ResolutionRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="Amasty_Rma::resolution" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_rma/rma_resolution/list" method="GET">
+        <service class="Amasty\RmaApi\Api\ResolutionFinderInterface" method="getList"/>
+        <resources>
+            <resource ref="Amasty_Rma::resolution" />
+        </resources>
+    </route>
+
+    <!-- RMA Condition -->
+    <route url="/V1/amasty_rma/rma_condition/get/:conditionId" method="GET">
+        <service class="Amasty\Rma\Api\ConditionRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="Amasty_Rma::condition" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_rma/rma_condition/list" method="GET">
+        <service class="Amasty\RmaApi\Api\ConditionFinderInterface" method="getList"/>
+        <resources>
+            <resource ref="Amasty_Rma::condition" />
+        </resources>
+    </route>
+
+    <!-- RMA Reason -->
+    <route url="/V1/amasty_rma/rma_reason/get/:reasonId" method="GET">
+        <service class="Amasty\Rma\Api\ReasonRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="Amasty_Rma::reason" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_rma/rma_reason/list" method="GET">
+        <service class="Amasty\RmaApi\Api\ReasonFinderInterface" method="getList"/>
+        <resources>
+            <resource ref="Amasty_Rma::reason" />
+        </resources>
+    </route>
+
+    <!-- RMA Chat -->
+    <route url="/V1/amasty_rma/rma_chat/get/:messageId" method="GET">
+        <service class="Amasty\Rma\Api\ChatRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="Amasty_Rma::rma_management" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_rma/rma_chat/list" method="GET">
+        <service class="Amasty\RmaApi\Api\ChatMessageFinderInterface" method="getList"/>
+        <resources>
+            <resource ref="Amasty_Rma::rma_management" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_rma/rma_chat/message" method="POST">
+        <service class="Amasty\Rma\Api\ChatRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Amasty_Rma::rma_management" />
+        </resources>
+    </route>
+
+    <!-- RMA Request -->
+    <route url="/V1/amasty_rma/rma_request/get/:requestId" method="GET">
+        <service class="Amasty\Rma\Api\RequestRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="Amasty_Rma::request_view" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_rma/rma_request/list" method="GET">
+        <service class="Amasty\RmaApi\Api\RequestFinderInterface" method="getList"/>
+        <resources>
+            <resource ref="Amasty_Rma::request_view" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_rma/rma_request/request/:requestId" method="PUT">
+        <service class="Amasty\Rma\Api\RequestRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Amasty_Rma::request_save" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_rma/rma_request/request" method="POST">
+        <service class="Amasty\Rma\Api\CustomerRequestRepositoryInterface" method="create"/>
+        <resources>
+            <resource ref="Amasty_Rma::request_save" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_rma/rma_request/cancel/:requestIdHash" method="POST">
+        <service class="Amasty\Rma\Api\CustomerRequestRepositoryInterface" method="closeRequest"/>
+        <resources>
+            <resource ref="Amasty_Rma::request_save" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_rma/rma_request/request/:requestId" method="DELETE">
+        <service class="Amasty\RmaApi\Api\RequestDeleterInterface" method="deleteById"/>
+        <resources>
+            <resource ref="Amasty_Rma::request_save" />
+        </resources>
+    </route>
+
+    <!-- RMA Request Tracking-->
+    <route url="/V1/amasty_rma/rma_request_tracking/get/:trackingId" method="GET">
+        <service class="Amasty\Rma\Api\RequestRepositoryInterface" method="getTrackingById"/>
+        <resources>
+            <resource ref="Amasty_Rma::request_view" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_rma/rma_request_tracking/save/:trackingId" method="PUT">
+        <service class="Amasty\Rma\Api\RequestRepositoryInterface" method="saveTracking"/>
+        <resources>
+            <resource ref="Amasty_Rma::request_save" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_rma/rma_request_tracking/create" method="POST">
+        <service class="Amasty\Rma\Api\RequestRepositoryInterface" method="saveTracking"/>
+        <resources>
+            <resource ref="Amasty_Rma::request_save" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_rma/rma_request_tracking/delete/:trackingId" method="DELETE">
+        <service class="Amasty\Rma\Api\RequestRepositoryInterface" method="deleteTrackingById"/>
+        <resources>
+            <resource ref="Amasty_Rma::request_save" />
+        </resources>
+    </route>
+
+    <!-- RMA Request Item-->
+    <route url="/V1/amasty_rma/rma_request_item/get/:itemId" method="GET">
+        <service class="Amasty\RmaApi\Api\RequestItemRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="Amasty_Rma::request_view" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_rma/rma_request_item/list" method="GET">
+        <service class="Amasty\RmaApi\Api\RequestItemFinderInterface" method="getList"/>
+        <resources>
+            <resource ref="Amasty_Rma::request_view" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_rma/rma_request_item/item/:itemId" method="PUT">
+        <service class="Amasty\RmaApi\Api\RequestItemRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Amasty_Rma::request_save" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_rma/rma_request_item/item" method="POST">
+        <service class="Amasty\RmaApi\Api\RequestItemRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Amasty_Rma::request_save" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_rma/rma_request_item/request/:itemId" method="DELETE">
+        <service class="Amasty\RmaApi\Api\RequestItemRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="Amasty_Rma::request_save" />
+        </resources>
+    </route>
+</routes>

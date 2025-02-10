@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2023 Amasty (https://www.amasty.com)
+ * @package RMA API for Magento 2 (System)
+ */-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!-- RMA Status -->
+    <preference for="Amasty\RmaApi\Api\StatusFinderInterface" type="Amasty\RmaApi\Model\Status\Finder"/>
+    <preference for="Amasty\RmaApi\Api\Data\StatusSearchResultsInterface" type="Amasty\RmaApi\Model\Status\StatusSearchResults"/>
+
+    <!-- RMA Resolution -->
+    <preference for="Amasty\RmaApi\Api\ResolutionFinderInterface" type="Amasty\RmaApi\Model\Resolution\Finder"/>
+    <preference for="Amasty\RmaApi\Api\Data\ResolutionSearchResultsInterface" type="Amasty\RmaApi\Model\Resolution\ResolutionSearchResults"/>
+
+    <!-- RMA Condition -->
+    <preference for="Amasty\RmaApi\Api\ConditionFinderInterface" type="Amasty\RmaApi\Model\Condition\Finder"/>
+    <preference for="Amasty\RmaApi\Api\Data\ConditionSearchResultsInterface" type="Amasty\RmaApi\Model\Condition\ConditionSearchResults"/>
+
+    <!-- RMA Return Reason -->
+    <preference for="Amasty\RmaApi\Api\ReasonFinderInterface" type="Amasty\RmaApi\Model\Reason\Finder"/>
+    <preference for="Amasty\RmaApi\Api\Data\ReasonSearchResultsInterface" type="Amasty\RmaApi\Model\Reason\ReasonSearchResults"/>
+
+    <!-- RMA Chat Message -->
+    <preference for="Amasty\RmaApi\Api\ChatMessageFinderInterface" type="Amasty\RmaApi\Model\Chat\MessageFinder"/>
+    <preference for="Amasty\RmaApi\Api\Data\ChatSearchResultsInterface" type="Amasty\RmaApi\Model\Chat\ChatSearchResults"/>
+
+    <!-- RMA Request -->
+    <preference for="Amasty\RmaApi\Api\RequestDeleterInterface" type="Amasty\RmaApi\Model\Request\Deleter"/>
+    <preference for="Amasty\RmaApi\Api\RequestFinderInterface" type="Amasty\RmaApi\Model\Request\Finder"/>
+    <preference for="Amasty\RmaApi\Api\Data\RequestSearchResultsInterface" type="Amasty\RmaApi\Model\Request\RequestSearchResults"/>
+
+    <!-- RMA Request Item -->
+    <preference for="Amasty\RmaApi\Api\RequestItemRepositoryInterface" type="Amasty\RmaApi\Model\RequestItem\Repository"/>
+    <preference for="Amasty\RmaApi\Api\RequestItemFinderInterface" type="Amasty\RmaApi\Model\RequestItem\Finder"/>
+    <preference for="Amasty\RmaApi\Api\Data\RequestItemSearchResultsInterface" type="Amasty\RmaApi\Model\RequestItem\RequestItemSearchResults"/>
+</config>

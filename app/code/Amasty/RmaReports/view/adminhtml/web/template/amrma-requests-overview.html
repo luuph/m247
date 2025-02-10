@@ -1,0 +1,69 @@
+<div class="amrma-chart-block">
+    <div class="amrma-flex-container">
+        <div class="amrma-statistics-block" data-bind="css: {'-full': pageType != 'overview'}">
+            <h3 class="amrma-title" data-bind="i18n: 'Statistics'"></h3>
+            <div class="btn-filters-block">
+                <div class="amrma-btn-container -checked" data-amrma-index="totalData" data-amrma-js="filter">
+                    <span class="amrma-name" data-bind="i18n: 'Total Requests'"></span>
+                    <span class="amrma-count" data-bind="text: $data.requestsCount"></span>
+                    <p class="amrma-tooltip-container">
+                        <span class="amrma-title" data-bind="i18n: 'Total Requests'"></span>
+                        <span class="amrma-text" data-bind="i18n: 'The number of closed RMA requests for the set period of time.'"></span>
+                    </p>
+                </div>
+                <div class="amrma-btn-container" data-amrma-index="percentageData" data-amrma-js="filter">
+                    <span class="amrma-name" data-bind="i18n: 'Percentage of Returns'"></span>
+                    <span class="amrma-count" data-bind="text: $data.returnsPercentage"></span>
+                    <p class="amrma-tooltip-container">
+                        <span class="amrma-title" data-bind="i18n: 'Percentage of Returns'"></span>
+                        <span class="amrma-text"
+                              data-bind="i18n: 'The ratio between the number of submitted RMA requests and the number of orders. It helps to understand the number of returns for the same number of orders. The less is the value, the better the situation with returns is.'">
+                        </span>
+                    </p>
+                </div>
+                <div class="amrma-btn-container" data-amrma-index="leadTimeData" data-amrma-js="filter">
+                    <span class="amrma-name" data-bind="i18n: 'Lead-time'"></span>
+                    <span class="amrma-count" data-bind="text: $data.leadTime"></span>
+                    <p class="amrma-tooltip-container">
+                        <span class="amrma-title" data-bind="i18n: 'Lead-time'"></span>
+                        <span class="amrma-text"
+                              data-bind="i18n: 'A time period starting from the RMA request submission and ending when RMA request gets to the \'Completed\' state. The less is the lead-time, the better your return process is. This is the average value for the set period.'">
+                        </span>
+                    </p>
+                </div>
+                <div class="amrma-btn-container" data-amrma-index="ratingData" data-amrma-js="filter">
+                    <span class="amrma-name" data-bind="i18n: 'Rating'"></span>
+                    <span class="amrma-count" data-bind="text: $data.rating"></span>
+                    <p class="amrma-tooltip-container">
+                        <span class="amrma-title" data-bind="i18n: 'Rating'"></span>
+                        <span class="amrma-text" data-bind="i18n: 'Some of the RMA requests are rated by customers. This is the average value for the set period.'"></span>
+                    </p>
+                </div>
+                <!-- ko if: pageType === 'overview' -->
+                <div class="amrma-btn-container" data-amrma-index="storeDeliveryData" data-amrma-js="filter">
+                    <span class="amrma-name" data-bind="i18n: 'Delivery by store'"></span>
+                    <span class="amrma-count" data-bind="text: $data.storeDelivery"></span>
+                    <p class="amrma-tooltip-container">
+                        <span class="amrma-title" data-bind="i18n: 'Delivery by store'"></span>
+                        <span class="amrma-text" data-bind="i18n: 'Shows how many items were delivered back from customers at the expense of the store.'"></span>
+                    </p>
+                </div>
+                <!-- /ko -->
+            </div>
+            <div id="amrma-chart-statistics" class="amrma-chart-container -statistics"></div>
+        </div>
+        <!-- ko if: pageType === 'overview' -->
+        <div class="amrma-reasons-block">
+            <h3 class="amrma-title" data-bind="i18n: 'Top Reasons'"></h3>
+            <div class="amrma-question-container">
+                <p class="amrma-tooltip-container">
+                    <span class="amrma-title" data-bind="i18n: 'Top Reasons'"></span>
+                    <span class="amrma-text" data-bind="i18n: 'Top Return Reasons for the set period.'"></span>
+                </p>
+            </div>
+            <div id="amrma-chart-reasons" class="amrma-chart-container"></div>
+            <div id="amrma-reasons-legend" class="amrma-chart-legend"></div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>

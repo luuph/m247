@@ -1,0 +1,18 @@
+{
+    "amasty_rma_shipping_label": {
+        "column": {
+            "label_id": true,
+            "request_id": true,
+            "shipping_label": true,
+            "packages": true,
+            "carrier_title": true,
+            "carrier_code": true,
+            "carrier_method": true,
+            "price": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "AMASTY_RMA_SHPP_LBL_REQUEST_ID_AMASTY_RMA_REQUEST_REQUEST_ID": true
+        }
+    }
+}

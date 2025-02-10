@@ -1,0 +1,49 @@
+Reports,Relatórios
+Overview,"Visão geral"
+"Reports in details","Relatórios em detalhes"
+RMA,RMA
+"7 Days","7 dias"
+"30 Days","30 dias"
+"Last Year","Ano passado"
+"Custom Date","Data personalizada"
+Statistics,Estatisticas
+"Total Requests","Total de Solicitações"
+"The number of closed RMA requests for the set period of time.","O número de solicitações de RMA fechadas para o período de tempo definido."
+"Percentage of Returns","Porcentagem de Devoluções"
+"The ratio between the number of submitted RMA requests and the number of orders. It helps to understand the number of returns for the same number of orders. The less is the value, the better the situation with returns is.","A proporção entre o número de solicitações de RMA enviadas e o número de pedidos. Ajuda a entender o número de devoluções para o mesmo número de pedidos. Quanto menor o valor, melhor é a situação com retornos."
+Lead-time,"Tempo de espera"
+"A time period starting from the RMA request submission and ending when RMA request gets to the 'Completed' state. The less is the lead-time, the better your return process is. This is the average value for the set period.","Um período de tempo que começa no envio da solicitação de RMA e termina quando a solicitação de RMA chega ao estado 'Concluído'. Quanto menor o tempo de espera, melhor é o seu processo de devolução. Este é o valor médio para o período definido."
+Rating,Avaliação
+"Some of the RMA requests are rated by customers. This is the average value for the set period.","Algumas das solicitações de RMA são avaliadas pelos clientes. Este é o valor médio para o período definido."
+"Delivery by store","Entrega por loja"
+"Shows how many items were delivered back from customers at the expense of the store.","Mostra quantos itens foram devolvidos pelos clientes às custas da loja."
+"Top Reasons","Principais motivos"
+"Top Return Reasons for the set period.","Principais motivos de devolução para o período definido."
+"Changes have been made to this section that have not been saved.","Foram feitas alterações nesta seção que não foram salvas."
+"This tab contains invalid data. Please resolve this before saving.","Esta guia contém dados inválidos. Por favor, resolva isso antes de salvar."
+"RMA Reports","Relatórios de RMA"
+"Date Range:",Período:
+From:,"A partir de:"
+To:,Para:
+"Request Items Resolution","Resolução de itens de solicitação"
+"Request Items Condition","Condição de itens de solicitação"
+"Request Items Reason","Motivo dos itens da solicitação"
+"RMA ID","ID de RMA"
+Customer,Cliente
+Manager,Gerente
+"Lead Time","Tempo de espera"
+"Request Items SKU","Solicitar SKU de itens"
+Total,Total
+"Suspicious Items","Itens Suspeitos"
+"The report helps to detect suspicious items in a few clicks. Please, set the needed Return Reason and you will see the list of items that were returned back for the set time period and reason. The chosen return reason will be saved and set by default next time you load the page. Sort the columns for the ease of use.","O relatório ajuda a detectar itens suspeitos em poucos cliques. Por favor, defina o motivo de devolução necessário e você verá a lista de itens que foram devolvidos para o período e motivo definidos. O motivo de devolução escolhido será salvo e definido por padrão na próxima vez que você carregar a página. Classifique as colunas para facilitar o uso."
+"Return Reason","Motivo da Devolução"
+"Suspicious Customers","Clientes suspeitos"
+"The report helps to detect suspicious customers in a few clicks. Please, set the needed Return Resolution and you will see the list of customers that submit a lot of returns or bring profit to the store for the set time period and reason. The chosen return reason will be saved and set by default next time you load the page. Sort the columns for the ease of use.","O relatório ajuda a detectar clientes suspeitos em poucos cliques. Por favor, defina a Resolução de Devolução necessária e você verá a lista de clientes que enviam muitas devoluções ou trazem lucro para a loja pelo período e motivo definidos. O motivo de devolução escolhido será salvo e definido por padrão na próxima vez que você carregar a página. Classifique as colunas para facilitar o uso."
+"Return Resolution","Resolução de Devolução"
+Item,Item
+"Returned, times","Devolvido, vezes"
+Price,Preço
+Name,Nome
+"Orders Qty","Quantidade de pedidos"
+"RMA Qty","Quantidade de RMA"
+Profit,Lucro

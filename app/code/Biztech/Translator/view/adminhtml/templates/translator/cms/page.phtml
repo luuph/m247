@@ -1,0 +1,46 @@
+<?php
+
+/**
+ * {{controller}} {{action}} template
+ *
+ * @var $block \Biztech\Translator\Block\Adminhtml\Translator\Index
+ */
+$review_form = "'" . $this->getLayout()->createBlock('Magento\Framework\View\Element\Template')->setTemplate('Biztech_Translator::translator/minTranslate.phtml')->toHtml() . "'";
+
+$version = $block->getVersion();
+$lower_version = 0;
+if (version_compare($version, '2.1', '<')) {
+    $lower_version = 1;
+    $requirejs = 'biztechTranslator';
+} else {
+    $requirejs = 'biztechTranslatorv213';
+}
+?>
+<script>
+    require([
+        "jquery",
+        "<?php echo $requirejs; ?>"
+    ], function($, biztechTranslator) {
+        $("#edit_form").after(<?php echo $review_form ?>);
+        var BiztechTranslatorConfig = '<?php echo $this->getCMSConfig() ?>';
+        var lower_version = <?php echo $lower_version; ?>;
+
+        $(window).ready(function() {
+            setTimeout(function() {
+                var translator = biztechTranslator.BiztechTranslatorForm.init('edit_form', BiztechTranslatorConfig);
+            }, 1000);
+            if (lower_version == 0) {
+                $(document).on('click', '.fieldset-wrapper', function() {
+
+                    if ($(this).hasClass("_show")) {
+                        function customTranslate() {
+
+                            var translator = biztechTranslator.BiztechTranslatorForm.init('edit_form', BiztechTranslatorConfig);
+                        }
+                        setTimeout(customTranslate, 1000); // 0.5 seconds
+                    }
+                });
+            }
+        });
+    });
+</script>

@@ -1,0 +1,22 @@
+{
+    "name": "amasty/module-rma-automatic-shipping-label",
+    "description": "Automatic Shipping Label Add-on for RMA Extension by Amasty",
+    "require": {
+        "php": ">=7.3",
+        "amasty/base": ">=1.14.6",
+        "amasty/rma": ">=2.2"
+    },
+    "type": "magento2-module",
+    "version": "1.0.2",
+    "license": [
+        "proprietary"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Amasty\\RmaAutomaticShippingLabel\\": ""
+        }
+    }
+}

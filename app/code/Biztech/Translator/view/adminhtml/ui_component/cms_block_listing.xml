@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <listingToolbar name="listing_top">
+        <massaction name="listing_massaction" component="Magento_Ui/js/grid/tree-massactions">
+            <action name="massaction_block_translate">
+                <settings>
+                    <type>massaction_block_translate</type>
+                    <label translate="true">Translate Selected CMS Blocks</label>
+                    <actions class="Biztech\Translator\Ui\Component\MassAction\Group\OptionsCmsBlocks"/>
+                </settings>
+            </action>
+        </massaction>
+    </listingToolbar>
+</listing>

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2023 Amasty (https://www.amasty.com)
+ * @package Automation Rules for RMA (Add-On) for Magento 2
+ */-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Amasty\RmaAutomation\Api\Data\AutomationRuleInterface" type="Amasty\RmaAutomation\Model\AutomationRule\AutomationRule"/>
+    <preference for="Amasty\RmaAutomation\Api\AutomationRuleRepositoryInterface" type="Amasty\RmaAutomation\Model\AutomationRule\Repository"/>
+
+    <preference for="Amasty\RmaAutomation\Api\Data\RuleActionInterface" type="Amasty\RmaAutomation\Model\AutomationRule\RuleAction"/>
+</config>

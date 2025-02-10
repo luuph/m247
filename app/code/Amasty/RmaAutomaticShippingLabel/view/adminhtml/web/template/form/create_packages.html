@@ -1,0 +1,27 @@
+<div class="amshipping-package-container">
+    <div class="amshipping-package-carrier">
+        <strong class="amshipping-name" data-bind="text: $data.shippingInformation().carrier_title"></strong>
+        <span data-bind="text: $data.shippingInformation().method_title"></span>
+        <strong class="amshipping-price" data-bind="text: $data.shippingInformation().price"></strong>
+    </div>
+    <!-- ko foreach: renderPackages -->
+        <div class="amshipping-package-header">
+            <span class="amshipping-title" data-bind="text: $parent.getPackageLabel($index())"></span>
+            <!-- ko ifnot: isShowItems -->
+            <span class="amshipping-link"
+                  data-bind="i18n: 'Add Products to Package',
+                             click: $parent.showProducts.bind($parent, $data),
+                             css: {'-disabled': isItemsSelected}"></span>
+            <!-- /ko -->
+            <!-- ko if: isShowItems -->
+            <span class="amshipping-link"
+                  data-bind="i18n: 'Add Selected Product(s) to Package',
+                             click: $parent.prepareProducts.bind($parent, $index())"></span>
+            <!-- /ko -->
+        </div>
+        <!-- ko template: $parent.packageTmpl --><!-- /ko -->
+        <!-- ko if: isShowItems() || isItemsSelected() -->
+            <!-- ko template: $parent.itemsTmpl --><!-- /ko -->
+        <!-- /ko -->
+    <!-- /ko -->
+</div>

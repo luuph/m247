@@ -1,0 +1,84 @@
+//
+//  Amasty RMA Reports
+//  ____________________________________________
+
+//
+//  Common
+//  ----------------------------------------------
+
+& when (@media-common = true) {
+    .amrma-listing-container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .amrma-resolution-select,
+    .amrma-reason-select {
+        & {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .admin__field-label {
+            margin-right: 10px;
+        }
+
+        .admin__control-select {
+            min-width: 300px;
+        }
+    }
+
+    .amrma-resolution-grid .admin__data-grid-wrap,
+    .amrma-reason-grid .admin__data-grid-wrap {
+       & {
+           overflow-y: scroll;
+           max-height: 325px;
+       }
+
+        &::-webkit-scrollbar-track {
+            border-radius: 3px;
+        }
+
+        &::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            border-radius: 4px;
+            background: #c5c5c5;
+        }
+    }
+
+    .amrma-fieldset-container {
+        width: 100%;
+    }
+
+    .amrma-reason-grid,
+    .amrma-resolution-grid {
+        flex-basis: 49%;
+        background: #fff;
+        border-radius: 20px;
+        box-shadow: 0 6px 25px rgba(218, 225, 241, .5);
+    }
+
+    .amrma-reason-grid,
+    .amrma-resolution-grid {
+        .data-grid .data-grid-th {
+            border: 0;
+            border-bottom: 1px solid #ebeef5;
+            background: #fff;
+            color: #000;
+
+            &._sortable:hover {
+                background: #fff;
+            }
+        }
+
+        //override magento table styles
+        .data-grid .amrma-grid-column {
+            border: 0;
+            border-bottom: 1px solid #ebeef5 !important;
+            background: #fff;
+        }
+    }
+}

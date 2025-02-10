@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2023 Amasty (https://www.amasty.com)
+ * @package Reports for RMA (Add-On) for Magento 2
+ */-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="amrmarep_reports_general_layout"/>
+    <body>
+        <attribute name="class" value="amrma-body-container"/>
+        <referenceContainer name="amrma.reports.container" htmlTag="div" htmlClass="amrma-content-container">
+            <uiComponent name="amrmarep_report_overview_form"/>
+        </referenceContainer>
+    </body>
+</page>

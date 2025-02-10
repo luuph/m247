@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+ * FME Extensions
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the fmeextensions.com license that is
+ *  available through the world-wide-web at this URL:
+ * https://www.fmeextensions.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category  FME
+ * @package   FME_RestrictPaymentMethod
+ * @copyright Copyright (c) 2019 FME (http://fmeextensions.com/)
+ * @license   https://fmeextensions.com/LICENSE.txt
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">paymentmethod_paymentmethod_form.paymentmethod_paymentmethod_form_data_source</item>
+            <item name="deps" xsi:type="string">paymentmethod_paymentmethod_form.paymentmethod_paymentmethod_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Restrict-Payment-Method Information</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">paymentmethod_paymentmethod_form</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">FME\RestrictPaymentMethod\Block\Adminhtml\RestrictPaymentMethod\Edit\BackButton</item>
+            <item name="reset" xsi:type="string">FME\RestrictPaymentMethod\Block\Adminhtml\RestrictPaymentMethod\Edit\ResetButton</item>
+            <item name="delete" xsi:type="string">FME\RestrictPaymentMethod\Block\Adminhtml\RestrictPaymentMethod\Edit\DeleteButton</item>
+            <item name="save" xsi:type="string">FME\RestrictPaymentMethod\Block\Adminhtml\RestrictPaymentMethod\Edit\SaveButton</item>
+            <item name="save_and_continue" xsi:type="string">FME\RestrictPaymentMethod\Block\Adminhtml\RestrictPaymentMethod\Edit\SaveAndContinueButton</item> 
+        </item>
+    </argument>
+    <dataSource name="paymentmethod_paymentmethod_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">FME\RestrictPaymentMethod\Model\PaymentMethod\DataProvider</argument>
+            <argument name="name" xsi:type="string">paymentmethod_paymentmethod_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">rule_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="submit_url" xsi:type="url" path="paymentmethod/paymentmethod/save"/>
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <fieldset name="payment_basic_details">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="collapsible" xsi:type="boolean">false</item>
+                <item name="label" xsi:type="string" translate="true">Restrict Payment Method Details</item>
+                <item name="sortOrder" xsi:type="number">1</item>
+            </item>
+        </argument>
+        <field name="rule_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">paymentmethodform</item>
+                </item>
+            </argument>
+        </field>
+        <field name="name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Name</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">paymentmethodform</item>
+                    <item name="dataScope" xsi:type="string">name</item>
+                    <item name="notice" xsi:type="string">Define a name for Payment restriction rule which will be used in the admin area.</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="status">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">boolean</item>
+                    <item name="formElement" xsi:type="string">checkbox</item>
+                    <item name="source" xsi:type="string">data</item>
+                    <item name="dataScope" xsi:type="string">status</item>
+                    <item name="prefer" xsi:type="string">toggle</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                    <item name="notice" xsi:type="string">Enable or disable the Payment Restriction Rules</item>
+                    <item name="label" xsi:type="string" translate="true">Status</item>
+                    <item name="valueMap" xsi:type="array">
+                        <item name="true" xsi:type="string">1</item>
+                        <item name="false" xsi:type="string">0</item>
+                    </item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="default" xsi:type="string">Enable</item>
+                </item>
+            </argument>
+        </field>
+        <field name="payment">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">FME\RestrictPaymentMethod\Model\Config\Source\Allmethods</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">int</item>
+                    <item name="label" xsi:type="string" translate="true">Payment Methods</item>
+                    <item name="formElement" xsi:type="string">multiselect</item>
+                    <item name="dataScope" xsi:type="string">payment</item>
+                    <item name="notice" xsi:type="string">Select Payment Methods you want to block.</item>
+                    <item name="sortOrder" xsi:type="number">30</item>
+                    <item name="source" xsi:type="string">fme_paymentmethod</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="store_id">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Cms\Ui\Component\Listing\Column\Cms\Options</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">int</item>
+                    <item name="sortOrder" xsi:type="number">40</item>
+                    <item name="label" xsi:type="string" translate="true">Store View</item>
+                    <item name="formElement" xsi:type="string">multiselect</item>
+                    <item name="dataScope" xsi:type="string">store_id</item>
+                    <item name="notice" xsi:type="string">Must specify the stores where the rule will be applied. Select all to apply the rule to any store. </item>
+                    <item name="source" xsi:type="string">fme_paymentmethod</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="customer_group_ids">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\CatalogRule\Model\Rule\CustomerGroupsOptionsProvider</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">int</item>
+                    <item name="label" xsi:type="string" translate="true">Customer Groups</item>
+                    <item name="formElement" xsi:type="string">multiselect</item>
+                    <item name="source" xsi:type="string">fme_shippingmethod</item>
+                    <item name="notice" xsi:type="string">Select Customer Groups to which you want to apply the rules.</item>
+                    <item name="sortOrder" xsi:type="number">45</item>
+                    <item name="dataScope" xsi:type="string">customer_group_ids</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="priority">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Priority</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">typeform</item>
+                    <item name="dataScope" xsi:type="string">priority</item>
+                    <item name="sortOrder" xsi:type="number">50</item>
+                    <item name="notice" xsi:type="string">'0' for low Priority '1' for high Priority</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="validate-digits" xsi:type="boolean">true</item>
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="operation">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">FME\RestrictPaymentMethod\Model\Config\Source\Operations</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Apply Operation As</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">typeform</item>
+                    <item name="dataScope" xsi:type="string">operation</item>
+                    <item name="sortOrder" xsi:type="number">70</item>
+                    <item name="caption" xsi:type="string" translate="true">-- Please Select --</item>
+                    <item name="notice" xsi:type="string">Set operation to AND if all selected options in the sections below must fulfiles the requirement / Set to OR if any of the selected options below fulfils the requirements</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+    <fieldset name="conditions">
+        <settings>
+            <collapsible>true</collapsible>
+            <label translate="true">Conditions</label>
+        </settings>
+        <container name="conditions_apply_to" sortOrder="10">
+            <htmlContent name="html_content">
+                <block name="conditions_apply_to" class="FME\RestrictPaymentMethod\Block\Adminhtml\RestrictPaymentMethod\Form\Tab\Conditions" />
+            </htmlContent>
+        </container>
+    </fieldset>
+    <fieldset name="customers">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Select Customers</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="sortOrder" xsi:type="number">20</item>
+            </item>
+        </argument>
+        <fieldset name="assign_customers">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Select Customers</item>
+                    <item name="collapsible" xsi:type="boolean">true</item>
+                    <item name="sortOrder" xsi:type="number">25</item>
+                </item>
+            </argument>
+            <container name="assign_customers_container" >
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="sortOrder" xsi:type="number">400</item>
+                    </item>
+                </argument>
+                <htmlContent name="html_content">
+                    <block class="FME\RestrictPaymentMethod\Block\Adminhtml\RestrictPaymentMethod\Form\AssignCustomer" name="category.customer.grid"/>
+                </htmlContent>
+            </container>
+        </fieldset>
+    </fieldset>
+
+    <fieldset name="couponandrules">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Coupon Code And Catalog Rules</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="sortOrder" xsi:type="number">30</item>
+            </item>
+        </argument>
+        <fieldset name="applyon">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Apply Rules With Coupon Code And Catalog Rules</item>
+                    <item name="collapsible" xsi:type="boolean">false</item>
+                    <item name="sortOrder" xsi:type="number">30</item>
+                </item>
+            </argument>
+            <field name="apply_coupon_id"> 
+                <argument name="data" xsi:type="array"> 
+                    <item name="options" xsi:type="object">FME\RestrictPaymentMethod\Model\Config\Source\CouponCode</item> 
+                    <item name="config" xsi:type="array"> 
+                        <item name="label" xsi:type="string" translate="true">Coupon Codes</item> 
+                        <item name="componentType" xsi:type="string">field</item> 
+                        <item name="formElement" xsi:type="string">select</item> 
+                        <item name="component" xsi:type="string">FME_RestrictPaymentMethod/js/components/new-method</item> 
+                        <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item> 
+                        <item name="dataScope" xsi:type="string">apply_coupon_id</item> 
+                        <item name="filterOptions" xsi:type="boolean">true</item> 
+                        <item name="showCheckbox" xsi:type="boolean">true</item> 
+                        <item name="disableLabel" xsi:type="boolean">true</item> 
+                        <item name="multiple" xsi:type="boolean">true</item> 
+                        <item name="levelsVisibility" xsi:type="number">2</item> 
+                        <item name="sortOrder" xsi:type="number">40</item> 
+                        <item name="required" xsi:type="boolean">true</item> 
+                    </item> 
+                </argument> 
+            </field>
+            <field name="apply_catalog_rule">
+                <argument name="data" xsi:type="array">
+                    <item name="options" xsi:type="object">FME\RestrictPaymentMethod\Model\Config\Source\CatalogRule</item>
+                    <item name="config" xsi:type="array">
+                        <item name="dataType" xsi:type="string">int</item>
+                        <item name="label" xsi:type="string" translate="true">Catalog Rules</item>
+                        <item name="formElement" xsi:type="string">multiselect</item>
+                        <item name="source" xsi:type="string">fme_paymentmethod</item>
+                        <item name="sortOrder" xsi:type="number">19</item>
+                        <item name="dataScope" xsi:type="string">apply_catalog_rule</item>
+                    </item>
+                </argument>
+            </field>
+        </fieldset>
+        <fieldset name="notapplyon">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Do NOT Apply Rules With Coupon Code And Catalog Rules</item>
+                    <item name="collapsible" xsi:type="boolean">false</item>
+                    <item name="sortOrder" xsi:type="number">30</item>
+                </item>
+            </argument>
+            <field name="noapply_coupon_id"> 
+                <argument name="data" xsi:type="array"> 
+                    <item name="options" xsi:type="object">FME\RestrictPaymentMethod\Model\Config\Source\CouponCode</item> 
+                    <item name="config" xsi:type="array"> 
+                        <item name="label" xsi:type="string" translate="true">Coupon Codes</item> 
+                        <item name="componentType" xsi:type="string">field</item> 
+                        <item name="formElement" xsi:type="string">select</item> 
+                        <item name="component" xsi:type="string">FME_RestrictPaymentMethod/js/components/new-method</item> 
+                        <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item> 
+                        <item name="dataScope" xsi:type="string">noapply_coupon_id</item> 
+                        <item name="filterOptions" xsi:type="boolean">true</item> 
+                        <item name="showCheckbox" xsi:type="boolean">true</item> 
+                        <item name="disableLabel" xsi:type="boolean">true</item> 
+                        <item name="multiple" xsi:type="boolean">true</item> 
+                        <item name="levelsVisibility" xsi:type="number">2</item> 
+                        <item name="sortOrder" xsi:type="number">40</item> 
+                        <item name="required" xsi:type="boolean">true</item> 
+                    </item> 
+                </argument> 
+            </field>
+            <field name="noapply_catalog_rule">
+                <argument name="data" xsi:type="array">
+                    <item name="options" xsi:type="object">FME\RestrictPaymentMethod\Model\Config\Source\CatalogRule</item>
+                    <item name="config" xsi:type="array">
+                        <item name="dataType" xsi:type="string">int</item>
+                        <item name="label" xsi:type="string" translate="true">Catalog Rules</item>
+                        <item name="formElement" xsi:type="string">multiselect</item>
+                        <item name="source" xsi:type="string">fme_paymentmethod</item>
+                        <item name="sortOrder" xsi:type="number">19</item>
+                        <item name="dataScope" xsi:type="string">noapply_catalog_rule</item>
+                    </item>
+                </argument>
+            </field>
+        </fieldset>
+    </fieldset>
+    <fieldset name="billingrules">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Restrict By Billing Address</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="sortOrder" xsi:type="number">30</item>
+            </item>
+        </argument>
+        <field name="restrictoptions">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">FME\RestrictPaymentMethod\Model\Config\Source\CountryOptions</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Restrict Options</item>
+                    <item name="component" xsi:type="string">FME_RestrictPaymentMethod/js/form/element/option</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">fme_paymentmethod</item>
+                    <item name="dataScope" xsi:type="string">restrictoptions</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                </item>
+            </argument>
+        </field>
+        <field name="postcode">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Postal Code</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">fme_paymentmethod</item>
+                    <item name="dataScope" xsi:type="string">postcode</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="notice" xsi:type="string">PostCode seperated by ',' (i.e 12345,23456)</item>
+                </item>
+            </argument>
+        </field>
+        <field name="country"> 
+            <argument name="data" xsi:type="array"> 
+                <item name="options" xsi:type="object">Magento\Directory\Model\Config\Source\Country</item> 
+                <item name="config" xsi:type="array"> 
+                    <item name="label" xsi:type="string" translate="true">Country</item> 
+                    <item name="componentType" xsi:type="string">field</item> 
+                    <item name="formElement" xsi:type="string">select</item> 
+                    <item name="component" xsi:type="string">FME_RestrictPaymentMethod/js/components/new-method</item> 
+                    <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item> 
+                    <item name="dataScope" xsi:type="string">country</item> 
+                    <item name="filterOptions" xsi:type="boolean">true</item> 
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="showCheckbox" xsi:type="boolean">true</item> 
+                    <item name="disableLabel" xsi:type="boolean">true</item> 
+                    <item name="multiple" xsi:type="boolean">true</item> 
+                    <item name="levelsVisibility" xsi:type="number">2</item> 
+                    <item name="sortOrder" xsi:type="number">30</item> 
+                </item> 
+            </argument> 
+        </field>
+        <field name="region_id"> 
+            <argument name="data" xsi:type="array"> 
+                <item name="options" xsi:type="object">Magento\Customer\Model\ResourceModel\Address\Attribute\Source\Region</item> 
+                <item name="config" xsi:type="array"> 
+                    <item name="label" xsi:type="string" translate="true">Region/State</item> 
+                    <item name="componentType" xsi:type="string">field</item> 
+                    <item name="formElement" xsi:type="string">select</item> 
+                    <item name="component" xsi:type="string">FME_RestrictPaymentMethod/js/components/new-method</item> 
+                    <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item> 
+                    <item name="dataScope" xsi:type="string">region_id</item> 
+                    <item name="filterOptions" xsi:type="boolean">true</item> 
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="showCheckbox" xsi:type="boolean">true</item> 
+                    <item name="disableLabel" xsi:type="boolean">true</item> 
+                    <item name="multiple" xsi:type="boolean">true</item> 
+                    <item name="levelsVisibility" xsi:type="number">2</item> 
+                    <item name="sortOrder" xsi:type="number">30</item> 
+                </item> 
+            </argument> 
+        </field>
+        <field name="total_operation">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">FME\RestrictPaymentMethod\Model\Config\Source\LogicalOperation</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Apply Grand Total Operation As</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">number</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">fme_paymentmethod</item>
+                    <item name="dataScope" xsi:type="string">total_operation</item>
+                    <item name="sortOrder" xsi:type="number">40</item>
+                </item>
+            </argument>
+        </field>
+        <field name="grandtotal">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Grand Total</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">fme_paymentmethod</item>
+                    <item name="dataScope" xsi:type="string">grandtotal</item>
+                    <item name="sortOrder" xsi:type="number">50</item>
+                    <item name="notice" xsi:type="string">Base Grand Total</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="not-negative-amount" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+    <fieldset name="assign_timing">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="label" xsi:type="string" translate="true">Day And Time</item>
+                <item name="sortOrder" xsi:type="number">39</item>
+            </item>
+        </argument>
+        <container name="assign_timing">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/dynamic-rows/dynamic-rows</item>
+                    <item name="template" xsi:type="string">FME_RestrictPaymentMethod/dynamic-rows/grid</item>
+                    <item name="componentType" xsi:type="string">dynamicRows</item>
+                    <item name="recordTemplate" xsi:type="string">record</item>
+                    <item name="deleteButtonLabel" xsi:type="string">Remove</item>
+                    <item name="addButtonLabel" xsi:type="string">Add More...</item>
+                    <item name="deleteProperty" xsi:type="boolean">false</item>
+                    <item name="dndConfig" xsi:type="array">
+                        <item name="enabled" xsi:type="boolean">false</item>
+                    </item>
+                </item>
+            </argument>
+            <container name="record">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Key</item>
+                        <item name="component" xsi:type="string" translate="true">Magento_Ui/js/dynamic-rows/record</item>
+                        <item name="isTemplate" xsi:type="boolean">true</item>
+                        <item name="is_collection" xsi:type="boolean">true</item>
+                        <item name="showFallbackReset" xsi:type="boolean">false</item>
+                    </item>
+                </argument>
+                <field name="day">
+                    <argument name="data" xsi:type="array">
+                        <item name="options" xsi:type="object">FME\RestrictPaymentMethod\Model\Config\Source\Weekdays</item>
+                        <item name="config" xsi:type="array">
+                            <item name="dataType" xsi:type="string">text</item>
+                            <item name="label" xsi:type="string" translate="true">Day</item>
+                            <item name="formElement" xsi:type="string">select</item>
+                            <item name="source" xsi:type="string">fme_paymentmethod</item>
+                            <item name="dataScope" xsi:type="string">day</item>
+                            <item name="sortOrder" xsi:type="number">1</item>
+                            <item name="caption" xsi:type="string" translate="true">-- Please Select --</item>
+                            <item name="validation" xsi:type="array">
+                                <item name="required-entry" xsi:type="boolean">true</item>
+                            </item>
+                        </item>
+                    </argument>
+                </field>
+                <fieldset name="opening_time">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="collapsible" xsi:type="boolean">false</item>
+                            <item name="sortOrder" xsi:type="number">3</item>
+                            <item name="label" xsi:type="string" translate="true">Open Time</item>
+                        </item>
+                    </argument>
+                    <field name="hopen">
+                        <argument name="data" xsi:type="array">
+                            <item name="options" xsi:type="object">FME\RestrictPaymentMethod\Model\Config\Source\Hours</item>
+                            <item name="config" xsi:type="array">
+                                <item name="dataType" xsi:type="string">text</item>
+                                <item name="formElement" xsi:type="string">select</item>
+                                <item name="source" xsi:type="string">fme_paymentmethod</item>
+                                <item name="label" xsi:type="string" translate="true">Hours</item>
+                                <item name="dataScope" xsi:type="string">hopen</item>
+                                <item name="sortOrder" xsi:type="number">1</item>
+                                <item name="caption" xsi:type="string" translate="true">- -</item>
+                                <item name="validation" xsi:type="array">
+                                    <item name="required-entry" xsi:type="boolean">true</item>
+                                </item>
+                            </item>
+                        </argument>
+                    </field>
+                    <field name="mopen">
+                        <argument name="data" xsi:type="array">
+                            <item name="options" xsi:type="object">FME\RestrictPaymentMethod\Model\Config\Source\Minutes</item>
+                            <item name="config" xsi:type="array">
+                                <item name="dataType" xsi:type="string">text</item>
+                                <item name="formElement" xsi:type="string">select</item>
+                                <item name="source" xsi:type="string">fme_paymentmethod</item>
+                                <item name="label" xsi:type="string" translate="true">Minutes</item>
+                                <item name="dataScope" xsi:type="string">mopen</item>
+                                <item name="sortOrder" xsi:type="number">2</item>
+                                <item name="caption" xsi:type="string" translate="true">- -</item>
+                                <item name="validation" xsi:type="array">
+                                    <item name="required-entry" xsi:type="boolean">true</item>
+                                </item>
+                            </item>
+                        </argument>
+                    </field>
+                </fieldset>
+                <fieldset name="closing_time">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="collapsible" xsi:type="boolean">false</item>
+                            <item name="sortOrder" xsi:type="number">4</item>
+                            <item name="label" xsi:type="string" translate="true">Close Time</item>
+                        </item>
+                    </argument>
+                    <field name="hclose">
+                        <argument name="data" xsi:type="array">
+                            <item name="options" xsi:type="object">FME\RestrictPaymentMethod\Model\Config\Source\Hours</item>
+                            <item name="config" xsi:type="array">
+                                <item name="dataType" xsi:type="string">text</item>
+                                <item name="formElement" xsi:type="string">select</item>
+                                <item name="source" xsi:type="string">fme_paymentmethod</item>
+                                <item name="label" xsi:type="string" translate="true">Hours</item>
+                                <item name="dataScope" xsi:type="string">hclose</item>
+                                <item name="sortOrder" xsi:type="number">1</item>
+                                <item name="caption" xsi:type="string" translate="true">- -</item>
+                                <item name="validation" xsi:type="array">
+                                    <item name="required-entry" xsi:type="boolean">true</item>
+                                </item>
+                            </item>
+                        </argument>
+                    </field>
+                    <field name="mclose">
+                        <argument name="data" xsi:type="array">
+                            <item name="options" xsi:type="object">FME\RestrictPaymentMethod\Model\Config\Source\Minutes</item>
+                            <item name="config" xsi:type="array">
+                                <item name="dataType" xsi:type="string">text</item>
+                                <item name="formElement" xsi:type="string">select</item>
+                                <item name="source" xsi:type="string">fme_paymentmethod</item>
+                                <item name="label" xsi:type="string" translate="true">Minutes</item>
+                                <item name="dataScope" xsi:type="string">mclose</item>
+                                <item name="sortOrder" xsi:type="number">2</item>
+                                <item name="caption" xsi:type="string" translate="true">--</item>
+                                <item name="validation" xsi:type="array">
+                                    <item name="required-entry" xsi:type="boolean">true</item>
+                                </item>
+                            </item>
+                        </argument>
+                    </field>
+                </fieldset>
+                <actionDelete>
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="componentType" xsi:type="string">actionDelete</item>
+                            <item name="dataType" xsi:type="string">text</item>
+                            <item name="fit" xsi:type="boolean">false</item>
+                            <item name="label" xsi:type="string">Actions</item>
+                            <item name="sortOrder" xsi:type="string">6</item>
+                            <item name="additionalClasses" xsi:type="string">data-grid-actions-cell</item>
+                            <item name="template" xsi:type="string">FME_RestrictPaymentMethod/dynamic-rows/cells/action-delete</item>
+                        </item>
+                    </argument>
+                </actionDelete>
+            </container>
+        </container>
+    </fieldset>
+</form>

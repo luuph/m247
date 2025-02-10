@@ -1,0 +1,29 @@
+<div class="amshipping-package-header">
+    <span class="amshipping-title" data-bind="i18n: 'Items in the Package'"></span>
+</div>
+<table class="amshipping-table-block -items">
+    <thead class="amshipping-thead">
+    <tr>
+        <th class="col amshipping-col" data-bind="i18n: 'Product'"></th>
+        <!-- ko if: isHideCustomsValue === 'false' -->
+        <th class="col amshipping-col" data-bind="i18n: 'Customs Value'"></th>
+        <!-- /ko -->
+        <th class="col amshipping-col" data-bind="i18n: 'Weight'"></th>
+        <th class="col amshipping-col" data-bind="i18n: 'Qty Ordered'"></th>
+        <th class="col amshipping-col" data-bind="i18n: 'Qty'"></th>
+    </tr>
+    </thead>
+    <tbody class="amshipping-tbody">
+    <!-- ko foreach: { data: $data.items, as: 'item' } -->
+    <tr class="amshipping-row" data-amshiping-js="row">
+        <td class="col amshipping-col" data-bind="text: item.name"></td>
+        <!-- ko if: $parent.isHideCustomsValue === 'false' -->
+        <td class="col amshipping-col" data-bind="text: item.customs_value"></td>
+        <!-- /ko -->
+        <td class="col id amshipping-col" data-bind="text: item.weight"></td>
+        <td class="col qty-ordered amshipping-col" data-bind="text: item.qty"></td>
+        <td class="col amshipping-col" data-bind="text: item.packageQty"></td>
+    </tr>
+    <!-- /ko -->
+    </tbody>
+</table>

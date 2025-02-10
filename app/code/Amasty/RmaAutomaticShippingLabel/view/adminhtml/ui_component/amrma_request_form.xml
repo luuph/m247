@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2023 Amasty (https://www.amasty.com)
+ * @package Shipping Labels for RMA (Add-On) for Magento 2
+ */-->
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <fieldset name="tracking_details">
+        <fieldset name="note">
+            <field name="shipping_label">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="template" xsi:type="string">Amasty_RmaAutomaticShippingLabel/form/shipping-label</item>
+                        <item name="rmaTemplate" xsi:type="string">Amasty_Rma/form/rma_file_uploader</item>
+                        <item name="component" xsi:type="string">Amasty_RmaAutomaticShippingLabel/js/form/element/shipping-label</item>
+                        <item name="carriersUrl" xsi:type="url" path="amrmashiplabel/shipping/carriers"/>
+                        <item name="viewPackageUrl" xsi:type="url" path="amrmashiplabel/shipping/viewpackage"/>
+                        <item name="imports" xsi:type="array">
+                            <item name="request_id" xsi:type="string">${ $.provider }:data.request_id</item>
+                            <item name="statusRma" xsi:type="string">${ $.provider }:data.status</item>
+                            <item name="rmaItems" xsi:type="string">${ $.provider }:data.return_items</item>
+                        </item>
+                    </item>
+                </argument>
+            </field>
+        </fieldset>
+    </fieldset>
+    <modal name="shipping-information">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="onCancel" xsi:type="string">actionCancel</item>
+                <item name="component" xsi:type="string">Amasty_RmaAutomaticShippingLabel/js/form/components/shipping</item>
+                <item name="childTmpl" xsi:type="string">Amasty_RmaAutomaticShippingLabel/form/shipping/radio</item>
+                <item name="modalClass" xsi:type="string">amshipping-shipping-container</item>
+                <item name="packagesUrl" xsi:type="url" path="amrmashiplabel/shipping/packages"/>
+                <item name="links" xsi:type="array">
+                    <item name="shippingInformation" xsi:type="string">${ $.parentName }.create-packages.packages.items:shippingInformation</item>
+                    <item name="packagesData" xsi:type="string">${ $.parentName }.create-packages.packages.items:packagesData</item>
+                </item>
+                <item name="imports" xsi:type="array">
+                    <item name="request_id" xsi:type="string">${ $.provider }:data.request_id</item>
+                </item>
+                <item name="options" xsi:type="array">
+                    <item name="title" translate="true" xsi:type="string">Step 1. Shipping Information</item>
+                    <item name="buttons" xsi:type="array">
+                        <item name="0" xsi:type="array">
+                            <item name="text" xsi:type="string">Apply and generate package</item>
+                            <item name="class" xsi:type="string">action-primary disabled amshipping-apply-button</item>
+                            <item name="actions" xsi:type="array">
+                                <item name="0" xsi:type="string">applyPackage</item>
+                                <item name="1" xsi:type="array">
+                                    <item name="targetName" xsi:type="string">${ $.parentName }.create-packages.packages.items</item>
+                                    <item name="actionName" xsi:type="string">initializePackages</item>
+                                </item>
+                                <item name="2" xsi:type="array">
+                                    <item name="targetName" xsi:type="string">${ $.parentName }.create-packages.packages.items</item>
+                                    <item name="actionName" xsi:type="string">createPackage</item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </item>
+        </argument>
+    </modal>
+    <modal name="show-label">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="onCancel" xsi:type="string">actionCancel</item>
+                <item name="component" xsi:type="string">Amasty_RmaAutomaticShippingLabel/js/form/components/show-label</item>
+                <item name="options" xsi:type="array">
+                    <item name="title" translate="true" xsi:type="string">Packages</item>
+                </item>
+            </item>
+        </argument>
+    </modal>
+    <modal name="create-packages">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="onCancel" xsi:type="string">actionCancel</item>
+                <item name="modalClass" xsi:type="string">modal-component amshipping-modal-component</item>
+                <item name="options" xsi:type="array">
+                    <item name="title" translate="true" xsi:type="string">Step 2. Create Packages</item>
+                    <item name="buttons" xsi:type="array">
+                        <item name="0" xsi:type="array">
+                            <item name="text" xsi:type="string">Back</item>
+                            <item name="class" xsi:type="string">action-scalable</item>
+                            <item name="actions" xsi:type="array">
+                                <item name="0" xsi:type="array">
+                                    <item name="targetName" xsi:type="string">${ $.name }</item>
+                                    <item name="actionName" xsi:type="string">closeModal</item>
+                                </item>
+                                <item name="1" xsi:type="array">
+                                    <item name="targetName" xsi:type="string">${ $.parentName }.shipping-information</item>
+                                    <item name="actionName" xsi:type="string">openModal</item>
+                                </item>
+                            </item>
+                        </item>
+                        <item name="1" xsi:type="array">
+                            <item name="text" xsi:type="string">Add Package</item>
+                            <item name="class" xsi:type="string">action-scalable amshipping-add-button disabled</item>
+                            <item name="actions" xsi:type="array">
+                                <item name="0" xsi:type="array">
+                                    <item name="targetName" xsi:type="string">${ $.name }.packages.items</item>
+                                    <item name="actionName" xsi:type="string">actionAddPackage</item>
+                                </item>
+                            </item>
+                        </item>
+                        <item name="2" xsi:type="array">
+                            <item name="text" xsi:type="string">Done</item>
+                            <item name="class" xsi:type="string">action-primary amshipping-done-button disabled</item>
+                            <item name="actions" xsi:type="array">
+                                <item name="0" xsi:type="array">
+                                    <item name="targetName" xsi:type="string">${ $.name }.packages.items</item>
+                                    <item name="actionName" xsi:type="string">actionDone</item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </item>
+        </argument>
+        <fieldset name="packages">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Shipping Information</item>
+                    <item name="additionalClasses" xsi:type="string">amshipping-fieldset-wrapper</item>
+                    <item name="template" xsi:type="string">Amasty_Rma/form/rma_fieldset</item>
+                </item>
+            </argument>
+            <container name="items">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="additionalClasses" xsi:type="string">amshipping-package-block</item>
+                        <item name="component" xsi:type="string">Amasty_RmaAutomaticShippingLabel/js/form/components/package</item>
+                        <item name="template" xsi:type="string">Amasty_RmaAutomaticShippingLabel/form/create_packages</item>
+                        <item name="messages" xsi:type="array">
+                            <item name="checkedProducts" xsi:type="string" translate="true">Please, specify the products</item>
+                            <item name="quantity" xsi:type="string" translate="true">Please, specify the required quantity</item>
+                            <item name="inputfields" xsi:type="string" translate="true">Please, paste package info in the fields</item>
+                        </item>
+                        <item name="applyShippingLabel" xsi:type="url" path="amrmashiplabel/shipping/generate"/>
+                        <item name="imports" xsi:type="array">
+                            <item name="items" xsi:type="string">${ $.provider }:${ $.dataScope }.return_items</item>
+                            <item name="request_id" xsi:type="string">${ $.provider }:data.request_id</item>
+                        </item>
+                    </item>
+                </argument>
+            </container>
+        </fieldset>
+    </modal>
+</form>

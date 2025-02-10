@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Social Login Base for Magento 2
+ */-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Amasty\InvisibleCaptcha\Model\Captcha">
+        <plugin name="Amasty_SocialLogin::InvisibleCaptcha" type="Amasty\SocialLogin\Plugin\InvisibleCaptcha" />
+    </type>
+
+    <type name="Magento\Customer\Block\Form\Register">
+        <plugin name="Amasty_SocialLogin::SetRegisterData" type="Amasty\SocialLogin\Plugin\Customer\Block\Form\RegisterPlugin" />
+    </type>
+
+    <type name="Amasty\AdvancedReview\ViewModel\Reviews\Product\View\ListView\WriteReviewButton">
+        <plugin
+            name="Amasty_SocialLogin::allow-render-social-login-button"
+            type="Amasty\SocialLogin\Plugin\AdvancedReview\ViewModel\Reviews\Product\View\ListView\WriteReviewButton\AllowWriteReviewButton"
+        />
+    </type>
+
+    <type name="Magento\Checkout\Block\Onepage">
+        <arguments>
+            <argument name="layoutProcessors" xsi:type="array">
+                <item name="amastySocialLogin" xsi:type="object">Amasty\SocialLogin\Block\LayoutProcessor</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\View\Element\Message\MessageConfigurationsPool">
+        <arguments>
+            <argument name="configurationsMap" xsi:type="array">
+                <item name="accountMessage" xsi:type="array">
+                    <item name="renderer" xsi:type="const">\Magento\Framework\View\Element\Message\Renderer\BlockRenderer::CODE</item>
+                    <item name="data" xsi:type="array">
+                        <item name="template" xsi:type="string">Amasty_SocialLogin::messages/message.phtml</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+</config>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/** Copyright © 2016 store.biztechconsultancy.com. All Rights Reserved.**/
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <listingToolbar name="listing_top">
+        <massaction name="listing_massaction">
+            <action name="massaction_product_translate">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">massaction_product_translate</item>
+                        <item name="label" xsi:type="string" translate="true">Translate Selected Products using Cron</item>
+                        <item name="url" xsi:type="url" path="translator/cron/check"/>
+                    </item>
+                </argument>
+                <argument name="actions" xsi:type="configurableObject">
+                    <argument name="class" xsi:type="string">Biztech\Translator\Ui\Component\MassAction\Group\Options</argument>
+                    <argument name="data" xsi:type="array">
+                        <item name="urlPath" xsi:type="string">translator/translator/massTranslateProduct</item>
+                        <item name="paramName" xsi:type="string">lang_to</item>
+                        <item name="confirm" xsi:type="array">
+                            <item name="title" xsi:type="string" translate="true">AppJetty Translator</item>
+                            <item name="message" xsi:type="string" translate="true">Are you sure you want to change language of selected Product(s) on Filtered Storeview ?</item>
+                        </item>
+                    </argument>
+                </argument>
+            </action>
+            <action name="massaction_product_translate_console">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">massaction_product_translate_console</item>
+                        <item name="label" xsi:type="string" translate="true">Add Product to Translate using Console</item>
+                        <item name="url" xsi:type="url" path="translator/cron/check"/>
+                    </item>
+                </argument>
+                <argument name="actions" xsi:type="configurableObject">
+                    <argument name="class" xsi:type="string">Biztech\Translator\Ui\Component\MassAction\Group\Options</argument>
+                    <argument name="data" xsi:type="array">
+                        <item name="urlPath" xsi:type="string">translator/translator/massTranslateProductConsole</item>
+                        <item name="paramName" xsi:type="string">lang_to</item>
+                        <item name="confirm" xsi:type="array">
+                            <item name="title" xsi:type="string" translate="true">AppJetty Translator</item>
+                            <item name="message" xsi:type="string" translate="true">Are you sure you want to change language of selected Product(s) on Filtered Storeview ?</item>
+                        </item>
+                    </argument>
+                </argument>
+            </action>
+        </massaction>
+    </listingToolbar>
+</listing>

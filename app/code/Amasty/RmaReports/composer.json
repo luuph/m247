@@ -1,0 +1,22 @@
+{
+    "name": "amasty/module-rma-reports",
+    "description": "RMA Reports by Amasty",
+    "require": {
+        "php": ">=7.3",
+        "amasty/base": ">=1.13.4",
+        "amasty/rma": ">=2.2"
+    },
+    "type": "magento2-module",
+    "version": "1.0.7",
+    "license": [
+        "Commercial"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Amasty\\RmaReports\\": ""
+        }
+    }
+}

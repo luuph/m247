@@ -1,0 +1,362 @@
+<?php
+
+/**
+Copyright © 2016 store.biztechconsultancy.com. All Rights Reserved.
+ **/
+
+// @codingStandardsIgnoreFile
+
+?>
+<div class="categories-side-col storeswitcher">
+    
+    <div class="sidebar-actions">
+
+        <input type="hidden" name="category_ids" id="product_categories"
+               class="required-entry input-text required-entry" value="<?php echo $this->getCategories() ?>">
+        <label>Select Language To Translate : </label>
+
+        
+        
+        <select id="language" name="language">
+            <?php
+            foreach ($this->getLanguages() as $key => $value) {
+                echo '<option value="' . $key . '">' . $value . '</option>';
+            }
+            ?>
+        </select>
+        <button class="scalable save" type="button" title="Bulk Category Translate" id="biztech_cat_bulk_translate"
+                name="cat_trans"><span> <?php echo __('Bulk Category Translate'); ?> </span></button>
+    </div>
+    <!-- store Switcher -->
+        <div class="customStoreSwitcher">        
+            <?php print_r($this->getStoresSwitcherCustom()); ?>
+        </div>
+    <!-- store Switcher -->
+
+    <div class="tree-actions">
+        <?php if ($block->getRoot()): ?>
+            <a href="#"
+               onclick="collapseTree(); return false;"><?php /* @escapeNotVerified */
+                                                        echo __('Collapse All'); ?></a>
+            <span class="separator">|</span> <a href="#"
+                                                onclick="expandTree(); return false;"><?php /* @escapeNotVerified */
+                                                                                        echo __('Expand All'); ?></a>
+        <?php endif; ?>
+    </div>
+
+    <?php if ($block->getRoot()): ?>
+    <div class="tree-holder">
+        <div id="tree-div" class="tree-wrapper"></div>
+    </div>
+</div>
+
+    <div data-id="information-dialog-tree" class="messages" style="display: none;">
+        <div class="message message-notice">
+            <div><?php /* @escapeNotVerified */
+                echo __('This operation can take a long time'); ?></div>
+        </div>
+    </div>
+    
+   <script id="ie-deferred-loader" defer="defer" src="//:"></script>
+ <script>
+    require([
+        "jquery",
+        'Magento_Ui/js/modal/modal',
+        'Magento_Ui/js/modal/confirm',
+        'Magento_Ui/js/modal/alert',
+        "jquery/ui",
+        "prototype",
+        "extjs/ext-tree-checkbox",
+        "mage/adminhtml/form",
+        "mage/translate"
+    ], function (jQuery, modal, confirm, alert) {
+
+//<![CDATA[
+
+// TODO: cleanup this script. It was copypasted from catalog/category/tree
+
+var tree;
+var categories_ids = [];
+
+/**
+ * Fix ext compatibility with prototype 1.6
+ */
+Ext.lib.Event.getTarget = function(e) {
+    var ee = e.browserEvent || e;
+    return ee.target ? Event.element(ee) : null;
+};
+
+Ext.tree.TreePanel.Enhanced = function(el, config)
+{
+    Ext.tree.TreePanel.Enhanced.superclass.constructor.call(this, el, config);
+};
+
+Ext.extend(Ext.tree.TreePanel.Enhanced, Ext.tree.TreePanel, {
+
+    loadTree : function(config, firstLoad)
+    {
+
+        var parameters = config['parameters'];
+        //parameters['expanded'] = '1';
+        var data = config['data'];
+
+        if ((typeof parameters['root_visible']) != 'undefined') {
+            this.rootVisible = parameters['root_visible']*1;
+        }
+
+        var root = new Ext.tree.TreeNode(parameters);
+
+        this.nodeHash = {};
+        this.setRootNode(root);
+
+        if (firstLoad) {
+            this.addListener('click', this.categoryClick.createDelegate(this));
+        }
+
+        this.loader.buildCategoryTree(root, data);
+        this.el.dom.innerHTML = '';
+        // render the tree
+        this.render();
+        //console.log(parameters['expanded']);
+        if(parameters['expanded'] == '1'){
+            this.expandAll();
+        }else{
+            //this.collapseAll();
+            root.expand();
+        }
+    },
+
+     
+    categoryClick : function(node, e)
+    {
+        node.getUI().check(!node.getUI().checked());
+    }
+});
+
+jQuery(function()
+{
+    var categoryLoader = new Ext.tree.TreeLoader({
+       dataUrl: '<?php /* @escapeNotVerified */ echo $block->getLoadTreeUrl(null, $block->getStore()->getId()) ?>'
+    });
+
+    categoryLoader.processResponse = function (response, parent, callback) {
+        var config = JSON.parse(response.responseText);
+
+        this.buildCategoryTree(parent, config);
+        if (typeof callback == "function") {
+            callback(this, parent);
+        }
+    };
+
+    categoryLoader.createNode = function(config) {
+        config.uiProvider = Ext.tree.CheckboxNodeUI;
+        var node;
+        var _node = Object.clone(config);
+        if (config.children && !config.children.length) {
+            delete(config.children);
+            node = new Ext.tree.AsyncTreeNode(config);
+        } else {
+            node = new Ext.tree.TreeNode(config);
+        }
+
+        return node;
+    };
+
+    categoryLoader.buildCategoryTree = function(parent, config)
+    {
+        if (!config) return null;
+
+        if (parent && config && config.length){
+            for (var i = 0; i < config.length; i++) {
+                config[i].uiProvider = Ext.tree.CheckboxNodeUI;
+                var node;
+                var _node = Object.clone(config[i]);
+                if (_node.children && !_node.children.length) {
+                    delete(_node.children);
+                    node = new Ext.tree.AsyncTreeNode(_node);
+                } else {
+                    node = new Ext.tree.TreeNode(config[i]);
+                }
+                parent.appendChild(node);
+                node.loader = node.getOwnerTree().loader;
+                if (_node.children) {
+                    this.buildCategoryTree(node, _node.children);
+                }
+            }
+        }
+    };
+
+    categoryLoader.buildHash = function(node)
+    {
+        var hash = {};
+
+        hash = this.toArray(node.attributes);
+
+        if (node.childNodes.length>0 || (node.loaded==false && node.loading==false)) {
+            hash['children'] = new Array;
+
+            for (var i = 0, len = node.childNodes.length; i < len; i++) {
+                if (!hash['children']) {
+                    hash['children'] = new Array;
+                }
+                hash['children'].push(this.buildHash(node.childNodes[i]));
+            }
+        }
+
+        return hash;
+    };
+
+    categoryLoader.toArray = function(attributes) {
+        var data = {};
+        for (var key in attributes) {
+            var value = attributes[key];
+            data[key] = value;
+        }
+
+        return data;
+    };
+
+    categoryLoader.on("beforeload", function(treeLoader, node) {
+        treeLoader.baseParams.id = node.attributes.id;
+    });
+
+    categoryLoader.on("load", function(treeLoader, node, config) {
+        varienWindowOnload();
+    });
+
+    tree = new Ext.tree.TreePanel.Enhanced('tree-div', {
+        animate:          false,
+        loader:           categoryLoader,
+        enableDD:         false,
+        containerScroll:  true,
+        selModel:         new Ext.tree.CheckNodeMultiSelectionModel(),
+        rootVisible:      '<?php /* @escapeNotVerified */ echo $block->getRoot()->getIsVisible() ?>',
+        useAjax:          <?php /* @escapeNotVerified */ echo $block->getUseAjax() ?>,
+        currentNodeId:    <?php echo (int)$block->getCategoryId() ?>,
+        addNodeTo:        false,
+        rootUIProvider:   Ext.tree.CheckboxNodeUI
+    });
+
+    tree.on('check', function(node, checked) {
+        
+        node.eachChild(function(n) {
+            n.getUI().check(checked);
+        });
+        
+        if(this.getChecked().length == 0){
+            categories_ids = [];
+        }
+        else{
+            var catIds = this.getChecked().join(',');
+            categories_ids = [catIds];
+        }
+        
+     
+    }, tree);
+
+    // set the root node
+    var parameters = {
+        text:        '<?php /* @escapeNotVerified */ echo htmlentities($block->getRoot()->getName()) ?>',
+        draggable:   false,
+        checked:'<?php /* @escapeNotVerified */ echo $block->getRoot()->getChecked() ?>',
+        uiProvider: Ext.tree.CheckboxNodeUI,
+        allowDrop:   <?php if ($block->getRoot()->getIsVisible()): ?>true<?php else: ?>false<?php endif; ?>,
+        id:          <?php echo (int)$block->getRoot()->getId() ?>,
+        expanded:    <?php echo (int)$block->getIsWasExpanded() ?>,
+        category_id: <?php echo (int)$block->getCategoryId() ?>
+    };
+
+    tree.loadTree({parameters:parameters, data:<?php /* @escapeNotVerified */ echo $block->getTreeJson() ?>},true);
+
+    expandTree = function(){
+        var parameters = {
+            text:        '<?php /* @escapeNotVerified */ echo htmlentities($block->getRoot()->getName()) ?>',
+            draggable:   false,
+            checked:'<?php /* @escapeNotVerified */ echo $block->getRoot()->getChecked() ?>',
+            uiProvider: Ext.tree.CheckboxNodeUI,
+            allowDrop:   <?php if ($block->getRoot()->getIsVisible()): ?>true<?php else: ?>false<?php endif; ?>,
+            id:          <?php echo (int)$block->getRoot()->getId() ?>,
+            expanded:    '1',
+            category_id: <?php echo (int)$block->getCategoryId() ?>
+         };
+        tree.loadTree({parameters:parameters, data:<?php /* @escapeNotVerified */ echo $block->getTreeJson() ?>},true);
+    },
+
+    
+    collapseTree = function(){
+        var parameters = {
+            text:        '<?php /* @escapeNotVerified */ echo htmlentities($block->getRoot()->getName()) ?>',
+            draggable:   false,
+            checked:'<?php /* @escapeNotVerified */ echo $block->getRoot()->getChecked() ?>',
+            uiProvider: Ext.tree.CheckboxNodeUI,
+            allowDrop:   <?php if ($block->getRoot()->getIsVisible()): ?>true<?php else: ?>false<?php endif; ?>,
+            id:          <?php echo (int)$block->getRoot()->getId() ?>,
+            expanded:    '0',
+            category_id: <?php echo (int)$block->getCategoryId() ?>
+         };
+        tree.loadTree({parameters:parameters, data:<?php /* @escapeNotVerified */ echo $block->getTreeJson() ?>},true);
+    }
+
+    jQuery(function () {
+            jQuery('button#biztech_cat_bulk_translate').click(function (event) {
+                var pcat = [];
+                if (categories_ids.length == 0 || categories_ids.length == null || categories_ids == 'undefined' || categories_ids == null) {
+                    alert({
+                        content: 'Please Select Category to Translate'
+                    });
+                } else {
+                    /*jQuery.each(product_categories, function (index, el) {
+                        if (jQuery('#ext-gen' + el).prop('checked')) {
+                            jQuery('#ext-gen' + el).prop('checked', true);
+                            pcat.push(el);
+                        }
+                    });*/
+
+                    jQuery.ajax({
+
+                        url: '<?php echo $this->getUrl('translator/translator/massTranslateCategory') ?>',
+                        type: 'POST',
+                        data: {
+                            lang_to: jQuery('#language').val(),
+                            product_categories: categories_ids,
+                            storeId: <?php /* @escapeNotVerified */ echo (int)$block->getStore()->getId() ?>,
+                        },
+                        showLoader: true
+                    }).done(function (data) {
+                        var response = JSON.parse(data);
+                        if (response.error) {
+                            alert({
+                                title: 'Information',
+                                content: response.error
+                            });
+                        } else if (response.success) {
+
+
+                            confirm({
+                                content: response.success,
+                                actions: {
+                                    confirm: function () {
+                                        window.location.href = "<?php echo $this->getUrl('translator/translator/index', ['active_tab' => 'categories_section', 'store' => $block->getStore()->getId()]) ?>";
+                                    }
+                                }
+                            });
+
+                        }
+                    })
+                    .fail(function (data) {
+                        alert({
+                            title: 'Alert',
+                            content: data.statusText
+                        });
+                    });
+                }
+            });
+        });
+
+});
+//]]>
+
+});
+</script>
+<?php endif; ?>
+

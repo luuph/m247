@@ -1,0 +1,30 @@
+{
+    "amasty_rma_automation_rules": {
+        "column": {
+            "rule_id": true,
+            "name": true,
+            "status": true,
+            "priority": true,
+            "further_processing": true,
+            "apply_for_new": true,
+            "apply_for_existing": true,
+            "conditions_serialized": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "amasty_rma_automation_rule_action": {
+        "column": {
+            "action_id": true,
+            "rule_id": true,
+            "type": true,
+            "value": true,
+            "additional_data": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_4A2F461F8FB3C40D6D61CEA3EBE55A5F": true
+        }
+    }
+}

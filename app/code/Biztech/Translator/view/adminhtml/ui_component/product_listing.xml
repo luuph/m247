@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/** Copyright © 2016 store.biztechconsultancy.com. All Rights Reserved.**/
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <listingToolbar name="listing_top">
+        <massaction name="listing_massaction" component="Magento_Ui/js/grid/tree-massactions">
+            <action name="massaction_product_translate">
+                <settings>
+                    <type>massaction_product_translate</type>
+                    <label translate="true">Translate Selected Products using Cron</label>
+                    <actions class="Biztech\Translator\Ui\Component\MassAction\Group\Options"/>
+                </settings>
+            </action>
+            <action name="massaction_product_translate_console">
+                <settings>
+                    <type>massaction_product_translate_console</type>
+                    <label translate="true">Translate Selected Products using Console</label>
+                    <actions class="Biztech\Translator\Ui\Component\MassAction\Group\OptionsConsole"/>
+                </settings>
+            </action>
+            <action name="massaction_product_in_allstores">
+                <settings>
+                    <confirm>
+                        <message translate="true">Are you sure to translate selected product(s) in multiple stores?</message>
+                        <title translate="true">Translate in multiple stores</title>
+                    </confirm>
+                    <url path="translator/translator/massTranslateProductInallstoreview"/>
+                    <type>massaction_product_in_allstores</type>
+                    <label translate="true">Translate Selected Products in Multiple Storeviews</label>
+                </settings>
+        </action>
+
+        </massaction>
+    </listingToolbar>
+</listing>

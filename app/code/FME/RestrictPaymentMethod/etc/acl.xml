@@ -1,0 +1,22 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">  
+                <resource id="FME_Extensions::fmeextensions" title="FME Extensions">
+                    <resource id="FME_RestrictPaymentMethod::main_menu" title="Restrict Payment Method Manager" 
+                              sortOrder="100">
+                        <resource id="FME_RestrictPaymentMethod::paymentmethod" title="Manage Payment Method" 
+                                  sortOrder="22" />  
+                    </resource>
+                </resource>            
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="FME_RestrictPaymentMethod::configuration" title="FME Restrict Payment Method Configuration" translate="title" />
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

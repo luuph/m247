@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2023 Amasty (https://www.amasty.com)
+ * @package Reports for RMA (Add-On) for Magento 2
+ */-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+  <table name="amasty_rma_reports_setting" resource="default" engine="innodb" comment="Amasty Rma Reports Setting Table">
+    <column xsi:type="int" name="setting_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Setting ID"/>
+    <column xsi:type="int" name="admin_id" padding="10" unsigned="true" nullable="false" identity="false" comment="Admin ID"/>
+    <column xsi:type="int" name="reason_id" padding="10" unsigned="true" nullable="false" identity="false" comment="Reason ID"/>
+    <column xsi:type="int" name="resolution_id" padding="10" unsigned="true" nullable="false" identity="false" comment="Resolution ID"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="setting_id"/>
+    </constraint>
+    <constraint xsi:type="foreign" referenceId="AMASTY_RMA_REPORTS_SETTING_ADMIN_ID_ADMIN_USER_USER_ID" table="amasty_rma_reports_setting" column="admin_id" referenceTable="admin_user" referenceColumn="user_id" onDelete="CASCADE"/>
+  </table>
+</schema>

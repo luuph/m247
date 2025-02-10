@@ -1,0 +1,41 @@
+<div class="amshipping-table-container">
+    <table class="amshipping-table-block -package">
+        <thead class="amshipping-thead">
+        <tr>
+            <!-- ko foreach: $parent.packagesData -->
+            <th scope="col" class="col amshipping-col" data-bind="visible: !isHidden, text: label"></th>
+            <!-- /ko -->
+            <th scope="col" class="col amshipping-col"></th>
+        </tr>
+        </thead>
+        <tbody class="amshipping-tbody">
+        <tr class="amshipping-row">
+            <!-- ko foreach: $parent.packagesData -->
+            <td class="col amshipping-col" data-bind="visible: !isHidden">
+                <!-- ko if: type === 'select' -->
+                <select name="amshipping_type"
+                        class="admin__control-select"
+                        data-bind="
+                                options: options,
+                                optionsText: 'value',
+                                optionsValue: 'name',
+                                value: $parent.params[value]">
+                </select>
+                <!-- /ko -->
+                <!-- ko if: type !== 'select' -->
+                <input type="text"
+                       class="amshipping-input"
+                       data-bind="value: $parent.params[value],
+                                          attr: {'data-amshipping-js': value + '-' + $parent.index}"/>
+                <!-- /ko -->
+            </td>
+            <!-- /ko -->
+            <td class="col amshipping-col">
+                <!-- ko if: !$parent.isEditPackage() -->
+                <span class="amshipping-link" data-bind="i18n: 'Delete', click: $parent.deletePackage.bind($parent, $index())"></span>
+                <!-- /ko -->
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

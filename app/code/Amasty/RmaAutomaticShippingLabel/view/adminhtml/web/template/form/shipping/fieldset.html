@@ -1,0 +1,23 @@
+<div class="fieldset-wrapper"
+     css="$data.additionalClasses"
+     attr="'data-level': $data.level, 'data-index': index"
+     data-bind="visible: $data.visible === undefined ? true : $data.visible">
+    <div class="fieldset-wrapper-title"
+         attr="tabindex: !collapsible ? -1 : 0,
+               'data-state-collapsible': collapsible ? opened() ? 'open' : 'closed' : null"
+         click="toggleOpened"
+         keyboard="13: toggleOpened"
+         if="title">
+
+        <strong css="'admin__collapsible-title': collapsible, title: !collapsible">
+            <span translate="title"/>
+        </strong>
+    </div>
+
+    <div class="admin__fieldset-wrapper-content"
+         css="'admin__collapsible-content': collapsible, '_show': opened, '_hide': !opened()">
+        <fieldset class="admin__fieldset" if="opened() || _wasOpened || initializeFieldsetDataByDefault">
+            <!-- ko template: $parent.childTmpl --><!-- /ko -->
+        </fieldset>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!-- Copyright © 2016 store.biztechconsultancy.com. All Rights Reserved. -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Store/etc/config.xsd">
+    <default>
+        <translator>
+            <general>
+                <languages>locale</languages>
+                <from_lang>auto</from_lang>
+                <translate_btntext>Translate To</translate_btntext>
+            </general>
+        </translator>
+    </default>
+</config>

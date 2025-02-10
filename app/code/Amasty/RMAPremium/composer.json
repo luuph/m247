@@ -1,0 +1,26 @@
+{
+    "name": "amasty/rma-premium",
+    "description": "RMA Premium by Amasty",
+    "require": {
+        "php": ">=7.3.0",
+        "amasty/rma": "*",
+        "amasty/module-rma-automatic-shipping-label": "*",
+        "amasty/module-rma-automation-rules": "*",
+        "amasty/module-rma-reports": "*",
+        "amasty/rma-api": "*",
+        "amasty/module-export-core": "*"
+    },
+    "type": "magento2-module",
+    "version": "1.0.2",
+    "license": [
+        "Commercial"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Amasty\\RMAPremium\\": ""
+        }
+    }
+}

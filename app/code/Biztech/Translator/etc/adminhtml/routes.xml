@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<!-- Copyright © 2016 store.biztechconsultancy.com. All Rights Reserved. -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../lib/internal/Magento/Framework/App/etc/routes.xsd">
+    <router id="admin">
+        <route id="translator" frontName="translator">
+            <module name="Biztech_Translator" before="Magento_Backend" />
+        </route>
+    </router>
+</config>

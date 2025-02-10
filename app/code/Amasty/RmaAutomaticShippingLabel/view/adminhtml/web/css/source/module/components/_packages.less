@@ -1,0 +1,143 @@
+//
+//  Amasty RMA Shipping Addons Style
+//  ____________________________________________
+
+//
+//  Common
+//  --------------------------------------------
+
+& when (@media-common = true) {
+    .amshipping-package-carrier {
+        margin-bottom: 50px;
+    }
+
+    .amshipping-package-header:not(:first-child) {
+        margin-top: 80px;
+    }
+
+    .amshipping-package-header {
+        & {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 25px;
+        }
+
+        .amshipping-title {
+            color: #403630;
+            font-size: 22px;
+            line-height: 30px;
+        }
+
+        .amshipping-link.disabled {
+            color: #ccc;
+            cursor: default;
+            pointer-events: none;
+        }
+    }
+
+    .amshipping-table-block.-package {
+        & {
+            background: #eeeff0;
+        }
+
+        .amshipping-thead {
+            border-bottom: 1px solid #fff;
+        }
+    }
+
+    .amshipping-table-block .amrma-checkbox-container {
+        flex-direction: row;
+        justify-content: flex-start;
+        cursor: pointer;
+    }
+
+    .amshipping-table-block {
+        & {
+            width: 100%;
+            text-align: left;
+        }
+
+        .amshipping-th {
+            padding: 11px 15px 8px 0;
+        }
+
+        .amshipping-input {
+            max-height: 26px;
+            width: 100%;
+        }
+
+        .amshipping-col {
+            padding: 15px;
+        }
+
+        .amshipping-col.-flex {
+            display: flex;
+        }
+
+        .amrma-label {
+            margin-right: 10px;
+        }
+
+        //override magento styles start
+        .amshipping-col .admin__control-select {
+            & {
+                padding: 3px 44px 3px 10px;
+                max-width: 190px;
+                background-position: ~'calc(100% - 12px) -37px, 100%, calc(100% - 3.2rem) 0';
+            }
+
+            &:active {
+                background-position: ~'calc(100% - 12px) 10px, 100%, calc(100% - 3.2rem) 0';
+            }
+        }
+
+        .amshipping-col.-select .admin__control-select {
+            max-width: 90%;
+        }
+
+        .amshipping-col.-flex .admin__control-select {
+            margin-left: 15px;
+            max-width: 90px;
+        }
+        //END override magento styles stop
+    }
+
+    .amshipping-table-block.-items {
+        .amshipping-thead {
+            border-bottom: 1px solid #e2e3e4;
+        }
+
+        .amshipping-thead .amshipping-col {
+            padding-bottom: 0;
+        }
+
+        .amshipping-row:nth-child(2n) {
+            background: #eeeff0;
+        }
+
+        .amshipping-row.-active {
+            background: #e7effe;
+        }
+
+        .amshipping-row.disabled .amrma-label {
+            background-image: @amshipping-icon-checkbox__disabled__background;
+        }
+
+        .amshipping-row.-active .amshipping-qty {
+            background: #fff;
+            opacity: 1;
+            cursor: auto;
+            pointer-events: initial;
+        }
+
+        .amshipping-row .amshipping-qty {
+            padding: 0 8px;
+            border: 1px solid #ccc;
+            background: #f1f1f1;
+            opacity: .5;
+            cursor: default;
+            pointer-events: none;
+        }
+    }
+}

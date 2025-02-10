@@ -1,0 +1,49 @@
+Reports,Rapports
+Overview,Aperçu
+"Reports in details","Rapports en détails"
+RMA,ARM
+"7 Days","7 jours"
+"30 Days","30 jours"
+"Last Year","L'année dernière"
+"Custom Date","Date personnalisée"
+Statistics,Statistiques
+"Total Requests","Nombre total de demandes"
+"The number of closed RMA requests for the set period of time.","Le nombre de demandes RMA fermées pour la période définie."
+"Percentage of Returns","Pourcentage de retours"
+"The ratio between the number of submitted RMA requests and the number of orders. It helps to understand the number of returns for the same number of orders. The less is the value, the better the situation with returns is.","Le rapport entre le nombre de demandes RMA soumises et le nombre de commandes. Cela aide à comprendre le nombre de retours pour le même nombre de commandes. Plus la valeur est faible, meilleure est la situation avec les rendements."
+Lead-time,"Délai de mise en œuvre"
+"A time period starting from the RMA request submission and ending when RMA request gets to the 'Completed' state. The less is the lead-time, the better your return process is. This is the average value for the set period.","Une période de temps commençant à partir de la soumission de la demande RMA et se terminant lorsque la demande RMA passe à l'état « Terminé ». Moins il y a de délai, meilleur est votre processus de retour. Il s'agit de la valeur moyenne pour la période définie."
+Rating,Évaluation
+"Some of the RMA requests are rated by customers. This is the average value for the set period.","Certaines des demandes RMA sont évaluées par les clients. Il s'agit de la valeur moyenne pour la période définie."
+"Delivery by store","Livraison par magasin"
+"Shows how many items were delivered back from customers at the expense of the store.","Affiche le nombre d'articles renvoyés par les clients aux frais du magasin."
+"Top Reasons","Principales raisons"
+"Top Return Reasons for the set period.","Principaux motifs de retour pour la période définie."
+"Changes have been made to this section that have not been saved.","Des modifications ont été apportées à cette section qui n'ont pas été enregistrées."
+"This tab contains invalid data. Please resolve this before saving.","Cet onglet contient des données invalides. Veuillez résoudre ce problème avant d'enregistrer."
+"RMA Reports","Rapports RMA"
+"Date Range:","Plage de dates :"
+From:,De:
+To:,À:
+"Request Items Resolution","Demander la résolution des éléments"
+"Request Items Condition","Demander l'état des articles"
+"Request Items Reason","Raison des éléments de la demande"
+"RMA ID","ID ARM"
+Customer,Client
+Manager,Gestionnaire
+"Lead Time","Délai de mise en œuvre"
+"Request Items SKU","Demander des articles SKU"
+Total,Total
+"Suspicious Items","Objets suspects"
+"The report helps to detect suspicious items in a few clicks. Please, set the needed Return Reason and you will see the list of items that were returned back for the set time period and reason. The chosen return reason will be saved and set by default next time you load the page. Sort the columns for the ease of use.","Le rapport aide à détecter les éléments suspects en quelques clics. Veuillez définir le motif de retour nécessaire et vous verrez la liste des articles qui ont été retournés pour la période et la raison définies. Le motif de retour choisi sera enregistré et défini par défaut lors du prochain chargement de la page. Triez les colonnes pour la facilité d'utilisation."
+"Return Reason","Raison du retour"
+"Suspicious Customers","Clients suspects"
+"The report helps to detect suspicious customers in a few clicks. Please, set the needed Return Resolution and you will see the list of customers that submit a lot of returns or bring profit to the store for the set time period and reason. The chosen return reason will be saved and set by default next time you load the page. Sort the columns for the ease of use.","Le rapport aide à détecter les clients suspects en quelques clics. Veuillez définir la résolution de retour nécessaire et vous verrez la liste des clients qui soumettent de nombreux retours ou rapportent des bénéfices au magasin pour la période et la raison définies. Le motif de retour choisi sera enregistré et défini par défaut lors du prochain chargement de la page. Triez les colonnes pour la facilité d'utilisation."
+"Return Resolution","Résolution de retour"
+Item,Article
+"Returned, times","Retourné, fois"
+Price,Prix
+Name,Nom
+"Orders Qty","Quantité de commandes"
+"RMA Qty","Qté RMA"
+Profit,Profit

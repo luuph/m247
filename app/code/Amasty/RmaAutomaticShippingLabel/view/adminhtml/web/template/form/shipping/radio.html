@@ -1,0 +1,12 @@
+<div class="amshipping-radio-container">
+    <!-- ko repeat: {foreach: methods, item: 'method'} -->
+    <label class="amshipping-label-block" data-bind="attr: {for: method().code}">
+        <input class="amshipping-radio"
+               type="radio"
+               name="amshipping_carrier_type"
+               data-bind="event: {change: $parent.showApplyButton.bind($parent, method)}, attr: {id: method().code}"/>
+        <span class="amshipping-label" data-bind="text: method().title"></span>
+        <span data-bind="text: method().price"></span>
+    </label>
+    <!-- /ko -->
+</div>

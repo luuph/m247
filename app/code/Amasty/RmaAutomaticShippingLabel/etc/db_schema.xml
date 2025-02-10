@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2023 Amasty (https://www.amasty.com)
+ * @package Shipping Labels for RMA (Add-On) for Magento 2
+ */-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+  <table name="amasty_rma_shipping_label" resource="default" engine="innodb" comment="Amasty RMA Shipping Labels Table">
+    <column xsi:type="int" name="label_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Shipping Label ID"/>
+    <column xsi:type="int" name="request_id" padding="10" unsigned="true" nullable="false" identity="false" comment="RMA Request ID"/>
+    <column xsi:type="blob" name="shipping_label" nullable="false" comment="Shipping Label Content"/>
+    <column xsi:type="text" name="packages" nullable="false" comment="Shipping Label Packages"/>
+    <column xsi:type="text" name="carrier_title" nullable="true" comment="Carrier Title"/>
+    <column xsi:type="text" name="carrier_code" nullable="true" comment="Carrier Code"/>
+    <column xsi:type="text" name="carrier_method" nullable="true" comment="Carrier Method"/>
+    <column xsi:type="decimal" name="price" scale="4" precision="12" unsigned="false" nullable="false" comment="Price"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="label_id"/>
+    </constraint>
+    <constraint xsi:type="foreign" referenceId="AMASTY_RMA_SHPP_LBL_REQUEST_ID_AMASTY_RMA_REQUEST_REQUEST_ID" table="amasty_rma_shipping_label" column="request_id" referenceTable="amasty_rma_request" referenceColumn="request_id" onDelete="CASCADE"/>
+  </table>
+</schema>

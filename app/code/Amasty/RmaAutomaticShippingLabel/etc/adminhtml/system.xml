@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2023 Amasty (https://www.amasty.com)
+ * @package Shipping Labels for RMA (Add-On) for Magento 2
+ */-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="amrmashiplabel" translate="label" type="text" sortOrder="181301" showInDefault="1" showInWebsite="0" showInStore="0">
+            <label>RMA Automatic Shipping Label</label>
+            <tab>amasty</tab>
+            <resource>Amasty_RmaAutomaticShippingLabel::config</resource>
+            <group id="return_address" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Items Return Address</label>
+                <field id="address_source" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Return Address Source</label>
+                    <source_model>\Amasty\RmaAutomaticShippingLabel\Model\OptionSource\ReturnAddressSource</source_model>
+                </field>
+                <field id="contact_name" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Contact Name</label>
+                    <depends>
+                        <field id="address_source">2</field>
+                    </depends>
+                </field>
+                <field id="country_id" translate="label" type="select" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Country</label>
+                    <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                    <frontend_class>countries</frontend_class>
+                    <can_be_empty>1</can_be_empty>
+                    <depends>
+                        <field id="address_source">2</field>
+                    </depends>
+                </field>
+                <field id="region_id" translate="label" type="text" sortOrder="27" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Region/State</label>
+                    <depends>
+                        <field id="address_source">2</field>
+                    </depends>
+                </field>
+                <field id="postcode" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>ZIP/Postal Code</label>
+                    <depends>
+                        <field id="address_source">2</field>
+                    </depends>
+                </field>
+                <field id="city" translate="label" type="text" sortOrder="45" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>City</label>
+                    <depends>
+                        <field id="address_source">2</field>
+                    </depends>
+                </field>
+                <field id="street_line1" translate="label" type="text" sortOrder="55" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Street Address</label>
+                    <depends>
+                        <field id="address_source">2</field>
+                    </depends>
+                </field>
+                <field id="street_line2" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Street Address Line 2</label>
+                    <depends>
+                        <field id="address_source">2</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+        <section id="carriers">
+            <group id="ups">
+                <field id="active_amrma" translate="label tooltip" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Use for Amasty RMA</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <tooltip>Current shipping method will be used for shipping label generation by Amasty RMA extension</tooltip>
+                </field>
+            </group>
+            <group id="fedex">
+                <field id="active_amrma" translate="label tooltip" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Use for Amasty RMA</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <tooltip>Current shipping method will be used for shipping label generation by Amasty RMA extension</tooltip>
+                </field>
+            </group>
+            <group id="dhl">
+                <field id="active_amrma" translate="label tooltip" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Use for Amasty RMA</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <tooltip>Current shipping method will be used for shipping label generation by Amasty RMA extension</tooltip>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

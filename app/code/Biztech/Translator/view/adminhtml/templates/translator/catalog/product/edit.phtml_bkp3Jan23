@@ -1,0 +1,75 @@
+<?php
+$helper = $this->helper("Biztech\Translator\Helper\Product");
+$version = $helper->getVersion();
+$lower_version = 0;
+if (version_compare($version, '2.1', '<')) {
+    $lower_version = 1;
+    $requirejs = 'biztechTranslator'; ?>
+    <?= $this->getLayout()->createBlock("Magento\Catalog\Block\Adminhtml\Product\Edit")->setTemplate("Magento_Catalog::catalog/product/edit.phtml")->toHtml(); ?>
+    <?php
+} else {
+    $requirejs = 'biztechTranslatorv213';
+}
+if ($helper->isEnabled()):
+    
+    $storeId = $helper->getStoreid();
+    
+    if ($storeId == 0) {
+        $defaultvalue = $helper->getdefaultvalue(null);
+    } else {
+        $defaultvalue = $helper->getdefaultvalue($storeId);
+    }
+    
+    if ($defaultvalue == 'locale') {
+        $locale = $helper->getlocale($storeId);
+        $l = explode('_', !$locale==null ? $locale:'');
+        $language = $l[0];
+    } else {
+        $language = $defaultvalue;
+    }?>
+    <?= $this->getLayout()->createBlock("Magento\Catalog\Block\Adminhtml\Product\Edit")->setTemplate("Biztech_Translator::translator/translate.phtml")->toHtml(); ?>
+    <script>
+        require([
+            'jquery',
+            '<?php echo $requirejs;?>'
+        ], function ($, biztechTranslator) {
+
+
+            jQuery.noConflict();
+            $(document).on('click', '#translate_button_all', function(e) {
+                jQuery.noConflict();
+                if(confirm("Are you sure to transate and save the product?") == true){
+                    var parameters = {
+                        product_id: '<?php echo $helper->ProductId() ?>',
+                        store_id: '<?php echo $storeId ?>',
+                        lang_to: '<?php echo $language ?>'
+                    };
+                    $.ajax({
+                        url: '<?php echo $this->getUrl('translator/translator/ProductTranslate') ?>',
+                        type: 'post',
+                        data: parameters,
+                        showLoader: true
+                    }).done(function (data) {
+                        if (data) {
+                            location.reload();
+                        }
+                    });
+                } else {
+                   return false;
+                }
+            });
+
+            var BiztechTranslatorConfig = '<?php echo $helper->getBiztechTranslatorConfiguration(); ?>';
+            var lower_version = <?php echo $lower_version; ?>;
+            
+            if (lower_version == 0) {
+            $(document).on('click', '.fieldset-wrapper', function() { 
+                    var translator = biztechTranslator.BiztechTranslatorForm.init('[data-form=edit-product]', BiztechTranslatorConfig);
+                });
+            }
+        });
+    </script>
+    <?php
+
+
+endif;

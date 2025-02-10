@@ -1,0 +1,46 @@
+<?php /* @var $block \Biztech\Translator\Block\Adminhtml\Config\Form\Calculatechar */ ?>
+
+<script>
+    require([
+        'jquery',
+        'Magento_Ui/js/modal/alert',
+        'prototype'
+    ], function(jQuery, alert){
+
+
+        var collectSpan = jQuery('#collect_span');
+
+        jQuery('#calculate_char').click(function () {
+            var params = {};
+            new Ajax.Request('<?php echo $block->getAjaxUrl() ?>', {
+                parameters:     params,
+                loaderArea:     true,
+                asynchronous:   true,
+                onCreate: function() {
+                    collectSpan.find('.processing').show();
+                },
+                onSuccess: function(response) {
+                    collectSpan.find('.processing').hide();
+                    if (response.status == 200) {
+                        var result = JSON.parse(response.responseText);
+                        html = '<p> Catalog character count with above selected attribute including html : ' + result.withhtml + '</p>';
+                        html += '<p> Catalog character count with above selected attribute without html : ' + result.withouthtml + '</p>';
+                        alert({
+                            title: 'Estimated Character Count',
+                            content: html,
+                            actions: {
+                                always: function(){}
+                            }
+                        });
+                    }
+                }
+            });
+        });
+
+    });
+</script>
+
+<?php echo $block->getButtonHtml() ?>
+<span class="collect-indicator" id="collect_span">
+    <img class="processing" hidden="hidden" alt="Collecting" style="margin:0 5px" src="<?php echo $block->getViewFileUrl('images/process_spinner.gif') ?>"/>
+</span>

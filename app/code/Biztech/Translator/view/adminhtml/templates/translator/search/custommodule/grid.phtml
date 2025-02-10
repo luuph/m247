@@ -1,0 +1,74 @@
+<?php
+/**
+Copyright © 2021 store.biztechconsultancy.com. All Rights Reserved.
+ **/
+$count = 1;
+$searchResults = $this->getResults();
+$max = sizeof($searchResults);
+?>
+<div class="data-grid-cell-content static-translate-message message"> <span><?php echo $max; ?></span> records translated </div>
+<div class="admin__data-grid-wrap" data-role="grid-wrapper">
+    <table class="data-grid data-grid-draggable" data-role="grid">
+        <thead class="table1" id="table1">
+        <tr class="data-grid-th _draggable">
+            <th class="data-grid-th _sortable _draggable" data-bind="
+                css: {
+                    '_sortable': sortable,
+                    '_draggable': draggable,
+                    '_ascend': sorting === 'asc',
+                    '_descend': sorting === 'desc'
+                },click: sort"><?php echo __('Sr. No.'); ?></th>
+            <th class="data-grid-th _sortable _draggable" data-bind="
+                css: {
+                    '_sortable': sortable,
+                    '_draggable': draggable,
+                    '_ascend': sorting === 'asc',
+                    '_descend': sorting === 'desc'
+                },click: sort"><?php echo __('Origin String'); ?></th>
+            <th class="data-grid-th _sortable _draggable" data-bind="
+                css: {
+                    '_sortable': sortable,
+                    '_draggable': draggable,
+                    '_ascend': sorting === 'asc',
+                    '_descend': sorting === 'desc'
+                },click: sort"><?php echo __('Translated String'); ?></th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <?php foreach ($searchResults as $skey => $_result): ?>
+
+            <tr class="data-row <?php echo ($count % 2 != 0) ? '_odd-row' : ''; ?>">
+                <td data-bind="
+                        css: $col.getFieldClass(),
+                        click: $col.getFieldHandler($row()),
+                        template: $col.getBody()
+                    ">
+                    <div class="data-grid-cell-content" data-bind="text: $col.getLabel($row())">
+                        <?php echo $count; ?>
+                    </div>
+                </td>
+                <td data-bind="
+                        css: $col.getFieldClass(),
+                        click: $col.getFieldHandler($row()),
+                        template: $col.getBody()
+                    ">
+                    <div class="data-grid-cell-content" data-bind="text: $col.getLabel($row())">
+                        <?php echo htmlspecialchars($_result['origional']); ?>
+                    </div>
+                </td>
+                <td data-bind="
+                        css: $col.getFieldClass(),
+                        click: $col.getFieldHandler($row()),
+                        template: $col.getBody()
+                    ">
+                    <div class="data-grid-cell-content" data-bind="text: $col.getLabel($row())">
+                        <?php echo htmlspecialchars($_result['translated']); ?>
+                    </div>
+                </td>
+            </tr>
+            <?php $count++ ?>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>

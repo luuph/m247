@@ -1,0 +1,97 @@
+//
+//  Compatibility with Amasty Jet Theme
+//  ____________________________________
+
+//
+//  Common
+//  ------------------------------------
+
+& when (@media-common = true) {
+    .amasty-jet-theme .ui-widget.ui-datepicker {
+        z-index: 99999 !important; // override default magento datepicker style
+    }
+
+    .amasty-jet-theme .page-wrapper,
+    .amasty-jet-theme .modals-wrapper {
+        .amsl-popup-block {
+            box-shadow:
+                0 3.3px 39.5px -27px rgba(255, 255, 255, .04),
+                0 4px 65.1px -27px rgba(255, 255, 255, .084),
+                0 5.1px 113.7px -27px rgba(255, 255, 255, .083),
+                0 8px 246px -27px rgba(255, 255, 255, .079);
+        }
+
+        .amsl-popup-overlay {
+            input[type='checkbox'] + label:before,
+            input[type='radio'] + label:before,
+            label > input[type='checkbox'] + span:first-of-type:before,
+            label > input[type='radio'] + span:first-of-type:before {
+                background: @color-white;
+            }
+        }
+
+        .amsl-buttons,
+        .amsl-popup-block,
+        .amsl-social-login,
+        .amsl-register-content {
+            & {
+                .lib-css(background, lighten(@amtheme__background-tertiary__color, 20%));
+            }
+
+            .label,
+            .amsl-error,
+            .amsl-title,
+            .field.newsletter .label {
+                .lib-css(color, @amtheme__text-primary__color);
+            }
+        }
+
+        .amsl-popup-block .form .fields.-am-block {
+            display: block;
+        }
+
+        .amsl-form {
+            .password-strength-meter {
+                color: @color-black;
+            }
+
+            .fieldset .fields .field.choice.-assistance {
+                margin-top: 10px;
+            }
+
+            .field.date.field-dob {
+                clear: both;
+            }
+
+            input[type='text'],
+            input[type='password'],
+            input[type='url'],
+            input[type='tel'],
+            input[type='search'],
+            input[type='number'],
+            input[type='datetime'],
+            input[type='email'],
+            textarea,
+            select {
+                &:extend(.amsl-popup-block .input-text all);
+            }
+
+            ._has-datepicker ~ .ui-datepicker-trigger {
+                background: ~'url("../svg/color_mode/dark/calendar.svg") no-repeat center / 50%';
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .amsl-form {
+        .field.choice.-assistance {
+            margin-top: 10px;
+        }
+
+        .form-create-account .fieldset .field.date.field-dob {
+            margin-top: 125px;
+            padding-bottom: 5px;
+        }
+    }
+}

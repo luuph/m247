@@ -1,0 +1,5 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="amasty_manager_deleted_shipping_label_rma">
+        <observer name="amrma_label_deleted" instance="Amasty\RmaAutomaticShippingLabel\Observer\Rma\ShippingLabelDeleted" />
+    </event>
+</config>

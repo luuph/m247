@@ -1,0 +1,50 @@
+{
+    "amasty_sociallogin_social": {
+        "column": {
+            "id": true,
+            "code": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "UNQ_AMASTY_SOCIALLOGIN_SOCIAL_COLUMN_CODE": true,
+            "AMASTY_SOCIALLOGIN_SOCIAL_CODE": true
+        }
+    },
+    "amasty_sociallogin_customers": {
+        "column": {
+            "id": true,
+            "social_id": true,
+            "customer_id": true,
+            "type": true,
+            "nme": true,
+            "name": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "AMASTY_SOCIALLOGIN_CSTRS_CSTR_ID_CSTR_ENTT_ENTT_ID": true
+        },
+        "index": {
+            "AMASTY_SOCIALLOGIN_CUSTOMERS_SOCIAL_ID": true,
+            "AMASTY_SOCIALLOGIN_CUSTOMERS_TYPE": true,
+            "AMASTY_SOCIALLOGIN_CUSTOMERS_CUSTOMER_ID": true
+        }
+    },
+    "amasty_sociallogin_sales": {
+        "column": {
+            "entity_id": true,
+            "social_id": true,
+            "items": true,
+            "amount": true,
+            "order_id": true,
+            "type": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        },
+        "index": {
+            "AMASTY_SOCIALLOGIN_SALES_SOCIAL_ID": true,
+            "AMASTY_SOCIALLOGIN_SALES_TYPE": true,
+            "AMASTY_SOCIALLOGIN_SALES_ORDER_ID": true
+        }
+    }
+}

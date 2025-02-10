@@ -1,0 +1,82 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Amasty\SocialLogin\Api\Data\SocialInterface" type="Amasty\SocialLogin\Model\Social" />
+    <preference for="Amasty\SocialLogin\Api\SocialRepositoryInterface" type="Amasty\SocialLogin\Model\Repository\SocialRepository" />
+    <preference for="Amasty\SocialLogin\Api\Data\SalesInterface" type="Amasty\SocialLogin\Model\Sales" />
+    <preference for="Amasty\SocialLogin\Api\SalesRepositoryInterface" type="Amasty\SocialLogin\Model\Repository\SalesRepository" />
+
+    <type name="Amasty\Gdpr\Model\Source\CheckboxLocationCombine">
+        <arguments>
+            <argument name="optionGroups" xsi:type="array">
+                <item name="amasty" xsi:type="array">
+                    <item name="optionSources" xsi:type="array">
+                        <item name="social_login" xsi:type="object">Amasty\SocialLogin\Model\Config\GdprSocialLogin</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\SocialLogin\Model\ResourceModel\Sales">
+        <arguments>
+            <argument name="connectionName" xsi:type="string">sales</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Sales\Model\OrderRepository">
+        <plugin name="Amasty_SocialLogin::on_order_delete" type="Amasty\SocialLogin\Plugin\Sales\DeleteSocialOrder"/>
+    </type>
+    <type name="Magento\Sales\Model\Service\OrderService">
+        <plugin name="Amasty_SocialLogin::SaveSocialSale"
+                type="Amasty\SocialLogin\Plugin\Sales\SaveSocialSale"/>
+    </type>
+
+    <virtualType name="loginButtonViewModel" type="Amasty\SocialLogin\Model\Di\ViewModelWrapper">
+        <arguments>
+            <argument name="name" xsi:type="string">Magento\Customer\ViewModel\LoginButton</argument>
+            <argument name="getShared" xsi:type="boolean">true</argument>
+            <argument name="isProxy" xsi:type="boolean">true</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="registrationViewModel" type="Amasty\SocialLogin\Model\Di\ViewModelWrapper">
+        <arguments>
+            <argument name="name" xsi:type="string">Magento\Customer\ViewModel\CreateAccountButton</argument>
+            <argument name="getShared" xsi:type="boolean">true</argument>
+            <argument name="isProxy" xsi:type="boolean">true</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="forgotPasswordButtonViewModel" type="Amasty\SocialLogin\Model\Di\ViewModelWrapper">
+        <arguments>
+            <argument name="name" xsi:type="string">Magento\Customer\ViewModel\ForgotPasswordButton</argument>
+            <argument name="getShared" xsi:type="boolean">true</argument>
+            <argument name="isProxy" xsi:type="boolean">true</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AmastyExtensionsData">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="socialLogin" xsi:type="array">
+                    <item name="name" xsi:type="string">Amasty_SocialLogin</item>
+                    <item name="url" xsi:type="string">customer/account/forgotpasswordpost</item>
+                    <item name="selector" xsi:type="string">.form.password.forget</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AdvancedReview_IsAllowWriteReview" type="Amasty\Base\Model\Di\Wrapper">
+        <arguments>
+            <argument name="name" xsi:type="string">Amasty\AdvancedReview\Model\Frontend\Review\IsAllowWriteReview</argument>
+        </arguments>
+    </virtualType>
+    <type name="Amasty\SocialLogin\Model\AdvancedReview\UseDefaultButtonUrl">
+        <arguments>
+            <argument name="isAllowWriteReview" xsi:type="object">AdvancedReview_IsAllowWriteReview</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Customer\Model\Visitor">
+        <plugin name="Amasty_SocialLogin::SetVisitorData" type="Amasty\SocialLogin\Plugin\Customer\Model\SetVisitorData"/>
+    </type>
+</config>

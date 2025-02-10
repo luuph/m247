@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+
+    <body>
+        <referenceContainer name='root'>
+            <block
+                class='Biztech\Translator\Block\Init'
+                name='Biztech_Translator_Block_Init'
+            />
+        </referenceContainer>
+
+        <referenceContainer name="content">
+            <block class="Magento\Framework\View\Element\Template" name="translate-popup" template="Biztech_Translator::translator/translate.phtml" />
+        </referenceContainer>
+
+        <!-- For Higher Version -->
+         <referenceBlock name="page.content">
+            <block name="product.form.translater"  ifconfig="translator/general/magento_higher_version" class="Biztech\Translator\Block\Adminhtml\Catalog\Category\Edithigher" template="Biztech_Translator::translator/catalog/category/edit.phtml" as="category_custom">
+                <arguments>
+                    <argument name="config" xsi:type="array">
+                        <item name="collapsible" xsi:type="boolean">false</item>
+                        <item name="label" xsi:type="string" translate="true" />
+                        <item name="sortOrder" xsi:type="string">1000</item>
+                        <item name="canShow" xsi:type="boolean">true</item>
+                        <item name="componentType" xsi:type="string">fieldset</item>
+                        <item name="provider" xsi:type="string">category_form.category_form_data_source</item>
+                        <item name="form" xsi:type="string">category_form.category_form</item>
+                        <item name="urlWizard" xsi:type="string">catalog/category/index</item>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+
+        <!-- For Lower Version -->
+        <referenceBlock name="page.content">
+            <block name="product.form.translater1"  ifconfig="translator/general/magento_lower_version" class="Biztech\Translator\Block\Adminhtml\Catalog\Category\Editlower" template="Biztech_Translator::translator/catalog/category/edit.phtml" as="category_custom1">
+                <arguments>
+                    <argument name="config" xsi:type="array">
+                        <item name="collapsible" xsi:type="boolean">false</item>
+                        <item name="label" xsi:type="string" translate="true" />
+                        <item name="sortOrder" xsi:type="string">1000</item>
+                        <item name="canShow" xsi:type="boolean">true</item>
+                        <item name="componentType" xsi:type="string">fieldset</item>
+                        <item name="provider" xsi:type="string">category_form.category_form_data_source</item>
+                        <item name="form" xsi:type="string">category_form.category_form</item>
+                        <item name="urlWizard" xsi:type="string">catalog/category/index</item>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

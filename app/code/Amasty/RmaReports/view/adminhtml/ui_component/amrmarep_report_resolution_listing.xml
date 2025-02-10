@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2023 Amasty (https://www.amasty.com)
+ * @package Reports for RMA (Add-On) for Magento 2
+ */-->
+
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">amrmarep_report_resolution_listing.amrmarep_report_resolution_listing_data_source</item>
+            <item name="deps" xsi:type="string">amrmarep_report_resolution_listing.amrmarep_report_resolution_listing_data_source</item>
+        </item>
+        <item name="spinner" xsi:type="string">amrmarep_report_resolution_columns</item>
+    </argument>
+    <dataSource name="amrmarep_report_resolution_listing_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Amasty\RmaReports\Model\Report\DataProvider\OverviewListing</argument>
+            <argument name="name" xsi:type="string">amrmarep_report_resolution_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">customer_id</argument>
+            <argument name="requestFieldName" xsi:type="string">customer_id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">customer_id</item>
+                        <item name="component" xsi:type="string">Amasty_RmaReports/js/grid/data-storage</item>
+                        <item name="saveUrl" xsi:type="url" path="amrmarep/report/settingssave" />
+                    </item>
+                </item>
+            </argument>
+        </argument>
+    </dataSource>
+    <columns name="amrmarep_report_resolution_columns">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="childDefaults" xsi:type="array">
+                    <item name="fieldAction" xsi:type="array">
+                        <item name="provider" xsi:type="string">amrmarep_report_resolution_listing.amrmarep_report_resolution_listing.amrmarep_report_resolution_columns.actions</item>
+                        <item name="target" xsi:type="string">applyAction</item>
+                        <item name="params" xsi:type="array">
+                            <item name="0" xsi:type="string">edit</item>
+                            <item name="1" xsi:type="string">${ $.$data.rowIndex }</item>
+                        </item>
+                    </item>
+                </item>
+                <item name="dndConfig" xsi:type="array">
+                    <item name="enabled" xsi:type="boolean">false</item>
+                </item>
+            </item>
+        </argument>
+        <column name="customer_name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="fieldClass" xsi:type="string">amrma-grid-column</item>
+                    <item name="label" xsi:type="string" translate="true">Name</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+            </argument>
+        </column>
+        <column name="order_qty">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="fieldClass" xsi:type="string">amrma-grid-column</item>
+                    <item name="label" xsi:type="string" translate="true">Orders Qty</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                </item>
+            </argument>
+        </column>
+        <column name="rma_qty">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="fieldClass" xsi:type="string">amrma-grid-column</item>
+                    <item name="label" xsi:type="string" translate="true">RMA Qty</item>
+                    <item name="sortOrder" xsi:type="number">30</item>
+                </item>
+            </argument>
+        </column>
+        <column name="profit">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="fieldClass" xsi:type="string">amrma-grid-column</item>
+                    <item name="label" xsi:type="string" translate="true">Profit</item>
+                    <item name="sortOrder" xsi:type="number">40</item>
+                </item>
+            </argument>
+        </column>
+    </columns>
+</listing>

@@ -1,0 +1,52 @@
+//
+//  Amasty RMA Shipping Addons Style
+//  ____________________________________________
+
+//
+//  Common
+//  --------------------------------------------
+
+& when (@media-common = true) {
+    //override magento styles start
+    .amrma-request-view .modal-inner-wrap {
+        overflow-x: hidden;
+    }
+    //END override magento styles stop
+
+    .amrma-request-view .amshipping-link {
+        & {
+            color: #007bdb;
+            cursor: pointer;
+        }
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .amrma-request-view .file-uploader {
+        margin-top: 10px;
+    }
+
+    .amshipping-file-container {
+        & {
+            position: relative;
+            z-index: 10;
+            display: inline-block;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #dadee5;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        & > .amshipping-remove {
+            position: relative;
+            margin-left: 10px;
+            padding-left: 15px;
+            background: @amshipping-icon-remove__background no-repeat center;
+            cursor: pointer;
+        }
+    }
+}

@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * FME Extensions
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the fmeextensions.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.fmeextensions.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category  FME
+ * @package   FME_RestrictPaymentMethod
+ * @copyright Copyright (c) 2019 FME (http://fmeextensions.com/)
+ * @license   https://fmeextensions.com/LICENSE.txt
+ */ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+	<update id="FME_Extensions::fmeextensions" 
+            title="FME Extensions" 
+            module="Magento_Backend" 
+            sortOrder="70" 
+            resource="FME_Extensions::fmeextensions"/>
+         
+        <add id="FME_RestrictPaymentMethod::main_menu" 
+             title="Manage Payment Methods" 
+             module="FME_RestrictPaymentMethod" 
+             sortOrder="20" 
+             parent="FME_Extensions::fmeextensions" 
+             resource="FME_RestrictPaymentMethod::main_menu" />
+
+        <add id="FME_RestrictPaymentMethod::paymentmethod" 
+             title="Manage Restriction Rules" 
+             module="FME_RestrictPaymentMethod" 
+             sortOrder="2" 
+             parent="FME_RestrictPaymentMethod::main_menu" 
+             action="paymentmethod/paymentmethod/index" 
+             resource="FME_RestrictPaymentMethod::paymentmethod" />
+        
+        <add id="FME_RestrictPaymentMethod::configurations" 
+             title="Configurations" 
+             module="FME_RestrictPaymentMethod" 
+             sortOrder="3" 
+             parent="FME_RestrictPaymentMethod::main_menu" 
+             action="adminhtml/system_config/edit/section/paymentmethod" 
+             resource="FME_RestrictPaymentMethod::configurations" />
+        
+       
+    </menu>
+</config>

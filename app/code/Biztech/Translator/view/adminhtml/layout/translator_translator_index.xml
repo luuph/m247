@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--/**
+	Copyright © 2016 store.biztechconsultancy.com. All Rights Reserved.
+**/ -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+	<update handle="editor"/>
+	<body>
+		<referenceContainer name="page.main.actions">
+        </referenceContainer>
+		<referenceContainer name="content">
+			<block class="Biztech\Translator\Block\Adminhtml\Translator\Edit" name="translator_translator_edit" />
+		</referenceContainer>
+		<referenceContainer name="left" >
+			<block class="Biztech\Translator\Block\Adminhtml\Translator\Edit\Tabs" name="translator_translator_edit_tabs" >
+				<block class="Biztech\Translator\Block\Adminhtml\Translator\Edit\Tab\Search" name="translator_translator_edit_tab_search"/>
+				<action method="addTab">
+					<argument name="name" xsi:type="string">search_section</argument>
+					<argument name="block" xsi:type="string">translator_translator_edit_tab_search</argument>
+				</action>
+
+				<block class="Biztech\Translator\Block\Adminhtml\Translator\Edit\Tab\StaticdataSerchandtranslate" name="translator_translator_edit_tab_module_static_data_search_and_translate"/>
+				<action method="addTab">
+					<argument name="name" xsi:type="string">module_static_data_search_and_translate</argument>
+					<argument name="block" xsi:type="string">translator_translator_edit_tab_module_static_data_search_and_translate</argument>
+				</action>
+
+				<block class="Biztech\Translator\Block\Adminhtml\Translator\Edit\Tab\Categories" name="translator_translator_edit_tab_categories"/>
+				<action method="addTab">
+					<argument name="name" xsi:type="string">categories_section</argument>
+					<argument name="block" xsi:type="string">translator_translator_edit_tab_categories</argument>
+				</action>
+			</block>
+		</referenceContainer>
+	</body>
+</page>

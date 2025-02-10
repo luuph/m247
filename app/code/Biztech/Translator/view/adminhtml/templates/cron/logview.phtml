@@ -1,0 +1,16 @@
+<div class="translationlog">
+    <h3 id="connector-log-header" class="page-main-actions">
+        <form method="post" action="<?= /* @noEscape */ $block->getClearLogUrl(); ?>" >
+            <?php echo $this->getBlockHtml('formkey')?>
+            <div>
+                <span class="log-title"><?= $block->escapeHtml(__('Cron Item Log')); ?></span>
+                <span class="btn-cls-log"><button id="clear_log" class="primary"><?= __('Clear Log') ?></button></span>
+            </div>
+        </form>
+    </h3>
+</div>
+<div class="translationlog-details">
+    <div id="log_data">
+        <?= /* @noEscape */ $block->getLogFileContent(); ?>
+    </div>
+</div>

@@ -1,0 +1,130 @@
+<?php
+/**
+Copyright © 2016 store.biztechconsultancy.com. All Rights Reserved.
+ **/
+$count = 1;
+$string = $this->getSearchString();
+$searchResults = $this->getResults();
+$max = sizeof($searchResults);
+$limit = 10;
+$total_pages = ceil($max / $limit);
+?>
+<div class="data-grid-cell-content"><h3><?php echo __('Search Results for: &quot;' . $string . '&quot;') ?> </h3>
+    <div><span><?php echo $max; ?></span> records found</div>
+</div>
+<div class="admin__data-grid-wrap" data-role="grid-wrapper">
+    <table class="data-grid data-grid-draggable" data-role="grid">
+        <thead class="table1" id="table1">
+        <tr class="data-grid-th _draggable">
+            <th class="data-grid-th _sortable _draggable" data-bind="
+                css: {
+                    '_sortable': sortable,
+                    '_draggable': draggable,
+                    '_ascend': sorting === 'asc',
+                    '_descend': sorting === 'desc'
+                },click: sort"><?php echo __('Sr. No.'); ?></th>
+            <th class="data-grid-th _sortable _draggable" data-bind="
+                css: {
+                    '_sortable': sortable,
+                    '_draggable': draggable,
+                    '_ascend': sorting === 'asc',
+                    '_descend': sorting === 'desc'
+                },click: sort"><?php echo __('Translated String'); ?></th>
+            <th class="data-grid-th _sortable _draggable" data-bind="
+                css: {
+                    '_sortable': sortable,
+                    '_draggable': draggable,
+                    '_ascend': sorting === 'asc',
+                    '_descend': sorting === 'desc'
+                },click: sort"><?php echo __('Origin String'); ?></th>
+            <th class="data-grid-th _sortable _draggable" data-bind="
+                css: {
+                    '_sortable': sortable,
+                    '_draggable': draggable,
+                    '_ascend': sorting === 'asc',
+                    '_descend': sorting === 'desc'
+                },click: sort"><?php echo __('Source'); ?></th>
+            <th class="data-grid-th _sortable _draggable" data-bind="
+                css: {
+                    '_sortable': sortable,
+                    '_draggable': draggable,
+                    '_ascend': sorting === 'asc',
+                    '_descend': sorting === 'desc'
+                },click: sort"><?php echo __('Locale'); ?></th>
+            <th class="data-grid-th _sortable _draggable" data-bind="
+                css: {
+                    '_sortable': sortable,
+                    '_draggable': draggable,
+                    '_ascend': sorting === 'asc',
+                    '_descend': sorting === 'desc'
+                },
+                click: sort"><?php echo __('Action'); ?></th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <?php foreach ($searchResults as $skey => $_result): ?>
+
+
+            <tr class="data-row <?php echo ($count % 2 != 0) ? '_odd-row' : ''; ?>">
+                <td data-bind="
+                        css: $col.getFieldClass(),
+                        click: $col.getFieldHandler($row()),
+                        template: $col.getBody()
+                    ">
+                    <div class="data-grid-cell-content" data-bind="text: $col.getLabel($row())">
+                        <?php echo $count; ?>
+                    </div>
+                </td>
+
+                <td data-bind="
+                        css: $col.getFieldClass(),
+                        click: $col.getFieldHandler($row()),
+                        template: $col.getBody()
+                    ">
+                    <div class="data-grid-cell-content" data-bind="text: $col.getLabel($row())">
+                        <?php echo htmlspecialchars($_result['translation']['translate']); ?>
+                    </div>
+                </td>
+                <td data-bind="
+                        css: $col.getFieldClass(),
+                        click: $col.getFieldHandler($row()),
+                        template: $col.getBody()
+                    ">
+                    <div class="data-grid-cell-content" data-bind="text: $col.getLabel($row())">
+                        <?php echo htmlspecialchars($_result['translation']['key']); ?>
+                    </div>
+                </td>
+                <td data-bind="
+                        css: $col.getFieldClass(),
+                        click: $col.getFieldHandler($row()),
+                        template: $col.getBody()
+                    ">
+                    <div class="data-grid-cell-content" data-bind="text: $col.getLabel($row())">
+                        <?php echo htmlspecialchars($_result['translation']['source']); ?>
+                    </div>
+                </td>
+                <td data-bind="
+                        css: $col.getFieldClass(),
+                        click: $col.getFieldHandler($row()),
+                        template: $col.getBody()
+                    ">
+                    <div class="data-grid-cell-content" data-bind="text: $col.getLabel($row())">
+                        <?php echo $_result['locale'] ?>
+                    </div>
+                </td>
+                <td data-bind="
+                        css: $col.getFieldClass(),
+                        click: $col.getFieldHandler($row()),
+                        template: $col.getBody()
+                    ">
+                    <div class="data-grid-cell-content" data-bind="text: $col.getLabel($row())">
+                        <a href="<?php echo $this->getUrl('*/*/edit', $this->getRequestParams(['source' => base64_encode($_result['translation']['source']), 'translation' => base64_encode(htmlspecialchars($_result['translation']['translate'])), 'locale' => $_result['locale'], 'original' => base64_encode(htmlspecialchars($_result['translation']['key']))])); ?>"><?php echo __('Edit'); ?></a>
+                    </div>
+                </td>
+            </tr>
+            <?php $count++ ?>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>

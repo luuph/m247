@@ -1,0 +1,21 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Social Login Base for Magento 2
+ */
+/**
+ * @var \Magento\Backend\Block\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+?>
+
+<script type="text/x-magento-init">
+    {
+        ".am-social-analytic": {
+            "Amasty_SocialLogin/js/amsl-ajax-loader": {
+                "url": "<?= $escaper->escapeUrl($block->getUrl('amsociallogin/customer/analytic')) ?>"
+            }
+        }
+    }
+</script>

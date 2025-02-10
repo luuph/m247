@@ -1,0 +1,41 @@
+<?php /* * Copyright © 2016 store.biztechconsultancy.com. All Rights Reserved. * */ ?>
+<?php
+$version = $block->getVersion();
+$lower_version = 0;
+if (version_compare($version, '2.1', '<')) {
+    $lower_version = 1;
+    $requirejs = 'biztechTranslator';
+} else {
+    $requirejs = 'biztechTranslatorv213';
+}
+?>
+
+<script>
+    require([
+        "jquery",
+        "<?php echo $requirejs; ?>"
+    ], function($, biztechTranslator) {
+
+        var BiztechTranslatorConfig = '<?php echo $this->getCategoryConfiguration() ?>';
+        var lower_version = <?php echo $lower_version; ?>;
+
+        $(window).ready(function() {
+            setTimeout(function() {
+                var translator = biztechTranslator.BiztechTranslatorForm.init('category_edit_form', BiztechTranslatorConfig);
+            }, 4000);
+
+
+            if (lower_version == 0) {
+                $(document).on('click', '.fieldset-wrapper', function() {
+                    var translator = biztechTranslator.BiztechTranslatorForm.init('category_edit_form', BiztechTranslatorConfig);
+                    if ($(this).hasClass("_show")) {
+                        function customTranslate() {
+                            var translator = biztechTranslator.BiztechTranslatorForm.init('category_edit_form', BiztechTranslatorConfig);
+                        }
+                        setTimeout(customTranslate, 4000);
+                    }
+                });
+            }
+        });
+    });
+</script>

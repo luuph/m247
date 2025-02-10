@@ -1,0 +1,88 @@
+//
+//  Amasty RMA Shipping Addons Style
+//  ____________________________________________
+
+//
+//  Common
+//  --------------------------------------------
+
+& when (@media-common = true) {
+    .amshipping-shipping-container {
+        margin: 0 auto;
+        width: 60%;
+    }
+
+    .amshipping-table-container {
+        overflow-y: auto;
+        max-width: 100%;
+    }
+
+    .amshipping-radio-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .amshipping-label-block {
+        & {
+            margin-top: 15px;
+            padding-left: 25px;
+            cursor: pointer;
+        }
+
+        .amshipping-label {
+            & {
+                position: relative;
+                padding-left: 25px;
+            }
+
+            &:before {
+                position: absolute;
+                top: 2px;
+                left: 0;
+                width: 16px;
+                height: 16px;
+                background: @amshipping-icon-radio__background no-repeat center;
+                content: '';
+            }
+        }
+
+        .amshipping-radio:checked + .amshipping-label:before {
+            background: @amshipping-icon-radio__checked__background no-repeat center;
+        }
+
+        .amshipping-radio {
+            display: none;
+        }
+    }
+
+    //override magento styles start
+    .amrma-request-view .amshipping-shipping-container .fieldset-wrapper .fieldset-wrapper-title {
+        border-bottom: 1px solid rgba(65, 54, 47, .3);
+    }
+
+    .amrma-request-view .amshipping-shipping-container .admin__collapsible-content .admin__fieldset {
+        border: none;
+    }
+
+    .amrma-request-view {
+        .modal-header {
+            padding-top: 40px;
+        }
+
+        .modal-title {
+            margin-bottom: 30px;
+        }
+
+        .action-close {
+            margin-top: 19px;
+        }
+    }
+
+    .amrma-request-view .page-actions .amshipping-apply-button.disabled {
+        border-color: @amshipping-disabled__color;
+        background: @amshipping-disabled__color;
+        color: #fff;
+        text-shadow: 1px 1px 0 rgba(0, 0, 0, .25);
+    }
+    //END override magento styles stop
+}

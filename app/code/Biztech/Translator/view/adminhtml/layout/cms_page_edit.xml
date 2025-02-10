@@ -1,0 +1,36 @@
+
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name='root'>
+            <block
+                class='Biztech\Translator\Block\Init'
+                name='Biztech_Translator_Block_Init'
+            />
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Magento\Framework\View\Element\Template" name="translate-popup" template="Biztech_Translator::translator/translate.phtml" />
+        </referenceContainer>
+        <referenceBlock name="page.content">
+            <block name="cms.page.form.translater" class="Biztech\Translator\Block\Adminhtml\CMS\Page" template="Biztech_Translator::translator/cms/page.phtml" as="cms_page_form_custom">
+                <arguments>
+                    <argument name="config" xsi:type="array">
+                        <item name="collapsible" xsi:type="boolean">false</item>
+                        <item name="label" xsi:type="string" translate="true" />
+                        <item name="sortOrder" xsi:type="string">1000</item>
+                        <item name="canShow" xsi:type="boolean">true</item>
+                        <item name="componentType" xsi:type="string">fieldset</item>
+                        <item name="provider" xsi:type="string">cms_page_form.page_form_data_source</item>
+                        <item name="form" xsi:type="string">cms_page_form.cms_page_form</item>
+                        <item name="urlWizard" xsi:type="string">cms/page/edit</item>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

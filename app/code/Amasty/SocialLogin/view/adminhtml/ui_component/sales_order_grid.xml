@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Social Login Base for Magento 2
+ */-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <columns name="sales_order_columns">
+        <column name="increment_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="index" xsi:type="string">main_table.increment_id</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="amasty_sociallogin_code" component="Magento_Ui/js/grid/columns/select" sortOrder="200">
+            <settings>
+                <visible>true</visible>
+                <options class="Amasty\SocialLogin\Model\SocialList"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <label>Login Network Type</label>
+            </settings>
+        </column>
+    </columns>
+</listing>

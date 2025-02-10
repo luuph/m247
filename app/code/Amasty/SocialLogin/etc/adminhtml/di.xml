@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Social Login Base for Magento 2
+ */-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Customer\Ui\Component\DataProvider">
+        <plugin name="Amasty_SocialLogin::add_login_type_filter"
+                type="Amasty\SocialLogin\Plugin\Customer\Ui\Component\DataProviderPlugin"/>
+    </type>
+
+    <!-- Add Fields to Order Grid -->
+    <type name="Magento\Sales\Model\ResourceModel\Order\Grid\Collection">
+        <plugin name="Amasty_SocialLogin::GridSearchResult"
+                type="\Amasty\SocialLogin\Plugin\Sales\ResourceModel\ManageGridFields"/>
+    </type>
+    <!-- Add Fields to Shipment Grid -->
+    <type name="Magento\Sales\Model\ResourceModel\Order\Shipment\Grid\Collection">
+        <plugin name="Amasty_SocialLogin::GridSearchResult"
+                type="\Amasty\SocialLogin\Plugin\Sales\ResourceModel\ManageGridFields"/>
+    </type>
+
+    <virtualType name="Amasty\SocialLogin\Block\Adminhtml\System\Config\OldRedirectUrlLinkedIn"
+                 type="Amasty\SocialLogin\Block\Adminhtml\System\Config\OldRedirectUrlByProvider">
+        <arguments>
+            <argument name="socialName" xsi:type="string">LinkedIn</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Amasty\SocialLogin\Block\Adminhtml\System\Config\OldRedirectUrlLinkedInOpenID"
+                 type="Amasty\SocialLogin\Block\Adminhtml\System\Config\OldRedirectUrlByProvider">
+        <arguments>
+            <argument name="socialName" xsi:type="string">LinkedInOpenID</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AmSocialPinterestField"
+                 type="Amasty\Base\Block\Adminhtml\System\Config\Form\Field\Promo\PromoField">
+        <arguments>
+            <argument name="moduleName" xsi:type="string">Amasty_SocialLoginPinterest</argument>
+            <argument name="promoConfig" xsi:type="array">
+                <item name="promoLink" xsi:type="string">https://amasty.com/amcustomer/account/products/?utm_source=extension&amp;utm_medium=backend&amp;utm_campaign=subscribe_sociallogin</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AmSocialAzureMicrosoftField"
+                 type="Amasty\Base\Block\Adminhtml\System\Config\Form\Field\Promo\PromoField">
+        <arguments>
+            <argument name="moduleName" xsi:type="string">Amasty_SocialLoginMicrosoftGraph</argument>
+            <argument name="promoConfig" xsi:type="array">
+                <item name="promoLink" xsi:type="string">https://amasty.com/amcustomer/account/products/?utm_source=extension&amp;utm_medium=backend&amp;utm_campaign=subscribe_sociallogin</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Amasty\SocialLogin\Block\Adminhtml\System\Config\SubscriptionAzure"
+                 type="Amasty\SocialLogin\Block\Adminhtml\System\Config\SubscriptionInfo">
+        <arguments>
+            <argument name="moduleName" xsi:type="string">Amasty_SocialLoginMicrosoftGraph</argument>
+            <argument name="message" xsi:type="string"><![CDATA[The functionality is available as part of an active product subscription or support subscription. To upgrade and obtain functionality please follow the <a href="https://amasty.com/amcustomer/account/products/?utm_source=extension&amp;utm_medium=backend&amp;utm_campaign=subscribe_sociallogin" target="_blank">link</a>. Than you can find the 'amasty/module-social-login-microsoft-graph' package for installation in composer suggest.]]></argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Amasty\SocialLogin\Block\Adminhtml\System\Config\SubscriptionPinterest"
+                 type="Amasty\SocialLogin\Block\Adminhtml\System\Config\SubscriptionInfo">
+        <arguments>
+            <argument name="moduleName" xsi:type="string">Amasty_SocialLoginPinterest</argument>
+            <argument name="message" xsi:type="string"><![CDATA[The functionality is available as part of an active product subscription or support subscription. To upgrade and obtain functionality please follow the <a href="https://amasty.com/amcustomer/account/products/?utm_source=extension&amp;utm_medium=backend&amp;utm_campaign=subscribe_sociallogin" target="_blank">link</a>. Than you can find the 'amasty/module-social-login-pinterest' package for installation in composer suggest.]]></argument>
+        </arguments>
+    </virtualType>
+</config>

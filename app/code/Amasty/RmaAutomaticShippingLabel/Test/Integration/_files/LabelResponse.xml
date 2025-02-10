@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2023 Amasty (https://www.amasty.com)
+ * @package Shipping Labels for RMA (Add-On) for Magento 2
+ */-->
+<ProcessShipmentReply>
+    <HighestSeverity>WARNING</HighestSeverity>
+    <Notifications>
+        <Severity>WARNING</Severity>
+        <Source>ship</Source>
+        <Code>3053</Code>
+        <Message>Recipient Postal-City Mismatch</Message>
+        <LocalizedMessage>Recipient Postal-City Mismatch</LocalizedMessage>
+    </Notifications>
+    <TransactionDetail>
+        <CustomerTransactionId>*** Express Domestic Shipping Request v9 using PHP ***</CustomerTransactionId>
+    </TransactionDetail>
+    <Version>
+        <ServiceId>ship</ServiceId>
+        <Major>10</Major>
+        <Intermediate>0</Intermediate>
+        <Minor>0</Minor>
+    </Version>
+    <CompletedShipmentDetail>
+        <UsDomestic>true</UsDomestic>
+        <CarrierCode>FDXG</CarrierCode>
+        <MasterTrackingId>
+            <TrackingIdType>GROUND</TrackingIdType>
+            <TrackingNumber>800026015351205</TrackingNumber>
+        </MasterTrackingId>
+        <ServiceTypeDescription>FXG</ServiceTypeDescription>
+        <PackagingDescription>YOUR_PACKAGING</PackagingDescription>
+        <CompletedPackageDetails>
+            <SequenceNumber>1</SequenceNumber>
+            <TrackingIds>
+                <TrackingIdType>GROUND</TrackingIdType>
+                <TrackingNumber>800026015351205</TrackingNumber>
+            </TrackingIds>
+            <GroupNumber>0</GroupNumber>
+            <Label>
+                <Type>OUTBOUND_LABEL</Type>
+                <ShippingDocumentDisposition>RETURNED</ShippingDocumentDisposition>
+                <Resolution>200</Resolution>
+                <CopiesToPrint>1</CopiesToPrint>
+                <Parts>
+                    <DocumentPartSequenceNumber>1</DocumentPartSequenceNumber>
+                    <Image>R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=</Image>
+                </Parts>
+            </Label>
+            <SignatureOption>SERVICE_DEFAULT</SignatureOption>
+        </CompletedPackageDetails>
+    </CompletedShipmentDetail>
+</ProcessShipmentReply>

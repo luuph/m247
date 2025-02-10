@@ -1,0 +1,50 @@
+<table class="amshipping-table-block -items">
+    <thead class="amshipping-thead">
+        <tr>
+            <th class="col amshipping-col" data-bind="i18n: 'Product'"></th>
+            <th class="col amshipping-col" data-bind="visible: $parents[1].isShowCustomsValue, i18n: 'Customs Value'"></th>
+            <th class="col amshipping-col" data-bind="i18n: 'Weight'"></th>
+            <th class="col amshipping-col" data-bind="i18n: 'Qty Ordered'"></th>
+            <th class="col amshipping-col" data-bind="i18n: 'Qty'"></th>
+            <th class="col amshipping-col"></th>
+        </tr>
+    </thead>
+    <tbody class="amshipping-tbody">
+    <!-- ko foreach: { data: $data.items, as: 'item' } -->
+        <tr class="amshipping-row" data-amshiping-js="row" data-bind="css: {'-active': item.checked}">
+            <td class="col amshipping-col amrma-checkbox-container">
+                <input type="checkbox"
+                       class="amrma-checkbox"
+                       data-bind="
+                            attr: {id: item.uniqueId},
+                            event: {change: $parents[1].checkItem.bind($parents[1])},
+                            checked: item.checked"
+                />
+                <label class="amrma-label" data-bind="attr: {for: item.uniqueId}"></label>
+                <span data-bind="text: item.name"></span>
+            </td>
+            <td class="col amshipping-col" data-bind="visible: $parents[1].isShowCustomsValue">
+                <input class="amshipping-customs"
+                       type="text"
+                       data-bind="value: item.customs_value"
+                />
+            </td>
+            <td class="col id amshipping-col" data-bind="text: item.weight"></td>
+            <td class="col qty-ordered amshipping-col" data-bind="text: item.qty"></td>
+            <td class="col amshipping-col">
+                <input class="amshipping-qty"
+                       type="text"
+                       data-bind="
+                            value: item.packageQty,
+                            event: {change: $parents[1].validateItemQty.bind($parents[1], event, item)}"
+                />
+            </td>
+            <td class="col amshipping-col">
+                <!-- ko if: item.saved && !$parents[1].isEditPackage() -->
+                <span class="amshipping-link" data-bind="i18n: 'Remove', click: $parents[1].removeItem.bind($parents[1], item)"></span>
+                <!-- /ko -->
+            </td>
+        </tr>
+    <!-- /ko -->
+    </tbody>
+</table>

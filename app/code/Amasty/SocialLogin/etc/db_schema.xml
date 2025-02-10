@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Social Login Base for Magento 2
+ */-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="amasty_sociallogin_social" resource="default" engine="innodb" comment="Amasty Social List">
+        <column xsi:type="smallint" name="id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Social ID"/>
+        <column xsi:type="varchar" name="code" nullable="false" length="20" comment="Social Network Code"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="UNQ_AMASTY_SOCIALLOGIN_SOCIAL_COLUMN_CODE">
+            <column name="code"/>
+        </constraint>
+    </table>
+
+    <table name="amasty_sociallogin_customers" resource="default" engine="innodb"
+           comment="Amasty Social Login Customers">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="ID"/>
+        <column xsi:type="varchar" name="social_id" nullable="false" length="255" default="" comment="Social ID"/>
+        <column xsi:type="int" name="customer_id" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Customer ID"/>
+        <column xsi:type="varchar" name="type" nullable="false" length="20" default="" comment="Social Network Code"/>
+        <column xsi:type="varchar" name="name" nullable="true" length="255" comment="Customer Name"/>
+        <constraint xsi:type="foreign" referenceId="AMASTY_SOCIALLOGIN_CSTRS_CSTR_ID_CSTR_ENTT_ENTT_ID"
+                    table="amasty_sociallogin_customers" column="customer_id"
+                    referenceTable="customer_entity"
+                    referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <index referenceId="AMASTY_SOCIALLOGIN_CUSTOMERS_SOCIAL_ID" indexType="btree">
+            <column name="social_id"/>
+        </index>
+        <index referenceId="AMASTY_SOCIALLOGIN_CUSTOMERS_TYPE" indexType="btree">
+            <column name="type"/>
+        </index>
+        <index referenceId="AMASTY_SOCIALLOGIN_CUSTOMERS_CUSTOMER_ID" indexType="btree">
+            <column name="customer_id"/>
+        </index>
+    </table>
+
+    <table name="amasty_sociallogin_sales" resource="default" engine="innodb" comment="Amasty Social Login Sales">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="int" name="order_id" nullable="true" default="null" unsigned="true"
+                comment="Sales Order entity ID"/>
+        <column xsi:type="varchar" name="social_id" nullable="true" length="255" comment="Social ID"/>
+        <column xsi:type="int" name="items" padding="11" nullable="false" default="0"
+                identity="false" comment="Items"/>
+        <column xsi:type="decimal" name="amount" scale="2" precision="10" nullable="false" default="0"
+                comment="Amount"/>
+        <column xsi:type="varchar" name="type" nullable="false" length="20" default="" comment="Social Network Code"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <index referenceId="AMASTY_SOCIALLOGIN_SALES_SOCIAL_ID" indexType="btree">
+            <column name="social_id"/>
+        </index>
+        <index referenceId="AMASTY_SOCIALLOGIN_SALES_TYPE" indexType="btree">
+            <column name="type"/>
+        </index>
+        <index referenceId="AMASTY_SOCIALLOGIN_SALES_ORDER_ID" indexType="btree">
+            <column name="order_id"/>
+        </index>
+        <!--        Foreign key with order can not be added due Split Database support. -->
+    </table>
+</schema>

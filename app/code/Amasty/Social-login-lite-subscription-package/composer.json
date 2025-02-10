@@ -1,0 +1,26 @@
+{
+    "name": "amasty/module-social-login-lite-subscription-package",
+    "description": "Social Login Lite Subscription Package",
+    "require": {
+        "php": ">=7.3",
+        "amasty/base": ">=1.17.0",
+        "amasty/module-social-login-lite": "*"
+    },
+    "suggest": {
+        "amasty/module-social-login-hyva": "Install this module to activate the integration with Hyva Theme.",
+        "amasty/module-invisible-captcha-hyva": "Install module-invisible-captcha-hyvam module to activate the integration Captcha module with Hyva Theme.",
+        "amasty/module-social-login-pinterest": "Install this package for Pinterest compatibility."
+    },
+    "homepage": "https://amasty.com/",
+    "type": "magento2-module",
+    "version": "1.12.4",
+    "license": "proprietary",
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Amasty\\SocialLoginLiteSubscriptionPackage\\": ""
+        }
+    }
+}

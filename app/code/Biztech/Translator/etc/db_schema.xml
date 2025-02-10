@@ -1,0 +1,105 @@
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="translator_cron">
+        <column xsi:type="int" name="id" unsigned="true" nullable="false" comment="Id" identity="true"/>
+        <column xsi:type="int" name="is_console" default="0" nullable="true" comment="Added product for translate using console"/>
+
+        <column xsi:type="int" name="store_id" padding="10" unsigned="true" nullable="false" comment="Store Id" default = "0"/>
+
+        <column xsi:type="datetime" name="cron_date" nullable="false" comment="Date and Time of Cron RUN"/>
+
+        <column xsi:type="datetime" name="update_cron_date" nullable="false" comment="Date and Time of Cron RUN"/>
+
+        <column xsi:type="text" name="cron_name" comment="Cron Name"/>
+
+        <column xsi:type="text" name="product_ids" comment="Ids selected to translate"/>
+
+        <column xsi:type="text" name="lang_from" comment="Language From"/>
+
+        <column xsi:type="text" name="lang_to" comment="Language to"/>
+
+        <column xsi:type="text" name="status" nullable="false" comment="abort,pending,processing,success"/>
+        
+        <column xsi:type="int" name="is_abort" default="0" nullable="true" comment="Is aborted"/>
+        <column xsi:type="int" name="last_product_id" padding="10" unsigned="true" nullable="false" comment="Last translated product id" default = "0"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+    
+    <table name="translator_logcron">
+        <column xsi:type="int" name="trans_id" unsigned="true" nullable="false" comment="Id" identity="true"/>
+
+        <column xsi:type="text" name="cron_job_code" nullable="false" comment="Store Id" />
+
+        <column xsi:type="datetime" name="cron_date" nullable="false" comment="Date and Time of Cron RUN"/>
+
+        <column xsi:type="int" name="status" nullable="false" default="0" comment="Status 0 => failed, 1 => success, 2 => abort"/>
+
+        <column xsi:type="int" name="product_id" nullable="false" comment="Last Translated Product Id"/>
+
+        <column xsi:type="text" name="remain_limit" nullable="true" comment="Remaining Daily Limit"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="trans_id"/>
+        </constraint>
+    </table>
+
+    <table name="translate_in_all_storeview">
+        <column xsi:type="int" name="id" unsigned="true" nullable="false" comment="Id" identity="true"/>
+
+        <column xsi:type="text" name="store_ids" nullable="false" comment="Store ids"/> 
+
+        <column xsi:type="text" name="cron_name" comment="Cron Name"/>
+
+        <column xsi:type="mediumtext" name="product_ids" nullable="false" comment="Product Ids selected to translate in all storeview"/>
+
+        <column xsi:type="text" name="succeed_store_ids" nullable="true" comment="Translation succeed in Store ids"/>
+
+        <column xsi:type="text" name="lang_from" comment="Language From"/>
+
+        <column xsi:type="text" name="lang_to" comment="Language to"/>
+
+        <column xsi:type="text" name="status" nullable="false" comment="abort,pending,processing,success"/>
+        
+        <column xsi:type="int" name="is_abort" default="0" nullable="true" comment="Is aborted"/>
+
+        <column xsi:type="datetime" name="cron_date" nullable="false" comment="Date and Time of Cron RUN"/>
+
+        <column xsi:type="datetime" name="update_cron_date" nullable="false" comment="Date and Time of Cron RUN"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+    
+    <table name="translate_newly_added_product">
+        <column xsi:type="int" name="id" unsigned="true" nullable="false" comment="Id" identity="true"/>
+
+        <column xsi:type="text" name="store_ids" nullable="false" comment="Store ids"/>
+
+        <column xsi:type="text" name="cron_name" comment="Cron Name"/>
+
+        <column xsi:type="text" name="product_ids" comment="Product Ids selected to translate in all storeview"/>
+            
+        <column xsi:type="text" name="succeed_store_ids" nullable="true" comment="Translation succeed in Store ids"/>        
+
+        <column xsi:type="text" name="lang_from" comment="Language From"/>
+
+        <column xsi:type="text" name="lang_to" comment="Language to"/>
+
+        <column xsi:type="text" name="status" comment="abort,pending,processing,success"/>
+        
+        <column xsi:type="int" name="is_abort" default="0" nullable="true" comment="Is aborted"/>
+
+        <column xsi:type="datetime" name="cron_date" nullable="false" comment="Date and Time of Cron RUN"/>
+
+        <column xsi:type="datetime" name="update_cron_date" nullable="false" comment="Date and Time of Cron RUN"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+
+</schema>

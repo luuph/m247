@@ -1,0 +1,98 @@
+<!--
+/**
+ * FME Extensions
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the fmeextensions.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.fmeextensions.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    FME
+ * @package     FME_RestrictPaymentMethod
+ * @copyright   Copyright (c) 2019 FME (http://fmeextensions.com/)
+ * @license     https://fmeextensions.com/LICENSE.txt
+ */
+-->
+
+<div class="admin__field-complex" if="$data.addButton">
+    <div class="admin__field-complex-title">
+        <span class="label" translate="'Day & Time'"></span>
+    </div>
+
+    <div class="admin__field-complex-elements">
+        <render args="fallbackResetTpl" if="$data.showFallbackReset && $data.isDifferedFromDefault"></render>
+        <button attr="{disabled: disabled}"
+                class="action-secondary"
+                type="button"
+                click="processingAddChild.bind($data, false, false, false)">
+            <span translate="addButtonLabel"></span>
+        </button>
+    </div>
+
+    <div class="admin__field-complex-content"
+         translate="'Add single record for each Day. Adding repeat record for a day, latest will be considered.'"></div>
+</div>
+
+<div class="admin__field admin__field-wide"
+     visible="visible"
+     disabled="disabled"
+     css="$data.setClasses($data)"
+     attr="'data-index': index">
+    <label if="$data.label" class="admin__field-label" attr="for: $data.uid">
+        <span translate="$data.label"></span>
+    </label>
+
+    <div class="admin__field-control" data-role="grid-wrapper">
+        <div class="admin__control-table-pagination" visible="!!element.getRecordCount()">
+            <div class="admin__data-grid-pager">
+                <button class="action-previous" type="button" data-bind="attr: {title: $t('Previous Page')}, click: previousPage, disable: isFirst()"></button>
+                <input class="admin__control-text" type="number" data-bind="attr: {id: ++ko.uid}, value: currentPage">
+                <label class="admin__control-support-text" data-bind="attr: {for: ko.uid}, text: 'of ' + pages()"></label>
+                <button class="action-next" type="button" data-bind="attr: {title: $t('Next Page')}, click: nextPage, disable: isLast()"></button>
+            </div>
+        </div>
+        <div class="admin__control-table-wrapper">
+            <table class="admin__dynamic-rows data-grid" data-role="grid">
+                <thead if="element.columnsHeader">
+                    <tr>
+                        <th if="$data.dndConfig.enabled"
+                            class="data-grid-draggable-row-cell"></th>
+
+                        <th repeat="foreach: labels, item: '$label'"
+                            class="data-grid-th"
+                            visible="$label().visible"
+                            disable="$label().disabled"
+                            css="setClasses($label())">
+                            <span translate="$label().label"></span>
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr repeat="foreach: elems, item: '$record'"
+                        class="data-row"
+                        css="'_odd-row': $index % 2">
+                        <td if="dndConfig.enabled"
+                            class="data-grid-draggable-row-cell"
+                            template="name: dndConfig.template, data: dnd"></td>
+
+                        <!-- ko foreach: { data: $record().elems(), as: 'elem'}  -->
+                        <td if="elem.template"
+                            visible="elem.visible"
+                            disable="elem.disabled"
+                            css="$parent.setClasses(elem)"
+                            template="elem.template"
+                            attr="'data-index': index"></td>
+                        <!-- /ko -->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

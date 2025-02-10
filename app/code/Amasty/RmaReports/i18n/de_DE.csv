@@ -1,0 +1,49 @@
+Reports,Berichte
+Overview,Überblick
+"Reports in details","Berichte im Detail"
+RMA,RMA
+"7 Days","7 Tage"
+"30 Days","30 Tage"
+"Last Year","Vergangenes Jahr"
+"Custom Date","Benutzerdefiniertes Datum"
+Statistics,Statistiken
+"Total Requests","Anfragen insgesamt"
+"The number of closed RMA requests for the set period of time.","Die Anzahl der abgeschlossenen RMA-Anfragen für den festgelegten Zeitraum."
+"Percentage of Returns","Prozentsatz der Renditen"
+"The ratio between the number of submitted RMA requests and the number of orders. It helps to understand the number of returns for the same number of orders. The less is the value, the better the situation with returns is.","Das Verhältnis zwischen der Anzahl der eingereichten RMA-Anfragen und der Anzahl der Bestellungen. Es hilft, die Anzahl der Rücksendungen für die gleiche Anzahl von Bestellungen zu verstehen. Je geringer der Wert ist, desto besser ist die Renditesituation."
+Lead-time,Vorlaufzeit
+"A time period starting from the RMA request submission and ending when RMA request gets to the 'Completed' state. The less is the lead-time, the better your return process is. This is the average value for the set period.","Ein Zeitraum, der von der Einreichung der RMA-Anforderung beginnt und endet, wenn die RMA-Anforderung den Status „Abgeschlossen“ erreicht. Je kürzer die Vorlaufzeit ist, desto besser ist Ihr Rückgabeprozess. Dies ist der Durchschnittswert für den eingestellten Zeitraum."
+Rating,Bewertung
+"Some of the RMA requests are rated by customers. This is the average value for the set period.","Einige der RMA-Anfragen werden von Kunden bewertet. Dies ist der Durchschnittswert für den eingestellten Zeitraum."
+"Delivery by store","Lieferung per Filiale"
+"Shows how many items were delivered back from customers at the expense of the store.","Zeigt an, wie viele Artikel von Kunden auf Kosten des Geschäfts zurückgeliefert wurden."
+"Top Reasons",Top-Gründe
+"Top Return Reasons for the set period.","Die häufigsten Rückgabegründe für den festgelegten Zeitraum."
+"Changes have been made to this section that have not been saved.","An diesem Abschnitt wurden Änderungen vorgenommen, die noch nicht gespeichert wurden."
+"This tab contains invalid data. Please resolve this before saving.","Diese Registerkarte enthält ungültige Daten. Bitte lösen Sie dies vor dem Speichern."
+"RMA Reports",RMA-Berichte
+"Date Range:",Datumsbereich:
+From:,Aus:
+To:,Zu:
+"Request Items Resolution","Lösung für angeforderte Artikel"
+"Request Items Condition","Artikelzustand anfordern"
+"Request Items Reason","Artikel anfordern Grund"
+"RMA ID",RMA-ID
+Customer,Kunde
+Manager,Manager
+"Lead Time",Vorlaufzeit
+"Request Items SKU","Artikel-SKU anfordern"
+Total,Gesamt
+"Suspicious Items","Verdächtige Gegenstände"
+"The report helps to detect suspicious items in a few clicks. Please, set the needed Return Reason and you will see the list of items that were returned back for the set time period and reason. The chosen return reason will be saved and set by default next time you load the page. Sort the columns for the ease of use.","Der Bericht hilft, verdächtige Elemente mit wenigen Klicks zu erkennen. Bitte geben Sie den erforderlichen Rückgabegrund ein und Sie sehen die Liste der Artikel, die für den festgelegten Zeitraum und Grund zurückgegeben wurden. Der gewählte Rücksendegrund wird gespeichert und beim nächsten Laden der Seite standardmäßig eingestellt. Sortieren Sie die Spalten für die Benutzerfreundlichkeit."
+"Return Reason",Rücksendegrund
+"Suspicious Customers","Verdächtige Kunden"
+"The report helps to detect suspicious customers in a few clicks. Please, set the needed Return Resolution and you will see the list of customers that submit a lot of returns or bring profit to the store for the set time period and reason. The chosen return reason will be saved and set by default next time you load the page. Sort the columns for the ease of use.","Der Bericht hilft, verdächtige Kunden mit wenigen Klicks zu erkennen. Bitte stellen Sie die erforderliche Rücksendeauflösung ein und Sie sehen die Liste der Kunden, die viele Rücksendungen einreichen oder dem Geschäft für den festgelegten Zeitraum und Grund Gewinn bringen. Der gewählte Rücksendegrund wird gespeichert und beim nächsten Laden der Seite standardmäßig eingestellt. Sortieren Sie die Spalten für die Benutzerfreundlichkeit."
+"Return Resolution",Rückgabeauflösung
+Item,Artikel
+"Returned, times","Zurückgegeben, mal"
+Price,Preis
+Name,Name
+"Orders Qty","Bestellungen Menge"
+"RMA Qty",RMA-Menge
+Profit,Profitieren

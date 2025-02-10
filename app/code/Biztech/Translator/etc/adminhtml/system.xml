@@ -1,0 +1,274 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="biztech" translate="label" sortOrder="300">
+            <label><![CDATA[AppJetty Extensions]]></label>
+        </tab>
+        <section id="translator" showInDefault="1" showInWebsite="1" showInStore="1">
+            <tab>biztech</tab>
+            <label><![CDATA[AppJetty Language Translator]]></label>
+            <resource>Biztech_Translator::config_translator</resource>
+            <group id="activation" showInDefault="1">
+                <label>Translator Activation</label>
+                <field id="key" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1"
+                       showInStore="0">
+                    <label><![CDATA[Activation Key]]></label>
+                    <validate>required-entry</validate>
+                    <comment model="Biztech\Translator\Model\System\Config\Comment" ></comment>
+                </field>
+                <field id="store" translate="label" type="multiselect" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Select Store</label>
+                    <source_model>Biztech\Translator\Model\Config\Source\WebsiteStoreview</source_model>
+                    <tooltip><![CDATA[If you are not able to select any store then please check your activation key and enter correct Activation key.]]></tooltip>
+                </field>
+            </group>
+
+            <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                   
+                <label><![CDATA[Translator Configuration]]></label>
+                <field id="is_active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Activation</label>
+                    <source_model>Biztech\Translator\Model\Config\Source\Enabledisable</source_model>
+                    <frontend_model>Biztech\Translator\Block\Adminhtml\Enabledisable</frontend_model>
+                </field>
+
+                <field id="google_api" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label><![CDATA[Enter Google API Key]]></label>
+                    <comment><![CDATA[Enter Google API Key to translate data]]></comment>
+                    <depends>
+                        <field id="is_active">1</field>
+                    </depends>
+                    <validate>required-entry</validate>
+                </field>
+
+                <field id="google_daily_limit" translate="label" type="text" sortOrder="21" showInDefault="1" showInWebsite="0"
+                       showInStore="0">
+                    <label><![CDATA[Enter Daily Quota]]></label>
+                    <comment><![CDATA[Enter daily quota (limit) specified in Google Billing Account.]]></comment>
+                    <frontend_model>Biztech\Translator\Block\Adminhtml\DailyQuotaAvailable</frontend_model>
+                    <depends>
+                        <field id="is_active">1</field>
+                    </depends>
+                    <validate>required-entry validate-digits validate-daily-quota</validate>
+                </field>
+
+                <field id="google_daily_cut_before_limit" translate="label" type="text" sortOrder="21" showInDefault="1" showInWebsite="0"
+                       showInStore="0">
+                    <label><![CDATA[Enter Safe Limit]]></label>
+                    <comment><![CDATA[Enter daily safe limit (must be less than daily limit above)]]></comment>
+                    <depends>
+                        <field id="is_active">1</field>
+                    </depends>
+                    <validate>required-entry validate-digits validate-safe-limit</validate>
+                </field>
+
+                <field id="languages" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1"
+                       showInStore="1" canRestore="1">
+                    <label><![CDATA[Language you want to translate your website to]]></label>
+                    <source_model>Biztech\Translator\Model\Config\Source\Language</source_model>
+                    <depends>
+                        <field id="is_active">1</field>
+                    </depends>
+                    <comment><![CDATA[Choose language you want to translate your website to]]></comment>
+                </field>
+
+                <field id="from_lang" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1"
+                       showInStore="1" canRestore="1">
+                    <label><![CDATA[Translate From]]></label>
+                    <source_model>Biztech\Translator\Model\Config\Source\Fromlanguage</source_model>
+                    <comment><![CDATA[Choose language you want to translate from]]></comment>
+                    <depends>
+                        <field id="is_active">1</field>
+                    </depends>
+                </field>
+
+                <field id="translate_btntext" translate="label" type="text" sortOrder="50" showInDefault="1"
+                       showInWebsite="1" showInStore="1" canRestore="1">
+                    <label><![CDATA[Translate Button Label]]></label>
+                    <comment><![CDATA[Enter text which would be displayed on Translate Button.<br/>Default Label: <strong>Translate To</strong>]]></comment>
+                    <depends>
+                        <field id="is_active">1</field>
+                    </depends>
+                </field>
+
+                <field id="translator_mass_product_in_allstoreview" translate="label" type="select" sortOrder="51" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Allow mass products translation in multiple store view</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>If Yes then it will translate multiple products in multiple storeview.</comment>
+                    <depends>
+                        <field id="is_active">1</field>
+                    </depends>
+                </field>
+                <field id="mass_product_store" translate="label" type="multiselect" sortOrder="52" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Select storeview</label>
+                    <source_model>Biztech\Translator\Model\Config\Source\Storeviewlist</source_model>
+                    <!-- <can_be_empty>1</can_be_empty> -->
+                    <depends>
+                        <field id="is_active">1</field>
+                        <field id="translator_mass_product_in_allstoreview">1</field>
+                    </depends>
+                     <comment>Select store view to perform mass product translation. Make sure to configure To and From language of the store properly</comment>
+                    <validate>required-entry</validate>
+                </field>
+
+                <field id="translator_newly_added_product_in_allstoreview" translate="label" type="select" sortOrder="54" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Allow mass translation of new products in multiple store view</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>If Yes then it will translate newly added products in multiple storeview.</comment>
+                    <depends>
+                        <field id="is_active">1</field>
+                    </depends>
+                </field>
+                <field id="newly_added_product_store" translate="label" type="multiselect" sortOrder="55" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Select storeview</label>
+                    <source_model>Biztech\Translator\Model\Config\Source\StoreviewlistNewlyAddedProduct</source_model>
+                    <!-- <can_be_empty>1</can_be_empty> -->
+                    <depends>
+                        <field id="is_active">1</field>
+                        <field id="translator_newly_added_product_in_allstoreview">1</field>
+                    </depends>
+                     <comment>Select store view to perform newly added product translation. Make sure to configure To and From language of the store properly </comment>
+                    <validate>required-entry</validate>
+                </field>
+                <field id="old_added_product" translate="label" type="select" sortOrder="56" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Translate not translated from module installation</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>If marked yes, it would translate old products which are not translated since the extension is installed.</comment>
+                    <depends>
+                        <field id="is_active">1</field>
+                        <field id="translator_newly_added_product_in_allstoreview">1</field>
+                    </depends>
+                </field>
+
+                <field id="cron_mail_send" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Send mail upon successful mass product translation cron</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>If selected yes, mail is sent upon successful mass product translation.</comment>
+                    <depends>
+                        <field id="is_active">1</field>
+                    </depends>
+                </field>
+                <field id="cron_mail_template" translate="label" type="select" sortOrder="62" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Select Email Template</label>
+                    <source_model>Biztech\Translator\Model\Config\EmailTemplateList</source_model>
+                    <depends>
+                        <field id="is_active">1</field>
+                        <field id="cron_mail_send">1</field>
+                    </depends>
+                    <validate>required-entry</validate>
+                </field>
+                <field id="cron_mail_for" translate="label" type="multiselect" sortOrder="64" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label><![CDATA[Select Mass Translation Cron To Send Mail]]></label>
+                    <source_model>Biztech\Translator\Model\Config\Source\Cronmailfor</source_model>
+                    <comment><![CDATA[Select mass translation cron to send mail notification when cron is successfully run.]]></comment>
+                    <depends>
+                        <field id="is_active">1</field>
+                        <field id="cron_mail_send">1</field>
+                    </depends>
+                    <validate>required-entry</validate>
+                </field>
+                <field id="cron_mail_id" translate="label" type="text" sortOrder="66" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Email Notification ID</label>
+                    <depends>
+                        <field id="is_active">1</field>
+                        <field id="cron_mail_send">1</field>
+                    </depends>
+                    <validate>required-entry multiple-email-validate</validate>
+                    <comment><![CDATA[Add multiple email ids separated by comma, example: [abc@test.com,pqr@test.com]]]></comment>
+                </field>
+
+                <field id="massaction_product_translate_fields" translate="label" type="multiselect" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA[Product Translate Fields]]></label>
+                    <source_model>Biztech\Translator\Model\Config\Source\Productattributes</source_model>
+                    <comment><![CDATA[Select product attribute(s) to be translated.]]></comment>
+                    <depends>
+                        <field id="is_active">1</field>
+                    </depends>
+                </field>
+
+                <field id="massaction_cmspage_translate_fields" translate="label" type="multiselect" sortOrder="75" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>CMS Page Translate Fields</label>
+                    <source_model>Biztech\Translator\Model\Config\Source\Cmspageattributes</source_model>
+                    <comment>Select CMS pages attribute(s) to be translated.
+                    </comment>
+                    <depends>
+                        <field id="is_active">1</field>
+                    </depends>
+                </field>
+
+                <field id="massaction_category_translate_fields" translate="label" type="multiselect" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Category Page Translate Fields</label>
+                    <source_model>Biztech\Translator\Model\Config\Source\Categoryattributes</source_model>
+                    <comment>Select category attribute(s) to be translated.
+                    </comment>
+                    <depends>
+                        <field id="is_active">1</field>
+                    </depends>
+                </field>
+
+                <field id="translate_in_all_store_view" translate="label" type="select" sortOrder="81"  showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Translate in all Store view</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>If Yes then it will translate mass product and mass category in all store view when you have chosen in All Store view.
+                    </comment>
+                    <depends>
+                        <field id="is_active">1</field>
+                    </depends>
+                </field>
+
+                
+                <field id="translate_all" translate="label" type="select" sortOrder="82" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Do you want to translate all products again?</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>If yes then it will translate all products again.</comment>
+                     <depends>
+                        <field id="is_active">1</field>
+                    </depends>
+                </field>
+
+                <field id="product_batch_size" translate="label" type="text" sortOrder="83" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Batch Size to Translate</label>
+                    <comment>Batch Size to Translate Products (range start from 20 to 100)</comment>
+                    <depends>
+                        <field id="is_active">1</field>
+                    </depends>
+                    <validate>validate-digits-range digits-range-20-100 required-entry</validate>
+                </field>
+
+                <field id="calculatechar" translate="label" type="button" sortOrder="84"
+                       showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Calculate estimated characters to be translated</label>
+                    <frontend_model>Biztech\Translator\Block\Adminhtml\Config\Form\Calculatechar</frontend_model>
+                    <depends>
+                        <field id="is_active">1</field>
+                    </depends>
+                </field>
+
+                <field id="magento_higher_version" translate="label" type="select" sortOrder="90" showInDefault="0"
+                       showInWebsite="0" showInStore="0">
+                    <label>Higher Version</label>
+                    <comment>Enable or Disable site translation</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="is_active">1</field>
+                    </depends>
+                </field>
+                <field id="magento_lower_version" translate="label" type="select" sortOrder="100" showInDefault="0"
+                       showInWebsite="0" showInStore="0">
+                    <label>Higher Version</label>
+                    <comment>Enable or Disable site translation</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="is_active">1</field>
+                    </depends>
+                </field>
+
+            </group>
+        </section>
+    </system>
+</config>

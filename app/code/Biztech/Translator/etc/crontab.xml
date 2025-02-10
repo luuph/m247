@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!-- Copyright © 2016 store.biztechconsultancy.com. All Rights Reserved. -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="biztranslator">
+        <!-- translate product in single storeview -->
+        <job name="bizgridcrontranslation" instance="Biztech\Translator\Cron\TranslateGridCronMassProducts" method="execute">
+            <schedule>*/2 * * * *</schedule>
+        </job>
+         <job name="bizcheckcron" instance="Biztech\Translator\Cron\CheckBizTranslateCron" method="execute">
+            <schedule>*/15 * * * *</schedule>
+        </job>
+        <!-- end -->
+
+        <!-- translate product in multiple storeview -->
+       <job name="masstranslateinallstorecron" instance="Biztech\Translator\Cron\TranslateMassProductsInAllstore" method="execute">
+            <schedule>*/10 * * * *</schedule>
+        </job>
+        <job name="checkmasstranslateinallstorecron" instance="Biztech\Translator\Cron\CheckTranslateMassProductsInAllstore" method="execute">
+            <schedule>*/30 * * * *</schedule>
+        </job>
+        <!-- end -->
+
+        <!-- translate new added products -->
+      <job name="addnewproducttotranslate" instance="Biztech\Translator\Cron\AddNewProductToTranslate" method="execute">
+            <schedule>0 1 * * *</schedule>
+        </job>
+		<job name="masstranslatenewlyaddedproductcron" instance="Biztech\Translator\Cron\TranslateNewlyAddedProduct" method="execute">
+            <schedule>*/10 * * * *</schedule>
+        </job>
+        <job name="checkmasstranslatenewlyaddedproductcron" instance="Biztech\Translator\Cron\CheckTranslateNewlyAddedProduct" method="execute">
+            <schedule>*/30 * * * *</schedule>
+        </job>
+        <!--  -->
+    </group>
+</config>

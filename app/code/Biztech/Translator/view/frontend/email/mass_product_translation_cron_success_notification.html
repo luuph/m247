@@ -1,0 +1,39 @@
+<!--@subject {{var subject}} @-->
+<!--@vars {
+"var logo_url":"Email Logo Image Url",
+"var logo_alt":"Email Logo Image Alt",
+} @-->
+<!--@styles 
+    body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+@-->
+{{template config_path="design/email/header_template"}}
+<body style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
+	<div style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:5px;">
+	    Dear {{var admin_name}},
+	    <br /><br />
+	    As you have added below cron to translate mass products which is sucessfully run and added products are translated sucessfully. <br /><br /><br />
+		<table bgcolor="FFFFFF" cellspacing="0" cellpadding="10" border="0" width="650"
+		       style="border:1px solid #E0E0E0;">
+			<tr height="0">
+				<th align="left" bgcolor="#EAEAEA" style="font-size:13px; padding:3px 9px">
+				Cron Name</th>
+				<th align="left" bgcolor="#EAEAEA" style="font-size:13px; padding:3px 9px">
+				Cron ID</th>
+				<th align="left" bgcolor="#EAEAEA" style="font-size:13px; padding:3px 9px">
+				Remain Daily Quota</th>
+			</tr>
+			<tr height="0">
+				<td>{{var cron_name}}</td>
+				<td>{{var cron_id}}</td>
+				<td>{{var remain_daily_quota}}</td>
+			</tr>
+		</table>
+		<center>
+	    	<p style="font-size:12px; margin:0;line-height: 22px;"> <br />
+	    		Thank you, <br><strong>AppJetty Language Translator</strong><br>
+	    		Date: {{var date_created}}
+			</p>
+		</center>
+	</div>
+</body>
+{{template config_path="design/email/footer_template"}}

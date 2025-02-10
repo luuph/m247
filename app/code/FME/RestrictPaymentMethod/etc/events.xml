@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * FME Extensions
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the fmeextensions.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.fmeextensions.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category  FME
+ * @package   FME_RestrictPaymentMethod
+ * @copyright Copyright (c) 2019 FME (http://fmeextensions.com/)
+ * @license   https://fmeextensions.com/LICENSE.txt
+ */ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+	<event name="payment_method_is_active">
+		<observer name="restrict_payment" instance="FME\RestrictPaymentMethod\Observer\PaymentMethodAvailable" />
+	</event>
+	<event name="checkout_cart_product_add_after">
+        <observer name="fme_restrict_payment_add_applied_rule_ids" instance="FME\RestrictPaymentMethod\Observer\UpdateQuote" />
+    </event>
+    <event name="sales_quote_remove_item">
+        <observer name="fme_restrict_payment_remove_applied_rule_ids" instance="FME\RestrictPaymentMethod\Observer\RemoveItemObserver" />
+    </event>
+</config>
+
+

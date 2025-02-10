@@ -1,0 +1,50 @@
+Reports,Reports
+Overview,Overview
+"Reports in details","Reports in details"
+RMA,RMA
+"7 Days","7 Days"
+"30 Days","30 Days"
+"Last Year","Last Year"
+"Custom Date","Custom Date"
+Statistics,Statistics
+"Total Requests","Total Requests"
+"The number of closed RMA requests for the set period of time.","The number of closed RMA requests for the set period of time."
+"Percentage of Returns","Percentage of Returns"
+"The ratio between the number of submitted RMA requests and the number of orders. It helps to understand the number of returns for the same number of orders. The less is the value, the better the situation with returns is.","The ratio between the number of submitted RMA requests and the number of orders. It helps to understand the number of returns for the same number of orders. The less is the value, the better the situation with returns is."
+Lead-time,Lead-time
+"A time period starting from the RMA request submission and ending when RMA request gets to the 'Completed' state. The less is the lead-time, the better your return process is. This is the average value for the set period.","A time period starting from the RMA request submission and ending when RMA request gets to the 'Completed' state. The less is the lead-time, the better your return process is. This is the average value for the set period."
+Rating,Rating
+"Some of the RMA requests are rated by customers. This is the average value for the set period.","Some of the RMA requests are rated by customers. This is the average value for the set period."
+"Delivery by store","Delivery by store"
+"Shows how many items were delivered back from customers at the expense of the store.","Shows how many items were delivered back from customers at the expense of the store."
+"Top Reasons","Top Reasons"
+"Top Return Reasons for the set period.","Top Return Reasons for the set period."
+"Changes have been made to this section that have not been saved.","Changes have been made to this section that have not been saved."
+"This tab contains invalid data. Please resolve this before saving.","This tab contains invalid data. Please resolve this before saving."
+"We couldn't find any records.","We couldn't find any records."
+"RMA Reports","RMA Reports"
+"Date Range:","Date Range:"
+From:,From:
+To:,To:
+"Request Items Resolution","Request Items Resolution"
+"Request Items Condition","Request Items Condition"
+"Request Items Reason","Request Items Reason"
+"RMA ID","RMA ID"
+Customer,Customer
+Manager,Manager
+"Lead Time","Lead Time"
+"Request Items SKU","Request Items SKU"
+Total,Total
+"Suspicious Items","Suspicious Items"
+"The report helps to detect suspicious items in a few clicks. Please, set the needed Return Reason and you will see the list of items that were returned back for the set time period and reason. The chosen return reason will be saved and set by default next time you load the page. Sort the columns for the ease of use.","The report helps to detect suspicious items in a few clicks. Please, set the needed Return Reason and you will see the list of items that were returned back for the set time period and reason. The chosen return reason will be saved and set by default next time you load the page. Sort the columns for the ease of use."
+"Return Reason","Return Reason"
+"Suspicious Customers","Suspicious Customers"
+"The report helps to detect suspicious customers in a few clicks. Please, set the needed Return Resolution and you will see the list of customers that submit a lot of returns or bring profit to the store for the set time period and reason. The chosen return reason will be saved and set by default next time you load the page. Sort the columns for the ease of use.","The report helps to detect suspicious customers in a few clicks. Please, set the needed Return Resolution and you will see the list of customers that submit a lot of returns or bring profit to the store for the set time period and reason. The chosen return reason will be saved and set by default next time you load the page. Sort the columns for the ease of use."
+"Return Resolution","Return Resolution"
+Item,Item
+"Returned, times","Returned, times"
+Price,Price
+Name,Name
+"Orders Qty","Orders Qty"
+"RMA Qty","RMA Qty"
+Profit,Profit

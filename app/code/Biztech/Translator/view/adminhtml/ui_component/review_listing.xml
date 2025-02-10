@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/** Copyright © 2016 store.biztechconsultancy.com. All Rights Reserved.**/
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Ui/etc/ui_configuration.xsd">
+    <container name="listing_top">
+        <massaction name="listing_massaction">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="selectProvider" xsi:type="string">rt.review_id</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/tree-massactions</item>
+                    <item name="displayArea" xsi:type="string">bottom</item>
+                    <item name="indexField" xsi:type="string">review_id</item>
+                </item>
+            </argument>
+            <action name="massaction_product_translate">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">massaction_product_translate</item>
+                        <item name="label" xsi:type="string" translate="true">Translate Selected Products</item>
+                    </item>
+                </argument>
+                <argument name="actions" xsi:type="configurableObject">
+                    <argument name="class" xsi:type="string">Biztech\Translator\Ui\Component\MassAction\Group\Options</argument>
+                    <argument name="data" xsi:type="array">
+                        <item name="urlPath" xsi:type="string">translator/translator/massTranslateProducts</item>
+                        <item name="paramName" xsi:type="string">lang_to</item>
+                        <item name="confirm" xsi:type="array">
+                            <item name="title" xsi:type="string" translate="true">AppJetty Translator</item>
+                            <item name="message" xsi:type="string" translate="true">Are you sure you want to change language of selected Pages?</item>
+                        </item>
+                    </argument>
+                </argument>
+            </action>
+        </massaction>
+    </container>
+</listing>

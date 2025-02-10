@@ -1,0 +1,21 @@
+{
+    "name": "biztech/translator",
+    "description": "Language Translator module for magento 2 For Translation with GOOGLE TRANSLATOR API",
+    "require": {
+        "php": "~7.4.0||~8.1.0||~8.2.0"
+    },
+    "type": "magento2-module",
+    "version": "200.1.7",
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Biztech\\Translator\\": ""
+        }
+    }
+}

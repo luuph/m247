@@ -1,0 +1,22 @@
+{
+    "name": "amasty/rma-api",
+    "description": "RMA API by Amasty",
+    "require": {
+        "php": ">=7.3",
+        "amasty/base": ">=1.13.4",
+        "amasty/rma": ">=2.5.0"
+    },
+    "type": "magento2-module",
+    "version": "1.0.1",
+    "license": [
+        "Commercial"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Amasty\\RmaApi\\": ""
+        }
+    }
+}

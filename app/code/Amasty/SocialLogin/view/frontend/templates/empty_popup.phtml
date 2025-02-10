@@ -1,0 +1,23 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Social Login Base for Magento 2
+ */
+/** @var \Magento\Framework\View\Element\Template $block */
+/** @var \Magento\Framework\Escaper $escaper */
+?>
+
+<div class="amsl-popup-overlay" data-am-js="am-login-message-overlay" style="display: none">
+    <div id="social-login-popup"
+         class="amsl-popup-block"
+         role="dialog"
+         aria-labelledby="amsl-popup-dialog"
+         tabindex="-1"
+         data-am-js="am-login-message-popup">
+        <button class="amsl-button amsl-close -clear"
+                title="<?= /* @noEscape */ __('Close') ?>"
+                aria-label="<?= /* @noEscape */ __('Close') ?>"></button>
+        <div class="amsl-content-wrapper" data-am-js="am-login-message-wrapper"></div>
+    </div>
+</div>

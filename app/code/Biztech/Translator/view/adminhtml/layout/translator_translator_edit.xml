@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--/**
+	Copyright © 2016 store.biztechconsultancy.com. All Rights Reserved.
+**/ -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+	<update handle="editor"/>
+	<body>
+		<referenceContainer name="page.main.actions">
+            <block class="Magento\Backend\Block\Store\Switcher" name="category.store.switcher" template="Magento_Backend::store/switcher.phtml"></block>
+        </referenceContainer>
+		<referenceContainer name="content">
+			<block class="Biztech\Translator\Block\Adminhtml\Search\Edit" name="translator_search_edit"/>
+		</referenceContainer>
+	</body>
+</page>

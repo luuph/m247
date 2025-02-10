@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2023 Amasty (https://www.amasty.com)
+ * @package Shipping Labels for RMA (Add-On) for Magento 2
+ */-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Amasty\RmaAutomaticShippingLabel\Api\ShippingLabelRepositoryInterface" type="Amasty\RmaAutomaticShippingLabel\Model\ShippingLabel\Repository"/>
+    <preference for="Amasty\RmaAutomaticShippingLabel\Api\Data\ShippingLabelInterface" type="Amasty\RmaAutomaticShippingLabel\Model\ShippingLabel\ShippingLabel"/>
+
+    <type name="Amasty\Rma\Model\ConfigProvider">
+        <plugin name="addShippingLabelsCarriersToConfig" type="Amasty\RmaAutomaticShippingLabel\Plugin\RmaConfigProvider"/>
+    </type>
+</config>

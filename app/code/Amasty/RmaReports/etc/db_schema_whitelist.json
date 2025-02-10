@@ -1,0 +1,14 @@
+{
+    "amasty_rma_reports_setting": {
+        "column": {
+            "setting_id": true,
+            "admin_id": true,
+            "reason_id": true,
+            "resolution_id": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "AMASTY_RMA_REPORTS_SETTING_ADMIN_ID_ADMIN_USER_USER_ID": true
+        }
+    }
+}

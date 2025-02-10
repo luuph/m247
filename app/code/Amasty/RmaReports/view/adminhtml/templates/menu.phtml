@@ -1,0 +1,45 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2023 Amasty (https://www.amasty.com)
+ * @package Reports for RMA (Add-On) for Magento 2
+ */ /** @var \Amasty\RmaReports\Block\Adminhtml\Menu $block */ ?>
+<?php /** @var \Magento\Framework\Escaper $escaper */ ?>
+
+<div class="amrma-menu-container">
+    <div class="amreports-list">
+        <?php foreach ($block->getMenu() as $group): ?>
+            <div class="amreports-item level-0
+            <?php if (isset($group['active'])): ?> -active<?php endif; ?>">
+                <?php if (isset($group['url'])): ?>
+                    <a class="amreports-label -dashboard"
+                       href="<?= $escaper->escapeUrl($block->getUrl($group['url'])) ?>"
+                       title="<?= $escaper->escapeHtmlAttr($group['title']) ?>">
+                        <?= $escaper->escapeHtml($group['title']) ?>
+                    </a>
+                <?php else: ?>
+                    <div class="amreports-label">
+                        <?= $escaper->escapeHtml($group['title']) ?>
+                    </div>
+                <?php endif ?>
+
+                <ul class="amreports-sublist">
+                    <?php foreach ($group['children'] as $child): ?>
+                        <li class="amreports-item level-1<?php if (isset($child['active'])): ?>
+                        -active<?php endif ?> <?= $escaper->escapeHtmlAttr($group['class'] ?? '') ?>">
+                            <?php if (isset($child['url'])): ?>
+                                <a href="<?= $escaper->escapeUrl($block->getUrl($child['url'])) ?>"
+                                   class="amreports-link <?= $escaper->escapeHtmlAttr($child['class'] ?? '') ?>"
+                                   title="<?= $escaper->escapeHtmlAttr($child['title']) ?>">
+                                    <?= $escaper->escapeHtml($child['title']) ?>
+                                </a>
+                            <?php else: ?>
+                                <?= $escaper->escapeHtml($child['title']) ?>
+                            <?php endif ?>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</div>

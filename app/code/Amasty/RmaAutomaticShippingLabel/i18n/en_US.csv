@@ -1,0 +1,55 @@
+NA,NA
+"General Store Address","General Store Address"
+"Shipping Origin Address","Shipping Origin Address"
+"Custom Address","Custom Address"
+lb,lb
+kg,kg
+in,in
+cm,cm
+"Shipping label with specified ID ""%1"" not found.","Shipping label with specified ID ""%1"" not found."
+"Shipping label for request with ID ""%1"" not found","Shipping label for request with ID ""%1"" not found"
+"Unable to save new shipping label. Error: %1","Unable to save new shipping label. Error: %1"
+"Unable to remove shipping label with ID %1. Error: %2","Unable to remove shipping label with ID %1. Error: %2"
+"Unable to remove shippinh label. Error: %1","Unable to remove shippinh label. Error: %1"
+"No packages was provided.","No packages was provided."
+"Wrong file extension in shipment for request %1.","Wrong file extension in shipment for request %1."
+"Shipping Label does not exists.","Shipping Label does not exists."
+"Extension ""gd"" is missing. Failed to create shipping label.","Extension ""gd"" is missing. Failed to create shipping label."
+"Failed to create shipping label. Please try again.","Failed to create shipping label. Please try again."
+"Add Products to Package","Add Products to Package"
+"Add Selected Product(s) to Package","Add Selected Product(s) to Package"
+"Items in the Package","Items in the Package"
+Product,Product
+"Customs Value","Customs Value"
+Weight,Weight
+"Qty Ordered","Qty Ordered"
+Qty,Qty
+Remove,Remove
+Delete,Delete
+Generate,Generate
+"View Package","View Package"
+or,or
+"Add a file","Add a file"
+"to upload shipping label","to upload shipping label"
+"Click here or drag and drop to add files.","Click here or drag and drop to add files."
+Package,Package
+"Carriers not found.","Carriers not found."
+"RMA Automatic Shipping Label","RMA Automatic Shipping Label"
+"Items Return Address","Items Return Address"
+"Return Address Source","Return Address Source"
+"Contact Name","Contact Name"
+Country,Country
+Region/State,Region/State
+"ZIP/Postal Code","ZIP/Postal Code"
+City,City
+"Street Address","Street Address"
+"Street Address Line 2","Street Address Line 2"
+"Use for Amasty RMA","Use for Amasty RMA"
+"Current shipping method will be used for shipping label generation by Amasty RMA extension","Current shipping method will be used for shipping label generation by Amasty RMA extension"
+"Step 1. Shipping Information","Step 1. Shipping Information"
+Packages,Packages
+"Step 2. Create Packages","Step 2. Create Packages"
+"Shipping Information","Shipping Information"
+"Please, specify the products","Please, specify the products"
+"Please, specify the required quantity","Please, specify the required quantity"
+"Please, paste package info in the fields","Please, paste package info in the fields"

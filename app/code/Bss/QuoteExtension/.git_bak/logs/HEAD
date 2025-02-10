@@ -1,9 +1,0 @@
-0000000000000000000000000000000000000000 49e3280c87a07e7cbc9eb26728654fb266c4f5b1 Hai Luu <luuph@bsscommerce.com> 1730789192 +0700	clone: from ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-request-to-quote.git
-49e3280c87a07e7cbc9eb26728654fb266c4f5b1 49e3280c87a07e7cbc9eb26728654fb266c4f5b1 Hai Luu <luuph@bsscommerce.com> 1730886873 +0700	reset: moving to HEAD
-49e3280c87a07e7cbc9eb26728654fb266c4f5b1 49e3280c87a07e7cbc9eb26728654fb266c4f5b1 Hai Luu <luuph@bsscommerce.com> 1730886898 +0700	checkout: moving from master to BSupport-7615
-49e3280c87a07e7cbc9eb26728654fb266c4f5b1 49e3280c87a07e7cbc9eb26728654fb266c4f5b1 Hai Luu <luuph@bsscommerce.com> 1736135544 +0700	reset: moving to HEAD
-49e3280c87a07e7cbc9eb26728654fb266c4f5b1 b6942aee30a6e9e180af2f44686d9d4462e0583a Hai Luu <luuph@bsscommerce.com> 1736135551 +0700	pull origin master: Fast-forward
-b6942aee30a6e9e180af2f44686d9d4462e0583a 49e3280c87a07e7cbc9eb26728654fb266c4f5b1 Hai Luu <luuph@bsscommerce.com> 1736135554 +0700	checkout: moving from BSupport-7615 to master
-49e3280c87a07e7cbc9eb26728654fb266c4f5b1 b6942aee30a6e9e180af2f44686d9d4462e0583a Hai Luu <luuph@bsscommerce.com> 1736135561 +0700	pull origin master: Fast-forward
-b6942aee30a6e9e180af2f44686d9d4462e0583a b6942aee30a6e9e180af2f44686d9d4462e0583a Hai Luu <luuph@bsscommerce.com> 1736761614 +0700	checkout: moving from master to BSupport-7691
-b6942aee30a6e9e180af2f44686d9d4462e0583a e47b65d80cbd2a1bd56c1df0aec27461f4de63c4 Hai Luu <luuph@bsscommerce.com> 1736765379 +0700	commit: BSupport-7691: Fix bug print pdf invoice, shipment, creditmemo by mask action in order grid

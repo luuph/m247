@@ -1,0 +1,90 @@
+/**
+ * MB "Vienas bitas" (www.magetrend.com)
+ *
+ * @category  Magetrend Extensions for Magento 2
+ * @package  Magetend/NewsletterMaker
+ * @author   E. Stulpinas <edwin@magetrend.com>
+ * @license  http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @link     https://www.magetrend.com/magento-2-newsletter-maker
+ */
+
+table.block-placeholder {
+    background: url(Magetrend_NewsletterMaker::images/mteditor/page_loader.gif) no-repeat center center #ffffff;
+}
+
+.block-action ul li a span.image-icon.variable-icon {
+    background-image: url(Magetrend_NewsletterMaker::images/mteditor/icon/variable_icon.png);
+}
+
+.block-action ul li a span.image-icon.source-icon {
+    background-image: url(Magetrend_NewsletterMaker::images/mteditor/icon/source_icon.png);
+}
+
+.block-action ul li a span.image-icon.move-icon {
+    background-image: url(Magetrend_NewsletterMaker::images/mteditor/icon/move.png);
+}
+
+.block-action ul li a span.image-icon.remove-icon {
+    background-image: url(Magetrend_NewsletterMaker::images/mteditor/icon/remove.png);
+}
+
+.ngrip {
+    background: url(Magetrend_NewsletterMaker::images/mteditor/icon/splitter.png) no-repeat center center;
+}
+
+.wgrip {
+    background: url(Magetrend_NewsletterMaker::images/mteditor/icon/splitter_vertical.png) no-repeat center center;
+}
+
+.sidebar nav .nav-second-level span.menu-icon.image-icon.source-icon {
+    background-image: url(Magetrend_NewsletterMaker::images/mteditor/icon/menu/source.png);
+}
+
+.sidebar nav .nav-second-level a:hover span.menu-icon.image-icon.source-icon {
+    background-image: url(Magetrend_NewsletterMaker::images/mteditor/icon/menu/source_active.png);
+}
+
+#switch_apply_to_all #switch_thumb_apply_to_all.active,
+#switch_auto_save #switch_thumb_auto_save.active,
+#switch #switch_thumb.active {
+    background-image: url(Magetrend_NewsletterMaker::images/mteditor/check.png);
+}
+
+#editor_helper ul li a span.image-icon.variable-icon {
+    background-image: url(Magetrend_NewsletterMaker::images/mteditor/icon/variable_icon.png);
+}
+
+#editor_helper ul li a span.image-icon.underline-icon {
+    background-image: url(Magetrend_NewsletterMaker::images/mteditor/icon/underline.png);
+}
+
+#editor_helper ul li a span.image-icon.source-icon {
+    background-image: url(Magetrend_NewsletterMaker::images/mteditor/icon/source_icon.png);
+}
+
+
+.mobile {
+    background: url(Magetrend_NewsletterMaker::images/mteditor/mobile.png) no-repeat top center;
+}
+
+.tablet {
+    background: url(Magetrend_NewsletterMaker::images/mteditor/tablet.png) no-repeat top center;
+}
+
+
+.loading-animation {
+    background: url(Magetrend_NewsletterMaker::images/mteditor/ajax-loader1.gif) no-repeat center center #ffffff;
+}
+
+table.block-placeholder,
+table.ui-sortable-placeholder {
+    background: url(Magetrend_NewsletterMaker::images/mteditor/placeholder_drop.png) no-repeat center center #ffffff;
+}
+
+span.image-icon.plus-icon {
+    background-image: url(Magetrend_NewsletterMaker::images/mteditor/icon/plus_icon.png);
+}
+
+span.image-icon.magnet-icon {
+    background-image: url(Magetrend_NewsletterMaker::images/mteditor/icon/magnet_icon.png);
+}

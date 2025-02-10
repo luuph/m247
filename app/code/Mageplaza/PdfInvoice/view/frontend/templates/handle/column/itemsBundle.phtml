@@ -1,0 +1,139 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category   Mageplaza
+ * @package    Mageplaza_PdfInvoice
+ * @copyright   Copyright (c) Mageplaza (http://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+?>
+<?php
+$item = $block->getData('item');
+$classForEl = $block->getData('classForEl');
+$codeValue = $block->getData('codeValue');
+$barcodeConfig = $block->getData('barcodeConfig');
+$type = $block->getData('type');
+$codeType = $block->getData('codeType');
+$isBarcode = $block->getData('isBarcode');
+$pageSize = $block->getData('pageSize');
+$hasParent = $block->getData('hasParent');
+$a4Barcode = $isBarcode && ($pageSize == 'A4');
+$a5Barcode = $isBarcode && ($pageSize == 'A5');
+$_order = $block->getOrder();
+$_prevOptionId = '';
+$isImpresive = $block->getData('isImpresive');
+?>
+<?php if (isset($isImpresive) && $isImpresive): ?>
+    <td class="<?= /** @noEscape */ $classForEl ?> <?= /** @noEscape */ $pageSize?>" style="max-width: 100px">
+        <?php if ($hasParent): ?>
+        <?php $attributes = $block->getSelectionAttributes($item) ?>
+        <?php if ($_prevOptionId != $attributes['option_id']): ?>
+        <div>
+            <strong><em><?= /* @noEscape */
+                    $attributes['option_label'] ?></em></strong>
+        </div>
+        <?php $_prevOptionId = $attributes['option_id'] ?>
+        <?php endif ?>
+        <?php endif ?>
+
+        <?php if (!($hasParent)): ?>
+        <p class="item-info">
+            <p class="product-name"><?= $block->escapeHtml($item->getName()) ?></p>
+            <p class="sku"><?= /* @noEscape */
+                __('SKU') ?>: <?= $block->escapeHtml($item->getSku()) ?></p>
+        </p>
+        <?php else: ?>
+        <div class="item-info">
+            <p><?= $block->getValueHtml($item) ?></p>
+            <?php if (!($type === 'shipment' && $pageSize !== 'A7' && $codeType === 'qr_code') && (($type === 'shipment' && $pageSize !== 'A7' && $codeType === 'barcode') || $a5Barcode || $codeType === 'barcode'
+                    && $pageSize !== 'A6' && $pageSize !== 'A7')): ?>
+                <p>
+                    <barcode code="<?= /** @noEscape */ $block->escapeHtml($codeValue['barcode']) ?>" type="<?= /** @noEscape */ $barcodeConfig['type'] ?>" size="<?= /** @noEscape */ $barcodeConfig['size'] ?>"
+                             height="0.7"/>
+                </p>
+            <?php endif ?>
+            <?php if ($type === 'shipment' && $pageSize !== 'A7' && $pageSize !== 'A4' && $codeType === 'qr_code'): ?>
+                <p>
+                    <barcode code="<?= /** @noEscape */ $block->escapeHtml($codeValue['qrcode']) ?>" type="QR" size="<?= /** @noEscape */ $barcodeConfig['size'] ?>"
+                             height="0.7"/>
+                </p>
+            <?php endif ?>
+        </div>
+        <?php endif ?>
+    </td>
+    <?php if ($a4Barcode && $hasParent) : ?>
+    <td class="mp-barcode-bc">
+        <p style="text-align: center">
+            <?php if ($codeType === 'qr_code') : ?>
+                <barcode code="<?= /** @noEscape */ $block->escapeHtml($codeValue['qrcode']) ?>" type="QR" size="<?= /** @noEscape */ $barcodeConfig['size'] ?>"
+                         height="0.7"/>
+            <?php endif ?>
+        </p>
+    </td>
+    <?php endif ?>
+<?php else: ?>
+<div class="<?= /** @noEscape */ $classForEl ?>">
+<?php $_prevOptionId = '' ?>
+<?php if ($item->getParentItem()): ?>
+    <?php $attributes = $block->getSelectionAttributes($item) ?>
+    <?php if ($_prevOptionId != $attributes['option_id']): ?>
+        <div>
+            <strong><em><?= /* @noEscape */
+                    $attributes['option_label'] ?></em></strong>
+        </div>
+        <?php $_prevOptionId = $attributes['option_id'] ?>
+    <?php endif ?>
+<?php endif ?>
+
+<?php if (!($hasParent)): ?>
+    <div class="item-info">
+        <p class="product-name"><?= $block->escapeHtml($item->getName()) ?></p>
+        <p class="sku"><?= /* @noEscape */
+            __('SKU') ?>: <?= $block->escapeHtml($item->getSku()) ?></p>
+    </div>
+    </div>
+<?php else: ?>
+    <div class="item-info">
+        <p><?= $block->getValueHtml($item) ?></p>
+        <?php if (!($type === 'shipment' && $pageSize !== 'A7' && $codeType === 'qr_code') && (($type === 'shipment' && $pageSize !== 'A7' && $codeType === 'barcode') || $a5Barcode || $codeType === 'barcode'
+            && $pageSize !== 'A6' && $pageSize !== 'A7')): ?>
+            <p>
+                <barcode code="<?= /** @noEscape */ $block->escapeHtml($codeValue['barcode']) ?>" type="<?= /** @noEscape */ $barcodeConfig['type'] ?>" size="<?= /** @noEscape */ $barcodeConfig['size'] ?>"
+                         height="0.7"/>
+            </p>
+        <?php endif ?>
+        <?php if ($type === 'shipment' && $pageSize !== 'A7' && $pageSize !== 'A4' && $codeType === 'qr_code'): ?>
+            <p>
+                <barcode code="<?= /** @noEscape */ $block->escapeHtml($codeValue['qrcode']) ?>" type="QR" size="<?= /** @noEscape */ $barcodeConfig['size'] ?>"
+                         height="0.7"/>
+            </p>
+        <?php endif ?>
+    </div>
+    </div>
+    <?php if ($a4Barcode): ?>
+        <div class="mp-barcode-bc">
+            <p style="text-align: center">
+                <?php if ($codeType === 'qr_code') : ?>
+                    <barcode code="<?= /** @noEscape */ $block->escapeHtml($codeValue['qrcode']) ?>" type="QR" size="<?= /** @noEscape */ $barcodeConfig['size'] ?>"
+                             height="0.7"/>
+                <?php endif ?>
+            </p>
+        </div>
+    <?php endif ?>
+
+<?php endif ?>
+
+<?php endif ?>

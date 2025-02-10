@@ -1,0 +1,53 @@
+/**
+ * MB "Vienas bitas" (www.magetrend.com)
+ *
+ * @category  Magetrend Extensions for Magento 2
+ * @package  Magetend/NewsletterMaker
+ * @author   E. Stulpinas <edwin@magetrend.com>
+ * @license  http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @link     https://www.magetrend.com/magento-2-newsletter-maker
+ */
+
+span.customSelect {
+    font:12px sans-serif;
+    background:#000000 url(Magetrend_NewsletterMaker::images/mteditor/arrow.png) right center no-repeat;
+    border:1px solid #ddd;
+    color:#ffffff;
+    padding: 0;
+    border: 1px dashed #a2a2a2;
+    width:175px;
+    height: 24px;
+    line-height: 24px;
+    padding: 0 7px;
+    overflow: hidden;
+}
+
+.customSelect {
+    /* This is the default class that is used */
+    /* Put whatever custom styles you want here */
+}
+
+.customSelect.customSelectHover {
+    /* Styles for when the select box is hovered */
+}
+
+.customSelect.customSelectOpen {
+    /* Styles for when the select box is open */
+}
+
+.customSelect.customSelectFocus {
+    /* Styles for when the select box is in focus */
+}
+
+.customSelect.customSelectDisabledOption {
+    /* Styles for when the selected item is a disabled one */
+}
+
+.customSelect.customSelectDisabled {
+    /* Styles for when the select box itself is disabled */
+}
+
+.customSelectInner {
+    width: 135px !important;
+    overflow: hidden;
+}

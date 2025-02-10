@@ -31,17 +31,11 @@ if ($block->checkModuleBssPreOrder()) {
     $helper_preorder = $this->helper('Bss\PreOrder\Helper\Data');
     $is_preorder = $helper_preorder->isEnable();
 }
-$isHidePrice = false;
-if ($block->checkModuleBssHidePrice()) {
-    $helperHidePrice = $this->helper('Bss\HidePrice\Helper\Data');
-    $isHidePrice = $helperHidePrice->activeHidePrice($product);
-}
 ?>
 
 <?php if ($product->isSaleable() && count($attributes)): ?>
 
     <?php
-    $isShowQuote = $product->getIsActiveRequest4QuoteProductPage() != null ? $product->getIsActiveRequest4QuoteProductPage() : false;
     $array = [];
     $assc_product_data = $block->getConfiguableGridViewData();
 
@@ -69,7 +63,7 @@ if ($block->checkModuleBssHidePrice()) {
     $typeTax = $block->getTypeTax();
     $configTableTP = $block->configTableTierPrice();
     $urlAjax = $block->getUrlAjax();
-    if (is_array($tableTierPrice) && count($tableTierPrice) > 0 && !$isHidePrice):?>
+    if (is_array($tableTierPrice) && count($tableTierPrice) > 0):?>
         <div class="tier-pricing">
             <div class="table-tier">
                 <table class="tier-table-price">
@@ -169,7 +163,7 @@ if ($block->checkModuleBssHidePrice()) {
                         <th class="qty sku <?php echo $helper->getDisplayAttributeAdvanced('sku') ?>"><?php echo __('SKU'); ?></th>
                         <th class="qty unit <?php echo $helper->getDisplayAttributeAdvanced('unit_price', $showUnit) ?>"><?php echo __('Unit Price'); ?></th>
                         <th class="qty subtotal <?php echo $helper->getDisplayAttributeAdvanced('subtotal') ?>"><?php echo __('Subtotal'); ?></th>
-                        <?php if ($isShowQuote || !$block->getProduct()->getDisableAddToCart()): ?>
+                        <?php if (!$block->getProduct()->getDisableAddToCart()): ?>
                             <th class="qty"><?php echo __('Qty'); ?></th>
                         <?php endif ?>
                         <th class="no-display hidden"></th>
@@ -230,14 +224,12 @@ if ($block->checkModuleBssHidePrice()) {
                                     id="<?php echo 'unit-price-' . $productVal["product_id"]; ?>"><?php echo $productVal["html_unit_price"]; ?></div>
                             </td>
                             <td class="qty subtotal <?php echo $helper->getDisplayAttributeAdvanced('subtotal') ?>">
-                            <?php if (!$productVal["disable_add_to_cart"]): ?>
                             <span class="final-price"
                                   id='<?php echo "final-price-" . $productVal["product_id"]; ?>'><?php echo $helper->getDisplayPriceWithCurrency(0) ?></span><br>
                                 <span class="excl-tax"
                                       id='<?php echo "excl-tax-" . $productVal["product_id"]; ?>'></span>
-                            <?php endif ?>
                             </td>
-                            <?php if ($isShowQuote || !$productVal["disable_add_to_cart"]): ?>
+                            <?php if (!$productVal["disable_add_to_cart"]): ?>
                                 <td class="qty qty-final">
                                     <?php if (($productVal['preorder'] == 1 || ($productVal['preorder'] == 2 && (int)$productVal['stock']['is_in_stock'] != 1)) && $is_preorder) { ?>
                                         <input type="text"
@@ -256,7 +248,6 @@ if ($block->checkModuleBssHidePrice()) {
                                                    name="config_table_qty[<?php echo $i ?>]" <?php echo ((int)$productVal['stock']['is_in_stock'] == 1) ? '' : 'disabled' ?>
                                                    index="<?php echo $i ?>"
                                                    productId="<?php echo $productVal['product_id']; ?>"/>
-                                            <?php if(!$productVal["disable_add_to_cart"]) : ?>       
                                             <div class="bss-tier-detailed hide"
                                                  id='<?php echo "bss-tier-detailed-" . $productVal["product_id"] ?>'>
                                                 <div class="prices-tier items">
@@ -264,7 +255,6 @@ if ($block->checkModuleBssHidePrice()) {
                                                         id='<?php echo "tier-price-" . $productVal["product_id"] ?>'></ul>
                                                 </div>
                                             </div>
-                                            <?php endif ?>
                                         <?php else : ?>
                                             <input type="text"
                                                    data-validate='{"bss-validate-qty-increment":<?= $productVal['qty_increment']; ?>}'
@@ -273,7 +263,6 @@ if ($block->checkModuleBssHidePrice()) {
                                                    name="config_table_qty[<?php echo $i ?>]" <?php echo ((int)$productVal['stock']['is_in_stock'] == 1) ? '' : 'disabled' ?>
                                                    index="<?php echo $i ?>"
                                                    productId="<?php echo $productVal['product_id']; ?>"/>
-                                            <?php if(!$productVal["disable_add_to_cart"]) : ?>
                                             <div class="bss-tier-detailed hide"
                                                  id='<?php echo "bss-tier-detailed-" . $productVal["product_id"] ?>'>
                                                 <div class="prices-tier items">
@@ -281,7 +270,6 @@ if ($block->checkModuleBssHidePrice()) {
                                                         id='<?php echo "tier-price-" . $productVal["product_id"] ?>'></ul>
                                                 </div>
                                             </div>
-                                            <?php endif ?>
                                         <?php endif ?>
                                     <?php } ?>
                                     <input type="hidden" class="unit-price"
@@ -361,7 +349,7 @@ if ($block->checkModuleBssHidePrice()) {
 
 
 
-php
+
 
         </script>
         <?php if (!$productVal["disable_add_to_cart"]): ?>

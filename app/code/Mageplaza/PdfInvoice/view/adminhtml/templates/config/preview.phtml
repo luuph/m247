@@ -1,0 +1,132 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_PdfInvoice
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ *
+ * /**
+ * @var $block \Mageplaza\PdfInvoice\Block\Adminhtml\System\Config\Preview
+ */
+
+/** @var \Mageplaza\PdfInvoice\Block\Adminhtml\System\Config\Preview $block */
+?>
+<?php
+$fieldId = $block->getHtmlId();
+$type = 'order';
+if ($fieldId === 'pdfinvoice_invoice_template') {
+    $type = 'invoice';
+}
+if ($fieldId === 'pdfinvoice_shipment_template') {
+    $type = 'shipment';
+}
+if ($fieldId === 'pdfinvoice_creditmemo_template') {
+    $type = 'creditmemo';
+}
+$templateConfig = $block->getPdfTemplate($type);
+$templates = $block->getTemplateList($type);
+?>
+<button class="preview-button" data-trigger="autofill-<?= /* @noEscape */ $type ?>" type="button">
+    <span><?= /** @noEscape */
+        __('Preview') ?></span>
+</button>
+<div id="mp-<?= /* @noEscape */ $type ?>-block-autofill" style="display:none;"
+     data-bind="mageInit: {
+            'Magento_Ui/js/modal/modal':{
+                'type': 'popup',
+                'title': 'Preview Template',
+                'modalClass': 'pdfinvoice-autofill-modal',
+                'trigger': '[data-trigger=autofill-<?= /* @noEscape */ $type ?>]',
+                'wrapperClass': 'pdfinvoice-autofill-wrapper',
+                'parentModalClass': '_has-modal-custom _has-auth-shown',
+                'responsive': true,
+                'responsiveClass': 'custom-popup',
+                'buttons': []
+            }}">
+    <div class="form_preview">
+        <div class="template-list">
+            <select class="default_template" id="default_template_<?= /* @noEscape */ $type ?>">
+                <?php foreach ($templates as $template): ?>
+                    <?php if ($templateConfig === $template['value']): ?>
+                        <option value="<?= /* @noEscape */ $template['value'] ?>" selected="selected"><?= /* @noEscape */ $template['label'] ?></option>
+                    <?php else: ?>
+                        <option value="<?= /* @noEscape */ $template['value'] ?>"><?= /* @noEscape */ $template['label'] ?></option>
+                    <?php endif ?>
+                <?php endforeach; ?>
+            </select>
+            <button id="preview_<?= /* @noEscape */ $type ?>" type="button" class="action-default scalable preview-button-popup"><span>Preview</span></button>
+        </div>
+        <iframe class="iframe_template" id="iframe_<?= /* @noEscape */ $type ?>" name="mp-iframe-<?= /* @noEscape */ $type ?>" ></iframe>
+        <div class="form-submit">
+            <form action="<?php /* @noEscape */echo $block->getPreviewTemplateUrl() ?>">
+            </form>
+            <form target="mp-iframe-<?= /* @noEscape */ $type ?>" method="post" action="<?php /* @noEscape */echo $block->getPreviewTemplateUrl() ?>" style="display:none" id="mp-custom-submit">
+                <input type="hidden" name="templateType" value="<?= /* @noEscape */ $type ?>"/>
+                <input name="templateId" id="template-id-<?= /* @noEscape */ $type ?>"/>
+                <input type="submit" name="submit" id="mp-submit-<?= /* @noEscape */ $type ?>"/>
+                <input name="form_key" id="mp-form-key-<?= /* @noEscape */ $type ?>" type="hidden">
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/x-magento-init">
+    {
+        "#mp-<?= /* @noEscape */ $type ?>-block-autofill": {
+            "Mageplaza_PdfInvoice/js/view/preview":{
+                "templateType" : "<?= /** @noEscape */ $type ?>"
+            }
+        }
+    }
+</script>
+
+<style>
+     #pdfinvoice_order_template, #pdfinvoice_invoice_template, #pdfinvoice_shipment_template, #pdfinvoice_creditmemo_template {
+         width: calc(100% - 135px);
+         margin-right: 5px;
+         float: left;
+     }
+     .preview-button {
+         width: 130px;
+         box-sizing: border-box;
+     }
+     .iframe_template {
+         width: 80%;
+         float: right;
+         margin-bottom: 30px;
+         height: 842px;
+         border: 1px solid #ddd;
+     }
+     .template-list{
+         width: 18%;
+         float: left;
+     }
+     .form_preview {
+         float: left;
+         width: 100%;
+         margin-top: 15px;
+     }
+     .default_template {
+         height: 33px;
+         padding: 0 10px;
+     }
+     .preview-button-popup {
+         margin-top: 10px;
+         width: 130px;
+         box-sizing: border-box;
+     }
+</style>
+

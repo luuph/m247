@@ -1,0 +1,52 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var $block \Magento\Catalog\Block\Catalog\Product\View\Addto\Compare */
+?>
+
+<!-- <a href="#" id="click-me"  data-post='' 
+        data-role="add-to-links"        class="action tocompare"><span><?php /* @escapeNotVerified */ echo __('Find it in stores') ?></span></a> -->
+<div>
+    <!--<a href="#" id="click-me">ok kg Me</a>-->
+</div>
+
+<div id="popup-mpdal" style="display:none;">
+  <?php echo $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('store-pickup-locations')->toHtml();?>
+</div>
+
+<script>
+    require(
+        [
+            'jquery',
+            'Magento_Ui/js/modal/modal'
+        ],
+        function(
+            $,
+            modal
+        ) {
+            var options = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                buttons: [{
+                    text: $.mage.__('ok'),
+                    class: '',
+                    click: function () {
+                        this.closeModal();
+                    }
+                }]
+            };
+
+            var popup = modal(options, $('#popup-mpdal'));
+            $("#click-me").on('click',function(){ 
+                $("#popup-mpdal").modal("openModal");
+            });
+
+        }
+    );
+</script>

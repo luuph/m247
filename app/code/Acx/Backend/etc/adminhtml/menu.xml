@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Acx_Backend::AgileCodex" title="Agile Codex" module="Acx_Backend" sortOrder="20" resource="Acx_Backend::AgileCodex"/>
+
+        <add
+                id="Acx_Backend::Acx_HelpCenter"
+                title="Contact Agile Codex"
+                module="Acx_Backend"
+                action="adminhtml/system_config/edit/section/acx_backend_config/"
+                sortOrder="1"
+                parent="Acx_Backend::AgileCodex"
+                resource="Acx_Backend::Acx_HelpCenter"
+        />
+    </menu>
+</config>

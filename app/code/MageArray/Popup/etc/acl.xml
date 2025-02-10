@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="MageArray_Core::core" title="MageArray Extensions" sortOrder="90">
+                    <resource id="MageArray_Popup::popupadmin" title="Popup" sortOrder="55">
+                        <resource id="MageArray_Popup::popup" title="Popup Manager" sortOrder="11"/>
+                        <resource id="MageArray_Popup::setting" title="Settings" sortOrder="11"/>
+                    </resource>
+                </resource>
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="MageArray_Popup::config_popup" title="Popup Section" sortOrder="80"/>
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

@@ -1,0 +1,230 @@
+*{
+    padding:0;
+    margin:0;
+}
+h1,h2,h3,h4,h5,h6,p{
+    padding:0;
+    margin:0;
+}
+#wrapper{
+    margin:20px;
+}
+.clr{
+    clear:both;
+}
+/******* HEADER **********/
+.header-left,.header-right,.footer-left{
+    width:50%;
+    float:left;
+}
+img{
+    margin-top:0px;
+}
+.business-information{
+    margin-top:5px;
+}
+.info{
+    margin-left:30px;
+    padding-top:28px;
+}
+
+/******* END HEADER **********/
+
+/********** CONTENT **********/
+.billing-address,.shipping-address,.payment-method,.shipping-method{
+    float:left;
+    width:50%;
+    color:black;
+}
+.billing-address p,.shipping-address p,.payment-method p,.shipping-method p{
+    margin-left:5px;
+    margin-top:10px;
+    margin-bottom:10px;
+}
+.content{
+    padding-top:30px;
+}
+.mp-block-heading{
+    width: 98% !important;
+    padding: 5px 0px 5px 5px;
+    color:#FFF;
+}
+
+.mp-block-heading,.mp-note,.mp-heading{
+background-color: {{var pdfInvoiceDesign.getHeadingColor()}};
+}
+
+/* Css table items */
+.table{
+    width:100%;
+}
+.header-table{
+    width:100%;
+    height:100%;
+}
+.mp-item{
+    float:left;
+    padding:6px 0px;
+}
+
+/*4 columns*/
+.four-columns .mp-item{
+    width:45%;
+}
+.four-columns .mp-price,.four-columns .mp-subtotal,.four-columns .mp-tax,.four-columns .mp-discount {
+    width: 13%;
+}
+.four-columns .mp-qty{
+    width:7%;
+}
+/*end for 4 columns*/
+
+/*5 columns*/
+.five-columns .mp-item{
+    width:35%;
+}
+.five-columns .mp-price,.five-columns .mp-subtotal,.five-columns .mp-tax,.five-columns .mp-discount {
+    width: 13%;
+}
+.five-columns .mp-qty{
+    width:7%;
+}
+/*end for 5 columns*/
+
+/*6 columns*/
+.six-columns .mp-item{
+    width:31%;
+}
+.six-columns .mp-qty,.six-columns .mp-price,.six-columns .mp-subtotal,.six-columns .mp-tax {
+    width: 10%;
+}
+.six-columns .mp-discount {
+    width: 11%;
+}
+/*end for 6 columns*/
+
+.mp-qty,.mp-price,.mp-subtotal,.mp-tax,.mp-discount{
+    float:left;
+    text-align:center;
+    padding:6px 0px;
+}
+.mp-image{
+    width:15%;
+    float:left;
+    text-align:center;
+    padding:6px 0px;
+}
+.mp-heading{
+    width:100%;
+    height:32px;
+    color:#FFF;
+}
+.mp-heading span{
+    font-weight:bold;
+}
+.mp-item{
+    padding-left:5px
+}
+.order-totals{
+    text-align: right;
+    margin-top:20px;
+}
+.mp{
+    width: 100%;
+    height: 35px;
+}
+.mp-str{
+    font-weight: bold;
+    width: 80%;
+    float: left;
+    margin-left: -35px;
+}
+.mp-right{
+    width: 1%;
+    float: left;
+}
+/* End css table items*/
+
+/********** END CONTENT **********/
+
+footer{
+    margin-top:30px;
+}
+.footer-left{
+    width:50%;
+    bottom:30px;
+}
+.mp-note{
+    color:#FFF;
+    padding-left: 3px;
+}
+/*for barcode*/
+/*4 columns*/
+.four-columns .mp-price-bc,.four-columns .mp-subtotal-bc,.four-columns .mp-tax-bc,.four-columns .mp-discount-bc{
+    width:15%;
+}
+.four-columns .mp-barcode-bc{
+    width: 20%;
+}
+.mp-image-bc{
+    width:17%;
+}
+/*end for 4 columns*/
+
+/*5 columns*/
+.five-columns .mp-price-bc,.five-columns .mp-subtotal-bc,.five-columns .mp-tax-bc,.five-columns .mp-discount-bc{
+    width:12%;
+}
+.five-columns .mp-barcode-bc{
+    width: 16%;
+}
+.five-columns .mp-image-bc{
+    width:15%;
+}
+/*end for 5 columns*/
+
+/*6 columns*/
+.six-columns .mp-price-bc,.six-columns .mp-subtotal-bc,.six-columns .mp-tax-bc,.six-columns .mp-discount-bc{
+    width:10%;
+}
+.six-columns .mp-barcode-bc{
+    width: 14%;
+}
+.six-columns .mp-image-bc{
+    width:13%;
+}
+/*end for 6 columns*/
+.mp-item-bc{
+    width:24%;
+    float:left;
+    padding:6px 0 6px 5px;
+    margin-left: 5px;
+}
+.mp-image-bc{
+    float:left;
+    text-align:center;
+    padding:6px 0;
+}
+.mp-barcode-bc{
+    float: left;
+    padding:6px 0;
+}
+.mp-barcode-bc p{
+    text-align: right;
+}
+.mp-price-bc,.mp-subtotal-bc,.mp-tax-bc,.mp-discount-bc{
+    float:left;
+    text-align:center;
+    padding:6px 0;
+}
+.mp-qty-bc{
+    width:7%;
+    float:left;
+    text-align:center;
+    padding:6px 0;
+}
+/*end for barcode*/
+.payment-method .table-caption{display: none}
+.paymentTable{
+    margin-top: 10px;
+}

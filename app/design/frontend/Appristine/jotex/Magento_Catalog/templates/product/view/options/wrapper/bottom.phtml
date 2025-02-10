@@ -1,0 +1,106 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+$sz = $block->getProduct()->getData('size_chart');
+
+$sml = $block->getProduct()->getData('store_map_location');
+
+
+if(!empty($sz)){
+?>
+
+        <div class="row size-chart-div">
+            <button  id="click-mchart1"  data-post='' data-role="add-to-links" class=" size_chartt  ">Size Chart</button>
+            <div id="popup-schart" style="display:none;">
+              <?php echo $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId($sz)->toHtml();?>
+            </div>
+            <script>
+			    require(
+			        [
+			            'jquery',
+			            'Magento_Ui/js/modal/modal'
+			        ],
+			        function(
+			            $,
+			            modal
+			        ) {
+			            var options = {
+			                type: 'popup',
+			                responsive: true,
+			                innerScroll: true,
+			                clickOutside: false,
+			                buttons: [{
+			                    text: $.mage.__('ok'),
+			                    class: '',
+			                    click: function () {
+			                        this.closeModal();
+			                    }
+			                }]
+			            };
+
+			            var popup = modal(options, $('#popup-schart'));
+			            $("#click-mchart1").on('click',function(){ 
+			                $("#popup-schart").modal("openModal");
+			            });
+
+			        }
+			    );
+			</script>
+			<style>
+			.size-chart-div{clear:both;padding:5px 5px 5px 0px;}
+			.modal-slide.modal-popup{background:rgba(0,0,0,0.9);}
+			</style>
+        </div>
+<?php } 
+
+if(!empty($sml)){
+?>
+
+        <div class="row sml_popup_div">
+            <button  id="click-sml"  data-post='' data-role="add-to-links" class=" sml_popup  ">Store Location</button>
+            <div id="popup-sml" style="display:none;">
+              <?php echo $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId($sml)->toHtml();?>
+            </div>
+            <script>
+			    require(
+			        [
+			            'jquery',
+			            'Magento_Ui/js/modal/modal'
+			        ],
+			        function(
+			            $,
+			            modal
+			        ) {
+			            var options = {
+			                type: 'popup',
+			                responsive: true,
+			                innerScroll: true,
+			                clickOutside: false,
+			                buttons: [{
+			                    text: $.mage.__('ok'),
+			                    class: '',
+			                    click: function () {
+			                        this.closeModal();
+			                    }
+			                }]
+			            };
+
+			            var popup = modal(options, $('#popup-sml'));
+			            $("#click-sml").on('click',function(){ 
+			                $("#popup-sml").modal("openModal");
+			            });
+
+			        }
+			    );
+			</script>
+			<style>
+			.size-chart-div{clear:both;padding:5px 5px 5px 0px;}
+			.modal-slide.modal-popup{background:rgba(0,0,0,0.9);}
+			</style>
+        </div>
+<?php } ?>
+<div class="product-options-bottom">
+    <?php echo $block->getChildHtml('', true);?>
+</div>

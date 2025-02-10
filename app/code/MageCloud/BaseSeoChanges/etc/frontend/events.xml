@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author andy
+ * @email andyworkbase@gmail.com
+ * @team MageCloud
+ * @package MageCloud_BaseSeoChanges
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="layout_generate_blocks_after">
+        <observer name="magecloud_base_seo_changes_process" instance="MageCloud\BaseSeoChanges\Observer\LayoutGenerateBlocksAfterBaseSeoChangesObserver" />
+    </event>
+</config>

@@ -1,0 +1,15 @@
+{
+    "name": "magetrend/newsletter-maker",
+    "autoload": {
+        "psr-4": {"Magetrend\\NewsletterMaker\\":""},
+        "files": ["registration.php"]
+    },
+    "description": "Newsletter Maker",
+    "type": "magento2-module",
+    "version": "1.0.5",
+    "support": {
+        "email": "info@magetrend.com",
+        "wiki": "https://www.magetrend.com/magento-2-newsletter-maker/user-guide",
+        "author": "E. Stulpinas"
+    }
+}

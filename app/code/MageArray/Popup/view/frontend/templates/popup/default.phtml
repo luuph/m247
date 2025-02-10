@@ -1,0 +1,407 @@
+<?php
+$data = $block->getPopup();
+if (!empty($data) && count($data)): ?>
+    <div class="MageArrayPopup">
+        <?php
+        foreach ($data as $nbPopup):
+            $pid = $nbPopup['popup_id'];
+            $title = $nbPopup['title'];
+            $description = $nbPopup['description'];
+            $isActive = $nbPopup['is_active'];
+            $storeId = $nbPopup['store_id'];
+            $popupType = $nbPopup['popup_type'];
+            $image = $nbPopup['image'];
+            $url = $nbPopup['url'];
+            $width = $nbPopup['width'];
+            $widthUnit = $nbPopup['width_unit'];
+            $maxWidth = $nbPopup['max_width'];
+            $page = $nbPopup['page'];
+            $specifiedUrl = $nbPopup['specified_url'];
+            $specifiedNotUrl = $nbPopup['specified_not_url'];
+            $showWhen = $nbPopup['show_when'];
+            $secondsDelay = $nbPopup['seconds_delay'];
+            $totalSecondsDelay = $nbPopup['total_seconds_delay'];
+            $scrollPx = $nbPopup['scroll_px'];
+            $clickSelector = $nbPopup['click_selector'];
+            $hoverSelector = $nbPopup['hover_selector'];
+            $fromDate = $nbPopup['from_date'];
+            $toDate = $nbPopup['to_date'];
+            $showingFrequency = $nbPopup['showing_frequency'];
+            $tm = ($nbPopup['cookie_time'] > 0 ? $nbPopup['cookie_time'] : 365);
+            $overlayClick = ($nbPopup['close_on_overlay_click'] == 1 ?
+                'helpers : { overlay : { closeClick: false } } ,' : '' );
+            $timeoutSeconds = ($nbPopup['close_on_timeout'] * 1000);
+            $closeOnTimeout = ($nbPopup['close_on_timeout'] > 0 ?
+                'afterLoad: function(){ setTimeout( function() { $.fancybox.close(); },
+                ' . $timeoutSeconds . '); },' : '');
+            $ifPendingOrder = $nbPopup['if_pending_order'];
+            $productInCart = $nbPopup['product_in_cart'];
+            $cartSubtotalMin = $nbPopup['cart_subtotal_min'];
+            $cartSubtotalMax = $nbPopup['cart_subtotal_max'];
+            $fancy = $overlayClick . $closeOnTimeout;
+            $stopLoop = 0;
+            if ($ifPendingOrder == 1) {
+                if (!empty($block->getCurrentUser())) {
+                    if ($block->getOrders() <= 0) {
+                        continue;
+                    }
+                } else {
+                    continue;
+                }
+            }
+            if ($storeId) {
+                $storeIds = explode(",", $storeId);
+                foreach ($storeIds as $ids) {
+                    if ($block->getStoreId() == $ids) {
+                        $stopLoop = 1;
+                    }
+                }
+                if ($stopLoop == 0) {
+                    continue;
+                }
+            }
+            if ($cartSubtotalMin && $cartSubtotalMax) {
+                if ($cartSubtotalMin > 0 && $block->getSubtotal() && $cartSubtotalMax > 0) {
+                    if (((int)str_replace(',', '', $block->getSubtotal()) > $cartSubtotalMin) &&
+                        ((int)str_replace(',', '', $block->getSubtotal()) < $cartSubtotalMax)) {
+                        continue;
+                    }
+                }
+            } else {
+                if ($cartSubtotalMin > 0 && $block->getSubtotal()) {
+                    if ((int)str_replace(',', '', $block->getSubtotal()) > $cartSubtotalMin) {
+                        continue;
+                    }
+                }
+                if ($cartSubtotalMax > 0 && $block->getSubtotal()) {
+                    if ((int)str_replace(',', '', $block->getSubtotal()) < $cartSubtotalMax) {
+                        continue;
+                    }
+                }
+            }
+            if ($productInCart == 1) {
+                if (!$block->getSubtotal()) {
+                    continue;
+                }
+            }
+            if ($productInCart == 2) {
+                if ($block->getSubtotal()) {
+                    continue;
+                }
+            }
+            if ($page) {
+                $stopLoop = 0;
+                $pageId = explode(",", $page);
+                foreach ($pageId as $id) {
+                    switch ($id) {
+                        case 1:
+                            if ($block->getActionName() == 'cms_index_index') {
+                                $stopLoop = 1;
+                            }
+                            break;
+                        case 2:
+                            if ($block->getActionName() == 'checkout_index_index') {
+                                $stopLoop = 1;
+                            }
+                            break;
+                        case 3:
+                            if ($block->getActionName() == 'checkout_cart_index') {
+                                $stopLoop = 1;
+                            }
+                            break;
+                        case 4:
+                            $multiUrl = explode(",", $specifiedUrl);
+                            foreach ($multiUrl as $url) {
+                                $search = ['http://','https://'];
+                                $currentUrl = str_replace($search, '', $block->getCurrentUrl());
+                                $specified = str_replace($search, '', $url);
+                                if ($currentUrl == $specified) {
+                                    $stopLoop = 1;
+                                }
+                            }
+                        case 5:
+                            if ($block->getActionName() == 'catalog_category_view') {
+                                $stopLoop = 1;
+                            }
+                            break;
+                        case 6:
+                            if ($block->getActionName() == 'catalog_product_view') {
+                                $stopLoop = 1;
+                            }
+                            break;
+                    }
+                }
+                if ($stopLoop != 1) {
+                    $stopLoop = 0;
+                    continue;
+                }
+            }
+            if ($specifiedNotUrl) {
+                $multiUrl = explode(",", $specifiedNotUrl);
+                foreach ($multiUrl as $url) {
+                    $currentUrl = str_replace('http://', '', $block->getCurrentUrl());
+                    $specified = str_replace('http://', '', $url);
+
+                    if ($currentUrl == $specified) {
+                        $stopLoop = 2;
+                    }
+                }
+
+                if ($stopLoop == 2) {
+                    $stopLoop = 0;
+                    continue;
+                }
+            }
+            ?>
+            <section>
+                <?php
+                if ($widthUnit == 1) {
+                    $px = 'px';
+                } else {
+                    $px = '%';
+                }
+
+                $widthStyle = '';
+                if ($width) {
+                    $widthStyle .= 'width:' . $width . $px . ';';
+                }
+                if ($width) {
+                    $widthStyle .= 'max-width:' . $maxWidth . 'px;';
+                }
+
+                $afterClose = '';
+                $afterLoad = '';
+
+                if ($showingFrequency):
+                    switch ($showingFrequency):
+                        case 1:
+                            $afterLoad .= "afterShow: function(){
+											  jQuery('.fancybox-close').attr('onclick', 'setAfterClose()');
+										   },";
+                            break;
+                        case 2:
+                            $afterLoad .= 'afterLoad: function()
+                            {
+                                setCookies("die_popup' . $pid . '","1", ' . $tm . ');
+                            },';
+                            break;
+                        case 3:
+                            ?>
+                                <script>
+                                    require(['jquery','fancybox','popup'],function(){
+                                        deleteCookie( 'die_popup<?= $pid?>' );
+                                        deleteCookie ( "one_time<?=  $pid ?>" );
+                                    });
+                                </script>
+                            <?php
+                            break;
+                        case 4:
+                            ?>
+                                <script>
+                                    require(['jquery','fancybox','popup'],function(){
+                                        if (!getCookie('per_session<?=  $pid?>'))
+                                        {
+                                            document.cookie="per_session<?=  $pid?>=1";
+                                        } else {
+                                            if (getCookie('per_session<?=  $pid ?>'))
+                                            {
+                                                setCookies('one_time<?=  $pid?>','1',365);
+                                            }
+                                        }
+                                    });
+                                </script>
+                            <?php
+                            break;
+                    endswitch;
+                endif;
+
+                switch ($showWhen):
+                    case 1:
+                        ?>
+                            <script>
+                                require(['jquery','fancybox','popup'],function($) {
+                                    $(window).on('load',function () {
+                                        if (canShow('<?=  $pid ?>')) {
+                                            $(".fancybox<?=  $pid ?>").trigger('click');
+                                        }
+                                    });
+                                });
+                            </script>
+                        <?php
+                        break;
+                    case 2:
+                        if ($secondsDelay) {
+                            $delay = ($secondsDelay * 1000);
+                        } else {
+                            $delay = 0;
+                        }
+                        ?>
+                            <script>
+                                require(['jquery','fancybox','popup'],function ($) {
+                                    $(window).on('load',function () {
+                                        setTimeout(function () {
+                                            if (canShow('<?=  $pid ?>')) {
+                                                $(".fancybox<?=  $pid ?>").trigger('click');
+                                            }
+                                        },<?=  $delay; ?>);
+                                    });
+                                });
+                            </script>
+                        <?php
+                        break;
+                    case 3:
+                        if ($totalSecondsDelay) {
+                            $delay = $totalSecondsDelay;
+                        } else {
+                            $delay = 0;
+                        }
+                        ?>
+                            <script>
+                                require(['jquery','fancybox','popup'],function($) {
+                                    if (!getCookie('unsetpopup<?=  $pid; ?>')) {
+                                        setInterval(function () {
+                                            if (!getCookie('unsetpopup<?=  $pid; ?>')) {
+                                                if (getCookie('one_time<?=  $pid; ?>')) {
+                                                    if (getCookie('popup_time<?=  $pid; ?>')) {
+                                                        //time continue...
+                                                    } else {
+                                                        setCookies('unsetpopup<?=  $pid ?>',
+                                                            '1',
+                                                            '<?=  $tm; ?>');
+                                                        $(".fancybox<?=  $pid ?>").trigger('click');
+                                                    }
+                                                } else {
+                                                    setCookies('one_time<?=  $pid ?>', '1', '<?=  $tm; ?>');
+                                                    setPopupTime(<?=  $pid ?>,<?=  $delay?>);
+                                                }
+                                            }
+                                        }, 1000);
+                                    }
+                                });
+                            </script>
+                        <?php
+                        break;
+                    case 4:
+                        if ($scrollPx): ?>
+                            <script>
+                                require(['jquery','fancybox','popup'],function($) {
+                                    $(window).scroll(function () {
+                                        if (!getCookie("scr_one_time<?=  $pid;?>")) {
+                                            if ($(window).scrollTop() >= <?=  $scrollPx;?>) {
+                                                if (canShow('<?=  $pid?>')) {
+                                                    $(".fancybox<?=  $pid ?>").trigger('click');
+                                                    setCookies('one_time<?=  $pid ?>','1','<?=  $tm; ?>');
+                                                }
+                                            }
+                                        }
+                                    });
+                                });
+                            </script>
+                        <?php endif;
+                        break;
+                    case 5:
+                        if ($clickSelector): ?>
+                            <script>
+                                require (['jquery','fancybox','popup'],function($) {
+                                    $('<?=  $clickSelector?>').click(function() {
+                                        if (canShow('<?=  $pid ?>')) {
+                                            $(".fancybox<?=  $pid ?>").trigger('click');
+                                        }
+                                    });
+                                });
+                            </script>
+                        <?php endif;
+                        break;
+                    case 6:
+                        if ($hoverSelector):?>
+                            <script>
+                                require(['jquery','fancybox','popup'],function($) {
+                                    $('<?=  $hoverSelector;?>').hover(function() {
+                                        if (canShow('<?=  $pid ?>')) {
+                                            $(".fancybox<?=  $pid ?>").trigger('click');
+                                        }
+                                    });
+                                });
+                            </script>
+                        <?php endif;
+                        break;
+                    case 7:
+                        ?>
+                            <script>
+                                require(['jquery','fancybox','popup'],function($) {
+                                    $('body').mouseleave(function () {
+                                        if (canShow('<?=  $pid ?>')) {
+                                            $(".fancybox<?=  $pid ?>").trigger('click');
+                                        }
+                                    });
+                                });
+                            </script>
+                        <?php
+                        break;
+                    default:
+                endswitch;
+                ?>
+
+                <?php if ($fromDate):?>
+                    <script>
+                        require(['jquery','fancybox','popup'],function($) {
+                            var currentDate = new Date();
+                            var fromDate = new Date('<?=  $fromDate ?>');
+                            if (currentDate < fromDate) {
+                                $('#popupdiv<?=  $pid ?>').hide();
+                                $('.fancybox<?=  $pid ?>').removeClass('fancybox<?=  $pid ?>');
+                            }
+                        });
+                    </script>
+                <?php endif; ?>
+
+                <?php if ($toDate): ?>
+                    <script>
+                        require(['jquery','fancybox','popup'],function($)
+                        {
+                            var currentDate = new Date();
+                            var toDate = new Date('<?=  $toDate ?>');
+                            if (currentDate > toDate) {
+                                $('#popupdiv<?=  $pid ?>').hide();
+                                $('.fancybox<?=  $pid ?>').removeClass('fancybox<?=  $pid ?>');
+                            }
+                        });
+                    </script>
+                <?php endif; ?>
+                <div class="popup_section">
+                    <div id="popupdiv<?=  $pid ?>"
+                        style="<?=  $widthStyle; ?>">
+                        <?php
+                        if ($popupType == 0) {
+                            echo $block->getContent($description);
+                        } else {
+                            $title = explode("/", $image);
+                            ?>
+                            <a href="<?php
+                            if ($url) {
+                                echo $url;
+                            } else {
+                                echo 'javascript:void(0)';
+                            } ?>">
+                                <img src="<?=  $block->getMediaUrl() . $image; ?>" alt="<?=$title[1];?>" title="<?=$title[1];?>"/>
+                            </a>
+                        <?php } ?>
+                    </div>
+                </div>
+
+                <a href="#popupdiv<?=  $pid ?>" class="fancybox-popup fancybox<?=  $pid ?>"></a>
+                <script>
+                 function setAfterClose() {
+                    setCookies("die_popup<?=  $pid ?>","1", <?=  $tm ?>);
+                 }
+                    require(['jquery','fancybox','popup'],function($) {
+                        $(".fancybox<?=  $pid ?>").fancybox({<?=  $fancy . $afterClose . $afterLoad ?>});
+                    });
+                </script>
+
+            </section>
+
+        <?php endforeach; ?>
+    </div>
+    <?php
+endif;

@@ -1,0 +1,35 @@
+<script>
+    require([
+        'jquery',
+        'prototype'
+    ], function(jQuery){
+        function ClearData() {
+
+            jQuery.ajax({
+                url: '<?php echo $block->getAjaxUrl() ?>',
+                type: 'POST',
+                data: {
+                    resource: ''
+                },
+                showLoader: true,
+                asynchronous: true,
+                success: function (response) {
+                    if (response.succeess === "true") {
+                        location.reload();
+                    }
+                    else {
+                        location.reload();
+                    }
+                },
+                error: function (data) {
+                }
+            });
+        }
+
+        jQuery('#btn_clear').click(function () {
+            ClearData();
+        });
+    });
+</script>
+
+<?php echo $block->getButtonHtml() ?>

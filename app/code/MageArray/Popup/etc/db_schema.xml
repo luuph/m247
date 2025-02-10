@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+  <table name="magearray_popup" resource="default" engine="innodb" comment="Popup Manager">
+    <column xsi:type="int" name="popup_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Popup ID"/>
+    <column xsi:type="text" name="title" nullable="true" comment="Popup Title"/>
+    <column xsi:type="text" name="description" nullable="true" comment="Description"/>
+    <column xsi:type="smallint" name="is_active" padding="6" unsigned="false" nullable="false" identity="false" default="0" comment="Active Status"/>
+    <column xsi:type="varchar" name="store_id" nullable="true" length="255" comment="Store ID"/>
+    <column xsi:type="varchar" name="popup_type" nullable="true" length="255" comment="Popup Type"/>
+    <column xsi:type="varchar" name="image" nullable="true" length="255" comment="Image"/>
+    <column xsi:type="text" name="url" nullable="true" comment="Url"/>
+    <column xsi:type="int" name="width" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Width"/>
+    <column xsi:type="smallint" name="width_unit" padding="6" unsigned="false" nullable="true" identity="false" comment="width Unit"/>
+    <column xsi:type="int" name="max_width" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Max Width"/>
+    <column xsi:type="varchar" name="page" nullable="true" length="255" comment="Page"/>
+    <column xsi:type="text" name="specified_url" nullable="true" comment="Specified Url"/>
+    <column xsi:type="text" name="specified_not_url" nullable="true" comment="Specified Not Url"/>
+    <column xsi:type="smallint" name="show_when" padding="6" unsigned="false" nullable="true" identity="false" comment="Show When"/>
+    <column xsi:type="int" name="seconds_delay" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Seconds Delay"/>
+    <column xsi:type="int" name="total_seconds_delay" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Total Seconds Delay"/>
+    <column xsi:type="int" name="scroll_px" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Scroll Px"/>
+    <column xsi:type="varchar" name="click_selector" nullable="true" length="255" comment="Click Selector"/>
+    <column xsi:type="varchar" name="close_on_hoverout" nullable="true" length="255" comment="Close On Hoverout"/>
+    <column xsi:type="varchar" name="hover_selector" nullable="true" length="255" comment="Hover Selector"/>
+    <column xsi:type="varchar" name="from_date" nullable="true" length="255" comment="From date"/>
+    <column xsi:type="varchar" name="to_date" nullable="true" length="255" comment="to date"/>
+    <column xsi:type="smallint" name="showing_frequency" padding="6" unsigned="false" nullable="true" identity="false" comment="Showing Frequency"/>
+    <column xsi:type="varchar" name="cookie_time" nullable="true" length="255" comment="Cookie Time"/>
+    <column xsi:type="smallint" name="close_on_overlay_click" padding="6" unsigned="false" nullable="true" identity="false" comment="Close On Overlay Click"/>
+    <column xsi:type="int" name="close_on_timeout" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="close on timeout"/>
+    <column xsi:type="smallint" name="if_pending_order" padding="6" unsigned="false" nullable="true" identity="false" comment="if pending order"/>
+    <column xsi:type="smallint" name="product_in_cart" padding="6" unsigned="false" nullable="true" identity="false" comment="product in cart"/>
+    <column xsi:type="int" name="cart_subtotal_min" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="cart subtotal min"/>
+    <column xsi:type="int" name="cart_subtotal_max" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="cart subtotal max"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="popup_id"/>
+    </constraint>
+    <index referenceId="MAGEARRAY_POPUP_POPUP_ID" indexType="btree">
+      <column name="popup_id"/>
+    </index>
+  </table>
+</schema>

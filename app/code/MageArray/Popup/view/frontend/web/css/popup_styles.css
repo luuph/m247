@@ -1,0 +1,11 @@
+.popup_section {
+	display:none;
+}
+.fancybox-popup {
+    opacity: 0;
+    display: inline-block;
+    text-indent: -999999px;
+    position: absolute;
+    bottom: 0;
+    pointer-events: none;
+}

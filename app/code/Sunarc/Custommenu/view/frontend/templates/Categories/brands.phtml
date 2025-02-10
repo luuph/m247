@@ -1,0 +1,91 @@
+<div class="main-container col2-left-layout">
+<div class="main">
+<div class="col-main">
+<div class="page-title category-title">
+<h1>Brands</h1>
+</div>
+<div class="catimagesnew">
+<ul id="cat" class="catlistnew">
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();  
+$catId = 120;  //Parent Category ID
+$subCategory = $objectManager->create('Magento\Catalog\Model\Category')->load($catId);
+    $subCats = $subCategory->getChildrenCategories();
+    $subcatinfo = '';
+    foreach ($subCats as $subcat)
+    {
+	    $subcategory_info = $objectManager->create('Magento\Catalog\Model\Category')->load($subcat->getId());
+           	
+			?>
+		
+<li><a href="<?php echo $subcat->getUrl(); ?>"> <img src="<?php echo $subcategory_info->getImageUrl() ?>" alt="<?php echo $subcat->getName(); ?>" width="204" height="433"> </a></li>
+
+			<?php
+        
+    }       
+?>    
+</ul>
+</div>
+<div class="category-description  ">&nbsp;</div>
+</div>
+<div class="col-left sidebar">
+<div class="block block-list leftlistcategory slideit current_category ">
+<div class="block-title slideitblock"><a href="{{store direct_url='brands.html'}}"><strong><em>Brands</em></strong></a> <span class="categorybtn selectcategory">▬</span></div>
+<div class="block-content">
+<ol class="left-serial">
+    <?php
+     foreach ($subCats as $subcat)
+    {
+	   
+			?>
+		
+<li><a href="<?php echo $subcat->getUrl(); ?>"><?php echo $subcat->getName(); ?></a></li>
+
+			<?php
+        
+    }  
+    ?>
+</ol>
+</div>
+</div>
+<?php echo $this->getLayout()
+          ->createBlock('Magento\Framework\View\Element\Template')
+          ->setTemplate('Sunarc_Custommenu::Categories/sidebar.phtml')
+          ->toHtml();
+          ?>
+<div class="block block-list slideit">
+<div class="block-title slideitblock"><strong><span class="nochange">Search Within Results</span></strong> <span class="selectaccordian  selectcategory">▬</span></div>
+<div class="block-content" style="display: block;"><form id="search-mini-form-leftside" class="search-mini-form-leftside" action="https://jotex.jo/catalogsearch/result" method="get">
+<div class="form-search"><input id="search" class="input-text" maxlength="128" name="q" type="text" value=""> <button class="button btn-search" title="Go" type="submit"> Go </button></div>
+</form></div>
+</div>
+<div class="block block-list">
+<div class="block-title"><strong><span class="nochange">Compare Products</span></strong> <span class="selectaccordian ">✚</span></div>
+<div class="block-content" style="display: none;">
+<ol id="resource-list">
+<li class="item">You have no items to compare.</li>
+</ol>
+</div>
+</div>
+<div class="block block-list slideit ">
+<div class="block-title slideitblock "><strong><span class="nochange">Resources</span></strong> <span class="selectaccordian selectcategory">▬</span></div>
+<div class="block-content" style="display: block;">
+<ol id="resource-list">
+<li class="item">
+<p><a title="" href="#" target="_blank" rel="noopener"><strong>Blog:</strong> Brands</a></p>
+</li>
+</ol>
+</div>
+</div>
+<div class="block block-banner">
+<div class="block-content">
+<div class="cat_back_img banner_p">
+<div class="p_banner">Have a Question ?</div>
+<div class="p_banner">Need help ?</div>
+<div class="p_banner">You can:</div>
+<button class="btn_banner btn_chat"><a>Chat</a></button> <button class="btn_banner"><a href="tel:+962777635777">Call</a></button> <button class="btn_banner"><a href="mailto:someone@example.com?Subject=Hello%20again">Email</a></button></div>
+</div>
+</div>
+</div>
+</div>
+</div>

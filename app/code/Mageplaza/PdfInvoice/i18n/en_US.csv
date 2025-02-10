@@ -1,0 +1,331 @@
+"Apply the rule only if the following conditions are met (leave blank for all products)","Apply the rule only if the following conditions are met (leave blank for all products)"
+Condition,Condition
+"Add New Template","Add New Template"
+"Save and Continue Edit","Save and Continue Edit"
+"Save Template","Save Template"
+"Edit Template '%1'","Edit Template '%1'"
+"New Template","New Template"
+"Load default template","Load default template"
+Template,Template
+"Load Template","Load Template"
+"Template Information","Template Information"
+"Apply Template At","Apply Template At"
+"Template Name","Template Name"
+"Insert Variable...","Insert Variable..."
+"Template style","Template style"
+"Stores -> Configuration -> Mageplaza -> ","Stores -> Configuration -> Mageplaza -> "
+"PDF Invoice","PDF Invoice"
+"Edit html","Edit html"
+"HTML,","HTML,"
+"CSS Supported","CSS Supported"
+Preview,Preview
+"You don't have permission to print this ' . . '.","You don't have permission to print this ' . . '."
+"Invalid ' . . ' ID.","Invalid ' . . ' ID."
+"There are no printable documents related to selected orders.","There are no printable documents related to selected orders."
+Templates,Templates
+"This template no longer exists.","This template no longer exists."
+"Cannot delete! The Template is using in config","Cannot delete! The Template is using in config"
+"The Template has been deleted.","The Template has been deleted."
+"Template to delete was not found.","Template to delete was not found."
+"Create New Template","Create New Template"
+"Manage Templates","Manage Templates"
+"Load message success!","Load message success!"
+"Cannot load template.","Cannot load template."
+"Cannot delete template #%1! The Template is using in config","Cannot delete template #%1! The Template is using in config"
+"A total of %1 record(s) have been deleted.","A total of %1 record(s) have been deleted."
+"Please insert content to preview!","Please insert content to preview!"
+"Can't preview. Please check HTML and Css in template.","Can't preview. Please check HTML and Css in template."
+"This template does not exist.","This template does not exist."
+"You saved the PDF template.","You saved the PDF template."
+"Something went wrong while saving template.","Something went wrong while saving template."
+"The document order id doesn't exist.","The document order id doesn't exist."
+"The customer isn't authorized to access this document.","The customer isn't authorized to access this document."
+"Incorrect Pdf Margin Format","Incorrect Pdf Margin Format"
+"Pdf Margin %1 Must Be A Positive Float Number","Pdf Margin %1 Must Be A Positive Float Number"
+"All Allowed Groups","All Allowed Groups"
+"Specific Groups","Specific Groups"
+SKU,SKU
+"Product ID","Product ID"
+"Product Name","Product Name"
+EAN13,EAN13
+ISBN,ISBN
+ISSN,ISSN
+UPC-A,UPC-A
+UPC-E,UPC-E
+EAN-8,EAN-8
+"Intelligent Mail","Intelligent Mail"
+"Royal Mail 4-state Customer","Royal Mail 4-state Customer"
+"Royal Mail 4-state Customer (Dutch)","Royal Mail 4-state Customer (Dutch)"
+POSTNET,POSTNET
+PLANET,PLANET
+"Code 128 A","Code 128 A"
+"Code 128 B","Code 128 B"
+"Code 128 C","Code 128 C"
+"UCC/EAN-128 A","UCC/EAN-128 A"
+"UCC/EAN-128 B","UCC/EAN-128 B"
+"UCC/EAN-128 C","UCC/EAN-128 C"
+"Code 39","Code 39"
+"Code 39+","Code 39+"
+"Code 39E","Code 39E"
+"Code 39E+","Code 39E+"
+"Standard 2 of 5","Standard 2 of 5"
+"Standard 2 of 5+","Standard 2 of 5+"
+"Interleaved 2 of 5","Interleaved 2 of 5"
+"Interleaved 2 of 5 +","Interleaved 2 of 5 +"
+"Interleaved 2 of 5 B","Interleaved 2 of 5 B"
+"Interleaved 2 of 5 B+","Interleaved 2 of 5 B+"
+MSI,MSI
+MSI+,MSI+
+C93,C93
+CODABAR,CODABAR
+CODE11,CODE11
+Barcode,Barcode
+"QR code","QR code"
+"No Code","No Code"
+A4,A4
+A5,A5
+A6,A6
+A7,A7
+Top,Top
+Bottom,Bottom
+"Custom PDF","Custom PDF"
+Both,Both
+No,No
+Active,Active
+Inactive,Inactive
+Order,Order
+Invoice,Invoice
+Shipment,Shipment
+"Credit Memo","Credit Memo"
+"Base Unsecure URL","Base Unsecure URL"
+"Base Secure URL","Base Secure URL"
+"General Contact Name","General Contact Name"
+"General Contact Email","General Contact Email"
+"Sales Representative Contact Name","Sales Representative Contact Name"
+"Sales Representative Contact Email","Sales Representative Contact Email"
+"Custom1 Contact Name","Custom1 Contact Name"
+"Custom1 Contact Email","Custom1 Contact Email"
+"Custom2 Contact Name","Custom2 Contact Name"
+"Custom2 Contact Email","Custom2 Contact Email"
+"Store Name","Store Name"
+"Store Phone Number","Store Phone Number"
+"Store Hours","Store Hours"
+Country,Country
+Region/State,Region/State
+"Zip/Postal Code","Zip/Postal Code"
+City,City
+"Street Address 1","Street Address 1"
+"Street Address 2","Street Address 2"
+"VAT Number","VAT Number"
+"Store Contact Information","Store Contact Information"
+"Order Info","Order Info"
+"Shipping Information","Shipping Information"
+"Billing Information","Billing Information"
+"Order Status","Order Status"
+"Order ID","Order ID"
+"Order Date","Order Date"
+"Payment Method","Payment Method"
+"Shipping Method","Shipping Method"
+"Total Shipping Amount","Total Shipping Amount"
+Subtotal,Subtotal
+"Comment Label","Comment Label"
+"Comment Text","Comment Text"
+"Grand Total","Grand Total"
+"Total Due","Total Due"
+"Total Tax Amount","Total Tax Amount"
+"Shipping Full Name","Shipping Full Name"
+"Shipping First Name","Shipping First Name"
+"Shipping Last Name","Shipping Last Name"
+"Shipping Name Prefix","Shipping Name Prefix"
+"Shipping Middle Name","Shipping Middle Name"
+"Shipping Name Suffix","Shipping Name Suffix"
+"Shipping Company","Shipping Company"
+"Shipping Address","Shipping Address"
+"Shipping State/Province","Shipping State/Province"
+"Shipping Vat Number","Shipping Vat Number"
+"Shipping Fax","Shipping Fax"
+"Shipping Zip/Postcode","Shipping Zip/Postcode"
+"Shipping Street Address","Shipping Street Address"
+"Shipping City","Shipping City"
+"Shipping Phone Number","Shipping Phone Number"
+"Shipping Country ID","Shipping Country ID"
+"Shipping Country","Shipping Country"
+"Billing Full Name","Billing Full Name"
+"Billing First Name","Billing First Name"
+"Billing Last Name","Billing Last Name"
+"Billing Name Prefix","Billing Name Prefix"
+"Billing Middle Name","Billing Middle Name"
+"Billing Name Suffix","Billing Name Suffix"
+"Billing Company","Billing Company"
+"Billing Address","Billing Address"
+"Billing State/Province","Billing State/Province"
+"Billing Vat Number","Billing Vat Number"
+"Billing Fax","Billing Fax"
+"Billing Zip/Postcode","Billing Zip/Postcode"
+"Billing Street Address","Billing Street Address"
+"Billing City","Billing City"
+"Billing Phone Number","Billing Phone Number"
+"Billing Country ID","Billing Country ID"
+"Billing Country","Billing Country"
+"Unknown template type","Unknown template type"
+Print,Print
+"'Print PDF ' .","'Print PDF ' ."
+"Print PDF %1","Print PDF %1"
+"SKU: %1","SKU: %1"
+"Excl. Tax","Excl. Tax"
+"Incl. Tax","Incl. Tax"
+"Product Image","Product Image"
+Items,Items
+Qty,Qty
+Price,Price
+"Item Descriptions","Item Descriptions"
+Image,Image
+"Gift Message","Gift Message"
+From:,From:
+To:,To:
+Message:,Message:
+"Gift Message for this Order","Gift Message for this Order"
+"From: %1","From: %1"
+"To: %1","To: %1"
+"Message: %1","Message: %1"
+N/A,N/A
+Tax,Tax
+"Store Credit","Store Credit"
+"Refunded to Store Credit","Refunded to Store Credit"
+"Print All Invoices","Print All Invoices"
+"Print All PDF Invoices","Print All PDF Invoices"
+"Print All Shipments","Print All Shipments"
+"Print All PDF Shipments","Print All PDF Shipments"
+"Print All Refunds","Print All Refunds"
+"Print All PDF Refunds","Print All PDF Refunds"
+"Credit memo","Credit memo"
+"Credit Memo Increment","Credit Memo Increment"
+"Credit Memo Date","Credit Memo Date"
+"Credit Memo Amount","Credit Memo Amount"
+"Credit Memo To","Credit Memo To"
+"Tax ID","Tax ID"
+"No #","No #"
+"BILLING ADDRESS","BILLING ADDRESS"
+"PAYMENT METHOD","PAYMENT METHOD"
+Address,Address
+Phone,Phone
+Email,Email
+"CREDIT MEMO","CREDIT MEMO"
+"Credit memo: #","Credit memo: #"
+"Date: ","Date: "
+"Amount: ","Amount: "
+Contact,Contact
+Registered,Registered
+CREDITMEMO,CREDITMEMO
+"Creditmemo ","Creditmemo "
+"Date : ","Date : "
+"Amount : ","Amount : "
+INVOICE,INVOICE
+"Invoice Increment","Invoice Increment"
+"Invoice Date","Invoice Date"
+"Invoice Amount","Invoice Amount"
+"Invoice To","Invoice To"
+"To: ","To: "
+"Invoice: #","Invoice: #"
+"Invoice ","Invoice "
+"Company Information","Company Information"
+ORDER,ORDER
+"Order Increment","Order Increment"
+"Order Amount","Order Amount"
+"Order To","Order To"
+"Order: #","Order: #"
+"Order ","Order "
+"Shipment Increment","Shipment Increment"
+"Shipment Date","Shipment Date"
+"Shipment Amount","Shipment Amount"
+"Shipment To","Shipment To"
+SHIPMENT,SHIPMENT
+"Shipment: #","Shipment: #"
+"Shipment ","Shipment "
+Loading....,Loading....
+"Mageplaza PDF Invoice","Mageplaza PDF Invoice"
+"General Configuration","General Configuration"
+"Enable PDF Invoice","Enable PDF Invoice"
+"Business Information","Business Information"
+"Company Name","Company Name"
+"Black Logo (Color)","Black Logo (Color)"
+"Your default logo will be used on template design. If empty, default logo will be used.<br />(jpeg, gif, png). You should upload logo 180 x 52","Your default logo will be used on template design. If empty, default logo will be used.<br />(jpeg, gif, png). You should upload logo 180 x 52"
+"White Logo","White Logo"
+"Logo Width","Logo Width"
+"Necessary only if an image has been uploaded above. Enter image width size in pixels without appending ""px"".","Necessary only if an image has been uploaded above. Enter image width size in pixels without appending ""px""."
+"Logo Height","Logo Height"
+"Necessary only if an image has been uploaded above. Enter image height size in pixels without appending ""px"".","Necessary only if an image has been uploaded above. Enter image height size in pixels without appending ""px""."
+"Registered Number","Registered Number"
+Design,Design
+"Heading Color","Heading Color"
+"Select the color for headings in template design","Select the color for headings in template design"
+"Show Page Number","Show Page Number"
+"Page Number Display Position","Page Number Display Position"
+"Page Size","Page Size"
+"Default templates work better in A4 and A5 sizes","Default templates work better in A4 and A5 sizes"
+"Pdf Margin","Pdf Margin"
+"<span>Measuring Unit: Millimeter</span>
+                                <br/>
+                                <span>Pdf Margin is explicitly specified by float number and separated by semicolon (;) as following:</span>
+                                <br/>
+                                <span>margin-top;margin-right;margin-bottom;margin-left</span>
+                                <br/>
+                                <span>Decimal Separator is dot (.) symbol</span>","<span>Measuring Unit: Millimeter</span>
+                                <br/>
+                                <span>Pdf Margin is explicitly specified by float number and separated by semicolon (;) as following:</span>
+                                <br/>
+                                <span>margin-top;margin-right;margin-bottom;margin-left</span>
+                                <br/>
+                                <span>Decimal Separator is dot (.) symbol</span>"
+"Font and Barcode Settings","Font and Barcode Settings"
+"Base Font Size","Base Font Size"
+"Enter a value from 0.7 to 1.5 for the barcode to display properly","Enter a value from 0.7 to 1.5 for the barcode to display properly"
+"Barcode Type","Barcode Type"
+"Encoding Type For Barcode. <a href=""https://www.scandit.com/blog/types-barcodes-choosing-right-barcode/"" target=""_blank""
+                                rel=""noopener noreferrer"">
+                                    Learn More
+                                </a>","Encoding Type For Barcode. <a href=""https://www.scandit.com/blog/types-barcodes-choosing-right-barcode/"" target=""_blank""
+                                rel=""noopener noreferrer"">
+                                    Learn More
+                                </a>"
+"Barcode Source Attribute","Barcode Source Attribute"
+"QR Code Source Attribute","QR Code Source Attribute"
+"Enable PDF Attachment","Enable PDF Attachment"
+"Select Yes to enable attaching PDF documents","Select Yes to enable attaching PDF documents"
+"Apply for customer groups","Apply for customer groups"
+"Customer Group","Customer Group"
+Label,Label
+"PDF File Downloaded Name","PDF File Downloaded Name"
+"Multiple Orders PDF File Downloaded Name","Multiple Orders PDF File Downloaded Name"
+"Select Template","Select Template"
+"Select a PDF template used for Order documents","Select a PDF template used for Order documents"
+"Code Type","Code Type"
+"If you choose QR code, you need to run the command ""composer require mpdf/qrcode""","If you choose QR code, you need to run the command ""composer require mpdf/qrcode"""
+"Show Custom Print Button","Show Custom Print Button"
+"Select which type of print button to display","Select which type of print button to display"
+"Display Print Button On Top","Display Print Button On Top"
+"Select Yes to display print button on top of order grid","Select Yes to display print button on top of order grid"
+Note,Note
+"Insert a note displayed in Order templates","Insert a note displayed in Order templates"
+"Multiple Invoices PDF File Downloaded Name","Multiple Invoices PDF File Downloaded Name"
+"Select a PDF template used for Invoice documents","Select a PDF template used for Invoice documents"
+"Display Print Button In Order Grid","Display Print Button In Order Grid"
+"Select Yes to display print invoice button in action list from order grid","Select Yes to display print invoice button in action list from order grid"
+"Insert a note displayed in Invoice templates","Insert a note displayed in Invoice templates"
+"Multiple Shipments PDF File Downloaded Name","Multiple Shipments PDF File Downloaded Name"
+"Select a PDF template used for Shipment documents","Select a PDF template used for Shipment documents"
+"Select Yes to display print shipment button in action list from order grid","Select Yes to display print shipment button in action list from order grid"
+"Insert a note displayed in Shipment templates","Insert a note displayed in Shipment templates"
+"Multiple Creditmemos PDF File Downloaded Name","Multiple Creditmemos PDF File Downloaded Name"
+"Select a PDF template used for Credit Memo documents","Select a PDF template used for Credit Memo documents"
+"Select Yes to display print creditmemo button in action list from order grid","Select Yes to display print creditmemo button in action list from order grid"
+"Insert a note displayed in Credit Memo templates","Insert a note displayed in Credit Memo templates"
+Delete,Delete
+"Delete Templates","Delete Templates"
+"Delete selected items?","Delete selected items?"
+ID,ID
+Name,Name
+Type,Type
+"Created Date","Created Date"
+"Updated Date","Updated Date"
+Edit,Edit

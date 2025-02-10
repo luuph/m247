@@ -1,0 +1,950 @@
+<?php
+/**
+ * @category Mageants StoreLocator
+ * @package Mageants_StoreLocator
+ * @copyright Copyright (c) 2017 Mageants
+ * @author Mageants Team <support@Mageants.com>
+ */
+$apiKey=$block->getApiKey();
+$_product = $block->getProduct();
+$productId=$_product->getId();
+$collection="";
+$imageUrl=$this->getViewFileUrl('Mageants_StoreLocator::images/close.png');
+$getProductText=$block->getProductText();
+if($getProductText==''){$$getProductText="Available Store";}
+
+$distance=0; $current=0;
+if($this->getRequest()->getPostValue()){
+    $data=$this->getRequest()->getPostValue();
+    if(isset($data['current'])) {
+        $current=$data['current'];
+        $distance=$data['distance'];
+        $imageUrl=$this->getViewFileUrl('Mageants_StoreLocator::images/close.png');
+        if($distance != 0){	$collection=$block->getRangeStoreCollection($current,$distance);
+        }else{ $collection=$block->getStoreCollection(); }
+    }else {
+        $storename=$data['storename'];
+        $countryid=$data['countryid'];
+        $state=$data['state'];
+        $city=$data['city'];
+        $zipcode=$data['zipcode'];
+        $collection=$block->getAreaStoreCollection($storename,$countryid,$state,$city,$zipcode);
+        $imageUrl=$this->getViewFileUrl('Mageants_StoreLocator::images/close.png');
+    }
+} else{
+    $collection=$block->CheckProductAvailable($productId);
+}
+?>
+<script src='https://maps.googleapis.com/maps/api/js?key=<?php echo $apiKey; ?>&v=3.exp&libraries=places'></script>
+<?php if(sizeof($collection) > 0): ?>
+    <div id="store_popup_div" style="display: inline;">
+        <button id="store_popup" class="action tocompare" name="store_popup" ><span><?php echo __($getProductText); ?></span></button>
+    </div>
+<?php endif; ?>
+<div id="store_popup_content" class="store_popup_content" style="display:none;position: fixed;">
+
+    <div class="close-rock">
+        <img src="<?php echo $imageUrl; ?>">
+    </div>
+    <div id="store_list" class="list-store-box col-sm-4  pull-left">
+        <div  class="page-title" id="store-pickup-title">
+            <h2 class="title" id="store-pickup-title-header-page-title">
+                <span class="" aria-hidden="true"></span>
+                <span><?php echo __("Store list"); ?></span>
+                <span class="number-store pull-right"><?php echo sizeOf($collection); echo __(" Stores");?> </span>
+            </h2>
+            <?php if(sizeOf($collection) < 0){ ?>
+                <div class="store-list-empty">
+                    <strong><?php echo __("No Store Found"); ?> </strong>
+                </div>
+            <?php }else { ?>
+            <div class="store-list-all" id="store-list-area">
+                <div class="list-store-container disable-ul">
+
+                    <?php	$inc=0;	foreach($collection as $store): ?>
+                        <?php if($store['image'] != null) {	$imageUrl=$this->getUrl('pub/media/').$store['image'];}
+                        else { $imageUrl=$this->getViewFileUrl('Mageants_StoreLocator::images/map_with_pin.png');} ?>
+
+                        <div id="store-click-product-view" onclick="javascript:google.maps.event.trigger(gmarkers[<?php echo $inc;  ?>],'mouseover')"  class="show-tag-li store-item store-40 store-active <?php if($inc==0){ echo "left-active"; } $inc++; ?>"  data-store-id="<?php echo $store['id']; ?>" data-store-index="0" data-latitude="<?php echo $store['latitude']; ?>" data-longitude="<?php echo $store['longitude']; ?>" data-address="<?php echo $store['address']; ?>">
+                            <div class="stores-content" id="stor-active-area">
+                                <div class="cols-3">
+                                    <div class="tag-store">
+                                        <img src="<?php echo $imageUrl; ?>">
+                                        <p class="text-center"></p>
+                                    </div>
+                                </div>
+                                <div class="cols-9">
+                                    <div class="tag-content">
+                                        <h4>
+                                            <!-- <a id="store-link" class="title-store store-link"  href="<?php echo $store['storeurl'] ?>" target="_blank"><?php echo __($store['sname']); ?>
+									<input type="hidden" class="sl-latitude" value="<?php echo __($store['latitude']); ?>">
+									<input type="hidden" class="sl-longitude" value="<?php echo __($store['longitude']); ?>">
+								</a> -->
+                                            <p style="color:#1979c3"><?php echo __($store['sname']); ?>
+                                                <a href="<?php echo $store['link']; ?>" target="_blank">
+                                                    <span style="margin: 15px;" ><?php echo __($store['link']); ?></span>
+                                                </a>
+                                            </p>
+                                            <input type="hidden" class="sl-latitude" value="<?php echo __($store['latitude']); ?>">
+                                            <input type="hidden" class="sl-longitude" value="<?php echo __($store['longitude']); ?>">
+                                        </h4>
+                                        <p class="address-store"><?php echo $store['address'].",".$store['region']." ".$store['city'].",".$store['country']; ?></p>
+                                        <p class="phone-store"><?php echo $store['phone']; ?>
+                                            <span style="color:#1979c3"><?php echo $store['email']; ?></span></p>
+                                        <div class="tagstore-content">
+                                            <a href="javascript:void(0)" data-lat="<?php echo $store['latitude']; ?>" data-long="<?php echo $store['longitude']; ?>" class="btn-link streetview"><span ><?php echo __("Street View"); ?></span></a>
+                                            <!--<a herf="#" data-lat="<?php echo $store['latitude']; ?>" data-long="<?php echo $store['longitude']; ?>" data-div-no="<?php echo $inc; ?>" class="btn-link direction" ><span ><?php echo __("Direction"); ?></span></a>-->
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <?php if($distance != 0) { ?>
+                                <div class="store-distance">
+                                <?php $dist=$block->getDistance($current,$store['latitude'],$store['longitude'],"K",$distance); ?>
+                                <?php echo "Distance : <bold> ".$dist." KM </bold>"; ?>
+                                </div><?php } ?>
+
+                            <div data-div-no="<?php echo $inc; ?>" class="option-direction custom-popup " style="padding: 0px;display: none;">
+
+                                <div id="directions-tool" class="directions-tool">
+                                    <ul class="vertical text-center">
+                                        <li class="travel car active" data-traveling="DRIVING"><span>D</span></li>
+                                        <li class="travel bus" data-traveling="TRANSIT"><span>T</span></li>
+                                        <li class="travel walk" data-traveling="WALKING"><span>W</span></li>
+                                        <li class="travel bicycle" data-traveling="BICYCLING"><span>B</span></li>
+                                    </ul>
+                                    <div class="form-inputs">
+                                        <input class="form-control origin originA start storelocator-originA-start" name="originA" isstart="true" autocomplete="off"  id="storelocator-originA-start" placeholder="Enter a location" type="text"> <br/>
+                                        <input class="form-control origin originB end" id="storelocator-originA-end" readonly="true" name="originB" autocomplete="off" value="<?php echo $store['address'].",".$store['city'].",".$store['country']; ?>" disabled type="text"> <br/>
+                                    </div>
+                                    <div class="directions-panel" id="directions-panel"></div>
+                                </div>
+                                <div class="box-input direction-go">
+                                    <button class="get-direction action primary pull-right" id="get_direction" title="Get Directions" type="submit">
+                                        <span>Go</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    <?php endforeach; } ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="map">
+        <?php
+        $latitude='';
+        $StoreCollection=$block->CheckProductAvailable($productId);
+        $locations="[";
+        $markTemplateText=array();
+        $i=0;
+        foreach($StoreCollection as $store)
+        {
+            if($i==0){$latitude=$store['latitude'];}
+            $markTemplate=$block->getStoreMarkerTemplate();
+            $icon='';
+            if($store['icon'] != null)
+            {
+                $src=$image="";
+                $icon=$this->getUrl('pub/media/').$store['icon'];
+            }
+            $locations .="['".$store['address']."',".$store['latitude'].",".$store['longitude'].",".$store['store_id'].",'".$icon."'],";
+            $markTemplate=str_replace("{{name}}",$store['sname'],$markTemplate);
+            if($store['image'] != null)
+            {
+                $src=$image="";
+                $src=$this->getUrl('pub/media/').$store['image'];
+                $image='<img height="50px" width="50px" src="'.$src.'" />';
+            }
+            else
+            {
+                $image="";
+                $image='<img height="50px" width="50px" src="'.$this->getViewFileUrl('Mageants_StoreLocator::images/map_with_pin.png').'" />';
+            }
+            $markTemplate=str_replace("{{image}}",$image,$markTemplate);
+            $markTemplate=str_replace("{{city}}",$store['city'],$markTemplate);
+            $markTemplate=str_replace("{{country}}",$store['country'],$markTemplate);
+            $markTemplate=str_replace("{{postcode}}",$store['postcode'],$markTemplate);
+            // $markTemplate=str_replace("{{region}}",$store['region'],$markTemplate);
+            $markTemplate = str_replace("{{region}}", $store['region'] ?? '', $markTemplate);
+
+            $markTemplate=str_replace("{{address}}",$store['address'],$markTemplate);
+            $markTemplate=str_replace("{{email}}",$store['email'],$markTemplate);
+            $markTemplate=str_replace("{{phone}}",$store['phone'],$markTemplate);
+            $markTemplate=str_replace("{{website}}",$store['link'],$markTemplate);
+            $markTemplate=str_replace("'",'"',$markTemplate);
+            $markTemplateText[] = array("$markTemplate");
+        }
+        $locations .= "]";
+
+        ?>
+        <div id="map" style="width: 100%; height: 580px;"></div>
+        <div id="pono" style="width: 100%; height: 580px;display: none; "></div>
+        <script type="text/javascript">
+            var locations=<?php if($locations!='[]'): echo $locations; else: echo "[['ahemdabad',-33.890542, 151.274856,1,'']]"; endif; ?>;
+            var markTemplateText=[];
+            var markerFlag=0;
+            markTemplateText =<?php if(sizeof($markTemplateText)>0){echo json_encode($markTemplateText);}else {echo "['ee','ee']";}  ?>;
+            markerFlag =<?php if(sizeof($markTemplateText)>0){echo "1";}else{ echo "0";}?>;
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom:<?php if($latitude!=''){echo "15";}else{echo "3";} ?>,
+                center: new google.maps.LatLng(locations[0][1], locations[0][2]),
+                minZoom: 1,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+
+            var infowindow = new google.maps.InfoWindow();
+            var marker, i;
+            var gmarkers = [];
+
+            function createMarker(latlng, html,icon,i) {
+                var marker = new google.maps.Marker({
+                    position: latlng,
+                    map: map
+                });
+                google.maps.event.addListener(marker, 'mouseover', function() {
+                    infowindow.setContent(html);
+                    infowindow.open(map, marker);
+                });
+                if(icon!='')
+                {
+                    var imageicon = {
+                        url: icon,
+                        scaledSize: new google.maps.Size(26, 36),
+                        origin: new google.maps.Point(0, 0),
+                        anchor: new google.maps.Point(0, 32)
+                    };
+                    marker.setIcon(imageicon);
+                }
+                if(i==0)
+                {
+                    google.maps.event.trigger(marker,'mouseover');
+                }
+                return marker;
+            }
+            if(markerFlag==1){
+                for (var i = 0; i < locations.length; i++) {
+                    gmarkers[i] =
+                        createMarker(new google.maps.LatLng(locations[i][1], locations[i][2]),markTemplateText[i][0],locations[i][4],i);
+
+                }
+            }
+
+        </script>
+    </div>
+</div>
+<script type="text/javascript">
+    require(["jquery","storelocator/popup"], function($) {
+        jQuery(document).ready(function($) {
+            $("#store_popup_div button").click(function(){
+                $("#store_popup_content").bPopup({
+                    modalClose:true
+                });
+            });
+            $(".close-rock").click(function(){
+                $("#store_popup_content").css("display", "none");
+                $(".b-modal.__b-popup1__").click();
+            });
+        });
+    });
+</script>
+<script>
+    require(["jquery"], function($){
+        $(document).ready(function($) {
+
+            $(".btn-link.streetview").click(function(e){
+                e.stopImmediatePropagation();
+                var latitude=jQuery(this).attr("data-lat");
+                var longitude=jQuery(this).attr("data-long");
+                var baltimore = new google.maps.LatLng(latitude, longitude);
+                var panoramaOptions = {
+                    position: baltimore,
+                    pov: {
+                        heading: 34,
+                        pitch: 10
+                    }
+                };
+                var panorama = new google.maps.StreetViewPanorama(document.getElementById('pono'), panoramaOptions);
+                jQuery("#map").hide();
+                jQuery("#pono").show();
+            });
+
+            $(".btn-link.direction").click(function(e){
+                e.stopImmediatePropagation();
+                var divno=$(this).attr("data-div-no");
+                $(".option-direction.active").removeClass("active");
+                jQuery("div[data-div-no='"+divno+"']").addClass("active");
+
+            });
+
+            $("li.travel").click(function(e){
+                e.preventDefault();
+                jQuery(".travel.active").removeClass("active");
+                jQuery(this).addClass("active");
+            });
+            setTimeout(function(){
+                $(".store-link").click(function(e){
+                    e.stopImmediatePropagation();
+                });
+            },1000);
+
+
+            $(".show-tag-li.store-item.store-40.store-active").click(function($){
+                jQuery(".left-active").removeClass("left-active");
+                jQuery(this).addClass("left-active");
+                var latitude= jQuery(this).find(".sl-latitude").val();
+                var longitude=jQuery(this).find(".sl-longitude").val();
+                var center = new google.maps.LatLng(latitude,longitude);
+                map.panTo(center);
+                jQuery("#map").show();
+                jQuery("#pono").hide();
+            });
+
+            $("#get_direction").click(function(e){
+                e.preventDefault();
+                var origin=jQuery("#storelocator-originA-start").val();
+                var destination=jQuery("#storelocator-originA-end").val();
+                if(origin=='')
+                {
+                    jQuery("#storelocator-originA-start").css("box-shadow","0 0 3px 1px red");
+                }
+                else
+                {
+                    var directionsService = new google.maps.DirectionsService();
+                    var directionsDisplay = new google.maps.DirectionsRenderer();
+                    var type=jQuery(".travel.active").attr("data-traveling");
+                    var map = new google.maps.Map(document.getElementById('map'), {
+                        zoom:7,
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    });
+
+                    directionsDisplay.setMap(map);
+                    directionsDisplay.setPanel(document.getElementById('directions-panel'));
+
+                    var request = {
+                        origin: origin,
+                        destination: destination,
+                        travelMode: google.maps.TravelMode[type]
+                    };
+
+                    directionsService.route(request, function(response, status) {
+                        if (status == google.maps.DirectionsStatus.OK) {
+                            directionsDisplay.setDirections(response);
+                        }
+                    });
+                }
+            });
+            jQuery('.storelocator-originA-start').each(function(){
+                new google.maps.places.Autocomplete(
+                    this, {
+                        types: ['geocode']
+                    });
+            });
+
+
+
+        });
+    });
+</script>
+<style type="text/css">
+    /*.option-direction.active
+    {
+        display: block !important;
+    }
+    .option-direction{display: none;}
+    .custom-popup {
+      left: 0;
+      margin-top: 5px;
+    }
+    .show-tag-li.store-item.store-40.store-active {
+      margin-top: 13px;
+    }
+    .custom-popup ul.vertical {
+      border-top: 1px solid #ccc;
+      margin: 0;
+      padding: 10px 0;
+    }
+    .text-center {
+      text-align: center;
+    }
+    .custom-popup ul.vertical li span {
+      padding: 0 20px 5px 13px;
+    }
+    .vertical li.travel {
+      display: inline;
+    }*/
+    /**
+      * Mageants StoreLocator Magento2 Extension
+      */
+
+    .storelocator-index-index .number-store.pull-right {
+        float: right;
+        font-size: 11px;
+    }
+    .storelocator-index-index .list-store-container.disable-ul {
+        padding: 0;
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+    .storelocator-index-index .col-sm-3.col-xs-3.tag-store {
+        float: left;
+        width: 40%;
+    }
+    .storelocator-index-index .col-sm-9.col-xs-9.tag-content {
+        float: left;
+        padding-left: 15px;
+        width: 45%;
+    }
+    .storelocator-index-index .loader-image {
+        left: 60%;
+        position: absolute;
+        top: 50%;
+        z-index: 2147483647;
+    }
+    .storelocator-index-index .map {
+        position: relative;
+        clear: both !important;
+    }
+    .storelocator-index-index .left-active
+    {
+        box-shadow:0 0 5px 4px #68a8e0 !important;
+    }
+    /* css for left block*/
+    .storelocator-index-index .search-store-locator .page-title
+    {
+        -moz-border-bottom-colors: none;
+        -moz-border-left-colors: none;
+        -moz-border-right-colors: none;
+        -moz-border-top-colors: none;
+        background-color: #f8f8f8;
+        border-color: #ddd #ddd -moz-use-text-color;
+        border-image: none;
+        float: left;
+        padding-bottom: 10px;
+        width: 100%;
+    }
+    .storelocator-index-index .page-title-wrapper {
+        display: none;
+    }
+    .storelocator-index-index #store_list .page-title h2
+    {
+        background-color: #1979c3;
+        color: #fff;
+        font-size: 14px;
+        font-weight: bold;
+        margin: 0;
+        padding: 10px 15px;
+    }
+    .storelocator-index-index .glyphicon {
+        display: inline-block;
+        font-family: "Glyphicons Halflings";
+        font-size: 18px;
+        font-style: normal;
+        font-weight: normal;
+        line-height: 5px;
+        margin-right: 10px;
+        position: relative;
+        top: 3px;
+        vertical-align: baseline;
+    }
+    .storelocator-index-index .glyphicon-align-justify::before {
+        content: "";
+    }
+    .storelocator-index-index .glyphicon-align-justify::before {
+        content: "";
+    }
+    .storelocator-index-index .list-store.col-xs-12
+    {
+        -moz-border-bottom-colors: none;
+        -moz-border-left-colors: none;
+        -moz-border-right-colors: none;
+        -moz-border-top-colors: none;
+        background-color: #f8f8f8;
+        border-color: -moz-use-text-color #ddd #ddd;
+        overflow-y: auto;
+        padding-top: 12px;
+    }
+    .storelocator-index-index .show-tag-li
+    {
+        background-color: #fff;
+        border-radius: 4px;
+        box-shadow: 1px 1px 5px #d6d6d6, -1px -1px 7px #d6d6d6;
+        cursor: pointer;
+        display: block;
+        float: left;
+        margin-bottom: 10px;
+        min-height: 97px;
+        overflow: auto;
+        padding: 10px 0;
+        width: 100%;
+    }
+    .storelocator-index-index .tag-store
+    {
+        text-align: center;
+    }
+    .storelocator-index-index .store-item h4 {
+        margin: 5px 0 10px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 100%;
+    }
+    .storelocator-index-index .store-item
+    {
+        cursor:auto;
+    }
+    .storelocator-index-index .show-tag-li.store-item.store-40.store-active:hover
+    {
+        background-color:#eee;
+        cursor:pointer;
+    }
+    .storelocator-index-index .store-item p {
+        font-size: 12px;
+        line-height: 18px;
+        margin: 0;
+    }
+    .storelocator-index-index .store-toolbar {
+        margin-left: 33px;
+    }
+    .storelocator-index-index .list-store.col-xs-12
+    {
+        height: 534px;
+        overflow: auto;
+    }
+    /* css for main search-block */
+    .storelocator-index-index .aw-storelocator-cms-block {
+        margin-bottom: 20px;
+    }
+    .storelocator-index-index .list-store-container .store-distance
+    {
+        clear: both;
+    }
+
+    .storelocator-index-index .aw-storelocator-search-block .padder {
+        padding: 20px;
+    }
+    .storelocator-index-index form .legend {
+        border-bottom: 1px solid #ededed;
+        color: #636363;
+        font-family: "Raleway","Helvetica Neue",Verdana,Arial,sans-serif;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1.4;
+        margin: 0 0 15px;
+        padding-bottom: 7px;
+        text-rendering: optimizespeed;
+        text-transform: uppercase;
+    }
+    .storelocator-index-index #storelocator_tabs_radius_contents .form-list select {
+        max-width: 80%;
+    }
+
+
+    .storelocator-index-index #storelocator_tabs_radius_contents .form-list > li {
+        margin-bottom: 10px;
+        position: relative !important;
+    }
+    .storelocator-index-index .page-title h1 {
+        background: #428bca url("../Mageants_StoreLocator/images/shop.png") no-repeat scroll 15px center / 18px auto;
+        color: #fff;
+        font-size: 15px;
+        font-weight: 600;
+        margin-bottom: 20px;
+        padding: 8px 15px 8px 40px;
+        text-transform: uppercase;
+    }
+    .storelocator-index-index .seach-store-locator {
+        flex: 1 0 auto;
+        margin-bottom: 10px;
+        margin-right: 20px;
+        max-width: 100%;
+        width: 97%;
+    }
+    .storelocator-index-index .buttons-set {
+        text-align: center;
+    }
+    .storelocator-index-index #storelocator_tabs_address_contents .input-text {
+        margin-right: 10px;
+        max-width: 95%;
+    }
+    .storelocator-index-index .aw-storelocator-search-block a:hover
+    {
+        text-decoration:none !important;
+    }
+    .storelocator-index-index #storelocator_tabs_address_contents .form-list li {
+        display: table-cell;
+        width: 16%;
+    }
+    .storelocator-index-index #storelocator_tabs_address_contents #country {
+        margin-top: 4px !important;
+        max-width:90%;
+    }
+    .storelocator-index-index #map-test > div {
+        height: 32px !important;
+        width: 95% !important
+    }
+    .storelocator-index-index #map-test .gm-style img {
+        display: none;
+    }
+    .storelocator-index-index #map-test .gmnoprint.gm-style-cc a {
+        display: none;
+    }
+    .storelocator-index-index #map-test .gmnoprint.gm-style-cc div {
+        display: none;
+    }
+    .storelocator-index-index #map-test .gm-style-cc div {
+        display: none;
+    }
+    .storelocator-index-index .input-box > div {
+        position: unset !important;
+    }
+    .storelocator-index-index #map-test .gm-style-cc a {
+        display: none;
+    }
+    .storelocator-index-index #map-test .gm-style-cc span {
+        display: none;
+    }
+
+
+    .storelocator-index-index .popup > h2 {
+        margin-bottom: 12px;
+        margin-top: 0;
+        padding: 0;
+    }
+    .storelocator-index-index .popup > img {
+        height: 100px;
+        width: 100px;
+    }
+    .storelocator-index-index .columns {
+        margin-top: 20px;
+    }
+
+    .store_popup_content legend.legend{margin: 10px 1px  !important;}
+    .store_popup_content {
+        background-color:white;
+        padding: 26px;
+        height:79%;
+        width:75%;
+        top:7% !important;
+        left:10% !important;
+        position: fixed !important;
+    }
+
+    .store_popup_content .close-rock{
+        cursor:pointer;
+        float:right;
+        position:absolute;
+        right:0%;
+        top:0%;
+    }
+
+    .close-rock > img{height: 30px;}
+    .storelocator-index-index #maincontent{clear: both; padding-top:10px;}
+    @media screen and (max-width: 467px) {
+        .storelocator-index-index  #reset_map{
+            display: none;
+        }
+        .storelocator-index-index  #address span {
+            display: none;
+        }
+        .storelocator-index-index  #address:after {
+            content: 'Location';
+        }
+    }
+
+
+
+
+
+
+
+    .storepage-title h2 {background: #428bca url("../Mageants_StoreLocator/images/store.png") no-repeat scroll;  background-position: 10px 5px; background-size:22px;  color: #ffffff;  font-size: 15px; font-weight: 600; margin-bottom: 20px; padding: 8px 15px 8px 40px;
+        text-transform: uppercase; margin-top:15px;}
+    .search-button .search-distance{background: #428bca url("../Mageants_StoreLocator/images/gps-1.png") no-repeat scroll; background-position: 7px 6px !important; background-size:22px !important; float:left;}
+    .search-button .search-area {background: #428bca url("../Mageants_StoreLocator/images/location.png") no-repeat scroll; float:left; background-position: 10px 5px !important; background-size:22px !important;}
+    .search-store-locator {background: #f8f8f8 none repeat scroll 0 0;  display: inline-block;  width: 100%; padding-bottom:15px; border-radius:5px;}
+    .search-store-locator .storepage-title {padding: 0px 15px;}
+    .aw-storelocator-search-block {display: inline-block; width: 100%;}
+
+    .field-contents .current-div{width:30%; float:left;}
+    .field-contents .radius-limits{width:20%; float:left; margin-top:5px;}
+    .field-contents .button-set.slocat{width:47%; float:left; text-align:right;}
+    .storelocator-index-index .sidebar.sidebar-main{width:40% !important;}
+    .storelocator-index-index .page-main .column.main{width:60% !important;}
+    .sidebar-main .store-list-all {background: #f2f2f2 none repeat scroll 0 0;  display: inline-block;  padding: 0 10px;  height: 550px; overflow-y: auto;}
+    .cols-3{width:20%; float:left;}
+    .cols-9{width:80%; float:left;}
+    .stores-content .tag-content{padding-left:15px; margin-top:15px;}
+    .store-list-all .tag-store{margin-top: 10px; padding: 0 10px;}
+    .storelocator-distance-content {display: inline-block;  width: 100%;}
+    .storelocator-distance-content .search-button{padding: 0px 15px;}
+    .storelocator-distance-content .fieldset.field-contents{display: inline-block; margin-top: 5px; padding: 0 15px; width: 100%;}
+    .searcharea-content .col-6{width:49%; float:left;}
+    .stores-content .tag-content h4{margin-bottom:5px;}
+    .tagstore-content{margin-top:3px;}
+    .tagstore-content a.btn-link{margin-right:5px; font-weight:600;}
+    .searcharea-content{padding:0px 15px; margin-top:3px;}
+    .searcharea-content .form-group{margin-bottom:10px; margin-bottom: 10px; padding-right: 10px;}
+    .searcharea-content .form-group:nth-child(2n){padding-right:0px !important; width:50% !important;}
+    .searcharea-content .form-group.col-12{width:100% !important; display:inline-block !important;}
+    @media only screen
+    and (min-device-width : 768px)
+    and (max-device-width : 1024px)  {
+        .storelocator-distance-content .fieldset.field-contents{padding:0px !important;}
+        .field-contents .radius-limits{width:40% !important;}
+        .storelocator-distance-content .fieldset.field-contents{padding:0px !important;}
+        .storelocator-distance-content .field-contents .button-set.slocat{width:27% !important;}
+        .field-contents .current-div{padding-left:15px !important;}
+    }
+    @media only screen and (max-width: 1024px) {
+        .searcharea-content .form-group.col-6{width:100% !important; padding:0px !important;}
+    }
+    @media only screen and (max-width: 767px) {
+        .field-contents .current-div, .field-contents .radius-limits, .field-contents .button-set.slocat{width:100% !important; float:none !important; text-align:left !important;}
+        .storelocator-distance-content .fieldset.field-contents{padding:0px !important;}
+        .storelocator-distance-content .fieldset.field-contents .current-div #current-address{padding:0px 15px !important;}
+        .aw-storelocator-search-block .search-button span{font-size:10px !important; font-weight:bold;}
+        .fieldset.field-contents .button-set.slocat{margin:0px 15px !important;}
+        .catalog-product-view .store_popup_content .list-store-box{
+            width:100% !important;
+        }
+        .catalog-product-view .store_popup_content .map{
+            width:100% !important;
+        }
+        .catalog-product-view #store-list-area {
+            position: relative !important;
+            overflow-y: scroll !important;
+            overflow-x: hidden !important;
+            padding: 0 10px !important;
+            max-height: 156px !important;
+        }
+        #store_list {
+            position: relative !important;
+            height: 100% !important;
+            max-height: 45% !important;
+        }
+        .catalog-product-view .store_popup_content .map {
+            height: 100% !important;
+            max-height: 55% !important;
+        }
+        .list-store-container.disable-ul p {
+            font-size: 10px !important;
+        }
+    }
+    @media screen and (max-width: 375px) {
+
+        .store_popup_content {
+            background-color: white !important;
+            left: 6% !important;
+        }
+    }
+
+
+    .storelocator-store-store .sidebar.sidebar-main{width:34% !important;}
+    .storelocator-store-store .column.main{width:66% !important;}
+    .storelocator-store-store .sidebar.sidebar-main h2.title{margin-top:0px !important;}
+    .storepage-title.opening h2{margin-bottom:0px;}
+    .store-timings{border:1px solid #ddd;}
+    .table-time-schedule tr:nth-child(2n+1){background-color:#f3f3f3;}
+    .mainstorlist{display:inline-block; width:100%;}
+    .mainstorlist .tag-content{padding-left:15px;}
+    .mainstores{margin-top:0px !important; padding:0px 15px;}
+    .allstores-content{border: 1px solid #dddddd; margin-bottom: 20px;}
+    .mainstores .tag-content h4{margin:5px 0px;}
+
+    .locator-title h1 {
+        margin: 1em 0 0.5em 0;
+        color: #343434;
+        font-weight: normal;
+        font-family: 'Ultra', sans-serif;
+        font-size: 36px;
+        line-height: 42px;
+        text-transform: uppercase;
+        text-shadow: 0 2px white, 0 3px #777;
+    }
+
+    .option-direction.active
+    {
+        display: block !important;
+    }
+    .option-direction{display: none;}
+    .custom-popup {
+        left: 0;
+        margin-top: 5px;
+    }
+    .show-tag-li.store-item.store-40.store-active {
+        margin-top: 13px;
+    }
+    .custom-popup ul.vertical {
+        border-top: 1px solid #ccc;
+        margin: 0;
+        padding: 10px 0;
+    }
+    .text-center {
+        text-align: center;
+    }
+    .custom-popup ul.vertical li span {
+        padding: 0 20px 5px 13px;
+    }
+    .vertical li.travel {
+        display: inline;
+    }
+    .store-timings .table-time-schedule i {
+        border: solid black;
+        border-width: 0 3px 3px 0;
+        display: inline-block;
+        padding: 3px;
+    }
+    .store-timings .table-time-schedule .arrow {
+        transform: rotate(-135deg);
+        -webkit-transform: rotate(-135deg);
+    }
+
+    .store-timings .table-time-schedule .down {
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+    }
+
+    .catalog-product-view .store_popup_content .list-store-box,.checkout-index-index .store_popup_content .list-store-box{
+        float: left;
+        width: 37.5%;
+    }
+    h2#store-pickup-title-header-page-title {
+        margin: 0;
+    }
+    /*.storelocator-index-index .storelocator-index-index .left-active {
+        box-shadow: 0 0 5px 4px #68a8e0 !important;
+    }*/
+
+    #store-click-product-view h2.title {
+        background-color: #1979C3;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 600;
+        padding: 10px;
+        margin: 0;
+
+    }
+    .catalog-product-view span.number-store.pull-right,.checkout-index-index span.number-store.pull-right {
+        float: right;
+    }
+    .catalog-product-view .store_popup_content .map,.checkout-index-index .store_popup_content .map {
+        float: right;
+        width: 60%;
+        position: relative;
+        height: 100%;
+    }
+
+    .catalog-product-view .show-tag-li.store-item.store-40,.checkout-index-index .show-tag-li.store-item.store-40{
+        background-color: #ffffff!important;
+    }
+    .catalog-product-view .store_popup_content .map #map,.checkout-index-index .store_popup_content .map #map {
+        height: 100% !important;
+    }
+    #store_list {
+        position: relative;
+        height: 100%;
+    }
+
+    #store-pickup-title {
+        background-color: #f2f2f2;
+        position: relative;
+        height: 100%;
+
+    }
+    .catalog-product-view h2.title,.checkout-index-index h2.title {
+        background-color: #1979C3;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 600;
+        padding: 10px;
+    }
+    .catalog-product-view #store-list-area{
+        position: relative;
+        height: 93%;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding: 0 10px;
+    }
+    #store-list-area .show-tag-li {
+        display: inline-block;
+        width: 100%;
+    }
+    #store-list-area .show-tag-li.left-active {
+        box-shadow: 0 0 5px 4px #68a8e0 !important;
+        border-radius: 4px;
+    }
+
+    #pono {
+        height: 100%!important;
+    }
+
+    /* start add checkout store pickup css */
+    .store-pickup-checkout #store-pickup-block {
+        position: relative;
+        padding: 0 75px 0 0;
+        margin: 0 0 10px;
+        clear: both;
+        display: flex;
+    }
+    .store-pickup-checkout #store-pickup-block .control {
+        float: left;
+        width: 49%;
+    }
+    .store-pickup-checkout #store-pickup-block .control.pickup-store {
+        padding-right: 10px;
+    }
+    .store-pickup-checkout #store-pickup-block .control .label {
+        font-weight: bold;
+    }
+    .store-pickup-checkout #store-pickup-block button.action {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+    }
+    /* end add checkout store pickup css */
+    /*new add 08/05/018 1.45*/
+    .checkout-index-index #store-pickup-block .label {
+        text-align: left;
+        float: left;
+        display: inline-block;
+    }
+    .checkout-index-index #storepickup_date {
+        float: left;
+        width: 83%;
+        display: block;
+        margin-bottom: 17px;
+    }
+
+    .checkout-index-index #store_select {
+        border-radius: 0;
+        float: right;
+        margin-right: 8px;
+    }
+
+    .checkout-index-index #store_list,.checkout-index-index .store_popup_content .map{
+        height: 89%;
+    }
+
+
+    .checkout-index-index #store-pickup-block .label {
+        font-weight: 700;
+        padding-right: 4px;
+        line-height: 2;
+    }
+
+    .checkout-index-index #store-list-area{
+        position: relative;
+        height: 93%;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding: 0 10px;
+
+    }
+    #store_popup_content .action.primary{
+        background-color: #1979C3 !important;
+    }
+</style>

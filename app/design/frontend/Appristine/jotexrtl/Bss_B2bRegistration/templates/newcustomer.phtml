@@ -1,0 +1,59 @@
+<?php
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_B2bRegistration
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2017-2018 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+// @codingStandardsIgnoreFile
+?>
+<?php
+/**
+ * New Customer block template
+ *
+ * @var \Bss\B2bRegistration\Block\Form\Login\Info $block
+ */
+?>
+<?php
+$enable = $block->isEnable();
+$enableShortCut = $block->isEnableShortcutLink();
+$shortCutLinkText = $block->getShortcutLinkText();
+$b2bCreateUrl = $block->getUrlB2bAccountCreate();
+?>
+<div class="block block-new-customer">
+    <div class="block-title">
+        <strong id="block-new-customer-heading" role="heading" aria-level="2"><?php echo $block->escapeHtml(__('New Customers')) ?></strong>
+    </div>
+    <div class="block-content" aria-labelledby="block-new-customer-heading">
+        <p><?php /* @escapeNotVerified */ echo __("عند إنشاء حساب، ستتمكن من الوصول إلى مجموعة واسعة من الفوائد:") ?></p>
+        <ul class="login-benefits">
+            <li><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAMCAQAAAAeoI8VAAABBUlEQVQYGQXBzyuDcRzA8Q+50IrLYvZYz5PDlrYZ+/X02Fo5GOpJ9JwQByf+Atoa+QcUbhxctHJT4uSi5LwciHYY5cdRD2s9PX3fXi+hHx2HKcaJEvL06wObGEIPAZJYjGGQuNzN+Jp6fhLClJgnwShGq2a1B9Re82tOWCNFnCRDOJX3blba3zsqIMQwSTHsxo9vBn1NtR6ZJiKUWGSBwsNh2Qtx9coGOZakU2/e/1VZ3XeDVD5wiJHGlFpnWTXOfuoBVfZut8ijM4IhffRyRJaIf3pOmhksiszKNkKQLjY/W+uYFClgYsndryBo6uWCHHlMcmSx5e3E9sM0XApkyDJBFJ3Jf0TSoyQ/Km9IAAAAAElFTkSuQmCC"> <?php echo __('انهاء عملية الدفع بسرعة') ?></li>
+            <li><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAMCAQAAAAeoI8VAAABBUlEQVQYGQXBzyuDcRzA8Q+50IrLYvZYz5PDlrYZ+/X02Fo5GOpJ9JwQByf+Atoa+QcUbhxctHJT4uSi5LwciHYY5cdRD2s9PX3fXi+hHx2HKcaJEvL06wObGEIPAZJYjGGQuNzN+Jp6fhLClJgnwShGq2a1B9Re82tOWCNFnCRDOJX3blba3zsqIMQwSTHsxo9vBn1NtR6ZJiKUWGSBwsNh2Qtx9coGOZakU2/e/1VZ3XeDVD5wiJHGlFpnWTXOfuoBVfZut8ijM4IhffRyRJaIf3pOmhksiszKNkKQLjY/W+uYFClgYsndryBo6uWCHHlMcmSx5e3E9sM0XApkyDJBFJ3Jf0TSoyQ/Km9IAAAAAElFTkSuQmCC"> <?php echo __('سهولة الوصول إلى تاريخ الطلبات وحالتها') ?></li>
+            <li><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAMCAQAAAAeoI8VAAABBUlEQVQYGQXBzyuDcRzA8Q+50IrLYvZYz5PDlrYZ+/X02Fo5GOpJ9JwQByf+Atoa+QcUbhxctHJT4uSi5LwciHYY5cdRD2s9PX3fXi+hHx2HKcaJEvL06wObGEIPAZJYjGGQuNzN+Jp6fhLClJgnwShGq2a1B9Re82tOWCNFnCRDOJX3blba3zsqIMQwSTHsxo9vBn1NtR6ZJiKUWGSBwsNh2Qtx9coGOZakU2/e/1VZ3XeDVD5wiJHGlFpnWTXOfuoBVfZut8ijM4IhffRyRJaIf3pOmhksiszKNkKQLjY/W+uYFClgYsndryBo6uWCHHlMcmSx5e3E9sM0XApkyDJBFJ3Jf0TSoyQ/Km9IAAAAAElFTkSuQmCC"> <?php echo __('عرض سلة التسوق الخاصة بك من أي جهاز') ?></li>
+            <li><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAMCAQAAAAeoI8VAAABBUlEQVQYGQXBzyuDcRzA8Q+50IrLYvZYz5PDlrYZ+/X02Fo5GOpJ9JwQByf+Atoa+QcUbhxctHJT4uSi5LwciHYY5cdRD2s9PX3fXi+hHx2HKcaJEvL06wObGEIPAZJYjGGQuNzN+Jp6fhLClJgnwShGq2a1B9Re82tOWCNFnCRDOJX3blba3zsqIMQwSTHsxo9vBn1NtR6ZJiKUWGSBwsNh2Qtx9coGOZakU2/e/1VZ3XeDVD5wiJHGlFpnWTXOfuoBVfZut8ijM4IhffRyRJaIf3pOmhksiszKNkKQLjY/W+uYFClgYsndryBo6uWCHHlMcmSx5e3E9sM0XApkyDJBFJ3Jf0TSoyQ/Km9IAAAAAElFTkSuQmCC"> <?php echo __('حفظ عناوين شحن متعددة') ?></li>
+            <li><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAMCAQAAAAeoI8VAAABBUlEQVQYGQXBzyuDcRzA8Q+50IrLYvZYz5PDlrYZ+/X02Fo5GOpJ9JwQByf+Atoa+QcUbhxctHJT4uSi5LwciHYY5cdRD2s9PX3fXi+hHx2HKcaJEvL06wObGEIPAZJYjGGQuNzN+Jp6fhLClJgnwShGq2a1B9Re82tOWCNFnCRDOJX3blba3zsqIMQwSTHsxo9vBn1NtR6ZJiKUWGSBwsNh2Qtx9coGOZakU2/e/1VZ3XeDVD5wiJHGlFpnWTXOfuoBVfZut8ijM4IhffRyRJaIf3pOmhksiszKNkKQLjY/W+uYFClgYsndryBo6uWCHHlMcmSx5e3E9sM0XApkyDJBFJ3Jf0TSoyQ/Km9IAAAAAElFTkSuQmCC"> <?php echo __('إنشاء قائمة بالمنتجات المفضلة') ?></li>
+        </ul>
+        <div class="actions-toolbar">
+            <?php if (!$block->disableRegisterDefault()): ?>
+                <div class="primary">
+                    <a href="<?php echo $block->escapeUrl($block->getCreateAccountUrl()) ?>" class="action create primary"><span><?php echo $block->escapeHtml(__('Create an Account')) ?></span></a>
+                </div>
+            <?php endif; ?>
+            <?php if ($enable): ?>
+                <div class="second-primary">
+                    <a href="<?php echo $block->escapeUrl($b2bCreateUrl) ?>" class="action create primary"><span><?php echo $block->escapeHtml(__($shortCutLinkText)) ?></span></a>
+                </div>
+            <?php endif ?>
+        </div>
+    </div>
+</div>

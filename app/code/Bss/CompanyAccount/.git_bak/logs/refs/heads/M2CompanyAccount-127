@@ -1,6 +1,0 @@
-0000000000000000000000000000000000000000 af904d98ddd2379d57a8455bc2e3ee68c9383a7a Hai Luu <luuph@bsscommerce.com> 1733283879 +0700	branch: Created from HEAD
-af904d98ddd2379d57a8455bc2e3ee68c9383a7a 193c6cfff49deaaa61a87e5889fb584919f0180b Hai Luu <luuph@bsscommerce.com> 1733287387 +0700	commit: Fix issues send mail order when sub-user removed
-193c6cfff49deaaa61a87e5889fb584919f0180b af904d98ddd2379d57a8455bc2e3ee68c9383a7a Hai Luu <luuph@bsscommerce.com> 1733293520 +0700	reset: moving to af904d9
-af904d98ddd2379d57a8455bc2e3ee68c9383a7a c50824320fefc6473ecfe0101dc261b71a67476b Hai Luu <luuph@bsscommerce.com> 1733293578 +0700	commit: Fix issues send mail order when sub-user removed
-c50824320fefc6473ecfe0101dc261b71a67476b e76dd9f38d5f5cc1c5ef86ae67b8d07eb0d48d98 Hai Luu <luuph@bsscommerce.com> 1733296473 +0700	commit: Add comment function send mail used session
-e76dd9f38d5f5cc1c5ef86ae67b8d07eb0d48d98 aabb14a7744fbec4f4f09c8b679e45672090975f Hai Luu <luuph@bsscommerce.com> 1734598326 +0700	commit: Fix send email use cron

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <menu>
+        <update id="MageArray_Core::core" title="MageArray Extensions" module="MageArray_Popup" sortOrder="40"
+                resource="MageArray_Core::core"/>
+        <add id="MageArray_Popup::popupadmin" title="Popup" module="MageArray_Popup" sortOrder="10"
+             parent="MageArray_Core::core" dependsOnModule="MageArray_Popup" resource="MageArray_Popup::popupadmin"/>
+        <add id="MageArray_Popup::popup" title="Popup" module="MageArray_Popup" sortOrder="20"
+             resource="MageArray_Popup::popup" action="popup/popup" parent="MageArray_Popup::popupadmin"/>
+        <add id="MageArray_Popup::settings" title="Settings" module="MageArray_Popup" sortOrder="30"
+             resource="MageArray_Popup::config_popup" action="adminhtml/system_config/edit/section/popup"
+             parent="MageArray_Popup::popupadmin"/>
+    </menu>
+</config>

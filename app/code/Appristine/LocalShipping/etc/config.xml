@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Store/etc/config.xsd">
+	<default>
+        <carriers>
+            <localshipping>
+                <active>1</active>
+                <sallowspecific>0</sallowspecific>
+				<model>Appristine\LocalShipping\Model\Carrier\LocalShipping</model>
+                <name>Appristine LocalShipping Shipping</name>
+                <price>0.00</price>
+                <title>Appristine LocalShipping Shipping</title>
+               <specificerrmsg>Appristine LocalShipping Shipping is not available for your area. Please contact us.</specificerrmsg>
+            </localshipping>
+            <!-- carrier-config -->
+        </carriers>
+    </default>
+</config>

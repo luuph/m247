@@ -1,0 +1,117 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category   Mageplaza
+ * @package    Mageplaza_PdfInvoice
+ * @copyright   Copyright (c) Mageplaza (http://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+?>
+<?php
+$_order = $block->getOrder();
+$flag = 0;
+$itemCount = count($_order->getAllItems());
+$storeId = $_order->getStoreId();
+$codeType = $block->getCodeType('order', $storeId);
+$barcodeConfig = $block->getBarcodeConfig($storeId);
+$isBarcode = !($codeType === 'no_code');
+$columnsConfig = $block->getColumnsConfig('order');
+$numberColumn = $block->getNumberColumn($columnsConfig, 4);
+$_store = $_order->getStore();
+$_imageHelper = $block->getHelperImage();
+$_messageHelper = $block->getHelperMessage();
+$_baseImageUrl = $_store->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA).'catalog/product';
+?>
+<style>
+    .mp-item,.mp-qty,.mp-price,.mp-subtotal,.mp-tax,.mp-discount,.mp-image {
+        font-size: 0.75rem;
+    }
+</style>
+<?php if ($_order): ?>
+    <?php $_items = $_order->getAllItems() ?>
+    <div class="table <?= /** @noEscape */ $numberColumn ?>-columns">
+        <div class="mp-row mp-heading">
+            <div class="mp-image">
+                <span><?= /* @noEscape */
+                    __('Image') ?><span>
+            </div>
+            <?php
+            foreach ($columnsConfig as $columnConfig) {
+                if ($columnConfig['status']) {
+                    echo $block->getThHtml($columnConfig['name'],0);
+                }
+            }
+            ?>
+        </div>
+        <?php $i = 0 ?>
+        <?php foreach ($_items as $_item): ?>
+            <?php $codeValue = $block->getCodeValue($_item, $storeId) ?>
+            <?php
+            $block->setItem($_item);
+            $indexKey = $i % 2 == 0 ? "odd" : "even";
+            if ($block->isBundleItem()) {
+                echo /** @noEscape */ $block->renderBundleItem($_item, $_order, $block->getOrderType(), $indexKey, $codeType, $barcodeConfig, $isBarcode, 'bundleitem_a5wimg.phtml', $columnsConfig);
+                $i++;
+                continue;
+            }
+            if ($_item->getParentItem()) {
+                continue;
+            }
+
+            $i++;
+            ?>
+            <div class="mp-row <?= /** @noEscape */ $indexKey ?>" style="border-bottom: 1px solid #ddd;">
+                <div class="mp-image">
+                    <img src="<?= /** @noEscape */ $_imageHelper->init($_item->getProduct(), 'small_image',
+                        ['type'=>'small_image'])->keepAspectRatio(true)->resize('65','65')->getUrl();?>"
+                        alt="<?= /** @noEscape */ __('Product Image');?>">
+                </div>
+                <?php
+                foreach ($columnsConfig as $columnConfig) {
+                    if ($columnConfig['status']) {
+                        echo /** @noEscape */ $block->getTdHtml($columnConfig['name'], 0, $_item, $codeValue, 'order');
+                    }
+                }
+                ?>
+            <div class="clr"></div>
+        <?php endforeach ?>
+    </div>
+    <div class="order-totals">
+        <?= $block->getChildHtml('order_totals') ?>
+    </div>
+
+    <?php if ($_messageHelper->isMessagesAllowed('order', $_order, $_order->getStore()) && $_order->getGiftMessageId()): ?>
+        <?php $_giftMessage = $_messageHelper->getGiftMessage($_order->getGiftMessageId()) ?>
+        <?php if ($_giftMessage): ?>
+            <br/>
+            <table class="message-gift">
+                <tr>
+                    <td>
+                        <h3><?= /* @noEscape */
+                            __('Gift Message for this Order') ?></h3>
+                        <strong><?= /* @noEscape */
+                            __('From:') ?></strong> <?= $block->escapeHtml($_giftMessage->getSender()) ?>
+                        <br/><strong><?= /* @noEscape */
+                            __('To:') ?></strong> <?= $block->escapeHtml($_giftMessage->getRecipient()) ?>
+                        <br/><strong><?= /* @noEscape */
+                            __('Message:') ?></strong>
+                        <br/><?= $block->escapeHtml($_giftMessage->getMessage()) ?>
+                    </td>
+                </tr>
+            </table>
+        <?php endif ?>
+    <?php endif ?>
+<?php endif ?>

@@ -1,0 +1,42 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/**
+ * @var \Magento\Theme\Block\Html\Header\Logo $block
+ */
+?>
+
+
+<?php $storeName = $block->getThemeName() ? $block->getThemeName() : $block->getLogoAlt();?>
+<span data-action="toggle-nav" class="action nav-toggle"><span><?php /* @escapeNotVerified */ echo __('Toggle Nav') ?></span></span>
+<?php if ($block->isHomePage()):?>
+<div class="custom_logo_container">
+    <img src="<?php echo $block->getUrl(''); ?>/pub/media/wysiwyg/newlogo.png" alt="JOTEX Commerce" class="custom_main_logo">
+    <a href="<?php echo $block->getUrl(''); ?>">
+<img height="43" width="185px" alt="JOTEX Commerce" src="<?php echo $block->getUrl(''); ?>/pub/media/wysiwyg/jotextmlogo_1.png"></a>
+    
+</div>
+    <strong class="logo">
+<?php else: ?>
+<div class="custom_logo_container">
+    <img src="<?php echo $block->getUrl(''); ?>/pub/media/wysiwyg/newlogo.png" alt="JOTEX Commerce" class="custom_main_logo">
+    <a href="<?php echo $block->getUrl(''); ?>"><img height="43" width="185px" alt="JOTEX Commerce" src="<?php echo $block->getUrl(''); ?>/pub/media/wysiwyg/jotextmlogo_1.png"></a>
+    
+</div>
+    <a class="logo" href="<?php echo $block->getUrl(''); ?>" title="<?php /* @escapeNotVerified */ echo $storeName ?>">
+<?php endif ?>
+        <img src="<?php /* @escapeNotVerified */ echo $block->getLogoSrc() ?>"
+             alt="<?php /* @escapeNotVerified */ echo $block->getLogoAlt() ?>"
+             <?php echo $block->getLogoWidth() ? 'width="' . $block->getLogoWidth() . '"' : '' ?>
+             <?php echo $block->getLogoHeight() ? 'height="' . $block->getLogoHeight() . '"' : '' ?>
+        />
+<?php if ($block->isHomePage()):?>
+    </strong>
+<?php else:?>
+    </a>
+<?php endif?>

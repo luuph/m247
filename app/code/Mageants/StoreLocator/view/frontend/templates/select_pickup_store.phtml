@@ -1,0 +1,294 @@
+<?php 
+
+$blockObj= $block->getLayout()->createBlock('Mageants\StoreLocator\Block\Index');
+$blockObj->getStoreCollection();
+$apiKey=$block->getApiKey();
+$_product = $block->getProduct();
+$storeCollection="";
+$storeLocation = '';
+$storeIds = '';
+$imageUrl=$this->getViewFileUrl('Mageants_StoreLocator::images/close.png');
+$getProductText=$block->getProductText();
+if($getProductText==''){$$getProductText="Available Store";}
+/*if($storeMarker!= ''){ $sMarker=$this->getUrl('pub/media/Mageants/').$storeMarker;} */
+
+?>
+<script src='https://maps.googleapis.com/maps/api/js?key=<?php echo $apiKey; ?>&v=3.exp&libraries=places'></script>
+
+
+<?php
+$id = 0;
+ foreach ($blockObj->getStoreCollection()->getData() as $value) 
+	{
+		$storeIds[] = $id;
+	    $storeLocation[] = $value['sname'].', '.$value['address'].', '.$value['city'].', '.$value['country'].', '.$value['postcode'];
+	    $id++;
+	} 
+?>
+
+<?php $storeCollection=$blockObj->getStoreCollection(); 
+	if(sizeof($storeCollection) > 0): ?>
+		<div id="store_popup_div" style="display:none;">
+			<button id="store_popup" class="action primary tocart" name="store_popup" onclick="load();" ><span><?php echo __($getProductText); ?></span></button>
+		</div>
+<?php endif; 
+?>
+<div id="store_popup_content" class="store_popup_content store-pickup-checkout" style="display:none;position: fixed;">
+	<div id="store-pickup-block">
+		<div class="control pickup-store">
+			<label class="label">Pickup Store</label>
+			<select name="pickup_store" id="store_pickup" >
+				<?php
+					for ($i=0; $i < sizeof($storeIds); $i++) { 
+				?>
+					<option value="<?php echo $storeIds[$i]; ?>"><?php echo $storeLocation[$i]; ?></option>
+				<?php	
+					}
+				?>
+			</select>
+		</div>		
+		<div class="control pickup-date">
+			<label class="label">Pickup Date</label>
+			<input class="input-text" type="text" name="pickup_date" id="storepickup_date" readonly="true"/>
+		</div>
+		<button id="store_select" class="action primary tocart" ><span><?php echo __('Select'); ?></span></button>
+	</div>
+	<div id="map" style="width: 100%; height: 417px;"></div>
+	<div class="close-rock">
+	  <img src="<?php echo $imageUrl; ?>">
+	</div>
+	<?php
+		$markTemplateText="";
+		$markTemplateText=array();
+		$locations="[";
+		foreach($storeCollection as $store)
+		{
+			$icon='';
+			if($store['icon'] != null)
+			{
+				$src=$image="";
+				$icon=$this->getUrl('pub/media/').$store['icon'];
+			}
+			$locations .="['".$store['address']."',".$store['latitude'].",".$store['longitude'].",".$store['store_id'].",'".$icon."'],";
+			$markTemplate=$block->getStoreMarkerTemplate();
+			if($store['image'] != null)
+			{
+				$src=$image="";
+				$src=$this->getUrl('pub/media/').$store['image'];
+				$image='<img height="50px" width="50px" src="'.$src.'" />';
+			}
+			else
+			{
+				$image="";
+				$image='<img height="50px" width="50px" src="'.$this->getViewFileUrl('Mageants_StoreLocator::images/map_with_pin.png').'" />';
+			}
+			
+			$markTemplate=str_replace("{{name}}",$store['sname'],$markTemplate);
+			$markTemplate=str_replace("{{image}}",$image,$markTemplate);
+			$markTemplate=str_replace("{{city}}",$store['city'],$markTemplate);
+			$markTemplate=str_replace("{{country}}",$store['country'],$markTemplate);
+			$markTemplate=str_replace("{{postcode}}",$store['postcode'],$markTemplate);
+			$markTemplate=str_replace("{{region}}",$store['region'],$markTemplate);
+			$markTemplate=str_replace("{{address}}",$store['address'],$markTemplate);
+			$markTemplate=str_replace("{{email}}",$store['email'],$markTemplate);
+			$markTemplate=str_replace("{{phone}}",$store['phone'],$markTemplate);
+			$markTemplate=str_replace("{{website}}",$store['link'],$markTemplate);
+			$markTemplate=str_replace("'",'"',$markTemplate);
+			$markTemplateText[] = array("$markTemplate");
+		}
+		$locations .= "]";
+	?>
+	<script>
+		
+	</script>
+	<script type="text/javascript">
+	function load() 
+    {
+		var map;
+		var locations=<?php if($locations!=''): echo $locations; else: echo "['ahemdabad',-33.890542, 151.274856,1]"; 
+					endif; ?>;
+		var markTemplateText =<?php echo json_encode($markTemplateText);  ?>;
+		 map = new google.maps.Map(document.getElementById('map'), {
+		  zoom:7,
+		  minZoom: 1,
+		  mapTypeId: google.maps.MapTypeId.ROADMAP
+		});
+		
+		var infowindow = new google.maps.InfoWindow();
+		var marker, i;
+		
+
+		for(var i=0;i<locations.length;i++) {  
+			marker = new google.maps.Marker({
+			position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+			map: map,
+		});
+		  google.maps.event.addListener(marker, 'mouseover', (function(marker, i) {
+			return function() {
+			  infowindow.setContent(markTemplateText[i][0]);
+			  infowindow.open(map, marker);
+			}
+		  })(marker, i));
+		  if(i==0)
+			{
+				infowindow.setContent(markTemplateText[i][0]);
+				infowindow.open(map, marker);
+			}
+			
+			if(locations[i][4] != '')
+			{
+				var imageicon = {
+					  url:locations[i][4] ,
+					  scaledSize: new google.maps.Size(26, 36),
+					  origin: new google.maps.Point(0, 0),
+					  anchor: new google.maps.Point(0, 32)
+					};
+
+				marker.setIcon(imageicon);
+			}
+			
+			 
+		}
+		
+		map.setCenter(new google.maps.LatLng(locations[0][1],locations[0][2])); 
+	} 
+	</script>
+</div>
+<script type="text/javascript">
+	require(["jquery","storelocator/popup"], function($) {
+		jQuery(document).ready(function($) {
+			$( "#store_pickup" ).change(function() {
+				var selectedstoreId = $("#store_pickup option:selected").val();
+				var map;
+				var locations=<?php if($locations!=''): echo $locations; else: echo "['ahemdabad',-33.890542, 151.274856,1]"; 
+							endif; ?>;
+				var markTemplateText =<?php echo json_encode($markTemplateText);  ?>;
+				 map = new google.maps.Map(document.getElementById('map'), {
+				  zoom:7,
+				  minZoom: 1,
+				  mapTypeId: google.maps.MapTypeId.ROADMAP
+				});
+				
+				var infowindow = new google.maps.InfoWindow();
+				var marker, i=1;
+				marker = new google.maps.Marker({
+					position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+					map: map,
+				});
+				for(var i=0;i<locations.length;i++) 
+				{  
+					marker = new google.maps.Marker({
+						position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+						map: map,
+					});
+					google.maps.event.addListener(marker, 'mouseover', (function(marker, i) {
+						return function() {
+						  infowindow.setContent(markTemplateText[i][0]);
+						  infowindow.open(map, marker);
+						}
+					})(marker, i));
+
+					if(i == selectedstoreId)
+					{
+						infowindow.setContent(markTemplateText[i][0]);
+						infowindow.open(map, marker);
+					}
+			
+					if(locations[i][4] != '')
+					{
+						var imageicon = {
+							  url:locations[i][4] ,
+							  scaledSize: new google.maps.Size(26, 36),
+							  origin: new google.maps.Point(0, 0),
+							  anchor: new google.maps.Point(0, 32)
+							};
+
+						marker.setIcon(imageicon);
+					}
+				}
+				map.setCenter(new google.maps.LatLng(locations[0][1],locations[0][2]));
+			});
+			
+			$("#store-pickup-additional-block").css("display", "none");
+			$("#store_popup_div button").click(function(){
+				google.maps.event.trigger(map, 'resize');
+				$("#store_popup_content").bPopup({
+					modalClose:true
+				});
+				load();
+			});
+			$(".close-rock").click(function(){
+				$("#store_popup_content").css("display", "none");
+				$(".b-modal.__b-popup1__").click();
+			});
+			$("#store_select").click(function(){
+				var selectedstore = $("#store_pickup option:selected").text();
+				var selectedDate = $("#storepickup_date").val();
+				$('#pickup_store').val(selectedstore);
+				$('#pickup_date').val(selectedDate);
+				$("#pickup_store_show").html(selectedstore);
+				$("#pickup_date_show").html(selectedDate);
+				if(selectedstore && selectedDate)
+                {
+                	$("#store-pickup-additional-block").css("display", "block");
+                }
+                else{
+                	$("#store-pickup-additional-block").css("display", "none");
+                }
+				$("#store_popup_content").css("display", "none");
+				$(".b-modal.__b-popup1__").click();				
+				
+			});
+		});
+	});	
+</script>   
+<script type="text/javascript">
+require(["jquery","storelocator/popup","mage/calendar"], function($, popup, calendar) {
+		jQuery(document).ready(function($) {
+        var enableextension = window.checkoutConfig.shipping.store_pickup.enableextension;
+        var disabled = window.checkoutConfig.shipping.store_pickup.disabled;
+        var noday = window.checkoutConfig.shipping.store_pickup.noday;
+        var hourMin = parseInt(window.checkoutConfig.shipping.store_pickup.hourMin);
+        var hourMax = parseInt(window.checkoutConfig.shipping.store_pickup.hourMax);
+        var format = window.checkoutConfig.shipping.store_pickup.format;
+        var disableDays = window.checkoutConfig.shipping.store_pickup.disableDays;
+	    if(!format) 
+	    {
+	        format = 'yy-mm-dd';
+	    }
+	    var disabledDay = disabled.split(",").map(
+	        function(item) {
+	        	return parseInt(item, 10);
+	        }
+	    );
+        if(noday) {
+                        var options = {
+                            minDate: disableDays,
+                            dateFormat:format,
+                            hourMin: hourMin,
+                            hourMax: hourMax
+                        };
+                    } else {
+                        var options = {
+                            minDate: disableDays,
+                            dateFormat:format,
+                            hourMin: hourMin,
+                            hourMax: hourMax,
+                            beforeShowDay: function(date) {
+                                var day = date.getDay();
+                                if(disabledDay.indexOf(day) > -1) {
+                                    return [false];
+                                } else {
+                                    return [true];
+                                }
+                            }
+                        };
+                    }
+
+			$("#storepickup_date" ).datetimepicker(options);
+
+		 
+		});
+
+	});
+</script>        

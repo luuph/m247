@@ -1,0 +1,238 @@
+<div id="all-category" class="mega-menu-child">
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$catId = 2; //Parent Category ID
+$subCategory = $objectManager->create('Magento\Catalog\Model\Category')
+    ->load($catId);
+$subCats = $subCategory->getChildrenCategories();
+$_helper = $this->helper('Sunarc\Custommenu\Helper\Data');
+$firstmenu = $_helper->getFirstMenu();
+$secondmenu = $_helper->getSecondMenu();
+$thirdmenu = $_helper->getThirdMenu();
+$isthirdmenu = 0;
+?>
+<ul class="tab">
+    <?php
+$i = 1;
+$j = 1;
+$k = 1;
+$subcatinfo = '';
+foreach ($subCats as $subcat)
+{
+    if ($subcat->getId() != 38 && $subcat->getId() != 132 && $subcat->getId() != 120)
+    {
+
+        $subcaturl = $subcat->getUrl();
+        $k = 1;
+?>
+        <li>       
+          
+                <a class="tablinks openClickTab <?php if ($i == 1) echo 'active' ?>" data-id="<?php echo 'tab' . $i ?>" data-href="<?php echo $subcaturl ?>" <?php if ($i == 1) echo " style='border-top:none;'" ?>><?php echo $subcat->getName(); ?></a>
+            
+        </li>
+    <?php $i++;
+        $tab = "tab" . $j;
+        if ($j == 1) $subcatinfo .= '<div id="' . $tab . '" class="tabcontent" style="display: block;">';
+        else $subcatinfo .= '<div id="' . $tab . '" class="tabcontent" style="display: none;">';
+        
+              
+        $storeManager  = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+        $storeID       = $storeManager->getStore()->getStoreId(); 
+        if ($subcat->getId() == 51)
+        {
+            if($storeID == 1)
+            $subcatinfo .= '<ul style="width:215px">';
+            else
+            $subcatinfo .= '<ul style="width:33%">';
+        }
+        else
+        {
+            $subcatinfo .= '<ul>';
+        }
+
+        $subcatId = $subcat->getId(); //Parent Category ID
+        $subCategorytree = $objectManager->create('Magento\Catalog\Model\Category')
+            ->load($subcatId);
+        $subCatstree = $subCategorytree->getChildrenCategories();
+        $_helper = $this->helper('Magento\Catalog\Helper\Output');
+        $count_sublevel = 0;
+
+        foreach ($subCatstree as $subcattree)
+        {
+            $subcattreeurl = $subcattree->getUrl();
+            $l=1;
+            $subcatinfo .= '<li><a class="link" href="' . $subcattreeurl . '">' . $subcattree->getName() . '</a></li>';
+
+             $subcattree_id = $subcattree->getId(); //Parent Category ID
+             $subCategorytree_level = $objectManager->create('Magento\Catalog\Model\Category')
+            ->load($subcattree_id);
+             $subCatstree_level = $subCategorytree_level->getChildrenCategories();
+             if(isset($subCatstree_level))
+             {
+              $count_sublevel =  $count_sublevel + count($subCatstree_level);
+            foreach ($subCatstree_level as $subcattree_level)
+            {
+
+                $total = count($subCatstree) + $count_sublevel;
+//$subcatinfo .= $total."yes".$k;
+           
+            if ($k % $firstmenu == 0 && $total != $k)
+            {
+                //   $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/test.log');
+                // $logger = new \Zend\Log\Logger();
+                // $logger->addWriter($writer);
+                // $logger->info('Your text message'.$firstmenu);
+                // $logger->info('k'.$k);
+                // if($isthirdmenu == 2)
+                // {
+                //      $firstmenu = $thirdmenu;
+                // }
+                // else{
+                // $firstmenu = $secondmenu;
+                // }
+                $subcatinfo .= '</ul><ul>';
+                $isthirdmenu++;
+                
+              
+
+            }
+                $subcattreelevel_url = $subcattree_level->getUrl();              
+                $subcatinfo .= '<li><a style="color:#8c8c8c;line-height:15px;" href="' . $subcattreelevel_url . '">' . $subcattree_level->getName() . '</a></li>';
+
+               $k++;
+               
+            }
+          }
+//$subcatinfo .= $total."No".$k;
+// if($isthirdmenu ==1)
+// $firstmenu = $secondmenu;
+// elseif($isthirdmenu ==2)
+// $firstmenu = $thirdmenu;
+
+ if ($k % $firstmenu == 0 && isset($total) && $total != $k)
+            {
+                // $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/test.log');
+                // $logger = new \Zend\Log\Logger();
+                // $logger->addWriter($writer);
+                // $logger->info('Your text message last'.$firstmenu);
+                // $logger->info('Your text message last k'.$k);
+
+                $subcatinfo .= '</ul><ul>';
+            }
+            $k++;
+
+           
+        }
+        $j++;
+
+        if ($_imgUrl = $subCategorytree->getImageUrl())
+        {
+            $_imgHtml = '<img src="' . $_imgUrl . '" alt="' . $subcattree->getName() . '" width="216" height="384"/>';
+            // $_imgHtml = $_helper->categoryAttribute($_category, $_imgHtml, 'image');
+            
+        }
+        else
+        {
+            $_imgHtml = '';
+        }
+        $subcatinfo .= '</ul>';
+        $subcatinfo .= '<div class="banner-div">
+<div class="banner-block"><a href="' . $subcaturl . '">' . $_imgHtml . '</a></div>
+<a class="view-btn" href="' . $subcaturl . '">View All</a> <a class="close-btn" href="#">close</a></div>
+<div class="clr">&nbsp;</div>';
+        $subcatinfo .= '</div>';
+
+    }
+} ?>
+</ul>
+<?php
+echo $subcatinfo;
+?>
+</div>
+<div class="clr">&nbsp;</div>
+<div class="clr">&nbsp;</div>
+<?php
+//echo $this->getLayout()
+//    ->createBlock('Magento\Cms\Block\Block')
+ //   ->setBlockId('shop-brand')
+ //   ->toHtml();
+?>
+<div id="all-brand" class="mega-menu-child all-brand">
+<ul>
+<?php
+$catId = 120;  //Parent Category ID
+$subCategory = $objectManager->create('Magento\Catalog\Model\Category')->load($catId);
+    $subCats = $subCategory->getChildrenCategories();
+    $subcatinfo = '';
+    foreach ($subCats as $subcat)
+    {
+	    $subcategory_info = $objectManager->create('Magento\Catalog\Model\Category')->load($subcat->getId());
+           	
+			?>
+		
+<li><a href="<?php echo $subcat->getUrl(); ?>"><img src="<?php echo $subcategory_info->getImageUrl() ?>" alt="<?php echo $subcat->getName(); ?>" width="235" height="168"> </a></li>
+
+			<?php
+        
+    }       
+?>
+</ul> 
+<a class="close-brand" title="Close" href="#">Close</a> <a class="view-brand" title="View all" href="<?php echo $subCategory->getUrl(); ?>">View all</a>
+<div class="clear">&nbsp;</div>
+</div>    
+</nav><nav id="cssmenu" class="mobile_menu_respon">
+<ul class="blockk">
+<li><a id="ui-id-8" class="level-top ui-corner-all" tabindex="-1" href="#"><?php echo __('Shop by Category') ?></a>
+<ul>
+
+
+    <?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$catId = 2; //Parent Category ID
+$subCategory = $objectManager->create('Magento\Catalog\Model\Category')
+    ->load($catId);
+$subCats = $subCategory->getChildrenCategories();
+$_helper = $this->helper('Magento\Catalog\Helper\Output');
+$i = 1;
+$j = 1;
+$subcatinfo = '';
+foreach ($subCats as $subcat)
+{
+    $subcatinfo = '';
+    if ($subcat->getId() != 38 && $subcat->getId() != 132 && $subcat->getId() != 120)
+    {
+        $subcaturl = $subcat->getUrl();
+
+?>
+        <li>       
+          
+               <a class="tablinks openClickTab <?php if ($i == 1) echo 'active tablet' ?>" data-id="<?php echo 'tab' . $i ?>" data-href="<?php echo $subcaturl ?>"><?php echo $subcat->getName(); ?></a>
+            
+        
+    <?php $i++;
+        $tab = "tab" . $j;
+
+        $subcatinfo .= '<ul>';
+
+        $subcatId = $subcat->getId(); //Parent Category ID
+        $subCategorytree = $objectManager->create('Magento\Catalog\Model\Category')
+            ->load($subcatId);
+        $subCatstree = $subCategorytree->getChildrenCategories();
+        $_helper = $this->helper('Magento\Catalog\Helper\Output');
+        foreach ($subCatstree as $subcattree)
+        {
+            $subcattreeurl = $subcattree->getUrl();
+
+            $subcatinfo .= '<li><a href="' . $subcattreeurl . '">' . $subcattree->getName() . '</a></li>';
+
+        }
+        $j++;
+
+        $subcatinfo .= '</ul></li>';
+        echo $subcatinfo;
+
+    }
+} ?>
+
+</ul>
+</li>

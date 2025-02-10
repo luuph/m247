@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../vendor/magento/framework/Module/etc/module.xsd">
+  <head>
+    <css src="css/local-l.css" media="screen and (max-width: 767px)"/>
+    <css src="css/test.css" media="screen" />
+    <css src="css/jotex-style.css" media="screen" />
+    <css src="css/responsive.css" media="screen" />
+    <css src="flex/flexslider.css" />
+    <css src="css/local-m.css"  media="screen and (min-width: 768px)" />
+    <css src="css/category.css" media="screen"/>
+    <css src="css/catlog.css" media="screen" />
+    <css src="https://use.fontawesome.com/releases/v5.7.1/css/all.css" src_type="url"/>
+    <!-- Google fonts -->
+    <link rel="stylesheet" type="text/css" src="https://fonts.googleapis.com/css?family=Droid+Sans:400,700" src_type="url" />
+    <link rel="stylesheet" type="text/css" src="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700" src_type="url" />
+  </head>
+</page>

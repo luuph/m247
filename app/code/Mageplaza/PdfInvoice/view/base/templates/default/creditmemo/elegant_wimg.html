@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+<body>
+<div class="header" style="background-image:url({{var header4}})">
+    <div class="header-left">
+        <div class="logo-left">
+            <a class="logo" href="{{store url=""}}">
+            <img
+                    width="{{var businessInformation.getLogoWidth()}}"
+                    height="{{var businessInformation.getLogoHeight()}}"
+                    src="{{var logo_url}}"
+                    alt="{{var logo_alt}}"
+                    border="0"
+            />
+            </a>
+        </div>
+    </div>
+    <div class="header-right">
+        <div class="info">
+            <h1 class="info-title">{{trans "Credit memo"}}</h1>
+            <p>{{trans "Credit Memo Increment"}} #{{var creditmemo.increment_id}}</p>
+            <p>{{trans "Credit Memo Date"}} #{{var creditmemo_date}}</p>
+            <p>{{trans "Credit Memo Amount"}} <span
+                    class="price">{{var creditmemo_amount|raw }}</span></p>
+        </div>
+    </div>
+    <div class="customer-name">
+        <p>{{trans "Credit Memo To"}}</p>
+        <strong>{{var customer_name}}</strong>
+    </div>
+</div>
+<div id="wrapper">
+    <div class="clr"></div>
+    <div class="content">
+        <div class="address-content">
+            <div class="billing-content">
+                <div class="billing-address">
+                    <h3 class="mp-block-heading">{{trans "Billing Address"}}</h3>
+                    <p>{{var formattedBillingAddress|raw}}</p>
+                </div>
+                <div class="shipping-method">
+                    <h3 class="mp-block-heading">{{trans "Payment Method"}}</h3>
+                    <table class="paymentTable">
+                        <tbody>
+                        <tr>
+                            <td>
+                                <dl class="payment-method checkmemo">
+                                    <dt class="title">{{var payment_html|raw}}</dt>
+                                </dl>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="shipping-content">
+                <div class="shipping-address">
+                    <h3 class="mp-block-heading">{{trans "Shipping Address"}}</h3>
+                    <p>{{var formattedShippingAddress|raw}}</p>
+                </div>
+                <div class="payment-method">
+                    <h3 class="mp-block-heading">{{trans "Shipping Method"}}</h3>
+                    <table class="paymentTable">
+                        <tbody>
+                        <tr>
+                            <td>
+                                <dl class="payment-method checkmemo">
+                                    <dt class="title">{{var order.getShippingDescription()}}</dt>
+                                </dl>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+        <div class="clr"></div>
+    </div>
+
+    {{layout area="frontend" handle="pdfinvoice_order_creditmemo_itemswimg" creditmemo_id=$creditmemo_id order_id=$order_id}}
+
+    <div class="business-information">
+        <div class="business address-business">
+            <span><span class="fa" style="font-family: fontawesome;">&#xf041;   </span>{{var businessInformation.getAddress()}}</span>
+        </div>
+        <div class="business phone-tax">
+            <div class="icon-phone">
+                <span class="business-str"><span class="fa" style="font-family: fontawesome;">&#xf095;  </span>{{var businessInformation.getPhone()}}</span>
+            </div>
+            <span class="business-str">{{trans "Tax ID"}} #{{var businessInformation.getVatNumber()}}</span>
+        </div>
+        <div style="float:right" class="business email-domain">
+            <div class="email">
+                <span class="business-str"><span class="fa" style="font-family: fontawesome;">&#xf2b6; </span>{{var businessInformation.getContact()}}</span>
+            </div>
+
+            <div class="domain">
+                <span><span class="fa" style="font-family: fontawesome;">&#xf0ac; </span>{{store url=""}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="clr"></div>
+</div>
+<footer>
+    {{depend creditmemoNote}}
+    <div class="footer-left">
+        <h3 class="mp-note">{{trans "Notes"}}:</h3>
+        <span style="font-style: italic;">{{var creditmemoNote|raw}}</span>
+    </div>
+    {{/depend}}
+</footer>
+</body>
+</html>

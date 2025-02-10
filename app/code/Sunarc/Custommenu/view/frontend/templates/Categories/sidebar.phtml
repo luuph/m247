@@ -1,0 +1,76 @@
+<?php
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $catId = 2;  //Parent Category ID
+    $subCategory = $objectManager->create('Magento\Catalog\Model\Category')->load($catId);
+    $subCats = $subCategory->getChildrenCategories();
+    $_helper = $this->helper('Magento\Catalog\Helper\Output');
+
+$category = $objectManager->get('Magento\Framework\Registry')->registry('current_category');//get current category
+
+    $subcatinfo = '';
+    foreach ($subCats as $subcat)
+    {
+	    if($subcat->getId()!=38 && $subcat->getId()!=132 && $subcat->getId()!=120)
+	    {
+        	$subcaturl = $subcat->getUrl();
+        	if($category->getId() == $subcat->getId()) {
+        		$current = 1;
+        	}
+        	else{
+        		$current = 0;
+        	}
+			?>
+			<div <?php if($current) { ?> class="block block-list leftlistcategory slideit current_category" <?php } else { ?> class="block block-list leftlistcategory" <?php } ?>>
+			<div <?php if($current) { ?> class="block-title slideitblock" <?php } else { ?> class="block-title" <?php } ?>><a href="<?php echo $subcaturl ?>"><strong><em><?php echo $subcat->getName(); ?></em></strong></a> 
+			<?php if($current)
+				  { ?>
+					<span class="categorybtn selectcategory">▬</span></div>
+					<?php 
+				  }
+				  else
+					{	
+						?>
+						<span class="categorybtn ">✚</span></div>
+						<?php
+					}
+				?>
+			<div class="block-content" <?php if($current ==0) { ?> style="display: none;" <?php } ?> >
+			<ol class="left-serial">
+			<?php
+	              $subcatId = $subcat->getId();  //Parent Category ID
+	              $subCategorytree = $objectManager->create('Magento\Catalog\Model\Category')->load($subcatId);
+	              $subCatstree = $subCategorytree->getChildrenCategories();
+	              $_helper = $this->helper('Magento\Catalog\Helper\Output');
+	              foreach ($subCatstree as $subcattree)
+	              {
+			        	$subcattreeurl = $subcattree->getUrl();      
+			         	?>
+			         	<li><a href="<?php echo $subcattreeurl ?>"><?php echo $subcattree->getName(); ?></a></li>
+			         	<?php
+			         	 $subcattree_id = $subcattree->getId(); //Parent Category ID
+			             $subCategorytree_level = $objectManager->create('Magento\Catalog\Model\Category')
+			            ->load($subcattree_id);
+			             $subCatstree_level = $subCategorytree_level->getChildrenCategories();
+			            
+$helper = \Magento\Framework\App\ObjectManager::getInstance()->get('Sunarc\Custommenu\Helper\Data'); 
+
+			             if(isset($subCatstree_level) && $helper->isEnable())
+			             {
+			          
+			            foreach ($subCatstree_level as $subcattree_level)
+			            {
+			                $subcattreelevel_url = $subcattree_level->getUrl();              
+			                ?><li><a style="color:#8c8c8c;line-height:10px;" href="<?php echo $subcattreelevel_url; ?>"><?php echo $subcattree_level->getName()?></a></li>	
+			                <?php	                			               
+			            }
+			        }
+			         	
+				  }
+			 ?>
+			</ol>
+			</div>
+			</div>
+			<?php
+        }
+    }       
+?>

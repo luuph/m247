@@ -1,0 +1,87 @@
+"Manage Popup","Manage Popup"
+"Add New Popup","Add New Popup"
+"Save Popup","Save Popup"
+Delete,Delete
+"Save and Continue Edit","Save and Continue Edit"
+"Cart Conditions","Cart Conditions"
+"If pending payment order","If pending payment order"
+"Skip this condition","Skip this condition"
+"Yes, apply this condition","Yes, apply this condition"
+"If product in cart","If product in cart"
+"Show only if there is any product in cart","Show only if there is any product in cart"
+"Show only if product cart is empty","Show only if product cart is empty"
+"Cart subtotal less than","Cart subtotal less than"
+"Leave empty or write 0 if you don't want to apply this condition.","Leave empty or write 0 if you don't want to apply this condition."
+"Cart subtotal more than","Cart subtotal more than"
+"Popup Information","Popup Information"
+Title,Title
+"Popup Content Type","Popup Content Type"
+"Custom Content (editor)","Custom Content (editor)"
+Image,Image
+Description,Description
+"Url of image link","Url of image link"
+"Popup content width","Popup content width"
+"Popup width unit","Popup width unit"
+"Popup content max width (in px)","Popup content max width (in px)"
+"Show at","Show at"
+...,...
+"Home page","Home page"
+"Checkout Onepage","Checkout Onepage"
+Cart,Cart
+"Specified Url","Specified Url"
+"Exclude Url","Exclude Url"
+"Show when","Show when"
+Seconds,Seconds
+"Scrolling px","Scrolling px"
+"Click selector","Click selector"
+"Hover selector","Hover selector"
+"From Date","From Date"
+"To Date","To Date"
+"Edit Popup '%1'","Edit Popup '%1'"
+"New Popup","New Popup"
+"Category Information","Category Information"
+"Search Engine Optimization","Search Engine Optimization"
+"Page Title","Page Title"
+"URL Key","URL Key"
+"Meta Keywords","Meta Keywords"
+"Meta Description","Meta Description"
+Settings,Settings
+"Showing Frequency","Showing Frequency"
+"Show until user closes it","Show until user closes it"
+"Show only once","Show only once"
+"Show every time","Show every time"
+"Show once per session","Show once per session"
+"Cookie lifetime in days","Cookie lifetime in days"
+"You can use also decimal dotted number 
+                            (e.g.: To expire cookie in 1 hour put 0.04 which means 1 day divided with 24 hours.)","You can use also decimal dotted number 
+                            (e.g.: To expire cookie in 1 hour put 0.04 which means 1 day divided with 24 hours.)"
+"Close when click outside popup","Close when click outside popup"
+Yes,Yes
+No,No
+"Available for popups with background overlay.","Available for popups with background overlay."
+"Close automatically after x seconds","Close automatically after x seconds"
+"Leave 0 or empty if you don't want popup to be closed automatically","Leave 0 or empty if you don't want popup to be closed automatically"
+Visiblity,Visiblity
+Status,Status
+"Popup ID","Popup ID"
+Action,Action
+Edit,Edit
+"Are you sure?","Are you sure?"
+"Change status","Change status"
+ID,ID
+Disabled,Disabled
+Enabled,Enabled
+"The Popup has been deleted.","The Popup has been deleted."
+"We can't find a Popup to delete.","We can't find a Popup to delete."
+"This Popup no longer exists.","This Popup no longer exists."
+CMS,CMS
+"Please select at least one popup.","Please select at least one popup."
+"A total of %1 record(s) have been deleted.","A total of %1 record(s) have been deleted."
+"Please select popup(s).","Please select popup(s)."
+"A total of %1 record(s) have been updated.","A total of %1 record(s) have been updated."
+"The Popup has been saved.","The Popup has been saved."
+"Something went wrong while saving the Popup.","Something went wrong while saving the Popup."
+"MageArray Extension","MageArray Extension"
+"MageArray Extensions","MageArray Extensions"
+Popup,Popup
+"General Options","General Options"

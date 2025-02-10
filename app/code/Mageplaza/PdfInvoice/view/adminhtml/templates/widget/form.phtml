@@ -1,0 +1,169 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_PdfInvoice
+ * @copyright   Copyright (c) 2017-2018 Mageplaza (https://www.mageplaza.com/)
+ * @license     http://mageplaza.com/LICENSE.txt
+ */
+
+/** @var $block \Magento\Backend\Block\Widget\Form */
+?>
+<?php /* @todo replace .form-inline with better class name */ ?>
+<?php /* ToDo UI: check if we need this wrapper in the process of global forms refactoring */ ?>
+<div class="entry-edit form-inline" id="mageplaza-pdfinvoice">
+    <?= /** @noEscape */ $block->getFormHtml() ?>
+    <form target="mp-iframe" method="post" action="<?php /* @noEscape */echo $block->getPreviewTemplateUrl() ?>" style="display:none" id="mp-custom-submit">
+        <input type="hidden" name="templateType" value="<?php /* @noEscape */echo $block->getTemplateType() ?>"/>
+        <textarea name="templateHtml" id="pdf-html"></textarea>
+        <textarea name="templateCss" id="pdf-css"></textarea>
+        <textarea name="templateColumnsConfig" id="pdf-columns-config"></textarea>
+        <input type="submit" name="submit" id="mp-submit"/>
+        <input name="form_key" id="mp-form-key" type="hidden">
+    </form>
+</div>
+<div id="pdf-table-config">
+    <?php
+    $helperData  = $this->helper(\Mageplaza\PdfInvoice\Helper\Data::class);
+    $type = $block->getRequest()->getParam('type');
+    $columns = $helperData->getColumns($type);
+    if ($templateId = $block->getRequest()->getParam('id')) {
+        $isDisplayWaring = $helperData->displayWarningText($templateId);
+    } else {
+        $isDisplayWaring = false;
+    }
+    ?>
+    <legend class="admin__legend legend" style="padding: 20px;margin: unset">
+        <span>Choose column of product list in PDF</span>
+    </legend>
+    <?php if ($isDisplayWaring): ?>
+    <p style="font-size: 12px;padding-left: 20px">This is an old template version, so if you edit the column in the product list table, the PDF will not display as expected. Therefore, you should not edit this table.</p>
+    <?php endif ?>
+    <div class="mp-table-responsive container">
+        <table class="pdf-invoive-table-columns-config">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Selected</th>
+                <th scope="col">Column Name</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($columns as $column): ?>
+                <?php
+                $disabled = in_array($column['name'], ['Items', 'Qty', 'Price', 'Subtotal']) ? 'disabled' : '';
+                ?>
+                <tr class="sortme" data-id="<?php echo /** @noEscape */ htmlspecialchars($column['id'] ?? ''); ?>" data-position="<?php echo /** @noEscape */ htmlspecialchars($column['position']); ?>" data-name="<?php echo /** @noEscape */ htmlspecialchars($column['name']); ?>">
+                    <td class="position"><?php echo /** @noEscape */ htmlspecialchars($column['position']); ?></td>
+                    <td>
+                        <input class="checkbox" type="checkbox" name="columns[<?php echo /** @noEscape */ htmlspecialchars($column['id'] ?? $column['name']); ?>][status]" <?php echo /** @noEscape */ $column['status'] ? 'checked' : ''; ?> <?php echo /** @noEscape */ $disabled; ?>>
+                    </td>
+                    <td class="name"><?php echo /** @noEscape */ htmlspecialchars($column['name']); ?></td>
+                    <td>
+                        <span class="action-icon tooltip-hover">
+                            <span class="tooltip-text">Drag and drop to reorder rows</span>
+                        </span>
+                        <input type="hidden" name="columns[<?php echo /** @noEscape */ htmlspecialchars($column['id'] ?? $column['name']); ?>][position]" value="<?php echo /** @noEscape */ htmlspecialchars($column['position']); ?>">
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+        <button style="display: none" type="button" class="save-button">Apply</button>
+    </div>
+</div>
+
+<?= /** @noEscape */ $block->getChildHtml('form_after') ?>
+
+<script type="text/x-magento-init">
+    {
+        "#mageplaza-pdfinvoice": {
+            "Mageplaza_PdfInvoice/js/view/pdfinvoice":{
+                "loadTemplateUrl": "<?= /** @noEscape */ $block->getLoadTemplateUrl() ?>",
+                "previewTemplateUrl": "<?= /** @noEscape */ $block->getPreviewTemplateUrl() ?>",
+                "templateType" : "<?= /** @noEscape */ $block->getTemplateType() ?>"
+            }
+        }
+    }
+</script>
+<script>
+    require([
+        'jquery',
+        'jquery/ui',
+        'mage/translate'
+    ], function ($) {
+        function updateColumnsConfig() {
+            var columns = [];
+            $('.pdf-invoive-table-columns-config tbody tr').each(function() {
+                var column = {
+                    id: $(this).data('id'),
+                    position: $(this).attr('data-position'),
+                    name: $(this).data('name'),
+                    status: $(this).find('input[type="checkbox"]').is(':checked')
+                };
+                columns.push(column);
+            });
+            $('#pdf-columns-config').val(JSON.stringify(columns));
+        }
+        $( document ).ready(function() {
+            setTimeout(
+                function()
+                {
+                    $('#pdf-table-config').insertBefore('#edit_form #pdfinvoice_template_edit_tabs_information_content #base_fieldset_information');
+                }, 1500);
+        });
+        $('.sortme .checkbox').click(function() {
+            var columns = [];
+            $('.sortme').each(function() {
+                column = {
+                    id: $(this).data('id'),
+                    position: $(this).attr('data-position'),
+                    name: $(this).data('name'),
+                    status: $(this).find('input[type="checkbox"]').is(':checked')
+                };
+                columns.push(column);
+            });
+            $('#pdf-columns-config').val(JSON.stringify(columns));
+        });
+        window.updatedColumns = <?php echo /** @noEscape */ json_encode($columns); ?>;
+        $(".pdf-invoive-table-columns-config > tbody").sortable({
+            items: "> tr.sortme",
+            handle: ".action-icon",
+            helper: function(e, ui) {
+                ui.children().each(function() {
+                    $(this).width($(this).width());
+                });
+                return ui;
+            },
+            stop: function(event, ui){
+                ui.item.children('td').effect('highlight', { color: '#E9F7FD' }, 500);
+            },
+            update: function(event, ui) {
+                var typePdf = <?php echo /** @noEscape */ json_encode($type) ?>;
+                let maxPosition = 6;
+                if (typePdf === 'shipment') maxPosition = 3;
+                $('.pdf-invoive-table-columns-config tbody tr').each(function(index) {
+                    var position = Math.min(index + 1, maxPosition);
+                    $(this).attr('data-position', position);
+                    $(this).find('.position').text(position);
+                    $(this).find('input[type="hidden"]').val(position);
+                });
+                updateColumnsConfig();
+            }
+        });
+        updateColumnsConfig()
+    });
+</script>

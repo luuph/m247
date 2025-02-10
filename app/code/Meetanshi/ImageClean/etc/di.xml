@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <type name="Meetanshi\ImageClean\Model\ResourceModel\Images\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">meetanshi_imageclean</argument>
+            <argument name="eventPrefix" xsi:type="string">imageclean_grid_listing_data_source</argument>
+            <argument name="eventObject" xsi:type="string">imageclean_grid_listing_data_source</argument>
+            <argument name="resourceModel" xsi:type="string">Meetanshi\ImageClean\Model\ResourceModel\Images</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="imageclean_grid_listing_data_source" xsi:type="string">Meetanshi\ImageClean\Model\ResourceModel\Images\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Meetanshi\ImageClean\Model\ResourceModel\Category\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">meetanshi_imageclean</argument>
+            <argument name="eventPrefix" xsi:type="string">imageclean_category_listing_data_source</argument>
+            <argument name="eventObject" xsi:type="string">imageclean_category_listing_data_source</argument>
+            <argument name="resourceModel" xsi:type="string">Meetanshi\ImageClean\Model\ResourceModel\Images</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="imageclean_category_listing_data_source" xsi:type="string">Meetanshi\ImageClean\Model\ResourceModel\Category\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Meetanshi\ImageClean\Model\ResourceModel\UseImages\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">meetanshi_imageclean</argument>
+            <argument name="eventPrefix" xsi:type="string">imageclean_use_grid_listing_data_source</argument>
+            <argument name="eventObject" xsi:type="string">imageclean_use_grid_listing_data_source</argument>
+            <argument name="resourceModel" xsi:type="string">Meetanshi\ImageClean\Model\ResourceModel\Images</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="imageclean_use_grid_listing_data_source" xsi:type="string">Meetanshi\ImageClean\Model\ResourceModel\UseImages\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="imageCleanProductUnUsedImage" xsi:type="object">Meetanshi\ImageClean\Console\FetchProductUnusedImage</item>
+                <item name="imageCleanProductUseImage" xsi:type="object">Meetanshi\ImageClean\Console\FetchProductUsedImage</item>
+                <item name="imageCleanCategoryImage" xsi:type="object">Meetanshi\ImageClean\Console\FetchCategoryImage</item>
+                <item name="imageCleanProductImageClean" xsi:type="object">Meetanshi\ImageClean\Console\CleanProductImage</item>
+                <item name="imageCleanCategoryImageClean" xsi:type="object">Meetanshi\ImageClean\Console\CleanCategoryImage</item>
+                <item name="imageCleanProductUseImageClean" xsi:type="object">Meetanshi\ImageClean\Console\CleanProductUseImage</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

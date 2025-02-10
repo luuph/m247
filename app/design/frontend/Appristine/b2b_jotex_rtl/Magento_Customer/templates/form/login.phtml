@@ -1,0 +1,69 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var \Magento\Customer\Block\Form\Login $block */
+
+$b2bHelper = $this->helper('Bss\B2bRegistration\Helper\Data');
+?>
+<hr/>
+<div class="block block-customer-login">
+
+    <div class="block-content" aria-labelledby="block-customer-login-heading">
+        <form class="form form-login custom_login_form"
+              action="<?php /* @escapeNotVerified */ echo $block->getPostActionUrl() ?>"
+              method="post"
+              id="login-form"
+              data-mage-init='{"validation":{}}'>
+            <?php echo $block->getBlockHtml('formkey'); ?>
+            <fieldset class="fieldset login" data-hasrequired="">
+			<div class="login_form_wpr">
+                <div class="field2 email required">
+                    <label class="label" for="email"><span><?php /* @escapeNotVerified */ echo __('EMAIL ADDRESS') ?></span></label>
+                    <div class="control">
+                        <input name="login[username]" value="<?php echo $block->escapeHtml($block->getUsername()) ?>" <?php if ($block->isAutocompleteDisabled()) :?> autocomplete="off"<?php endif; ?> id="email" type="email" class="input-text" title="<?php /* @escapeNotVerified */ echo __('EMAIL ADDRESS') ?>" data-validate="{required:true, 'validate-email':true}">
+                    </div>
+                </div>
+                <div class="field2 password required">
+                    <label for="pass" class="label"><span><?php /* @escapeNotVerified */ echo __('Password') ?></span></label>
+                    <div class="control">
+                        <input name="login[password]" type="password" <?php if ($block->isAutocompleteDisabled()) :?> autocomplete="off"<?php endif; ?> class="input-text" id="pass" title="<?php /* @escapeNotVerified */ echo __('Password') ?>" data-validate="{required:true}">
+                    </div>
+                </div>
+			</div>
+			<div class="sign_forget_container">
+			    <div>
+			        <div class="sign_forget_container_inner">
+                    <div class="primary"><button type="submit" class="action login primary" name="send" id="send2"><span><?php /* @escapeNotVerified */ echo __('Sign in') ?></span></button></div>
+
+                    <div class="primary">
+                        <a class="action login primary forgetpw_btn"   id=""  href="<?php /* @escapeNotVerified */ echo $block->getForgotPasswordUrl() ?>"><span><?php /* @escapeNotVerified */ echo __('Forgot Your Password?') ?></span></a>
+                    </div>
+                     </div>
+			    </div>
+			    <div></div>
+			</div>
+                <div>
+				<p>للدخول إلى هذا الموقع أو تقديم الطلبات ، يجب أن تكون مسجلاً كعميل B2B<br>
+                    إذا كنت عميلاً بالفعل ، فيمكنك استخدام البيانات الخاصة بك لتسجيل الدخول<br>
+                    إذا لم تكن عميلاً ، فأنت بحاجة إلى تقديم طلب للحصول على حساب B2B.<br>
+                    للتقدم بطلب للحصول على حساب B2B ، يمكنك إرسال بريد إلكتروني إلينا على <a href="mailto:uniform@shireentrading.com">uniform@shireentrading.com</a><br>
+                    أو يمكنك التقديم عبر الإنترنت بالضغط على الرابط أدناه                
+ </p>
+				</div><br>
+
+
+                 <?php  $regstoreurl = "/customer/account/create"; ?>
+                <?php if ($b2bHelper->isEnable()): ?>
+                        <div class="second-primary">
+                            <a href="/<?php echo $block->escapeUrl($b2bHelper->getB2bUrl()) ?>" class="action create primary"><span><?php echo $block->escapeHtml(__('Create B2B Account')) ?></span></a>
+                        </div>
+                <?php endif; ?>
+            </fieldset>
+        </form>
+    </div>
+</div>

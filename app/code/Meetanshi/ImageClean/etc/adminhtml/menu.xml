@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Meetanshi_ImageClean::imageclean" resource="Meetanshi_ImageClean::imageclean"
+             module="Meetanshi_ImageClean" title="Image Clean" sortOrder="20"/>
+        <add id="Meetanshi_ImageClean::imagecleanproductdata" resource="Meetanshi_ImageClean::imagecleanproductdata"
+             module="Meetanshi_ImageClean" title="Unused Product Images" sortOrder="30"
+             action="imageclean/images/index" parent="Meetanshi_ImageClean::imageclean"/>
+
+        <add id="Meetanshi_ImageClean::imageclean_use_product" resource="Meetanshi_ImageClean::imageclean_use_product"
+             module="Meetanshi_ImageClean" title="Used Product Images" sortOrder="35"
+             action="imageclean/useimages/index" parent="Meetanshi_ImageClean::imageclean"/>
+
+        <add id="Meetanshi_ImageClean::imagecleancategorydata" resource="Meetanshi_ImageClean::imagecleancategorydata"
+             module="Meetanshi_ImageClean" title="Unused Category Images" sortOrder="40"
+             action="imageclean/images/category" parent="Meetanshi_ImageClean::imageclean"/>
+
+        <add id="Meetanshi_ImageClean::imageclean_configuration" title="Configuration" module="Meetanshi_ImageClean" sortOrder="50" parent="Meetanshi_ImageClean::imageclean" action="adminhtml/system_config/edit/section/image_clean" resource="Meetanshi_ImageClean::imageclean_config"/>
+    </menu>
+</config>

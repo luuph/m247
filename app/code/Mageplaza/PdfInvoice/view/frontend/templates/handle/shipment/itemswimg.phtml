@@ -1,0 +1,88 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category   Mageplaza
+ * @package    Mageplaza_PdfInvoice
+ * @copyright   Copyright (c) Mageplaza (http://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+?>
+<?php
+$_shipment = $block->getShipment();
+$_order = $block->getOrder();
+$storeId = $_order->getStoreId();
+$codeType = $block->getCodeType('shipment', $storeId);
+$barcodeConfig = $block->getBarcodeConfig($storeId);
+$isBarcode = !($codeType === 'no_code');
+$pageSize = $block->getPageSize();
+$a4Barcode = $isBarcode && ($pageSize == 'A4');
+$a5Barcode = $isBarcode && ($pageSize == 'A5');
+$columnsConfig = $block->getColumnsConfig('shipment');
+$numberColumn = $block->getNumberColumn($columnsConfig, 4);
+$_store = $_order->getStore();
+$_imageHelper = $block->getHelperImage();
+$_baseImageUrl = $_store->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA).'catalog/product';
+?>
+<?php if ($_shipment && $_order): ?>
+    <div class="table">
+        <div class="mp-row mp-heading">
+            <div class="mp-image">
+                <span><?= /* @noEscape */
+                    __('Image') ?><span>
+            </div>
+            <?php
+            foreach ($columnsConfig as $columnConfig) {
+                if ($columnConfig['status']) {
+                    echo $block->getThHtml($columnConfig['name'],$a4Barcode);
+                }
+            }
+            ?>
+        </div>
+        <?php $i = 0 ?>
+        <?php foreach ($_shipment->getAllItems() as $_item): ?>
+            <?php $codeValue = $block->getCodeValue($_item, $storeId) ?>
+            <?php
+            $block->setItem($_item);
+            $indexKey = $i % 2 == 0 ? "odd" : "even";
+            if ($block->isBundleItem()) {
+                echo /** @noEscape */ $block->renderBundleItem($_item, $_order, $block->getShipmentType(), $indexKey, $codeType, $barcodeConfig, $isBarcode, 'bundleitemswimg.phtml', $columnsConfig);
+                $i++;
+                continue;
+            }
+
+            if ($_item->getOrderItem()->getParentItem()) {
+                continue;
+            }
+            $i++;
+            ?>
+            <div class="mp-row <?= /** @noEscape */ $indexKey ?>" style="border-bottom: 1px solid #ddd;">
+                <div class="mp-image">
+                    <img src="<?= /** @noEscape */ $_imageHelper->init($_item->getOrderItem()->getProduct(), 'small_image',
+                        ['type'=>'small_image'])->keepAspectRatio(true)->resize('65','65')->getUrl();?>"
+                         alt="<?= /** @noEscape */ __('Product Image');?>">
+                </div>
+                <?php
+                foreach ($columnsConfig as $columnConfig) {
+                    if ($columnConfig['status']) {
+                        echo $block->getTdHtml($columnConfig['name'], $a4Barcode, $_item, $codeValue, 'shipment');
+                    }
+                }
+                ?>
+            </div>
+            <div class="clr"></div>
+        <?php endforeach ?>
+    </div>
+<?php endif ?>

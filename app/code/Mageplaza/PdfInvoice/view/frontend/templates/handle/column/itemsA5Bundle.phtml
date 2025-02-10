@@ -1,0 +1,79 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category   Mageplaza
+ * @package    Mageplaza_PdfInvoice
+ * @copyright   Copyright (c) Mageplaza (http://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+?>
+<?php
+$item = $block->getData('item');
+$classForEl = $block->getData('classForEl');
+$codeValue = $block->getData('codeValue');
+$barcodeConfig = $block->getData('barcodeConfig');
+$codeType = $block->getData('codeType');
+$isBarcode = $block->getData('isBarcode');
+$pageSize = $block->getData('pageSize');
+$a4Barcode = $isBarcode && ($pageSize == 'A4');
+$a5Barcode = $isBarcode && ($pageSize == 'A5');
+$_order = $block->getOrder();
+$hasParent = $block->getData('hasParent');
+?>
+<?php if (isset($isImpresive) && $isImpresive): ?>
+<td class="<?= /** @noEscape */ $classForEl ?>">
+<?php else: ?>
+<div class="<?= /** @noEscape */ $classForEl ?>">
+<?php endif; ?>
+<?php $_prevOptionId = '' ?>
+        <?php if ($hasParent): ?>
+            <?php $attributes = $block->getSelectionAttributes($item) ?>
+            <?php if ($_prevOptionId != $attributes['option_id']): ?>
+                <div>
+                    <strong><em><?= /* @noEscape */
+                            $attributes['option_label'] ?></em></strong>
+                </div>
+                <?php $_prevOptionId = $attributes['option_id'] ?>
+            <?php endif ?>
+        <?php endif ?>
+
+        <?php if (!$hasParent): ?>
+        <div class="item-info">
+            <p class="product-name"><?= $block->escapeHtml($item->getName()) ?></p>
+            <p class="sku"><?= /* @noEscape */
+                __('SKU') ?>: <?= $block->escapeHtml($item->getSku()) ?></p>
+        </div>
+    <?php else: ?>
+    <div class="item-info">
+        <p><?= $block->getValueHtml($item) ?></p>
+        <?php if ($isBarcode): ?>
+            <p>
+                <?php if ($codeType === 'barcode') : ?>
+                    <barcode code="<?= /** @noEscape */ $block->escapeHtml($codeValue['barcode']) ?>" type="<?= /** @noEscape */ $barcodeConfig['type'] ?>" size="<?= /** @noEscape */ $barcodeConfig['size'] ?>"
+                             height="0.7"/>
+                <?php else : ?>
+                    <barcode code="<?= /** @noEscape */ $block->escapeHtml($codeValue['qrcode']) ?>" type="QR" size="<?= /** @noEscape */ $barcodeConfig['size'] ?>"
+                             height="0.7"/>
+                <?php endif ?>
+            </p>
+        <?php endif ?>
+    </div>
+    <?php endif ?>
+<?php if (isset($isImpresive) && $isImpresive): ?>
+</td>
+<?php else: ?>
+</div>
+<?php endif; ?>

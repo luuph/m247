@@ -1,3 +1,0 @@
-0000000000000000000000000000000000000000 ac6bb384dd49301728119164ed70afeb83e77bb3 Hai Luu <luuph@bsscommerce.com> 1730883820 +0700	branch: Created from HEAD
-ac6bb384dd49301728119164ed70afeb83e77bb3 7d8653937e0a99e67cc998f61167606c9e28d2ec Hai Luu <luuph@bsscommerce.com> 1730883892 +0700	commit: BSupport-7615: Fix add product hideprice to quote
-7d8653937e0a99e67cc998f61167606c9e28d2ec 1161a5a06863393317d443a120988579895732b2 Hai Luu <luuph@bsscommerce.com> 1732534431 +0700	commit: BSupport-7635: Fix search product

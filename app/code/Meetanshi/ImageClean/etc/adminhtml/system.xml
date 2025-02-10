@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="meetanshi" translate="label" class="meetanshi" sortOrder="501">
+            <label></label>
+        </tab>
+        <section id="image_clean" translate="label" sortOrder="1130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Image Clean</label>
+            <tab>meetanshi</tab>
+            <resource>Meetanshi_ImageClean::imageclean_config</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Configuration</label>
+                <field id="resources" translate="label" type="multiselect" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Clean Resources</label>
+                    <source_model>Meetanshi\ImageClean\Model\Config\Source\Resources</source_model>
+                    <comment><![CDATA[Select the resource(s) to remove both for manual and periodic cleaning.]]></comment>
+                    <validate>required-select</validate>
+                </field>
+
+                <field id="max_images" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Maximum Images to Process in Each Attempt</label>
+                    <validate>required-entry validate-digits</validate>
+                </field>
+
+                <field id="clear" translate="label" type="button" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Manual Clean Up</label>
+                    <frontend_model>Meetanshi\ImageClean\Block\System\Config\Button</frontend_model>
+                </field>
+
+                <field id="enable_schedule" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Schedule Periodic Clean Up</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="frequency" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Clean Up Frequency</label>
+                    <depends>
+                        <field id="enable_schedule">1</field>
+                    </depends>
+                    <source_model>Meetanshi\ImageClean\Model\Config\Source\Frequency</source_model>
+                </field>
+
+                <field id="time" translate="label" type="time" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Start Time</label>
+                    <depends>
+                        <field id="enable_schedule">1</field>
+                    </depends>
+                    <comment><![CDATA[Start time is considered based on the server time.<br>
+                    Don't forget to schedule cron to make periodic cleanup work.]]></comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

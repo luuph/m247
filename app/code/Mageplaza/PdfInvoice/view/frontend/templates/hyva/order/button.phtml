@@ -1,0 +1,81 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_PdfInvoice
+ * @copyright   Copyright (c) Mageplaza (http://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+use Magento\Framework\Escaper;
+
+/** @var Escaper $escaper */
+
+/** @var \Mageplaza\PdfInvoice\Block\CustomPrint $block */
+if (!$block->isEnable() || !$block->getHelperConfig()->isEnabledHyvaTheme()) {
+    return $this;
+}
+
+[$urls, $printAllUrl, $showCustomPrint, $label, $labels, $type] = $block->getPrintBtnInfo($block->getRequest()->getFullActionName());
+?>
+<div x-data="initPDF()"
+     x-html="html"
+     x-init="buttonHtml()"
+>
+</div>
+<script type="text/javascript">
+    'use strict';
+    var hyvaPrintBtn = document.querySelector('.ml-6.btn.btn-secondary.text-secondary-darker');
+    hyvaPrintBtn.classList.add('hyva-print-btn');
+
+    function initPDF() {
+        return {
+            html: '',
+            buttonHtml() {
+                var urls                          = '<?= /** @noEscape */ $urls ?>';
+                var label                         = '<?= /** @noEscape */ $label ?>';
+                var labels                        = '<?= /** @noEscape */ $labels ?>';
+                var printAllUrl                   = '<?= /** @noEscape */ $printAllUrl ?>';
+                var showCustomPrint               = <?= /** @noEscape */ $showCustomPrint ?>;
+                var showCustomPrintWithConditions = <?= /** @noEscape */ $block->getShowCustomPrintWithCondition($type) ?>;
+                var type                          = '<?=/** @noEscape */ $type ?>';
+                var hyvaPrintBtn = document.querySelector('.hyva-print-btn');
+                if (showCustomPrint && type === 'order') {
+                    this.html = '<a href="' + urls + '" class="mp-order ml-6 btn btn-secondary text-secondary-darker" rel="noopener"><span>' + label + '</span></a>';
+
+                    if (showCustomPrint === 1) {
+                        hyvaPrintBtn.style.display = 'none';
+                    }
+                }
+                if (showCustomPrint && showCustomPrintWithConditions.length > 0) {
+                    if (showCustomPrint === 1) {
+                        hyvaPrintBtn.style.display = 'none';
+                    }
+                    var ids = '', paramConnect = '';
+                    showCustomPrintWithConditions.forEach(function (id, index) {
+                        if (index < showCustomPrintWithConditions.length - 1) {
+                            paramConnect = '%2C'
+                        } else {
+                            paramConnect = ''
+                        }
+                        ids = ids + id + paramConnect;
+                    });
+                    printAllUrl = printAllUrl + 'ids/' + ids;
+                    this.html = '<a href="' + printAllUrl + '" class="action print ml-6 btn btn-secondary text-secondary-darker"><span>' + labels + '</span></a>';
+                }
+            }
+        }
+    }
+</script>

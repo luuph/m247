@@ -1,0 +1,21 @@
+<ul class="catlistnew">
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();  
+$category = $objectManager->get('Magento\Framework\Registry')->registry('current_category');//get current category
+$catId = $category->getId();  //Parent Category ID
+$subCategory = $objectManager->create('Magento\Catalog\Model\Category')->load($catId);
+    $subCats = $subCategory->getChildrenCategories();
+    $subcatinfo = '';
+    foreach ($subCats as $subcat)
+    {
+	    if($subcat->getId()!=38 && $subcat->getId()!=132 && $subcat->getId()!=120)
+	    {
+           	  $subcategory_info = $objectManager->create('Magento\Catalog\Model\Category')->load($subcat->getId());
+			?>
+			<li><span class="subname"><a href="<?php echo $subcat->getUrl(); ?>"><?php echo $subcat->getName(); ?></a></span><img src="<?php echo $subcategory_info->getImageUrl() ?>" alt="<?php echo $subcat->getName() ?>" width="181" height="224"/><span class="shopnowb"><a href="<?php echo $subcat->getUrl(); ?>">Shop Now</a></span></li>
+
+			<?php
+        }
+    }       
+?>
+</ul>

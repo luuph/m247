@@ -1,0 +1,98 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category   Mageplaza
+ * @package    Mageplaza_PdfInvoice
+ * @copyright   Copyright (c) Mageplaza (http://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+?>
+<?php
+$_invoice = $block->getInvoice();
+$_order = $block->getOrder();
+$storeId = $_order->getStoreId();
+$codeType = $block->getCodeType('invoice', $storeId);
+$barcodeConfig = $block->getBarcodeConfig($storeId);
+$isBarcode = !($codeType === 'no_code');
+$pageSize = $block->getPageSize();
+$a4Barcode = $isBarcode && ($pageSize == 'A4');
+$a5Barcode = $isBarcode && ($pageSize == 'A5');
+
+$columnsConfig = $block->getColumnsConfig('invoice');
+$numberColumn = $block->getNumberColumn($columnsConfig, 4);
+if ($pageSize == 'A7' || $pageSize == 'A6'){
+    ?>
+    <style>
+        .mp-invoice-barcode {
+            display: none;
+        }
+        .mp-item,.mp-qty,.mp-price,.mp-subtotal,.mp-tax,.mp-discount,.mp-image {
+            font-size: 0.6rem;
+        }
+    </style>
+<?php } ?>
+<?php
+if ($pageSize == 'A5'): ?>
+    <style>
+        .mp-item,.mp-qty,.mp-price,.mp-subtotal,.mp-tax,.mp-discount,.mp-image {
+            font-size: 0.75rem;
+        }
+    </style>
+<?php endif ?>
+<?php if ($_invoice && $_order): ?>
+    <div class="table <?= /** @noEscape */ $numberColumn ?>-columns">
+        <div class="mp-row mp-heading">
+            <?php
+                foreach ($columnsConfig as $columnConfig) {
+                    if ($columnConfig['status']) {
+                        echo $block->getThHtml($columnConfig['name'],$a4Barcode);
+                    }
+                }
+            ?>
+        </div>
+        <?php $i = 0 ?>
+        <?php foreach ($_invoice->getAllItems() as $_item): ?>
+            <?php $codeValue = $block->getCodeValue($_item, $storeId) ?>
+            <?php
+            $block->setItem($_item);
+            $indexKey = $i % 2 == 0 ? "odd" : "even";
+            if ($block->isBundleItem()) {
+                echo /** @noEscape */  $block->renderBundleItem($_item, $_order, $block->getInvoiceType(), $indexKey, $codeType, $barcodeConfig, $isBarcode, 'bundleitems.phtml', $columnsConfig);
+                $i++;
+                continue;
+            }
+
+            if ($_item->getOrderItem()->getParentItem()) {
+                continue;
+            }
+            $i++;
+            ?>
+            <div class="mp-row <?= /** @noEscape */ $indexKey ?>" style="border-bottom: 1px solid #ddd;">
+                <?php
+                    foreach ($columnsConfig as $columnConfig) {
+                        if ($columnConfig['status']) {
+                            echo $block->getTdHtml($columnConfig['name'], $a4Barcode, $_item, $codeValue, 'invoice');
+                        }
+                    }
+                ?>
+            </div>
+            <div class="clr"></div>
+        <?php endforeach ?>
+    </div>
+    <div class="order-totals">
+        <?= $block->getChildHtml('invoice_totals') ?>
+    </div>
+<?php endif ?>

@@ -500,8 +500,8 @@ class LayoutProcessor
 
             if ($newAddress) {
                 if ($quote->getIsVirtual() == 1) {
-                    // $jsLayout['components']['checkout']['children']['steps']['children']['billing-step']['children']
-                    // ['payment']['children']['afterMethods']['children'][$attribute->getAttributeCode()] = $componentContent;
+                    $jsLayout['components']['checkout']['children']['steps']['children']['billing-step']['children']
+                    ['payment']['children']['afterMethods']['children'][$attribute->getAttributeCode()] = $componentContent;
                 } elseif ($defaultShippingAddress) {
                     $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']['children']
                     ['shippingAddress']['children']['before-form']['children'][$attribute->getAttributeCode()] = $componentContent;

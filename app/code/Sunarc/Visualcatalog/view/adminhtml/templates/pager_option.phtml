@@ -1,0 +1,74 @@
+<?php
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+/**
+ * Pager template
+ *
+ * @see \Magento\Theme\Block\Html\Pager
+ */
+?>
+
+<?php $count = 1;
+$current_page ='';
+?>
+
+<?php if ($block->getCollection()->getSize()): ?>
+    <?php if ($block->getLastPageNum()>1): ?>
+    <br>
+    <table style= "width:200px" >
+        <tr><td>
+     <div > <p> <b> Select Page : </b></p></div></td>
+        <td><div class="page_options" >
+            <select class="cd-pagination custom-buttons" name="page">
+                    <?php if ($block->canShowPreviousJump()): ?>
+             <?php 
+                $lastNumber = $block->getLastPageNum() ;
+                while(!$block->isPageCurrent($count) && !in_array($count, $block->getFramePages())){ ?>
+                    <option class="item">
+                                <span><?php  /* @escapeNotVerified */  echo $count ?></span>
+                        </option>  
+                <?php 
+                $count++;
+            } ?>
+           
+            <?php endif;?> 
+
+                <?php foreach ($block->getFramePages() as $_page): ?>
+                 <?php if ($block->isPageCurrent($_page)): 
+                 $current_page = $_page;
+                    endif;?>
+                    <?php if (!$block->isPageCurrent($_page)): ?>
+                        <option class="item">
+                                <span><?php /* @escapeNotVerified */ echo $_page ?></span>
+                        </option>
+                    <?php 
+                    endif;?>
+                <?php 
+            $count = $_page;
+                endforeach;?>
+                 <?php if ($block->canShowNextJump()): ?>
+             <?php 
+                $count++;
+                $lastNumber = $block->getLastPageNum() ;
+                while($count <= $lastNumber){ ?>
+                    <option class="item">
+                                <span><?php  /* @escapeNotVerified */  echo $count ?></span>
+                        </option>  
+                <?php 
+                $count++;
+            } ?>
+             <?php endif;?>
+            </select> 
+
+          </div></td></tr></table>
+         <input type="hidden" name="current_page"
+                       value="<?php echo $current_page; // $_product->getCatIndexPosition() ?>"/>
+         <?php endif;?>  
+          <?php endif;?>     

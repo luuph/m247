@@ -1,0 +1,90 @@
+<?php
+$_productCollection = $block->getLoadedProductCollection();
+$_helper = $this->helper('Magento\Catalog\Helper\Output');
+
+
+
+/*echo $this->getLayout()->createBlock("Magento\Theme\Block\Html\Pager")->setTemplate("Sunarc_Visualcatalog::html/pager.phtml")->toHtml();
+die('here');*/
+?>
+
+<?php if ($block->getPagerHtml()): ?>
+    <div class="toolbar bottom"><?php echo $block->getPagerHtml(); ?></div>
+<?php 
+
+
+endif ?>
+
+
+<style type="text/css">
+.active_product{
+    border:5px solid black !important;
+}
+</style>
+<script>
+require(['jquery'],function($){
+
+    $(document).ready(function(){
+     $( ".product" ).on( "click", function()  { 
+        $(".product").removeClass("active_product");
+        $(".active").remove();
+  $(this).addClass('active_product');
+  var id = $(this).attr('product-id');
+  var position = $(this).attr('pos'); 
+  var active = "<input type='hidden' class ='active' name='selected["+ id + "]'value='"+ position + "' />";
+  $(this ).after(active)
+  
+});
+    });
+
+});
+
+</script>
+
+<form id="edit_position_form" action="<?php echo $block->getFormAction() ?>" method="post"
+      enctype='multipart/form-data'>
+
+      <?php if ($block->getPagerHtml()): ?>
+    <div class="toolbar bottom"><?php echo $block->getPagerOptionsHtml(); ?></div>
+    <?php 
+endif ?>
+
+<?php //include ($block->getTemplateFile('Magento_Catalog::product/list/toolbar/limiter.phtml')) ?>
+
+    <ul id="products" class="grid clearfix">
+        <?php $position = 1; ?>
+        <?php $selected = 0; ?>
+        <?php foreach ($_productCollection as $_product): ?>
+            <li class="product clearfix" id="product-<?php echo $_product->getId(); ?>" product-id="<?php echo $_product->getId(); ?>" position="<?php echo $_product->getCatIndexPosition().'=='.$position; ?>" pos="<?php echo $position; ?>">
+                <section class="left">
+                    <img src="<?php echo $block->getImageData($_product); ?>" alt="default thumb" class="thumb" width="200" height="150">
+                    <?php
+                    $_productNameStripped = $block->stripTags($_product->getName(), null, true);
+                    ?>
+                    <strong class="product name product-item-name">
+                        <?php /* @escapeNotVerified */
+                        echo $_helper->productAttribute($_product, $_product->getName(), 'name');
+                        echo $_product->getProductsPosition();
+                        ?> (<?php echo $_product->getSku(); ?>)
+                    </strong>
+                </section>
+                <input type="hidden" name="positions[<?php echo $_product->getId(); ?>]"
+                       value="<?php echo $position; // $_product->getCatIndexPosition() ?>"/>
+                <?php $position++; ?>
+                <section class="right">
+                    <span class="price"><?php echo $block->getPriceFormat($_product->getPriceInfo()->getPrice('final_price')->getValue()); ?></span>
+                </section>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+    <input name="form_key" type="hidden" value="<?php /* @escapeNotVerified */
+    echo $block->getFormKey() ?>"/>
+</form>
+
+
+<?php if ($block->getPagerHtml()): ?>
+    <div class="toolbar bottom"><?php echo $block->getPagerHtml(); ?></div>
+<?php endif ?>
+
+
+

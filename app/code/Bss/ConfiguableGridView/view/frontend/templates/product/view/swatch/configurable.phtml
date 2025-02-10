@@ -47,7 +47,6 @@ if ($block->checkModuleBssPreOrder()) {
             }
         }
     }
-    $isShowQuote = $product->getIsActiveRequest4QuoteProductPage() != null ? $product->getIsActiveRequest4QuoteProductPage() : false;
     ?>
     <?php
     $productVal["disable_add_to_cart"] = false;
@@ -122,7 +121,7 @@ if ($block->checkModuleBssPreOrder()) {
                         <th class="qty sku <?php echo $helper->getDisplayAttributeAdvanced('sku') ?>"><?php echo __('SKU'); ?></th>
                         <th class="qty unit <?php echo $helper->getDisplayAttributeAdvanced('unit_price', $showUnit) ?>"><?php echo __('Unit Price'); ?></th>
                         <th class="qty subtotal <?php echo $helper->getDisplayAttributeAdvanced('subtotal') ?>"><?php echo __('Subtotal'); ?></th>
-                        <?php if ($isShowQuote || !$block->getProduct()->getDisableAddToCart()): ?>
+                        <?php if (!$block->getProduct()->getDisableAddToCart()): ?>
                             <th class="qty"><?php echo __('Qty'); ?></th>
                         <?php endif ?>
                         <th class="no-display hidden"></th>
@@ -180,14 +179,12 @@ if ($block->checkModuleBssPreOrder()) {
                                 <div><?php echo $productVal["html_unit_price"]; ?></div>
                             </td>
                             <td class="qty subtotal <?php echo $helper->getDisplayAttributeAdvanced('subtotal') ?>">
-                            <?php if (!$productVal["disable_add_to_cart"]): ?>
                                     <span class="final-price"
                                           id='<?php echo "final-price-" . $productVal["product_id"]; ?>'><?php echo $helper->getDisplayPriceWithCurrency(0) ?></span><br>
                                 <span class="excl-tax"
                                       id='<?php echo "excl-tax-" . $productVal["product_id"]; ?>'></span>
-                            <?php endif ?>
                             </td>
-                            <?php if ($isShowQuote || !$productVal["disable_add_to_cart"]): ?>
+                            <?php if (!$productVal["disable_add_to_cart"]): ?>
                                 <td class="qty qty-final">
                                     <?php if (($productVal['preorder'] == 1 || ($productVal['preorder'] == 2 && (int)$productVal['stock']['is_in_stock'] != 1)) && $is_preorder) { ?>
                                         <input type="text"
@@ -206,7 +203,6 @@ if ($block->checkModuleBssPreOrder()) {
                                                    name="config_table_qty[<?php echo $i ?>]" <?php echo ((int)$productVal['stock']['is_in_stock'] == 1) ? '' : 'disabled' ?>
                                                    index="<?php echo $i ?>"
                                                    productId="<?php echo $productVal['product_id']; ?>"/>
-                                            <?php if(!$productVal["disable_add_to_cart"]) : ?>
                                             <div class="bss-tier-detailed hide"
                                                  id='<?php echo "bss-tier-detailed-" . $productVal["product_id"] ?>'>
                                                 <div class="prices-tier items">
@@ -214,7 +210,6 @@ if ($block->checkModuleBssPreOrder()) {
                                                         id='<?php echo "tier-price-" . $productVal["product_id"] ?>'></ul>
                                                 </div>
                                             </div>
-                                            <?php endif ?>
                                         <?php else : ?>
                                             <input type="text"
                                                    data-validate='{"bss-validate-qty-increment":<?= $productVal['qty_increment']; ?>}'
@@ -223,7 +218,6 @@ if ($block->checkModuleBssPreOrder()) {
                                                    name="config_table_qty[<?php echo $i ?>]" <?php echo ((int)$productVal['stock']['is_in_stock'] == 1) ? '' : 'disabled' ?>
                                                    index="<?php echo $i ?>"
                                                    productId="<?php echo $productVal['product_id']; ?>"/>
-                                            <?php if(!$productVal["disable_add_to_cart"]) : ?>
                                             <div class="bss-tier-detailed hide"
                                                  id='<?php echo "bss-tier-detailed-" . $productVal["product_id"] ?>'>
                                                 <div class="prices-tier items">
@@ -231,7 +225,6 @@ if ($block->checkModuleBssPreOrder()) {
                                                         id='<?php echo "tier-price-" . $productVal["product_id"] ?>'></ul>
                                                 </div>
                                             </div>
-                                            <?php endif ?>
                                         <?php endif ?>
                                     <?php } ?>
                                     <input type="hidden" class="unit-price"

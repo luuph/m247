@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <!-- Add new Tab -->
+        <tab id="acx" translate="label" sortOrder="400">
+            <label>Agile Codex</label>
+        </tab>
+        <section id="acx_backend_config" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Agile Codex Documentation</label>
+            <tab>acx</tab>
+            <group id="recommended_solutions" translate="label" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Recommended Solutions:</label>
+                <frontend_model>Acx\Backend\Block\Adminhtml\System\Config\Extensions</frontend_model>
+            </group>
+        </section>
+        <section id="csp" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>CSP Settings</label>
+            <tab>acx</tab>
+            <group id="mode" translate="label" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>CSP Mode Configuration:</label>
+                <group id="storefront" translate="label" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>StoreFront Configuration:</label>
+                    <field id="report_uri" translate="label" sortOrder="1" type="text" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>Report URI</label>
+                        <validate>required-entry</validate>
+                    </field>
+                </group>
+                <group id="admin" translate="label" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Admin Configuration:</label>
+                    <field id="report_uri" translate="label" sortOrder="1" type="text" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>Report URI</label>
+                        <validate>required-entry</validate>
+                    </field>
+                </group>
+            </group>
+        </section>
+    </system>
+</config>

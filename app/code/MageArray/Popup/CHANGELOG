@@ -1,0 +1,40 @@
+MageArray_Popup
+
+-------------
+  CHANGELOG
+-------------
+
+===== 1.0.0 =====
+* Initial stable M2 release
+
+===== 1.0.1 =====
+*Bug fixes
+
+===== 1.0.2 =====
+*Cookie not deleted issue fix
+*Popup display issue fix checkout page & pending_order condition
+*When Cart subtotal less than and more than both is set then  popup dont show issue fix
+*Compability with Magento2.2
+
+===== 1.0.3 =====
+*Compatibility with Magento2.3
+
+===== 1.0.4 =====
+*Bug fixes
+*Compatibility with Magento 2.3.4
+
+===== 1.0.5 =====
+*Bug fixes
+
+===== 1.0.6 =====
+*Bug fixes
+*Compatibility with Magento 2.4.0
+
+===== 1.0.7 =====
+* Compatibility with Magento 2.4.3
+* Add version tab in system config
+
+===== 1.0.8 =====
+* Compatibility with Magento 2.4.4
+* Update fancybox version
+* Bug Fixes

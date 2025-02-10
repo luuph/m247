@@ -1,0 +1,36 @@
+@acx_store_color: #FFF;
+#nav {
+li.item-agilecodex {
+        > a {
+            &:before {
+                content: '';
+                background-image: url("../Acx_Backend/images/AgileCodex_Logo.svg");
+                background-repeat: no-repeat;
+                background-size: 25px;
+                background-position: center;
+                height: 25px;
+            }
+        }
+}
+        .submenu {
+            .item-acx-helpcenter {
+                a {
+                    &:after {
+                        content: '\e633';
+                        font-family: 'Admin Icons';
+                        margin-left: 10px;
+                        vertical-align: baseline;
+                        font-size: 13px;
+                    }
+                }
+            }
+        }
+}
+.admin__menu {
+    
+    //  This part hides Submenu Group Titles only for menus with single groups.
+    .submenu .column:only-of-type .submenu-group-title,
+    .level-0 > .submenu > ul > .level-1:only-of-type > .submenu-group-title {
+        display: block !important;
+    }
+}

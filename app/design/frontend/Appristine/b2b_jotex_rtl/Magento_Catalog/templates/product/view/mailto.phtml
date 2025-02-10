@@ -1,0 +1,47 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php $_product = $block->getProduct() ?>
+
+    
+       
+       
+<?php if ($block->canEmailToFriend()): ?>
+
+    
+    <!--Email to frd-->
+    <a href="<?php /* @escapeNotVerified */ echo $this->helper('Magento\Catalog\Helper\Product')->getEmailToFriendUrl($_product) ?>"
+       class="action mailto friend"><span><?php /* @escapeNotVerified */ echo __('بريد الكترونى') ?></span></a>
+<?php endif; ?>
+
+<div class="social_icon">
+    <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&width=62&layout=button&action=like&size=large&show_faces=true&share=false&height=65&appId" width="65" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+
+    <div class="facebook">
+        <span class="sharee" style="letter-spacing: 1px;vertical-align: top; "> مشاركة&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
+         <!--Facebook-->
+                <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode($_product->getProductUrl());?>&t=<?php echo urlencode($_product->getName())?>" onclick='javascript:window.open(this.href,"","width=640,height=480,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes");return false' title="Share on FaceBook">
+                    <img src="<?php echo $this->getViewFileUrl('images/fb.png'); ?>" alt="f" width="">
+                </a>&nbsp;
+        <!--gmail -->
+                <a href="mailto:?subject=<?php echo ($_product->getName()) ?>&body=<?php echo ($_product->getProductUrl()) ?>"><img src="<?php echo $this->getViewFileUrl('images/mail.png'); ?>" alt="g" width="">&nbsp;</a>
+        <!--print -->
+                 <a href="#" onclick="myFunction()"><img src="<?php echo $this->getViewFileUrl('images/print.png'); ?>" alt="p" width=""></a>
+                
+                <script>
+                function myFunction() {
+                    window.print();
+                }
+                </script>
+        
+        
+    </div>
+       
+</div>
+

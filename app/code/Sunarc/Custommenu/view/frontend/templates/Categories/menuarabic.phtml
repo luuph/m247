@@ -1,0 +1,73 @@
+<ul id="ui-id-6" class="ui-menu ui-widget ui-widget-content ui-corner-all deskstop_view" tabindex="0">
+<li class="level0 mega-menu-parent nav-1 level-top parent ui-menu-item active" data-id="#all-category"><a class="level-top ui-corner-all" href="#">تسوق حسب الفئة</a></li>
+<li class="level0 nav-2 mega-menu-parent shop-by-brand level-top parent ui-menu-item" data-id="#all-brand"><a id="ui-id-9" class="level-top ui-corner-all" tabindex="-1" href="#">تسوق حسب الماركة</a></li>
+<li class="level0 nav-3 last level-top ui-menu-item"><a id="ui-id-10-desktop" class="level-top ui-corner-all" tabindex="-1" href="<?php echo $block->escapeUrl($block->getUrl()) ?>">الصفحة الرئيسية</a></li>
+<li class="level0 nav-4 last level-top ui-menu-item"><a id="ui-id-11-desktop" class="level-top ui-corner-all" tabindex="-1" href="https://jotex.jo/arabic" target="_blank" rel="noopener">موقع جوتكس</a></li>
+<li class="level0 nav-6 last level-top ui-menu-item"><a id="ui-id-11-desktop" class="level-top ui-corner-all" tabindex="-1" href="<?php echo $block->getUrl('clearance.html') ?>" rel="noopener">تنزيلات</a></li>
+<!--<li class="level0 nav-5 last level-top ui-menu-item"><a id="ui-id-11-desktop" class="level-top ui-corner-all" tabindex="-1" href="{{store url='https://b2b.jotex.jo/customer/account'}}">حسابي</a></li>  -->
+
+
+<?php
+//$blockObj= $block->getLayout()->createBlock('Sunarc\Custommenu\Block\Customerinfo');
+//echo $blockObj->customerLoggedIn();
+ //if($block->customerLoggedIn()){ 
+?>
+   <li class="level0 nav-6 last level-top ui-menu-item cname">
+        <span class="customer-name"
+              data-bind="scope: 'customer'">
+            <!-- ko if: customer().fullname  -->
+            <a href="<?php echo $block->escapeUrl($block->getUrl('customer/account/')) ?>"><span style="display:none;" data-bind="text: customer().fullname,style: {display:'inline'}"></span></a>
+            <!-- /ko -->
+            <!-- ko ifnot: customer().fullname  -->
+             <a href="<?php echo $block->getUrl('customer/account/login'); ?>" style="display:none;" data-bind="style: {display:'inline'}"><?php echo __('حسابي') ?></a>
+             <!-- /ko -->
+        </span>
+        <script type="text/x-magento-init">
+        {
+            "*": {
+                "Magento_Ui/js/core/app": {
+                    "components": {
+                        "customer": {
+                            "component": "Magento_Customer/js/view/customer"
+                        }
+                    }
+                }
+            }
+        }
+        </script>
+        <?php if($block->getChildHtml()):?>
+            <div class="customer-menu" data-target="dropdown">
+                <?= $block->getChildHtml() ?>
+            </div>
+        <?php endif; ?>
+    </li>
+            <li class="level0 nav-3 last level-top ui-menu-item">
+                 <span class="customer-logout"
+              data-bind="scope: 'customer'">
+            <!-- ko if: customer().fullname  -->
+           <a href="<?php echo $block->escapeUrl($block->getUrl('customer/account/logout')) ?>" style="display:none;" data-bind="style: {display:'inline'}"><span>تسجيل خروج</span></a>
+           <!-- /ko -->
+            <!-- ko ifnot: customer().fullname  -->
+            
+             <!-- /ko -->
+        </span>
+                </li>
+             
+
+<?php  /*}else{
+     ?>
+
+<li class="level0 nav-5 last level-top ui-menu-item">
+        <a href="<?php echo $block->escapeUrl($block->getUrl('customer/account/')) ?>">
+            <?php echo __("My Account") ?>
+</a>
+</li>
+
+<?php
+ }*/
+ ?>
+<!--<li class="level0 nav-5 last level-top ui-menu-item"><a id="ui-id-11-desktop" class="level-top ui-corner-all" tabindex="-1" href="{{store url='https://b2b.jotex.jo/customer/account'}}">MY Account</a></li>-->
+</ul>
+<ul id="ui-id-6" class="ui-menu ui-widget ui-widget-content ui-corner-all mobile_responsive" tabindex="0">
+<li style="list-style-type: none;">&nbsp;</li>
+</ul>

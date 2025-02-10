@@ -48,7 +48,18 @@ define([
                         console.log('Error happens. Try again.');
                     }
                 });
-            }
+            },
+            
+            getCartItems: function () {
+                var items = this.getCartParamUnsanitizedHtml('items') || [];
+                items = items.slice(parseInt(-this.maxItemsToDisplay, 10));
+                items.forEach(function(item) {
+                    if (item.isCheckoutQuote === undefined) {
+                        item.isCheckoutQuote = false;
+                    }
+                });
+                return items;
+            },
         });
     }
 });

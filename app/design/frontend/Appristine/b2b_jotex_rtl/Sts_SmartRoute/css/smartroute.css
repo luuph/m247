@@ -1,0 +1,120 @@
+html[lang="ar-SA"] .messages{
+    direction: rtl;
+}
+.smartroute-cont-ar{
+    direction: rtl;
+}
+.smartroute-cont-ar td, .smartroute-cont-ar th{
+    text-align: right;
+}
+body.stssmartroute-payment-directpost .directpost-form-cont .block {
+    width: 45%;
+    margin-right: 5%;
+    float: left;
+}
+body.stssmartroute-payment-directpost .smartroute-cont-ar  .directpost-form-cont .block,
+body.stssmartroute-payment-directpost .smartroute-cont-ar .directpost-form-cont .block-full{
+    float: right;
+}
+body.stssmartroute-payment-directpost .directpost-form-cont .date-block{
+    width: 49%;    
+    float: left;
+}
+body.stssmartroute-payment-directpost .smartroute-cont-ar .directpost-form-cont .date-block{
+    float: right;
+}
+body.stssmartroute-payment-directpost .smartroute-cont-ar .directpost-form-cont .date-block:first-child{
+    margin-right: 0px;
+    margin-left: 2%;
+}
+body.stssmartroute-payment-directpost .directpost-form-cont .date-block:first-child{
+	margin-right: 2%;
+}
+body.stssmartroute-payment-directpost .directpost-form-cont .block-full{
+    float: left;
+    width: 100%;
+    text-align: center;
+    clear: both;	
+}
+body.stssmartroute-payment-directpost .directpost-form-cont .block-full button[type="submit"]{
+	/*width: 20%;*/
+}
+body.stssmartroute-payment-directpost .directpost-form-cont .payment-radio-holder{
+	min-height: 60px;
+}
+.payment-radio-holder.custom-icon input[type="radio"] {
+    display: inline-block;
+    vertical-align: top;
+}
+.payment-radio-holder.custom-icon img {
+    margin-top: -20px;
+}
+
+/*======================================
+=            payment method            =
+======================================*/
+.opc-payment .payment-method-title .label {
+  display: inline-block;
+  vertical-align: middle;
+}
+.opc-payment .payment-method-title > img {
+  display: inline-block;
+  margin-bottom: 4px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+.opc-payment .payment-method-title {
+  padding-bottom: 0px;
+}
+.payment-method-content .control .input-text.cvv {
+  margin-bottom: 10px;
+}
+.payment .cvv .control._with-tooltip {
+  position: relative;
+}
+.payment .cvv ._with-tooltip .field-tooltip {
+  left: auto;
+  right: 190px;
+  top: -32px;
+  display: block;
+}
+.opc-wrapper .field .control._with-tooltip{
+  padding-right: 0px!important;
+}
+.opc-wrapper .field .control._with-tooltip input.cvv {
+  width: 55px!important;
+}
+.opc-payment .payment-method-content .payment .control .field {
+  float: right;
+  margin-left: 3px;
+}
+.checkout-payment-method .payment-method-content .ccard .year .select{
+	width: 100%;
+}
+.checkout-index-index .payment-method-content form#smartroute-form .field.no-label.year{
+  width: 100px!important;
+}
+.payment-method-content .ccard.smartroute .cvv {
+	overflow: visible;
+}
+@media (max-width: 500px) {
+  .field-tooltip .field-tooltip-content {
+    right: -198px;
+    top: 40px;
+    left: auto;
+  }
+}
+/*.field-tooltip .field-tooltip-content::before, .field-tooltip .field-tooltip-content::after {*/
+/*  border: 10px solid transparent;*/
+/*  height: 0;*/
+/*  width: 0;*/
+/*  margin-top: -21px;*/
+/*  right: 10px;*/
+/*  left: auto;*/
+/*  top: 0;*/
+/*}*/
+/*.field-tooltip .field-tooltip-content::after {*/
+/*  border-bottom-color: #f4f4f4;*/
+/*  top: 1px;*/
+/*}*/
+/*=====  End of payment method  ======*/

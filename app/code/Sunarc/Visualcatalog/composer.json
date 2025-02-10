@@ -1,0 +1,30 @@
+{
+  "name": "sunarc/magento2-visualcatalog",
+  "description": "Magento 2.0 Visual Catalog",
+  "version": "1.0.2",
+  "license": [
+    "OSL-3.0",
+    "AFL-3.0"
+  ],
+  "type": "magento2-module",
+  "license": [
+    "OSL-3.0",
+    "AFL-3.0"
+  ],
+  "authors": [
+    {
+      "name": "Rajneesh Vyas",
+      "email": "rajneesh.vyas@sunarctechnologies.com",
+      "homepage": "http://sunarctechnologies.com/",
+      "role": "Leader"
+    }
+  ],
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+     "psr-4": {
+      "Sunarc\\Visualcatalog\\": ""
+    }
+  }
+}

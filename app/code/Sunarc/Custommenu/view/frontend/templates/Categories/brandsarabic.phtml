@@ -1,0 +1,91 @@
+<div class="main-container col2-left-layout">
+<div class="main">
+<div class="col-main">
+<div class="page-title category-title">
+<h1>الماركات</h1>
+</div>
+<div class="catimagesnew">
+<ul id="cat" class="catlistnew">
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();  
+$catId = 120;  //Parent Category ID
+$subCategory = $objectManager->create('Magento\Catalog\Model\Category')->load($catId);
+    $subCats = $subCategory->getChildrenCategories();
+    $subcatinfo = '';
+    foreach ($subCats as $subcat)
+    {
+	    $subcategory_info = $objectManager->create('Magento\Catalog\Model\Category')->load($subcat->getId());
+           	
+			?>
+		
+<li><a href="<?php echo $subcat->getUrl(); ?>"> <img src="<?php echo $subcategory_info->getImageUrl() ?>" alt="<?php echo $subcat->getName(); ?>" width="204" height="433"> </a></li>
+
+			<?php
+        
+    }       
+?>    
+</ul>
+</div>
+<div class="category-description  ">&nbsp;</div>
+</div>
+<div class="col-left sidebar">
+<div class="block block-list leftlistcategory slideit current_category ">
+<div class="block-title slideitblock"><a href="{{store url='brands.html'}}"><strong><em>ماركات</em></strong></a> <span class="categorybtn selectcategory">▬</span></div>
+<div class="block-content">
+<ol class="left-serial">
+    <?php
+     foreach ($subCats as $subcat)
+    {
+	   
+			?>
+		
+<li><a href="<?php echo $subcat->getUrl(); ?>"><?php echo $subcat->getName(); ?></a></li>
+
+			<?php
+        
+    }  
+    ?>
+</ol>
+</div>
+</div>
+<?php echo $this->getLayout()
+          ->createBlock('Magento\Framework\View\Element\Template')
+          ->setTemplate('Sunarc_Custommenu::Categories/sidebar.phtml')
+          ->toHtml();
+          ?>
+<div class="block block-list slideit">
+<div class="block-title slideitblock"><strong><span class="nochange">البحث ضمن النتائج</span></strong> <span class="selectaccordian  selectcategory">▬</span></div>
+<div class="block-content" style="display: block;"><form id="search-mini-form-leftside" class="search-mini-form-leftside" action="{{store url='catalogsearch/result'}}" method="get">
+<div class="form-search"><input id="search" class="input-text" maxlength="128" name="q" type="text" value=""> <button class="button btn-search go" title="Go" type="submit"> اذهب </button></div>
+</form></div>
+</div>
+<div class="block block-list">
+<div class="block-title"><strong><span class="nochange">قارن بين المنتجات</span></strong> <span class="selectaccordian ">✚</span></div>
+<div class="block-content" style="display: none;">
+<ol id="resource-list">
+<li class="item">لا يوجد لديك عناصر للمقارنة.</li>
+</ol>
+</div>
+</div>
+<div class="block block-list slideit ">
+<div class="block-title slideitblock "><strong><span class="nochange">موارد</span></strong> <span class="selectaccordian selectcategory">▬</span></div>
+<div class="block-content" style="display: block;">
+<ol id="resource-list">
+<li class="item">
+<p><a title="" href="#" target="_blank" rel="noopener"><strong>مدونة:</strong> Brands</a></p>
+</li>
+</ol>
+</div>
+</div>
+<div class="block block-banner">
+<div class="block-content">
+<div class="cat_back_img banner_p">
+<div class="p_banner">لديك سؤال؟</div>
+<div class="p_banner">تحتاج مساعدة ؟</div>
+<div class="p_banner">باستطاعتك</div>
+<button class="btn_banner btn_chat"><a>دردشة</a></button> <button class="btn_banner"><a href="tel:+6494461709">اتصال</a></button> <button class="btn_banner"><a href="mailto:someone@example.com?Subject=Hello%20again">إيميل</a></button></div>
+</div>
+</div>
+</div>
+</div>
+</div>

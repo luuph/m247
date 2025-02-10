@@ -1,0 +1,38 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+/**
+ * New Customer block template
+ *
+ * @var $block \Magento\Customer\Block\Form\Login\Info
+ */
+?>
+<?php if ($block->getRegistration()->isAllowed()): ?>
+<div class="block block-new-customer">
+    <div class="block-title">
+        <strong id="block-new-customer-heading" role="heading" aria-level="2"><?php /* @escapeNotVerified */ echo __('NEW HERE?') ?></strong>
+    </div>
+    <div class="block-content" aria-labelledby="block-new-customer-heading">
+        <p><?php /* @escapeNotVerified */ echo __("When you create an account, you'll gain access to a wide range of benefits:") ?></p>
+        <ul class="login-benefits">
+            <li><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAMCAQAAAAeoI8VAAABBUlEQVQYGQXBzyuDcRzA8Q+50IrLYvZYz5PDlrYZ+/X02Fo5GOpJ9JwQByf+Atoa+QcUbhxctHJT4uSi5LwciHYY5cdRD2s9PX3fXi+hHx2HKcaJEvL06wObGEIPAZJYjGGQuNzN+Jp6fhLClJgnwShGq2a1B9Re82tOWCNFnCRDOJX3blba3zsqIMQwSTHsxo9vBn1NtR6ZJiKUWGSBwsNh2Qtx9coGOZakU2/e/1VZ3XeDVD5wiJHGlFpnWTXOfuoBVfZut8ijM4IhffRyRJaIf3pOmhksiszKNkKQLjY/W+uYFClgYsndryBo6uWCHHlMcmSx5e3E9sM0XApkyDJBFJ3Jf0TSoyQ/Km9IAAAAAElFTkSuQmCC"> <?php echo __('Faster checkout') ?></li>
+            <li><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAMCAQAAAAeoI8VAAABBUlEQVQYGQXBzyuDcRzA8Q+50IrLYvZYz5PDlrYZ+/X02Fo5GOpJ9JwQByf+Atoa+QcUbhxctHJT4uSi5LwciHYY5cdRD2s9PX3fXi+hHx2HKcaJEvL06wObGEIPAZJYjGGQuNzN+Jp6fhLClJgnwShGq2a1B9Re82tOWCNFnCRDOJX3blba3zsqIMQwSTHsxo9vBn1NtR6ZJiKUWGSBwsNh2Qtx9coGOZakU2/e/1VZ3XeDVD5wiJHGlFpnWTXOfuoBVfZut8ijM4IhffRyRJaIf3pOmhksiszKNkKQLjY/W+uYFClgYsndryBo6uWCHHlMcmSx5e3E9sM0XApkyDJBFJ3Jf0TSoyQ/Km9IAAAAAElFTkSuQmCC"> <?php echo __('Easy access to oder history and status') ?></li>
+            <li><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAMCAQAAAAeoI8VAAABBUlEQVQYGQXBzyuDcRzA8Q+50IrLYvZYz5PDlrYZ+/X02Fo5GOpJ9JwQByf+Atoa+QcUbhxctHJT4uSi5LwciHYY5cdRD2s9PX3fXi+hHx2HKcaJEvL06wObGEIPAZJYjGGQuNzN+Jp6fhLClJgnwShGq2a1B9Re82tOWCNFnCRDOJX3blba3zsqIMQwSTHsxo9vBn1NtR6ZJiKUWGSBwsNh2Qtx9coGOZakU2/e/1VZ3XeDVD5wiJHGlFpnWTXOfuoBVfZut8ijM4IhffRyRJaIf3pOmhksiszKNkKQLjY/W+uYFClgYsndryBo6uWCHHlMcmSx5e3E9sM0XApkyDJBFJ3Jf0TSoyQ/Km9IAAAAAElFTkSuQmCC"> <?php echo __('View your shopping cart from any device') ?></li>
+            <li><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAMCAQAAAAeoI8VAAABBUlEQVQYGQXBzyuDcRzA8Q+50IrLYvZYz5PDlrYZ+/X02Fo5GOpJ9JwQByf+Atoa+QcUbhxctHJT4uSi5LwciHYY5cdRD2s9PX3fXi+hHx2HKcaJEvL06wObGEIPAZJYjGGQuNzN+Jp6fhLClJgnwShGq2a1B9Re82tOWCNFnCRDOJX3blba3zsqIMQwSTHsxo9vBn1NtR6ZJiKUWGSBwsNh2Qtx9coGOZakU2/e/1VZ3XeDVD5wiJHGlFpnWTXOfuoBVfZut8ijM4IhffRyRJaIf3pOmhksiszKNkKQLjY/W+uYFClgYsndryBo6uWCHHlMcmSx5e3E9sM0XApkyDJBFJ3Jf0TSoyQ/Km9IAAAAAElFTkSuQmCC"> <?php echo __('Save multiple shipping addresses') ?></li>
+            <li><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAMCAQAAAAeoI8VAAABBUlEQVQYGQXBzyuDcRzA8Q+50IrLYvZYz5PDlrYZ+/X02Fo5GOpJ9JwQByf+Atoa+QcUbhxctHJT4uSi5LwciHYY5cdRD2s9PX3fXi+hHx2HKcaJEvL06wObGEIPAZJYjGGQuNzN+Jp6fhLClJgnwShGq2a1B9Re82tOWCNFnCRDOJX3blba3zsqIMQwSTHsxo9vBn1NtR6ZJiKUWGSBwsNh2Qtx9coGOZakU2/e/1VZ3XeDVD5wiJHGlFpnWTXOfuoBVfZut8ijM4IhffRyRJaIf3pOmhksiszKNkKQLjY/W+uYFClgYsndryBo6uWCHHlMcmSx5e3E9sM0XApkyDJBFJ3Jf0TSoyQ/Km9IAAAAAElFTkSuQmCC"> <?php echo __('Create a wishlist') ?></li>
+        </ul>
+        <div class="actions-toolbar">
+            <div class="primary">
+                <a href="<?php /* @escapeNotVerified */ echo $block->getCreateAccountUrl() ?>" class="action create primary"><span><?php /* @escapeNotVerified */ echo __('Create Account') ?></span></a>
+            </div>
+        </div>
+    </div>
+</div>
+<?php endif; ?>

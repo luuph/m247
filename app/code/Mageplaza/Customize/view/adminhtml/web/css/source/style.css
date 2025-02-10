@@ -1,0 +1,7 @@
+#mpdeliverytime_general_cutoff_time~select:nth-of-type(3) {
+    display: none;
+}
+
+#mpdeliverytime_general_cutoff_time~span:nth-of-type(2) {
+    display: none;
+}

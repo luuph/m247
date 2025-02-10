@@ -1,0 +1,249 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    padding: 0;
+    margin: 0;
+}
+
+#wrapper {
+    width: 90%;
+    margin: 20px;
+    margin-left: 5%;
+}
+
+.clr {
+    clear: both;
+}
+
+/******* HEADER **********/
+.header {
+    height: 200px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.header-right {
+    float: right;
+    width: 45%;
+    margin: -130px -10px 0 0
+}
+
+.header-right .info-title {
+    font-size: 40px;
+}
+
+.header-left {
+    padding: 50px 60px;
+    width: 100%;
+    float: left;
+}
+
+.customer-name {
+    margin-top: 20px;
+    margin-left: 5%;
+    font-weight: bold;
+}
+
+.customer-name strong {
+    text-transform: uppercase;
+}
+
+.logo-left {
+    margin-top: 30px;
+}
+
+.info {
+    margin-left: 30px;
+    padding-top: 28px;
+}
+
+/******* END HEADER **********/
+
+.billing-address, .shipping-address, .payment-method, .shipping-method {
+    float: left;
+    width: 100%;
+    color: black;
+}
+
+.billing-address p, .shipping-address p, .payment-method p, .shipping-method p {
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.mp-block-heading {
+    width: 98% !important;
+    padding: 5px 0px 5px 5px;
+}
+
+
+/* Css table items */
+.table-items {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #363636;
+}
+
+.table-items .mp-heading {
+    width: 100%;
+    height: 32px;
+    color: #FFF;
+}
+
+.mp-heading span {
+    font-weight: bold;
+}
+
+.order-totals {
+    width: 50%;
+    float: right;
+    text-align: right;
+    margin-top: 20px;
+}
+
+.mp {
+    width: 100%;
+    height: 30px;
+}
+
+.mp-str, .row-left, .grand-total {
+    width: 54%;
+    float: left;
+    margin-left: 15px;
+}
+
+.mp-right, .row-right, .grand-total-price {
+    width: 30%;
+    float: left;
+}
+
+.grand_total {
+    background-color: #363636;
+    padding-top: 8px;
+    color: #FFF;
+}
+
+.table-items td, .table-items th {
+    border: 3px solid #ddd;
+    padding: 8px;
+}
+.table-items th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+}
+.table-items td{
+    text-align: center;
+}
+.table-items td.mp-item-bc, .table-items td.mp-item{
+    text-align: left;
+}
+.mp-row .mp-barcode-bc{
+    text-align: right;
+}
+.mp-row .mp-barcode-bc, .mp-heading .mp-barcode-bc{
+    border-left: none;
+}
+.mp-row .mp-item-bc, .mp-heading .mp-item-bc{
+    border-right: none;
+}
+
+.table-items .mp-heading  th{
+    text-transform: uppercase;
+}
+
+.table-items th{
+    font-size:12px;
+}
+
+/* End css table items*/
+
+/*for shipping nad payment method*/
+.shipping-payment {
+    height: 70px;
+    float: left;
+    width: 50%;
+    padding: 20px 0;
+}
+
+.payment-method, .shipping-method {
+    width: 50%;
+}
+
+.payment-method.checkmemo {
+    width: 100%;
+}
+
+.payment-method .table-caption {
+    display:none;
+}
+
+/*for note*/
+.mp-note {
+    padding-left: 3px;
+}
+
+.footer-left {
+    float: left;
+    width: 51%;
+}
+
+/*for Address*/
+.content {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.billing-content {
+    float: left;
+    width: 40%;
+}
+
+.shipping-content {
+    float: right;
+    width: 40%;
+}
+
+.paymentTable {
+    margin-top: 5px;
+}
+
+.billing-content, .shipping-content {
+    margin: 10px 0;
+}
+
+/*for business info*/
+.business-information {
+    width: 100%;
+    margin-top: 10%;
+    color: #FFF;
+    padding-left: 5%;
+}
+
+.business-information .business {
+    width: 29%;
+    float: left;
+    padding: 10px 2%;
+}
+
+/*color*/
+.business-information, .mp-heading {
+    background-color: #0048db;
+}
+
+#wrapper div.content div.address-content div.shipping-content div p a,
+#wrapper div.content div.address-content div.billing-content div p a {
+    color: black;
+}
+.table-items{
+    color: #FFF;
+}
+.customer-name strong, .header-right .info-title {
+    color: #0048db;
+}
+.business-information, .mp-heading{
+    background:{{var pdfInvoiceDesign.getHeadingColor()}};
+}

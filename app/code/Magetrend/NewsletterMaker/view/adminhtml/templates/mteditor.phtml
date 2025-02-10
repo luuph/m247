@@ -1,0 +1,654 @@
+<?php
+/**
+ * MB "Vienas bitas" (www.magetrend.com)
+ *
+ * @category  Magetrend Extensions for Magento 2
+ * @package  Magetend/NewsletterMaker
+ * @author   E. Stulpinas <edwin@magetrend.com>
+ * @license  http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @link     https://www.magetrend.com/magento-2-newsletter-maker
+ */
+?>
+<!doctype html>
+<html lang="en">
+    <head>
+        <script>
+            var FORM_KEY = '<?php echo $block->getFormKey();?>';
+        </script>
+        <meta charset="utf-8"/>
+        <meta name="robots" content="NOINDEX,NOFOLLOW"/>
+        <meta name="viewport" content="width=1024"/>
+        <meta name="format-detection" content="telephone=no"/>
+        <title>Newsletter Maker / Magento Admin</title>
+        <link  rel="icon" type="image/x-icon" href="<?php echo $block->getViewFileUrl('Magento_Theme::favicon.ico'); ?>" />
+        <link  rel="shortcut icon" type="image/x-icon" href="<?php echo $block->getViewFileUrl('Magento_Theme::favicon.ico'); ?>" />
+
+        <link rel="stylesheet" type="text/css" media="all" href="<?php echo $block->getViewFileUrl('Magetrend_NewsletterMaker::css/mteditor/select.css'); ?>" />
+        <link rel="stylesheet" type="text/css" media="all" href="<?php echo $block->getViewFileUrl('Magetrend_NewsletterMaker::css/mteditor/codemirror/codemirror.css'); ?>" />
+        <link rel="stylesheet" type="text/css" media="all" href="<?php echo $block->getViewFileUrl('Magetrend_NewsletterMaker::css/mteditor/codemirror/theme.css'); ?>" />
+        <link rel="stylesheet" type="text/css" media="all" href="<?php echo $block->getViewFileUrl('Magetrend_NewsletterMaker::css/mteditor/bootstrap.min.css'); ?>" />
+        <link rel="stylesheet" type="text/css" media="all" href="<?php echo $block->getViewFileUrl('Magetrend_NewsletterMaker::css/mteditor/jquery-ui.css'); ?>" />
+        <link rel="stylesheet" type="text/css" media="all" href="<?php echo $block->getViewFileUrl('Magetrend_NewsletterMaker::css/mteditor/jquery.fileupload.css'); ?>" />
+        <link rel="stylesheet" type="text/css" media="all" href="<?php echo $block->getViewFileUrl('Magetrend_NewsletterMaker::css/mteditor/mteditor.css'); ?>" />
+        <link rel="stylesheet" type="text/css" media="all" href="<?php echo $block->getViewFileUrl('Magetrend_NewsletterMaker::css/mteditor/colorpicker.css'); ?>" />
+        <link rel="stylesheet" type="text/css" media="all" href="<?php echo $block->getViewFileUrl('Magetrend_NewsletterMaker::css/mteditor/popup.css'); ?>" />
+        <link rel="stylesheet" type="text/css" media="all" href="<?php echo $block->getViewFileUrl('Magetrend_NewsletterMaker::css/mteditor/source.css'); ?>" />
+        <link rel="stylesheet" type="text/css" media="all" href="<?php echo $block->getViewFileUrl('Magetrend_NewsletterMaker::css/mteditor/images.css'); ?>" />
+
+        <script type="text/javascript" src="<?php echo $block->getViewFileUrl('Magetrend_NewsletterMaker::js/mteditor/jquery-2.1.3.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo $block->getViewFileUrl('Magetrend_NewsletterMaker::js/mteditor/md5.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo $block->getViewFileUrl('Magetrend_NewsletterMaker::js/mteditor/codemirror/codemirror.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo $block->getViewFileUrl('Magetrend_NewsletterMaker::js/mteditor/codemirror/mode/css.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo $block->getViewFileUrl('Magetrend_NewsletterMaker::js/mteditor/codemirror/mode/javascript.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo $block->getViewFileUrl('Magetrend_NewsletterMaker::js/mteditor/codemirror/mode/xml.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo $block->getViewFileUrl('Magetrend_NewsletterMaker::js/mteditor/codemirror/mode/htmlmixed.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo $block->getViewFileUrl('Magetrend_NewsletterMaker::js/mteditor/bootstrap.min.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo $block->getViewFileUrl('Magetrend_NewsletterMaker::js/mteditor/html2canvas.min.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo $block->getViewFileUrl('Magetrend_NewsletterMaker::js/mteditor/jquery.cookie.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo $block->getViewFileUrl('Magetrend_NewsletterMaker::js/mteditor/jquery-ui.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo $block->getViewFileUrl('Magetrend_NewsletterMaker::js/mteditor/jquery.ui.widget.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo $block->getViewFileUrl('Magetrend_NewsletterMaker::js/mteditor/jquery.iframe-transport.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo $block->getViewFileUrl('Magetrend_NewsletterMaker::js/mteditor/jquery.fileupload.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo $block->getViewFileUrl('Magetrend_NewsletterMaker::js/mteditor/jquery.customSelect.min.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo $block->getViewFileUrl('Magetrend_NewsletterMaker::js/mteditor/text_edit_helper.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo $block->getViewFileUrl('Magetrend_NewsletterMaker::js/mteditor/colorpicker.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo $block->getViewFileUrl('Magetrend_NewsletterMaker::js/mteditor/popup.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo $block->getViewFileUrl('Magetrend_NewsletterMaker::js/mteditor/source_editor.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo $block->getViewFileUrl('Magetrend_NewsletterMaker::js/mteditor/helper/save.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo $block->getViewFileUrl('Magetrend_NewsletterMaker::js/mteditor/helper/content.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo $block->getViewFileUrl('Magetrend_NewsletterMaker::js/mteditor/helper/template.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo $block->getViewFileUrl('Magetrend_NewsletterMaker::js/mteditor/jquery.metisMenu.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo $block->getViewFileUrl('Magetrend_NewsletterMaker::js/mteditor/editor.js'); ?>"></script>
+
+    </head>
+    <body>
+        <div id="editor_wrapper">
+            <div class="sidebar">
+                <nav class="navbar-default navbar-side" role="navigation">
+                    <ul class="nav" id="main-menu">
+                        <li class="active">
+                            <a href="#">
+                                <span class="menu-icon glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                Edit
+                                <span class="glyphicon glyphicon-chevron-right next-level" aria-hidden="true"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                <li  class="first">
+                                    <a href="#" class="active open-tools" data-selector="edit-layout">
+                                        <span class="menu-icon  glyphicon glyphicon-th-large" aria-hidden="true"></span>
+                                        Layout
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#"  class="open-tools" data-selector="edit-style">
+                                        <span class="menu-icon glyphicon glyphicon-tint" aria-hidden="true"></span>
+                                        Color Scheme
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#"  class="open-tools" data-selector="edit-image">
+                                        <span class="menu-icon glyphicon glyphicon-picture" aria-hidden="true"></span>
+                                        Images
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" data-selector="edit-source">
+                                        <span class="menu-icon glyphicon image-icon source-icon"></span>
+                                        Source Editor
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="menu-icon glyphicon glyphicon-resize-full" aria-hidden="true"></span>
+                                Preview
+                                <span class="next-level glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            </a>
+
+                            <ul class="nav nav-second-level">
+                                <li class="first">
+                                    <a href="#" data-action="preview-full-screen">
+                                        <span class="menu-icon glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                                        Full screen
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" data-action="preview-tablet">
+                                        <span class="menu-icon glyphicon glyphicon-phone rotate90"
+                                              aria-hidden="true"
+                                              style="font-size: 13px"></span>
+                                        Tablet
+                                    </a>
+                                </li>
+                                <li class="last">
+                                    <a href="#" data-action="preview-mobile">
+                                        <span class="menu-icon glyphicon glyphicon-phone" aria-hidden="true"></span>
+                                        Mobile
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" data-action="send-email">
+                                <span class="menu-icon glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                                Send
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="menu-icon glyphicon glyphicon-cog" aria-hidden="true"></span>
+                                Actions
+                                <span class="next-level glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            </a>
+
+                            <ul class="nav nav-second-level">
+                                <li class="first">
+                                    <a href="#" data-action="change-info">
+                                        <span class="menu-icon glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                        Change info
+                                    </a>
+                                </li>
+                                <li class="last">
+                                    <a href="#" data-action="delete-template">
+                                        <span class="menu-icon glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                        Delete template
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="actions">
+                    <button type="button" class="btn btn-complete btn-cons" data-action="save">
+                        Save
+                    </button>
+                    <button type="button" class="btn btn-default btn-cons" data-action="back" >
+                        <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> Back to Magento
+                    </button>
+                </div>
+            </div>
+            <div class="tools edit-layout active">
+                <div class="mteditor-panel-scroll">
+                    <div class="mteditor-panel-container">
+                        <div class="tools-container">
+                            <div class="title">Drag block to the right</div>
+                            <div class="block-list " id="draggable"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tools edit-style">
+                <div class="empty-style-panel">
+                    Select a block on the right
+                </div>
+                <div class="mteditor-panel-scroll">
+                    <div class="mteditor-panel-container">
+                        <div class="tools-container">
+                            <div class="option">Apply to all
+                                <div id="switch" class="inactive">
+                                    <div id="switch_thumb" class="inactive"></div>
+                                </div>
+                            </div>
+                            <ul>
+                                <li id="mtedit_bgcolor">
+                                    <span>Block Background Colors</span>
+                                    <ul></ul>
+                                </li>
+                                <li  id="mtedit_color">
+                                    <span>Block Font Colors</span>
+                                    <ul></ul>
+                                </li>
+                                <li id="mtedit_body_bgcolor">
+                                    <span>Other Background Colors</span>
+                                    <ul></ul>
+                                </li>
+                                <li id="mtedit_body_color">
+                                    <span>Other Font Colors</span>
+                                    <ul></ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tools edit-image">
+                <div class="empty-image-panel">
+                    Select an image on the right
+                </div>
+                <div class="mteditor-panel-scroll">
+                    <div class="mteditor-panel-container">
+                        <div class="tools-container">
+                            <div class="option" id="image_properties">
+                                <span class="mteditor-option-title">Image properties</span>
+                                <div class="mteditor-option-container">
+                                    <div class="form">
+                                        <div class="option05">
+                                            <label for="image-width">Width</label>
+                                            <div class="option05-group">
+                                                <input type="text" name="image-width" value=""/>
+                                            </div>
+                                        </div>
+                                        <div class="option05 option-right">
+                                            <label for="image-height">Height</label>
+                                            <div class="option05-group">
+                                                <input type="text" name="image-height" value=""/>
+                                            </div>
+                                        </div>
+                                        <div class="option4">
+                                            <label for="image-margin">Margin: top, right, bottom, left</label>
+                                            <div class="option4-group">
+                                                <input type="text" name="image-margin-top" value=""/>
+                                                <input type="text" name="image-margin-right" value=""/>
+                                                <input type="text" name="image-margin-bottom" value=""/>
+                                                <input type="text" name="image-margin-left" value=""/>
+                                            </div>
+                                        </div>
+
+                                        <div class="option1">
+                                            <label for="image-alt">Image Alt</label>
+                                            <input type="text" name="image-alt" value=""/>
+                                        </div>
+
+                                        <div class="option1">
+                                            <label for="image-title">Image Title</label>
+                                            <input type="text" name="image-title" value=""/>
+                                        </div>
+
+                                        <div class="option1">
+                                            <label for="image-style">Image Style</label>
+                                            <input type="text" name="image-style" value=""/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mteditor_upload_new">
+                                <div class="option">
+                                    <span class="mteditor-option-title">Upload new image</span>
+                                    <div class="mteditor-option-container">
+                                        <form id="imageupload" action="" method="POST" enctype="multipart/form-data">
+                                            <div class="fileupload-buttonbar">
+                                                <span class="btn btn-complete btn-cons fileinput-button">
+                                                    <i class="glyphicon glyphicon-plus"></i>
+                                                    <span class="mteditor_upload_button">Select image</span>
+                                                    <input type="file" name="files">
+                                                </span>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <ul class="mteditor-image-list"></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="page-wrapper">
+
+                <iframe id="preview-frame" width="100%" height="100%" frameborder="0"></iframe>
+                <div id="source_panel" style="display: none">
+                    <div class="source-panel-container">
+                        <div class="source-panel-resize-up-down">
+                            <div class="ui-resizable-handle ui-resizable-n ngrip" id="ngrip"></div>
+                            <div class="source-panel-toolbar">
+                                <ul>
+                                    <li class="source-tab-close">
+                                        <a href="#"><span class="glyphicon glyphicon-remove"></span> Close</a>
+                                    </li>
+                                    <li class="source-tab-css active">
+                                        <a href="#"><span class="glyphicon glyphicon-edit"></span>Edit CSS</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="source-panel-window">
+                                <div class="source-panel-window-html">
+                                    <textarea id="source_editor_html"><?php echo $block->getTemplateContentHtml(); ?></textarea>
+                                </div>
+                                <div class="source-panel-window-css">
+                                    <div class="ui-resizable-handle ui-resizable-w wgrip" id="wgrip"></div>
+                                    <textarea id="source_editor_css"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="hidden_content">
+            <div id="mteditor_tmp"></div>
+            <div id="empty_placeholder">
+                <div class="empty-placeholder">
+                    <div class="drag-here">
+                        <div class="inside">
+                            <span class="image-icon plus-icon"></span>
+                            <span class="mtplaceholder-text">Drag & Drop Block Here</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="first_item_placeholder">
+                <div class="first-item-placeholder">
+                    <div class="drag-here">
+                        <div class="inside">
+                            <span class="image-icon magnet-icon"></span> <span class="mtplaceholder-text">Drop Here</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="block_placeholder">
+                <table class="block-placeholder" width="100%"><tr><td></td></tr></table>
+            </div>
+            <div id="hidden_content_block"></div>
+            <div id="confirm_popup">
+
+                <div class="esns_box_block_1 normal-width">
+                    <div class="popup-msg"></div>
+                </div>
+                <div class="popup-actions">
+                    <ul>
+                        <li><a class="btn btn-success btn-cons" href="#" data-action="1">Yes</a> </li>
+                        <li><a class="btn btn-danger btn-cons" href="#" data-action="0">No</a> </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="content_popup">
+                <div class="popup-content"></div>
+
+            </div>
+            <div id="change_info">
+                <div class="popup-form normal-width">
+                    <div class="form-group">
+                        <label><em>*</em>Newsletter Template Name</label>
+                        <span class="help">e.g. "Weekly Deals"</span>
+                        <input name="template_code" type="text" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label><em>*</em>Newsletter Subject</label>
+                        <span class="help">e.g. "Best of the Week"</span>
+                        <input name="template_subject" type="text" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label><em>*</em>Sender Name</label>
+                        <span class="help">e.g. "CustomerSupport"</span>
+                        <input name="template_sender_name" type="text" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label><em>*</em>Sender Email</label>
+                        <span class="help">e.g. "support@example.com"</span>
+                        <input name="template_sender_email" type="text"  class="form-control">
+                    </div>
+
+                </div>
+                <div class="response-error"></div>
+                <div class="response-success"></div>
+                <div class="popup-actions">
+                    <ul>
+                        <li><a class="btn btn-success btn-cons" href="#" data-action="1">Save</a> </li>
+                        <li><a class="btn btn-danger btn-cons" href="#" data-action="0">Cancel</a> </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="edit_link_form">
+                <div class="popup-form normal-width">
+                    <div class="form-group link-title">
+                        <label>Title</label>
+                        <span class="help">e.g. "Get it now!"</span>
+                        <input name="editor_link_title" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Url</label>
+                        <span class="help">e.g. "http://www.example.com"</span>
+                        <input name="editor_link_href" type="text"  class="form-control">
+                    </div>
+                </div>
+                <div class="popup-actions">
+                    <ul>
+                        <li><a class="btn btn-success btn-cons" href="#" data-action="1">Apply</a> </li>
+                        <li><a class="btn btn-danger btn-cons" href="#" data-action="0">Remove Link</a> </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="edit_var_form">
+                <div class="popup-form normal-width">
+                    <div class="form-group link-title">
+                        <label>Variables</label>
+                        <span class="help">Select one</span>
+                        <select name="editor_var" class="form-control">
+                            <?php $variables = $block->getVars(true); ?>
+                            <?php foreach ($variables as $varGroup) : ?>
+                                <optgroup label="<?php echo $varGroup['label']; ?>">
+                                <?php foreach ($varGroup['options'] as $option) : ?>
+                                    <option><?php echo $option['label'];?></option>
+                                <?php endforeach; ?>
+                                </optgroup>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="popup-actions">
+                    <ul>
+                        <li><a class="btn btn-success btn-cons" href="#" data-action="1">Insert</a> </li>
+                        <li><a class="btn btn-danger btn-cons" href="#" data-action="0">Cancel</a> </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="init_new_template">
+                <div class="popup-with-form normal-width">
+                    <div class="popup-form ">
+                        <input name="template_ready" type="hidden" value="0">
+                        <div class="form-group">
+                            <label><em>*</em>Newsletter Template Name</label>
+                            <span class="help">e.g. "Weekly Deals"</span>
+                            <input name="template_name" type="text" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label><em>*</em>Newsletter Subject</label>
+                            <span class="help">e.g. "Best of the Week"</span>
+                            <input name="template_subject" type="text" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label><em>*</em>Template</label>
+                            <select class="form-control init-template" name="email_template">
+                                <option value=""> Choose Newsletter Template </option>
+                                <?php $templateList = $block->getTemplateList(); ?>
+                                <?php foreach ($templateList as $template) : ?>
+                                    <option value="<?php echo $block->escapeHtml($template['value']);?>">
+                                        <?php echo $block->escapeHtml($template['label']);?>
+                                    </option>
+                                <?php endforeach; ?>
+
+                            </select>
+
+                            <div class="mt-import-template">
+                                <div class="mt-import-template-span">OR</div>
+                                    <form class="template_upload" action="" method="POST" enctype="multipart/form-data">
+                                        <div class="fileupload-buttonbar">
+                                            <span class="btn btn-complete btn-cons fileinput-button">
+                                                <i class="glyphicon glyphicon-upload"></i>
+                                                <span class="mteditor_upload_button">Upload a file (.zip, .html)</span>
+                                                <input type="file" name="files">
+                                            </span>
+                                        </div>
+                                    </form>
+                                <a style="padding: 10px 0 0; display: inline-block;" target="_blank" href="http://www.magetrend.com/magento-2-newsletter-maker/user-guide/custom-newsletter-template">How to Prepare a Template?</a><br/>
+                                <a style="padding: 5px 0 0; display: inline-block;" target="_blank" href="http://www.magetrend.com/media/wiki/newlsetter-example.zip">Download Example</a>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="response-error"></div>
+                </div>
+
+                <div class="popup-actions">
+                    <ul>
+                        <li>
+                            <button class="btn btn-success btn-cons" data-action="1" disabled="disabled">Create new</button>
+                        </li>
+                        <li>
+                            <button class="btn btn-danger btn-cons" data-action="0">Back to Magento</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <div id="mobile_preview">
+                <div class="mobile">
+                    <iframe src="" width="340" height="480"> </iframe>
+                </div>
+            </div>
+
+            <div id="tablet_preview">
+                <div class="tablet">
+                    <iframe src="" width="800" height="480"> </iframe>
+                </div>
+            </div>
+            <div id="send_test_message">
+                <div class="popup-with-form normal-width">
+                    <div class="popup-form ">
+                        <div class="form-group">
+                            <label><em>*</em>Email</label>
+                            <span class="help">e.g. "example@exmple.com"</span>
+                            <input name="send_email[email]" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="response-success"></div>
+                    <div class="response-error"></div>
+                    <div class="popup-actions">
+                        <ul>
+                            <li><button class="btn btn-success btn-cons" data-action="1" disabled="disabled">Send</button> </li>
+                            <li><button class="btn btn-danger btn-cons" data-action="0">Cancel</button></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="block-action">
+            <ul>
+                <li>
+                    <a href="#" class="block-action-move" title="move"><span class="image-icon move-icon"></span></a>
+                </li>
+                <li>
+                    <a href="#" class="block-action-delete" title="delete" ><span class="image-icon remove-icon"></span></a>
+                </li>
+            </ul>
+        </div>
+        <div id="esns_background_layer">
+            <div id="esns_box_layer">
+                <div id="esns_box_close"></div>
+                <div id="esns_box_content"></div>
+            </div>
+        </div>
+
+        <div id="editor_helper">
+            <div class="helper helper-text">
+                <ul>
+                    <li>
+                            <select id="fontFamily" name="font-family">
+                                <option value="">Font</option>
+                                <?php $fonts = $block->getFonts(); ?>
+                                <?php foreach ($fonts as $font) : ?>
+                                    <option value="<?php echo $font; ?>"><?php echo $font; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                    </li>
+                    <li>
+                        <input style="width: 44px" value="12px" name="font-size">
+                    </li>
+                    <li>
+                        <input style="width: 66px" value="#000000" name="color" class="color">
+                    </li>
+                </ul>
+                <ul>
+                    <li><a href="#" data-action="bold"><span class="glyphicon glyphicon-bold"></span></a></li>
+                    <li><a href="#" data-action="italic"><span class="glyphicon glyphicon-italic"></span></a></li>
+                    <li><a href="#" data-action="underline"><span class="image-icon underline-icon"></span></a></li>
+                    <li><a href="#"  data-action="align-left"><span class="glyphicon glyphicon-align-left"></span></a></li>
+                    <li><a href="#" data-action="align-center"><span class="glyphicon glyphicon-align-center"></span></a></li>
+                    <li><a href="#" data-action="align-right"><span class="glyphicon glyphicon-align-right"></span></a></li>
+                    <li><a href="#" data-action="align-justify"><span class="glyphicon glyphicon-align-justify"></span></a></li>
+                    <li>
+                        <a href="#" data-action="link" data-link-type="text"><span class="glyphicon glyphicon-link"></span></a>
+                    </li>
+                    <li><a href="#" data-action="var"><span class="image-icon variable-icon"></span></a></li>
+                    <li><a href="#" data-action="image"><span class="glyphicon glyphicon-picture"></span></a></li>
+                    <li><a href="#" data-action="html"><span class="image-icon source-icon"></span></a></li>
+
+                </ul>
+            </div>
+            <div class="helper helper-image">
+                <ul>
+                    <li>
+                        <a href="#"  data-action="align-left" data-image-editable="true">
+                            <span class="glyphicon glyphicon-align-left"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-action="align-center" data-image-editable="true">
+                            <span class="glyphicon glyphicon-align-center"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-action="align-right" data-image-editable="true">
+                            <span class="glyphicon glyphicon-align-right"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-action="align-justify" data-image-editable="true">
+                            <span class="glyphicon glyphicon-align-justify"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-action="link"  data-link-type="image">
+                            <span class="glyphicon glyphicon-link"></span>
+                        </a>
+                    </li>
+                    <li><a href="#" data-action="remove-image"  data-image-editable="true">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="helper helper-link">
+                <ul>
+                    <li><a href="#" data-action="bold"><span class="glyphicon glyphicon-bold"></span></a></li>
+                    <li><a href="#" data-action="italic"><span class="glyphicon glyphicon-italic"></span></a></li>
+                    <li>
+                        <a href="#" data-action="link" data-link-type="text">
+                            <span class="glyphicon glyphicon-link"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div id="loading" style="">
+            <span class="loading-animation">Please Wait....</span>
+        </div>
+
+        <div id="frame-overlay"></div>
+        <div id="draggable-helper-visible"><span></span></div>
+    </body>
+</html>
+
+
+<?php
+//@codingStandardsIgnoreStart
+?>
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        mtEditor.init(<?php echo $this->getJsonConfig(); ?>);
+    });
+</script>
+<?php
+//@codingStandardsIgnoreEnd
+?>

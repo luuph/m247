@@ -1,0 +1,353 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    padding: 0;
+    margin: 0;
+}
+
+#wrapper {
+    width: 90%;
+    margin: 20px;
+    margin-left: 5%;
+}
+
+.clr {
+    clear: both;
+}
+
+/******* HEADER **********/
+.header {
+    height: 158px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.header-right {
+    float: right;
+    width: 45%;
+    margin: -50px -50px 0 0;
+    padding-right: 5%;
+    color: #000000a1;
+}
+
+.header-right .info-title {
+    font-size: 40px;
+}
+
+.header-left {
+    padding: 60px 60px;
+    width: 100%;
+    float: left;
+}
+
+.customer-name {
+    margin-top: 60px;
+    margin-left: 5%;
+    font-weight: bold;
+}
+
+.customer-name strong , .info-title{
+    text-transform: uppercase;
+}
+
+.logo-left img {
+    margin-top: 40px;
+}
+
+.info {
+    margin-left: 30px;
+    padding-top: 28px;
+}
+
+/******* END HEADER **********/
+
+.billing-address, .shipping-address, .payment-method, .shipping-method {
+    float: left;
+    width: 100%;
+    color: black;
+}
+
+.billing-address p, .shipping-address p, .payment-method p, .shipping-method p {
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.mp-block-heading {
+    width: 98% !important;
+    padding: 5px 0px 5px 5px;
+}
+
+
+/* Css table items */
+.table {
+    width: 100%;
+}
+
+.mp-heading {
+    width: 100%;
+    height: 32px;
+    color: #FFF;
+}
+
+.mp-heading span {
+    font-weight: bold;
+}
+
+.mp-item{
+    float:left;
+    padding:6px 6px;
+}
+
+/*4 columns*/
+.four-columns .mp-item{
+    width:44%;
+}
+.four-columns .mp-price,.four-columns .mp-subtotal,.four-columns .mp-tax,.four-columns .mp-discount {
+    width: 13%;
+}
+.four-columns .mp-qty{
+    width: 7%;
+}
+/*end for 4 columns*/
+
+/*5 columns*/
+.five-columns .mp-item{
+    width:37%;
+}
+.five-columns .mp-price,.five-columns .mp-subtotal,.five-columns .mp-tax,.five-columns .mp-discount {
+    width: 12%;
+}
+.five-columns .mp-qty{
+    width:7%;
+}
+/*end for 5 columns*/
+
+/*6 columns*/
+.six-columns .mp-item{
+    width:30%;
+}
+.six-columns .mp-price,.six-columns .mp-tax{
+    width: 10%;
+}
+.six-columns .mp-subtotal,.six-columns .mp-discount {
+    width: 11%;
+}
+.six-columns .mp-qty{
+    width:7%;
+}
+/*end for 6 columns*/
+
+.mp-qty,.mp-price,.mp-subtotal,.mp-tax,.mp-discount{
+    float:left;
+    text-align:center;
+    padding:6px 0px;
+}
+.mp-image{
+    width:15%;
+    float:left;
+    text-align:center;
+    padding:6px 0px;
+}
+.order-totals {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.mp {
+    width: 100%;
+    height: 30px;
+}
+
+.mp-str {
+    width: 80%;
+    float: left;
+    margin-left: -35px;
+}
+
+.mp-right {
+    width: 18%;
+    float: left;
+}
+
+.grand_total {
+    border-top: 1px solid #e0e0f2;
+    border-bottom: 1px solid #e0e0f1;
+    width: 50%;
+    padding-top: 8px;
+    margin-left: 50%;
+}
+
+.grand_total .mp-str {
+    width: 60%;
+}
+
+.grand_total .mp-right {
+    width: 36%;
+}
+.mp-row .mp-item-bc .product-name,.mp-row .mp-item .product-name {
+    font-weight: bold;
+}
+
+.grand-total-price {
+    height: 34px;
+    border-top: 1px solid #e0e0f2;
+    border-bottom: 1px solid #e0e0f1;
+    font-size: 8px;
+    text-align: center;
+    padding-top: 12px;
+    width: 20%;
+}
+
+.row-left strong {
+    font-weight: normal;
+}
+
+/* End css table items*/
+
+/*for barcode*/
+/*4 columns*/
+.four-columns .mp-item-bc{
+    width:31%;
+}
+.four-columns .mp-barcode-bc{
+    width: 30%;
+}
+/*end for 4 columns*/
+
+/*5 columns*/
+.five-columns .mp-item-bc{
+    width:25%;
+}
+.five-columns .mp-barcode-bc{
+    width: 25%;
+}
+/*end for 5 columns*/
+
+/*6 columns*/
+.six-columns .mp-item-bc{
+    width:20%;
+}
+.six-columns .mp-barcode-bc{
+    width: 20%;
+}
+/*end for 6 columns*/
+.mp-item-bc {
+    float: left;
+    padding: 6px 0px 6px 5px;
+}
+
+.mp-image-bc {
+    width: 11%;
+    float: left;
+    text-align: center;
+    padding: 6px 0px;
+}
+.mp-image-bc img{
+    max-width: 100%;
+}
+
+.mp-barcode-bc {
+    float: left;
+    padding: 6px 0px;
+}
+
+.mp-barcode-bc p {
+    text-align: right;
+}
+
+.mp-price-bc, .mp-subtotal-bc, .mp-tax-bc, .mp-discount-bc {
+    width: 10%;
+    float: left;
+    text-align: center;
+    padding: 6px 0px;
+}
+
+.mp-qty-bc {
+    width: 7%;
+    float: left;
+    text-align: center;
+    padding: 6px 0px;
+}
+
+/*end for barcode*/
+
+/*for Address*/
+.content {
+    background-color: #f6f6f6;
+    width: 100%;
+    margin-bottom: 30px;
+    margin-top: 5px;
+}
+
+.billing-content {
+    float: left;
+    width: 40%;
+}
+
+.shipping-content {
+    float: right;
+    width: 40%;
+}
+
+.paymentTable {
+    margin-top: 5px;
+}
+
+.billing-content, .shipping-content {
+    margin: 10px 0;
+}
+caption{
+    display:none;
+}
+
+/*for business info*/
+.business-information {
+    width: 100%;
+    margin-top: 10%;
+    color: #FFF;
+}
+
+.business-information .business {
+    width: 29%;
+    float: left;
+    padding: 10px 1%;
+}
+.business.phone-tax{
+    margin: 0 3.5%;
+}
+/*color*/
+.business-information .business, .mp-heading, .footer-left  {
+    background-color: #0048db;
+}
+
+.customer-name strong, .header-right .info-title {
+    color: #0048db;
+}
+
+.business-information .business, .mp-note, .mp-heading, .footer-left  {
+    background:{{var pdfInvoiceDesign.getHeadingColor()}};
+}
+.footer-left{
+    color:#FFF;
+}
+#wrapper div.content div.address-content div.shipping-content div p a,
+#wrapper div.content div.address-content div.billing-content div p a {
+    color: black;
+}
+
+/*for note*/
+.mp-note {
+    color: #FFF;
+    padding-left: 3px;
+}
+.footer-left {
+    width: 100%;
+    padding: 0 5%;
+}
+footer {
+    margin-top: 10px;
+}

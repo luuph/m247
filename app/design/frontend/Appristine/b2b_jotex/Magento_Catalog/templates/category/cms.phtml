@@ -1,0 +1,28 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<?php
+/**
+ * Category view template
+ *
+ * @var $block \Magento\Catalog\Block\Category\View
+ */
+?>
+<?php if ($block->isContentMode() || $block->isMixedMode()) :?>
+    <div class="category-cms">
+        <?= $block->getCmsBlockHtml() ?>
+    </div>
+<?php endif; ?>
+<?php if ($block->isContentMode()) :?>
+    <style>
+        .sidebar-main, .mana-filter-block, .sidebar-additional {
+            display: none;
+        }
+        #mana_ajax_wrapper_mobile_mana_layered_nav {
+            display: none;
+        }
+    </style>
+<?php endif; ?>

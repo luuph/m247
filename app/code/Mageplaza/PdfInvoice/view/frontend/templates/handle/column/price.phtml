@@ -1,0 +1,56 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category   Mageplaza
+ * @package    Mageplaza_PdfInvoice
+ * @copyright   Copyright (c) Mageplaza (http://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+?>
+<?php
+$_order = $block->getOrder();
+$item = $this->getParentBlock()->getItem();
+$classForEl = $this->getParentBlock()->getClassForEl();
+$codeValue = $this->getParentBlock()->getCode();
+$isImpresive = $this->getParentBlock()->getImpresive();
+?>
+<?php if (isset($isImpresive) && $isImpresive): ?>
+<td class="<?= /** @noEscape */ $classForEl ?>">
+    <?php else: ?>
+<div class="<?= /** @noEscape */ $classForEl ?>">
+<?php endif; ?>
+    <?php if ($block->getParentBlock()->displayPriceExclTax() || $block->getParentBlock()->displayBothPrices()): ?>
+        <?php if ($block->getParentBlock()->displayBothPrices()): ?>
+            <span class="label"><?= /* @noEscape */
+                __('Excl. Tax') ?>:</span>
+        <?php endif ?>
+        <?= /* @noEscape */
+        $_order->formatPrice($item->getPrice()) ?>
+    <?php endif ?>
+
+    <?php if ($block->getParentBlock()->displayPriceInclTax() || $block->getParentBlock()->displayBothPrices()): ?>
+        <?php if ($block->getParentBlock()->displayBothPrices()): ?>
+            <br/><span class="label"><?= /* @noEscape */
+                __('Incl. Tax') ?>:</span>
+        <?php endif ?>
+        <?= /* @noEscape */
+        $_order->formatPrice($item->getPriceInclTax()) ?>
+    <?php endif ?>
+<?php if (isset($isImpresive) && $isImpresive): ?>
+    </td>
+<?php else: ?>
+    </div>
+<?php endif; ?>

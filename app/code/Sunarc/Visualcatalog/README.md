@@ -1,0 +1,1 @@
+Sunarc Visual Catalog Magento 2 Extension

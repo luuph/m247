@@ -1,0 +1,57 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var $block \Magento\Wishlist\Block\Catalog\Product\View\Addto\Wishlist */
+?>
+
+<?php  
+   // $objectManager = \Magento\Framework\App\objectManager::getInstance();
+   // $customerSession = $objectManager -> create('Magento\Customer\Model\Session');
+    $customer_id = $block->getCustomerId();
+?>
+
+<?php if ($block->isWishListAllowed()) : ?>
+
+<?php
+   // if($customer_id){
+        ?>
+        <a href="#"
+       class="action towishlist"
+       data-post='<?php /* @escapeNotVerified */ echo $block->getWishlistParams(); ?>'
+       data-action="add-to-wishlist"><span><?php /* @escapeNotVerified */ echo __('Add to Wishlist') ?></span></a>
+       <?php
+    /*}
+    else{
+        ?>
+         <a href="#" id="fav_log_in" class="action towishlist"
+       data-post='<?php echo $block->getWishlistParams(); ?>'
+       data-action="add-to-wishlist"><span><?php echo __('Add to Wishlist') ?></span></a>
+       <?php
+    }*/
+    ?>
+
+<?php endif; ?>
+<script type="text/x-magento-init">
+    {
+        "body": {
+            "addToWishlist": <?php /* @escapeNotVerified */ echo $block->getWishlistOptionsJson() ?>
+        }
+    }
+</script>
+
+
+
+<script>
+    require(["jquery"], function($){
+        $("#fav_log_in").click(function()
+        {
+            alert("You need to Login/Register before you can proceed.");
+        });
+
+    });
+</script>

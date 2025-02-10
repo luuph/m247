@@ -1,0 +1,43 @@
+{
+    "magearray_popup": {
+        "column": {
+            "popup_id": true,
+            "title": true,
+            "description": true,
+            "is_active": true,
+            "store_id": true,
+            "popup_type": true,
+            "image": true,
+            "url": true,
+            "width": true,
+            "width_unit": true,
+            "max_width": true,
+            "page": true,
+            "specified_url": true,
+            "specified_not_url": true,
+            "show_when": true,
+            "seconds_delay": true,
+            "total_seconds_delay": true,
+            "scroll_px": true,
+            "click_selector": true,
+            "close_on_hoverout": true,
+            "hover_selector": true,
+            "from_date": true,
+            "to_date": true,
+            "showing_frequency": true,
+            "cookie_time": true,
+            "close_on_overlay_click": true,
+            "close_on_timeout": true,
+            "if_pending_order": true,
+            "product_in_cart": true,
+            "cart_subtotal_min": true,
+            "cart_subtotal_max": true
+        },
+        "index": {
+            "MAGEARRAY_POPUP_POPUP_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

@@ -1,0 +1,21 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var $block \Magento\Customer\Block\Account\AuthorizationLink */
+$dataPostParam = '';
+if ($block->isLoggedIn()) {
+    $dataPostParam = sprintf(" data-post='%s'", $block->getPostParams());
+}
+ $loginlabel = ($block->escapeHtml($block->getLabel()) == "Sign In") ? "Login" : $block->getLabel();
+$regstoreurl = str_replace("customer/account/login","customer/account/create",$block->getLinkAttributes() );
+?>
+<li class="authorization-link" data-label="<?php echo $block->escapeHtml(__('')); ?>">
+    <a <?php /* @escapeNotVerified */ echo $block->getLinkAttributes(); ?><?php /* @escapeNotVerified */ echo $dataPostParam; ?>>
+        <?php echo $block->escapeHtml($loginlabel); ?>
+    </a><?php if (!$block->isLoggedIn()) { ?>/<a <?php echo $regstoreurl; ?> class="reg"><?php echo __('Register') ?></a><?php } ?>
+</li>

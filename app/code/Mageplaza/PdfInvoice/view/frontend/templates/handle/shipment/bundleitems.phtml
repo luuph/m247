@@ -1,0 +1,109 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category   Mageplaza
+ * @package    Mageplaza_PdfInvoice
+ * @copyright   Copyright (c) Mageplaza (http://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+?>
+<?php /** @var $block \Mageplaza\PdfInvoice\Block\BundleItems */ ?>
+
+<?php
+$parentItem = $block->getItem();
+$barcodeConfig = $block->getBarcodeConfig();
+$codeType = $block->getCodeType();
+$isBarcode = $block->getIsBarcode();
+$type = $block->getType();
+$pageSize = $block->getPageSize();
+$a4Barcode = $isBarcode && ($pageSize == 'A4');
+$a5Barcode = $isBarcode && ($pageSize == 'A5');
+$items = array_merge([$parentItem->getOrderItem()], $parentItem->getOrderItem()->getChildrenItems());
+
+$_index = 0;
+$_order = $block->getOrder();
+$block->setStoreId($_order->getStoreId());
+$_messageHelper = $block->getHelperMessage();
+$columnsConfig = $block->getColumnsConfig();
+?>
+<?php if ($block->getItemOptions() || $parentItem->getDescription() || $_messageHelper->isMessagesAllowed('order_item', $parentItem) && $parentItem->getGiftMessageId()): ?>
+    <?php $_showlastRow = true ?>
+<?php else: ?>
+    <?php $_showlastRow = false ?>
+<?php endif ?>
+
+<?php $_prevOptionId = '' ?>
+<?php
+$i = 1;
+?>
+<div class="bundle-item <?= /** @noEscape */ $block->getIndexKey() ?>" style="border-bottom: 1px solid #ddd;">
+    <?php foreach ($items
+
+    as $_item): ?>
+    <?php
+    // As part of invoice item renderer logic, the order is set on each invoice item.
+    // In the case of a bundle product, this template takes over rendering its children,
+    // so it is necessary to pass the order along to each child.
+    $_item->setOrder($_order);
+    $codeValue = [];
+
+    if ($barcodeConfig['barcode_attribute'] === 'sku') {
+        $codeValue['barcode'] = $_item->getSku();
+    } else if ($barcodeConfig['barcode_attribute'] === 'product_id') {
+        $codeValue['barcode'] = $_item->getProductId();
+    } else {
+        $codeValue['barcode'] = $_item->getName();
+    }
+
+    if ($barcodeConfig['qrcode_attribute'] === 'sku') {
+        $codeValue['qrcode'] = $_item->getSku();
+    } else if ($barcodeConfig['qrcode_attribute'] === 'product_id') {
+        $codeValue['qrcode'] = $_item->getProductId();
+    } else {
+        $codeValue['qrcode'] = $_item->getName();
+    }
+    ?>
+    <div class="mp-row">
+        <?php
+        foreach ($columnsConfig as $columnConfig) {
+            if ($columnConfig['status']) {
+                echo $block->getTdBundleHtml($columnConfig['name'], $a4Barcode, $isBarcode, $_item, $codeValue, 'shipment');
+            }
+        }
+        ?>
+    </div>
+    <div class="clr"></div>
+<?php endforeach ?>
+
+<?php if ($_showlastRow): ?>
+    <div class="mp-row">
+        <div class="item-extra">
+            <?php if ($block->getItemOptions()): ?>
+                <div>
+                    <?php foreach ($block->getItemOptions() as $option): ?>
+                        <div><strong><em><?= /* @noEscape */
+                                    $option['label'] ?></em></strong></div>
+                        <div><?= /* @noEscape */
+                            $option['value'] ?></div>
+                    <?php endforeach ?>
+                </div>
+            <?php endif ?>
+            <?= $block->escapeHtml($_item->getDescription()) ?>
+        </div>
+    </div>
+<?php endif ?>
+</div>
+<div class="clr"></div>

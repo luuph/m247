@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_CustomOptionAbsolutePriceQuantity
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2017-2022 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Catalog\Model\Config\Source\Product\Options\Price">
+        <plugin name="bss-coap-add-absolute-type" type="Bss\CustomOptionAbsolutePriceQuantity\Plugin\PriceType"/>
+    </type>
+    <type name="Magento\Catalog\Helper\Product\Configuration">
+        <plugin name="bss-add-to-product-quote-coap" type="Bss\CustomOptionAbsolutePriceQuantity\Plugin\QuotePlugin" sortOrder="10"/>
+    </type>
+    <type name="Magento\Tax\Model\Sales\Total\Quote\CommonTaxCollector">
+        <plugin name="bss-coap-map-item-plugin" type="Bss\CustomOptionAbsolutePriceQuantity\Plugin\MapItemPlugin" sortOrder="10"/>
+    </type>
+    <type name="Magento\Quote\Model\Quote\Item">
+        <plugin name="bss-coap-option-qty-separate" type="Bss\CustomOptionAbsolutePriceQuantity\Plugin\RepresentProductPlugin" sortOrder="10"/>
+    </type>
+    <type name="Magento\Catalog\Helper\Product">
+        <plugin name="bss-prepare-product-options-plugin" type="Bss\CustomOptionAbsolutePriceQuantity\Plugin\ProductHelperPlugin" sortOrder="10"/>
+    </type>
+    <preference for="Magento\Tax\Model\Calculation\TotalBaseCalculator" type="Bss\CustomOptionAbsolutePriceQuantity\Override\TotalBaseCalculator" />
+    <preference for="Magento\Tax\Model\Calculation\RowBaseCalculator" type="Bss\CustomOptionAbsolutePriceQuantity\Override\RowBaseCalculator" />
+    <preference for="Magento\Tax\Model\Calculation\UnitBaseCalculator" type="Bss\CustomOptionAbsolutePriceQuantity\Override\UnitBaseCalculator" />
+    <preference for="Bss\CustomOptionAbsolutePriceQuantity\Api\Data\QtyOptionInterface" type="Bss\CustomOptionAbsolutePriceQuantity\Model\QtyOption" />
+
+    <type name="Magento\Catalog\Model\Product\Option\Value">
+        <plugin name="bss-coap-add-tier-price-option-value" type="Bss\CustomOptionAbsolutePriceQuantity\Plugin\Model\ResourceModel\OptionValuePlugin" sortOrder="10"/>
+    </type>
+    <type name="Magento\Catalog\Model\Product\Option">
+        <plugin name="bss-coap-add-tier-price-option" type="Bss\CustomOptionAbsolutePriceQuantity\Plugin\Model\ResourceModel\OptionPlugin" sortOrder="10"/>
+    </type>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="bss_customabspriceqty_stock_listing_data_source" xsi:type="string">Bss\CustomOptionAbsolutePriceQuantity\Model\ResourceModel\OptionQtyReport\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Bss\CustomOptionAbsolutePriceQuantity\Model\ResourceModel\OptionQtyReport\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">bss_custom_option_qty_report</argument>
+            <argument name="resourceModel" xsi:type="string">Bss\CustomOptionAbsolutePriceQuantity\Model\ResourceModel\OptionQtyReport</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\View\Element\UiComponent\Context">
+        <arguments>
+            <argument name="namespace" xsi:type="string">bssabspriceqty_stock_listing</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Catalog\Model\ResourceModel\Product\Option\Collection">
+        <plugin name="bss-after-load-option" type="Bss\CustomOptionAbsolutePriceQuantity\Plugin\Model\ResourceModel\Product\Option\Collection" sortOrder="50"/>
+    </type>
+    <type name="Magento\Quote\Model\Quote\Item\CartItemOptionsProcessor">
+        <plugin name="bss-after-get-buy-request" type="Bss\CustomOptionAbsolutePriceQuantity\Plugin\Model\Quote\Item\CartItemOptionsProcessor" sortOrder="50"/>
+    </type>
+</config>

@@ -1,0 +1,66 @@
+<?php
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_CustomOptionAbsolutePriceQuantity
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2017-2022 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+
+// @codingStandardsIgnoreFile
+
+/**
+ * Tooltip options block
+ *
+ * @var $block \Bss\CustomOptionAbsolutePriceQuantity\Block\Render\Tooltip
+ */
+// @codingStandardsIgnoreFile
+?>
+<?php
+$option = $block->getOption();
+$moduleConfig = $block->getModuleConfig();
+$des = $block->escapeHtml($option->getBssDescriptionOption());
+$desType = $option->getBssDescriptionOptionType();
+$toolTipGeneral = $block->escapeHtml($moduleConfig->getTooltipMessage());
+$toolTipEnable = $block->isEnableTooltip();
+?>
+<?php echo $block->isAbsPriceTip() ? '<span>' . __('(absolute price)') . '</span>' : ''; ?>
+<?php if ($toolTipEnable) : ?>
+    <span class="coap-tooltip">
+        <span tooltip="<?php echo ($des !== '' && $desType == 1) ? $toolTipGeneral . '
+' . $des : $toolTipGeneral; ?>"></span>
+    </span>
+<?php endif; ?>
+
+<?php if ($des !== '' && $desType == 1 && !$toolTipEnable) : ?>
+    <span class="coap-tooltip">
+        <span tooltip="<?php echo $des; ?>"></span>
+    </span>
+<?php endif; ?>
+
+<?php if ($des !== '' && $desType == 2) : ?>
+    <p class="bss_description">
+        <?php echo $des; ?>
+    </p>
+<?php endif; ?>
+
+<?php if ($block->getPriceTypeData()) : ?>
+    <script type="text/x-magento-init">
+        {
+            ".bss_options_<?php echo $option->getId() ?>": {
+                "coapTip": {
+                    "priceTypeData": <?php /* @escapeNotVerified */ echo $block->getPriceTypeData(); ?>
+                }
+            }
+        }
+    </script>
+<?php endif; ?>

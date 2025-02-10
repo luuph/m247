@@ -1,0 +1,201 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_RewardPoint
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2019-2020 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <block class="Magento\Backend\Block\Widget\Grid\Container" name="adminhtml.report.grid.container" template="Magento_Backend::widget/grid/container/empty.phtml">
+            <block class="Bss\RewardPoint\Block\Adminhtml\EarnReport\Filter" name="adminhtml.report.grid" as="grid" >
+                <arguments>
+                    <argument name="use_ajax" xsi:type="string">0</argument>
+                    <argument name="pager_visibility" xsi:type="string">0</argument>
+                    <argument name="id" xsi:type="string">gridReport</argument>
+                    <argument name="dataSource" xsi:type="object" shared="false">Bss\RewardPoint\Model\ResourceModel\Report\Collection</argument>
+                </arguments>
+                <block class="Magento\Backend\Block\Widget\Grid\Export" name="adminhtml.report.grid.export" as="grid.export">
+                    <arguments>
+                        <argument name="exportTypes" xsi:type="array">
+                            <item name="csv" xsi:type="array">
+                                <item name="urlPath" xsi:type="string">*/*/exportEarnCsv</item>
+                                <item name="label" xsi:type="string" translate="true">CSV</item>
+                            </item>
+                            <item name="excel" xsi:type="array">
+                                <item name="urlPath" xsi:type="string">*/*/exportEarnExcel</item>
+                                <item name="label" xsi:type="string" translate="true">Excel XML</item>
+                            </item>
+                        </argument>
+                    </arguments>
+                </block>
+                <block class="Bss\RewardPoint\Block\Adminhtml\EarnReport\Chart" name="earnreport.chart" template="Bss_RewardPoint::earnreport/chart_earn_report.phtml"/>
+                <block class="Magento\Backend\Block\Widget\Grid\ColumnSet" as="grid.columnSet" name="adminhtml.report.grid.columnSet">
+                    <arguments>
+                        <argument name="filter_visibility" xsi:type="string">0</argument>
+                        <argument name="empty_text" xsi:type="string" translate="true">We can't find records for this period.</argument>
+                        <argument name="empty_cell_label" xsi:type="string" translate="true">We can't find records for this period.</argument>
+                        <argument name="count_totals" xsi:type="string">1</argument>
+                    </arguments>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" name="adminhtml.report.grid.columnSet.period" as="period">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Period</argument>
+                            <argument name="sortable" xsi:type="string">0</argument>
+                            <argument name="type" xsi:type="string">text</argument>
+                            <argument name="id" xsi:type="string">period</argument>
+                            <argument name="index" xsi:type="string">period</argument>
+                            <argument name="grouped" xsi:type="string">1</argument>
+                            <argument name="totals_label" xsi:type="string" translate="true">Total</argument>
+                            <argument name="column_css_class" xsi:type="string">col-period</argument>
+                            <argument name="header_css_class" xsi:type="string">col-period</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" name="adminhtml.report.grid.columnSet.earnpoint" as="earnpoint">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Total Earned</argument>
+                            <argument name="sortable" xsi:type="string">0</argument>
+                            <argument name="type" xsi:type="string">number</argument>
+                            <argument name="index" xsi:type="string">total_earn_point</argument>
+                            <argument name="total" xsi:type="string">sum</argument>
+                            <argument name="id" xsi:type="string">total_earn_point</argument>
+                            <argument name="column_css_class" xsi:type="string">col-total</argument>
+                            <argument name="header_css_class" xsi:type="string">col-total</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" name="adminhtml.report.grid.columnSet.admin.change" as="adminchange">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Admin Change</argument>
+                            <argument name="sortable" xsi:type="string">0</argument>
+                            <argument name="type" xsi:type="string">number</argument>
+                            <argument name="index" xsi:type="string">earn_report_admin_change</argument>
+                            <argument name="total" xsi:type="string">sum</argument>
+                            <argument name="id" xsi:type="string">earn_report_admin_change</argument>
+                            <argument name="column_css_class" xsi:type="string">col-admin-change</argument>
+                            <argument name="header_css_class" xsi:type="string">col-admin-change</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" name="adminhtml.report.grid.columnSet.registration" as="registration">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Registration</argument>
+                            <argument name="sortable" xsi:type="string">0</argument>
+                            <argument name="type" xsi:type="string">number</argument>
+                            <argument name="total" xsi:type="string">sum</argument>
+                            <argument name="index" xsi:type="string">earn_report_registration</argument>
+                            <argument name="id" xsi:type="string">earn_report_registration</argument>
+                            <argument name="column_css_class" xsi:type="string">col-registration</argument>
+                            <argument name="header_css_class" xsi:type="string">col-registration</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" name="adminhtml.report.grid.columnSet.birthday" as="birthday">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Birthday</argument>
+                            <argument name="sortable" xsi:type="string">0</argument>
+                            <argument name="type" xsi:type="string">number</argument>
+                            <argument name="index" xsi:type="string">earn_report_birthday</argument>
+                            <argument name="total" xsi:type="string">sum</argument>
+                            <argument name="id" xsi:type="string">earn_report_birthday</argument>
+                            <argument name="column_css_class" xsi:type="string">col-birthday</argument>
+                            <argument name="header_css_class" xsi:type="string">col-birthday</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" name="adminhtml.report.grid.columnSet.first.review" as="firstreview">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">First Review</argument>
+                            <argument name="sortable" xsi:type="string">0</argument>
+                            <argument name="type" xsi:type="string">number</argument>
+                            <argument name="total" xsi:type="string">sum</argument>
+                            <argument name="index" xsi:type="string">earn_report_first_review</argument>
+                            <argument name="id" xsi:type="string">earn_report_first_review</argument>
+                            <argument name="column_css_class" xsi:type="string">col-first-review</argument>
+                            <argument name="header_css_class" xsi:type="string">col-first-review</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" name="adminhtml.report.grid.columnSet.review" as="review">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Review</argument>
+                            <argument name="sortable" xsi:type="string">0</argument>
+                            <argument name="type" xsi:type="string">number</argument>
+                            <argument name="total" xsi:type="string">sum</argument>
+                            <argument name="index" xsi:type="string">earn_report_review</argument>
+                            <argument name="id" xsi:type="string">earn_report_review</argument>
+                            <argument name="column_css_class" xsi:type="string">col-review</argument>
+                            <argument name="header_css_class" xsi:type="string">col-review</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" name="adminhtml.report.grid.columnSet.first.order" as="firstorder">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">First Order</argument>
+                            <argument name="sortable" xsi:type="string">0</argument>
+                            <argument name="type" xsi:type="string">number</argument>
+                            <argument name="total" xsi:type="string">sum</argument>
+                            <argument name="index" xsi:type="string">earn_report_first_order</argument>
+                            <argument name="id" xsi:type="string">earn_report_first_order</argument>
+                            <argument name="column_css_class" xsi:type="string">col-first-order</argument>
+                            <argument name="header_css_class" xsi:type="string">col-first-order</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" name="adminhtml.report.grid.columnSet.order" as="order">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Order</argument>
+                            <argument name="sortable" xsi:type="string">0</argument>
+                            <argument name="type" xsi:type="string">number</argument>
+                            <argument name="index" xsi:type="string">earn_report_order</argument>
+                            <argument name="total" xsi:type="string">sum</argument>
+                            <argument name="id" xsi:type="string">earn_report_order</argument>
+                            <argument name="column_css_class" xsi:type="string">col-order</argument>
+                            <argument name="header_css_class" xsi:type="string">col-order</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" name="adminhtml.report.grid.columnSet.order.refund" as="orderrefund">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Order Refund</argument>
+                            <argument name="sortable" xsi:type="string">0</argument>
+                            <argument name="type" xsi:type="string">number</argument>
+                            <argument name="index" xsi:type="string">earn_report_order_refund</argument>
+                            <argument name="total" xsi:type="string">sum</argument>
+                            <argument name="id" xsi:type="string">earn_report_order_refund</argument>
+                            <argument name="column_css_class" xsi:type="string">col-order-refund</argument>
+                            <argument name="header_css_class" xsi:type="string">col-order-refund</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" name="adminhtml.report.grid.columnSet.import" as="import">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Import</argument>
+                            <argument name="sortable" xsi:type="string">0</argument>
+                            <argument name="type" xsi:type="string">number</argument>
+                            <argument name="index" xsi:type="string">earn_report_import</argument>
+                            <argument name="total" xsi:type="string">sum</argument>
+                            <argument name="id" xsi:type="string">earn_report_import</argument>
+                            <argument name="column_css_class" xsi:type="string">col-import</argument>
+                            <argument name="header_css_class" xsi:type="string">col-import</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" name="adminhtml.report.grid.columnSet.subscribe.newsletters" as="subscribe">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Subscribe Newsletters</argument>
+                            <argument name="sortable" xsi:type="string">0</argument>
+                            <argument name="type" xsi:type="string">number</argument>
+                            <argument name="index" xsi:type="string">earn_report_subscribe</argument>
+                            <argument name="total" xsi:type="string">sum</argument>
+                            <argument name="id" xsi:type="string">earn_report_subscribe</argument>
+                            <argument name="column_css_class" xsi:type="string">col-subscribe</argument>
+                            <argument name="header_css_class" xsi:type="string">col-subscribe</argument>
+                        </arguments>
+                    </block>
+                </block>
+            </block>
+        </block>
+    </body>
+</page>

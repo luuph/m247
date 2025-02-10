@@ -1,0 +1,112 @@
+<?php
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category  BSS
+ * @package   Bss_ConfigurableProductWholesale
+ * @author    Extension Team
+ * @copyright Copyright (c) 2017-2018 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license   http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+
+// @codingStandardsIgnoreFile
+/** @var $block \Bss\ConfigurableProductWholesale\Block\Product\Renderer\ConfigurableProductWholesale */
+?>
+
+<?php
+    $_product    = $block->getProduct();
+    $_attributes = $block->decorateArray($block->getAllowAttributes());
+    $_helper = $block->getHelper();
+    $tableData = $block->getJsonConfigTable();
+    $countCpAttributes = $block->getCountAttributes();
+    $stockItem = $block->getStockItem()->getData();
+?>
+<?php if ($_product->isSaleable() && !empty($_attributes)) :?>
+    <?php
+        $i = 1;
+        $count = count($_attributes);
+    ?>
+    <?php foreach ($_attributes as $_attribute) : ?>
+        <?php
+        if ($i == $count) {
+            $class = 'bss-hidden bss-last-select';
+            $required = 'data-validate="{required:false}"';
+        } else {
+            $class = 'bss-show';
+            $required = 'data-validate="{required:true}"';
+        }
+        ?>
+        <div class="field configurable required <?php /* @noEscape */ echo $class; ?>">
+            <label class="label" for="attribute<?php /* @noEscape */ echo $_attribute->getAttributeId() ?>">
+                <span><?php echo $block->escapeHtml($_attribute->getProductAttribute()->getStoreLabel()) ?></span>
+            </label>
+            <div class="control">
+                <select name="super_attribute[<?php /* @noEscape */ echo $_attribute->getAttributeId() ?>]"
+                        data-selector="super_attribute[<?php /* @noEscape */ echo $_attribute->getAttributeId() ?>]"
+                        <?php /* @noEscape */ echo $required; ?>
+                        id="attribute<?php /* @noEscape */ echo $_attribute->getAttributeId() ?>"
+                        class="super-attribute-select swatch-attribute"
+                        attribute-id="<?php /* @noEscape */ echo $_attribute->getAttributeId() ?>">
+                    <option value=""><?php /* @noEscape */ echo __('Choose an Option...') ?></option>
+                </select>
+            </div>
+        </div>
+        <?php $i++; ?>
+    <?php endforeach; ?>
+    <div class="bss-ptd-table" data-bind="scope:'knockouts'">
+        <!-- ko template: getTemplate() --><!-- /ko -->
+    </div>
+
+    <script type="text/x-magento-init">
+        {
+            ".bss-ptd-table": {
+                "Magento_Ui/js/core/app": {
+                    "components": {
+                        "knockouts": {
+                            "component": "Bss_ConfigurableProductWholesale/js/cpwd",
+                            "productData": <?= /* @escapeNotVerified */ $block->getDataJson() ?>,
+                            "attributeData": <?= /* @escapeNotVerified */ $block->getAttributeData() ?>,
+                            "productOptionsIndex": <?= $block->getProductOptionsIndex() ?>,
+                            "jsonSwatchConfig": <?= /* @escapeNotVerified */ $block->getJsonSwatchConfig() ?>,
+                            "jsonSystemConfig": <?= /* @escapeNotVerified */ $_helper->getJsonSystemConfig($_product) ?>,
+                            "isDecimalQty": <?php /* @escapeNotVerified */ echo $stockItem['is_qty_decimal'] ?>,
+                            <?php if ($block->getStockItem()->getQtyIncrements()) : ?>
+                            "incrementQty": <?php /* @escapeNotVerified */ echo $block->getStockItem()->getQtyIncrements() ?>,
+                             <?php endif;?>
+                             "fomatPrice": <?= /* @escapeNotVerified */ $_helper->getFomatPrice() ?>,
+                             "isAjaxLoad": <?php echo $_helper->isAjax($_product) ? 1 : 0 ?>,
+                             "noSwatch": "1",
+                             "jsonConfig": <?= /* @escapeNotVerified */ $block->getJsonConfig() ?>
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <script type="text/x-magento-init">
+        {
+            "#product_addtocart_form": {
+                "configurable": {
+                    "spConfig": <?php /* @noEscape */ echo $block->getJsonConfig() ?>,
+                    <?php if ($block->getPreselectData()) :?>
+                    "preselect": <?php /* @noEscape */ echo $block->getPreselectData(); ?>,
+                    <?php endif;?>
+                    <?php if ($_helper->isEnableSdcp($_product)): ?>
+                    "isEnabledSdcp": <?= $_helper->isEnableSdcp($_product) ?>,
+                    <?php endif; ?>
+                    "gallerySwitchStrategy": "<?php /* @noEscape */ echo $block->getVar(
+                        'gallery_switch_strategy',
+                        'Magento_ConfigurableProduct'
+                    ) ?: 'replace'; ?>"
+                }
+            }
+        }
+    </script>
+<?php endif;?>

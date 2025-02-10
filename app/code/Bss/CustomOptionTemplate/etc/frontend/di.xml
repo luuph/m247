@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+* BSS Commerce Co.
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the EULA
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* http://bsscommerce.com/Bss-Commerce-License.txt
+*
+* @category   BSS
+* @package    Bss_CustomOptionTemplate
+* @author     Extension Team
+* @copyright  Copyright (c) 2018-2020 BSS Commerce Co. ( http://bsscommerce.com )
+* @license    http://bsscommerce.com/Bss-Commerce-License.txt */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Catalog\Block\Product\View\Options">
+        <plugin name="bss-option-template-block-product-view-option" type="Bss\CustomOptionTemplate\Plugin\Block\Product\View\Options" sortOrder="10"/>
+    </type>
+    <type name="Magento\Catalog\Model\Product\Option\Type\DefaultType">
+        <plugin name="bss-template-remove-require-for-option" type="Bss\CustomOptionTemplate\Plugin\Model\Product\Option\Type\DefaultType" sortOrder="10" />
+    </type>
+    <type name="Magento\Catalog\Helper\Product\Configuration">
+        <plugin name="bss-template-remove-option-store-view" type="Bss\CustomOptionTemplate\Plugin\Helper\Product\Configuration" sortOrder="10" />
+    </type>
+</config>

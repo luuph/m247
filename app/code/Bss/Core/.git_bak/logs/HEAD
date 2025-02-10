@@ -1,0 +1,16 @@
+0000000000000000000000000000000000000000 5b9970d85607cbe3775bbeb72bd8791e880c44b2 Hai Luu <luuph@bsscommerce.com> 1731983111 +0700	clone: from ssh://x-gitlab.bsscommerce.com:2224/bsssupport/bss-core.git
+5b9970d85607cbe3775bbeb72bd8791e880c44b2 5b9970d85607cbe3775bbeb72bd8791e880c44b2 Hai Luu <luuph@bsscommerce.com> 1731985642 +0700	checkout: moving from master to M2CoreExtension-20
+5b9970d85607cbe3775bbeb72bd8791e880c44b2 5b9970d85607cbe3775bbeb72bd8791e880c44b2 Hai Luu <luuph@bsscommerce.com> 1732011941 +0700	reset: moving to HEAD
+5b9970d85607cbe3775bbeb72bd8791e880c44b2 ccbff059e89c40af65ec6a5562a6d401d29a96a5 Hai Luu <luuph@bsscommerce.com> 1732012031 +0700	commit: M2CoreExtension-20: remove popup extension version, add label into section BSS Extensions, chang Bss > BSS
+ccbff059e89c40af65ec6a5562a6d401d29a96a5 bb061cf389287b60ce8691b3af96352aa339a8fe Hai Luu <luuph@bsscommerce.com> 1732096085 +0700	commit: M2CoreExtension-20: Update call api 1 time 1 day
+bb061cf389287b60ce8691b3af96352aa339a8fe ccbff059e89c40af65ec6a5562a6d401d29a96a5 Hai Luu <luuph@bsscommerce.com> 1732156905 +0700	reset: moving to ccbff05
+ccbff059e89c40af65ec6a5562a6d401d29a96a5 ccbff059e89c40af65ec6a5562a6d401d29a96a5 Hai Luu <luuph@bsscommerce.com> 1732156954 +0700	reset: moving to HEAD
+ccbff059e89c40af65ec6a5562a6d401d29a96a5 100c0cea4e5f4f134b51b428e60eb1cc9caf4e28 Hai Luu <luuph@bsscommerce.com> 1732157000 +0700	commit: M2CoreExtension-20: Update call api 1 time 1 day
+100c0cea4e5f4f134b51b428e60eb1cc9caf4e28 ccbff059e89c40af65ec6a5562a6d401d29a96a5 Hai Luu <luuph@bsscommerce.com> 1732158247 +0700	reset: moving to ccbff05
+ccbff059e89c40af65ec6a5562a6d401d29a96a5 ccbff059e89c40af65ec6a5562a6d401d29a96a5 Hai Luu <luuph@bsscommerce.com> 1732158253 +0700	reset: moving to HEAD
+ccbff059e89c40af65ec6a5562a6d401d29a96a5 5d53e8741d8ce252d0e7954475df0552186bd133 Hai Luu <luuph@bsscommerce.com> 1732158303 +0700	commit: M2CoreExtension-20: Update call api 1 time 1 day
+5d53e8741d8ce252d0e7954475df0552186bd133 2a2672e4e92dfc04ceaf54a6d9507d8dcc1e4705 Hai Luu <luuph@bsscommerce.com> 1732246202 +0700	commit: M2CoreExtension-20: fix reivew code + update endpoint promote
+2a2672e4e92dfc04ceaf54a6d9507d8dcc1e4705 5b9970d85607cbe3775bbeb72bd8791e880c44b2 Hai Luu <luuph@bsscommerce.com> 1732260794 +0700	checkout: moving from M2CoreExtension-20 to master
+5b9970d85607cbe3775bbeb72bd8791e880c44b2 2a2672e4e92dfc04ceaf54a6d9507d8dcc1e4705 Hai Luu <luuph@bsscommerce.com> 1732260811 +0700	merge M2CoreExtension-20: Fast-forward
+2a2672e4e92dfc04ceaf54a6d9507d8dcc1e4705 b9c6a94129c51e2b3c3b6b15fe1d062f9e818623 Hai Luu <luuph@bsscommerce.com> 1732777196 +0700	commit: Fix text BSS Promotion Extensions
+b9c6a94129c51e2b3c3b6b15fe1d062f9e818623 358f24439b87843aedece9136837f60a6928cd16 Hai Luu <luuph@bsscommerce.com> 1733451647 +0700	commit: Module version 1.0.9

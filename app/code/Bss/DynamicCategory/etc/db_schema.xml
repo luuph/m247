@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_DynamicCategory
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2023 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+ -->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="bss_dynamic_category_rule" resource="default" engine="innodb" comment="BSS Dynamic Category Rule">
+        <column xsi:type="int" name="rule_id" padding="10" unsigned="true" nullable="false"
+                comment="Rule Id"/>
+        <column xsi:type="mediumtext" name="conditions_serialized" nullable="true"
+                comment="Conditions Serialized"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="rule_id"/>
+        </constraint>
+    </table>
+    <table name="bss_dynamic_category_logging" resource="default" engine="innodb" comment="BSS Dynamic Category Reindex Logging">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Id"/>
+        <column xsi:type="int" name="cat_id" padding="10" unsigned="true" nullable="false"
+                comment="Category Id"/>
+            <column xsi:type="mediumtext" name="conditions_serialized" nullable="true"
+                comment="Conditions Serialized"/>
+        <column xsi:type="mediumtext" name="product_ids" nullable="true"
+                comment="Product IDs that apply to categories"/>
+        <column xsi:type="timestamp" name="time_reindex" on_update="false" nullable="false"
+                default="CURRENT_TIMESTAMP" comment="Current Time Reindex"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+</schema>

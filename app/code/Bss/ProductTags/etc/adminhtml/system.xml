@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category  BSS
+ * @package   Bss_ProductTags
+ * @author    Extension Team
+ * @copyright Copyright (c) 2018-2022 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license   http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <!-- Add new Tab -->
+        <tab id="bss" translate="label" sortOrder="300">
+            <label><![CDATA[Bss Commerce]]></label>
+        </tab>
+        <section id="bss_producttags" translate="label" type="text" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label><![CDATA[Product Tags]]></label>
+            <tab>bss</tab>
+            <!-- resource tag name which we have to defined in the acl.xml -->
+            <resource>Bss_ProductTags::config_producttags</resource>
+            <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA[Enable]]></label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Version 1.0.6]]></comment>
+                </field>
+                <field id="use_meta_keyword" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label><![CDATA[Use "Meta keywords" as Tag]]></label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <backend_model>Bss\ProductTags\Model\System\Config\RequireIndex</backend_model>
+                </field>
+                <field id="title" translate="label" type="text" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label><![CDATA[Title of Tags List on Product Page]]></label>
+                </field>
+                <field id="tag_in_productpage" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA[Enable Tags on Product Page]]></label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="tag_sort_by" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="70">
+                    <label><![CDATA[Tag Keywords Sort by]]></label>
+                    <source_model>Bss\ProductTags\Model\System\Config\SortBy</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

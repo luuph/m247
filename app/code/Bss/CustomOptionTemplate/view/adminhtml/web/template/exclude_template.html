@@ -1,0 +1,42 @@
+<!--
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_CustomOptionTemplate
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2018-2020 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+ -->
+
+<select multiple="true" class="multiselect-exclude"
+        data-bind="
+    options: tenplates_included,
+    selectedOptions: tenplates_excluded,
+    optionsValue: 'value',
+    optionsText: 'label',
+    event: {change: updateExclude},
+    attr: {id: multiselectId}"
+></select>
+<input class="admin__control-text hidden" type="text"
+       data-bind="
+    event: {change: userChanges},
+    value: value,
+    hasFocus: focused,
+    valueUpdate: valueUpdate,
+    attr: {
+        name: inputName,
+        form: 'product_form',
+        placeholder: placeholder,
+        'aria-describedby': noticeId,
+        id: uid,
+        disabled: disabled
+}"/>

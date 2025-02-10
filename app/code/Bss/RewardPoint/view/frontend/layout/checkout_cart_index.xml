@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_RewardPoint
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2019-2020 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="checkout.cart.container">
+            <container name="bss.rewardpoint" label="Reward Points Container" htmlTag="div" htmlClass="cart-discount cart-bss-rewward-point" after="-">
+                <block class="Bss\RewardPoint\Block\Cart\SpendPoint" name="bss.rewardpoint.checkout.cart.credit" template="Bss_RewardPoint::cart/spend_point.phtml" as="rewardpoint"/>
+            </container>
+        </referenceContainer>
+        <referenceBlock name="checkout.cart.totals">
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <item name="block-totals" xsi:type="array">
+                            <item name="children" xsi:type="array">
+                                <item name="spend_point" xsi:type="array">
+                                    <item name="component" xsi:type="string">Bss_RewardPoint/js/view/checkout/cart/spend_point</item>
+                                    <item name="sortOrder" xsi:type="string">31</item>
+                                    <item name="config" xsi:type="array">
+                                        <item name="template" xsi:type="string">Bss_RewardPoint/checkout/cart/spend_point</item>
+                                        <item name="title" xsi:type="string" translate="true">Spend Point</item>
+                                    </item>
+                                </item>
+                                <item name="earn_point" xsi:type="array">
+                                    <item name="component" xsi:type="string">Bss_RewardPoint/js/view/checkout/cart/earn_point</item>
+                                    <item name="sortOrder" xsi:type="string">32</item>
+                                    <item name="config" xsi:type="array">
+                                        <item name="template" xsi:type="string">Bss_RewardPoint/checkout/cart/earn_point</item>
+                                        <item name="title" xsi:type="string" translate="true">Earned points after order completion</item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>

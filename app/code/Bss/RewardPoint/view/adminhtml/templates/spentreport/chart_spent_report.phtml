@@ -1,0 +1,19 @@
+<?php
+/**
+ * @var $block \Bss\RewardPoint\Block\Adminhtml\SpentReport\Chart
+ **/
+?>
+<div class="spent_report_chart">
+    <h2 style="margin-left: 55%; padding:20px;">Earned Points vs Spent Points (%)</h2>
+    <canvas id="myChart" style="max-width: 400px; max-height: 400px; margin-left: 50%"></canvas>
+</div>
+
+<script type="text/x-magento-init">
+    {
+        "#myChart": {
+            "Bss_RewardPoint/js/spentreport": {
+                "dataChart":<?= $block->getTotal() ?>
+            }
+        }
+    }
+</script>

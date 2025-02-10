@@ -1,0 +1,70 @@
+# pack-refs with: peeled fully-peeled sorted 
+953485625049537725ba093213c643066e6a8974 refs/remotes/origin/BSS-EXM2-OA-86
+7d08386700cd4cf0fb6dab41cb1fc51df1d77eb9 refs/remotes/origin/BSupport-7185
+7c6070a55f8a7a1a2527fc75cd3c41e267897b89 refs/remotes/origin/BSupport-7555
+b93b099e2d84e57d5df3f67e2fd6ce60768607d6 refs/remotes/origin/M2B2BExtensions-94
+c1bfece157f242e8de5dbeaed8a3d294971600c0 refs/remotes/origin/M2CompanyAccount-27
+96937559c964f675598e3e2dec5db9a58ac2b5bf refs/remotes/origin/M2SalesRep-18
+b07014d56c2af578e61887e3c0ae62c9cc378e9d refs/remotes/origin/M2SalesRep-20
+28009ef585376dedee85a457c1c342936af05244 refs/remotes/origin/M2SalesRep-22
+c66f547536262c03e0085de717f1e8422ac6b25e refs/remotes/origin/M2SalesRep-23
+f7f5553f98891c88cc718165a6447146197bc899 refs/remotes/origin/M2SalesRep-25
+cd70401604008795ab1ea9a8c7623f63b88ed5de refs/remotes/origin/M2SalesRep-27
+8e5764a206abb07def070c8de5fb2b48cc4bc329 refs/remotes/origin/M2SalesRep-28
+57033d467b4317ee11a83c8f616046ecb09f1f19 refs/remotes/origin/M2SalesRep-29
+85a1d749c2c2e56150e59bff11f5f71660ddbf5e refs/remotes/origin/M2SalesRep-31
+fd23acc5448f7da442c5572901684fb713ea51b9 refs/remotes/origin/M2SalesRep-35
+cc052ecb14a16aebbc0f3fe4bbcb92a42710b2f5 refs/remotes/origin/M2SalesRep-37
+0e2907b77e5906749fa4494bd0db596c5de5f755 refs/remotes/origin/M2SalesRep-38
+3edc9033baae5b5a1fe8ee0a871caaf4f18bc263 refs/remotes/origin/M2SalesRep-41
+be130b8b303f343989bb5b092aea0bac9f6fde24 refs/remotes/origin/M2SalesRep-42
+f3a8b8f54ec08be31c21283d30401e8eb0921d1e refs/remotes/origin/M2SalesRep-52
+d2b48194210311bf17493f4fe19428510d1b33b5 refs/remotes/origin/M2SalesRep-53
+0064aad7a59d9098cb0c273e081e091804af288b refs/remotes/origin/M2SalesRep-55
+3640959a39cda355c016163571c3c8de6abe1dd3 refs/remotes/origin/M2SalesRep-56
+dee592762ad97fb139026fce0b63bb88fa1f4229 refs/remotes/origin/M2SalesRep-58
+c25bf2a9eb5828ed56a4b5ea24ae13c5bf6f8097 refs/remotes/origin/M2SalesRep-60
+d26eaaeeee1c57b110bb1f6d0a41a277d3fd7a14 refs/remotes/origin/M2SalesRep-62
+9f66cc67da54ae4fce2a2aaac2988aee4d0a93d2 refs/remotes/origin/M2SalesRep-63
+020b8f429ada9ef46711aad5daf8de17805da2a5 refs/remotes/origin/M2SalesRep-65
+b07014d56c2af578e61887e3c0ae62c9cc378e9d refs/remotes/origin/Test94
+42c31d64efdb7795428626eed7d65ba7917bceb3 refs/remotes/origin/b2b-2a-dev
+42c31d64efdb7795428626eed7d65ba7917bceb3 refs/remotes/origin/b2b-2a-test
+1aa64c818aa9087b6814ccaf45038902b7906dab refs/remotes/origin/dev-phase2
+d53115edce988af8d55258b5f8f0afa63110b883 refs/remotes/origin/dev-phase2-2
+72e2fa4410fd5869c8dd79e0110a1f31b8efea02 refs/remotes/origin/hotfix-v1.1.3
+eb82209a35865b52f3c4ddf2e1434723d9d16cac refs/remotes/origin/master
+b0e3215f5264b040b6d58d9620244af6ee60b468 refs/remotes/origin/test-manhnd
+67e39fb974007579829eeaeced3b34685199dc28 refs/tags/1.1.2
+^96d5c25a397dce23b24d3a0a6eebec617bdfd53b
+6296e5c55a6e42a369b452622816bbd4418529a5 refs/tags/v1.0.0
+^a4386f729ae593cf366c588d4278bc2b939bb197
+ddb92c88b178a0c1bc929f5ff6183ae38219f95f refs/tags/v1.0.1
+^42c31d64efdb7795428626eed7d65ba7917bceb3
+50b54a533e3cbb20b1d55abad76cf53faf38419e refs/tags/v1.0.2
+^3f76ebffd9ee155cb2a6a68a615c31ba550b3ce0
+398652bf9e4288f5bd947932655fe1a94f43fc10 refs/tags/v1.0.3
+^ae4c36181ab8af2b51233b2785c95f7fe4262589
+39c570b83b2481a0def08c274a33263227506560 refs/tags/v1.0.4
+^a7dac3a81bcf6cf313e20de9ef0c0e84b72662cc
+5a7573a8c08bc25c54f886885eaf28398fffe83e refs/tags/v1.0.5
+^cf02084870be8fa50b4deb8b78893e5cdce572d5
+6fcfe72c00607107517f96ee9ca2add2cd989748 refs/tags/v1.0.6
+^fd7fa1415b11b2172f820c69c9688ab848fa4f70
+0ad45b88c7531a95e38d6544637d9764d358f4c7 refs/tags/v1.0.7
+^0ec8733df95237b5c43d9e2f1ad596131a4829a3
+59940cba24c65f1672447d0538fe3cf630612e50 refs/tags/v1.0.8
+^1d3412ec27c3c3daece678f364bb311bf557a3a8
+6b63f64e9e115f99726472e5ae3bad8fc70c5c34 refs/tags/v1.0.9
+^2cf95aef54feb7b3d380f6fece75dccee2137efa
+88822b1ce280509095c7edc5430029ecf9576223 refs/tags/v1.1.0
+^bc410a0af12fc05ca330287625ef41004eba48ec
+24aa907ed6d6d163576b17b4bc4377befd73be6b refs/tags/v1.1.1
+^f560fa009fdef56106ad147503c26fba7e4e8f12
+3073595a0aa3143ce2f2dd03a5cc3195b7107393 refs/tags/v1.1.2
+^67294c8a8fe0d8e2a3c40e63a2911afb0e5056d7
+74fcd8ae134103d5592253e8e3cec8a9da62355a refs/tags/v1.1.3
+^74c3ca0e029f8cbad4513979eb7e99498263ff9d
+a482cead4521b05db48d932c34c7fa6c5e823a9e refs/tags/v1.1.4
+^10e0f0e81037c4ab204999fe733421e5c67991c9
+eb82209a35865b52f3c4ddf2e1434723d9d16cac refs/tags/v1.1.5

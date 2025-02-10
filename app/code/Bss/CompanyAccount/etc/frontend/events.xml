@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_CompanyAccount
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2020 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="layout_generate_blocks_after">
+        <observer name="bss_companyaccount_layout_generate_blocks_after" instance="Bss\CompanyAccount\Observer\AfterGenerateLayoutBlocks"/>
+    </event>
+    <event name="layout_load_before">
+        <observer name="bss_companyaccount_customer_dashboard_permissions_layout_render" instance="Bss\CompanyAccount\Observer\CustomerDashboard"/>
+    </event>
+    <event name="controller_action_predispatch">
+        <observer name="bss_companyaccount_disable_checkout"
+                  instance="Bss\CompanyAccount\Observer\ActionMiddleware"/>
+    </event>
+    <event name="bss_update_password_subuser">
+        <observer name="bss_update_password_subuser"
+                  instance="Bss\CompanyAccount\Observer\UpdatePassWord"/>
+    </event>
+    <event name="bss_update_email_subuser">
+        <observer name="bss_validate_password_email_subuser"
+                  instance="Bss\CompanyAccount\Observer\ValidatePassWord"/>
+    </event>
+    <event name="controller_action_predispatch_checkout_cart_index">
+        <observer name="bss_companyaccount_checkout_cart_validate"
+                  instance="Bss\CompanyAccount\Observer\CheckApprovedQuote"/>
+    </event>
+</config>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_RewardPoint
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2019-2020 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="left">
+	        <block class="Bss\RewardPoint\Block\Adminhtml\Rule\Edit\Tabs" name="rewardpoint_rule_edit_tabs">
+	            <block class="Bss\RewardPoint\Block\Adminhtml\Rule\Edit\Tab\Main" name="rewardpoint_rule_edit_tab_main"/>
+	            <block class="Bss\RewardPoint\Block\Adminhtml\Rule\Edit\Tab\Conditions" name="rewardpoint_rule_edit_tab_conditions"/>
+	            <block class="Bss\RewardPoint\Block\Adminhtml\Rule\Edit\Tab\Actions" name="rewardpoint_rule_edit_tab_actions"/>
+	            <block class="Bss\RewardPoint\Block\Adminhtml\Rule\Edit\Tab\Notes" name="rewardpoint_rule_edit_tab_notes"/>
+	            <action method="addTab">
+	                <argument name="name" xsi:type="string">main_section</argument>
+	                <argument name="block" xsi:type="string">rewardpoint_rule_edit_tab_main</argument>
+	            </action>
+	            <action method="addTab">
+	                <argument name="name" xsi:type="string">conditions_section</argument>
+	                <argument name="block" xsi:type="string">rewardpoint_rule_edit_tab_conditions</argument>
+	            </action>
+	            <action method="addTab">
+	                <argument name="name" xsi:type="string">actions_section</argument>
+	                <argument name="block" xsi:type="string">rewardpoint_rule_edit_tab_actions</argument>
+	            </action>
+	            <action method="addTab">
+	                <argument name="name" xsi:type="string">notes_section</argument>
+	                <argument name="block" xsi:type="string">rewardpoint_rule_edit_tab_notes</argument>
+	            </action>
+	        </block>
+	    </referenceContainer>
+	    <referenceContainer name="content">
+	        <block class="Bss\RewardPoint\Block\Adminhtml\Rule\Edit" name="rewardpoint_rule_edit"/>
+	    </referenceContainer>
+    </body>
+</page>

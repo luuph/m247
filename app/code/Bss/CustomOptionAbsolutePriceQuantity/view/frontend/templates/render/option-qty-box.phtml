@@ -1,0 +1,89 @@
+<?php
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_CustomOptionAbsolutePriceQuantity
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2017-2020 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+
+// @codingStandardsIgnoreFile
+// phpcs:disable Magento2.Templates.ThisInTemplate
+// phpcs:disable Generic.WhiteSpace.ScopeIndent
+
+/**
+ * Qty options block
+ *
+ * @var $block \Bss\CustomOptionAbsolutePriceQuantity\Block\Render\QtyBox
+ */
+?>
+
+<?php $option = $block->getOption();
+$checkTypeProductPriceDisplay = $block->checkTypeProductPriceDisplay();
+?>
+<?php
+$tierPricesOptions = $block->getTierPriceOption();
+?>
+<div class="bss-abs-option"></div>
+<?php if (count($tierPricesOptions)) : ?>
+    <?php foreach ($tierPricesOptions as $key => $tierPricesOption) : ?>
+        <?php foreach ($tierPricesOption as $i => $list) : ?>
+            <?php $class =  $block->checkSelectTypeOption($option) ?  ' tier-hidden tier-option-value-'.$i :  ' tier-show tier-option-'.$key ?>
+            <ul class="prices-tier <?= $class ?> items">
+                <?php foreach ($list as $index => $price) : ?>
+                    <li class="item">
+                        <?=  __(
+                            'Buy %1 %5for %2 %6 each and <strong class="benefit">save<span class="percent tier-%3">&nbsp;%4</span>%</strong>',
+                            $price['price_qty'],
+                            $checkTypeProductPriceDisplay == "1" ? '<span class="abs-tierprice-option">'.
+                                $block->getFormatedPrice($block->calculatorPrice($price, true))
+                                .'</span>' :
+                                '<span class="abs-tierprice-option">'.
+                                $block->getFormatedPrice($block->calculatorPrice($price))
+                                .'</span>',
+                            $index,
+                            $block->calculatorSavePercent($price['price'], $price['optionBasePrice'], $price['price-type']),
+                            $price['optionTitle'] ? '('.$price['optionTitle'].') ' : '',
+                            $checkTypeProductPriceDisplay == "3" ? '<span class="abs-tierprice-option-exlc">'.
+                                "(".__('Excl.Tax') ." ".$block->getFormatedPrice(
+                                    $block->calculatorPrice($price, true)
+                                ) .")". '</span>' : ""
+                        );
+                        ?>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        <?php endforeach; ?>
+    <?php endforeach; ?>
+    <script type="text/x-magento-init">
+                {
+                    "#bss_options_<?php /* @escapeNotVerified */ echo $option->getId()?>,.bss_options_<?php /* @escapeNotVerified */ echo $option->getId()?>": {
+                        "Bss_CustomOptionAbsolutePriceQuantity/js/tier_price_render": {
+                            "optionType": "<?= /* @escapeNotVerified */ $option->getType(); ?>",
+                            "optionId" : <?= /* @escapeNotVerified */ $option->getId(); ?>
+                        }
+                    }
+                }
+            </script>
+<?php endif; ?>
+<?php if ($option->getBssCoapQty()) : ?>
+    <label class="label coap-qty" for="bss_option_qty_<?php /* @escapeNotVerified */ echo $option->getId() ?>">
+        <span><?php echo __('Option Qty') ?></span>
+    </label>
+    <div class="bss-option-qty">
+        <input type="number"
+               id="bss_option_qty_<?php  /* @escapeNotVerified */ echo $option->getId() ?>"
+               class="input-text bss-qty-box"
+               data-validate='{"required-number":true,"validate-item-quantity":{"minAllowed":1}}'
+               name="option_qty[<?php  echo $option->getId() ?>]" value="1" />
+    </div>
+<?php endif; ?>

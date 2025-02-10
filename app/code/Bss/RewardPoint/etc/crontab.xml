@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_RewardPoint
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2019-2020 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+	<group id="default">
+		<job instance="Bss\RewardPoint\Cron\Birthday" method="execute" name="reward_birthday">
+			<schedule>1 0 * * *</schedule>
+		</job>
+		<job instance="Bss\RewardPoint\Cron\PointExpired" method="execute" name="update_point_expired">
+			<schedule>1 0 * * *</schedule>
+		</job>
+		<job instance="Bss\RewardPoint\Cron\ExpiredNotificationEmail" method="execute" name="expired_noti_email">
+			<schedule>1 0 * * *</schedule>
+		</job>
+	</group>
+</config>

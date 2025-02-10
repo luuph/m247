@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!--
+/**
+* BSS Commerce Co.
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the EULA
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* http://bsscommerce.com/Bss-Commerce-License.txt
+*
+* @category   BSS
+* @package    Bss_CustomOptionTemplate
+* @author     Extension Team
+* @copyright  Copyright (c) 2018-2020 BSS Commerce Co. ( http://bsscommerce.com )
+* @license    http://bsscommerce.com/Bss-Commerce-License.txt
+*/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="catalog_product_save_after">
+        <observer name="bss_opt_template_update" instance="Bss\CustomOptionTemplate\Observer\ProductSaveAfter" />
+    </event>
+    <event name="catalog_product_save_before">
+        <observer name="bss_opt_template_update_before" instance="Bss\CustomOptionTemplate\Observer\ProductSaveBefore" />
+    </event>
+    <event name="bss_custom_options_get_header_container">
+        <observer name="bss_opt_template_add_exclude_config" instance="Bss\CustomOptionTemplate\Observer\Adminhtml\AddExcludeConfig" />
+    </event>
+    <event name="bss_custom_options_common_container_add_child_before">
+        <observer name="bss_opt_template_add_template_id" instance="Bss\CustomOptionTemplate\Observer\Adminhtml\AddTemplate" />
+    </event>
+    <event name="bss_custom_options_template_select_type_add_child_before">
+        <observer name="bss_opt_template_add_column_value" instance="Bss\CustomOptionTemplate\Observer\Adminhtml\AddColumnValue" />
+    </event>
+</config>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_RewardPoint
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2019-2020 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="Bss\RewardPoint\Model\ResourceModel\Rate\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">bss_reward_point_rate</argument>
+            <argument name="resourceModel" xsi:type="string">Bss\RewardPoint\Model\ResourceModel\Rate</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="rewardpoint_rate_grid_data_source" xsi:type="string">Bss\RewardPoint\Model\ResourceModel\Rate\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Bss\RewardPoint\Model\ResourceModel\Transaction\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">bss_reward_point_transaction</argument>
+            <argument name="resourceModel" xsi:type="string">Bss\RewardPoint\Model\ResourceModel\Transaction</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Bss\RewardPoint\Model\ResourceModel\Transaction\Grid\Collection" type="Bss\RewardPoint\Ui\Component\DataProvider\SearchResult\Transactions">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">bss_reward_point_transaction</argument>
+            <argument name="resourceModel" xsi:type="string">Bss\RewardPoint\Model\ResourceModel\Transaction</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="rewardpoint_transaction_grid_data_source" xsi:type="string">Bss\RewardPoint\Model\ResourceModel\Transaction\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Bss\RewardPoint\Model\ResourceModel\Rule\AssociatedEntityMap" type="Magento\Framework\DataObject">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="website" xsi:type="array">
+                    <item name="associations_table" xsi:type="string">bss_reward_point_rule_website</item>
+                    <item name="rule_id_field" xsi:type="string">rule_id</item>
+                    <item name="entity_id_field" xsi:type="string">website_id</item>
+                </item>
+                <item name="customer_group" xsi:type="array">
+                    <item name="associations_table" xsi:type="string">bss_reward_point_rule_customer_group</item>
+                    <item name="rule_id_field" xsi:type="string">rule_id</item>
+                    <item name="entity_id_field" xsi:type="string">customer_group_id</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Bss\RewardPoint\Model\ResourceModel\Rule\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">bss_reward_point_rule</argument>
+            <argument name="resourceModel" xsi:type="string">Bss\RewardPoint\Model\ResourceModel\Rule</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="rewardpoint_rule_grid_data_source" xsi:type="string">Bss\RewardPoint\Model\ResourceModel\Rule\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Bss\RewardPoint\Model\ResourceModel\Rule\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">bss_reward_point_rule</argument>
+            <argument name="resourceModel" xsi:type="string">Bss\RewardPoint\Model\ResourceModel\Rule</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="rewardpoint_earnreport_grid_data_source" xsi:type="string">Bss\RewardPoint\Model\ResourceModel\Rule\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!--Apis-->
+    <preference for="Bss\RewardPoint\Api\RewardPointManagementInterface" type="Bss\RewardPoint\Model\RewardPointManagement" />
+    <preference for="Bss\RewardPoint\Api\TransactionInterface" type="Bss\RewardPoint\Model\TransactionRepository" />
+    <preference for="Bss\RewardPoint\Api\QuoteTotalsInterface" type="Bss\RewardPoint\Model\UpdateQuoteTotal" />
+    <preference for="Bss\RewardPoint\Api\Data\UpdateItemDetailsInterface" type="Bss\RewardPoint\Model\UpdateItemDetails" />
+    <preference for="Bss\RewardPoint\Api\Data\EarnPointInterface" type="Bss\RewardPoint\Model\ApplyEarnPoint" />
+    <preference for="Bss\RewardPoint\Api\Data\AddPointCustomer" type="Bss\RewardPoint\Model\AddPointCustomer" />
+    <!--End-->
+
+    <type name="Bss\RewardPoint\Controller\Index\Index">
+        <plugin name="authentication" type="\Magento\Sales\Controller\Order\Plugin\Authentication"/>
+    </type>
+    <type name="Bss\RewardPoint\Controller\Notify\Index">
+        <plugin name="authentication" type="\Magento\Sales\Controller\Order\Plugin\Authentication"/>
+    </type>
+    <type name="Bss\RewardPoint\Controller\Transaction\Index">
+        <plugin name="authentication" type="\Magento\Sales\Controller\Order\Plugin\Authentication"/>
+    </type>
+    <type name="Magento\Catalog\Controller\Adminhtml\Product\Validate">
+        <plugin name="validate_attribute_custom_rwp" type="\Bss\RewardPoint\Plugin\Product\ValidateAttribute"/>
+    </type>
+    <type name="Magento\Sales\Model\Order\Invoice">
+        <plugin name="before_capture" type="Bss\RewardPoint\Plugin\Model\Order\Invoice"/>
+    </type>
+    <type name="Bss\RewardPoint\Model\Transaction">
+        <plugin name="transaction-send-email" type="Bss\RewardPoint\Plugin\Model\Transaction"/>
+    </type>
+
+    <!--REST Api-->
+    <type name="Magento\Customer\Api\CustomerRepositoryInterface">
+        <plugin name="add_reward_point" type="Bss\RewardPoint\Plugin\Api\CustomerRepositoryInterface"/>
+    </type>
+    <type name="Magento\Quote\Api\CartTotalRepositoryInterface">
+        <plugin name="add_reward_point_quote" type="Bss\RewardPoint\Plugin\Api\CartTotalRepositoryInterface"/>
+    </type>
+</config>

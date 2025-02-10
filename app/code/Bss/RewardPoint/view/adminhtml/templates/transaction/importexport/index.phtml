@@ -1,0 +1,40 @@
+<?php
+// @codingStandardsIgnoreFile
+/*
+ * @var $block \Bss\RewardPoint\Block\Adminhtml\ImportExport
+ *
+ */
+?>
+<input type="hidden" value="<?php echo $block->getUrl('*/*/validate'); ?>" id="validate-url"/>
+<form action="<?php echo $block->getUrl('*/*/import'); ?>" enctype="multipart/form-data" id="import-form" method="post">
+    <div style="margin-left:18%;">
+        <b class="admin__field-label"><?php echo __('Import Product Transactions:'); ?></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="file" name="file" id="file" class="input-file required-entry"/>&nbsp;
+        <input type="submit" class="action-default scalable" name="import" id="import"
+               value="<?php echo __('Check Data'); ?>" disabled="disabled"/>
+        </br><a style="margin-left: 14%;" href="<?php echo $block->getUrl('*/*/download'); ?>">
+            <?php echo __('Download Sample File'); ?>
+        </a>
+        </br></br>
+        <input name="form_key" type="hidden" value="<?php /* @escapeNotVerified */ echo $block->getFormKey() ?>" />
+    </div>
+</form>
+
+<form action="<?php echo $block->getUrl('*/*/export'); ?>" enctype="multipart/form-data" method="post">
+    <div style="margin-left:18%; margin-top: 15px;">
+        <b class="admin__field-label"><?php echo __('Export Transactions:'); ?></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <select name="export_file_type" class=" select admin__control-select">
+            <option>CSV</option>
+        </select>&nbsp;&nbsp;
+        <input type="submit" class="action-default scalable" name="export" id="export"
+               value="<?php echo __('Export Transactions'); ?>"/>
+        <input name="form_key" type="hidden" value="<?php /* @escapeNotVerified */ echo $block->getFormKey() ?>" />
+    </div>
+</form>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Bss_RewardPoint/js/importexport":{}
+        }
+    }
+</script>

@@ -1,0 +1,10 @@
+0000000000000000000000000000000000000000 ba4397241f43c56ee27f89617039f33851811cbb Hai Luu <luuph@bsscommerce.com> 1732268745 +0700	branch: Created from HEAD
+ba4397241f43c56ee27f89617039f33851811cbb fb2b7bf81b692697804250f9531fda590d2b8f05 Hai Luu <luuph@bsscommerce.com> 1732273602 +0700	commit: M2CompanyAccount-128: Update approved order permistion
+fb2b7bf81b692697804250f9531fda590d2b8f05 6ef7dd4910b55baa99644b4cdff06c9421542be3 Hai Luu <luuph@bsscommerce.com> 1732613711 +0700	commit: M2CompanyAccount-128: Update logic display button in minicart with order approved
+6ef7dd4910b55baa99644b4cdff06c9421542be3 b7a9f82b721919ddfac97894cc873b141f0e264a Hai Luu <luuph@bsscommerce.com> 1732618756 +0700	commit: M2CompanyAccount-128: Fix bug checkout with replace order id of order rejected
+b7a9f82b721919ddfac97894cc873b141f0e264a 619e04df493ba06c7013ab1894b838b87a94195a Hai Luu <luuph@bsscommerce.com> 1732703592 +0700	commit: M2CompanyAccount-128: Check order is rejected with module OSC
+619e04df493ba06c7013ab1894b838b87a94195a d665d8ea3ab9ce1ce489ef248dfc57690295bb42 Hai Luu <luuph@bsscommerce.com> 1732759562 +0700	commit: M2CompanyAccount-128: prevent add product to cart & view the cart page when quote status is Waiting
+d665d8ea3ab9ce1ce489ef248dfc57690295bb42 619e04df493ba06c7013ab1894b838b87a94195a Hai Luu <luuph@bsscommerce.com> 1732768288 +0700	reset: moving to 619e04d
+619e04df493ba06c7013ab1894b838b87a94195a 373cd2d77bd996607a4dc278d5698334cd2934f5 Hai Luu <luuph@bsscommerce.com> 1732768517 +0700	commit: M2CompanyAccount-128: Update logic 2 sub-user checkout same order + prevent view the cart page when quote status is waiting & reject
+373cd2d77bd996607a4dc278d5698334cd2934f5 df2413f3db18df7da278b4be3bf16e796b6a62e7 Hai Luu <luuph@bsscommerce.com> 1733111184 +0700	commit: M2CompanyAccount-128: fix review code
+df2413f3db18df7da278b4be3bf16e796b6a62e7 1e0cc4dba1e0e26f0cb92560ecb269cd769a0fec Hai Luu <luuph@bsscommerce.com> 1733802086 +0700	commit: Fix bug admin + sub-user has role place order not checkout order waiting

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_RewardPoint
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2019-2020 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+-->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/carts/mine/bss-reward-point/apply/:spendPoint" method="PUT">
+        <service class="Bss\RewardPoint\Api\RewardPointManagementInterface" method="apply"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route method="GET" url="/V1/bsscommerce/rewardpoints/storeconfigs/:storeview">
+        <service class="Bss\RewardPoint\Api\RewardPointManagementInterface" method="getAllModuleConfig"/>
+        <resources>
+            <resource ref="Bss_RewardPoint::config"/>
+        </resources>
+    </route>
+    <route method="POST" url="/V1/bsscommerce/rewardpoints/:quoteId/applypoint">
+        <service class="Bss\RewardPoint\Api\QuoteTotalsInterface" method="update"/>
+        <resources>
+            <resource ref="Bss_RewardPoint::main"/>
+        </resources>
+    </route>
+
+    <route method="POST" url="/V1/bsscommerce/rewardpoints/:quoteId">
+        <service class="Bss\RewardPoint\Api\QuoteTotalsInterface" method="applyEarnPoints"/>
+        <resources>
+            <resource ref="Bss_RewardPoint::main"/>
+        </resources>
+    </route>
+    <route method="GET" url="/V1/bsscommerce/rewardpoints/transaction/:customerId">
+        <service class="Bss\RewardPoint\Api\TransactionInterface" method="getByCustomerId"/>
+        <resources>
+            <resource ref="Bss_RewardPoint::transaction"/>
+        </resources>
+    </route>
+
+    <route method="POST" url="/V1/bsscommerce/rewardpoints/newpoint">
+        <service class="Bss\RewardPoint\Api\TransactionInterface" method="setData"/>
+        <resources>
+            <resource ref="Bss_RewardPoint::transaction"/>
+        </resources>
+    </route>
+</routes>

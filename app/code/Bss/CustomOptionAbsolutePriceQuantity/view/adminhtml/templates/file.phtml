@@ -1,0 +1,129 @@
+<?php
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_CustomOptionAbsolutePriceQuantity
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2017-2020 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+
+// @codingStandardsIgnoreFile
+/* @var $block \Bss\CustomOptionAbsolutePriceQuantity\Block\Options\Type\File */
+?>
+<?php $option = $block->getOption(); ?>
+<?php $fileInfo = $block->getFileInfo(); ?>
+<?php $fileExists = $fileInfo->hasData() ? true : false; ?>
+<?php $fileName = 'options_' . $option->getId() . '_file'; ?>
+<?php $fieldNameAction = $fileName . '_action'; ?>
+<?php $fieldValueAction = $fileExists ? 'save_old' : 'save_new'; ?>
+<?php $fileNamed = $fileName . '_name'; ?>
+<?php $rand = rand(); ?>
+
+<script>
+require(['prototype'], function(){
+//<![CDATA[
+    opFile<?php /* @escapeNotVerified */ echo $rand; ?> = {
+        initializeFile: function(inputBox) {
+            this.inputFile = inputBox.select('input[name="<?php /* @escapeNotVerified */ echo $fileName; ?>"]')[0];
+            this.inputFileAction = inputBox.select('input[name="<?php /* @escapeNotVerified */ echo $fieldNameAction; ?>"]')[0];
+            this.fileNameBox = inputBox.up('dd').select('.<?php /* @escapeNotVerified */ echo $fileNamed ?>')[0];
+        },
+
+        toggleFileChange: function(inputBox) {
+            this.initializeFile(inputBox);
+            inputBox.toggle();
+            this.fileChangeFlag = this.fileChangeFlag ? false : true;
+            if (!this.fileDeleteFlag) {
+                if (this.fileChangeFlag) {
+                     this.inputFileAction.value = 'save_new';
+                     this.inputFile.disabled = false;
+                 } else {
+                     this.inputFileAction.value = 'save_old';
+                     this.inputFile.disabled = true;
+                 }
+            }
+        },
+
+        toggleFileDelete: function(fileDeleteFlag, inputBox) {
+            this.initializeFile(inputBox);
+            this.fileDeleteFlag = fileDeleteFlag.checked ? true : false;
+            if (this.fileDeleteFlag) {
+                this.inputFileAction.value = '';
+                this.inputFile.disabled = true;
+                this.fileNameBox.setStyle({'text-decoration': 'line-through'});
+            } else {
+                this.inputFileAction.value = this.fileChangeFlag ? 'save_new' : 'save_old';
+                this.inputFile.disabled = (this.fileChangeFlag == 'save_old');
+                this.fileNameBox.setStyle({'text-decoration': 'none'});
+            }
+        }
+    };
+//]]>
+
+});
+</script>
+
+<div class="admin__field <?php if ($option->getIsRequire()) echo ' required _required' ?>">
+    <label class="admin__field-label label">
+        <?php echo  $block->escapeHtml($option->getTitle()) ?>
+        <?php if ($option->getPriceType() === "abs") : ?>
+          <?php echo ' ' . __('(Absolute Price)'); ?>
+        <?php endif; ?>
+        <?php /* @escapeNotVerified */ echo $block->getFormatedPrice() ?>
+    </label>
+    <div class="admin__field-control control">
+        <?php if ($fileExists): ?>
+            <span class="<?php /* @noEscape */ echo $fileNamed ?>"><?php echo $block->escapeHtml($fileInfo->getTitle()); ?></span>
+            <a href="javascript:void(0)" class="label" onclick="opFile<?php /* @escapeNotVerified */ echo $rand; ?>.toggleFileChange($(this).next('.input-box'))">
+                <?php /* @escapeNotVerified */ echo __('Change') ?>
+            </a>&nbsp;
+            <?php if (!$option->getIsRequire()): ?>
+                <input type="checkbox" onclick="opFile<?php /* @escapeNotVerified */ echo $rand; ?>.toggleFileDelete($(this), $(this).next('.input-box'))" price="<?php /* @escapeNotVerified */ echo $block->getCurrencyPrice($option->getPrice(true)) ?>"/>
+                <span class="label"><?php /* @escapeNotVerified */ echo __('Delete') ?></span>
+            <?php endif; ?>
+        <?php endif; ?>
+        <div class="input-box" <?php echo $fileExists ? 'style="display:none"' : '' ?>>
+            <!-- ToDo UI: add appropriate file class when z-index issue in ui dialog will be resolved  -->
+            <input type="file" name="<?php /* @noEscape */ echo $fileName; ?>" class="product-custom-option<?php echo $option->getIsRequire() ? ' required-entry' : '' ?>" price="<?php /* @escapeNotVerified */ echo $block->getCurrencyPrice($option->getPrice(true)) ?>" <?php echo $fileExists ? 'disabled="disabled"' : '' ?>/>
+            <input type="hidden" name="<?php /* @escapeNotVerified */ echo $fieldNameAction; ?>" value="<?php /* @escapeNotVerified */ echo $fieldValueAction; ?>" />
+
+            <?php if ($option->getFileExtension()): ?>
+                <div class="admin__field-note">
+                    <span><?php /* @escapeNotVerified */ echo __('Compatible file extensions to upload')?>: <strong><?php /* @escapeNotVerified */ echo $option->getFileExtension() ?></strong></span>
+                </div>
+            <?php endif; ?>
+
+            <?php if ($option->getImageSizeX() > 0): ?>
+                <div class="admin__field-note">
+                    <span><?php /* @escapeNotVerified */ echo __('Maximum image width')?>: <strong><?php /* @escapeNotVerified */ echo $option->getImageSizeX() ?> <?php /* @escapeNotVerified */ echo __('px.')?></strong></span>
+                </div>
+            <?php endif; ?>
+
+            <?php if ($option->getImageSizeY() > 0): ?>
+                <div class="admin__field-note">
+                    <span><?php /* @escapeNotVerified */ echo __('Maximum image height')?>: <strong><?php /* @escapeNotVerified */ echo $option->getImageSizeY() ?> <?php /* @escapeNotVerified */ echo __('px.')?></strong></span>
+                </div>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>
+<?php if ($option->getBssCoapQty()): ?>
+<div class="field admin__field">
+    <label class="label admin__field-label"><span><?php /* @escapeNotVerified */ echo $option->getTitle() . ' - ' . __('Options Qty') ?></span></label>
+    <div class="control admin__field-control">
+        <input
+            id="product_composite_configure_input_qty" class="input-text admin__control-text qty"
+            type="text" name="option_qty[<?php  echo $option->getId() ?>]"
+            value="<?php echo $block->getProduct()->getData('bss_reorder_option_qty/'.$option->getId()) ?>" />
+    </div>
+</div>
+<?php endif;?>

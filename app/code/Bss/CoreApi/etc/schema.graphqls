@@ -1,0 +1,73 @@
+type Query {
+    modules(
+        product_id: Int @doc(description: "Product Id")
+    ): Modules @resolver(class: "Bss\\CoreApi\\Model\\Resolver\\Modules")
+    @doc(description: "Query List of Bsscommerce Module")
+
+    related_products(
+        product_ids: [Int]
+    ): [RelatedProducts] @resolver(class: "Bss\\CoreApi\\Model\\Resolver\\RelatedProducts")
+
+    new_products: [Product] @resolver(class: "Bss\\CoreApi\\Model\\Resolver\\NewProducts")
+#    bss_news: BssNews @resolver(class: "Bss\\CoreApi\\Model\\Resolver\\BssNews")
+#    promotions: Promotions @resolver(class: "Bss\\CoreApi\\Model\\Resolver\\Promotions")
+    configs: Config @resolver(class: "Bss\\CoreApi\\Model\\Resolver\\Configs")
+
+    module(
+        api_name: String
+    ): Module @resolver(class: "Bss\\CoreApi\\Model\\Resolver\\Module")
+}
+
+type Modules {
+    items: [SingleModule]
+    count: Int
+}
+
+type SingleModule {
+    name: String
+    product_name: String
+    product_url: String
+    entity_id: Int
+    user_guide: String
+    packages: [Package]
+}
+
+type Package {
+    title: String
+}
+
+type RelatedProducts {
+    main_product: Int
+    related: [Product]
+}
+
+type Config {
+    popup_expire_time: Int
+    popup_delay_open_time: Int
+    theme_header_block: String
+    theme_popup_block: String
+}
+
+type Product {
+    name: String
+    image: String
+    link: String
+    sku: String
+}
+
+type BssNews {
+    title: String
+    image: String
+    description: String
+    date: String
+}
+
+type Promotions {
+    message: String
+    btn_text: String
+}
+
+type Module {
+    product_name: String
+    product_url: String
+}

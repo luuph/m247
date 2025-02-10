@@ -1,0 +1,131 @@
+<?php
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_CustomOptionTemplate
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2017-2020 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+// @codingStandardsIgnoreFile
+?>
+<?php /** @var $block \Magento\Catalog\Block\Adminhtml\Product\Edit\Tab\Options\Type\Text */ ?>
+<script id="custom-option-text-type-template" type="text/x-magento-template">
+    <div id="product_option_<%- data.option_id %>_type_<%- data.group %>" class="fieldset ccccccc">
+        <table class="data-table">
+            <thead>
+            <tr>
+                <?php if ($block->getCanReadPrice() !== false): ?>
+                <th class="type-price"><?= $block->escapeHtml(__('Price')) ?></th>
+                <th class="type-type"><?= $block->escapeHtml(__('Price Type')) ?></th>
+                <?php endif; ?>
+                <th class="type-sku"><?= $block->escapeHtml(__('SKU')) ?></th>
+                <th class="type-last last"><?= $block->escapeHtml(__('Max Characters')) ?></th>
+                <?php if ($block->isCompatibleAbs()): ?>
+                <th></th>
+                <?php endif;?>
+            </tr>
+            </thead>
+            <tr>
+                <?php if ($block->getCanReadPrice() !== false): ?>
+                <td class="opt-price">
+                    <input id="product_option_<%- data.option_id %>_price"
+                           name="product[options][<%- data.option_id %>][price]"
+                           class="input-text validate-number product-option-price"
+                           type="text" value="<%- data.price %>" data-store-label="<%- data.price %>"
+                        <?php if ($block->getCanEditPrice() === false): ?>
+                           disabled="disabled"
+                        <?php endif; ?>>
+                </td>
+                <td class="opt-price-type"><?= $block->getPriceTypeSelectHtml('data-attr="price-type"') ?><%- data.checkboxScopePrice %></td>
+                <?php else: ?>
+                <input id="product_option_<%- data.option_id %>_price" name="product[options][<%- data.option_id %>][price]" type="hidden">
+                <input id="product_option_<%- data.option_id %>_price_type" name="product[options][<%- data.option_id %>][price_type]" type="hidden">
+                <?php endif; ?>
+                <td>
+                    <input name="product[options][<%- data.option_id %>][sku]" class="input-text" type="text" value="<%- data.sku %>">
+                </td>
+                <td>
+                    <input name="product[options][<%- data.option_id %>][max_characters]" class="input-text validate-zero-or-greater" type="text" value="<%- data.max_characters %>">
+                </td>
+                <?php if ($block->isCompatibleAbs()): ?>
+                    <td>
+                        <div class="field field-option-req">
+                            <div class="option-tier-price-div">
+                                <div class="add-tier-price-button"></div>
+                                <aside role="dialog" class="modal-slide  product_form_product_form_advanced_pricing_modal" aria-labelledby="modal-title-14" aria-describedby="modal-content-14" data-role="modal" data-type="slide" tabindex="0" style="z-index: 902;">
+                                    <div data-role="focusable-start" tabindex="0"></div>
+                                    <div class="modal-inner-wrap" data-role="focusable-scope">
+                                        <header class="modal-header">
+                                            <h1 id="modal-title-14" class="modal-title" data-role="title">
+                                                <?php /* @escapeNotVerified */ echo __('Advanced Pricing'); ?>
+                                            </h1>
+                                            <button class="action-close" data-role="closeBtn" type="button">
+                                                <span> <?php /* @escapeNotVerified */ echo __('Close'); ?></span>
+                                            </button>
+                                            <div class="page-main-actions">
+                                                <div class="page-actions">
+                                                    <div class="page-actions-buttons">
+                                                        <button class="action-primary" type="button" data-role="action"><span><?php /* @escapeNotVerified */ echo __('Done'); ?></span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </header>
+                                        <div class="modal-content" data-role="content">
+                                            <div class="modal-component">
+                                                <div class="fieldset-wrapper _show" data-level="0" data-index="advanced-pricing">
+                                                    <div class="field">
+                                                        <div class="control">
+                                                            <form class="bss-custom-option-tier-price-form">
+                                                                <table class="admin__control-table tiers_table" id="tiers_table">
+                                                                    <thead>
+                                                                    <tr>
+                                                                        <th class="col-websites"><?php /* @escapeNotVerified */ echo __('Website'); ?></th>
+                                                                        <th class="col-customer-group"><?php /* @escapeNotVerified */ echo __('Customer Group'); ?></th>
+                                                                        <th class="col-qty required"><?php /* @escapeNotVerified */ echo __('Quantity'); ?></th>
+                                                                        <th class="col-price required"><?php /* @escapeNotVerified */ echo __('Price');?></th>
+                                                                        <th class="col-delete" ><?php /* @escapeNotVerified */ echo __('Action'); ?></th>
+                                                                    </tr>
+                                                                    </thead>
+                                                                    <tbody class="tbody-tier-price-data"></tbody>
+                                                                    <tfoot>
+                                                                    <tr>
+                                                                        <td colspan="5">
+                                                                            <button type="button" class="add-tier-price-row">
+                                                                                <span><?php /* @escapeNotVerified */ echo __('Add'); ?></span>
+                                                                            </button>
+                                                                        </td>
+                                                                    </tr>
+                                                                    </tfoot>
+                                                                </table>
+                                                            </form>
+
+                                                        </div>
+                                                        <input type="hidden"  class="ahii bss_tier_price_option" name="product[options][<%- data.option_id %>][bss_tier_price_option]"
+                                                               value="<%- data.bss_tier_price_option %>">
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div data-role="focusable-end" tabindex="0"></div>
+                                </aside>
+                            </div>
+
+                        </div>
+                    </td>
+                <?php endif; ?>
+            </tr>
+        </table>
+    </div>
+</script>

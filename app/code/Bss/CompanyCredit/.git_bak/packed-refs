@@ -1,0 +1,33 @@
+# pack-refs with: peeled fully-peeled sorted 
+90f69663697ef564414546ef7288b98ede6125fe refs/remotes/origin/Hotfix-v1.0.8
+c98d6ec8541fc395c2918f2f6be20cab378c73a6 refs/remotes/origin/M2CompanyAccount-55
+e0a3e951a604845fe13f922d54af6c8c9281761d refs/remotes/origin/M2CompanyCredit-17
+59a2b5d500a927da6561bb31437613934624bec4 refs/remotes/origin/M2CompanyCredit-18
+e443591c1f2ed6f32d0915a0b3fa77b52b97dcce refs/remotes/origin/M2CompanyCredit-21
+1340c1f784247228970e3abbced2e6f5a6afa17f refs/remotes/origin/M2CompanyCredit-25
+d9fbfd0c916daa290d82ee6b65a41e8216dda198 refs/remotes/origin/M2CompanyCredit-33
+859e0979d70f18a89ca4cc1c8ae8cb7e1183fbf6 refs/remotes/origin/M2CompanyCredit-35
+c1527175bf058351adc6156a6a9bac581358b88e refs/remotes/origin/M2CompanyCredit-42
+56d09f1394a8acdddf233365d9d4879bd7f39226 refs/remotes/origin/M2CompanyCredit-43
+c3cf17c0d6f9d786d2fa8dc9ef736d7ca06859a1 refs/remotes/origin/M2CompanyCredit-44
+d168496f2c63aabe55b66088095e0d69fc354abd refs/remotes/origin/M2CompanyCredit-9
+2c4ffd9f759137ebfb3de88a4ba120480dc4be5b refs/remotes/origin/hotfix-v1.0.5
+58c4ce7e609313954bdd31c4127d706b5abf6972 refs/remotes/origin/master
+9c643ded5f55078868e1d6b1815997c65c78b898 refs/tags/v.1.0.3
+^9ddc193bbf7297022302ed3dc8cd350dc655c7cc
+8fe2f86a3811db752d9d10dba36d47470ba34c9a refs/tags/v1.0.0
+^bb4e5ff931059601e145e188db152410222376cd
+5941a83b22df100c11f5760d1dc819604e2bbb52 refs/tags/v1.0.1
+^81a638420467c37b6e2bc821cacbd90a6b0a9e89
+c3c78c16913f331613bbc75de000f3bad720e962 refs/tags/v1.0.2
+^ebcec5a4691b710abdd83c09617f8ab0a59a3556
+5acbff086bab5b21a2798f61444c630bdb3b3f0b refs/tags/v1.0.4
+^bc00bb564ad0168eb2d78e43d74153cf674eada4
+610e108ab5d7eb2c08fa9560055b08857aa005ef refs/tags/v1.0.5
+^3a02212420529971e8cd8116412c3c2f603cb1e5
+e575efa099e83dc1c98112a3ab1fcf13ee6be5f0 refs/tags/v1.0.6
+^682e3479e63bfe657df3ff9ebad90c310c2d0662
+d0d3f46d5daad4fea8dad3f6e8400de2da1f9999 refs/tags/v1.0.7
+^b33245842b0c3799ea3fcb56a5c38f286f895301
+a108abc8102124ecd92e1dbe051beead7191dde2 refs/tags/v1.0.8
+^58c4ce7e609313954bdd31c4127d706b5abf6972

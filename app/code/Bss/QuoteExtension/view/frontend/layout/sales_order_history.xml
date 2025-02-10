@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_QuoteExtension
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2018-2023 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <referenceContainer name="sales.order.history.extra.column.header" label="Order History Extra Column Header">
+        <block template="Bss_QuoteExtension::order/history/table-header.phtml" name="extra.column.header" cacheable="false" after="-"/>
+    </referenceContainer>
+    <referenceBlock name="sales.order.history.extra.container">
+        <block class="Bss\QuoteExtension\Block\Order\History" as="extra.container" name="extra.container" cacheable="false" after="-"/>
+    </referenceBlock>
+</page>

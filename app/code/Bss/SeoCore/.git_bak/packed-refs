@@ -1,0 +1,11 @@
+# pack-refs with: peeled fully-peeled sorted 
+a1f6544742df644a809113015878ed1ec5bb80b9 refs/remotes/origin/BSupport-7024
+37959a349a478b233cd1aab86bf27047ddc131f7 refs/remotes/origin/M2SEOSuite-227
+7f09604e31235c1cd18f6b0f3df90840afb60a99 refs/remotes/origin/M2SEOSuite-246
+ed340f6b1f4de3bf4043705984022c128397d176 refs/remotes/origin/master
+da968341daec836c19a9be4741e50e0a54dca91b refs/tags/v1.0.5
+^aad43ad95bd7bf9a43bd394822d5f9e9ce784405
+cc9171feab4e1456e17a86e0c083504190b0dda3 refs/tags/v1.0.6
+^b611d83bcdc927a57cf190eaa95c638d8533e248
+86a7b929f4cc556303f49b71cd7ac76d0af9674e refs/tags/v1.0.7
+^ed340f6b1f4de3bf4043705984022c128397d176

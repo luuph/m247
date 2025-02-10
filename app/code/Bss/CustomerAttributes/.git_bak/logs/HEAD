@@ -1,0 +1,5 @@
+0000000000000000000000000000000000000000 68c220ea707d8c5ce13faf9d2e1faf8d901a1fa6 Hai Luu <luuph@bsscommerce.com> 1730861260 +0700	clone: from ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-customer-attribute.git
+68c220ea707d8c5ce13faf9d2e1faf8d901a1fa6 68c220ea707d8c5ce13faf9d2e1faf8d901a1fa6 Hai Luu <luuph@bsscommerce.com> 1730862462 +0700	checkout: moving from master to BSupport-7615
+68c220ea707d8c5ce13faf9d2e1faf8d901a1fa6 9504e09f9a652809d0ee0fa9e9d95a0413e8bee7 Hai Luu <luuph@bsscommerce.com> 1730862493 +0700	commit: BSupport-7615: Fix checkout with product virtual
+9504e09f9a652809d0ee0fa9e9d95a0413e8bee7 68c220ea707d8c5ce13faf9d2e1faf8d901a1fa6 Hai Luu <luuph@bsscommerce.com> 1737453965 +0700	checkout: moving from BSupport-7615 to master
+68c220ea707d8c5ce13faf9d2e1faf8d901a1fa6 fcba2cc26470464fcf2f8303c2a575cb67fbfb60 Hai Luu <luuph@bsscommerce.com> 1737453969 +0700	pull origin master: Fast-forward

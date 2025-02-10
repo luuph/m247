@@ -1,0 +1,292 @@
+<?php
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_CustomOptionTemplate
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2017-2020 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+
+// @codingStandardsIgnoreFile
+$templateHelper = $this->helper(\Bss\CustomOptionTemplate\Helper\Data::class);
+$listStoreView= $templateHelper->getListStoreView();
+?>
+<?php /** @var $block \Magento\Catalog\Block\Adminhtml\Product\Edit\Tab\Options\Type\Select */ ?>
+<script id="custom-option-select-type-template" type="text/x-magento-template">
+    <div id="product_option_<%- data.option_id %>_type_<%- data.group %>" class="fieldset">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th class="col-draggable">&nbsp;</th>
+                    <th class="col-name required"><?php /* @escapeNotVerified */ echo __('Title') ?><span class="required">*</span></th>
+                    <?php if ($block->getCanReadPrice() !== false) : ?>
+                    <th class="col-price"><?php /* @escapeNotVerified */ echo __('Price') ?></th>
+                    <th class="col-price-type"><?php /* @escapeNotVerified */ echo __('Price Type') ?></th>
+                    <?php endif; ?>
+                    <th class="col-sku"><?php /* @escapeNotVerified */ echo __('SKU') ?></th>
+
+                <?php if ($block->isCompatibleCOImage()) : ?>
+                    <th><?php /* @escapeNotVerified */ echo __('Image') ?></th>
+                    <th class="swatch-image-coi"><?php /* @escapeNotVerified */ echo __('Swatch Image') ?></th>
+                <?php endif; ?>
+                    <?php if ($block->isCompatibleDependentCO()) : ?>
+                        <th><?php /* @escapeNotVerified */ echo __('Dependent Options') ?></th>
+                        <th class="col-actions">&nbsp;</th>
+                    <?php endif; ?>
+                    <th><?php /* @escapeNotVerified */ echo __('Is Default') ?></th>
+                    <?php if($block->isCompatibleAbs()): ?>
+                        <th></th>
+                    <?php endif;?>
+                    <th class="col-actions">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody id="select_option_type_row_<%- data.option_id %>"></tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="6"><?php echo $block->getAddButtonHtml() ?>
+                        <input name="validation_<%- data.option_id %>_result" class="required-option-select-type-rows" type="hidden" value="">
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</script>
+<script id="custom-option-select-type-row-template" type="text/x-magento-template">
+    <tr id="product_option_<%- data.id %>_select_<%- data.select_id %>" class="determined-location">
+        <td class="col-draggable">
+            <div data-role="draggable-handle" class="draggable-handle"
+                 title="<?php /* @escapeNotVerified */ echo __('Sort Custom Option'); ?>"></div>
+            <input name="product[options][<%- data.id %>][values][<%- data.select_id %>][sort_order]" type="hidden" value="<%- data.sort_order %>">
+            <?php if ($block->isCompatibleDependentCO()) : ?>
+                <span class="bss_dco_span no-display" id="bss_dco_span_<%- data.id %>_select_<%- data.select_id %>"><%- data.dependent_id %></span>
+                <input id="product_option_<%- data.id %>_select_<%- data.select_id %>_dependent_id" class="dependent-id" name="product[options][<%- data.id %>][values][<%- data.select_id %>][dependent_id]" type="hidden" value="<%- data.dependent_id %>" option_key="<%- data.id %>">
+            <?php endif; ?>
+        </td>
+        <td class="col-name select-opt-title field-option-title">
+            <input name="product[options][<%- data.id %>][values][<%- data.select_id %>][option_type_id]" type="hidden" value="<%- data.option_type_id %>">
+            <input id="product_option_<%- data.id %>_select_<%- data.select_id %>_is_delete" name="product[options][<%- data.id %>][values][<%- data.select_id %>][is_delete]" type="hidden" value="">
+            <input id="product_option_<%- data.id %>_select_<%- data.select_id %>_title" <% if (typeof data.scopeTitleDisabled != 'undefined' && data.scopeTitleDisabled != null) { %> disabled="disabled" <% } %> name="product[options][<%- data.id %>][values][<%- data.select_id %>][title]" class="required-entry input-text select-type-title <% if (typeof data.scopeTitleDisabled != 'undefined' && data.scopeTitleDisabled != null) { %> disabled <% } %>" type="text" value="<%- data.title %>" data-store-label="<%- data.title %>"><%= data.checkboxScopeTitle %>
+        </td>
+        <?php if ($block->getCanReadPrice() !== false) : ?>
+        <td class="col-price select-opt-price">
+            <input id="product_option_<%- data.id %>_select_<%- data.select_id %>_price"
+                   <% if (typeof data.scopePriceDisabled != 'undefined' && data.scopePriceDisabled != null) { %> disabled="disabled" <% } %>
+                   name="product[options][<%- data.id %>][values][<%- data.select_id %>][price]"
+                   class="input-text validate-number product-option-price"
+                   type="text" value="<%- data.price %>" data-store-label="<%- data.price %>"
+                <?php if ($block->getCanEditPrice() === false) : ?>
+                   disabled="disabled"
+                <?php endif; ?>>
+        </td>
+        <td class="col-price-type select-opt-price-type">
+            <?php /* @escapeNotVerified */ echo $block->getPriceTypeSelectHtml('data-attr="price-type" <% if (typeof data.scopePriceDisabled != "undefined" && data.scopePriceDisabled != null) { %> disabled="disabled" <% } %>') ?><%- data.checkboxScopePrice %>
+        </td>
+        <?php else : ?>
+        <input id="product_option_<%- data.id %>_select_<%- data.select_id %>_price" name="product[options][<%- data.id %>][values][<%- data.select_id %>][price]" type="hidden">
+        <input id="product_option_<%- data.id %>_select_<%- data.select_id %>_price_type" name="product[options][<%- data.id %>][values][<%- data.select_id %>][price_type]" type="hidden">
+        <?php endif; ?>
+        <td class="col-sku">
+            <input name="product[options][<%- data.id %>][values][<%- data.select_id %>][sku]" class="input-text" type="text" value="<%- data.sku %>">
+        </td>
+        <?php if ($block->isCompatibleCOImage()) : ?>
+            <td>
+                <div class="image-customoption-container">
+                    <div class="preview coi-image">
+                        <a href="<%- data.image_url %>">
+                            <img id="image_<%- data.id %>_<%- data.select_id %>" class="preview_image" src="<%- data.image_url %>" alt="" style="width: 50px;height: 50px"/>
+                        </a>
+                        <button type="button" class="action-delete" data-role="delete-button" title="<?php /* @escapeNotVerified */ echo __('Delete image');?>">
+                        <span><?php /* @escapeNotVerified */ echo __('Delete image');?></span>
+                        <button type="button" class="action-delete action-edit" data-role="delete-button" title="<?php /* @escapeNotVerified */ echo __('Edit image');?>">
+                        </button>
+                    </button>
+                    </div>
+                    <div class="image image-placeholder" style="width: 50px;height: 50px">
+                        <div class="lds-hourglass"></div>
+                        <input type="hidden" name="product[options][<%- data.id %>][values][<%- data.select_id %>][image_url]" class="input-text image_url" type="text" value="<%- data.image_url %>">
+                        <input type="file" name="image" data-url="<?php /* @escapeNotVerified */ echo $this->getUrl('bsscustomoption/images/upload');?>" class="upload-image-coi" multiple="multiple" />
+                        <img class="spacer" src=""/>
+                        <p class="image-placeholder-text"></p>
+                    </div>
+                </div>
+            </td>
+            <td <% if (data.enableSwatch === 0) { %> class="no-display" <% } %> >
+                <div class="image-customoption-container swatch-image-container">
+                    <div class="preview swatch-image">
+                        <a href="<%- data.swatch_image_url %>">
+                            <img id="image_swatch_<%- data.id %>_<%- data.select_id %>" class="preview_image" src="<%- data.swatch_image_url %>" alt="" style="width: 50px;height: 50px"/>
+                        </a>
+                        <button type="button" class="action-delete" data-role="delete-button" title="<?php /* @escapeNotVerified */ echo __('Delete image');?>">
+                            <span><?php /* @escapeNotVerified */ echo __('Delete image');?></span>
+                        </button>
+                        <button type="button" class="action-delete action-edit" data-role="delete-button" title="<?php /* @escapeNotVerified */ echo __('Edit Swatch Image');?>">
+                        </button>
+                    </div>
+                    <div class="image image-placeholder" style="width: 50px;height: 50px">
+                        <div class="lds-hourglass"></div>
+                        <input type="hidden" name="product[options][<%- data.id %>][values][<%- data.select_id %>][swatch_image_url]" class="input-text swatch_image_url" type="text" value="<%- data.swatch_image_url %>">
+                        <input type="file" name="image" data-url="<?php /* @escapeNotVerified */ echo $this->getUrl('bsscustomoption/images/upload');?>" class="upload-image-coi" multiple="multiple" />
+                        <img class="spacer" src=""/>
+                        <p class="image-placeholder-text"></p>
+                    </div>
+                </div>
+            </td>
+        <?php endif; ?>
+        <?php if ($block->isCompatibleDependentCO()) : ?>
+            <td>
+                <select multiple="true" class="multiselect-dco"></select>
+                <input class="dco-control-input dependent-id-exist dependent-id-option no-display" type="hidden" name="product[options][<%- data.id %>][values][<%- data.select_id %>][depend_value]" id="depend_value_<%- data.id %>_multiselect_<%- data.select_id %>"  value="<%- data.depend_value %>" option_key="<%- data.id %>">
+            </td>
+            <td>
+                <div class="dco-button no-display" option_key="<%- data.id %>"></div>
+            </td>
+        <?php endif; ?>
+        <td class="_fit">
+            <div class="admin__field _fit" data-index="is_default">
+                <div class="admin__field-control">
+                    <div class="admin__actions-switch" data-role="switcher">
+                        <input type="checkbox" class="admin__actions-switch-checkbox value-is-default" data-option-value-isdefault="option_<%- data.id %>_values_is_default" id="option_<%- data.id %>_values_<%- data.select_id %>_is_default" name="product[options][<%- data.id %>][values][<%- data.select_id %>][is_default]">
+                        <label class="admin__actions-switch-label" for="option_<%- data.id %>_values_<%- data.select_id %>_is_default">
+                            <span class="admin__actions-switch-text" data-text-on="Yes" data-text-off="No"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </td>
+        <?php if($block->isCompatibleAbs()): ?>
+        <td>
+            <div class="field field-option-req">
+                <div class="option-tier-price-div">
+                    <div class="add-tier-price-button"></div>
+                    <aside role="dialog" class="modal-slide  product_form_product_form_advanced_pricing_modal" aria-labelledby="modal-title-14" aria-describedby="modal-content-14" data-role="modal" data-type="slide" tabindex="0" style="z-index: 902;">
+                        <div data-role="focusable-start" tabindex="0"></div>
+                        <div class="modal-inner-wrap" data-role="focusable-scope">
+                            <header class="modal-header">
+                                <h1 id="modal-title-14" class="modal-title" data-role="title">
+                                    <?php /* @escapeNotVerified */ echo __('Advanced Pricing'); ?>
+                                </h1>
+                                <button class="action-close" data-role="closeBtn" type="button">
+                                    <span> <?php /* @escapeNotVerified */ echo __('Close'); ?></span>
+                                </button>
+                                <div class="page-main-actions">
+                                    <div class="page-actions">
+                                        <div class="page-actions-buttons">
+                                            <button class="action-primary" type="button" data-role="action"><span><?php /* @escapeNotVerified */ echo __('Done'); ?></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </header>
+                            <div class="modal-content" data-role="content">
+                                <div class="modal-component">
+                                    <div class="fieldset-wrapper _show" data-level="0" data-index="advanced-pricing">
+                                        <div class="field">
+                                            <div class="control">
+                                                <form class="bss-custom-option-tier-price-form">
+                                                    <table class="admin__control-table tiers_table" id="tiers_table">
+                                                        <thead>
+                                                        <tr>
+                                                            <th class="col-websites"><?php /* @escapeNotVerified */ echo __('Website'); ?></th>
+                                                            <th class="col-customer-group"><?php /* @escapeNotVerified */ echo __('Customer Group'); ?></th>
+                                                            <th class="col-qty required"><?php /* @escapeNotVerified */ echo __('Quantity'); ?></th>
+                                                            <th class="col-price required"><?php /* @escapeNotVerified */ echo __('Price');?></th>
+                                                            <th class="col-delete" ><?php /* @escapeNotVerified */ echo __('Action'); ?></th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody class="tbody-tier-price-data"></tbody>
+                                                        <tfoot>
+                                                        <tr>
+                                                            <td colspan="5">
+                                                                <button type="button" class="add-tier-price-row">
+                                                                    <span><?php /* @escapeNotVerified */ echo __('Add'); ?></span>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                        </tfoot>
+                                                    </table>
+                                                </form>
+
+                                            </div>
+                                            <input type="hidden"  class="ahii bss_tier_price_option" name="product[options][<%- data.id %>][values][<%- data.select_id %>][bss_tier_price_option]"
+                                                   value="<%- data.bss_tier_price_option %>">
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div data-role="focusable-end" tabindex="0"></div>
+                    </aside>
+                </div>
+
+            </div>
+        </td>
+        <?php endif; ?>
+        <td>
+            <div class="field field-option-req">
+                <div class="option-store-title-div template-div-modal">
+                    <div class="control">
+                        <div class="add-store-title-button button-show-modal" data-toggle="tooltip" data-placement="top" title="<?php /* @escapeNotVerified */ echo __('Store View Titles');?>"></div>
+                    </div>
+                    <aside role="dialog" class="modal-slide  product_form_product_form_store_title_modal" aria-labelledby="modal-title-14" aria-describedby="modal-content-14" data-role="modal" data-type="slide" tabindex="0" style="z-index: 902;">
+                        <div data-role="focusable-start" tabindex="0"></div>
+                        <div class="modal-inner-wrap" data-role="focusable-scope">
+                            <header class="modal-header">
+                                <h1 id="modal-title-14" class="modal-title" data-role="title"><?php /* @escapeNotVerified */ echo __('Store View Titles');?>
+                                </h1>
+                                <button class="action-close button-close-modal" data-role="closeBtn" type="button">
+                                    <span><?php /* @escapeNotVerified */ echo __('close');?></span>
+                                </button>
+                                <div class="page-main-actions">
+                                    <div class="page-actions">
+                                        <div class="page-actions-buttons">
+                                            <button class="action-primary button-close-modal" type="button" data-role="action"><span><?php /* @escapeNotVerified */ echo __('Done');?></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </header>
+                            <div class="modal-content" data-role="content">
+                                <div class="modal-component">
+                                    <div class="fieldset-wrapper _show" data-level="0">
+                                        <div class="admin__fieldset-wrapper-content _hide">
+                                            <fieldset class="admin__fieldset">
+                                                <?php foreach ($listStoreView as $storeview) : ?>
+                                                    <fieldset class="admin__field" data-index="group_container_0">
+                                                        <legend class="admin__field-label">
+                                                            <span><?php /* @escapeNotVerified */ echo __($storeview['label']);?></span>
+                                                        </legend>
+                                                        <div class="admin__field-control admin__field-group-columns admin__control-fields">
+                                                            <div class="admin__field">
+                                                                <div class="admin__field-control">
+                                                                    <input data-index="<?php echo $storeview['value'];?>" id="product_option_<%- data.id %>_value_<%- data.select_id %>_title_<?php /* @escapeNotVerified */ echo $storeview['value'] ?>" class="option-title-store admin__control-text"
+                                                                           type="text" placeholder="empty to use global title" maxlength="255">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </fieldset>
+                                                <?php endforeach;?>
+                                                <input type="hidden" value="<%- data.title_option %>" class="data-title-store" name="product[options][<%- data.id %>][values][<%- data.select_id %>][title_option]"/>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div data-role="focusable-end" tabindex="0"></div>
+                    </aside>
+                </div>
+            </div>
+        </td>
+        <td class="col-actions col-delete"> <?php echo $block->getDeleteButtonHtml() ?></td>
+    </tr>
+</script>

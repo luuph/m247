@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!--
+/**
+* BSS Commerce Co.
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the EULA
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* http://bsscommerce.com/Bss-Commerce-License.txt
+*
+* @category   BSS
+* @package    Bss_CustomOptionTemplate
+* @author     Extension Team
+* @copyright  Copyright (c) 2018-2020 BSS Commerce Co. ( http://bsscommerce.com )
+* @license    http://bsscommerce.com/Bss-Commerce-License.txt
+*/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="Bss\CustomOptionTemplate\Model\ResourceModel\Template\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">bss_custom_option_template</argument>
+            <argument name="resourceModel" xsi:type="string">Bss\CustomOptionTemplate\Model\ResourceModel\Template</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="custom_option_template_grid_data_source" xsi:type="string">Bss\CustomOptionTemplate\Model\ResourceModel\Template\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Bss\CustomOptionImage\Helper\ImageSaving">
+        <plugin name="custom-move-image" type="Bss\CustomOptionTemplate\Plugin\AfterMoveImage"/>
+    </type>
+    <type name="Magento\Catalog\Model\Product\Option">
+        <plugin name="bss-co-template-co-saved" type="Bss\CustomOptionTemplate\Plugin\OptionPlugin" sortOrder="10"/>
+    </type>
+    <type name="Magento\Catalog\Model\Product\Option\Value">
+        <plugin name="bss-option-template-edit-value" type="Bss\CustomOptionTemplate\Plugin\Model\ResourceModel\OptionValuePlugin" sortOrder="10"/>
+    </type>
+    <type name="Magento\Catalog\Model\Product\Type\AbstractType">
+        <plugin name="bss-template-ignore-require-option" type="Bss\CustomOptionTemplate\Plugin\Model\Product\Type\AbstractType" sortOrder="10" />
+    </type>
+</config>

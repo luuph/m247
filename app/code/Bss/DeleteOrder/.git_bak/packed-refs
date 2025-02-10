@@ -1,0 +1,10 @@
+# pack-refs with: peeled fully-peeled sorted 
+0f518e6cb9e99bf52492103fc8542ce122ce129b refs/remotes/origin/M2DeleteOrder-13
+78bd9e7887533ab9d65f1483708a1b5ea800b5e5 refs/remotes/origin/M2DeleteOrder-6
+81deb446acc8afb99e4eb5b5a6abedee46fd7984 refs/remotes/origin/master
+817d2b9d9c84025d810af01a975ea9dc9b84a7bb refs/tags/v1.0.5
+^4b3df00a8e7c487b675e75c16cc25f387d6913ae
+bd16af3017a34e50aa089e8e876a472b6aed6501 refs/tags/v1.0.6
+^3c387beb2801d07a34c7801f4afcc61af8f6de1b
+d6481b5f74d0979a9118f4c1606cd326ffdfd72d refs/tags/v1.0.7
+^81deb446acc8afb99e4eb5b5a6abedee46fd7984

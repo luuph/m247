@@ -1,0 +1,30 @@
+<?php
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_QuoteExtension
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2018-2023 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+
+/**
+ * @var Bss\QuoteExtension\Block\Order\Info\Buttons $block
+ */
+?>
+<?php if ($block->getQuoteExtensionIncrementId() != null) : ?>
+    <span><?= $block->escapeHtml(__('Related Quote: ')) ?></span>
+    <a href="<?= $block->escapeUrl($block->getRelatedQuoteUrl()) ?>"
+       class="action related-quote"
+       rel="noopener">
+        <span><?= $block->escapeHtml(__($block->getQuoteExtensionIncrementId())) ?></span>
+    </a>
+<?php endif; ?>

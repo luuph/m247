@@ -1,0 +1,380 @@
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_Core
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2017-2018 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+
+.admin__menu .level-0.item-bss-core-menu > a {
+  &:before {
+    content: url('Bss_Core::images/logo-bss.svg');
+    width: 40%;
+    margin-left: auto;
+    margin-bottom: 10px;
+    margin-right: auto;
+  }
+  
+  &:hover::before {
+    content: url('Bss_Core::images/logo-bss-light.svg');
+  }
+}
+
+.admin__field-label {
+  cursor: default;
+}
+
+#bss-core-header {
+  .logo {
+    float: left;
+    margin: 0 15px 0 0;
+    padding-top: 6px;
+  }
+  a:visited, .alink:visited {
+    color: #006bb4;
+    text-decoration: none;
+  }
+  .menu-top {
+    display: block;
+    position: relative;
+    right: inherit;
+    top: inherit;
+    visibility: visible;
+    float: left;
+
+    ul {
+      padding: 0;
+      margin: 0;
+      border-left: 1px solid #f2f2f2;
+
+      li {
+        display: inline-block;
+        padding: 0 10px;
+
+        a {
+          height: 54px;
+          line-height: 54px;
+          color: #303030;
+          font-weight: 700;
+          font-size: 16px;
+
+          &:hover {
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+.bss-popup {
+  .modal-inner-wrap {
+    width: 50%;
+  }
+  .modal-title {
+    margin-left: 20%;
+  }
+  #bss-popup-new-version {
+    width: 100%;
+    .logo {
+      width: 20%;
+      float: left;
+      text-align: center;
+      div {
+        margin-bottom: 25px;
+      }
+    }
+    .messages {
+      width: 80%;
+      float: right;
+      padding-left: 20px;
+      li {
+        margin-bottom: 10px;
+        a {
+          color: #eb5202;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+  .modal-footer button {
+    text-transform: uppercase;
+    background-color: #eb5202;
+    border-color: #eb5202;
+    color: #ffffff;
+    text-decoration: none;
+  }
+}
+.bss-title-extension {
+  color: #303030;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: .025em;
+  text-decoration: none;
+  transition: color .15s linear;
+  line-height: 20px;
+}
+#bss-promotions-container .bss-promotions-container__content {
+  border: #e7e7e7 solid 1px;
+  border-radius: 4px;
+  margin-top: 32px;
+}
+.bss-header-extension {
+  display: flex;
+  align-items: center;
+  border-bottom: #e7e7e7 solid 1px;
+  padding: 8px;
+}
+.bss-header-extension .bss-header-extension_icon {
+  width: 100px;
+  height: 58px;
+  margin-right: 8px;
+}
+.bss-header-extension .bss-extension_icon-img {
+  background-image: url('Bss_Core::images/bss.png');
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: contain;
+}
+.bss-header-extension .bss-promotion-title {
+  color: #212121;
+  font-weight: 700;
+  margin-bottom: 8px;
+  font-size: 18px;
+  line-height: 18px;
+}
+.bss-header-extension .bss-promotion-description {
+  font-size: 13px;
+  font-weight: 600;
+  color: #a3a3a3;
+  margin: 0;
+}
+//Content bss extensions
+.bss-promotion-extensions {
+  padding: 12px;
+}
+.bss-promotion-extensions .bss-extension {
+  border: #e7e7e7 solid 1px;
+  border-radius: 4px;
+  display: flex;
+}
+.bss-promotion-extensions.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.bss-promotion-extensions .grid-item {
+  padding: 20px;
+  text-align: center;
+}
+.bss-promotion-extensions .bss-extension-item__left {
+  border: #fd9a00 solid 1px;
+  width: 30%;
+  min-width: 30%;
+  border-radius: 4px;
+  margin-right: 20px;
+}
+.bss-promotion-extensions .bss-extension-item__img {
+  background-color: #f1f1f1;
+  height: 70%;
+  border-bottom: #fd9a00 solid 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px 4px 0 0;
+}
+.bss-promotion-extensions .bss-extension-price {
+  height: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 600;
+}
+.bss-promotion-extensions .bss-extension-item__right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+}
+.bss-promotion-extensions .bss-extension-review {
+  display: flex;
+  margin-bottom: 10px;
+}
+.stars-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-right: 8px;
+}
+.bss-extension-review .stars-container::before {
+  position: absolute;
+  display: block;
+  content: "";
+  width: 1px;
+  height: 12px;
+  background-color: #b1b1b1;
+  top: 3px;
+  right: 0;
+}
+.bss-promotion-extensions .bss-extension-review .reviews {
+  color: #767070;
+  font-size: 13px;
+  font-weight: 600;
+  padding-left: 8px;
+}
+.star-icon {
+  width: 14px;
+  height: 14px;
+  margin-right: 2px;
+  fill: #fd9a00;
+}
+.bss-promotion-extensions h3.bss-extension-name {
+  color: #212121;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.bss-promotion-extensions .bss-extension-btn {
+  background: #fd9a00;
+  border: 2px solid #fd9a00;
+  outline: unset;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 12px;
+  letter-spacing: 1px;
+  padding: 10px 28px;
+  line-height: 12px;
+  //width: 30%;
+  opacity: 1;
+}
+.bss-promotion-extensions .bss-extension-btn:hover {
+  background-color: #fff;
+  border: 2px solid #fd9a00;
+  color: #fd9a00;
+}
+.bss-rating-summary {
+  overflow: hidden;
+  white-space: nowrap;
+}
+.bss-rating-summary .bss-rating-result {
+  position: relative;
+  vertical-align: middle;
+}
+.bss-rating-summary .bss-rating-result:before {
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+  -webkit-font-smoothing: antialiased;
+  color: #c7c7c7;
+  font-family: 'luma-icons';
+  font-size: 16px;
+  height: 16px;
+  letter-spacing: 2px;
+  line-height: 16px;
+  content: '\e605' '\e605' '\e605' '\e605' '\e605';
+  display: block;
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+}
+.bss-rating-summary .bss-rating-result > span {
+  display: block;
+  overflow: hidden;
+}
+.bss-rating-summary .bss-rating-result > span:before {
+  position: relative;
+  z-index: 2;
+  -webkit-font-smoothing: antialiased;
+  color: #ff5501;
+  font-family: 'luma-icons';
+  font-size: 16px;
+  height: 16px;
+  letter-spacing: 2px;
+  line-height: 16px;
+  content: '\e605' '\e605' '\e605' '\e605' '\e605';
+  display: block;
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+}
+.bss-rating-summary .bss-rating-result > span span {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+/* Custom Scroll */
+#bss-promotions-container ::-webkit-scrollbar {
+  width: 8px;
+}
+/* Track */
+#bss-promotions-container ::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+/* Handle */
+#bss-promotions-container ::-webkit-scrollbar-thumb {
+  background: #fd9a00;
+  border-radius: 10px;
+}
+/* Handle on hover */
+#bss-promotions-container ::-webkit-scrollbar-thumb:hover {
+  background: #fd9a00;
+}
+
+@media (max-width: 1600px) {
+  .bss-promotion-extensions .bss-extension-review {
+    flex-direction: column;
+  }
+  .bss-promotion-extensions .bss-extension-review .reviews {
+    padding-left: 0;
+    padding-top: 4px;
+  }
+}
+@media (max-width: 1024px) {
+  .bss-promotion-extensions.grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .bss-header-extension {
+    padding: 10px;
+  }
+  .bss-promotion-extensions.grid-container {
+    gap: 10px;
+  }
+  .bss-promotion-extensions {
+    padding: 16px 10px;
+  }
+}
+.bss-tab-container:before {
+  content: 'Sale';
+  background: #eb5202;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  height: 26px;
+  line-height: 22px;
+  padding: 2px 0;
+  position: absolute;
+  right: 50px;
+  text-align: center;
+  top: ~'calc(50% - 13px)';
+  width: 44px;
+}

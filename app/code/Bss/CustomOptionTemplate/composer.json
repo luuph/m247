@@ -1,0 +1,21 @@
+{
+    "name": "bsscommerce/custom-option-template",
+    "description": "Bss Custom Option Template",
+    "type": "magento2-module",
+    "require": {
+        "bsscommerce/custom-option-core": "1.0.*"
+    },
+    "version": "1.2.0",
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+    "autoload": {
+        "files": [
+          "registration.php"
+        ],
+        "psr-4": {
+            "Bss\\CustomOptionTemplate\\": ""
+        }
+    }
+}

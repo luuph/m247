@@ -1,0 +1,20 @@
+# pack-refs with: peeled fully-peeled sorted 
+7ee306c41934062bc97abb5220ddefe08c1b5101 refs/remotes/origin/BSupport-5458
+8073f5b813bfd7883accffaeb81f8b8522a0d447 refs/remotes/origin/EE
+ac0d23da0729fb18cc94356999bd519d50931149 refs/remotes/origin/M2SEOSuite-199
+aa64d654fec42a37242de79e3d675e431368f708 refs/remotes/origin/M2SEOSuite-209
+05f9c6a6abb17c2033d0499aeaf8b3445c45b413 refs/remotes/origin/M2SEOSuite-219
+4b101087ec9e7d11fcfb5bf4b540d3d51e202407 refs/remotes/origin/M2SEOSuite-233
+1886d43ad5b191884cf82305d381c0576e006346 refs/remotes/origin/M2SEOSuite-236
+d1c47556e4068f54d352ec942b5c42bcd2d41008 refs/remotes/origin/hotfix-v1.1.9
+bf666950fe6cb6f0ee9b246849f6a2fc1af6fec8 refs/remotes/origin/master
+d6fa4211493aa7650b842209cb79692cf405e984 refs/tags/v1.1.2
+^6979c8c500244460744d58b7def47d24d40e56b6
+41d7a85c44615ce1a63f16e34bcd2ec6714af401 refs/tags/v1.1.7
+^435454fa43a0e4af164da78aef5aa62ba2cded9f
+b74022165f08ccce3ab5b135fe419b8c6dabbf91 refs/tags/v1.1.8
+^ae4e47e55c1fcdc9da9c30f82cbdda742fa53f2d
+30755b579c5139584a6c1f241a061ed4f1c54189 refs/tags/v1.1.9
+^1c4cd616e5c38241d731d263253de11e51eef1d6
+e941d9e28e81a017425b33c272a4a2dd77bdd48f refs/tags/v1.2.0
+^bf666950fe6cb6f0ee9b246849f6a2fc1af6fec8

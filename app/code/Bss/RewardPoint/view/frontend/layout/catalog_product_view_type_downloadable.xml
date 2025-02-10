@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_RewardPoint
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2019-2020 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="product.info.main">
+            <block class="Bss\RewardPoint\Block\Customer\PointShowing" name="review_point_message" template="Bss_RewardPoint::account/rewardpoint-message.phtml" ifconfig="bssrewardpoint/frontend/product_page_tab_review">
+                <arguments>
+                    <argument name="message_type" xsi:type="string">review</argument>
+                    <argument name="css_class" xsi:type="string">review-message</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="product.info.options.wrapper">
+            <block class="Bss\RewardPoint\Block\Customer\PointShowing" name="product_point_message" template="Bss_RewardPoint::account/rewardpoint-message.phtml" ifconfig="bssrewardpoint/frontend/product_page_reward_point">
+                <arguments>
+                    <argument name="message_type" xsi:type="string">product</argument>
+                    <argument name="css_class" xsi:type="string">product-point</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="product.info.form.content">
+            <block class="Bss\RewardPoint\Block\Customer\PointShowing" name="product_point_message_1" template="Bss_RewardPoint::account/rewardpoint-message.phtml" ifconfig="bssrewardpoint/frontend/product_page_reward_point">
+                <arguments>
+                    <argument name="message_type" xsi:type="string">product</argument>
+                    <argument name="css_class" xsi:type="string">product-point</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Bss\RewardPoint\Block\Customer\PointShowing" name="review_point_message_tab" template="Bss_RewardPoint::account/rewardpoint-message.phtml" ifconfig="bssrewardpoint/frontend/product_page_tab_review">
+                <arguments>
+                    <argument name="message_type" xsi:type="string">review</argument>
+                    <argument name="css_class" xsi:type="string">review-message-tab</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+        <move element="review_point_message" destination="product.info.main" after="page.main.title"/>
+        <move element="product_point_message" destination="product.info.options.wrapper.bottom" before="product.info.social"/>
+    </body>
+</page>

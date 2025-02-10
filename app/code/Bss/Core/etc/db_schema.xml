@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="bss_core_api_data_extension_info" resource="default" engine="innodb" comment="BSS Extensions Info">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true" comment="ID"/>
+        <column xsi:type="varchar" name="type" nullable="false" length="255" comment="Type"/>
+        <column xsi:type="longtext" name="response_data" nullable="true" comment="Response Data"/>
+        <column xsi:type="timestamp" name="last_updated" nullable="true" default="CURRENT_TIMESTAMP" on_update="true" comment="Last Updated Timestamp"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+</schema>

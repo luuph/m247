@@ -1,0 +1,35 @@
+<?php
+/**
+ * @var Bss\RewardPoint\Block\Transaction\View
+ */
+//  @codingStandardsIgnoreFile
+?>
+<?php
+$transaction = $block->getTransaction();
+?>
+<?php if ($transaction): ?>
+    <div class="block block-balance">
+        <div class="block-content">
+            <p class="rw-point">
+                <span><?= $block->escapeHtml(__('Point')) ?>:</span>
+                <span class="panel-point"><?= $transaction->getPoint() ?></span>
+            </p>
+            <p class="rw-point">
+                <span><?= $block->escapeHtml(__('Note')) ?>:</span>
+                <span class="panel-point"><?= $transaction->getNote() ?></span>
+            </p>
+            <p class="rw-point">
+                <span><?= $block->escapeHtml(__('Created by')) ?>:</span>
+                <span class="panel-point"><?= $transaction->getCreatedBy() ?></span>
+            </p>
+            <p class="rw-point">
+                <span><?= $block->escapeHtml(__('Transaction type')) ?>:</span>
+                <span class="panel-point"><?= $block->getActionsName($transaction->getAction()) ?></span>
+            </p>
+            <p class="rw-point">
+                <span><?= $block->escapeHtml(__('Transaction date')) ?>:</span>
+                <span class="panel-point"><?= $transaction->getCreatedAt() ?></span>
+            </p>
+        </div>
+    </div>
+<?php endif ?>

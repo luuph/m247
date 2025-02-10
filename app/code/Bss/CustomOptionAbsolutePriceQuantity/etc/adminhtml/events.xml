@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_CustomOptionAbsolutePriceQuantity
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2017-2020 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="bss_custom_options_common_container_add_child_before">
+        <observer name="add_common_container_grid_child" instance="Bss\CustomOptionAbsolutePriceQuantity\Observer\Adminhtml\AddBackendField" />
+    </event>
+    <event name="bss_custom_options_render_select_after_title">
+        <observer name="coap_backend_order_tip" instance="Bss\CustomOptionAbsolutePriceQuantity\Observer\Adminhtml\Render\AddAbsoluteTooltip" />
+    </event>
+    <event name="bss_abs_custom_options_select_type_add_child_before">
+        <observer name="coap_option_tier_price" instance="Bss\CustomOptionAbsolutePriceQuantity\Observer\Adminhtml\AddTierPrice" />
+    </event>
+</config>

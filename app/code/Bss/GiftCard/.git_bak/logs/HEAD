@@ -1,0 +1,3 @@
+0000000000000000000000000000000000000000 5155d058f5d263b028a8ff11b18940927007e0f0 Hai Luu <luuph@bsscommerce.com> 1735026795 +0700	clone: from ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-gift-card.git
+5155d058f5d263b028a8ff11b18940927007e0f0 5155d058f5d263b028a8ff11b18940927007e0f0 Hai Luu <luuph@bsscommerce.com> 1736492122 +0700	checkout: moving from master to BSupport-7655
+5155d058f5d263b028a8ff11b18940927007e0f0 82ad702a9ed9d62bb9e411d60abecafce9746b33 Hai Luu <luuph@bsscommerce.com> 1736492171 +0700	commit: BSupport-7655: Fix send 2 code per 1 order when checkout with paypal

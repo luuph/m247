@@ -1,0 +1,54 @@
+<?php
+/**
+ * @var Bss\RewardPoint\Block\Transaction\ListTransaction
+ */
+//  @codingStandardsIgnoreFile
+?>
+<?php
+$transactions = $block->getTransactions();
+?>
+<?php if ($transactions): ?>
+<?php $count = count($transactions); ?>
+    <div class="block block-transaction">
+        <div class="block-content">
+            <?php if ($count > 0): ?>
+                <div class="table-wrapper transaction-recent">
+                    <table class="data table table-transaction-items recent" id="my-transactions-table">
+                        <caption class="table-caption"><?= /* @escapeNotVerified */ __('Recent Transactions') ?></caption>
+                        <thead>
+                            <tr>
+                                <th scope="col" class="col point"><?= /* @escapeNotVerified */ __('Point') ?></th>
+                                <th scope="col" class="col note"><?= /* @escapeNotVerified */ __('Note') ?></th>
+                                <th scope="col" class="col created_by"><?= /* @escapeNotVerified */ __('Created by') ?></th>
+                                <th scope="col" class="col type"><?= /* @escapeNotVerified */ __('Transaction type') ?></th>
+                                <th scope="col" class="col create_at"><?= /* @escapeNotVerified */ __('Transaction date') ?></th>
+                                <th scope="col" class="col action"><?= /* @escapeNotVerified */ __('Action') ?></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($transactions as $transaction): ?>
+                                <tr>
+                                    <td data-th="<?= $block->escapeHtml(__('Point')) ?>" class="col point"><?= /* @escapeNotVerified */ $transaction->getPoint() ?></td>
+                                    <td data-th="<?= $block->escapeHtml(__('Note')) ?>" class="col note"><?= $block->escapeHtml($transaction->getNote()) ?></td>
+                                    <td data-th="<?= $block->escapeHtml(__('Created by')) ?>" class="col created_by"><?= /* @escapeNotVerified */ $transaction->getCreatedBy() ?></td>
+                                    <td data-th="<?= $block->escapeHtml(__('Transaction type')) ?>" class="col type"><?= /* @escapeNotVerified */ $block->getActionsName($transaction->getAction()) ?></td>
+                                    <td data-th="<?= $block->escapeHtml(__('Transaction date')) ?>" class="col create_at"><?= /* @escapeNotVerified */ $block->formatDate($transaction->getCreatedAt()) ?></td>
+                                    <td data-th="<?= $block->escapeHtml(__('Actions')) ?>" class="col actions">
+                                        <a href="<?= /* @escapeNotVerified */ $block->getViewUrl($transaction->getTransactionId()) ?>" class="action view">
+                                            <span class="panel-point"><?= /* @escapeNotVerified */ __('View') ?></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            <?php if ($block->getPagerHtml()): ?>
+                    <div class="order-products-toolbar toolbar bottom"><?php echo $block->getPagerHtml(); ?></div>
+            <?php endif ?>
+            <?php else: ?>
+                <div class="message info empty"><span><?= /* @escapeNotVerified */ __('You have placed no transactions.') ?></span></div>
+            <?php endif; ?>
+        </div>
+    </div>
+<?php endif; ?>

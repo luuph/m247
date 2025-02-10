@@ -1,0 +1,20 @@
+<!--@subject Guest To Customer Template Email @-->
+{{template config_path="design/email/header_template"}}
+Dear {{trans "%nameCustomer ," nameCustomer=$nameCustomer}}<br>
+<br>
+Thank you for shopping at our {{trans "%nameStore " nameStore=$nameStore}} store!<br>
+Please be kindly informed of your personal login details:<br>
+{{trans "Email: %email ." email=$email}}<br>
+Create your password <a href={{trans "%urlGet" urlGet=$urlGet}}>Here</a><br>
+When you sign in to your account, you will be able to:<br>
+    <ul style="margin-left: 35px;">
+        <li>Proceed through checkout faster</li>
+        <li>Check the status of orders</li>
+        <li>View past orders</li>
+        <li>Make changes to your account information</li>
+        <li>Change your password</li>
+        <li>Store alternative addresses (for shipping to multiple family members and friends)</li>
+    </ul>
+Best regards,<br>
+{{trans "%nameStore " nameStore=$nameStore}}.<br>
+{{template config_path="design/email/footer_template"}}

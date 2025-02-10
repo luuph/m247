@@ -1,0 +1,44 @@
+<!--
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_RewardPoint
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2019-2020 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+-->
+<!--@subject {{trans "Reward point transaction created"}} @-->
+<!--@vars {
+"var customer.name":"Customer Name"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<table>
+    <tr class="email-intro">
+        <td>
+            <p class="greeting">{{trans " Dear %customer_name," customer_name=$customer_name}}</p>
+        </td>
+    </tr>
+    <tr class="email-summary">
+        <td>
+            <p>{{trans "Nice! You have just spent %point" point=$transaction.getPoint() |raw}} {{trans "points."}}</p>
+            <p>{{trans "Now you have %balance" balance=$balance |raw}} {{trans "points in your balance."}}</p>
+            <p>{{trans "You can save a lot more in your future order. With every %x_point" x_point=$x_point}} {{trans " point you use in your shopping, we will discount 1 %base_currency_code" base_currency_code=$base_currency_code}} {{trans " for your order."}}</p>
+            <p>{{trans "You can also check your point balance changes in your account. If you have questions about your points, drop us a line via support@example.com."}}</p>
+            <br>
+            <p>{{trans "Have a nice day!"}}.</p>
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

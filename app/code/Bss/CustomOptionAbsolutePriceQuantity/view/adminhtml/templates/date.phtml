@@ -1,0 +1,107 @@
+<?php
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_CustomOptionAbsolutePriceQuantity
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2017-2020 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+
+// @codingStandardsIgnoreFile
+?>
+<?php /* @var $block \Bss\CustomOptionAbsolutePriceQuantity\Block\Options\Type\Date */ ?>
+<?php $option = $block->getOption(); ?>
+<?php $optionId = $option->getId(); ?>
+<div class="admin__field field<?php if ($option->getIsRequire()) echo ' required _required' ?>">
+  <label class="label admin__field-label">
+      <?php echo  $block->escapeHtml($option->getTitle()) ?>
+        <?php if ($option->getPriceType() === "abs") : ?>
+          <?php echo ' ' . __('(Absolute Price)'); ?>
+        <?php endif; ?>
+      <?php /* @escapeNotVerified */ echo $block->getFormatedPrice() ?>
+  </label>
+  <div class="admin__field-control control">
+
+  <?php if ($option->getType() == \Magento\Catalog\Model\Product\Option::OPTION_TYPE_DATE_TIME
+      || $option->getType() == \Magento\Catalog\Model\Product\Option::OPTION_TYPE_DATE): ?>
+
+      <?php echo $block->getDateHtml() ?>
+
+      <?php if (!$block->useCalendar()): ?>
+      <script>
+require([
+  "prototype",
+  "Magento_Catalog/catalog/product/composite/configure"
+], function(){
+      window.dateOption = productConfigure.opConfig.dateOption;
+      Event.observe('options_<?php /* @escapeNotVerified */ echo $optionId ?>_month', 'change', dateOption.reloadMonth.bind(dateOption));
+      Event.observe('options_<?php /* @escapeNotVerified */ echo $optionId ?>_year', 'change', dateOption.reloadMonth.bind(dateOption));
+});
+</script>
+      <?php endif; ?>
+
+  <?php endif; ?>
+
+  <?php if ($option->getType() == \Magento\Catalog\Model\Product\Option::OPTION_TYPE_DATE_TIME
+      || $option->getType() == \Magento\Catalog\Model\Product\Option::OPTION_TYPE_TIME): ?>
+      <span class="time-picker"><?php echo $block->getTimeHtml() ?></span>
+  <?php endif; ?>
+
+    <input type="hidden" name="validate_datetime_<?php /* @escapeNotVerified */ echo $optionId ?>" class="validate-datetime-<?php /* @escapeNotVerified */ echo $optionId ?>" value="" />
+    <script>
+require([
+  "jquery",
+  "mage/backend/validation"
+], function(jQuery){
+    //<![CDATA[
+<?php if ($option->getIsRequire()): ?>
+        jQuery.validator.addMethod('validate-datetime-<?php /* @escapeNotVerified */ echo $optionId ?>', function(v) {
+            var dateTimeParts = jQuery('.datetime-picker[id^="options_<?php /* @escapeNotVerified */ echo $optionId ?>"]');
+            for (var i=0; i < dateTimeParts.length; i++) {
+                if (dateTimeParts[i].value == "") return false;
+            }
+            return true;
+        }, '<?php /* @escapeNotVerified */ echo $block->escapeJsQuote( __('This is a required option.') )?>');
+<?php else: ?>
+        jQuery.validator.addMethod('validate-datetime-<?php /* @escapeNotVerified */ echo $optionId ?>', function(v) {
+            var dateTimeParts = jQuery('.datetime-picker[id^="options_<?php /* @escapeNotVerified */ echo $optionId ?>"]');
+            var hasWithValue = false, hasWithNoValue = false;
+            var pattern = /day_part$/i;
+            for (var i=0; i < dateTimeParts.length; i++) {
+                if (! pattern.test(dateTimeParts[i].id)) {
+                    if (dateTimeParts[i].value === "") {
+                        hasWithValue = true;
+                    } else {
+                        hasWithNoValue = true;
+                    }
+                }
+            }
+            return hasWithValue ^ hasWithNoValue;
+        }, '<?php /* @escapeNotVerified */ echo $block->escapeJsQuote( __('The field isn\'t complete.') )?>');
+<?php endif; ?>
+    //]]>
+
+});
+</script>
+  </div>
+</div>
+<?php if ($option->getBssCoapQty()): ?>
+<div class="field admin__field">
+    <label class="label admin__field-label"><span><?php /* @escapeNotVerified */ echo $option->getTitle() . ' - ' . __('Options Qty') ?></span></label>
+    <div class="control admin__field-control">
+        <input
+            id="product_composite_configure_input_qty" class="input-text admin__control-text qty"
+            type="text" name="option_qty[<?php  echo $option->getId() ?>]"
+            value="<?php echo $block->getProduct()->getData('bss_reorder_option_qty/'.$option->getId()) ?>" />
+    </div>
+</div>
+<?php endif;?>

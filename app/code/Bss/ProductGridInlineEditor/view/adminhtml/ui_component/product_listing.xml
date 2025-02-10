@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <modal name="bss_source_listing_modal">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="componentType" xsi:type="string">modal</item>
+                <item name="component" xsi:type="string">Bss_ProductGridInlineEditor/js/grid/modal/modal-component</item>
+                <item name="options" xsi:type="array">
+                    <item name="type" xsi:type="string">popup</item>
+                    <item name="title" xsi:type="string" translate="true">Edit Stock</item>
+                    <item name="buttons" xsi:type="array">
+                        <item name="0" xsi:type="array">
+                            <item name="text" xsi:type="string" translate="true">Close</item>
+                            <item name="actions" xsi:type="array">
+                                <item name="0" xsi:type="string">closeModal</item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </item>
+        </argument>
+        <insertListing name="bss_product_listing_loader">
+            <settings>
+                <autoRender>true</autoRender>
+                <ns>bss_inventory_source_listing</ns>
+            </settings>
+        </insertListing>
+    </modal>
+</listing>

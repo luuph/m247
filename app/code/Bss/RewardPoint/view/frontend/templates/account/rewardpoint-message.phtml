@@ -1,0 +1,13 @@
+<?php
+/**
+ * @var Bss\RewardPoint\Block\Customer\PointShowing
+ */
+//  @codingStandardsIgnoreFile
+?>
+<?php if (!empty($block->getRewardPointMessage())): ?>
+    <div class="reward-point-message <?= $block->getCssClass() ?>">
+        <span>
+            <?= $block->getRewardPointMessage() ?>
+        </span>
+    </div>
+<?php endif; ?>

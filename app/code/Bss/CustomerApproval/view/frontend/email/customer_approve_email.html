@@ -1,0 +1,24 @@
+<!--@subject Welcome! Your account has been approved! @-->
+{{template config_path="design/email/header_template"}}
+<table>
+    <p>
+        {{trans "Hi %name," name=$varName}}
+    </p>
+    <p>
+        {{trans "Welcome to our website."}}
+    </p>
+    <p>
+        {{trans "Your account information details are as follows:" }}
+    </p>
+    <p>
+        <b>Email Address:</b>{{trans " %email" email=$varEmail}}
+    </p>
+    <p>
+        <b>Password:</b> [The password you specified]
+    </p>
+    <p>
+        {{trans 'Click <a href="%login_url">here</a> to sign in to our site.'
+        login_url="$this.getUrl($store,'customer/account/login/')" |raw}}
+    </p>
+</table>
+{{template config_path="design/email/footer_template"}}

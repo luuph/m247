@@ -1,0 +1,69 @@
+<!--
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_CustomOptionAbsolutePriceQuantity
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2017-2020 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+ -->
+<div class="option-tier-price-div">
+    <button id="add-tier-price-button"></button>
+    <aside role="dialog" class="modal-slide  product_form_product_form_advanced_pricing_modal" aria-labelledby="modal-title-14" aria-describedby="modal-content-14" data-role="modal" data-type="slide" tabindex="0" style="z-index: 902;">
+        <div data-role="focusable-start" tabindex="0"></div>
+        <div class="modal-inner-wrap" data-role="focusable-scope">
+            <header class="modal-header">
+                <h1 id="modal-title-14" class="modal-title" data-role="title" data-bind="text : $t('Advanced Pricing')">
+                </h1>
+                <button class="action-close" data-role="closeBtn" type="button">
+                    <span data-bind="text : $t('Close')"></span>
+                </button>
+                <div class="page-main-actions">
+                    <div class="page-actions">
+                        <div class="page-actions-buttons">
+                            <button class="action-primary" type="button" data-role="action"><span data-bind="text : $t('Done')"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <div class="modal-content" data-role="content">
+                <div data-bind="hasFocus: focused" class="modal-component">
+                    <div class="fieldset-wrapper _show" data-level="0" data-index="advanced-pricing">
+                        <div class="field">
+                            <div class="control">
+                                <form class="bss-custom-option-tier-price-form" data-bind="attr: {id: bodyId,}">
+                                </form>
+
+                            </div>
+                            <input type="hidden"  class="ahii" data-bind="
+                                event: {change: userChanges},
+                                value: value,
+                                hasFocus: focused,
+                                valueUpdate: valueUpdate,
+                                attr: {
+                                    name: inputName,
+                                    placeholder: placeholder,
+                                    'aria-describedby': noticeId,
+                                    id: uid,
+                                    disabled: disabled,
+                                    maxlength: 255
+                            }"/>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div data-role="focusable-end" tabindex="0"></div>
+    </aside>
+</div>

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+  <table name="quote" resource="default">
+    <column xsi:type="text" name="shipping_arrival_timeslot" nullable="true"/>
+    <column xsi:type="date" name="shipping_arrival_date"/>
+    <column xsi:type="text" name="shipping_arrival_comments" nullable="true"/>
+    <column xsi:type="text" name="time_slot_price" nullable="true"/>
+    <column xsi:type="text" name="base_time_slot_price" nullable="true"/>
+  </table>
+  <table name="sales_order" resource="default">
+    <column xsi:type="date" name="shipping_arrival_date"/>
+    <column xsi:type="text" name="shipping_arrival_comments" nullable="true"/>
+    <column xsi:type="text" name="shipping_arrival_timeslot" nullable="true"/>
+    <column xsi:type="text" name="time_slot_price" nullable="true"/>
+    <column xsi:type="text" name="base_time_slot_price" nullable="true"/>
+    <column xsi:type="decimal" name="delivery_time_slot_price_refunded" scale="4" precision="12" unsigned="false" nullable="true" comment="Delivery Time Slot Price Refunded"/>
+    <column xsi:type="decimal" name="base_delivery_time_slot_price_refunded" scale="4" precision="12" unsigned="false" nullable="true" comment="Base Delivery Time Slot Price Refunded"/>
+  </table>
+  <table name="sales_order_grid" resource="default">
+    <column xsi:type="text" name="shipping_arrival_timeslot" nullable="true"/>
+    <column xsi:type="date" name="shipping_arrival_date"/>
+    <column xsi:type="text" name="shipping_arrival_comments" nullable="true"/>
+  </table>
+  <table name="sales_creditmemo" resource="default">
+    <column xsi:type="decimal" name="delivery_time_slot_price" scale="4" precision="12" unsigned="false" nullable="true" comment="Delivery Time Slot Price"/>
+    <column xsi:type="decimal" name="base_delivery_time_slot_price" scale="4" precision="12" unsigned="false" nullable="true" comment="Base Delivery Time Slot Price"/>
+  </table>
+</schema>

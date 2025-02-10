@@ -1,0 +1,17 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[remote "origin"]
+	url = ssh://git@x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_custom-pricing.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
+[branch "Request4quote-234"]
+	remote = origin
+	merge = refs/heads/Request4quote-234
+[branch "v1.1.4-draft"]
+	remote = origin
+	merge = refs/heads/v1.1.4-draft

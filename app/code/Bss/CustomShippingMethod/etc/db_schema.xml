@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_CustomShippingMethod
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2017-2022 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+  <table name="bss_custom_shipping_method" resource="default" engine="innodb" comment="Bss Custom shipping Method">
+    <column xsi:type="int" name="id" padding="11" unsigned="false" nullable="false" identity="true" comment="Id"/>
+    <column xsi:type="smallint" name="enabled" padding="6" unsigned="false" nullable="false" identity="false" comment="Enabled"/>
+    <column xsi:type="text" name="name" nullable="false" comment="name"/>
+    <column xsi:type="text" name="type" nullable="true" comment="type"/>
+    <column xsi:type="decimal" name="price" scale="4" precision="12" unsigned="false" nullable="true" comment="price"/>
+    <column xsi:type="text" name="calculate_handling_fee" nullable="true" comment="Calculate Handling Fee "/>
+    <column xsi:type="decimal" name="handling_fee" scale="4" precision="12" unsigned="false" nullable="true" comment="Handling Fee"/>
+    <column xsi:type="smallint" name="applicable_countries" padding="6" unsigned="false" nullable="false" identity="false" comment="Applicable Countries"/>
+    <column xsi:type="text" name="specific_countries" nullable="true" comment="Specific Countries"/>
+    <column xsi:type="decimal" name="minimum_order_amount" scale="4" precision="12" unsigned="false" nullable="true" comment="Minimum Order Amount"/>
+    <column xsi:type="decimal" name="maximum_order_amount" scale="4" precision="12" unsigned="false" nullable="true" comment="Maximum Order amount"/>
+    <column xsi:type="int" name="sort_order" padding="11" unsigned="false" nullable="true" identity="false" comment="Sort Order"/>
+    <column xsi:type="text" name="specific_regions" nullable="true" comment="Destination Region Code"/>
+    <column xsi:type="text" name="specific_country" nullable="true" comment="Destination Country"/>
+    <column xsi:type="varchar" name="cities" nullable="true" length="255" comment="City"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="id"/>
+    </constraint>
+    <index referenceId="BSS_CUSTOM_SHIPPING_METHOD_ID" indexType="btree">
+      <column name="id"/>
+    </index>
+  </table>
+  <table name="bss_custom_shipping_method_store" resource="default" engine="innodb" comment="bss_custom_shipping_method_store">
+    <column xsi:type="int" name="method_id" padding="11" unsigned="false" nullable="false" identity="false" comment="ID Custom Shipping Method "/>
+    <column xsi:type="smallint" name="store_id" padding="5" unsigned="true" nullable="false" identity="false" comment="ID Store"/>
+    <constraint xsi:type="foreign" referenceId="BSS_CUSTOM_SHIPPING_METHOD_STORE_STORE_ID_STORE_STORE_ID" table="bss_custom_shipping_method_store" column="store_id" referenceTable="store" referenceColumn="store_id" onDelete="CASCADE"/>
+    <constraint xsi:type="foreign" referenceId="BSS_CUSTOM_SHPP_METHOD_STORE_METHOD_ID_BSS_CUSTOM_SHPP_METHOD_ID" table="bss_custom_shipping_method_store" column="method_id" referenceTable="bss_custom_shipping_method" referenceColumn="id" onDelete="CASCADE"/>
+    <index referenceId="BSS_CUSTOM_SHIPPING_METHOD_STORE_STORE_ID" indexType="btree">
+      <column name="store_id"/>
+    </index>
+    <index referenceId="BSS_CUSTOM_SHIPPING_METHOD_STORE_METHOD_ID" indexType="btree">
+      <column name="method_id"/>
+    </index>
+  </table>
+</schema>

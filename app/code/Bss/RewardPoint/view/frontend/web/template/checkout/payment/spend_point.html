@@ -1,0 +1,53 @@
+<!-- ko if: isDisplayed() -->
+    <div class="payment-option _collapsible opc-payment-additional bss-reward-point-code"
+         data-bind="mageInit: {'collapsible':{'openedState': '_active'}}">
+        <div class="payment-option-title field choice" data-role="title">
+            <span class="action action-toggle" id="block-bss-reward-point-heading" role="heading" aria-level="2">
+                <!-- ko i18n: 'Apply Reward Point'--><!-- /ko -->
+            </span>
+        </div>
+        <div class="payment-option-content bss-reward-point" data-role="content">
+            <!-- ko foreach: getRegion('messages') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+            <form class="form form-bss-reward-point" id="bss-reward-point-form">
+                <div class="payment-option-inner">
+                    <div class="field">
+                        <div class="block-content">
+                            <span class="balance-price-label">
+                                <span data-bind="i18n: 'Your Reward Point:'"></span>
+                                <span data-bind="text: pointLeft()" class="price"></span>
+                            </span>
+                        </div>
+                        <div class="block-content">
+                            <span class="rate-label">
+                                <span data-bind="text: rateHtml()" class="rate"></span>
+                            </span>
+                        </div>
+                        <!-- ko if: isPointSlider() -->
+                            <div id="slider-point">
+                                <div class="rangeinner"></div>
+                                <div id="display-number-point-slider" class="ui-slider-handle"></div>
+                            </div>
+                        <!-- /ko -->
+                        <div class="control">
+                            <input class="input-text validate-number validate-digits"
+                                   type="text"
+                                   id="bss-reward-point-value"
+                                   name="spend_reward_point"
+                                   data-validate="{'required-entry':true}"
+                                   data-bind="value: point,  attr:{placeholder: $t('Enter Value')} "></input>
+                        </div>
+                    </div>
+                </div>
+                <div class="actions-toolbar">
+                    <div class="primary">
+                        <button class="action bss-reward-point-apply" type="submit" data-bind="'value': $t('Apply Reward'), click: apply">
+                            <span><!-- ko i18n: 'Apply Reward'--><!-- /ko --></span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+<!-- /ko -->

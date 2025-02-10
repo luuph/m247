@@ -1,0 +1,53 @@
+<?php
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category  BSS
+ * @package   Bss_ProductTags
+ * @author    Extension Team
+ * @copyright Copyright (c) 2018-2019 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license   http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+
+namespace Bss\ProductTags\Model\ResourceModel\ProductTagName;
+
+/**
+ * Class Collection
+ *
+ * @package Bss\ProductTags\Model\ResourceModel\ProductTagName
+ */
+class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
+{
+    /**
+     * Define resource model.
+     */
+    public function _construct()
+    {
+        $this->_init(
+            \Bss\ProductTags\Model\ProductTagName::class,
+            \Bss\ProductTags\Model\ResourceModel\ProductTagName::class
+        );
+    }
+
+    /**
+     * Array name tag
+     *
+     * @return array
+     */
+    public function arrayNameTag()
+    {
+        $array = [];
+        $data = $this->addFieldToSelect('name_tag')->getData();
+        foreach ($data as $item) {
+            $array[] = $item['name_tag'];
+        }
+        return $array;
+    }
+}

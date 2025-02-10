@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">bss_inventory_source_listing.bss_inventory_source_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <spinner>columns</spinner>
+        <deps>
+            <dep>bss_inventory_source_listing.bss_inventory_source_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="bss_inventory_source_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <dataProvider class="Bss\ProductGridInlineEditor\Ui\Component\Listing\Grid\DataProvider" name="bss_inventory_source_listing_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+
+    <!-- columns -->
+    <columns name="columns">
+        <settings>
+            <editorConfig>
+                <param name="selectProvider" xsi:type="string">bss_inventory_source_listing.bss_inventory_source_listing.columns.ids</param>
+                <param name="enabled" xsi:type="boolean">true</param>
+                <param name="indexField" xsi:type="string">source_code</param>
+                <param name="clientConfig" xsi:type="array">
+                    <item name="saveUrl" path="productgridinlineeditor/source/inlineEdit" xsi:type="url"/>
+                    <item name="validateBeforeSave" xsi:type="boolean">false</item>
+                </param>
+            </editorConfig>
+            <childDefaults>
+                <param name="fieldAction" xsi:type="array">
+                    <item name="provider" xsi:type="string">bss_inventory_source_listing.bss_inventory_source_listing.columns_editor</item>
+                    <item name="target" xsi:type="string">startEdit</item>
+                    <item name="params" xsi:type="array">
+                        <item name="0" xsi:type="string">${ $.$data.rowIndex }</item>
+                        <item name="1" xsi:type="boolean">true</item>
+                    </item>
+                </param>
+            </childDefaults>
+        </settings>
+        <selectionsColumn name="ids" sortOrder="10">
+            <settings>
+                <visible>false</visible>
+                <indexField>source_code</indexField>
+            </settings>
+        </selectionsColumn>
+        <column name="name" sortOrder="20">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Name</label>
+            </settings>
+        </column>
+        <column name="quantity" class="Bss\ProductGridInlineEditor\Ui\Component\Listing\Column\SourceQuantity" sortOrder="40">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Quantity</label>
+                <sortable>false</sortable>
+                <editor>
+                    <editorType>text</editorType>
+                    <validation>
+                        <rule name="validate-number" xsi:type="boolean">true</rule>
+                    </validation>
+                </editor>
+            </settings>
+        </column>
+        <column name="source_item_status" component="Magento_Ui/js/grid/columns/select" sortOrder="30">
+            <settings>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <sortable>false</sortable>
+                <label translate="true">Source Item Status</label>
+                <options class="Magento\InventoryCatalogAdminUi\Model\OptionSource\SourceItemStatus"/>
+                <editor>
+                    <editorType>select</editorType>
+                </editor>
+            </settings>
+        </column>
+        <column name="sku" sortOrder="50">
+            <settings>
+                <label translate="true">Sku</label>
+                <visible>false</visible>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+            </settings>
+        </column>
+        <column name="product_id" sortOrder="60">
+            <settings>
+                <visible>false</visible>
+                <label translate="true">Product ID</label>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+            </settings>
+        </column>
+    </columns>
+</listing>

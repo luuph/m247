@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_RewardPoint
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2019-2023 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Checkout\Model\CompositeConfigProvider">
+        <arguments>
+            <argument name="configProviders" xsi:type="array">
+                <item name="bss_reward_point" xsi:type="object">Bss\RewardPoint\Model\CompositeConfigProvider</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Catalog\Pricing\Render\FinalPriceBox">
+        <plugin name="CustomizeProductListCommon_Plugin" type="Bss\RewardPoint\Plugin\Product\CustomizeProductListCommon" />
+    </type>
+    <type name="Magento\ConfigurableProduct\Block\Product\View\Type\Configurable">
+        <plugin name="AddChildProductJson" type="Bss\RewardPoint\Plugin\Block\Product\View\Type\Configurable"/>
+    </type>
+    <type name="Magento\Customer\CustomerData\SectionPoolInterface">
+        <arguments>
+            <argument name="sectionSourceMap" xsi:type="array">
+                <item name="reward_point_section" xsi:type="string">Bss\RewardPoint\CustomerData\GetRewardPoint</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Quote\Model\Quote">
+        <plugin name="minimum_order_amount_with_reward_point_quote" type="Bss\RewardPoint\Plugin\Model\Quote" />
+    </type>
+    <type name="Magento\Quote\Model\Quote\Address">
+        <plugin name="minimum_order_amount_with_reward_point_address" type="Bss\RewardPoint\Plugin\Model\Quote\Address" />
+    </type>
+</config>

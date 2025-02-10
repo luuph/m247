@@ -1,0 +1,26 @@
+0000000000000000000000000000000000000000 a73f88c8a57d4670fc9fdcdfaf5bfd2fc2a14f75 Hai Luu <luuph@bsscommerce.com> 1734941483 +0700	clone: from ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_custom-pricing.git
+a73f88c8a57d4670fc9fdcdfaf5bfd2fc2a14f75 a73f88c8a57d4670fc9fdcdfaf5bfd2fc2a14f75 Hai Luu <luuph@bsscommerce.com> 1735642167 +0700	checkout: moving from master to M2CustomPricing-81
+a73f88c8a57d4670fc9fdcdfaf5bfd2fc2a14f75 580cb0dbc0b71b982f1304313c5813f64114893c Hai Luu <luuph@bsscommerce.com> 1735642244 +0700	commit: M2CustomPricing-81: update pricing after product import
+580cb0dbc0b71b982f1304313c5813f64114893c 19c6f83770cbe37c5be744427600596e35162f63 Hai Luu <luuph@bsscommerce.com> 1735878340 +0700	commit: M2CustomPricing-81: Fix review code update query
+19c6f83770cbe37c5be744427600596e35162f63 16426f8097dabccd1124f34a892e1a25ac83b58e Hai Luu <luuph@bsscommerce.com> 1736134713 +0700	checkout: moving from M2CustomPricing-81 to Request4quote-234
+16426f8097dabccd1124f34a892e1a25ac83b58e 670082105782a47e4e6cd1a13436de78bbaa54c7 Hai Luu <luuph@bsscommerce.com> 1736135013 +0700	checkout: moving from Request4quote-234 to v1.1.4-draft
+670082105782a47e4e6cd1a13436de78bbaa54c7 16426f8097dabccd1124f34a892e1a25ac83b58e Hai Luu <luuph@bsscommerce.com> 1736135020 +0700	checkout: moving from v1.1.4-draft to Request4quote-234
+16426f8097dabccd1124f34a892e1a25ac83b58e 670082105782a47e4e6cd1a13436de78bbaa54c7 Hai Luu <luuph@bsscommerce.com> 1736135029 +0700	merge v1.1.4-draft: Fast-forward
+670082105782a47e4e6cd1a13436de78bbaa54c7 670082105782a47e4e6cd1a13436de78bbaa54c7 Hai Luu <luuph@bsscommerce.com> 1736144389 +0700	reset: moving to HEAD
+670082105782a47e4e6cd1a13436de78bbaa54c7 a73f88c8a57d4670fc9fdcdfaf5bfd2fc2a14f75 Hai Luu <luuph@bsscommerce.com> 1736144398 +0700	checkout: moving from Request4quote-234 to master
+a73f88c8a57d4670fc9fdcdfaf5bfd2fc2a14f75 a73f88c8a57d4670fc9fdcdfaf5bfd2fc2a14f75 Hai Luu <luuph@bsscommerce.com> 1736145428 +0700	reset: moving to HEAD
+a73f88c8a57d4670fc9fdcdfaf5bfd2fc2a14f75 670082105782a47e4e6cd1a13436de78bbaa54c7 Hai Luu <luuph@bsscommerce.com> 1736147042 +0700	checkout: moving from master to Request4quote-234
+670082105782a47e4e6cd1a13436de78bbaa54c7 a73f88c8a57d4670fc9fdcdfaf5bfd2fc2a14f75 Hai Luu <luuph@bsscommerce.com> 1736149025 +0700	checkout: moving from Request4quote-234 to master
+a73f88c8a57d4670fc9fdcdfaf5bfd2fc2a14f75 670082105782a47e4e6cd1a13436de78bbaa54c7 Hai Luu <luuph@bsscommerce.com> 1736162476 +0700	checkout: moving from master to Request4quote-234
+670082105782a47e4e6cd1a13436de78bbaa54c7 8f0e2091eb0b4e9d50d86196037b644e55f8da24 Hai Luu <luuph@bsscommerce.com> 1736217326 +0700	commit: Request4quote-234: Fix custom pricing of item in quote view FE
+8f0e2091eb0b4e9d50d86196037b644e55f8da24 63df49e41762194197cfca25fda1cfe0dc102fa9 Hai Luu <luuph@bsscommerce.com> 1736231969 +0700	commit: Request4quote-234: revert plugin global scope + add disable in admin area
+63df49e41762194197cfca25fda1cfe0dc102fa9 8f0e2091eb0b4e9d50d86196037b644e55f8da24 Hai Luu <luuph@bsscommerce.com> 1736232485 +0700	reset: moving to 8f0e209
+8f0e2091eb0b4e9d50d86196037b644e55f8da24 63df49e41762194197cfca25fda1cfe0dc102fa9 Hai Luu <luuph@bsscommerce.com> 1736232507 +0700	reset: moving to 63df49e
+63df49e41762194197cfca25fda1cfe0dc102fa9 8f0e2091eb0b4e9d50d86196037b644e55f8da24 Hai Luu <luuph@bsscommerce.com> 1736232548 +0700	reset: moving to 8f0e209
+8f0e2091eb0b4e9d50d86196037b644e55f8da24 3be664bd30535d8c011ce757937ac1902c0318df Hai Luu <luuph@bsscommerce.com> 1736232704 +0700	commit: Request4quote-234: revert plugin global scope + add disable in admin area
+3be664bd30535d8c011ce757937ac1902c0318df 670082105782a47e4e6cd1a13436de78bbaa54c7 Hai Luu <luuph@bsscommerce.com> 1736234811 +0700	checkout: moving from Request4quote-234 to v1.1.4-draft
+670082105782a47e4e6cd1a13436de78bbaa54c7 3be664bd30535d8c011ce757937ac1902c0318df Hai Luu <luuph@bsscommerce.com> 1736243461 +0700	checkout: moving from v1.1.4-draft to Request4quote-234
+3be664bd30535d8c011ce757937ac1902c0318df 3f43eed11902311d83031e526745632df84ae5a4 Hai Luu <luuph@bsscommerce.com> 1736244854 +0700	commit: Request4quote-234: Fix review code disable plugin in di
+3f43eed11902311d83031e526745632df84ae5a4 670082105782a47e4e6cd1a13436de78bbaa54c7 Hai Luu <luuph@bsscommerce.com> 1736247208 +0700	checkout: moving from Request4quote-234 to v1.1.4-draft
+670082105782a47e4e6cd1a13436de78bbaa54c7 726c29920981bffdd303285488afbf0be5d0bfa0 Hai Luu <luuph@bsscommerce.com> 1737087369 +0700	pull origin v1.1.4-draft: Fast-forward
+726c29920981bffdd303285488afbf0be5d0bfa0 1937666b69fed797065feb3fa299aed4f125c12c Hai Luu <luuph@bsscommerce.com> 1737088763 +0700	commit: Update module to version v1.1.4

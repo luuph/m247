@@ -1,0 +1,3 @@
+website_code,customer_id,point,action,created_at,note,created_by,is_expired
+base,3,20,1,,test,support@bsscommerce.com,0
+base,1,50,3,,test,admin,1

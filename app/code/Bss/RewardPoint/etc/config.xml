@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_RewardPoint
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2019-2020 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <bssrewardpoint>
+        	<general>
+        		<redeem_threshold>1</redeem_threshold>
+        	</general>
+            <frontend>
+                <point_icon>images/bss-default-icon.png</point_icon>
+            </frontend>
+            <email_notification>
+                <earn_point_template>bssrewardpoint_email_notification_earn_point_template</earn_point_template>
+                <spend_point_template>bssrewardpoint_email_notification_spend_point_template</spend_point_template>
+                <expiry_warning_template>bssrewardpoint_email_notification_expiry_warning_template</expiry_warning_template>
+            </email_notification>
+        </bssrewardpoint>
+    </default>
+</config>

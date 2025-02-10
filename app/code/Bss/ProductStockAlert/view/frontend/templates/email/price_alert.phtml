@@ -1,0 +1,81 @@
+<?php
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_ProductStockAlert
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2015-2023 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var $block \Bss\ProductStockAlert\Block\Email\PriceAlert */
+?>
+
+<?php if ($productData = $block->getProduct()): ?>
+    <?php $priceData = $block->getPriceData(); ?>
+
+    <p><?php /* @escapeNotVerified */ echo __("Price of the following product has changed:"); ?></p>
+
+    <table>
+        <td class="col item">
+            <div style="text-align: center; margin-bottom: 20px">
+                <?php $urlProduct = $block->escaper()->escapeUrl($productData['url_price_alert']) ?>
+                <a href="<?php /* @escapeNotVerified */ echo $urlProduct ?>">
+                    <img style="width: 180px" src="<?php echo $block->escaper()->escapeUrl($productData['img_price_alert']) ?>" alt="">
+                </a>
+                <p>
+                    <strong class="product name">
+                        <a href="<?php /* @escapeNotVerified */ echo $urlProduct ?>"><?php echo $block->escaper()->escapeHtml($productData['name']) ?></a>
+                    </strong>
+                </p>
+                <p>
+                    <del style="opacity: 70%">
+                        <?php echo $block->escaper()->escapeHtml($priceData['currency_symbol']) ?>
+                        <?php /* @escapeNotVerified */ echo number_format($priceData['initial_price'], 2) ?>
+                    </del>
+                    &ensp;
+                    <strong>
+                        <?php echo $block->escaper()->escapeHtml($priceData['currency_symbol']) ?>
+                        <?php /* @escapeNotVerified */ echo number_format($priceData['final_price'], 2) ?>
+                    </strong>
+                </p>
+
+                <form action="<?php echo $block->getAddToCartAction() ?>" method="get" id="form-add-to-cart">
+                    <input type="hidden" name="product_id" value="<?php echo $block->escaper()->escapeHtml($priceData['product_id']); ?>">
+                    <button type="submit" style="background-color:#1979c3; color:white; border:none; padding:10px 25px">
+                        <span><?php /* @escapeNotVerified */ echo __("Add to Cart") ?></span>
+                    </button>
+                </form>
+            </div>
+
+            <p>
+                <span>
+                    <?php echo sprintf(__("You are receiving this because you subscribed for %s's price alerts."), $block->escaper()->escapeHtml($productData['name'])) ?>
+                </span>
+
+                <?php if ($priceData['customer_id']) : ?>
+                <span>
+                    <?php /* @escapeNotVerified */ echo sprintf(
+    __('You can manage all your subscriptions at %s (for logged-in users) or follow the link to %s from our price alerts.'),
+    '<a href="' . $block->getUrlListPriceAlert() . '">' . __("My Price Subscriptions") . '</a>',
+    '<a href="' . $block->getCancelPostAction($productData['entity_id'], $productData['parent_id']) . '">' . __("Unsubscribe") . '</a>'
+) ?>
+                </span>
+                <?php endif; ?>
+            </p>
+
+            <p><?php /* @escapeNotVerified */ echo __("Thank you,") ?></p>
+            <p><?php /* @escapeNotVerified */ echo $block->getEmailPriceName($priceData['store_id']); ?></p>
+        </td>
+    </table>
+<?php endif; ?>

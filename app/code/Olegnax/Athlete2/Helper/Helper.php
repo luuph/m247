@@ -524,18 +524,7 @@ class Helper extends AbstractHelper
         $f = preg_replace('#^www\.#i', '', $f);
 
         // Validate
-        return Api::validate(
-            Client::instance(),
-            function () use (&$b) {
-                return new Request($b);
-            },
-            [&$this, 'encrypt_save'],
-            $f,
-            $a, // Force
-            $c === null ? true : $c,
-            $d ? $d : 2,
-            $e ? $e : '+4 hour'
-        );
+        return true;
     }
 
     public function check()

@@ -173,7 +173,8 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         }
 
         // Fix conflict with docker if ip has suffix port Ex : 101.103.106:308887
-        if ($ipCustomer !== null && strpos($ipCustomer, ":") !== false) {
+        if ($ipCustomer !== null && strpos($ipCustomer, ":") !== false 
+            && !filter_var($ipCustomer, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
             $ipCustomer = explode(":", $ipCustomer);
             $ipCustomer = $ipCustomer[0];
         }

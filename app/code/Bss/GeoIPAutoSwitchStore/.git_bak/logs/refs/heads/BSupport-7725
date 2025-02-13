@@ -1,5 +1,4 @@
-0000000000000000000000000000000000000000 9df3b35b522386af4c008979f670ff29c0905188 Hai Luu <luuph@bsscommerce.com> 1739172159 +0700	clone: from ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-geoip-auto-switch-store.git
-9df3b35b522386af4c008979f670ff29c0905188 9df3b35b522386af4c008979f670ff29c0905188 Hai Luu <luuph@bsscommerce.com> 1739351608 +0700	checkout: moving from master to BSupport-7725
+0000000000000000000000000000000000000000 9df3b35b522386af4c008979f670ff29c0905188 Hai Luu <luuph@bsscommerce.com> 1739351608 +0700	branch: Created from HEAD
 9df3b35b522386af4c008979f670ff29c0905188 6fe6b5727ab9bab7a4e70cc0b37ac3acc53c61d5 Hai Luu <luuph@bsscommerce.com> 1739351791 +0700	commit: BSupport-7725: Fix customer only use IPv6
 6fe6b5727ab9bab7a4e70cc0b37ac3acc53c61d5 9df3b35b522386af4c008979f670ff29c0905188 Hai Luu <luuph@bsscommerce.com> 1739352364 +0700	reset: moving to 9df3b35
 9df3b35b522386af4c008979f670ff29c0905188 ad0a4076d9f026c96dc66f2daaf173245aa67d15 Hai Luu <luuph@bsscommerce.com> 1739352411 +0700	commit: BSupport-7725: Fix customer only use IPv6

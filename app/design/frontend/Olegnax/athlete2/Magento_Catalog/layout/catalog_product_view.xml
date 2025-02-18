@@ -27,7 +27,7 @@
                 <container name="ox_product_bar.right.before"/>
                 <container name="ox_product_bar.box-tocart.after"/>
                 <block class="Olegnax\Athlete2\Block\Product\SalePriceDifference" name="ox_product_bar.price_difference" template="Magento_Catalog::product/view/price_difference.phtml" />
-                <container name="ox_product_bar.info.price" htmlTag="div" htmlClass="product-bar__info-price">
+                <!-- <container name="ox_product_bar.info.price" htmlTag="div" htmlClass="product-bar__info-price">
                     <block class="Magento\Catalog\Pricing\Render" name="ox_product_bar.price.final">
                         <arguments>
                             <argument name="price_render" xsi:type="string">product.price.render.default</argument>
@@ -35,7 +35,7 @@
                             <argument name="zone" xsi:type="string">item_view</argument>
                         </arguments>
                     </block>
-                </container>
+                </container> -->
                 <block class="Magento\Catalog\Block\Product\View" name="ox_product_bar.info.review" template="Magento_Catalog::product/view/review.phtml"/>
                 <block class="Olegnax\Athlete2\Block\Template" name="ox_product_bar.content.before" template="Olegnax_Athlete2::custom_content.phtml" >
                     <arguments>

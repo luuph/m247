@@ -79,6 +79,14 @@ class Quote extends \Magento\Quote\Model\Quote
         }
         $quote->setData($data);
         $quote->merge($this);
+
+        foreach($quote->getAllItems() as $item) {
+            $price = $item->getPrice();
+            $item->setCustomPrice($price);
+            $item->setOriginalCustomPrice($price);
+            $item->getProduct()->setIsSuperMode(true);
+        }
+
         if ($this->getBillingAddress()->getId()) {
             $data = $this->getBillingAddress()->getData();
             unset($data['address_id']);

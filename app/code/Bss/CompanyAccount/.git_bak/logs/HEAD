@@ -73,3 +73,5 @@ fcedb4fd0d8ac1ceedc6b58d24e2226b0b03bfb3 fcedb4fd0d8ac1ceedc6b58d24e2226b0b03bfb
 fcedb4fd0d8ac1ceedc6b58d24e2226b0b03bfb3 fcedb4fd0d8ac1ceedc6b58d24e2226b0b03bfb3 Hai Luu <luuph@bsscommerce.com> 1738815142 +0700	reset: moving to HEAD
 fcedb4fd0d8ac1ceedc6b58d24e2226b0b03bfb3 78dc00c1c9706d72ed463e2c7c26b0452df8f217 Hai Luu <luuph@bsscommerce.com> 1738816353 +0700	commit: M2CompanyAccount-136: Fix bug minicart when config disable module
 78dc00c1c9706d72ed463e2c7c26b0452df8f217 fcedb4fd0d8ac1ceedc6b58d24e2226b0b03bfb3 Hai Luu <luuph@bsscommerce.com> 1738816378 +0700	checkout: moving from M2CompanyAccount-136 to master
+fcedb4fd0d8ac1ceedc6b58d24e2226b0b03bfb3 fcedb4fd0d8ac1ceedc6b58d24e2226b0b03bfb3 Hai Luu <luuph@bsscommerce.com> 1740456286 +0700	checkout: moving from master to BSupport-7625
+fcedb4fd0d8ac1ceedc6b58d24e2226b0b03bfb3 f5ccc4b6f47c0c62616d03476dd8f04345956427 Hai Luu <luuph@bsscommerce.com> 1740456470 +0700	commit: BSupport-7625: Fix conflict QuoteExtension when place quote with guest

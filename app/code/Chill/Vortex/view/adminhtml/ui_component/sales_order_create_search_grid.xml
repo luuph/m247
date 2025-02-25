@@ -1,14 +1,20 @@
 <?xml version="1.0"?>
-<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Ui/etc/ui_configuration.xsd">
-    <columns name="sales_order_create_search_columns">
-        <column name="custom_column">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="label" xsi:type="string" translate="true">Custom Column</item>
-                    <item name="sortOrder" xsi:type="number">100</item>
-                    <item name="visible" xsi:type="boolean">true</item>
-                </item>
-            </argument>
-        </column>
-    </columns>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui/etc/ui_configuration.xsd">
+    <filters name="listing_filters">
+        <filter name="sku" component="Magento_Ui/js/form/element/ui-select">
+            <settings>
+                <dataScope>sku</dataScope>
+                <label translate="true">SKU</label>
+                <visible>true</visible>
+            </settings>
+        </filter>
+        <filter name="entity_id" component="Magento_Ui/js/form/element/input">
+            <settings>
+                <dataScope>entity_id</dataScope>
+                <label translate="true">Product ID</label>
+                <visible>true</visible>
+            </settings>
+        </filter>
+    </filters>
 </listing>

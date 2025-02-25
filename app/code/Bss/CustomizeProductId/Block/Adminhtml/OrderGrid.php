@@ -1,4 +1,5 @@
 <?php
+
 /**
  * BSS Commerce Co.
  *
@@ -15,36 +16,26 @@
  * @copyright  Copyright (c) 2025 BSS Commerce Co. ( http://bsscommerce.com )
  * @license    http://bsscommerce.com/Bss-Commerce-License.txt
  */
+
 namespace Bss\CustomizeProductId\Block\Adminhtml;
 
 class OrderGrid extends \Magento\Sales\Block\Adminhtml\Order\Create\Search\Grid
 {
-
     /**
-     * Prepare collection to be displayed in the grid
+     * Prepare collection
      *
      * @return $this
      */
     protected function _prepareCollection()
     {
+        $collection = $this->getCollection();
 
-        $attributes = $this->_catalogConfig->getProductAttributes();
-        $store = $this->getStore();
-
-        /* @var $collection \Magento\Catalog\Model\ResourceModel\Product\Collection */
-        $collection = $this->productCollectionProvider->getCollectionForStore($store);
-        $collection->addAttributeToSelect(
-            $attributes
-        );
-        $collection->addAttributeToFilter(
-            'type_id',
-            $this->_salesConfig->getAvailableProductTypes()
-        );
-
-        $this->setCollection($collection);
+        if ($collection) {
+            $collection->addAttributeToSelect('product_id');
+        }
         return parent::_prepareCollection();
     }
-    
+
     /**
      * Prepare columns
      *
@@ -52,6 +43,16 @@ class OrderGrid extends \Magento\Sales\Block\Adminhtml\Order\Create\Search\Grid
      */
     protected function _prepareColumns()
     {
+        $this->addColumn(
+            'search_product_id_sku',
+            [
+                'header' => __('Search by Product ID, SKU'),
+                'sortable' => true,
+                'header_css_class' => 'col-id',
+                'column_css_class' => 'col-id',
+                'index' => 'search_product_id_sku'
+            ]
+        );
         $this->addColumn(
             'product_id',
             [
@@ -63,5 +64,30 @@ class OrderGrid extends \Magento\Sales\Block\Adminhtml\Order\Create\Search\Grid
             ]
         );
         return parent::_prepareColumns();
+    }
+
+    /**
+     * Add column filter to collection
+     *
+     * @param \Magento\Backend\Block\Widget\Grid\Column $column
+     * @return $this
+     */
+    protected function _addColumnFilterToCollection($column)
+    {
+        // Set custom filter for in product flag
+        if ($column->getId() == 'search_product_id_sku') {
+            $value = $column->getFilter()->getValue();
+            $attribute = [
+                ['attribute' => 'product_id', 'like' => "%$value%"],
+                ['attribute' => 'sku', 'like' => "%$value%"]
+            ];
+            $condition = $column->getFilter()->getCondition();
+            if (!empty($value)) {
+                $this->getCollection()->addFieldToFilter($attribute, $condition);
+            }
+        } else {
+            parent::_addColumnFilterToCollection($column);
+        }
+        return $this;
     }
 }

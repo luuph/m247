@@ -1,0 +1,58 @@
+# pack-refs with: peeled fully-peeled sorted 
+60c2477516a2a5fadaa2429a24a5712b4982c637 refs/remotes/origin/BCProject-1468
+7a3fb1bedb8b99aafe6953619402b4f4905673be refs/remotes/origin/BSupport-7555
+135be757394dc4a5baa1d72162f1536487d2264a refs/remotes/origin/BSupport-7555-v2
+ef8042d3dc1885783abcef2ada51e9e719cd1eac refs/remotes/origin/BSupport-7678-v119
+8c1c28ae146d65727b459fd30587256d2d3a398e refs/remotes/origin/M2B2BExtensions-72
+ea098ce48650427e469bc39f673de1010255dde3 refs/remotes/origin/M2ForceLogin-27
+a97e1cd658a55a76e9b48db3a926e5a7b915951a refs/remotes/origin/M2ForceLogin-28
+6ac23f6482a952c87386a265fdf6aa8f9b64d3fb refs/remotes/origin/M2ForceLogin-29
+8aff8b12d34806df2d26b2a1f59f8e57c6705c4d refs/remotes/origin/M2ForceLogin-30
+e9d1d6b9430deda49360c80f1e2d1767fb0040c6 refs/remotes/origin/M2ForceLogin-34
+6017fc294da7ef5e7769306550038186b165481a refs/remotes/origin/M2ForceLogin-35
+224c2c3717dc98c8094372fcfd3852404fc987fa refs/remotes/origin/M2ForceLogin-36
+95b9291a2e97044b6d321dffc3d8b2b6ded1dff5 refs/remotes/origin/M2ForceLogin-37
+0fbb4755720d8311efc80abe97334163f7fbdcf8 refs/remotes/origin/M2ForceLogin-40
+c8e9a49c8058964964aaaf3aa8e4f93c14a429f7 refs/remotes/origin/M2ForceLogin-44
+433ccd6d74ce579da18b8135c7ee97193bc2d064 refs/remotes/origin/M2ForceLogin-45
+76e467b573115569a92a3ff383200759714c6c23 refs/remotes/origin/M2ForceLogin-48
+7a130df02e2edebf5cbf2848ee7e1c21de2f15d0 refs/remotes/origin/M2ForceLogin-53
+08b9ecf9d44bc5686af972497767f7cf98a80d5d refs/remotes/origin/M2ForceLogin-54
+50715fd7a8b713cd84e1d50548280c686a9dca0f refs/remotes/origin/M2ForceLogin-9
+f7575345d0045cbe1eb1e2b1a52370c58ae20c4e refs/remotes/origin/b2b-2a-dev
+40cb185c21f58e00d071a3b7010582c1e5a3a16f refs/remotes/origin/b2b-2a-test
+01b295f03b6df2a0f9fa2d4172e3879f19d74cdc refs/remotes/origin/hotfix-v1.1.9
+451b524507d8a4efeb2555e0b349b5f548b46ba4 refs/remotes/origin/hotfix.v1.1.7
+ce47c4c28a6a91df36c936a0857a43bb001db844 refs/remotes/origin/master
+08b9ecf9d44bc5686af972497767f7cf98a80d5d refs/remotes/origin/v1.2.0-draft
+f78f2940795c440e869cb033f4d12b71ff5d523c refs/tags/v1.0.5
+^40cb185c21f58e00d071a3b7010582c1e5a3a16f
+7671280af26c83713321c58db6361720a78f6677 refs/tags/v1.0.6
+^2833f9a96bdc1b39dae68eab3c8779434e2c2b29
+e95f57877aef514db5037cddc1e0635b54c3faed refs/tags/v1.0.7
+^c0fd5c5bf23dc3386c8775a4ee1b4dd5eae7e19d
+d4face0509d9e6847f4ea0aabd38117fdbff34a0 refs/tags/v1.0.8
+^994fc958a964bbad54a5f9f55c74f8e18068a615
+b6acb3b0ef6be03d91e27f0e5f00e5ca91dd06d9 refs/tags/v1.0.9
+^33f3535cdbb9ef7baa8c437e0257583b47be5d70
+ebd5791b5e70f22711df85401abb701b0668e2c4 refs/tags/v1.1.0
+^5e3cf1184066131dc5295e043558ea16a29e39af
+6ba9c0d211b9559184b848a595781d008a299d49 refs/tags/v1.1.1
+^ea098ce48650427e469bc39f673de1010255dde3
+9ad2cfee4e9dea5cdce7252cdae93b19222cd282 refs/tags/v1.1.2
+^cb3e856838f1c857f22c44a283bdefd995f76a52
+9d1924eeb92390939ed47887d548abb564439937 refs/tags/v1.1.3
+^adc0b8b02d7367e1457f124e93669afe4bcbd47a
+65f01b8b1a00676a4af982c1291ef17329853ba5 refs/tags/v1.1.4
+^c8cdacddc23ed6d11351dff7f968fa0594119f74
+0e0ad8434fe03d12986f3c149c80a6dd7e837ac4 refs/tags/v1.1.5
+^f655f0313f1d12d33c05e621ed7299c0c762a514
+c7030b99d7bd69803709c569f650f1658dced1d6 refs/tags/v1.1.6
+^1431f25bb246a18ecec844b0e8f268c5d42c890b
+d7c2de796b7f5455b2518f81145c814ee23030a7 refs/tags/v1.1.7
+^83860d4e6d9780d97e5ae5ebfb3476062a1f9888
+3f4581119b666487c9bb688974e04d60b97cd541 refs/tags/v1.1.8
+^e5c269cc9918859f457f3b124be1a35d8061c539
+6f82cac97281bc27aaefbd367d01261e7c61fe35 refs/tags/v1.1.9
+^a8f9844d8aa732187c2e2ad7207b40ac109b0d00
+ce47c4c28a6a91df36c936a0857a43bb001db844 refs/tags/v1.2.0

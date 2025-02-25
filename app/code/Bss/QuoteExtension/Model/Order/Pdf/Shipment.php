@@ -35,7 +35,7 @@ use Magento\Sales\Model\RtlTextHandler;
 use Magento\Store\Model\App\Emulation;
 use Magento\Store\Model\StoreManagerInterface;
 
-class Shipment extends \Magento\Sales\Model\Order\Pdf\Shipment
+class Shipment extends AbstractPdf
 {
     /**
      * @var StoreManagerInterface
@@ -105,8 +105,6 @@ class Shipment extends \Magento\Sales\Model\Order\Pdf\Shipment
             $localeDate,
             $inlineTranslation,
             $addressRenderer,
-            $storeManager,
-            $appEmulation,
             $data
         );
         $this->rtlTextHandler = $rtlTextHandler ?: ObjectManager::getInstance()->get(RtlTextHandler::class);

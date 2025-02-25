@@ -1,0 +1,2 @@
+0000000000000000000000000000000000000000 fcedb4fd0d8ac1ceedc6b58d24e2226b0b03bfb3 Hai Luu <luuph@bsscommerce.com> 1740456286 +0700	branch: Created from HEAD
+fcedb4fd0d8ac1ceedc6b58d24e2226b0b03bfb3 f5ccc4b6f47c0c62616d03476dd8f04345956427 Hai Luu <luuph@bsscommerce.com> 1740456470 +0700	commit: BSupport-7625: Fix conflict QuoteExtension when place quote with guest

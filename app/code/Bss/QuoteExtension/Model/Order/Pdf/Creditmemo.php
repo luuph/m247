@@ -35,7 +35,7 @@ use Magento\Sales\Model\RtlTextHandler;
 use Magento\Store\Model\App\Emulation;
 use Magento\Store\Model\StoreManagerInterface;
 
-class Creditmemo extends \Magento\Sales\Model\Order\Pdf\Creditmemo
+class Creditmemo extends AbstractPdf
 {
     /**
      * @var StoreManagerInterface
@@ -106,8 +106,6 @@ class Creditmemo extends \Magento\Sales\Model\Order\Pdf\Creditmemo
             $localeDate,
             $inlineTranslation,
             $addressRenderer,
-            $storeManager,
-            $appEmulation,
             $data
         );
         $this->rtlTextHandler = $rtlTextHandler ?: ObjectManager::getInstance()->get(RtlTextHandler::class);

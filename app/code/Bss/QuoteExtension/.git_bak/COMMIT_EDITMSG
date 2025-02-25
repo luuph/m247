@@ -1,1 +1,1 @@
-BSupport-7691: Fix bug print pdf invoice, shipment, creditmemo by mask action in order grid
+BSupport-7625: Fix load manage quote grid with DB setup table_prefix

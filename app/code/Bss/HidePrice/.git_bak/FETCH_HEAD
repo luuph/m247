@@ -16,7 +16,10 @@ b25955399a07df26b8adb2bb225b85dc4b148678	not-for-merge	branch 'M2HidePrice-110' 
 56c40570c587722715f933339982a714770f1aa7	not-for-merge	branch 'M2HidePrice-115' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-hide-price
 9c13bc50270a7cf43f22ed48fb2eea0264e2714f	not-for-merge	branch 'M2HidePrice-116' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-hide-price
 e87f00a49236e61f6f08e567a6f166adae5e9369	not-for-merge	branch 'M2HidePrice-118' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-hide-price
+f20856cc4f723ec62a7e6226d47faae474df1992	not-for-merge	branch 'M2HidePrice-120' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-hide-price
 d8c3136981138e44db1dbff501dc4b18ad54b1be	not-for-merge	branch 'M2HidePrice-121' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-hide-price
+aa6dd4dc728541bed964a48dc865fbb6624317b6	not-for-merge	branch 'M2HidePrice-125' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-hide-price
+5b50d6cef5a0d20003b36d7f004b41f7e6099a52	not-for-merge	branch 'M2HidePrice-126' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-hide-price
 738e9440d1530932c5d4d54d495f5afabfd3b0fa	not-for-merge	branch 'M2HidePrice-30' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-hide-price
 2fbf25d8b892bb0eb06e2cfd6acc387d980fc75f	not-for-merge	branch 'M2HidePrice-31' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-hide-price
 2cbc08c0f35e64c18d6103a68cebc65f97fff3ff	not-for-merge	branch 'M2HidePrice-32' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-hide-price
@@ -56,5 +59,6 @@ e17a362342134603ba4f5876658302d2ee0fe6e6	not-for-merge	branch 'hotfix-v1.2.7-bs6
 4c190c60a70bfb13da85c9a794b586816081d236	not-for-merge	branch 'hotfix-v1.2.8-bs7193' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-hide-price
 e8f13fc5de05367822f07191701bc3763884d23a	not-for-merge	branch 'hotfix-v1.2.9' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-hide-price
 0151c9198ba846d36b65be708772ce003464ecd6	not-for-merge	branch 'hotfix-v1.3.0' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-hide-price
-e6551f3b367257a8a41eb08c870a51af9ed96959	not-for-merge	branch 'master' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-hide-price
-a9215a91ca751ed86910818a3aa0a229b9b2aea8	not-for-merge	branch 'v1.3.2-draft' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-hide-price
+fc8db50449304312dae7eabc1456c193e4051f3a	not-for-merge	branch 'master' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-hide-price
+cb89e69a09b58310064cd61ea8cd23da788430a6	not-for-merge	branch 'v1.3.2-draft' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-hide-price
+2e762fd9e64a73ec80871237b066ac75c9b88d8b	not-for-merge	branch 'v1.3.4-draft' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-hide-price

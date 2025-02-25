@@ -1,0 +1,22 @@
+<div class="admin__field">
+    <label for="sku_filter">SKU:</label>
+    <input type="text" id="sku_filter" name="sku" value="<?= $block->escapeHtml($this->getRequest()->getParam('sku')) ?>" />
+</div>
+<div class="admin__field">
+    <label for="product_id_filter">Product ID:</label>
+    <input type="text" id="product_id_filter" name="product_id" value="<?= $block->escapeHtml($this->getRequest()->getParam('product_id')) ?>" />
+</div>
+<button onclick="filterGrid()">Search</button>
+
+<script>
+function filterGrid() {
+    var sku = document.getElementById('sku_filter').value;
+    var productId = document.getElementById('product_id_filter').value;
+    
+    var url = new URL(window.location.href);
+    url.searchParams.set('sku', sku);
+    url.searchParams.set('product_id', productId);
+    
+    window.location.href = url.toString();
+}
+</script>

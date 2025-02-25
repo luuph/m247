@@ -144,6 +144,13 @@ class ParamOverriderCartId
                 if ($cart) {
                     return $cart->getId();
                 }
+            } else {
+                if ($this->checkoutSession->getCheckoutIsQuoteExtension()) {
+                    return $this->checkoutSession->getCheckoutIsQuoteExtension();
+                }
+                if ($this->checkoutSession->getIsQuoteExtension()) {
+                    return $this->checkoutSession->getIsQuoteExtension();
+                }
             }
         } catch (NoSuchEntityException $e) {
             $this->logger->critical($e);

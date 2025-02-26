@@ -546,16 +546,6 @@ class Configurable extends \Magento\Swatches\Block\Product\Renderer\Configurable
     }
 
     /**
-     * Check module Bss_HidePrice
-     *
-     * @return bool
-     */
-    public function checkModuleBssHidePrice()
-    {
-        return $this->manager->isEnabled('Bss_HidePrice');
-    }
-
-    /**
      * Get url ajax
      *
      * @return string

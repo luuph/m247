@@ -1,5 +1,8 @@
 # [Release Note](https://bsscommerce.com/magento-2-b2b-registration-extension.html)
 
+# v1.4.3 (Feb 14, 2025)
+- Compatible with module Bss Customer Approval
+- Fix bug: cannot send mail to customer when enable auto approve accounts
 # v1.4.2 (Dec 16, 2024)
 - Fix bug:
   - Compatible with BSS M2 Customer attribute: bug required validate field.

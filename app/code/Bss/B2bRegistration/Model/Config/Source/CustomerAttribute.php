@@ -46,7 +46,7 @@ class CustomerAttribute extends \Magento\Eav\Model\Entity\Attribute\Source\Boole
                 'label' => __('B2B Reject'),
                 'value' => self::B2B_REJECT,
             ];
-        
+
         return $options;
     }
 }

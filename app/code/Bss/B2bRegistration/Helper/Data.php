@@ -18,6 +18,8 @@
 
 namespace Bss\B2bRegistration\Helper;
 
+use Bss\B2bRegistration\Model\ResourceModel\Options;
+use Magento\Framework\App\Helper\Context;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Customer\Model\Url as CustomerUrl;
 use Magento\Framework\Api\DataObjectHelper;
@@ -51,25 +53,33 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     protected $customerExtractor;
 
     /**
+     * @var Options
+     */
+    protected $optionModel;
+
+    /**
      * Data constructor.
-     * @param \Magento\Framework\App\Helper\Context $context
+     * @param Context $context
      * @param StoreManagerInterface $storeManager
      * @param CustomerUrl $customerUrl
      * @param DataObjectHelper $dataObjectHelper
      * @param CustomerExtractor $customerExtractor
+     * @param Options $optionModel
      */
     public function __construct(
         \Magento\Framework\App\Helper\Context $context,
         StoreManagerInterface                 $storeManager,
         CustomerUrl                           $customerUrl,
         DataObjectHelper                      $dataObjectHelper,
-        CustomerExtractor                     $customerExtractor
+        CustomerExtractor                     $customerExtractor,
+        Options $optionModel
     ) {
         parent::__construct($context);
         $this->storeManager = $storeManager;
         $this->customerUrl = $customerUrl;
         $this->dataObjectHelper = $dataObjectHelper;
         $this->customerExtractor = $customerExtractor;
+        $this->optionModel = $optionModel;
     }
 
     /**
@@ -664,5 +674,19 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             return explode(",", $stateRequired);
         }
         return [];
+    }
+
+    /**
+     * Get customer approved value
+     *
+     * @return int|null
+     * @throws \Zend_Db_Statement_Exception
+     */
+    public function getApproveValue()
+    {
+        if ($optionId = $this->optionModel->getStatusValue('Approved')) {
+            return (int)$optionId;
+        }
+        return null;
     }
 }

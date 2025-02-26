@@ -396,6 +396,10 @@ class CreatePost extends \Magento\Customer\Controller\AbstractAccount
     {
         if ($autoApproval) {
             $customer->setCustomAttribute("b2b_activasion_status", $this->createPostHelper->returnApproval());
+            $approve = $this->helper->getApproveValue();
+            if ($approve) {
+                $customer->setCustomAttribute("activasion_status", $approve);
+            }
         } else {
             $customer->setCustomAttribute("b2b_activasion_status", $this->createPostHelper->returnPending());
         }
@@ -609,7 +613,7 @@ class CreatePost extends \Magento\Customer\Controller\AbstractAccount
                 'varCompany' => $company
             ];
 
-            $adminSendMailStatus = explode(',', $this->helper->isEnableAdminEmail() ?: '');
+            $adminSendMailStatus = explode(',', $this->helper->isEnableAdminEmail() ?? '');
 
             if (($autoApproval && in_array(AutoApprovalOptions::AUTO_APPROVE_ACC, $adminSendMailStatus)) ||
                 (!$autoApproval && in_array(AutoApprovalOptions::NOT_AUTO_APPROVE_ACC, $adminSendMailStatus))) {

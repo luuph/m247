@@ -107,6 +107,11 @@ class MassApproved extends \Magento\Customer\Controller\Adminhtml\Index\Abstract
             $customer->setCustomAttribute("b2b_normal_customer_group", $customer->getGroupId());
         }
         $customer->setGroupId($customerGroupId);
+
+        $customerApproval = $customer->getCustomAttribute('activasion_status');
+        if ($customerApproval && $customerApproval->getValue() != $this->helper->getApproveValue()) {
+            $customer->setCustomAttribute('activasion_status', $this->helper->getApproveValue());
+        }
         return $this->customerRepository->save($customer);
     }
 

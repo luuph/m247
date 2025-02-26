@@ -13,7 +13,7 @@
  * @category   BSS
  * @package    Bss_B2bRegistration
  * @author     Extension Team
- * @copyright  Copyright (c) 2017-2024 BSS Commerce Co. ( http://bsscommerce.com )
+ * @copyright  Copyright (c) 2017-2025 BSS Commerce Co. ( http://bsscommerce.com )
  * @license    http://bsscommerce.com/Bss-Commerce-License.txt
  */
  -->
@@ -32,7 +32,7 @@
                 <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Enable Module</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                    <comment><![CDATA[Version 1.4.2]]></comment>
+                    <comment><![CDATA[Version 1.4.3]]></comment>
                 </field>
             </group>
             <group id="register" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">

@@ -19,8 +19,7 @@ var config = {
         '*': {
             'Magento_Checkout/template/billing-address/form.html':
                 'Bss_OneStepCheckout/template/billing-address/form.html',
-            'Magento_Checkout/js/model/shipping-rate-service':
-                'Bss_OneStepCheckout/js/model/shipping-rate-service',
+
             'Magento_Checkout/js/action/get-payment-information':
                 'Bss_OneStepCheckout/js/action/get-payment-information',
             'Magento_SalesRule/js/action/cancel-coupon':

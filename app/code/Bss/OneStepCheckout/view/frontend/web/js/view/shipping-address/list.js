@@ -28,7 +28,8 @@ define([
         parent: '${ $.$data.parentName }',
         name: '${ $.$data.name }',
         component: 'Magento_Checkout/js/view/shipping-address/address-renderer/default',
-        template: 'Bss_OneStepCheckout/shipping-address/address-renderer/default'
+        template: 'Bss_OneStepCheckout/shipping-address/address-renderer/default',
+        provider: 'checkoutProvider'
     };
 
     return Component.extend({

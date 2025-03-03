@@ -24,9 +24,6 @@
     <event name="sales_order_place_after">
         <observer name="bss_onstepcheckout_save_guest" instance="Bss\OneStepCheckout\Observer\GuestSave" />
     </event>
-    <event name="layout_load_before">
-        <observer name="bss_onstepcheckout_layout_load_before" instance="Bss\OneStepCheckout\Observer\BeforeLoad" />
-    </event>
     <event name="email_order_set_template_vars_before">
         <observer name="bss-osc-order-comment" instance="Bss\OneStepCheckout\Observer\EmailTemplateVars"/>
     </event>

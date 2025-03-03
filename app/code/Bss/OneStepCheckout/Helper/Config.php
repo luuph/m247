@@ -41,6 +41,8 @@ class Config extends AbstractHelper
     const OSC_CONTROLLER_NAME  = 'onestepcheckout';
     const GIFT_WRAP_FIELD      = 'onestepcheckout/gift_wrap/';
     const ALLOW_GUESS_FOLLOW = 'checkout/options/guest_checkout';
+    public const XML_PATH_MANAGE_STOCK = 'cataloginventory/item_options/manage_stock';
+    public const XML_PATH_BACKORDERS = 'cataloginventory/item_options/backorders';
 
     /**
      * @var \Magento\Framework\Pricing\Helper\Data
@@ -579,5 +581,35 @@ class Config extends AbstractHelper
         } else {
             return true;
         }
+    }
+
+    /**
+     * Retrieve Manage Stock data wrapper
+     *
+     * @param null|string|bool|int|\Magento\Store\Model\Store $store
+     * @return int
+     */
+    public function getManageStock($store = null)
+    {
+        return (int) $this->scopeConfig->isSetFlag(
+            self::XML_PATH_MANAGE_STOCK,
+            ScopeInterface::SCOPE_STORE,
+            $store
+        );
+    }
+
+    /**
+     * Retrieve backorders status
+     *
+     * @param null|string|bool|int|\Magento\Store\Model\Store $store
+     * @return int
+     */
+    public function getBackOrders($store = null)
+    {
+        return (int) $this->scopeConfig->getValue(
+            self::XML_PATH_BACKORDERS,
+            ScopeInterface::SCOPE_STORE,
+            $store
+        );
     }
 }

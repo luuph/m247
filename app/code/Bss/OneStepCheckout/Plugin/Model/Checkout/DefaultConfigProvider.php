@@ -18,6 +18,7 @@
 namespace Bss\OneStepCheckout\Plugin\Model\Checkout;
 
 use Bss\OneStepCheckout\Helper\Config;
+use Bss\OneStepCheckout\Model\ResourceModel\AddStockDataToQuoteItemsCollection;
 use Magento\CatalogInventory\Api\StockRegistryInterface;
 use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Framework\Exception\LocalizedException;
@@ -67,18 +68,25 @@ class DefaultConfigProvider
     protected $getStockItemConfiguration;
 
     /**
+     * @var AddStockDataToQuoteItemsCollection
+     */
+    protected $addStockDataToQuoteItemsCollection;
+
+    /**
      * Construct.
      *
      * @param CheckoutSession $checkoutSession
      * @param StockRegistryInterface $stockRegistry
      * @param Config $configHelper
      * @param Manager $moduleManager
+     * @param AddStockDataToQuoteItemsCollection $addStockDataToQuoteItemsCollection
      */
     public function __construct(
         CheckoutSession        $checkoutSession,
         StockRegistryInterface $stockRegistry,
         Config                 $configHelper,
-        Manager                $moduleManager
+        Manager                $moduleManager,
+        AddStockDataToQuoteItemsCollection $addStockDataToQuoteItemsCollection
     ) {
         $this->checkoutSession = $checkoutSession;
         $this->stockRegistry = $stockRegistry;
@@ -89,6 +97,7 @@ class DefaultConfigProvider
             $this->stockResolver = \Magento\Framework\App\ObjectManager::getInstance()->create('\Magento\InventorySalesApi\Api\StockResolverInterface');
             $this->getStockItemConfiguration = \Magento\Framework\App\ObjectManager::getInstance()->create('\Magento\InventoryConfigurationApi\Api\GetStockItemConfigurationInterface');
         }
+        $this->addStockDataToQuoteItemsCollection = $addStockDataToQuoteItemsCollection;
     }
 
     /**
@@ -126,29 +135,30 @@ class DefaultConfigProvider
         if ($quoteId) {
             $quoteItems = $this->checkoutSession->getQuote()->getItemsCollection();
             if ($isInventoryEnable) {
-                foreach ($quoteItems as $quoteItem) {
-                    if (in_array($quoteItem->getProductType(), ["configurable", "bundle", "grouped"])) {
-                        continue;
-                    }
-                    $product = $quoteItem->getProduct();
-                    $productSku = $product->getData('sku') ?? $product->getSku();
-                    $stock = $this->stockResolver->execute(
-                        \Magento\InventorySalesApi\Api\Data\SalesChannelInterface::TYPE_WEBSITE,
-                        $this->storeManager->getWebsite()->getCode()
-                    );
-                    if ($stockId = $stock->getStockId()) {
-                        $stockItemConfiguration = $this->getStockItemConfiguration->execute($productSku, $stockId);
-                        if (!$this->getProductSalableQty) {
-                            $this->getProductSalableQty =
-                                \Magento\Framework\App\ObjectManager::getInstance()
-                                    ->get('Magento\InventorySales\Model\GetProductSalableQty');
+                $stock = $this->stockResolver->execute(
+                    \Magento\InventorySalesApi\Api\Data\SalesChannelInterface::TYPE_WEBSITE,
+                    $this->storeManager->getWebsite()->getCode()
+                );
+                $quoteItemsCollection = $this->addStockDataToQuoteItemsCollection->addStockDataToCollection($quoteItems);
+                if ($quoteItemsCollection) {
+                    foreach ($quoteItemsCollection as $quoteItem) {
+                        if (in_array($quoteItem['product_type'], ["configurable", "bundle", "grouped"])) {
+                            continue;
                         }
-
-                        $salableQty = $this->getProductSalableQty->execute($productSku, $stockId);
-                        $id = $quoteItem->getParentItemId() ?: $quoteItem->getItemId();
-                        $data['saleableQty'][$id] = $salableQty;
-                        $data['backorders'][$id] = $stockItemConfiguration->getBackorders();
-                        $data['isManageStock'][$id] = $stockItemConfiguration->isManageStock();
+                        if ($stock->getStockId()) {
+                            $id = $quoteItem['parent_item_id'] ?: $quoteItem['item_id'];
+                            $data['saleableQty'][$id] = $quoteItem['saleable_qty'];
+                            if ($quoteItem['use_config_manage_stock']) {
+                                $data['isManageStock'][$id] = $this->configHelper->getManageStock();
+                            } else {
+                                $data['isManageStock'][$id] = $quoteItem["manage_stock"];
+                            }
+                            if ($quoteItem['use_config_backorders']) {
+                                $data['backorders'][$id] = $this->configHelper->getBackOrders();
+                            } else {
+                                $data['backorders'][$id] = $quoteItem['backorders'];
+                            }
+                        }
                     }
                 }
             } else {
@@ -161,11 +171,7 @@ class DefaultConfigProvider
                         $product->getId(),
                         $product->getStore()->getWebsiteId()
                     );
-                    if ($stockItemConfiguration->getBackorders() == 0) {
-                        $salableQty = $product->getQty() - $stockItemConfiguration->getMinQty();
-                    } else {
-                        $salableQty = $product->getQty();
-                    }
+                    $salableQty = $this->getSalableQty($product, $stockItemConfiguration);
                     $id = $quoteItem->getParentItemId() ?: $quoteItem->getItemId();
                     $data['saleableQty'][$id] = $salableQty;
                     $data['backorders'][$id] = $stockItemConfiguration->getBackorders();
@@ -174,5 +180,23 @@ class DefaultConfigProvider
             }
         }
         return $data;
+    }
+
+    /**
+     * Get salable Qty
+     *
+     * @param \Magento\Catalog\Model\Product $product
+     * @param \Magento\CatalogInventory\Api\Data\StockItemInterface $stockItemConfiguration
+     * @return float
+     */
+    public function getSalableQty($product, $stockItemConfiguration)
+    {
+        if (!$stockItemConfiguration->getManageStock()) {
+            return PHP_INT_MAX;
+        }
+        if ($stockItemConfiguration->getBackorders() == 0) {
+            return $product->getQty() - $stockItemConfiguration->getMinQty();
+        }
+        return $product->getQty();
     }
 }

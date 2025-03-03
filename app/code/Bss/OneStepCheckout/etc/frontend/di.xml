@@ -49,4 +49,7 @@
             </argument>
         </arguments>
     </type>
+    <type name="Magento\Sales\Block\Order\Info">
+        <plugin name="add_delivery_to_sales_order_view" type="Bss\OneStepCheckout\Plugin\AddDeliveryToSaleOrderBlock" sortOrder="10"/>
+    </type>
 </config>

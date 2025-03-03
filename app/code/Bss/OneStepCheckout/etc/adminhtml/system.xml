@@ -13,7 +13,7 @@
  * @category   BSS
  * @package    Bss_OneStepCheckout
  * @author     Extension Team
- * @copyright  Copyright (c) 2017-2023 BSS Commerce Co. ( http://bsscommerce.com )
+ * @copyright  Copyright (c) 2017-2025 BSS Commerce Co. ( http://bsscommerce.com )
  * @license    http://bsscommerce.com/Bss-Commerce-License.txt
  */
 -->
@@ -31,7 +31,7 @@
                 <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Enable</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                    <comment><![CDATA[Version 2.3.9]]></comment>
+                    <comment><![CDATA[Version 2.4.2]]></comment>
                 </field>
                 <field id="create_new" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Allow Creating Account On Checkout Page</label>

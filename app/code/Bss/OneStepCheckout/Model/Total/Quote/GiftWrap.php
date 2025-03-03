@@ -12,7 +12,7 @@
  * @category  BSS
  * @package   Bss_OneStepCheckout
  * @author    Extension Team
- * @copyright Copyright (c) 2017-2018 BSS Commerce Co. ( http://bsscommerce.com )
+ * @copyright Copyright (c) 2017-2024 BSS Commerce Co. ( http://bsscommerce.com )
  * @license   http://bsscommerce.com/Bss-Commerce-License.txt
  */
 
@@ -26,13 +26,22 @@ class GiftWrap extends \Magento\Quote\Model\Quote\Address\Total\AbstractTotal
     protected $configHelper;
 
     /**
-     * Giftwrap constructor.
+     * @var \Bss\OneStepCheckout\Helper\Data
+     */
+    protected $dataHelper;
+
+    /**
+     * Gift wrap constructor.
+     *
      * @param \Bss\OneStepCheckout\Helper\Config $configHelper
+     * @param \Bss\OneStepCheckout\Helper\Data $dataHelper
      */
     public function __construct(
-        \Bss\OneStepCheckout\Helper\Config $configHelper
+        \Bss\OneStepCheckout\Helper\Config $configHelper,
+        \Bss\OneStepCheckout\Helper\Data $dataHelper
     ) {
         $this->configHelper = $configHelper;
+        $this->dataHelper = $dataHelper;
     }
 
     /**
@@ -54,12 +63,50 @@ class GiftWrap extends \Magento\Quote\Model\Quote\Address\Total\AbstractTotal
         if (empty($shippingAssignment->getItems())) {
             return $this;
         }
+        $this->prepareGiftWrap($quote);
+
         if ($quote->getOscGiftWrap() !== null) {
             $total->setTotalAmount('osc_gift_wrap', $quote->getOscGiftWrap());
             $total->setBaseTotalAmount('base_osc_gift_wrap', $quote->getBaseOscGiftWrap());
         }
 
         return $this;
+    }
+
+    /**
+     * Prepare giftWrap before checkout
+     * If disable Bss_OSC -> Set GiftWrap to null
+     * If enable Bss_OSC -> compatible multi currency
+     *
+     * @param $quote
+     * @return void
+     */
+    public function prepareGiftWrap($quote)
+    {
+        if ($quote && $quote->getId()) {
+            $storeId = $quote->getStoreId();
+            $giftWrapFeeConfig = $this->configHelper->getGiftWrapFee();
+            $currentGiftWrapFee = $quote->getOscGiftWrap();
+            if ($giftWrapFeeConfig === false || $quote->isVirtual()) {
+                $quote->setBaseOscGiftWrapFeeConfig(null);
+                $quote->setOscGiftWrapFeeConfig(null);
+                $quote->setOscGiftWrapType(null);
+                $quote->setBaseOscGiftWrap(null);
+                $quote->setOscGiftWrap(null);
+            } elseif ($currentGiftWrapFee !== null) {
+                $giftWrapType = $this->configHelper->getGiftWrap('type', $storeId);
+                $giftWrapFeeConfigCurrency = $this->configHelper->formatCurrency($giftWrapFeeConfig);
+                $giftWrapFee = $this->dataHelper->getTotalGiftWrapFee($quote, $giftWrapFeeConfig, $giftWrapType);
+                $giftWrapFeeCurrency = $this->configHelper->formatCurrency($giftWrapFee);
+                if ($giftWrapFeeCurrency != $currentGiftWrapFee) {
+                    $quote->setBaseOscGiftWrapFeeConfig($giftWrapFeeConfig);
+                    $quote->setOscGiftWrapFeeConfig($giftWrapFeeConfigCurrency);
+                    $quote->setOscGiftWrapType($giftWrapType);
+                    $quote->setBaseOscGiftWrap($giftWrapFee);
+                    $quote->setOscGiftWrap($giftWrapFeeCurrency);
+                }
+            }
+        }
     }
 
     /**

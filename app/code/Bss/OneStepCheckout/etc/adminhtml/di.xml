@@ -22,4 +22,7 @@
     <type name="Magento\Framework\Data\Form\Element\AbstractElement">
         <plugin name="bss-remove-config" sortOrder="10" type="Bss\OneStepCheckout\Plugin\System\Config\Form\Fieldset"/>
     </type>
+    <type name="Magento\Sales\Block\Adminhtml\Order\AbstractOrder">
+        <plugin name="bss_add_delivery_info_to_shipping_view" type="Bss\OneStepCheckout\Plugin\AddDeliveryToSaleOrderBlock" sortOrder="10"/>
+    </type>
 </config>

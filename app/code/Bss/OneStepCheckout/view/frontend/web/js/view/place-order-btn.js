@@ -355,6 +355,9 @@ define([
                     validateShippingInfomation = true;
                 } else {
                     validateShippingInfomation = shippingAddressComponent.validateShippingInformation();
+                    if (!validateShippingInfomation) {
+                        self.displayMessage();
+                    }
                 }
                 if (validateShippingInfomation ||
                     (!_.isEmpty(amazonLogin) &&
@@ -398,6 +401,17 @@ define([
                         self.placeOrderContinue();
                     }
                 }
+            }
+        },
+        displayMessage: function () {
+            var divMessageWarning = $('div[role="alert"].osc-warning');
+            if (divMessageWarning) {
+                var messageSpan = divMessageWarning.find('span.message.osc-warning');
+                messageSpan.text($t('Please check all information carefully before placing the order.'));
+                divMessageWarning.show();
+                setTimeout(function () {
+                    divMessageWarning.hide();
+                }, 5000);
             }
         }
     });

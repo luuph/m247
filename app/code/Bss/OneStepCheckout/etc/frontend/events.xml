@@ -18,9 +18,6 @@
  */
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
-    <event name="core_layout_render_element">
-        <observer name="bss_onstepcheckout_delivery" instance="Bss\OneStepCheckout\Observer\AddDeliveryToOrderShippingBlockObserver" />
-    </event>
     <event name="checkout_submit_all_after">
         <observer name="bssosc_save_order_after_submit" instance="Bss\OneStepCheckout\Observer\SaveOrderAfterSubmitObserver" />
     </event>

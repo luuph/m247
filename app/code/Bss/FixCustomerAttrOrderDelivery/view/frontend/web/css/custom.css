@@ -1,4 +1,4 @@
- .block-miniquote .block-content >.actions {
+.block-miniquote .block-content >.actions {
     margin-top: 15px;
 }
  .block-miniquote .block-content >.actions >.primary {
@@ -929,6 +929,17 @@ body.customer-account-create.page-layout-1column .form-create-account .field.req
  }
  body.customer-account-create.page-layout-1column.btwob-account-create .form-create-account .fieldset.create.info {
      margin-top: 0;
+ }
+ body.customer-account-create.page-layout-1column .form-create-account .field-recaptcha {
+    float: left;
+    width: 100% !important;
+    overflow: hidden;
+    clear: both;
+    box-sizing: border-box;
+    margin: 0 0 8px;
+ }
+ .form-create-account .g-recaptcha {
+    padding-left: 35px;
  }
  @media all and (max-width: 1200px) {
     body.customer-account-create.page-layout-1column.btwob-account-create .form-create-account .field span {

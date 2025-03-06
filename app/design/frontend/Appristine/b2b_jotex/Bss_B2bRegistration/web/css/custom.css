@@ -1,4 +1,4 @@
- .block-miniquote .block-content >.actions {
+.block-miniquote .block-content >.actions {
     margin-top: 15px;
 }
  .block-miniquote .block-content >.actions >.primary {
@@ -908,6 +908,7 @@ body.customer-account-create.page-layout-1column .form-create-account .field.req
  body.customer-account-create.btwob-account-create .fieldset>.field:last-child {
      margin-left:0;
      padding: 0 10px;
+     padding-bottom: 10px;
  }
  .btwob-account-create .fieldset.address {
     margin: 0 11px 40px 0;
@@ -929,12 +930,24 @@ body.customer-account-create.page-layout-1column .form-create-account .field.req
  body.customer-account-create.page-layout-1column.btwob-account-create .form-create-account .fieldset.create.info {
      margin-top: 0;
  }
- @media all and (max-width: 1200px) { 
+ body.customer-account-create.page-layout-1column .form-create-account .field-recaptcha {
+    float: left;
+    width: 100% !important;
+    overflow: hidden;
+    clear: both;
+    box-sizing: border-box;
+    margin: 0 0 8px;
+ }
+ .form-create-account .g-recaptcha {
+    padding-right: 22px;
+    float: right;
+ }
+ @media all and (max-width: 1200px) {
     body.customer-account-create.page-layout-1column.btwob-account-create .form-create-account .field span {
         font-size: 14px!important;
     }
  }
- @media all and (max-width: 1024px) { 
+ @media all and (max-width: 1024px) {
     body.customer-account-create.page-layout-1column.btwob-account-create .form-create-account .field span {
         font-size: 12px!important;
     }
@@ -946,8 +959,8 @@ body.customer-account-create.page-layout-1column .form-create-account .field.req
         width: auto !important;
     }
  }
- @media all and (max-width: 839px) { 
-    body.btwob-account-create.page-layout-1column .form-create-account .fieldset.create.info, 
+ @media all and (max-width: 839px) {
+    body.btwob-account-create.page-layout-1column .form-create-account .fieldset.create.info,
     body.btwob-account-create.page-layout-1column .form-create-account .fieldset.create.account {
         width: 100%!important;
     }
@@ -970,12 +983,12 @@ body.customer-account-create.page-layout-1column .form-create-account .field.req
         margin: 10px 0;
     }
  }
- @media all and (max-width: 480px) { 
+ @media all and (max-width: 480px) {
     body.customer-account-create.btwob-account-create.page-layout-1column .form-create-account .field label,
     body.customer-account-create.btwob-account-create.page-layout-1column .form-create-account .field .control,
     body.customer-account-create.btwob-account-create.page-layout-1column .form-create-account .field.required label,
     body.customer-account-create.btwob-account-create.page-layout-1column .form-create-account .field.required .control,
-    body.customer-account-create.btwob-account-create.page-layout-1column .form-create-account .field.required .control, 
+    body.customer-account-create.btwob-account-create.page-layout-1column .form-create-account .field.required .control,
     body.customer-account-create.btwob-account-create.page-layout-1column .form-create-account .field.password.required .control,
     body.customer-account-create.btwob-account-create.page-layout-1column .form-create-account .field.confirmation.required,
     body.customer-account-create.btwob-account-create.page-layout-1column .form-create-account .field.confirmation.required .control{
@@ -986,7 +999,7 @@ body.customer-account-create.page-layout-1column .form-create-account .field.req
     body.customer-account-create.btwob-account-create.page-layout-1column .newsletter {
         margin-left: 0;
     }
-    body.customer-account-create.page-layout-1column.btwob-account-create .form-create-account .field.required label, 
+    body.customer-account-create.page-layout-1column.btwob-account-create .form-create-account .field.required label,
     body.customer-account-create.page-layout-1column.btwob-account-create .form-create-account .field.password.required label {
         padding-left: 0!important;
     }

@@ -1,5 +1,6 @@
-3731f641d7ad06a7c971b81ee80be7edbd00bd1a		branch 'master' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-configurable-product-wholesale-display
+6d91f80a8bf8a04353f46ab2e6e1f321db35f537		branch 'master' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-configurable-product-wholesale-display
 5dc3eac1733c199b5c362d91e532db8c5fa157fa	not-for-merge	branch 'BCProject-1386' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-configurable-product-wholesale-display
+2ed6033ad11fb19a15c2658e43dd7f0c3a65139f	not-for-merge	branch 'BCProject-2439' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-configurable-product-wholesale-display
 ec5eba061800c6b642bd2303a447c7848b1eb83a	not-for-merge	branch 'BPModulesAPI-17' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-configurable-product-wholesale-display
 4a8e59e47a14b226d06d158db808c34dc6bf130f	not-for-merge	branch 'BSS-EXM2-CPWD-100' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-configurable-product-wholesale-display
 4eedf8b702107f0bb0e2287c3a770368b225183c	not-for-merge	branch 'BSS-EXM2-CPWD-103' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-configurable-product-wholesale-display
@@ -48,6 +49,7 @@ a574b4437249926db5c6665133b6dbbf92cbffd7	not-for-merge	branch 'BSS-EXM2-CPWD-81'
 0240e4afd24bb63110c8cc82d0c53e481f78608c	not-for-merge	branch 'BSupport-7196' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-configurable-product-wholesale-display
 4140fad1763b0cc6b9dcf34e48a22d8b771b7d42	not-for-merge	branch 'BSupport-7660' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-configurable-product-wholesale-display
 b26e604995672b7b1be714a4bb2a4fd099bb2956	not-for-merge	branch 'BSupport-7673' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-configurable-product-wholesale-display
+f698d0634983589255b68cb8635bc0f76c321417	not-for-merge	branch 'BSupport-7706' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-configurable-product-wholesale-display
 037cf314182db17d712486c9ac7cdb76c595ccb1	not-for-merge	branch 'M2ImprovedConfigurableProduct-2' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-configurable-product-wholesale-display
 f79e681330c125fadad4264cde2ec7ab6b2144c0	not-for-merge	branch 'M2ImprovedConfigurableProduct-2-TOANTV' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-configurable-product-wholesale-display
 9d07da0f662bba0828ba19fa289676045bfc584e	not-for-merge	branch 'M2ImprovedConfigurableProduct-20' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-configurable-product-wholesale-display
@@ -57,4 +59,5 @@ f79e681330c125fadad4264cde2ec7ab6b2144c0	not-for-merge	branch 'M2ImprovedConfigu
 f8408b30179f0126eac0e4b61ebc01fbb06fd956	not-for-merge	branch 'hotfix-v1.4.6' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-configurable-product-wholesale-display
 37ea0aa890d2d0e1aff3dfe55e2ea70cba7e6d9a	not-for-merge	branch 'lessthanM2.3.3' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-configurable-product-wholesale-display
 85bf5e0a14b289b20e0080ea9af5bd1a3634b898	not-for-merge	branch 'revert-480f9442' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-configurable-product-wholesale-display
-f42c961700afb1f4eaee4205011b04b93c216528	not-for-merge	branch 'v1.4.7-draft' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-configurable-product-wholesale-display
+16c6118bc709188d9fed9e184c7421c52f379288	not-for-merge	branch 'v1.4.7-draft' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-configurable-product-wholesale-display
+8bea4265393fb33f8dbfb994c5280a7d9439a897	not-for-merge	branch 'v1.4.8-draft' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-configurable-product-wholesale-display

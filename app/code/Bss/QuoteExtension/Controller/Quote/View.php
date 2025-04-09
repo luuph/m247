@@ -246,7 +246,7 @@ class View extends Action
             if ($block) {
                 $block->setRefererUrl($this->_redirect->getRefererUrl());
             }
-            $this->checkoutSession->setIsQuoteExtension($magentoQuote->getId());
+            $this->checkoutSession->setIdQuoteExtension($magentoQuote->getId());
             return $resultPage;
         } else {
             $resultRedirect = $this->resultRedirectFactory->create();

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      layout="admin-login"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <!-- Thêm block video -->
+        <referenceContainer name="login.content">
+            <block class="Magento\Framework\View\Element\Template"
+                   name="admin.login.video.bg"
+                   template="Chill_Vortex::login_video.phtml"
+                   before="-" />
+        </referenceContainer>
+        <!-- Thêm CSS -->
+    </body>
+</page>

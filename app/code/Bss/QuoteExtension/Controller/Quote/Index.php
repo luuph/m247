@@ -39,9 +39,9 @@ class Index extends \Bss\QuoteExtension\Controller\Quote
         if ($this->isInvalidQuoteRequest()) {
             return $resultReidrect->setPath('quoteextension/quote/emptyQuote');
         }
-        $this->quoteExtensionSession->setCheckoutIsQuoteExtension(false);
+        $this->quoteExtensionSession->setCheckoutIdQuoteExtension(false);
         $quoteId = $this->quoteExtensionSession->getQuoteExtensionId();
-        $this->quoteExtensionSession->setIsQuoteExtension($quoteId);
+        $this->quoteExtensionSession->setIdQuoteExtension($quoteId);
         $resultPage = $this->resultPageFactory->create();
         $resultPage->getConfig()->getTitle()->set(__('Quote'));
 

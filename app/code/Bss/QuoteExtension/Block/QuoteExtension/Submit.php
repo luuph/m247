@@ -234,6 +234,7 @@ class Submit extends AbstractQuoteExtension
         $output['isRequiredAddress'] = $this->isRequiredAddress();
         $output['inValidAmount'] = $this->quoteExtensionSession->getInvalidRequestQuoteAmount();
         $output["addToQuote"] = true;
+        $output["isShowSubToTal"] = $this->canShowSubtotal();
         return $output;
     }
 

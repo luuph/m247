@@ -98,8 +98,8 @@ class ParamOverriderCartId implements ParamOverriderInterface
                 if ($qEEntityId = $this->request->getParam("qe_entity_id")) {
                     return $this->qeApi->getQuoteIdByQEEntityTy($qEEntityId);
                 }
-                if ($this->checkoutSession->getCheckoutIsQuoteExtension()) {
-                    return $this->checkoutSession->getCheckoutIsQuoteExtension();
+                if ($this->checkoutSession->getCheckoutIdQuoteExtension()) {
+                    return $this->checkoutSession->getCheckoutIdQuoteExtension();
                 }
 
                 $pathInfo = $this->request->getPathInfo();
@@ -126,8 +126,8 @@ class ParamOverriderCartId implements ParamOverriderInterface
                 }
 
                 $referer = $this->request->getHeader('Referer');
-                if ($referer && strpos($referer, 'quoteextension') !== false && $this->checkoutSession->getIsQuoteExtension()) {
-                    return $this->checkoutSession->getIsQuoteExtension();
+                if ($referer && strpos($referer, 'quoteextension') !== false && $this->checkoutSession->getIdQuoteExtension()) {
+                    return $this->checkoutSession->getIdQuoteExtension();
                 }
 
 
@@ -139,11 +139,11 @@ class ParamOverriderCartId implements ParamOverriderInterface
                 if ($qEEntityId = $this->request->getParam("qe_entity_id")) {
                     return $this->qeApi->getQuoteIdByQEEntityTy($qEEntityId);
                 }
-                if ($this->checkoutSession->getCheckoutIsQuoteExtension()) {
-                    return $this->checkoutSession->getCheckoutIsQuoteExtension();
+                if ($this->checkoutSession->getCheckoutIdQuoteExtension()) {
+                    return $this->checkoutSession->getCheckoutIdQuoteExtension();
                 }
-                if ($this->checkoutSession->getIsQuoteExtension()) {
-                    return $this->checkoutSession->getIsQuoteExtension();
+                if ($this->checkoutSession->getIdQuoteExtension()) {
+                    return $this->checkoutSession->getIdQuoteExtension();
                 }
             }
         } catch (NoSuchEntityException $e) {

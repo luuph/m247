@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_OrderRestriction
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2021-2022 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+  <table name="bss_order_restriction" resource="default" engine="innodb" comment="The Order Restriction Table">
+    <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true" comment="ID"/>
+    <column xsi:type="int" name="product_id" padding="10" unsigned="true" nullable="false" identity="false" comment="Related Customer"/>
+    <column xsi:type="int" name="sale_qty_per_month" padding="10" unsigned="true" nullable="true" identity="false" comment="The allowed qty/month"/>
+    <column xsi:type="smallint" name="use_config_sale_qty_per_month" padding="5" unsigned="true" nullable="true" identity="false" comment="Is use the config setting"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="entity_id"/>
+    </constraint>
+    <constraint xsi:type="foreign" referenceId="BSS_ORDER_RESTRICTION_PRD_ID_CAT_PRD_ENTT_ENTT_ID" table="bss_order_restriction" column="product_id" referenceTable="catalog_product_entity" referenceColumn="entity_id" onDelete="CASCADE"/>
+  </table>
+</schema>

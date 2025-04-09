@@ -144,7 +144,7 @@ class QuoteExtensionPlace extends AbstractHelper
                 }
                 $this->idQuoteExtensionPlace = $this->getQuoteIdByIdQE($quoteExtensionId);
                 $this->checkoutSession->setQuoteIdPayPal($this->idQuoteExtensionPlace);
-                $this->checkoutSession->setIsQuoteExtension($this->idQuoteExtensionPlace);
+                $this->checkoutSession->setIdQuoteExtension($this->idQuoteExtensionPlace);
             }
             return $this->idQuoteExtensionPlace;
         } elseif ($this->getQuoteQuoteIdPayPal()) {

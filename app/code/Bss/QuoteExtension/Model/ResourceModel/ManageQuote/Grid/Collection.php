@@ -138,7 +138,7 @@ class Collection extends \Bss\QuoteExtension\Model\ResourceModel\ManageQuote\Col
         $this->addFilterToMap('increment_id', 'main_table.increment_id');
         $this->addFilterToMap('status', 'main_table.status');
         $this->getSelect()->joinLeft(
-            ['sales_order' => $this->getTable('sales_order')],
+            'sales_order',
             'sales_order.quote_id = main_table.backend_quote_id
                      OR sales_order.quote_id = main_table.target_quote',
             [

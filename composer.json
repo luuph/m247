@@ -19,7 +19,6 @@
     "version": "2.4.7-p3",
     "require": {
         "bsscommerce/dependent-custom-option": "1.2.0",
-        "magento/composer-dependency-version-audit-plugin": "~0.1",
         "magento/composer-root-update-plugin": "^2.0.4",
         "magento/module-bundle-sample-data": "100.4.*",
         "magento/module-catalog-rule-sample-data": "100.4.*",
@@ -97,10 +96,6 @@
         "0": {
             "type": "composer",
             "url": "https://repo.magento.com/"
-        },
-        "bsscommerce": {
-            "type": "composer",
-            "url": "https://composer.bsscommerce.com/community/"
         }
     },
     "extra": {

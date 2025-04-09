@@ -37,20 +37,28 @@ class SendRequest
     protected $manageQuoteRepository;
 
     /**
+     * @var \Magento\Framework\App\Response\RedirectInterface
+     */
+    protected $redirect;
+
+    /**
      * Construct
      *
      * @param CheckoutSession $checkoutSession
      * @param \Magento\Framework\App\RequestInterface $request
      * @param \Bss\QuoteExtension\Model\ManageQuoteRepository $manageQuoteRepository
+     * @param \Magento\Framework\App\Response\RedirectInterface $redirect
      */
     public function __construct(
         CheckoutSession $checkoutSession,
         \Magento\Framework\App\RequestInterface $request,
-        \Bss\QuoteExtension\Model\ManageQuoteRepository $manageQuoteRepository
+        \Bss\QuoteExtension\Model\ManageQuoteRepository $manageQuoteRepository,
+        \Magento\Framework\App\Response\RedirectInterface $redirect
     ) {
         $this->checkoutSession = $checkoutSession;
         $this->request = $request;
         $this->manageQuoteRepository = $manageQuoteRepository;
+        $this->redirect = $redirect;
     }
 
     /**
@@ -64,10 +72,10 @@ class SendRequest
      */
     public function afterGenerateOrderRequest($subject, $someThing, $subUser)
     {
-        $quoteRequest = $this->request->getServer('HTTP_REFERER') ?? "";
+        $quoteRequest = $this->redirect->getRefererUrl();
         $checkSendRqQuote = str_contains($quoteRequest, 'quote_id');
         if ($checkSendRqQuote) {
-            $extensionQuoteId = $this->checkoutSession->getData('is_quote_extension');
+            $extensionQuoteId = $this->checkoutSession->getIdQuoteExtension();
             $manageQuote = $this->manageQuoteRepository->getByQuoteId($extensionQuoteId);
             if ($manageQuote->getQuoteId()) {
                 $manageQuote->setBackendQuoteId($manageQuote->getQuoteId());

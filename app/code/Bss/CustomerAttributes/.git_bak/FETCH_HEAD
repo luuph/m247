@@ -1,10 +1,11 @@
-fcba2cc26470464fcf2f8303c2a575cb67fbfb60		branch 'master' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-customer-attribute
 60382ec059922a709b70e73776b99db7be28e8ca	not-for-merge	branch 'BSupport-4445' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-customer-attribute
 d3998f8e97be03aad79d8d4d62a38bb615fc8bb6	not-for-merge	branch 'BSupport-4453' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-customer-attribute
+bdf99cd095c80b046fd5c5ad6358b958e2a4d18e	not-for-merge	branch 'BSupport-5475' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-customer-attribute
 2f12cb57f1227abc4d24916e9db4043014f34806	not-for-merge	branch 'BSupport-7555' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-customer-attribute
 1111bce3cbe55471e84c0ed47bb4bca14c3f77b4	not-for-merge	branch 'BSupport-7555-draft' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-customer-attribute
 7a9d09a3447300b4172e1ac2851f0a8cb230b15d	not-for-merge	branch 'BSupport-7555-v2' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-customer-attribute
 5027282fda2d8ae3cf850cc152e1ce3ce9005eae	not-for-merge	branch 'BSupport-7615' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-customer-attribute
+35d40c64d93a4478379d366b2622f1cd83892cd0	not-for-merge	branch 'BSupport-7625' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-customer-attribute
 29cb3613aaa3ccca0441cb61191b114e2dcc5992	not-for-merge	branch 'M2.3.x' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-customer-attribute
 b600efe46d3008318f4b549f13496353304be384	not-for-merge	branch 'M2B2BExtensions-173' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-customer-attribute
 253e996200819258737c5eba09518b3f7961a79a	not-for-merge	branch 'M2B2BExtensions-65' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-customer-attribute
@@ -108,8 +109,9 @@ f21b1857362c7b35511eb25f770828417fc276a6	not-for-merge	branch 'hotfix-m2.3.3' of
 d6929037994b8473d24b88052d3135f38ced213f	not-for-merge	branch 'hotfix-v1.4.8-m244' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-customer-attribute
 b867b1cfe9f54b885a91d8fbd38d6d0bd74b24cb	not-for-merge	branch 'hotfix.v1.4.0' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-customer-attribute
 3bab32569777e47637b3b76dc975728ac077096f	not-for-merge	branch 'hotfix.v1.4.1' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-customer-attribute
+ae815de5a1b582f00410988f6b7af4eaa9055c9d	not-for-merge	branch 'master' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-customer-attribute
 f30fad6882a3665cac2166dbece59676fe3abb14	not-for-merge	branch 'test' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-customer-attribute
 e520bd8f14e8ac40c5cdbcf520bdf6145fb5332f	not-for-merge	branch 'test89' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-customer-attribute
 f1c91c4a6ecdc5c6fb171368ecb68cac14fa0b16	not-for-merge	branch 'v1.4.2-hotfix' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-customer-attribute
 1fd54635032fd47a47aea23e002ce928e99848a5	not-for-merge	branch 'v1.5.0-draft' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-customer-attribute
-632413106415583f1b63df4439d6a511063a410d	not-for-merge	branch 'v1.5.1-draft' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-customer-attribute
+35d40c64d93a4478379d366b2622f1cd83892cd0	not-for-merge	branch 'v1.5.1-draft' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-customer-attribute

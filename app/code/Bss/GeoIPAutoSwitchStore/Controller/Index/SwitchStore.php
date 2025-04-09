@@ -21,8 +21,6 @@ namespace Bss\GeoIPAutoSwitchStore\Controller\Index;
 use Magento\Framework\App\Action\Context;
 use Magento\Store\Model\Store;
 use Bss\GeoIPAutoSwitchStore\Cookie\GeoSession;
-use Magento\Framework\App\Config\ScopeConfigInterface;
-use Magento\Store\Model\ScopeInterface;
 
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
@@ -60,11 +58,6 @@ class SwitchStore extends \Magento\Framework\App\Action\Action
      */
     private $geoIpHelper;
 
-    /**
-     * @var ScopeConfigInterface
-     */
-    protected $scopeConfig;
-
 
     /**
      * @var null|Store
@@ -87,7 +80,6 @@ class SwitchStore extends \Magento\Framework\App\Action\Action
      * @param \Bss\GeoIPAutoSwitchStore\Helper\GeoIPData $geoIpHelper
      */
     public function __construct(
-        ScopeConfigInterface $scopeConfig,
         Context $context,
         \Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory,
         \Bss\GeoIPAutoSwitchStore\Helper\Data $moduleHelper,
@@ -97,7 +89,6 @@ class SwitchStore extends \Magento\Framework\App\Action\Action
         \Bss\GeoIPAutoSwitchStore\Helper\GeoIPData $geoIpHelper,
         GeoSession $geoSession
     ) {
-        $this->scopeConfig = $scopeConfig;
         $this->storeManager = $storeManager;
         $this->moduleHelper = $moduleHelper;
         $this->geoIpConfig = $geoIpConfig;
@@ -379,19 +370,10 @@ class SwitchStore extends \Magento\Framework\App\Action\Action
     {
         $locale = null;
         if($storeId) {
-            $locale = $this->getLocaleByStore($storeId);
+            $locale = $this->moduleHelper->getLocaleByStore($storeId);
         }
         $country = $this->countryFactory->create()->loadByCode($countryCode);
         return $country->getName($locale);
-    }
-
-    protected function getLocaleByStore($storeId)
-    {
-        return $this->scopeConfig->getValue(
-            'general/locale/code',
-            ScopeInterface::SCOPE_STORE,
-            $storeId
-        );
     }
 
     /**

@@ -12,7 +12,7 @@
  * @category   BSS
  * @package    Bss_QuoteExtension
  * @author     Extension Team
- * @copyright  Copyright (c) 2018-2019 BSS Commerce Co. ( http://bsscommerce.com )
+ * @copyright  Copyright (c) 2018-2025 BSS Commerce Co. ( http://bsscommerce.com )
  * @license    http://bsscommerce.com/Bss-Commerce-License.txt
  */
 
@@ -72,6 +72,11 @@ class HelperClass
     protected $productMetadata;
 
     /**
+     * @var \Magento\Framework\Module\Manager
+     */
+    protected $moduleManager;
+
+    /**
      * HelperClass constructor.
      * @param \Magento\Catalog\Model\ProductFactory $productFactory
      * @param \Magento\Framework\Filter\LocalizedToNormalized $localizedToNormalized
@@ -82,6 +87,7 @@ class HelperClass
      * @param \Magento\CatalogInventory\Api\StockItemCriteriaInterfaceFactory $stockItemCriteriaFactory
      * @param \Magento\CatalogInventory\Api\StockItemRepositoryInterface $stockItemRepository
      * @param ProductMetadataInterface $productMetadata
+     * @param \Magento\Framework\Module\Manager $moduleManager
      */
     public function __construct(
         \Magento\Catalog\Model\ProductFactory $productFactory,
@@ -92,7 +98,8 @@ class HelperClass
         \Magento\Framework\Escaper $escaper,
         \Magento\CatalogInventory\Api\StockItemCriteriaInterfaceFactory $stockItemCriteriaFactory,
         \Magento\CatalogInventory\Api\StockItemRepositoryInterface $stockItemRepository,
-        ProductMetadataInterface $productMetadata
+        ProductMetadataInterface $productMetadata,
+        \Magento\Framework\Module\Manager $moduleManager
     ) {
         $this->productFactory = $productFactory;
         $this->localizedToNormalized = $localizedToNormalized;
@@ -103,6 +110,7 @@ class HelperClass
         $this->stockItemCriteriaFactory = $stockItemCriteriaFactory;
         $this->stockItemRepository = $stockItemRepository;
         $this->productMetadata = $productMetadata;
+        $this->moduleManager = $moduleManager;
     }
 
     /**
@@ -175,5 +183,27 @@ class HelperClass
     public function returnProductMetadata()
     {
         return $this->productMetadata;
+    }
+
+    /**
+     * @return \Magento\Framework\Module\Manager
+     */
+    public function returnModuleManager()
+    {
+        return $this->moduleManager;
+    }
+
+    /**
+     * Check enable disable MSI
+     *
+     * @return bool
+     */
+    public function isEnableMSI()
+    {
+        $version = $this->productMetadata->getVerSion();
+        if (version_compare($version, '2.3.0') >= 0 && $this->moduleManager->isEnabled('Magento_Inventory')) {
+            return true;
+        }
+        return false;
     }
 }

@@ -97,4 +97,7 @@
     <type name="Magento\Customer\Model\AccountManagement">
         <plugin name="BssAssignGuestToCustomer" sortOrder="1" type="Bss\GuestToCustomer\Plugin\Model\Customer\AccountManagement"/>
     </type>
+    <type name="Magento\Checkout\Block\Checkout\LayoutProcessor">
+        <plugin name="bss_guest_to_customer_checkout_layout" type="Bss\GuestToCustomer\Plugin\Checkout\LayoutProcessor"/>
+    </type>
 </config>

@@ -1,5 +1,9 @@
 # [Release Note](https://bsscommerce.com/magento-2-request-for-quote-extension.html)
-
+## v1.3.5 (Feb 28, 2024)
+- Fix bug: print pdf invoice, shipment, creditmemo by mask action in order grid
+- Update: 
+  - Compatible M2 Company Account
+  - Compatible BssConfigurableGridView with MSI
 ## v1.3.4 (Nov 14, 2024)
 - Fix bug: filtering the quote in the backend + compatible with BSS M2 Company Account extension.
 - Update: compatible with BSS M2 Add multiple product to cart extension.

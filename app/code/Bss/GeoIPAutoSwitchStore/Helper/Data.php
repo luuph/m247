@@ -28,6 +28,8 @@ use Magento\Store\Api\StoreRepositoryInterface;
 use Magento\Store\Model\Store;
 use Magento\Store\Model\StoreManagerInterface;
 use Symfony\Component\Console\Exception\LogicException;
+use Magento\Store\Model\ScopeInterface;
+use Exception;
 
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
@@ -171,10 +173,16 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             //Return a US IP
             $ipCustomer = '23.235.227.106';
         }
+        if ($ipCustomer === null) {
+            return null;
+        }
+
+        if (filter_var($ipCustomer, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) || filter_var($ipCustomer, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
+            return $ipCustomer;
+        }
 
         // Fix conflict with docker if ip has suffix port Ex : 101.103.106:308887
-        if ($ipCustomer !== null && strpos($ipCustomer, ":") !== false 
-            && !filter_var($ipCustomer, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
+        if (strpos($ipCustomer ?? '', ":") !== false) {
             $ipCustomer = explode(":", $ipCustomer);
             $ipCustomer = $ipCustomer[0];
         }
@@ -334,5 +342,20 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     protected function getStoreCode()
     {
         return $this->storeManager->getStore()->getCode();
+    }
+
+    /**
+     * Get locale by store
+     *
+     * @param int|string $storeId
+     * @return void
+     */
+    public function getLocaleByStore($storeId)
+    {
+        return $this->scopeConfig->getValue(
+            'general/locale/code',
+            ScopeInterface::SCOPE_STORE,
+            $storeId
+        );
     }
 }

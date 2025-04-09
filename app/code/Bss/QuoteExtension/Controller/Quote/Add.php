@@ -51,11 +51,6 @@ class Add extends \Bss\QuoteExtension\Controller\Quote
     protected $helperClass;
 
     /**
-     * @var int
-     */
-    protected $versionMagento;
-
-    /**
      * @var array
      */
     protected $stockData;
@@ -279,8 +274,6 @@ class Add extends \Bss\QuoteExtension\Controller\Quote
      */
     public function addChildProduct($params, $addType = 1)
     {
-        // check version magento 2
-        $this->checkVersionMagento();
         $this->getDetailStockChildProduct($params['config_table_product_id']);
         $related = $this->getRequest()->getParam('related_product');
         $storeId = $this->storeManager->getStore()->getId();
@@ -350,10 +343,10 @@ class Add extends \Bss\QuoteExtension\Controller\Quote
      */
     protected function getQtyofChildProduct($simpleProduct)
     {
-        if ($this->versionMagento != 0) {
-            return  $simpleProduct->getQuantityBss();
+        if ($this->helperClass->isEnableMSI()) {
+            return $simpleProduct->getQuantityBss();
         } else {
-            return  $this->stockData[$simpleProduct->getId()]['qty'];
+            return isset($this->stockData[$simpleProduct->getId()]['qty']) ? $this->stockData[$simpleProduct->getId()]['qty'] : null;
         }
     }
 
@@ -380,18 +373,6 @@ class Add extends \Bss\QuoteExtension\Controller\Quote
     }
 
     /**
-     * @return $this
-     */
-    protected function checkVersionMagento()
-    {
-        $version = $this->helperClass->returnProductMetadata()->getVerSion();
-        if (version_compare($version, '2.3.0') >= 0) {
-            $this->versionMagento = 1;
-        }
-        return $this;
-    }
-
-    /**
      * @param int $productQty
      * @param int $productId
      * @param int $boughtQty
@@ -401,10 +382,10 @@ class Add extends \Bss\QuoteExtension\Controller\Quote
     {
         $stockData = $this->stockData;
         $quantity = $stockData[$productId]['qty'];
-        if ($this->versionMagento != 0) {
+        if ($this->helperClass->isEnableMSI()) {
             $quantity = $productQty;
         }
-        if ($stockData[$productId]['manage_stock'] && !$stockData[$productId]['backorders'] && $boughtQty > $quantity) {
+        if (isset($stockData[$productId]) && $stockData[$productId]['manage_stock'] && !$stockData[$productId]['backorders'] && $boughtQty > $quantity) {
             return false;
         }
         return true;
@@ -416,7 +397,7 @@ class Add extends \Bss\QuoteExtension\Controller\Quote
     protected function addErrorMessage($e)
     {
         if ($this->quoteExtensionSession->getUseNotice(true)) {
-            $this->messageManager->addNotice(
+            $this->messageManager->addNoticeMessage(
                 $this->helperClass->returnEscaper()->escapeHtml($e->getMessage())
             );
         } else {

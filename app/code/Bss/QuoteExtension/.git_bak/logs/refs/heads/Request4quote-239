@@ -1,0 +1,2 @@
+0000000000000000000000000000000000000000 b2c96d92f46afb9b95433b3dafad3cb0d6ea50f6 Hai Luu <luuph@bsscommerce.com> 1743149911 +0700	branch: Created from HEAD
+b2c96d92f46afb9b95433b3dafad3cb0d6ea50f6 bd47b52af36a05f24413a5bdde937a9b7a425fcc Hai Luu <luuph@bsscommerce.com> 1743150188 +0700	commit: Request4quote-239: Fix load manage quote grid with DB setup table_prefix

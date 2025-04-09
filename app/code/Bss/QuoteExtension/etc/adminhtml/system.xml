@@ -31,7 +31,7 @@
                 <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label><![CDATA[Enable Request4Quote]]></label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                    <comment><![CDATA[Version 1.3.4]]></comment>
+                    <comment><![CDATA[Version 1.3.5]]></comment>
                 </field>
                 <field id="save_customer" translate="label" type="select" sortOrder="10" showInDefault="1">
                     <label><![CDATA[Auto change quote price when changing customer group]]></label>

@@ -38,7 +38,7 @@ use Magento\Store\Model\StoreManagerInterface;
  * Sales Order Invoice PDF model
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
-class Invoice extends \Magento\Sales\Model\Order\Pdf\AbstractPdf
+class Invoice extends \Magento\Sales\Model\Order\Pdf\Invoice
 {
     /**
      * @var StoreManagerInterface
@@ -108,6 +108,8 @@ class Invoice extends \Magento\Sales\Model\Order\Pdf\AbstractPdf
             $localeDate,
             $inlineTranslation,
             $addressRenderer,
+            $storeManager,
+            $appEmulation,
             $data
         );
         $this->rtlTextHandler = $rtlTextHandler ?: ObjectManager::getInstance()->get(RtlTextHandler::class);

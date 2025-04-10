@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_Shopbybrand
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+-->
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="mpbrand_option" class="Mageplaza\Shopbybrand\Block\Widget\OptionId">
+        <label>MP Brand Option ID Widget</label>
+        <description>MP Brand Option ID Widget</description>
+        <parameters>
+            <parameter name="title" xsi:type="text" required="false" visible="true">
+                <label>Title</label>
+            </parameter>
+            <parameter name="show_title" xsi:type="select" visible="true"
+                       source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label>Show/Hide Widget Title</label>
+            </parameter>
+            <parameter name="option_id" xsi:type="text" required="true" visible="true">
+                <label>Input Option ID</label>
+                <description>Input Option IDs which you want to show. Example : 213 , 214 , 215...etc</description>
+            </parameter>
+            <parameter name="template" xsi:type="select" required="true" visible="true">
+                <label>Template</label>
+                <options>
+                    <option name="brands" value="Mageplaza_Shopbybrand::widget/brandlist.phtml" selected="true">
+                        <label>Default MP Brand Template</label>
+                    </option>
+                </options>
+            </parameter>
+        </parameters>
+        <containers>
+            <container name="content">
+                <template name="brands" value="brands"/>
+            </container>
+        </containers>
+    </widget>
+    <widget id="mpbrand_featured" class="Mageplaza\Shopbybrand\Block\Widget\Featured">
+        <label>MP Featured Brand Widget</label>
+        <description>MP Featured Brand Widget</description>
+        <parameters>
+            <parameter name="title" xsi:type="text" required="false" visible="true">
+                <label>Title</label>
+            </parameter>
+            <parameter name="show_title" xsi:type="select" visible="true"
+                       source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label>Show/Hide Widget Title</label>
+            </parameter>
+            <parameter name="template" xsi:type="select" required="true" visible="true">
+                <label>Template</label>
+                <options>
+                    <option name="brands" value="Mageplaza_Shopbybrand::widget/brandlist.phtml" selected="true">
+                        <label>Default MP Brand Template</label>
+                    </option>
+                </options>
+            </parameter>
+        </parameters>
+        <containers>
+            <container name="content">
+                <template name="brands" value="brands"/>
+            </container>
+        </containers>
+    </widget>
+    <widget id="mpbrand_category" class="Mageplaza\Shopbybrand\Block\Widget\CategoryId">
+        <label>MP Brand Category ID Widget</label>
+        <description>MP Brand Category ID Widget</description>
+        <parameters>
+            <parameter name="title" xsi:type="text" required="false" visible="true">
+                <label>Title</label>
+            </parameter>
+            <parameter name="show_title" xsi:type="select" visible="true"
+                       source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label>Show/Hide Widget Title</label>
+            </parameter>
+            <parameter name="category_id" xsi:type="text" required="true" visible="true">
+                <label>Input Category ID</label>
+                <description>Input Category IDs which you want to show. Example : 1, 2, 3...etc</description>
+            </parameter>
+            <parameter name="template" xsi:type="select" required="true" visible="true">
+                <label>Template</label>
+                <options>
+                    <option name="brands" value="Mageplaza_Shopbybrand::widget/brandlist.phtml" selected="true">
+                        <label>Default MP Brand Template</label>
+                    </option>
+                </options>
+            </parameter>
+        </parameters>
+        <containers>
+            <container name="content">
+                <template name="brands" value="brands"/>
+            </container>
+        </containers>
+    </widget>
+    <widget id="mpbrand_advanced_widget" class="Mageplaza\Shopbybrand\Block\Widget\Advanced">
+        <label>MP Brand Advanced Widget</label>
+        <description>MP Brand Advanced Widget</description>
+        <parameters>
+            <parameter name="title" xsi:type="text" required="false" visible="true">
+                <label>Title</label>
+            </parameter>
+            <parameter name="option_id" xsi:type="block" required="true" visible="true">
+                <label translate="true">Brand List</label>
+                <block class="Mageplaza\Shopbybrand\Block\Widget\Advanced\BrandList">
+                    <data>
+                        <item name="button" xsi:type="array">
+                            <item name="open" xsi:type="string">Select Brand List</item>
+                        </item>
+                    </data>
+                </block>
+            </parameter>
+            <parameter name="brand_category" xsi:type="multiselect" required="false" visible="true"
+                       source_model="Mageplaza\Shopbybrand\Model\Config\Source\Widget\BrandCategory">
+                <label>Brand Categories</label>
+            </parameter>
+            <parameter name="sort_brand_by" xsi:type="select" visible="true">
+                <label translate="true">Sort Brand by</label>
+                <options>
+                    <option name="alphabet" value="alphabet" selected="true">
+                        <label>Alphabet</label>
+                    </option>
+                    <option name="random" value="random">
+                        <label>Random</label>
+                    </option>
+                    <option name="num_products" value="num_products">
+                        <label>Number of products</label>
+                    </option>
+                    <option name="option_id" value="option_id">
+                        <label>Option ID</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="sort_dir" xsi:type="select" visible="true">
+                <label translate="true">Default Sort Direction</label>
+                <options>
+                    <option name="asc" value="asc" selected="true">
+                        <label>Ascending</label>
+                    </option>
+                    <option name="desc" value="desc">
+                        <label>Descending</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="template" xsi:type="select" required="true" visible="true">
+                <label>Template</label>
+                <options>
+                    <option name="brands" value="Mageplaza_Shopbybrand::widget/advanced/brand_list.phtml" selected="true">
+                        <label>MP Brand Advanced Template</label>
+                    </option>
+                </options>
+            </parameter>
+        </parameters>
+        <containers>
+            <container name="content">
+                <template name="brands" value="brands"/>
+            </container>
+        </containers>
+    </widget>
+</widgets>

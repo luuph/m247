@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magezon
+ *
+ * This source file is subject to the Magezon Software License, which is available at https://www.magezon.com/license.
+ * Do not edit or add to this file if you wish to upgrade the to newer versions in the future.
+ * If you wish to customize this module for your needs.
+ * Please refer to https://www.magezon.com for more information.
+ *
+ * @category  Magezon
+ * @package   Magezon_LookBook
+ * @copyright Copyright (C) 2021 Magezon (https://www.magezon.com)
+ */
+-->
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="lookbook_profiles_list" class="Magezon\LookBook\Block\Widget\ProfileList">
+        <label translate="true">Lookbook Profiles List</label>
+        <description translate="true"></description>
+        <parameters>
+            <parameter name="title" xsi:type="text" visible="true">
+                <label translate="true">Title</label>
+            </parameter>
+            <parameter name="page_size" xsi:type="text" visible="true">
+                <label translate="true">Number Of Profiles</label>
+            </parameter>
+            <parameter name="categories" xsi:type="multiselect" visible="true" source_model="Magezon\LookBook\Model\Category\Source\CategoryList">
+                <label translate="true">Categories</label>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

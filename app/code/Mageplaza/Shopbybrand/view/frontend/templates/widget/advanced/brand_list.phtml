@@ -1,0 +1,198 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_Shopbybrand
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+use Magento\Swatches\Model\Swatch;
+use Mageplaza\Shopbybrand\Block\Widget\Advanced;
+
+/** @var Advanced $block */
+$brandCollection = $block->getWidgetBrandCollection();
+$helperData  = $this->helper(\Mageplaza\Shopbybrand\Helper\Data::class);
+?>
+
+<?php if ($brandCollection && $brandCollection->getSize() && $helperData->isEnable()): ?>
+    <div class="block block-brand-widget widget">
+    <div class="block-title" style="text-align: center">
+        <strong id="block-related-brand-heading" role="heading" aria-level="2">
+            <?= $block->escapeHtml($block->getWidgetTitle()) ?>
+        </strong>
+    </div>
+    <?php if ($block->isSlider()): ?>
+        <?= /** @noEscape */ $block->includeCssLib() ?>
+        <div class="block-content">
+            <div class="owl-carousel owl-theme brand-carousel"
+                 id="related-brand-carousel"
+                 data-mage-init='{"brandSliderRelated":<?= $block->escapeHtml($block->getJsSliderConfig()) ?>}'>
+                <?php foreach ($brandCollection as $brand): ?>
+                    <a href="<?= /** @noEscape */ $block->helper()->getBrandUrl($brand) ?>">
+                        <?php if ($brand->getSwatchType() == Swatch::SWATCH_TYPE_VISUAL_COLOR): ?>
+                            <img class="img-responsive brand-image"
+                                 style="background-color: <?= /** @noEscape */ $brand->getSwatchValue() ?>"
+                                 width="<?= /** @noEscape */ $block->getLogoWidth() ?>"
+                                 height="<?= /** @noEscape */ $block->getLogoHeight() ?>">
+                            <span><?= /** @noEscape */ $brand->getValue() ?></span>
+                        <?php else: ?>
+                            <img class="img-responsive brand-image"
+                                 src="<?= /** @noEscape */ $block->helper()->getBrandImageUrl($brand) ?>"
+                                 width="<?= /** @noEscape */ $block->getLogoWidth() ?>"
+                                 height="<?= /** @noEscape */ $block->getLogoHeight() ?>"
+                                 alt="<?= /** @noEscape */ $brand->getValue() ?>">
+                            <span><?= /** @noEscape */ $brand->getValue() ?></span>
+                        <?php endif; ?>
+                    </a>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        <?php
+        $sliderWidth = $block->getSliderWidth() ? $block->getSliderWidth() . 'px' : '100%';
+        $sliderHeight = $block->getSliderHeight() ? $block->getSliderHeight() . 'px' : '100%';
+        ?>
+    <style>
+        @media screen and (min-width: 1366px) {
+            .block-brand-widget {
+                width: <?= /** @noEscape */ $sliderWidth ?>;
+                height: <?= /** @noEscape */ $sliderHeight ?>;
+                overflow: auto;
+            }
+        }
+
+        .owl-prev {
+            left: -60px;
+            top: 10%;
+        }
+
+        .owl-next {
+            right: -20px;
+            top: 10%;
+        }
+
+        .block-brand-widget .block-content .owl-nav [class*='owl-']:hover {
+            background: none !important;
+            color: #404040 !important;
+        }
+
+        .block-brand-widget .block-title, .block.block-brand-widget .owl-item {
+            text-align: center;
+        }
+
+        .block-brand-widget .block-content {
+            padding: 0 85px;
+        }
+
+        .block-brand-widget .block-content a span {
+            width: <?= /** @noEscape */ $block->getLogoWidth() . 'px' ?>;
+        }
+    </style>
+    <?php else: ?>
+        <div class="block-content brand-mix-container products wrapper grid products-grid">
+            <div class="brand-list-content-widget">
+                <ol class="products list items product-items">
+                    <?php foreach ($brandCollection as $brand): ?>
+                        <li class="item product product-item mix">
+                                <div class="product-item-info" data-container="product-grid">
+                                    <a title="<?= /** @noEscape */ $brand->getValue() ?>"
+                                       href="<?= /** @noEscape */ $block->helper()->getBrandUrl($brand) ?>"
+                                       class="product photo product-item-photo"
+                                       tabindex="-1">
+                                <span class="product-image-container">
+                                    <span class="product-image-wrapper" style="padding-bottom: 90%;">
+                                        <img class="product-image-photo"
+                                             src="<?= /** @noEscape */ $block->helper()->getBrandImageUrl($brand) ?>"
+                                             alt="<?= /** @noEscape */ $brand->getValue() ?>">
+                                    </span>
+                                </span>
+                                    </a>
+                                    <div class="product details product-item-details">
+                                            <strong class="product name product-item-name" style="text-align: center">
+                                                <a title="<?= /** @noEscape */ $brand->getValue() ?>"
+                                                   class="product-item-link"
+                                                   href="<?= /** @noEscape */ $block->helper()->getBrandUrl($brand) ?>">
+                                                    <?= $block->escapeHtml($brand->getValue()) ?>
+                                                </a>
+                                            </strong>
+                                    </div>
+                                </div>
+                        </li>
+                    <?php endforeach; ?>
+                </ol>
+            </div>
+        </div>
+        <style type="text/css">
+            .block-brand-widget {
+                display: grid;
+            }
+            .block-brand-widget .brand-list-content-widget li.product-item {
+                margin-left: 0;
+                padding: 5px;
+            }
+
+            .block-brand-widget .brand-list-content-widget li.product-item .product-item-info {
+                width: 100%;
+            }
+
+            .block-brand-widget .brand-list-content-widget li.product-item .product-image-container {
+                width: 100%;
+            }
+
+            .mix {
+                position: relative;
+            }
+        </style>
+    <?php endif; ?>
+    </div>
+<?php endif; ?>
+<style type="text/css">
+    #block-related-brand-heading {
+        font-weight: 600 !important;
+    }
+
+    .block-brand-widget .block-content {
+        margin-top: 0 !important;
+    }
+
+    .block-brand-widget .block-content img {
+        border-radius: 30px;
+        border: 1px solid #d9d9d9 !important;
+        width: <?= /** @noEscape */ $block->getLogoWidth() . 'px' ?> !important;
+        height: <?= /** @noEscape */ $block->getLogoHeight() . 'px' ?> !important;
+    }
+
+    .block-brand-widget .block-content img:hover {
+        box-shadow: 3px 3px 3px 3px #d9d9d9!important;
+    }
+
+    .block-brand-widget .block-content a {
+        color: #333333 !important;
+        text-align: center;
+        font-size: 16px;
+    }
+
+    .block-brand-widget .block-content a span {
+        display: block;
+        margin-top: 10px !important;
+        font-weight: 600 !important;
+        text-align: center;
+    }
+
+    .block-brand-widget .product-item-info:hover {
+        border: none !important;
+        box-shadow: none !important;
+    }
+</style>

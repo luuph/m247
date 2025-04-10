@@ -1,0 +1,39 @@
+<div class="mgz-marker marker draggable ui-widget-content ui-draggable ui-draggable-handle" ko-style="{ 'position': 'absolute', 'left': left() + 'px', 'top': top() + 'px', 'animation': animation() }" afterRender="$parent.YourAfterRenderFunction">
+	<!-- ko ifnot: marker_label -->
+		<span data-bind="click: $parent.openModal, html: $parent.markerIcon"></span>
+	<!-- /ko -->
+	<!-- ko if: marker_label -->
+		<span data-bind="click: $parent.openModal, text: marker_label"></span>
+	<!-- /ko -->
+	<!-- ko if: modal -->
+	<div class="item-content">
+		<div class="field">
+			<div class="ui-widget">
+			  	<label for="products" data-bind="i18n: 'Product SKU: '"></label>
+			  	<input id="products" data-bind="textInput: sku">
+			</div>
+		</div>
+		<div class="field">
+			<label for="marker_label" data-bind="i18n: 'Marker Label: '"></label>
+			<input type="text" name="marker-label" id="marker_label" value="" data-bind="value: marker_label">
+		</div>
+		<div class="field">
+			<label for="title" data-bind="i18n: 'Custom Label: '"></label>
+			<input type="text" name="gender" id="title" value="" data-bind="value: title">
+		</div>
+		<div class="field">
+			<label for="description" data-bind="i18n: 'Custom Text: '"></label>
+			<textarea name="description" id="description" value="" data-bind="value: description"></textarea>
+		</div>
+		<div class="field">
+			<label for="popup-position" data-bind="i18n: 'Popup Position'"></label>
+			<select id="popup-position" data-bind="options: locations, optionsText: 'Location', optionsValue: 'Value', value: popup"></select>
+		</div>
+		<div class="btn">
+			<button type="submit" data-bind="click: $parent.closeMarker, i18n: 'Save'"></button>
+			<button type="submit" data-bind="click: $parent.removeMarker, i18n: 'Delete'"></button>
+			<button type="submit" data-bind="click: $parent.cancelMarker, i18n: 'Cancel'"></button>
+		</div>
+	</div>
+	<!-- /ko -->
+</div>	 

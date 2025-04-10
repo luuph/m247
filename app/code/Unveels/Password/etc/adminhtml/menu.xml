@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Backend/etc/menu.xsd">
+    <menu>
+        <add id="Unveels_Password::password" title="Show/Hide Password" module="Unveels_Password" sortOrder="60" resource="Unveels_Password::password" parent="Unveels_Core::core"/>
+       
+        <add id="Unveels_Password::configuration" title="Configuration" module="Unveels_Password" sortOrder="10" parent="Unveels_Password::password" action="adminhtml/system_config/edit/section/disable_password" resource="Unveels_Password::config"/>
+    </menu>
+</config>

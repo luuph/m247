@@ -69,6 +69,10 @@ class ShippingPost implements \Magento\Framework\Event\ObserverInterface
      */
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
+        $writer = new \Zend_Log_Writer_Stream(BP . '/var/log/custom.log');
+                $logger = new \Zend_Log();
+                $logger->addWriter($writer);
+                $logger->info('ShippingPost');
         $quote = $observer->getEvent()->getQuote();
         $customerAddressId = $quote->getShippingAddress()->getCustomerAddressId();
         $addresses = $this->addressRepository

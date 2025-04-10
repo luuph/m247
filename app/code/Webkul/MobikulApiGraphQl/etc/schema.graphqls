@@ -1,0 +1,2340 @@
+type Query {
+    homePageData(
+        customerToken: String, 
+        storeId:Int, 
+        websiteId: Int, 
+        currency: String,
+        url: String,
+        width: String,
+        quoteId: Int,
+        mFactor: String,
+        isFromUrl: String
+    ): HomePageData @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Catalog\\HomePageData") @doc(description: "home page all information")
+
+    categoryPageData(
+        customerToken: String, 
+        storeId:Int, 
+        categoryId: Int, 
+        currency: String,
+        width: String,
+        quoteId: Int,
+        mFactor: String
+    ): CategoryPageData @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Catalog\\CategoryPageData") @doc(description: "category page all information")
+
+    productCollection(
+        customerToken: String, 
+        storeId:Int, 
+        currency: String,
+        width: String,
+        quoteId: Int,
+        mFactor: String,
+        id: String,
+        type: String,
+        sortData: collectionSort,
+        filterData: [collectionFilter],
+        pageNumber: Int
+    ): ProductCollection @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Catalog\\ProductCollection") @doc(description: "product collection all information")
+
+    productPageData(
+        customerToken: String, 
+        storeId:Int, 
+        productId: Int, 
+        currency: String,
+        width: String,
+        quoteId: Int,
+        sku: String
+    ): ProductPageData @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Catalog\\ProductPageData") @doc(description: "product page all information")
+
+    getCategoryList(
+        storeId:Int
+    ): GetCategoryList @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Catalog\\GetCategoryList") @doc(description: "category list information")
+
+    customerCompareList(
+        storeId:Int
+        customerToken: String,
+        width: String,
+        mFactor: String,
+        currency: String
+    ): CompareList @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Catalog\\CompareList") @doc(description: "compare list information")
+
+    advancedSearchFormData(
+        storeId:Int
+    ): AdvancedSearchFormData @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Catalog\\AdvancedSearchFormData") @doc(description: "advanced search form data information")
+
+    productShare(
+        storeId:Int,
+        message: String!,
+        productId: Int!,
+        customerName: String,
+        customerEmail: String,
+        recipientName: [String],
+        recipientEmail: [String]
+    ): DefaultResponse @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Catalog\\ProductShare") @doc(description: "share products by mail")
+
+    ratingFormData(
+        storeId:Int
+    ): RatingForm @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Catalog\\RatingFormData") @doc(description: "rating form data information")
+
+    reviewsAndRatings(
+        storeId:Int,
+        url: String,
+        width: String,
+        productId: Int,
+        websiteId: Int,
+        pageNumber: Int,
+        customerToken: String
+    ): ReviewsAndRatings @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Catalog\\ReviewsAndRatings") @doc(description: "reviews And Ratings information")
+
+    upsellProductList(
+        storeId:Int,
+        url: String,
+        width: String,
+        productId: Int,
+        websiteId: Int,
+        pageNumber: Int,
+        customerToken: String
+    ): UpsellProductList @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Catalog\\UpsellProductList") @doc(description: "Upsell product list information")
+
+    walkthrough(
+        width:String,
+        store_id:String
+    ): WalkThrough @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Catalog\\Walkthrough") @doc(description: "walkthrough information")
+
+    cartDetails(
+        width:String,
+        quoteId: Int,
+        customerToken: String,
+        storeId: Int,
+        currency: String,
+        pageNumber: Int
+    ): CartDetails @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Checkout\\CartDetails") @doc(description: "cart information")
+
+    checkoutAddress(
+        quoteId: Int,
+        customerToken: String,
+        storeId: Int
+    ): CheckoutAddress @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Checkout\\CheckoutAddress") @doc(description: "checkout address information")
+
+    checkoutAddressFormData(
+        isGuest: Boolean,
+        customerToken: String,
+        storeId: Int,
+        addressId: Int
+    ): CheckoutAddressFormData @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Checkout\\CheckoutAddressFormData") @doc(description: "checkout address form data information")
+
+    reviewAndPayment(
+        shippingMethod: String,
+        customerToken: String,
+        storeId: Int,
+        quoteId: Int,
+        currency: String
+    ): ReviewAndPayment @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Checkout\\ReviewAndPayment") @doc(description: "review and payment information")
+
+    shippingMethods(
+        shippingData: shippingDataInput,
+        customerToken: String,
+        storeId: Int,
+        quoteId: Int,
+        currency: String
+    ): ShippingMethods @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Checkout\\ShippingMethods") @doc(description: "shipping methods information")
+
+    accountInfoData(
+        customerToken: String,
+        storeId: Int,
+        tokenType: String
+    ): AccountInfoData @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Customer\\AccountInfoData") @doc(description: "customer account information")
+
+    addressBookData(
+        customerToken: String,
+        storeId: Int,
+        forDashboard: Int
+    ): AddressBookData @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Customer\\AddressBookData") @doc(description: "address book information")
+
+    addressFormData(
+        customerToken: String,
+        storeId: Int,
+        addressId: Int
+    ): AddressFormDataRequest @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Customer\\AddressFormData") @doc(description: "address form information")
+
+    checkCustomerByEmail(
+        email: String,
+        storeId: Int
+    ): CheckCustomerByEmail @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Customer\\CheckCustomerByEmail") @doc(description: "check customer by email information")
+
+    createAccountFormData(
+        storeId: Int
+    ): CreateAccountFormData @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Customer\\CreateAccountFormData") @doc(description: "create account form data information")
+
+    downloadProduct(
+        hash: String,
+        customerToken: String
+    ): DownloadProduct @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Customer\\DownloadProduct") @doc(description: "download product information")
+
+    invoiceView(
+        storeId: Int,
+        invoiceId: Int,
+        customerToken: String
+    ): InvoiceView @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Customer\\InvoiceView") @doc(description: "customer invoice view information")
+
+    myDownloadsList(
+        storeId: Int,
+        pageNumber: Int,
+        customerToken: String
+    ): MyDownloadsList @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Customer\\MyDownloadsList") @doc(description: "download list information")
+
+    wishlist(
+        storeId: Int,
+        pageNumber: Int,
+        customerToken: String,
+        currency: String,
+        width: String
+    ): Wishlist @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Customer\\Wishlist") @doc(description: "wishlist information")
+
+    shipmentView(
+        storeId: Int,
+        customerToken: String,
+        shipmentId: Int
+    ): ShipmentView @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Customer\\ShipmentView") @doc(description: "shipment view information")
+
+    reviewList(
+        storeId: Int,
+        customerToken: String,
+        pageNumber: Int,
+        forDashboard: Int
+    ): ReviewListData @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Customer\\ReviewList") @doc(description: "review list information")
+
+    reviewDetails(
+        storeId: Int,
+        customerToken: String,
+        reviewId: Int
+    ): ReviewDetails @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Customer\\ReviewDetails") @doc(description: "review details information")
+
+    orderList(
+        storeId: Int,
+        customerToken: String,
+        pageNumber: Int,
+        forDashboard: Int,
+        requiredCount: Int
+    ): OrderList @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Customer\\OrderList") @doc(description: "order list information")
+
+    orderDetails(
+        storeId: Int,
+        customerToken: String,
+        incrementId: String
+    ): OrderDetails @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Customer\\OrderDetails") @doc(description: "order details information")
+
+    cmsData(
+        id: Int
+    ): CmsData @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Extra\\CmsData") @doc(description: "cms data information")
+
+    customCollection(
+        storeId: Int,
+        quoteId: Int,
+        width: String,
+        sortData: String,
+        pageNumber: Int,
+        filterData: String,
+        customerToken: String,
+        notificationId: Int
+    ): CustomCollection @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Extra\\CustomCollection") @doc(description: "custom collection information")
+
+    notificationList(
+        storeId: Int,
+        width: String
+    ): NotificationList @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Extra\\NotificationList") @doc(description: "custom collection information")
+
+    otherNotificationData(
+        notificationId: Int
+    ): OtherNotificationData @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Extra\\OtherNotificationData") @doc(description: "other notification information")
+
+    searchSuggestion(
+        storeId: Int,
+        categoryId: Int,
+        searchQuery: String,
+        currency: String,
+    ): SearchSuggestion @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Extra\\SearchSuggestion") @doc(description: "search suggestion information")
+
+    searchTermList(
+        storeId: Int
+    ): SearchTermList @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Extra\\SearchTermList") @doc(description: "search term list information")
+
+    price(
+        storeId: Int,
+        productId: Int,
+        customerToken: String
+    ): DefaultResponse @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Productalert\\Price") @doc(description: "price alert information")
+
+    stock(
+        storeId: Int,
+        productId: Int,
+        customerToken: String
+    ): DefaultResponse @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Productalert\\Stock") @doc(description: "stock alert information")
+
+    guestView(
+        storeId: Int,
+        incrementId: String,
+        lastName: String,
+        email: String,
+        type: String,
+        zipCode: String
+    ): GuestView @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Sales\\GuestView") @doc(description: "guest order view information")
+
+    creditView(
+        storeId: Int,
+        creditMemoId: String,
+        customerToken: String,
+    ): CreditView @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Customer\\CreditView") @doc(description: "customer credit memo view information")
+
+    printInvoice(customerToken:String,
+            storeId:Int,
+            invoiceId: Int,
+            incrementId:String,
+            ): PrintInvoice @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Customer\\PrintInvoice") @doc(description: "Download Invoice") 
+
+    getWatchQr(
+        firebaseId: String,
+        os: String,
+        width: Int
+    ): WatchQr @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Watch\\Qr") 
+    @doc(description: "get Qr URL for Watch App")
+}
+
+type Mutation {
+    addToWishlist(
+        storeId: Int,
+        productId: Int!,
+        customerToken: String,
+        params: String
+    ): AddToWishlist @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Catalog\\AddToWishlist") @doc(description: "Add to wishlist request")
+
+    addToCompare(
+        storeId: Int,
+        productId: Int!,
+        customerToken: String               
+    ): DefaultResponse @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Catalog\\AddToCompare") @doc(description: "Add to compare request")
+
+    removeFromCompare(
+        storeId: Int,
+        productId: Int!,
+        customerToken: String               
+    ): DefaultResponse @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Catalog\\RemoveFromCompare") @doc(description: "Remove from compare request")
+
+    accountCreate(
+        storeId: Int,
+        orderId: Int              
+    ): DefaultResponse @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Checkout\\AccountCreate") @doc(description: "Remove from compare request")
+
+    addToCart(
+        storeId: Int,
+        productId: Int,
+        quoteId: Int,
+        customerToken: String,
+        qty: Int,
+        params: addToCartParams,
+        relatedProducts: [Int]            
+    ): AddToCart @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Checkout\\AddToCart") @doc(description: "Add to cart request")
+
+    applyCoupon(
+        storeId: Int,
+        couponCode: String,
+        removeCoupon: Int
+        quoteId: Int,
+        customerToken: String           
+    ): DefaultResponse @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Checkout\\ApplyCoupon") @doc(description: "Apply coupon code request")
+
+    changeOrderStatus(
+        storeId: Int,
+        status: Int,
+        state: String
+        incrementId: String,
+        transactionId: String,
+        customerToken: String           
+    ): DefaultResponse @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Checkout\\ChangeOrderStatus") @doc(description: "change order status request")
+
+    emptyCart(
+        storeId: Int,
+        quoteId: Int,
+        customerToken: String           
+    ): DefaultResponse @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Checkout\\EmptyCart") @doc(description: "cart empty request")
+
+    placeOrder(
+        storeId: Int,
+        quoteId: Int,
+        customerToken: String,
+        token:String,
+        invoiceId:String,
+        gatewayName:String,
+        paymentMethod: String,
+        ccCid: Int,
+        ccType: String,
+        ccNumber: Int,
+        ccExpYear: Int,
+        ccExpMonth: Int,
+        billingData: shippingDataInput,
+        checkoutMethod: String,
+        purchasePoint: String,
+        currency: String
+    ): PlaceOrder @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Checkout\\PlaceOrder") @doc(description: "place order request")
+
+    removeCartItem(
+        storeId: Int,
+        quoteId: Int,
+        customerToken: String,
+        itemId: Int          
+    ): RemoveCartItem @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Checkout\\RemoveCartItem") @doc(description: "remove cart item request")
+
+    updateCart(
+        storeId: Int,
+        quoteId: Int,
+        customerToken: String,
+        itemData: [cartItemData]         
+    ): UpdateCart @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Checkout\\UpdateCart") @doc(description: "update cart request")
+
+    updateItemOptions(
+        storeId: Int,
+        quoteId: Int,
+        customerToken: String,
+        productId: Int,
+        itemId: Int,
+        qty: Int,
+        params: String,
+        relatedProducts: String          
+    ): UpdateItemOptions @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Checkout\\UpdateItemOptions") @doc(description: "update cart item options request")
+
+    wishlistFromCart(
+        storeId: Int,
+        customerToken: String,
+        itemId: Int         
+    ): WishlistFromCart @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Checkout\\WishlistFromCart") @doc(description: "wishlist from cart request")
+
+    contact(
+        storeId: Int,
+        name: String,
+        email: String,
+        comment: String,
+        telephone: String         
+    ): DefaultResponse @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Contact\\Contact") @doc(description: "contact admin request")
+
+    createAccount(
+        storeId: Int,
+        os: String,
+        email: String,
+        dob: String,
+        width: String,
+        token: String,
+        mobile: String,
+        prefix: String,
+        suffix: String, 
+        taxvat: String,
+        gender: String,
+        mFactor: Int,
+        quoteId: Int,
+        isSocial: Int,
+        firstName: String,
+        lastName: String,
+        websiteId: Int,
+        password: String,
+        pictureUrl: String,
+        middleName: String,
+        orderId: Int,
+        base64_image: String    
+    ): CreateAccount @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Customer\\CreateAccount") @doc(description: "create account request")
+
+    deleteAddress(
+        addressId: Int,
+        customerToken: String        
+    ): DefaultResponse @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Customer\\DeleteAddress") @doc(description: "delete address request")
+
+    forgotPassword(
+        email: String,
+        storeId: Int,
+        websiteId: Int        
+    ): DefaultResponse @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Customer\\ForgotPassword") @doc(description: "forgot password request")
+
+    login(
+        os: String,
+        storeId: Int,
+        websiteId: Int, 
+        width: String, 
+        token: String,
+        mobile: String,
+        quoteId: Int,
+        mFactor: Int,
+        username: String,
+        password: String    
+    ): Login @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Customer\\Login") @doc(description: "customer login request")
+
+    wishlistToCart(
+        itemId: Int,
+        storeId: Int,
+        productId: Int,
+        qty: Int,
+        customerToken: String
+    ): WishlistToCart @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Customer\\WishlistToCart") @doc(description: "wishlist to cart request")
+
+    updateWishlist(
+        itemData: String,
+        customerToken: String
+    ): DefaultResponse @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Customer\\UpdateWishlist") @doc(description: "update wishlist request")
+
+    saveReview(
+        title: String,
+        detail: String,
+        storeId: Int,
+        productId: Int,
+        nickname: String,
+        customerToken: String,
+        ratings: [reviewRatings]
+    ): DefaultResponse @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Customer\\SaveReview") @doc(description: "save review request")
+
+    saveAddress(
+        storeId: Int,
+        addressId: Int,
+        customerToken: String,
+        addressData: saveAddressDataInput
+    ): DefaultResponse @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Customer\\SaveAddress") @doc(description: "save address request")
+
+    saveAccountInfo(
+        storeId: Int,
+        customerToken: String,
+        dob: String,
+        email:String,
+        mobile: String,
+        prefix: String,
+        suffix: String,
+        taxvat: String,
+        gender: Int,
+        lastName: String,
+        firstName: String,
+        middleName: String,
+        newPassword: String,
+        doChangePassword: Int,
+        confirmPassword: String,
+        currentPassword: String,
+        doChangeEmail: Boolean
+    ): SaveAccountInfo @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Customer\\SaveAccountInfo") @doc(description: "save account info request")
+
+    reOrder(
+        storeId: Int,
+        customerToken: String,
+        incrementId: String
+    ): ReOrder @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Customer\\ReOrder") @doc(description: "re order request")
+
+    removeFromWishlist(
+        storeId: Int,
+        customerToken: String,
+        itemId: Int
+    ): RemoveFromWishlist @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Customer\\RemoveFromWishlist") @doc(description: "remove from wishlist request")
+
+    logout(
+        storeId: Int,
+        customerToken: String,
+        token: String
+    ): DefaultResponse @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Extra\\Logout") @doc(description: "logout request")
+
+    registerDevice(
+        os: String,
+        customerToken: String,
+        token: String
+    ): DefaultResponse @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Extra\\RegisterDevice") @doc(description: "register device request")
+
+    allToCart(
+        storeId: Int,
+        websiteId: Int,
+        customerToken: String,
+        itemData: [cartItemData]
+    ): AllToCart @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Sales\\AllToCart") @doc(description: "wishlist all to cart request")
+
+    guestReOrder(
+        storeId: Int,
+        incrementId: String,
+        quoteId: Int
+    ): GuestReOrder @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Sales\\GuestReOrder") @doc(description: "guest re order request")
+
+    shareWishlist(
+        storeId: Int,
+        emails: String,
+        message: String,
+        websiteId: Int,
+        customerToken: String
+    ): ShareWishlist @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Sales\\ShareWishlist") @doc(description: "share wishlist request")
+
+    deleteAccount(
+        websiteId: Int,
+        storeId: Int,
+        customerToken: String,
+        password: String,
+        confirmPassword: String
+    ): DeleteAccount @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Customer\\DeleteAccount") @doc(description: "Delete customer account")
+
+    uploadBannerPic(
+        width: String,
+        mFactor: String,
+        customerToken: String!,
+        imageEncoded: String!,
+        imageName: String!
+    ): UploadBannerPic @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Customer\\UploadBannerPic") @doc(description: "Upload banner image for customer")
+
+    uploadProfilePic(
+        width: String,
+        mFactor: String,
+        customerToken: String!,
+        imageEncoded: String!,
+        imageName: String!
+    ): UploadBannerPic @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Customer\\UploadProfilePic") @doc(description: "Upload banner image for customer")
+
+    watchLogin(
+        firebaseId: String,
+        customerToken: String
+    ): WatchLogin @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Watch\\Login") @doc(description: "Login customer in Watch App")
+}
+
+type CreditView {
+    success: Boolean,
+    message: String,
+    orderId: Int,
+    shippingAddress: ShippingAddress,
+    billingAddress: BillingAddress,
+    shippingMethod: ShippingMethod,
+    paymentMethod: PaymentMethod,
+    itemList: [InvoiceItemList],
+    totals: [InvoiceTotalsData]
+}
+
+input reviewRatings {
+    ratingId: Int,
+    optionId: Int
+}
+
+type DeleteAccount {
+    success: Boolean,
+    message: String,
+    otherError: String
+}
+
+type UploadBannerPic {
+    success: Boolean,
+    message: String,
+    url: String
+}
+
+input cartItemData {
+    id: String,
+    qty: String
+}
+
+input addToCartParams {
+    options: [addToCartParamsOptions],
+    bundleOption: [addToCartBundleOption],
+    superGroup: [addToCartSuperGroup],
+    superAttribute: [addToCartSuperAttribute],
+    links: [String]
+}
+
+input addToCartParamsOptions {
+    id: String,
+    value: [String]
+}
+
+input addToCartBundleOption {
+    id: String,
+    value: String,
+    qty: String
+}
+
+input addToCartSuperGroup {
+    id: String,
+    value: String
+}
+
+input addToCartSuperAttribute {
+    id: String,
+    value: String
+}
+
+input shippingDataInput {
+    addressId: String,
+    newAddress: newAddressInput,
+    sameAsShipping: String
+}
+
+input newAddressInput {
+    saveInAddressBook: String,
+    email: String,
+    fax: String,
+    city: String,
+    region: String,
+    prefix: String,
+    suffix: String,
+    street: [String],
+    company: String,
+    lastName: String,
+    postcode: String,
+    region_id: String,
+    firstName: String,
+    telephone: String,
+    middleName: String,
+    country_id: String,
+    address_title: String,
+    custom_attributes: [CustomAttributeInput]
+}
+
+input saveAddressDataInput {
+    default_billing: String,
+    default_shipping: String,
+    fax: String,
+    quoteId: String,
+    city: String,
+    region: String,
+    prefix: String,
+    suffix: String,
+    street: [String],
+    company: String,
+    lastName: String,
+    postcode: String,
+    region_id: String,
+    firstName: String,
+    telephone: String,
+    middleName: String,
+    country_id: String,
+    address_title: String,
+    custom_attributes: [CustomAttributeInput]
+}
+
+input CustomAttributeInput {
+    attribute_code: String!
+    value: String!
+}
+
+type ShareWishlist {
+    success: Boolean,
+    message: String,
+    sentTo: String
+}
+
+type GuestView {
+    success: Boolean,
+    message: String,
+    orderData: GuestOrderData
+}
+
+type GuestOrderData {
+    itemList: [GuestItemList],
+    totals: [OrderItemTotals],
+    orderInfo: [OrderInfo]
+}
+
+type GuestItemList {
+    name: String,
+    sku: String,
+    price: String,
+    qty: Int,
+    subTotal: String
+}
+
+type OrderInfo {
+    shippingAddress: String,
+    shippingMethod: String,
+    billingAddress: String,
+    paymentMethod: String
+}
+
+type GuestReOrder {
+    success: Boolean,
+    message: String,
+    quoteId: String,
+    cartCount: Int
+}
+
+type AllToCart {
+    success: Boolean,
+    message: String,
+    warning: Boolean,
+    cartCount: Int
+}
+
+type SearchTermList {
+    success: Boolean,
+    message: String,
+    termList: [TermList]
+}
+
+type TermList {
+    term: String,
+    ratio: Int
+}
+
+type SearchSuggestion {
+    success: Boolean,
+    message: String,
+    suggestProductArray: SuggestProductArray
+}
+
+type SuggestProductArray {
+    products: [SuggestProduct],
+    tags: [Suggestionproducttags]
+}
+
+type Suggestionproducttags {
+    label: String,
+    count: Int
+}
+
+type SuggestProduct {
+    price: String,
+    thumbnail: String,
+    productId: String,
+    productName: String,
+    specialPrice: String,
+    hasSpecialPrice: Boolean
+}
+
+type OtherNotificationData {
+    success: Boolean,
+    message: String,
+    title: String,
+    content: String
+}
+
+type NotificationList {
+    success: Boolean,
+    message: String,
+    notificationList: [NotificationListItems]
+}
+
+type NotificationListItems {
+    id: String,
+    title: String,
+    content: String,
+    notificationType: String,
+    banner: String,
+    dominantColor: String,
+    categoryName: String,
+    categoryId: String,
+    productName: String,
+    productType: String,
+    productId: String
+}
+
+type CustomCollection {
+    success: Boolean,
+    message: String,
+    totalCount: Int,
+    productList: [OneProductList],
+    layeredData: [LayeredData],
+    sortingData: [SortingData],
+    cartCount: Int
+}
+
+type CmsData {
+    success: Boolean,
+    message: String,
+    title: String,
+    url: String,
+    content: String
+}
+
+type OrderDetails {
+    success: Boolean,
+    message: String,
+    hasShipments: Boolean,
+    hasInvoices: Boolean,
+    hasCreditmemo: Boolean,
+    customerName: String,
+    customerEmail: String,
+    state: String,
+    orderDate: String,
+    incrementId: String,
+    statusLabel: String,
+    statusColorCode: String,
+    canReorder: Boolean,
+    orderData: OrderData,
+    invoiceList: [InvoiceList],
+    shipmentList: [ShipmentList],
+    creditmemoList: [CreditMemoList],
+    shippingAddress: String,
+    shippingMethod: String,
+    billingAddress: String,
+    paymentMethod: String,
+    shippingAddressData: [CheckoutAddressData],
+    billingAddressData: [CheckoutAddressData]
+}
+
+type CreditMemoList {
+    incrementId: String,
+    items: [CreditMemoProductList],
+    totals: [OrderItemTotals]
+}
+
+type CreditMemoProductList {
+    name: String,
+    option: [ItemListOptions],
+    sku: String,
+    price: String,
+    qty: Int,
+    subTotal: String,
+    discountAmount: String,
+    rowTotal: String
+}
+
+type ShipmentList {
+    id: String,
+    incrementId: String,
+    items: [ShipmentProductItems]
+}
+
+type ShipmentProductItems {
+    name: String,
+    option: [ItemListOptions],
+    sku: String,
+    qty: Int
+}
+
+type InvoiceList {
+    id: String,
+    incrementId: String,
+    items: [InvoiceProductItems],
+    sku: String,
+    price: String,
+    qty: Int,
+    subTotal: String,
+    totals: [OrderItemTotals]
+}
+
+type InvoiceProductItems {
+    name: String,
+    options: [ItemListOptions]
+}
+
+type OrderData {
+    itemList: [ItemList]
+    totals: [OrderItemTotals]
+}
+
+type ItemList {
+    name: String,
+    productId: String,
+    sku: String,
+    options: [ItemListOptions],
+    price: String,
+    qty: ListQty,
+    subTotal: String,
+    image: String
+}
+
+type ListQty {
+    Ordered: Int,
+    Shipped: Int,
+    Canceled: Int,
+    Refunded: Int
+}
+
+type OrderItemTotals {
+    code: String,
+    label: String,
+    value: String,
+    formattedValue: String
+}
+
+type OrderList {
+    success: Boolean,
+    message: String,
+    totalCount: Int,
+    orderList: [OrderListItems]
+}
+
+type OrderListItems {
+    id: String,
+    date: String,
+    state: String,
+    status: String,
+    ship_to: String,
+    order_id: String,
+    item_count: String,
+    order_total: String,
+    item_image_url: String,
+    statusColorCode: String,
+    canReorder: Boolean
+}
+
+type RemoveFromWishlist {
+    success: Boolean,
+    message: String,
+    alreadyDeleted: Boolean
+}
+
+type ReOrder {
+    success: Boolean,
+    message: String,
+    cartCount: Int
+}
+
+type ReviewDetails {
+    success: Boolean,
+    message: String,
+    thumbNail: String,
+    productId: String,
+    productName: String,
+    dominantColor: String,
+    ratingData: [RatingData],
+    reviewDate: String,
+    reviewTitle: String,
+    reviewDetail: String,
+    averageRating: Float,
+    totalProductReviews: Int
+}
+
+type ReviewListData {
+    success: Boolean,
+    message: String,
+    totalCount: Int,
+    reviewList: [ReviewListItems]
+}
+
+type ReviewListItems {
+    id: String,
+    productId: String,
+    productName: String,
+    thumbNail: String,
+    dominantColor: String,
+    customerRating: Float
+}
+
+type SaveAccountInfo {
+    success: Boolean,
+    message: String,
+    customerName: String
+}
+
+type ShipmentView {
+    success: Boolean,
+    message: String,
+    orderId: Int,
+    itemList: [ShipmnetItemList],
+    trackingData: [TrackingData]
+}
+
+type TrackingData {
+    id: String,
+    number: String,
+    title: String,
+    carrier: String
+}
+
+type ShipmnetItemList {
+    id: String,
+    name: String,
+    sku: String,
+    qty: Int,
+    productId: String,
+    option: [WishlistOptions]
+}
+
+type Wishlist {
+    success: Boolean,
+    message: String,
+    totalCount: Int,
+    wishList: [WishlistItems]
+}
+
+type WishlistItems {
+    id: String,
+    sku: String,
+    qty: Int,
+    price: String,
+    name: String,
+    productId: String,
+    description: String,
+    options: [WishlistOptions],
+    reviewCount: Int,
+    configurableData: ConfigurableData,
+    isInWishlist: Boolean,
+    wishlistItemId: Int,
+    typeId: String,
+    entityId: Int,
+    linksPurchasedSeparately: Boolean,
+    rating: String,
+    isAvailable: Boolean,
+    price: String,
+    finalPrice: String,
+    formattedPrice: String,
+    formattedFinalPrice: String,
+    name: String,
+    msrpEnabled: Boolean,
+    hasRequiredOptions: Boolean,
+    msrpDisplayActualPriceType: String,
+    groupedPrice: String,
+    priceView: String,
+    minPrice: String,
+    maxPrice: String,
+    formattedMaxPrice: String,
+    formattedMinPrice: String,
+    isNew: Boolean,
+    isInRange: Boolean,
+    thumbNail: String,
+    dominantColor: String,
+    tierPrice: String,
+    formattedTierPrice: String,
+    minAddToCartQty: Int,
+    availability: String,
+    arUrl: String,
+    arType: String,
+    arTextureImages: [String]
+}
+
+type WishlistOptions {
+    value: [String],
+    label: String
+}
+
+type WishlistToCart {
+    success: Boolean,
+    message: String,
+    cartCount: Int
+    productId: Int
+}
+
+type MyDownloadsList {
+    success: Boolean,
+    message: String,
+    totalCount: Int,
+    downloadsList: [DownloadsList]
+}
+
+type DownloadsList {
+    incrementId: String,
+    isOrderExist: Boolean,
+    message: String,
+    hash: String,
+    date: String,
+    state: String,
+    status: String,
+    statusColorCode: String,
+    proName: String,
+    remainingDownloads: String,
+    canReorder: Boolean
+}
+
+type Login {
+    success: Boolean,
+    message: String,
+    customerName: String,
+    customerEmail: String,
+    mobile: String,
+    customerId: String,
+    customerToken: String,
+    bearerToken: String,
+    cartCount: Int,
+    profileImage: String,
+    bannerImage: String
+}
+
+type DownloadProduct {
+    success: Boolean,
+    message: String,
+    mimeType: String,
+    url: String,
+    fileName: String
+}
+
+type InvoiceView {
+    success: Boolean,
+    message: String,
+    orderId: Int,
+    shippingAddress: ShippingAddress,
+    billingAddress: BillingAddress,
+    shippingMethod: ShippingMethod,
+    paymentMethod: PaymentMethod,
+    itemList: [InvoiceItemList],
+    totals: [InvoiceTotalsData]
+}
+
+type InvoiceTotalsData {
+    title: String,
+    label: String,
+    value: String,
+    formattedValue: String
+}
+
+type InvoiceItemList {
+    id: String,
+    name: String,
+    productId: String,
+    sku: String,
+    option: [ItemListOptions],
+    qty: Int,
+    taxAmount: String,
+    discountAmount: String
+    price: String,
+    subTotal: String,
+    rowTotal: String
+}
+
+type ItemListOptions {
+    label: String,
+    value: [String]
+}
+
+type ShippingMethod {
+    title: String
+}
+
+type PaymentMethod {
+    title: String
+}
+
+type ShippingAddress {
+    firstname: String,
+    lastname: String,
+    city: String,
+    region: String,
+    street: [String],
+    country: String,
+    pincode: String
+}
+
+type BillingAddress {
+    firstname: String,
+    lastname: String,
+    city: String,
+    region: String,
+    street: [String],
+    country: String,
+    pincode: String
+}
+
+type CreateAccountFormData {
+    success: Boolean,
+    message: String,
+    isPrefixVisible: Boolean,
+    isPrefixRequired: Boolean,
+    prefixOptions: [String],
+    prefixHasOptions: Boolean,
+    isMiddlenameVisible: Boolean,
+    isSuffixVisible: Boolean,
+    isSuffixRequired: Boolean,
+    suffixOptions: [String],
+    suffixHasOptions: Boolean,
+    isMobileVisible: Boolean,
+    isMobileRequired: Boolean,
+    isDOBVisible: Boolean,
+    isDOBRequired: Boolean,
+    isTaxRequired: Boolean,
+    isTaxVisible: Boolean,
+    isGenderRequired: Boolean,
+    isGenderVisible: Boolean,
+    dateFormat: String
+}
+
+type CreateAccount {
+    success: Boolean,
+    message: String,
+    customerName: String,
+    customerEmail: String,
+    customerId: String,
+    customerToken: String,
+    bearerToken: String,
+    cartCount: Int,
+    bannerImage: String,
+    profileImage: String,
+    customerImg: String
+    
+}
+
+type CheckCustomerByEmail {
+    success: Boolean,
+    message: String,
+    isCustomerExist: Boolean
+}
+
+type AddressFormDataRequest {
+    success: Boolean,
+    message: String,
+    isCompanyVisible: Boolean,
+    isCompanyRequired: Boolean,
+    isTelephoneVisible: Boolean,
+    isTelephoneRequired: Boolean,
+    isFaxVisible: Boolean,
+    isPrefixVisible: Boolean,
+    isMiddlenameVisible: Boolean,
+    isSuffixVisible: Boolean,
+    isDOBVisible: Boolean,
+    isTaxVisible: Boolean,
+    isGenderVisible: Boolean,
+    isAddressTitleVisible: Boolean,
+    isAddressTitleRequired: Boolean,
+    countryData: [CountryData],
+    lastName: String,
+    firstName: String,
+    defaultCountry: String,
+    streetLineCount: Int,
+    allowToChooseState: Boolean,
+    addressData: AddressData
+}
+
+type AddressData {
+    isDefaultBilling: Boolean,
+    isDefaultShipping: Boolean,
+    entity_id: String,
+    increment_id: String,
+    parent_id: String,
+    created_at: String,
+    updated_at: String,
+    is_active: String,
+    city: String,
+    company: String,
+    country_id: String,
+    fax: String,
+    firstname: String,
+    lastname: String,
+    middlename: String,
+    postcode: String,
+    prefix: String,
+    region: String,
+    region_id: String,
+    street: [String],
+    suffix: String,
+    telephone: String,
+    vat_id: String,
+    vat_is_valid: String,
+    vat_request_date: String,
+    vat_request_id: String,
+    vat_request_success: String
+}
+
+type AddressBookData {
+    success: Boolean,
+    message: String,
+    otherError: String,
+    billingAddress: Addresses,
+    shippingAddress: Addresses,
+    additionalAddress: [Addresses],
+    addressCount: Int
+}
+
+type Addresses {
+    value: String,
+    id: String,
+    addressTitle: String
+}
+
+type AccountInfoData {
+    success: Boolean,
+    message: String,
+    email: String,
+    mobile: String,
+    lastName: String,
+    firstName: String,
+    mstRewardsTierId: String,
+    isPrefixVisible: Boolean,
+    isPrefixRequired: Boolean,
+    prefixValue: String,
+    prefixHasOptions: Boolean,
+    prefixOptions: [String],
+    middleName: String,
+    isMiddlenameVisible: Boolean,
+    isSuffixVisible: Boolean,
+    isSuffixRequired: Boolean,
+    suffixValue: String,
+    suffixHasOptions: Boolean,
+    suffixOptions: [String],
+    isMobileVisible: Boolean,
+    isMobileRequired: Boolean,
+    isDOBVisible: Boolean,
+    isDOBRequired: Boolean,
+    DOBValue: String,
+    isTaxVisible: Boolean,
+    isTaxRequired: Boolean,
+    taxValue: String,
+    isGenderVisible: Boolean,
+    isGenderRequired: Boolean,
+    genderValue: String,
+    isFaxVisible: Boolean,
+    isFaxRequired: Boolean,
+    isTelephoneVisible: Boolean,
+    isTelephoneRequired: Boolean,
+    dateFormat: String,
+    customerId: String,
+    customerToken: String,
+    cartCount: String,
+    bearerToken: String
+}
+
+type WishlistFromCart {
+    success: Boolean,
+    message: String,
+    cartCount: Int,
+    subtotal: CartTotalData,
+    discount: CartTotalData,
+    shipping: CartTotalData,
+    tax: CartTotalData,
+    grandtotal: CartTotalData
+}
+
+type UpdateItemOptions {
+    success: Boolean,
+    message: String,
+    cartCount: Int
+}
+
+type UpdateCart {
+    success: Boolean,
+    message: String,
+    cartCount: Int
+}
+
+type ShippingMethods {
+    success: Boolean,
+    message: String,
+    cartTotal: String,
+    cartCount: Int,
+    shippingMethods: [ShippingMethodList]
+}
+
+type ShippingMethodList {
+    isSelected: Boolean,
+    title: String,
+    method: [Method]
+}
+
+type Method {
+    isSelected: Boolean,
+    code: String,
+    label: String,
+    price: String
+}
+
+type ReviewAndPayment {
+    success: Boolean,
+    message: String,
+    quoteId: Int,
+    cartCount: Int,
+    billingAddress: String,
+    shippingAddress: String,
+    shippingMethod: String,
+    cartTotal: String,
+    paymentMethods: [PaymentMethods],
+    couponCode: String,
+    giftCode: String,
+    giftCodeId: Int,
+    spendPoints: String,
+    spendAmount: String,
+    currencyCode: String,
+    orderReviewData: OrderReviewData,
+    shippingAddressData: [CheckoutAddressData],
+    billingAddressData: [CheckoutAddressData]
+}
+
+type OrderReviewData {
+    items: [ReviewItems],
+    cartTotal: Int,
+    totals: [CartTotalData]
+}
+
+type ReviewItems {
+    productName: String,
+    qty: Int,
+    unformattedOriginalPrice: Float,
+    originalPrice: String,
+    price: String,
+    subTotal: String,
+    options: [CartItemOptions],
+    thumbnail: String,
+    dominantColor: String,
+    unformattedPrice: Float
+}
+
+type PaymentMethods {
+    code: String,
+    title: String,
+    extraInformation: String,
+    link: String,
+    imageUrl: String
+}
+
+type RemoveCartItem {
+    success: Boolean,
+    message: String,
+    subtotal: CartTotalData,
+    discount: CartTotalData,
+    shipping: CartTotalData,
+    tax: CartTotalData,
+    grandtotal: CartTotalData,
+    cartCount: Int
+}
+
+type PlaceOrder {
+    success: Boolean,
+    message: String,
+    cartCount: Int,
+    showCreateAccountLink: Boolean,
+    canReorder: Boolean,
+    email: String,
+    orderId: String,
+    incrementId: String,
+    customerDetails: OrderCustomerDetails
+}
+
+type OrderCustomerDetails {
+    guestCustomer: Boolean,
+    groupId: String,
+    firstname: String,
+    middlename: String,
+    lastname: String,
+    email: String
+}
+
+type CheckoutAddressFormData {
+    success: Boolean,
+    message: String,
+    lastName: String,
+    firstName: String,
+    addressData: AddressFormData,
+    isGuest: Boolean,
+    address: [CheckoutAddressData],
+    countryData: [CountryData],
+    defaultCountry: String,
+    streetLineCount: Int,
+    isCompanyVisible: Boolean,
+    isCompanyRequired: Boolean,
+    isTelephoneVisible: Boolean,
+    isTelephoneRequired: Boolean,
+    isFaxVisible: Boolean,
+    isFaxRequired: Boolean,
+    isPrefixVisible: Boolean,
+    isPrefixRequired: Boolean,
+    isMiddlenameVisible: Boolean,
+    isSuffixVisible: Boolean,
+    isSuffixRequired: Boolean,
+    isDOBVisible: Boolean,
+    isDOBRequired: Boolean,
+    isTaxVisible: Boolean,
+    isTaxRequired: Boolean,
+    isGenderVisible: Boolean,
+    isGenderRequired: Boolean,
+    isAddressTitleVisible: Boolean,
+    isAddressTitleRequired: Boolean,
+    prefixValue: String,
+    prefixOptions: [String],
+    prefixHasOptions: Boolean,
+    middleName: String,
+    suffixValue: String,
+    suffixOptions: [String],
+    suffixHasOptions: Boolean
+}
+
+type CountryData {
+    name: String,
+    country_id: String,
+    isStateRequired: Boolean,
+    isZipOptional: Boolean,
+    states: [States]
+}
+
+type States {
+    code: String,
+    name: String,
+    region_id: String
+}
+
+type AddressFormData {
+    isDefaultBilling: Boolean,
+    isDefualtShipping: Boolean,
+    entity_id: String,
+    increment_id: String,
+    parent_id: String,
+    created_at: String,
+    updated_at: String,
+    is_active: String,
+    city: String,
+    company: String,
+    fax:String,
+    country_id: String,
+    firstname: String,
+    lastname: String,
+    middlename: String,
+    postcode: String,
+    prifix: String,
+    region: String,
+    region_id: String,
+    street: [String],
+    suffix: String,
+    telephone: String,
+    vat_id: String,
+    vat_is_valid: String,
+    vat_request_date: String,
+    vat_request_id: String,
+    var_request_success: String,
+    custom_attributes: [CustomAttributeType]
+}
+
+type CustomAttributeType {
+    attribute_code: String!
+    value: String!
+}
+
+type CheckoutAddress {
+    success: Boolean,
+    message: String,
+    address: [CheckoutAddressData],
+    firstName: String,
+    lastName: String,
+    middleName: String,
+    prefixValue: String,
+    suffixValue: String,
+    cartCount: Int,
+    isVirtual: Boolean,
+    streetLineCount: Int,
+    defaultCountry: String,
+    isPrefixVisible: Boolean,
+    isPrefixRequired: Boolean,
+    prefixHasOptions: Boolean,
+    prefixOptions: [String],
+    isMiddlenameVisible: Boolean,
+    isSuffixVisible: Boolean,
+    isSuffixRequired: Boolean,
+    SuffixHasOptions: Boolean,
+    SuffixOptions: [String],
+    allowToChooseState: Boolean
+}
+
+type CheckoutAddressData {
+    value: String,
+    id: String,
+    city: String,
+    country_id: String,
+    firstname: String,
+    lastname: String,
+    region: String,
+    region_id: String,
+    street: String,
+    telephone: String,
+    city_id: String,
+    address_title: String,
+    building_name: String,
+    floor: String,
+    avenue: String,
+    apt_number: String
+}
+
+type CartDetails {
+    success: Boolean,
+    message: String,
+    quoteId: Int,
+    minimumAmount: Int,
+    minimumFormattedAmount: String,
+    showThreshold: Boolean,
+    canGuestCheckoutDownloadable: Boolean,
+    allowMultipleShipping: Boolean,
+    items: [CartItems],
+    totalCount: Int,
+    couponCode: String,
+    isVirtual: Boolean,
+    crossSellList: [OneProductList],
+    isAllowedGuestCheckout: Boolean,
+    cartCount: Int,
+    totalsData: [CartTotalData],
+    descriptionMessage: String,
+    isCheckoutAllowed: Boolean,
+    unformattedCartTotal: Float,
+    cartTotal: String
+}
+
+type CartTotalData {
+    title: String,
+    value: String,
+    formattedValue: String,
+    unformattedValue: Float
+}
+
+type CartItems {
+    image: String,
+    thresholdQty: String,
+    remainingQty: Int,
+    dominantColor: String,
+    name: String,
+    canMoveToWishlist: Boolean,
+    options: [CartItemOptions],
+    id: String,
+    sku: String,
+    qty: Int,
+    typeId: String,
+    price: Float,
+    subTotal: String,
+    finalPrice: Float,
+    formattedPrice: String,
+    formattedFinalPrice: String,
+    isInRange: Boolean,
+    groupedProductId: Int,
+    productId: String,
+    message: [String]
+}
+
+type CartItemOptions {
+    optionId: String,
+    label: String,
+    valueIds: [String],
+    value: [String]
+}
+
+type DefaultResponse {
+    success: Boolean,
+    message: String
+}
+
+type AddToCart {
+    success: Boolean,
+    message: String,
+    minimumAmount: Int,
+    minimumFormattedAmount: String,
+    cartCount: Int,
+    isCheckoutAllowed: Boolean,
+    descriptionMessage: String,
+    canGuestCheckoutDownloadable: Boolean,
+    isAllowedGuestCheckout: Boolean,
+    cartTotal: Float,
+    cartTotalFormattedAmount: String,
+    isVirtual: Boolean,
+    quoteId: Int
+}
+
+type WalkThrough {
+    success: Boolean,
+    message: String,
+    walkthroughVersion: Float,
+    walkthroughData: [WalkThroughData]
+}
+
+type WalkThroughData {
+    title: String,
+    content: String,
+    image: String,
+    imageDominantColor: String,
+    colorCode: String
+}
+
+type UpsellProductList {
+    success: Boolean,
+    message: String,
+    productList: [OneProductList]
+}
+
+type ReviewsAndRatings {
+    success: Boolean,
+    message: String,
+    ratingFormData: [RatingDataForm],
+    ratingData: [RatingData],
+    totalCount: Int,
+    reviewList: [ReviewList],
+    showRatings: String,
+    rating: String
+}
+
+type RatingForm {
+    success: Boolean,
+    message: String,
+    ratingFormData: [RatingDataForm]
+}
+
+type RatingDataForm {
+    id: String,
+    name: String,
+    values: [String]
+}
+
+type AddToWishlist {
+    success: Boolean,
+    message: String,
+    itemId: Int
+}
+
+type AdvancedSearchFormData {
+    success: Boolean,
+    message: String,
+    fieldList: [FieldList]
+}
+
+type FieldList {
+    label: String,
+    title: String,
+    options: [FieldListOptions],
+    fieldList: String,
+    attributeCode: String,
+    maxQueryLength: String
+}
+
+type FieldListOptions {
+    value: String,
+    label: String
+}
+
+type HomePageData @doc(description: "home page all information") {
+    message: String
+    otherError: String
+    success: Boolean
+    storeId: Int
+    websiteId: Int
+    watchEnabled: Boolean
+    allowedCurrencies: [AllowedCurrencies] @doc(description: "allowedCurrencies Data Information")
+    defaultCurrency: String
+    tabCategoryView: String
+    launcherIconType: String
+    darkAppButtonColor: String
+    darkAppThemeColor: String
+    darkAppThemeTextColor: String
+    darkButtonTextColor: String
+    darkAppLogo: String
+    darkSplashImage: String
+    darkAppLogoDominantColor: String
+    appButtonColor: String
+    appThemeColor: String
+    appThemeTextColor: String
+    buttonTextColor: String
+    splashImage: String
+    appLogo: String
+    appLogoDominantColor: String
+    allowIosDownload: String
+    iosDownloadLink: String
+    allowAndroidDownload: String
+    androidDownloadLink: String
+    showSwatchOnCollection: String
+    walkthroughVersion: String
+    priceFormat: PriceFormat
+    themeCode: String
+    categories: [Categories] @doc(description: "category information")
+    featuredCategories: [CategoryInfo] @doc(description: "featuredCategories category information")
+    bannerImages: [BannerImages] @doc(description: "Banner information")
+    carousel: [Carousel] @doc(description: "Carousel information")
+    cmsData: [HomePageCmsData] @doc(description: "Cms Data Information")
+    storeData: [StoreData] @doc(description: "storeData Data Information")
+    websiteData: [WebsitesData]
+    currentCurrency: String
+    wishlistEnable: String
+    customerName: String
+    customerEmail: String
+    cartCount: Int
+    customerBannerImage: String
+    bannerDominantColor: String
+    customerProfileImage: String
+    customerDominantColor: String
+    sortOrder: [SortOrder]
+    customerWishlist: [Int]
+    themeType: Int
+}
+
+type WebsitesData {
+    id: Int
+    name: String
+    baseUrl: String
+}
+
+type SortOrder @doc(description: "home page configurator sort order") {
+    id: Int,
+    layoutId: String,
+    label: String,
+    position: String,
+    type: String
+}
+
+type CategoryPageData @doc(description: "category page all information") {
+    message: String,
+    success: Boolean,
+    entityId: Int,
+    categories: [ParentCategories],
+    productList: [OneProductList],
+    cartCount: Int,
+    bannerImage: [CategoryBanners],
+    smallBannerImage: [CategoryBanners]
+}
+
+type ProductCollection @doc(description: "product collection data") {
+    success: Boolean,
+    message: String,
+    criteriaData: String,
+    childCategories: [ChildCategories],
+    totalCount: Int,
+    productList: [OneProductList],
+    layeredData: [LayeredData],
+    sortingData: [SortingData],
+    cartCount: Int,
+    banners: [Banners]
+}
+
+input collectionSort {
+    code: String,
+    direction: String
+}
+
+input collectionFilter {
+    value: String,
+    code: String
+}
+
+type ProductPageData @doc(description: "product page all information") {
+    message: String,
+    success: Boolean,
+    arUrl: String,
+    arType: String,
+    arTextureImages: [String],
+    reviewCount: Int,
+    ratingArray: [String],
+    priceFormat: PriceFormat,
+    id: String,
+    sku: String,
+    name: String,
+    typeId: String,
+    productUrl: String,
+    guestCanReview: Boolean,
+    showPriceDropAlert: Boolean,
+    showBackInStockAlert: Boolean,
+    isAllowedGuestCheckout: Boolean,
+    minPrice: Float,
+    maxPrice: Float,
+    formattedMinPrice: String,
+    formattedMaxPrice: String,
+    price: Float,
+    finalPrice: Float,
+    specialPrice: Float,
+    formattedPrice: String,
+    formattedFinalPrice: String,
+    formattedSpecialPrice: String,
+    msrp: Float,
+    msrpEnabled: Boolean,
+    description: String,
+    brand: String,
+    brand_name: String,
+    more_details_product_tab: String,
+    delivery_product_tab: String,
+    formattedMsrp: String,
+    shortDescription: String,
+    msrpDisplayActualPriceType: String,
+    availability: String,
+    imageGallery: [ProductImageGallery],
+    thumbNail: String,
+    dominantColor: String,
+    additionalInformation: [ProductAdditionalInfo],
+    ratingFormData: [RatingFormData],
+    ratingData: [RatingData],
+    reviewList: [ReviewList],
+    rating: Float,
+    customOptions: [CustomOptions],
+    links: DownloadableLinks,
+    samples: DownloadableSamples,
+    groupedData: [GroupedData],
+    groupedPrice: String,
+    bundleOptions: [BundleOptions],
+    priceView : String,
+    configurableData: ConfigurableData,
+    is_new: Boolean,
+    tierPrices: [String],
+    relatedProductList: [OneProductList],
+    upsellProductList: [OneProductList],
+    cartCount: Int,
+    isInWishlist: Boolean,
+    wishlistItemId: Int,
+    canGuestCheckoutDownloadable: Boolean,
+    isCheckoutAllowed: Boolean,
+    isThresholdVisible: Boolean,
+    thresholdQtyLeft: Int,
+    minAddToCartQty: Int
+}
+
+type GetCategoryList {
+    success: Boolean,
+    message: String,
+    categoryData: [CategoryData]
+}
+
+type CompareList {
+    success: Boolean,
+    message: String,
+    showSwatchOnCollection: Boolean,
+    productList: [OneProductList],
+    attributeValueList: [CompareAttributeList]
+}
+
+type CompareAttributeList {
+    attributeName: String,
+    value: [String]
+}
+
+type CategoryData {
+    id: String,
+    name: String,
+    img_url: String,
+    dominantColor: String
+}
+
+type BundleOptions {
+    option_id: String,
+    parent_id: String,
+    required: String,
+    position: String,
+    type: String,
+    default_title: String,
+    title: String,
+    optionValues: [GroupedOptionValues]
+}
+
+type GroupedOptionValues {
+    title: String,
+    price: Int,
+    isSingle: Boolean,
+    isDefault: String,
+    defaultQty: String,
+    optionValueId: String,
+    foramtedPrice: String,
+    isQtyUserDefined: String
+}
+
+type GroupedData {
+    name: String,
+    id: String,
+    isAvailable: Boolean,
+    isInRange: Boolean,
+    defaultQty: Int,
+    specialPrice: String,
+    foramtedPrice: String,
+    thumbNail: String,
+    dominantColor: String
+}
+
+type DownloadableSamples {
+    hasSample: Boolean,
+    title: String,
+    linkSampleData: [LinkSampleData]
+}
+
+type LinkSampleData {
+    sampleTitle: String,
+    url: String,
+    mimeType: String,
+    fileName: String
+}
+
+type DownloadableLinks {
+    title: String,
+    linksPurchasedSeparately: Boolean,
+    linkData: [LinkData]
+}
+
+type LinkData {
+    id: String,
+    price: String,
+    linkTitle: String,
+    formattedPrice: String,
+    url: String,
+    mimeType: String,
+    fileName: String,
+    haveLinkSample: Int,
+    linkSampleTitle: String
+}
+
+type CustomOptions {
+    option_id: String,
+    product_id: String,
+    type: String,
+    is_require: String,
+    sku: String,
+    max_characters: String,
+    file_extension: String,
+    image_size_x: String,
+    image_size_y: String,
+    sort_order: String,
+    default_title: String,
+    store_title: String,
+    title: String,
+    default_price: String,
+    default_price_type: String,
+    store_price: String,
+    store_price_type: String,
+    price: String,
+    price_type: String,
+    decorated_is_first: String,
+    decorated_is_odd: Boolean,
+    decorated_is_last: Boolean,
+    unformatted_default_price: String,
+    formatted_default_price: String,
+    unformatted_price: String,
+    formatted_price: String,
+    optionValues: [OptionValues]
+}
+
+type OptionValues {
+    option_type_id: String,
+    option_id: String,
+    sku: String,
+    sort_order: String,
+    default_title: String,
+    store_title: String,
+    title: String,
+    default_price: String,
+    default_price_type: String,
+    store_price: String,
+    store_price_type: String,
+    price: String,
+    price_type: String,
+    formatted_price: String,
+    formatted_default_price: String,
+}
+
+type ReviewList {
+    title: String,
+    details: String,
+    avgRatings: Float,
+    ratings: [Ratings],
+    reviewBy: String,
+    reviewOn: String
+}
+
+type Ratings {
+    label: String,
+    value: String
+}
+
+type RatingData {
+    ratingCode: String,
+    ratingValue: Float
+}
+
+type RatingFormData {
+    id: String,
+    name: String,
+    values: [String]
+}
+
+type ProductAdditionalInfo {
+    label: String,
+    value: String
+}
+
+type ProductImageGallery {
+    isVideo: Boolean,
+    videoUrl: String,
+    smallImage: String,
+    largeImage: String,
+    dominantColor: String
+}
+
+type Banners {
+    bannerImage: String,
+    dominantColor: String
+}
+
+type SortingData {
+    code: String,
+    label: String
+}
+
+type LayeredData {
+    code: String,
+    label: String,
+    is_filterable: Boolean,
+    options: [FilterOptions]
+}
+
+type FilterOptions {
+    id: String,
+    label: String,
+    count: Int
+}
+
+type ChildCategories {
+    id: Int,
+    name: String,
+    hasChildren: Boolean
+}
+
+type ParentCategories {
+    id: Int,
+    mobileSort: String,
+    name: String,
+    banner: String,
+    thumbnail: String,
+    hasChildren: Boolean,
+    bannerDominantColor: String,
+    thumbnailDominantColor: String,
+    childCategories: [Categories]
+}
+
+type CategoryBanners {
+    url: String,
+    dominantColor: String
+}
+
+type AllowedCurrencies {
+    label: String
+    code: String
+}
+
+type Categories {
+    id: Int,
+    mobileSort: String,
+    name: String,
+    banner: String,
+    thumbnail: String,
+    hasChildren: Boolean,
+    bannerDominantColor: String,
+    thumbnailDominantColor: String
+}
+
+type CategoryInfo {
+    url: String,
+    dominantColor: String,
+    categoryId: Int,
+    categoryName: String
+}
+
+type BannerImages {
+    url: String,
+    dominantColor: String,
+    bannerType: String,
+    id: Int,
+    name: String,
+    route: String
+}
+
+type Carousel {
+    id: String,
+    type: String,
+    label: String,
+    productList: [OneProductList],
+    color: String,
+    image: String,
+    image_size: String,
+    category_id: String,
+    block_title: String,
+    block_description: String,
+    dominantColor: String,
+    banners: [BannerImages]
+}
+
+type OneProductList {
+    categoryId: Int,
+    reviewCount: Int,
+    configurableData: ConfigurableData,
+    isInWishlist: Boolean,
+    wishlistItemId: Int,
+    typeId: String,
+    entityId: Int,
+    linksPurchasedSeparately: Boolean,
+    rating: String,
+    isAvailable: Boolean,
+    price: String,
+    finalPrice: String,
+    formattedPrice: String,
+    formattedFinalPrice: String,
+    name: String,
+    sku: String,
+    brand: String,
+    brand_name: String,
+    msrpEnabled: Boolean,
+    hasRequiredOptions: Boolean,
+    msrpDisplayActualPriceType: String,
+    groupedPrice: String,
+    priceView: String,
+    minPrice: String,
+    maxPrice: String,
+    formattedMaxPrice: String,
+    formattedMinPrice: String,
+    isNew: Boolean,
+    isInRange: Boolean,
+    thumbNail: String,
+    dominantColor: String,
+    tierPrice: String,
+    formattedTierPrice: String,
+    minAddToCartQty: Int,
+    availability: String,
+    arUrl: String,
+    arType: String,
+    arTextureImages: [String],
+    visibility: String
+}
+
+type ConfigurableData {
+    attributes: [ConfigurableAttributes],
+    template: String,
+    optionPrices: [ConfigOptionPrices],
+    productId: Int,
+    chooseText: String,
+    images: String,
+    index: String,
+    swatchData: String
+}
+
+type ConfigurableAttributes {
+    id: Int,
+    code: String,
+    label: String,
+    options: [ConfigOptions]
+    swatchType: String,
+    updateProductPreviewImage: Boolean
+}
+
+type ConfigOptions {
+    id: Int,
+    label: String,
+    products: [String]
+}
+
+type ConfigOptionPrices {
+    oldPrice: ConfigPriceAmount,
+    basePrice: ConfigPriceAmount,
+    finalPrice: ConfigPriceAmount,
+    tierPrices: ConfigPriceAmount,
+    msrpPrice: ConfigPriceAmount,
+    product: Int
+}
+
+type ConfigPriceAmount {
+    amount: Float
+}
+
+type HomePageCmsData {
+    id: String
+    title: String
+}
+
+type WebsiteData {
+    id: Int
+    name: String
+}
+
+type StoreData {
+    id: Int
+    name: String
+    stores: [StoreDataStores]
+}
+
+type StoreDataStores {
+    id: Int
+    code: String
+    name: String
+}
+
+type PriceFormat {
+    pattern: String,
+    precision: Int,
+    requiredPrecision: Int,
+    decimalSymbol: String,
+    groupSymbol: String,
+    groupLength: Int,
+    integerRequired: Boolean
+}
+
+type PrintInvoice {
+    success: Boolean,
+    message: String,
+    url: String
+}
+
+type WatchQr {
+    success: Boolean,
+    message: String,
+    qr_url: String
+}
+
+type WatchLogin {
+    success: Boolean,
+    message: String
+}

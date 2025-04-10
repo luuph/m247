@@ -1,0 +1,34 @@
+<?php
+namespace Magecomp\Whatsappultimate\Controller\Customer;
+
+class Checkout extends \Magento\Framework\App\Action\Action
+{
+    protected $custsession;
+    protected $helpercustomer;
+    protected $resultRedirectFactory;
+
+    public function __construct(
+        \Magento\Framework\App\Action\Context $context,
+        \Magento\Customer\Model\Session $custsession,
+        \Magecomp\Whatsappultimate\Helper\Customer $helpercustomer,
+        \Magento\Framework\Controller\Result\Redirect $resultRedirect
+    ) {
+        $this->custsession = $custsession;
+        $this->helpercustomer = $helpercustomer;
+        $this->resultRedirectFactory = $resultRedirect;
+        parent::__construct($context);
+    }
+
+    public function execute()
+    {
+        if (!$this->custsession->isLoggedIn() && $this->helpercustomer->isOrderConfirmationForUser()) {
+            $this->_view->loadLayout();
+            $this->_view->getPage()->getConfig()->getTitle()->set(__('WhatsApp Number Verification'));
+            $this->_view->renderLayout();
+        } else {
+            $resultRedirect = $this->resultRedirectFactory->create();
+            $resultRedirect->setPath('');
+            return $resultRedirect;
+        }
+    }
+}

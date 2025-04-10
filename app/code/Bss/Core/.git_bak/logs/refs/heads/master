@@ -1,4 +1,0 @@
-0000000000000000000000000000000000000000 5b9970d85607cbe3775bbeb72bd8791e880c44b2 Hai Luu <luuph@bsscommerce.com> 1731983111 +0700	clone: from ssh://x-gitlab.bsscommerce.com:2224/bsssupport/bss-core.git
-5b9970d85607cbe3775bbeb72bd8791e880c44b2 2a2672e4e92dfc04ceaf54a6d9507d8dcc1e4705 Hai Luu <luuph@bsscommerce.com> 1732260811 +0700	merge M2CoreExtension-20: Fast-forward
-2a2672e4e92dfc04ceaf54a6d9507d8dcc1e4705 b9c6a94129c51e2b3c3b6b15fe1d062f9e818623 Hai Luu <luuph@bsscommerce.com> 1732777196 +0700	commit: Fix text BSS Promotion Extensions
-b9c6a94129c51e2b3c3b6b15fe1d062f9e818623 358f24439b87843aedece9136837f60a6928cd16 Hai Luu <luuph@bsscommerce.com> 1733451647 +0700	commit: Module version 1.0.9

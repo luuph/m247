@@ -1,0 +1,116 @@
+<?php
+namespace Unveels\SocialLoginGraphql\Model\Resolver;
+
+use Magento\Framework\Exception\InputException;
+use Magento\Framework\GraphQl\Exception\GraphQlInputException;
+use Magento\Customer\Api\CustomerRepositoryInterface;
+use Magento\Customer\Api\Data\CustomerInterfaceFactory;
+use Magento\Customer\Model\CustomerFactory;
+use Magento\Store\Model\StoreManagerInterface;
+use Magento\Integration\Model\Oauth\TokenFactory as TokenModelFactory;
+use Magento\Customer\Api\Data\CustomerExtensionFactory;
+
+use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Framework\GraphQl\Config\Element\Field;
+use Magento\Framework\GraphQl\Exception\GraphQlNoSuchEntityException;
+use Magento\Framework\GraphQl\Query\ResolverInterface;
+use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
+
+class AppleSocialLoginResolver implements ResolverInterface
+{
+    private $tokenModelFactory;
+    protected $storeManager;
+    protected $customerFactory;
+    protected $customerDataFactory;
+    protected $customerRepository;
+    protected $customerExtensionFactory;
+
+    public function __construct(
+        CustomerFactory $customerFactory,
+        CustomerInterfaceFactory $customerDataFactory,
+        CustomerRepositoryInterface $customerRepository,
+        StoreManagerInterface $storeManager,
+        TokenModelFactory $tokenModelFactory,
+        CustomerExtensionFactory $customerExtensionFactory
+    ) {
+        $this->customerFactory = $customerFactory;
+        $this->customerRepository = $customerRepository;
+        $this->customerDataFactory = $customerDataFactory;
+        $this->storeManager = $storeManager;
+        $this->tokenModelFactory = $tokenModelFactory;
+        $this->customerExtensionFactory = $customerExtensionFactory;
+    }
+
+    private function jwtDecode($token)
+    {
+        $splitToken = explode(".", $token);
+        $payloadBase64 = $splitToken[1];
+        $decodedPayload = json_decode(urldecode(base64_decode($payloadBase64)), true);
+        return $decodedPayload;
+    }
+
+    public function resolve(
+        Field $field,
+        $context,
+        ResolveInfo $info,
+        array $value = null,
+        array $args = null
+    ) {
+        $token = $args['token'] ?? null;
+        $firstName = $args['firstName'] ?? null;
+        $lastName = $args['lastName'] ?? null;
+    
+        if (empty($token)) {
+            throw new GraphQlInputException(__('The token should be provided.'));
+        }
+    
+        try {
+            $decoded = $this->jwtDecode($token);
+    
+            // Extract email and other fields from the decoded token
+            $email = $decoded["email"] ?? null;
+            if (!$email) {
+                throw new GraphQlInputException(__('The email is missing in the decoded token.'));
+            }
+    
+            $firstName = $firstName ?? ($decoded["given_name"] ?? explode("@", $email)[0]);
+            $lastName = $lastName ?? ($decoded["family_name"] ?? "user");
+            $avatar = "";
+    
+            return $this->createSocialLogin($firstName, $lastName, $email, $avatar);
+        } catch (\Exception $e) {
+            throw new GraphQlInputException(__($e->getMessage()));
+        }
+    }    
+
+    private function createSocialLogin($firstName, $lastName, $email, $avatar)
+    {
+        try {
+            // Check if customer already exists
+            $existingCustomer = $this->customerRepository->get($email);
+
+            // Generate a token for the existing customer
+            $token = $this->tokenModelFactory->create()->createCustomerToken($existingCustomer->getId())->getToken();
+
+            return ['token' => $token];
+        } catch (NoSuchEntityException $e) {
+            // Customer does not exist, proceed with creating a new one
+            $customer = $this->customerDataFactory->create();
+            $customer->setFirstname($firstName)
+                     ->setLastname($lastName)
+                     ->setEmail($email)
+                     ->setCustomAttribute('customer_avatar', $avatar);
+
+            try {
+                $customer = $this->customerRepository->save($customer);
+
+                // Generate a token for the new customer
+                $token = $this->tokenModelFactory->create()->createCustomerToken($customer->getId())->getToken();
+
+                return ['token' => $token];
+            } catch (\Exception $e) {
+                throw new GraphQlInputException(__('Failed to create a customer: ' . $e->getMessage()));
+            }
+        }
+    }   
+}

@@ -1,0 +1,7 @@
+type Query {
+    getCitiesByRegion(region_id: Int!): [City] @resolver(class: "Unveels\\CitiesGraphqlApi\\Model\\Resolver\\GetCitiesByRegion") @doc(description: "Get all the Cities which is Under that region ID")
+}
+type City {
+    city_id: Int
+    city_name: String
+}

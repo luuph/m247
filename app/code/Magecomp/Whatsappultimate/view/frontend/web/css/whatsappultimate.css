@@ -1,0 +1,107 @@
+/* Customer Account Create (START) */
+.mobilenumber {
+	float: left;
+	max-width: 200px;
+	width: 80%;
+}
+
+#otpdiv { display: none; float: left; margin-left: 15px; width: 18% }
+
+#otpbtndiv { float: left; margin-left: 15px; }
+
+#otpbtndiv #resendotpbtn { display: none; }
+
+#smserror { clear: both; }
+
+#waitsmsdiv {
+	margin-left: 15px;
+	float: left;
+	display: none;
+}
+/* Customer Account Create (END) */
+
+/* Customer Mobile Confirmation (START) */
+#confirmationdiv, #smserrordiv, #smssuccessdiv, #procedtocheckoutdiv {
+	display: none;
+	clear: both;
+	margin-top: 10px;
+}
+
+#existingnumberdiv {
+	clear: both;
+	margin-top: 10px;
+}
+/* Customer Mobile Confirmation (END) */
+.whatsappultimate-customer-checkout .page-title-wrapper .page-title{
+	margin-bottom:8px;
+}
+.whatsappultimate-customer-update .countryflag-comment{
+	float: left;
+    width: 100%;
+}
+.whatsappultimate-customer-update #otpdiv {
+    width: 18%;
+    padding: 1% 1% 1% 0%;
+    margin-left: 0px;
+}
+.whatsappultimate-customer-update #otpbtndiv{
+	margin-left: 0px;
+	padding: 1% 0%;
+}
+.whatsappultimate-customer-checkout #otpbtndiv {
+    float: left;
+    margin-left: 0px; 
+    padding: 1% 0%;
+}
+.whatsappultimate-customer-checkout #otpdiv {
+    margin-left: 0px; 
+    padding: 1% 1% 1% 0%;
+}
+.whatsappultimate-customer-checkout .comment.flagdisableregister {
+    float: left;
+    width: 100%;
+}
+#smssuccessdiv:before {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    .comment.flagdisableregister {
+    float: left;
+    width: 100%;
+}
+    font-size: 24px;
+    line-height: 24px;
+    color: #006400;
+    content: '\e60e';
+    font-family: 'luma-icons';
+    margin: -12px 0 0;
+    vertical-align: middle;
+    display: inline-block;
+    font-weight: normal;
+    overflow: hidden;
+    speak: none;
+    left: 0;
+    top: 22px;
+    width: 45px;
+    position: absolute;
+    text-align: center;
+}
+#smserrordiv:before {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 24px;
+  line-height: 24px;
+  color: #b30000;
+  content: '\e61f';
+  font-family: 'luma-icons';
+  margin: -12px 0 0;
+  vertical-align: middle;
+  display: inline-block;
+  font-weight: normal;
+  overflow: hidden;
+  speak: none;
+  left: 0;
+  top: 22px;
+  width: 45px;
+  position: absolute;
+  text-align: center;
+}

@@ -1,0 +1,130 @@
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MobikulCore
+ * @author    Webkul Software Private Limited
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+
+<?php 
+
+$mobileurl = $block->getMobileUrl();
+$defaultThemeColor = $block->getDefaultThemeColor();
+$baricon = $block->getBarIcon();
+$defaultLogo = $block->getDefaultLogo();
+$carticon = $block->getCartIcon();
+$searchicon = $block->getSearchIcon();
+$productImage = $block->getProductImage();
+$defaultThemeTextColor = $block->getDefaultThemeTextColor();
+$defaultButtonColor = $block->getDefaultButtonColor();
+$defaultButtonTextColor = $block->getDefaultButtonTextColor();
+
+?>
+
+<div class='light_front_preview' style='padding: 46px 0 55px;
+width: 261px;
+min-height: 355px;
+margin: auto;
+overflow: hidden;
+clear: both;
+background: url(<?= $block->escapeHtml($mobileurl) ?>);'>
+    <div class='light_layout_gallery' style='min-height: 355px;
+    position: relative;
+    overflow: hidden;
+    max-height: 202px;
+    max-width: 249px;
+    margin: 0 auto;
+    background-color:#fff;'>
+        <div class='light_topHeader' style='background-color: <?= $block->escapeHtml($defaultThemeColor) ?>;
+        padding: 1px 10px;
+        color: #fff;
+        font-size: 18px;
+        padding: 5px 10px;
+        float: left;
+        width: 100%;
+        width: 100%;
+        box-sizing: border-box;
+        margin-top: 0px;'>
+            <div class='light_leftmenu' style='width: 20px;float: left;margin-top: 6px;'>
+                <span class='light_toggleMenu'><img src='<?= $block->escapeHtml($baricon) ?>' style='max-width: 18px;
+                display: inline-block;
+                max-height: 18px;
+                object-fit: contain;'></span>
+            </div>
+            <div class='light_logo' style='display: inline-block;
+            vertical-align: middle;
+            margin-right: 20px;
+            margin-left:20px;
+            '>
+                <img src='<?= $block->escapeHtml($defaultLogo) ?>' alt='Logo' style='max-width: 90px;
+                display: inline-block;
+                max-height: 25px;
+                object-fit: contain;'>
+            </div>
+            <div class='light_cartSection' style='padding: 6px 0 0 0px; float: right;'>
+                <span class='light_cartIcon'><img src='<?= $block->escapeHtml($carticon) ?>' style='max-width: 20px;
+                display: inline-block;
+                max-height: 20px;
+                object-fit: contain;'></span>
+            </div>
+            <div class='light_searchBar' style='float: right; padding: 6px 10px 0;'>
+                <span class='light_searchicon'><img src='<?= $block->escapeHtml($searchicon) ?>' style='max-width: 18px;
+                display: inline-block;
+                max-height: 18px;
+                object-fit: contain;'></span>
+            </div>	
+        </div>
+        <div class='light_app_body' style='background-color:#fff;width:100%;'>
+            <img src='<?= $block->escapeHtml($productImage) ?>'>
+            <p class='light_body_text' 
+            style='font-size:10px;padding:5px 10px;color:<?= $block->escapeHtml($defaultThemeTextColor) ?>'>
+            Antonia Racer Tank &nbsp;<strong>$34.00</strong></p>
+            <div class='light_btn-left' style='float: left;
+            padding: 5px 20px;
+            width: 35%;
+            height:20px;
+            font-weight: 600;
+            line-height:20px;
+            font-size: 12px;
+            background-color: #dfdfdf;
+            text-align:center;'>ADD TO CART</div>
+            <div class='light_btn-right' style='float: left;
+            padding: 5px 20px;
+            width: 32%;
+            font-weight: 600;
+            line-height:20px;
+            height:20px;
+            font-size: 12px;
+            background-color:<?= $block->escapeHtml($defaultButtonColor) ?>;
+            color:<?= $block->escapeHtml($defaultButtonTextColor) ?>;
+            text-align:center;'>BUY NOW</div>
+        </div>
+    </div>
+</div>
+<script type='text/javascript'>
+    document.addEventListener('DOMContentLoaded', function(){
+        let buttonTextColor = document.querySelector('#mobikul_light_mode_config_light_button_text_color');
+        let buttonColor = document.querySelector('#mobikul_light_mode_config_light_app_button_color');
+        let themeColor = document.querySelector('#mobikul_light_mode_config_light_app_theme_color');
+        let themeTextColor = document.querySelector('#mobikul_light_mode_config_light_app_theme_text_color');
+        let buttonColorEle = document.querySelector('.light_btn-right');
+        let topHeader = document.querySelector('.light_topHeader');
+        let bodyText = document.querySelector('.light_body_text');
+        buttonTextColor.addEventListener('change', function () {
+            buttonColorEle.style.color = this.value;
+        });
+        buttonColor.addEventListener('change', function () {
+            buttonColorEle.style.backgroundColor = this.value;
+        });
+        themeColor.addEventListener('change', function () {
+            topHeader.style.backgroundColor = this.value;
+        });
+        themeTextColor.addEventListener('change', function () {
+            bodyText.style.color = this.value;
+        });
+    });
+</script>

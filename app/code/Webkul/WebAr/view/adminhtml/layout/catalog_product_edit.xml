@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_WebAr
+ * @author    Webkul Software Private Limited
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="catalog_product_new"/>
+    <update handle="styles"/>
+    <body>
+       <referenceContainer name="js">
+            <block class="Magento\Backend\Block\Template"
+                template="Webkul_WebAr::js.phtml"
+                name="webar_js_backend">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Webkul\WebAr\ViewModel\DataModel</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,83 @@
+<?php
+$viewModel = $block->getViewModel();
+$walletHelper = $viewModel->getHelper();
+$walletBlock = $block->getLayout()->createBlock(\Webkul\Walletsystem\Block\Cart::class);
+$isModuleEnable = $walletHelper->getWalletenabled();
+$walletTotalAmount = (int)$walletHelper->getWalletTotalAmount($walletHelper->getCustomerId());
+$currencyCode = $walletHelper->getCurrentCurrencyCode();
+
+if ($isModuleEnable) {  ?>
+    <div class="payment-method">
+    <?php if ($walletTotalAmount) {  ?>
+
+        <div class='wk_ws_wallet_payment'>
+                <input  
+                type="hidden" 
+                value =""
+                id='wk_ws_grandtotal' name='wallet_subtotal' >
+                <div class='wk_ws_payment_form_outer'>
+                    <div>
+                        <div class='wk_wallet_check_outer'>
+                            <input id='wallet_auto' type="checkbox" name="" value='walletsystem' 
+                            class="wk_ws_custom_checkbox">
+                            <label for = "wallet_auto"> 
+                                <span ><?=$block->escapeHtml($walletHelper->getWalletTitle())?></span></label>
+                        </div>
+                    </div>
+
+                    <div class='wk_ws_payment_outer' style='display: none'> 
+                        <table class='wk_ws_payment_table'>
+                            <tr>
+                                <th><h4>Payment to be Made</h4></th>
+                                <th></th>
+                                <th><h4>Amount in your Wallet</h4></th>
+                                <th></th>
+                                <th class='wk_ws_leftamount_th' ><h4 class=''>Left Amount to be paid</h4></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <?= $block->escapeHtml($walletHelper->getCurrencySymbol($currencyCode));?>
+                                    <?= $block->escapeHtml($walletHelper->getGrandTotal());?> 
+                                </td>
+                                <td><hr class='wk_ws_line' style='width: 5px;'>
+                                    <div class="wk_ws_minus"></div><hr class='wk_ws_line' style='width: 5px;'>
+                                </td>
+                                <td><?=$block->escapeHtml($walletHelper->getWalletTitle())?></td>
+                                <td><hr class='wk_ws_line' style='width: 5px;'>
+                                    <div class="wk_ws_plus"></div><hr class='wk_ws_line'style='width: 5px;'>
+                                </td>
+                                <td class='wk_ws_leftamount'></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td class='wk_ws_restamount'>Remaining:<span class='wk_restamount'></span></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <?php } else { ?>
+            <h5>No Amount available in wallet</h5>
+    </div>
+    <?php }
+}
+
+    $orderData = [
+        'walletTotalAmount' => $walletTotalAmount,
+        'currencySymbol' => $walletHelper->getCurrencySymbol($currencyCode),
+        'grandTotal' => $walletHelper->getGrandTotal(),
+        'lefToPayAmount' => $walletHelper->getlefToPayAmount(),
+        'leftInWallet' => $walletHelper->getLeftWallet()
+    ];
+    
+    $serializedOrderData = $walletHelper->serialize($orderData);
+    ?>
+<script type="text/x-magento-init">
+{
+    "*":{
+        "Wkmultiwalletsystem":<?=/*@noEscape*/ $serializedOrderData; ?>
+    }
+}
+</script>

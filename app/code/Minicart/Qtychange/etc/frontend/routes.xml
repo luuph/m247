@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/Router/Config.xsd">
+    <router id="standard">
+        <route id="minicart_qtychange" frontName="minicart_qtychange">
+            <module name="Minicart_Qtychange"/>
+        </route>
+    </router>
+</config>

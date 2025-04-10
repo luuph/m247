@@ -1,0 +1,32 @@
+<?php
+/**
+ * Magezon
+ *
+ * This source file is subject to the Magezon Software License, which is available at https://www.magezon.com/license
+ * Do not edit or add to this file if you wish to upgrade the to newer versions in the future.
+ * If you wish to customize this module for your needs.
+ * Please refer to https://www.magezon.com for more information.
+ *
+ * @category  Magezon
+ * @package   Magezon_LookBook
+ * @copyright Copyright (C) 2021 Magezon (https://www.magezon.com)
+ */
+/**
+ * @var $block \Magezon\LookBook\Block\Adminhtml\Profile\Helper\Form\Gallery\Content
+ */
+?>
+
+<script type="text/javascript">
+    require(['jquery'], function($) {
+        $('#mgzlookbook_general_enabled').change(function(){
+            if($(this).val() == 0) {
+                $('.section-config').css('border-color', 'transparent');
+            } else {
+                $('.section-config').css('border-color', '#ccc');
+            }
+        });
+        if($('#mgzlookbook_general_enabled').val() == 0) {
+            $('.section-config').css('border-color', 'transparent');
+        }
+    })
+</script>

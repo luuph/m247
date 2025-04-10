@@ -1,0 +1,106 @@
+<?php
+/**
+ * Copyright © 2018 Porto. All rights reserved.
+ *
+ * Top menu for store
+ *
+ * @see \Smartwave\Megamenu\Block\Topmenu
+ */
+
+$_helper = $this->helper('Smartwave\Megamenu\Helper\Data');
+$_config = $_helper->getConfig('sw_megamenu');
+$columnsLimit = 0;
+$header_type = $_helper->getConfig('porto_settings/header/header_type');
+
+// Check if the Mega Menu is enabled in the configuration
+if ($_config['general']['enable']) :
+    $_menu = $block->getMegamenuHtml(); // Get the Mega Menu HTML
+?>
+    <nav class="navigation sw-megamenu <?= in_array($header_type, [7, 8, 18, 22, 25]) ? 'side-megamenu' : '' ?>" role="navigation">
+        <ul>
+            <?= html_entity_decode($_menu); // Decode HTML entities ?>
+        </ul>
+    </nav>
+
+    <script type="text/javascript">
+        require([
+            'jquery',
+            'Smartwave_Megamenu/js/sw_megamenu'
+        ], function ($) {
+            $(".sw-megamenu").swMegamenu(); 
+        });
+    </script>
+<?php
+else :
+    // Fallback if Mega Menu is not enabled
+    $_menu = $block->getHtml('level-top', 'submenu', $columnsLimit); // Get default menu HTML
+?>
+    <nav class="navigation sw-megamenu" role="navigation">
+        <ul data-mage-init='{"menu":{"responsive":true, "expanded":true, "position":{"my":"left top","at":"left bottom"}}}'>
+            <?= html_entity_decode($_menu); // Decode HTML entities ?>
+        </ul>
+    </nav>
+<?php
+endif;
+?>
+<script>
+    require(['jquery'], function($) {
+        $(document).ready(function() {
+            $('.ui-menu-item.level0 > a').each(function() {
+                if ($(this).text().trim() === "Blog") {
+                    $(this).siblings('.level0.submenu').addClass('blog-submenu');
+                }
+            });
+
+            if (window.location.href.indexOf('/ar') !== -1) {
+                $('.blog-submenu').each(function() {
+                    this.style.setProperty('left', '28%', 'important');
+                });
+            } else {
+                $('.blog-submenu').each(function() {
+                    this.style.setProperty('left', '68%', 'important');
+                });
+            }
+
+            $('.blog-submenu ul').removeClass('col-md-12 mega-columns columns4');
+            $('.blog-submenu ul').css('width', '100%');
+            
+            $('.blog-submenu ul li').css('width', '100%');
+        });
+    });
+</script>
+
+<style>
+    .level0.submenu .subchildmenu {
+        display: flex;
+        flex-direction: column; /* Stack items vertically */
+        list-style: none; /* Remove default list styling */
+        padding: 0;
+        margin: 0;
+    }
+
+    .level0.submenu .subchildmenu li {
+        margin-bottom: 10px; /* Add spacing between items */
+    }
+
+    .level0.submenu .subchildmenu li a {
+        display: block;
+        text-decoration: none;
+        color: #333; /* Set a color for the links */
+    }
+    @media (min-width: 1024px) { /* Adjust the min-width as needed for your design */
+        .blog-submenu {
+            width: 15% !important;
+            /* left: 828px !important; */
+            right: auto !important;
+        }
+    }
+    
+    .sw-megamenu.navigation li.level0.fullwidth > .submenu a:hover, .sw-megamenu.navigation li.level0.staticwidth > .submenu a:hover {
+        color: #696969 !important;
+        background-color: #f4f4f4;
+    }
+    .sw-megamenu.navigation li.level0.fullwidth .submenu a:hover > span, .sw-megamenu.navigation li.level0.staticwidth .submenu a:hover > span {
+        text-decoration: none !important;
+    }
+</style>

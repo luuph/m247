@@ -19,7 +19,11 @@
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
-        <referenceBlock name="billing_address" template="Bss_CustomerAttributes::order/create/form/address.phtml"/>
+        <referenceBlock name="billing_address" template="Bss_CustomerAttributes::order/create/form/address.phtml">
+            <arguments>
+                <argument name="viewModel" xsi:type="object">Bss\CustomerAttributes\ViewModel\Adminhtml\Order\Create\Billing\Address</argument>
+            </arguments>
+        </referenceBlock>
         <referenceContainer name="js">
             <block class="Bss\CustomerAttributes\Block\Adminhtml\Order\Create\Billing\Address"
                    template="Bss_CustomerAttributes::order/create/js.phtml" name="customer_attributes_file"/>

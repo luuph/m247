@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Backend/etc/system_file.xsd">
+    <system>
+		<section id="whatsappultimate">
+				<group id="smsgatways">
+					<field id="360dialogapikey" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+						<label>API Key</label>
+						<depends><field id="gateway">whatsappdialog360api</field></depends>
+                        <comment><![CDATA[Get API key from 360hubstaff dashboard WhatsApp Account - Generate API key]]></comment>
+						<validate>required-entry</validate>
+					</field>
+                    <field id="360dialogapinamespace" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Name Space</label>
+                        <depends><field id="gateway">whatsappdialog360api</field></depends>
+                        <comment><![CDATA[Get Namespace from 360hubstaff dashboard WhatsApp Account - Select Your WhatsApp Number - Show Details]]></comment>
+                        <validate>required-entry</validate>
+                    </field>
+					<field id="dialogapiurl" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+						<label>Message API URI</label>
+						<depends><field id="gateway">whatsappdialog360api</field></depends>
+						<validate>required-entry validate-url</validate>
+					</field>
+                    <field id="contactapiurl" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Contact API URI</label>
+                        <depends><field id="gateway">whatsappdialog360api</field></depends>
+                        <validate>required-entry validate-url</validate>
+                    </field>
+				</group>
+		</section>
+    </system>
+</config>

@@ -1,0 +1,121 @@
+Balance,Balance
+Reports,Reports
+"Traffic Source Statistics","Traffic Source Statistics"
+"Bestsellers Affiliate","Bestsellers Affiliate"
+"New Affiliate","New Affiliate"
+"Affiliate Reports","Affiliate Reports"
+"Top Affiliate","Top Affiliate"
+"Affiliate Transaction","Affiliate Transaction"
+"Accounts Reports","Accounts Reports"
+Bestsellers,Bestsellers
+"Sales Reports","Sales Reports"
+"Page not found.","Page not found."
+"Invalid email.","Invalid email."
+"Requested email doesn't exist","Requested email doesn't exist"
+"Account id required","Account id required"
+"Requested entity doesn't exist","Requested entity doesn't exist"
+"Could not delete the account: %1","Could not delete the account: %1"
+"Id required","Id required"
+"Could not change status the account: %1","Could not change status the account: %1"
+"Customer id required","Customer id required"
+"Affiliate group required","Affiliate group required"
+"Affiliate group doesn't exist","Affiliate group doesn't exist"
+"Status required","Status required"
+"The customer ""%1"" has registed as an affiliate already","The customer ""%1"" has registed as an affiliate already"
+"Could not save the affiliate: %1","Could not save the affiliate: %1"
+"Requested status doesn't exist","Requested status doesn't exist"
+"Campaign id required","Campaign id required"
+"Value id required","Value id required"
+"Could not change status the campaign: %1","Could not change status the campaign: %1"
+"Could not delete the campaign: %1","Could not delete the campaign: %1"
+"Invalid email","Invalid email"
+"customer_email is empty","customer_email is empty"
+"%1 is empty","%1 is empty"
+"Balance must equals or greater than zero","Balance must equals or greater than zero"
+"Affiliate status doesn't exist","Affiliate status doesn't exist"
+"store_id doesn't exist","store_id doesn't exist"
+"website_id doesn't exist","website_id doesn't exist"
+"Please enable module to import affiliate account","Please enable module to import affiliate account"
+"Account email doesn't exist","Account email doesn't exist"
+"Amount must equals or greater than zero","Amount must equals or greater than zero"
+"Transaction status doesn't exist","Transaction status doesn't exist"
+"Cannot create transaction.","Cannot create transaction."
+Add/Update,Add/Update
+Delete,Delete
+Add,Add
+Day,Day
+Week,Week
+Month,Month
+Year,Year
+Custom,Custom
+"Affiliate id required","Affiliate id required"
+"Order id required","Order id required"
+"Transaction amount must great than zero!","Transaction amount must great than zero!"
+"Affiliate doesn't exist!","Affiliate doesn't exist!"
+"Withdraw id required","Withdraw id required"
+"The withdraw had canceled.","The withdraw had canceled."
+"Could not approve the withdraw: %1","Could not approve the withdraw: %1"
+"Could not cancel the withdraw: %1","Could not cancel the withdraw: %1"
+"Amount required","Amount required"
+"Payment method required","Payment method required"
+"Amount must great than zero","Amount must great than zero"
+"Payment method doesn't exist","Payment method doesn't exist"
+"Paypal email required","Paypal email required"
+"Invalid paypal email address.","Invalid paypal email address."
+"Affiliate account doesn't exist","Affiliate account doesn't exist"
+"Could not save the withdraw: %1","Could not save the withdraw: %1"
+Statistic,Statistic
+CTR,CTR
+Click(s),Click(s)
+Impression(s),Impression(s)
+"Something went wrong while saving object. Token exist","Something went wrong while saving object. Token exist"
+"There is no sample file for this entity.","There is no sample file for this entity."
+Product,Product
+SKU,SKU
+Price,Price
+Quantity,Quantity
+"We couldn't find any records.","We couldn't find any records."
+Name,Name
+Email,Email
+Status,Status
+"Register At","Register At"
+"Sales Amount","Sales Amount"
+"Number of Orders","Number of Orders"
+Commission,Commission
+"Chart is disabled. To enable the chart, click <a href='%1'>here</a>","Chart is disabled. To enable the chart, click <a href='%1'>here</a>"
+"Balance Report","Balance Report"
+"Raw Clicks","Raw Clicks"
+Source,Source
+"Order Count","Order Count"
+"Ordered Item Quantity","Ordered Item Quantity"
+"Total Invoiced","Total Invoiced"
+"Commission Refunded","Commission Refunded"
+"Commission Canceled","Commission Canceled"
+"Total Commission","Total Commission"
+"Refer Url","Refer Url"
+"Coupon Code","Coupon Code"
+"Request Error","Request Error"
+"Mageplaza Affiliate Reports","Mageplaza Affiliate Reports"
+Accounts,Accounts
+Sales,Sales
+"Show Report for Banner on Frontend","Show Report for Banner on Frontend"
+"Show Impressions and Clicks","Show Impressions and Clicks"
+"Traffic Source Statistics Page Content","Traffic Source Statistics Page Content"
+Content,Content
+"Total Commission Statistics including On Hold Commissions","Total Commission Statistics including On Hold Commissions"
+"Credit Balance Chart","Credit Balance Chart"
+"Background Color","Background Color"
+"Border Color","Border Color"
+"Sales Reports Affiliate","Sales Reports Affiliate"
+"Account Reports Affiliate","Account Reports Affiliate"
+Click,Click
+Impression,Impression
+"Store View","Store View"
+"Created At","Created At"
+"Product Name","Product Name"
+"Quantity Ordered","Quantity Ordered"
+Period,Period
+"-- Select --","-- Select --"
+"Account Email","Account Email"
+"Number Of Orders","Number Of Orders"
+"Total Sales Amount","Total Sales Amount"

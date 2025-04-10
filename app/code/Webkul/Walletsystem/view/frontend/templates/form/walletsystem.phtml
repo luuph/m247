@@ -1,0 +1,34 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Walletsystem
+ * @author    Webkul
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+?>
+<?php
+
+if (!$block->getIsMultiShipping()) { ?>
+<script>
+        window.walletconfig = <?= /* @noEscape */ $block->serialize($block->getCustomConfig()); ?>;
+</script>
+<div id="wallet-system-component" data-bind="scope:'wallet-system-component'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <script type="text/x-magento-init">
+    {
+        "#wallet-system-component": {
+            "Magento_Ui/js/core/app": {
+               "components": {
+                    "wallet-system-component": {
+                        "component": "Webkul_Walletsystem/js/wallet-payment"
+                    }
+                }
+            }
+        }
+    }
+    </script>
+</div>
+<?php } ?>

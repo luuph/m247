@@ -1,0 +1,3 @@
+extend type Category {
+    category_img: String @resolver(class: "Unveels\\BlogCategoryBanner\\Model\\Resolver\\CategoryImage") @doc(description: "The image URL of the category.")
+}

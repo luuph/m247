@@ -1,0 +1,197 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_WebAr
+ * @author    Webkul Software Private Limited
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+     <tab id="webkul" translate="label" sortOrder="10" class="wk-config-tab-class">
+        <label>Webkul</label>
+    </tab>
+       <section id="webar" translate="label" type="text" sortOrder="510" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>WebAR Configuration</label>
+            <tab>webkul</tab>
+            <resource>Webkul_WebAr::config_webar</resource>
+            <group id="general_settings" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Settings</label>
+                <field id="enable" translate="label comment" sortOrder="1" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable WebAR</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <validate>validate-no-html-tags validate-select</validate>
+                </field>
+                <field id="show_other_images" translate="label comment" sortOrder="1" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Product Image Gallery with 3D Model</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <validate>validate-no-html-tags validate-select</validate>
+                </field>
+                <field id="model_thumbnail" translate="label comment" sortOrder="1" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>3D Model Thumbnail in Image Gallery</label>
+                    <source_model>Webkul\WebAr\Model\Config\Source\ThumbnailOptions</source_model>
+                    <depends>
+                        <field id="show_other_images">1</field>
+                    </depends>
+                    <validate>validate-no-html-tags validate-select</validate>
+                </field>
+                <field id="custom_thumbnail" translate="label" type="image" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>3D Model Thumbnail Image</label>
+                    <backend_model>Webkul\WebAr\Model\Config\Backend\PosterImageFile</backend_model>
+                    <base_url type="media" scope_info="1">Wk3dModelPosters</base_url>
+                    <upload_dir config="system/filesystem/media" scope_info="1">Wk3dModelPosters</upload_dir>
+                    <comment>Allowed file types: jpg, jpeg, gif, png, webp. Recommended size is Product thumbnail size (88 x 110 px).</comment>
+                    <depends>
+                        <field id="model_thumbnail">custom_thumbnail_image</field>
+                    </depends>
+                </field>
+            </group>
+
+            <!--Model Viewer Attributes Settings:START-->
+            <group id="attribute_settings" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Model-Viewer Staging And Cameras Attributes Settings</label>
+                <field id="auto_rotate" translate="label comment" sortOrder="1" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Auto Rotate</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <tooltip>Allows the auto-rotation of the model.</tooltip>
+                    <validate>validate-no-html-tags validate-select</validate>
+                </field>
+                <field id="auto_rotate_delay" translate="label comment" sortOrder="2" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Auto Rotate Delay</label>
+                    <tooltip>Sets the delay before auto-rotation begins of 3D Model.</tooltip>
+                    <comment>Enter numeric value(in milliseconds).</comment>
+                    <depends>
+                        <field id="auto_rotate">1</field>
+                    </depends>
+                    <validate>validate-no-html-tags validate-not-negative-number validate-number</validate>
+                </field>
+                <field id="interpolation_decay" translate="label comment" sortOrder="3" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Interpolation Decay</label>
+                    <tooltip>Controls the rate of interpolation when the camera or model moves, due to either user interaction or attribute changes. The camera automatically interpolates between orbits (even when controls are disabled)</tooltip>
+                    <comment>Enter positive numeric value > 0 (zero) (in milliseconds).</comment>
+                    <depends>
+                        <field id="auto_rotate">0</field>
+                    </depends>
+                    <validate>validate-no-html-tags validate-not-negative-number validate-greater-than-zero</validate>
+                </field>
+                <field id="disable_zoom" translate="label comment" sortOrder="5" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Disable Zoom</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <tooltip>Disables user zoom so that wheel and pinch interactions have the browser's default behavior.</tooltip>
+                    <validate>validate-no-html-tags validate-select</validate>
+                </field>
+                <field id="disable_tap" translate="label comment" sortOrder="6" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Disable Tap</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <tooltip>Clicking on the 3D model focuses on that point while clicking off the model returns to the default center. In model-viewer, there is a disable-pan attribute to turn all of this off, but here we demonstrate only turning off the click/tap behaviors via the disable-tap attribute.</tooltip>
+                    <validate>validate-no-html-tags validate-select</validate>
+                </field>
+            </group>
+
+            <group id="loading_attribute_settings" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Model-Viewer Loading Attributes Settings</label>
+                <field id="poster" translate="label" type="image" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>3D Model Poster Image</label>
+                    <backend_model>Webkul\WebAr\Model\Config\Backend\PosterImageFile</backend_model>
+                    <base_url type="media" scope_info="1">Wk3dModelPosters</base_url>
+                    <upload_dir config="system/filesystem/media" scope_info="1">Wk3dModelPosters</upload_dir>
+                    <comment>Displays an image or poster until 3D Model loaded on Product Page. Allowed file types: jpg, jpeg, gif, png, webp.</comment>
+                </field>
+            </group>
+
+            <group id="lighting_attribute_settings" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Model-Viewer Lighting And Skybox Attributes Settings</label>
+                <field id="apply_skybox" translate="label comment" sortOrder="1" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Apply SkyBox Configuration</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <validate>validate-no-html-tags validate-select</validate>
+                </field>
+                <field id="skybox_image" translate="label" type="file" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Skybox Image</label>
+                    <backend_model>Webkul\WebAr\Model\Config\Backend\SkyImageFile</backend_model>
+                    <base_url type="media" scope_info="1">Wk3dModelSkyboxImg</base_url>
+                    <upload_dir config="system/filesystem/media" scope_info="1">Wk3dModelSkyboxImg</upload_dir>
+                    <depends>
+                        <field id="apply_skybox">1</field>
+                    </depends>
+                    <comment>It links to an equirectangular projection image which is used as the skybox, and applied as an environment map to the model. It supports hdr (recommended), png, and jpg images.</comment>
+                </field>
+                <field id="apply_env" translate="label comment" sortOrder="3" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Apply Environment Image Configuration</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <validate>validate-no-html-tags validate-select</validate>
+                </field>
+                <field id="environment_image" translate="label comment" sortOrder="4" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Environment Image</label>
+                    <source_model>Webkul\WebAr\Model\Config\Source\EnvImageOptions</source_model>
+                    <depends>
+                        <field id="apply_env">1</field>
+                    </depends>
+                    <tooltip>It used to set environmental lighting without changing the background. Normally if skybox-image is set, that image will also be used for the environment-image. If neither is specified, default 'neutral' lighting will be applied. If 'legacy' is specified without a skybox, then our old default environment is applied instead.</tooltip>
+                    <validate>validate-no-html-tags validate-select</validate>
+                </field>
+                <field id="environment_image_url" translate="label comment" sortOrder="5" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Environment Image Url(jpg or hdr image)</label>
+                    <depends>
+                        <field id="apply_env">1</field>
+                        <field id="environment_image">envurl</field>
+                    </depends>
+                    <validate>validate-no-html-tags required-entry validate-url</validate>
+                </field>
+                <field id="shadow_intensity" translate="label comment" sortOrder="6" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Shadow Intensity</label>
+                    <comment>Enter any value between 0 and 1.</comment>
+                    <tooltip>Allows to Control the opacity of the shadow. Set to 0 to turn off the shadow entirely.</tooltip>
+                    <validate>validate-no-html-tags validate-number validate-not-negative-number validate-number-range number-range-0-1</validate>
+                </field>
+                <field id="shadow_softness" translate="label comment" sortOrder="7" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Shadow Softness</label>
+                    <comment>Enter any value between 0 and 1.</comment>
+                    <tooltip>Allows to Control the blurriness of the shadow. Set to 0 for hard shadows. Softness should not be changed every frame as it incurs a performance cost. Softer shadows render faster.</tooltip>
+                    <validate>validate-no-html-tags validate-number validate-not-negative-number validate-number-range number-range-0-1</validate>
+                </field>
+                <field id="exposure" translate="label comment" sortOrder="8" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Exposure</label>
+                    <comment>Enter any positive number.</comment>
+                    <validate>validate-no-html-tags validate-number validate-not-negative-number</validate>
+                    <tooltip>Allows to Control the exposure of both the model and skybox, for use primarily with HDR environments.</tooltip>
+                </field>
+            </group>
+            <!--Model Viewer Attributes Settings:ENDS-->
+
+            <!--AR Button Settings-->
+            <group id="ar_button_settings" translate="label" type="text" sortOrder="700" showInDefault="1"
+                   showInWebsite="1" showInStore="1">
+                <label>AR Button Settings</label>
+                <field id="button_type" translate="label comment" sortOrder="4" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>AR Button Type</label>
+                    <source_model>Webkul\WebAr\Model\Config\Source\ArButtonOptions</source_model>
+                    <validate>validate-no-html-tags validate-select</validate>
+                </field>
+                <field id="button_text" translate="label comment" sortOrder="5" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>AR Custom Button Text</label>
+                    <depends>
+                        <field id="button_type">custom_button</field>
+                    </depends>
+                    <validate>validate-no-html-tags required-entry</validate>
+                </field>
+            </group>
+            <!---->
+
+            <!--Product Information Group Tab-->
+            <group id="webar_product_information" translate="label" type="text" sortOrder="700" showInDefault="1"
+                   showInWebsite="1" showInStore="1">
+                <label>WebAR Product Information</label>
+                <field id="info" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <frontend_model>Webkul\WebAr\Block\Config\Source\ModuleInformation</frontend_model>
+                </field>
+            </group>
+            <!---->
+        </section>
+    </system>
+</config>

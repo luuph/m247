@@ -1,0 +1,108 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_AffiliateUltimate
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+namespace Mageplaza\AffiliateUltimate\Api\Data;
+
+use Magento\Framework\Api\ExtensibleDataInterface;
+
+/**
+ * Interface AffiliateInvoiceInterface
+ * @api
+ */
+interface AffiliateInvoiceInterface extends ExtensibleDataInterface
+{
+    /**#@+
+     * Constants for keys of data array. Identical to the name of the getter in snake case
+     */
+    const AFFILIATE_COMMISSION = 'affiliate_commission';
+
+    const AFFILIATE_DISCOUNT_AMOUNT = 'affiliate_discount_amount';
+
+    const BASE_AFFILIATE_DISCOUNT_AMOUNT = 'base_affiliate_discount_amount';
+
+    /**#@-*/
+
+    /**
+     * Return the affiliate commission.
+     *
+     * @return string affiliate commission.
+     */
+    public function getAffiliateCommission();
+
+    /**
+     * Set affiliate commission.
+     *
+     * @param string|null $commission
+     *
+     * @return $this
+     */
+    public function setAffiliateCommission($commission);
+
+    /**
+     * Return the affiliate discount amount.
+     *
+     * @return string
+     */
+    public function getAffiliateDiscountAmount();
+
+    /**
+     * Set the affiliate discount amount.
+     *
+     * @param string $amount
+     *
+     * @return $this
+     */
+    public function setAffiliateDiscountAmount($amount);
+
+    /**
+     * Return the  base affiliate discount amount.
+     *
+     * @return string
+     */
+    public function getBaseAffiliateDiscountAmount();
+
+    /**
+     * Set the base affiliate discount amount.
+     *
+     * @param string $amount
+     *
+     * @return $this
+     */
+    public function setBaseAffiliateDiscountAmount($amount);
+
+    /**
+     * Retrieve existing extension attributes object or create a new one.
+     *
+     * @return \Mageplaza\AffiliateUltimate\Api\Data\AffiliateInvoiceExtensionInterface|null
+     */
+    public function getExtensionAttributes();
+
+    /**
+     * Set an extension attributes object.
+     *
+     * @param \Mageplaza\AffiliateUltimate\Api\Data\AffiliateInvoiceExtensionInterface $extensionAttributes
+     *
+     * @return $this
+     */
+    public function setExtensionAttributes(
+        \Mageplaza\AffiliateUltimate\Api\Data\AffiliateInvoiceExtensionInterface $extensionAttributes
+    );
+}

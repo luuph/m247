@@ -1,0 +1,16 @@
+type TechPage {
+    tech_title_en: String
+    tech_title_ar: String
+    tech_sub_title_en: String
+    tech_sub_title_ar: String
+    tech_description_en: String
+    tech_description_ar: String
+    tech_video: String
+    tech_button_title_en: String
+    tech_button_title_ar: String
+    tech_button_link: String
+}
+
+type Query {
+    getTechPageList: [TechPage] @resolver(class: "Unveels\\TechPageApi\\Model\\Resolver\\TechPageList")
+}

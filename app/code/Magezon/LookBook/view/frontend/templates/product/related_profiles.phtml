@@ -1,0 +1,57 @@
+<?php
+/**
+ * @var $block  Magezon\LookBook\Block\Product\RelatedProfiles
+ */
+$dataHelper           = $this->helper(Magezon\LookBook\Helper\Data::class);
+$collection           = $this->getCollection();
+$profilePageProduct   = $dataHelper->getProductPageTitle();
+$reponsiveDesktop     = $dataHelper->getProductPageCarouselDesktop();
+$reponsiveTabletL     = $dataHelper->getProductPageCarouselTabletL();
+$reponsiveTabletP     = $dataHelper->getProductyPageCarouselTabletP();
+$reponsiveMobieL      = $dataHelper->getProductPageCarouselMobieL();
+$reponsiveMobieP      = $dataHelper->getProductPageCarouselMobieP();
+$numberProfileProduct = $dataHelper->getProductPageCarouselNumberProfile();
+$marginProfileProduct = $dataHelper->getProductPageCarouselMargin();
+$navButton            = $dataHelper->getProductPageCarouselNavButton();
+$navDot               = $dataHelper->getProductPageCarouselDotNav();
+$autoHeight           = $dataHelper->getProductPageCarouselAutoHeight();
+$loop                 = $dataHelper->getProductPageCarouselLoop();
+$autoPlay             = $dataHelper->getProductPageCarouselAutoPlay();
+$autoPlayTimeOut      = $dataHelper->getProductPageCarouselAutoPlayTimeout();
+$pauseOnMouseHover    = $dataHelper->getProductPageCarouselPauseOnMouseHover();
+$rightToLeft          = $dataHelper->getProductPageCarouselRightToLeft();
+?>
+<div class="lookbook-profile-product-wrapper">
+    <h4><?= $profilePageProduct ?></h4>
+    <div class="lookbook-profile-carousel owl-carousel">
+        <?= $this->getProfilesHtml($collection) ?>
+    </div>
+</div>
+<script>
+    require(['jquery', 'Magezon_Core/js/owl.carousel.min'], function($) {
+        $(".lookbook-profile-carousel").owlCarousel({
+            lazyLoad: false,
+            items: <?= $numberProfileProduct ?>,
+            margin: <?= $marginProfileProduct ?>,
+            nav: <?= $navButton ?>,
+            dots: <?= $navDot ?>,
+            autoHeight: <?= $autoHeight ?>,
+            loop: <?= $loop ?>,
+            autoplay: <?= $autoPlay ?>,
+            autoplayTimeout: <?= $autoPlayTimeOut ?>,
+            autoplayHoverPause: <?= $pauseOnMouseHover ?>,
+            rtl: <?= $rightToLeft ?>,
+            navText : [
+                '<i class="fas mgz-fa-chevron-left" aria-hidden="true"></i>',
+                '<i class="fas mgz-fa-chevron-right" aria-hidden="true"></i>'
+            ],
+            responsive: {
+                0: {'items': <?= $reponsiveMobieP ?>},
+                544: {'items': <?= $reponsiveMobieL ?>},
+                768: {'items': <?= $reponsiveTabletP ?>},
+                992: {'items': <?= $reponsiveTabletL ?>},
+                1200: {'items': <?= $reponsiveDesktop ?>}
+            }
+        });
+    })
+</script>

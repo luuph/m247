@@ -1,0 +1,28 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Walletsystem
+ * @author    Webkul
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+?>
+<?php
+    $creditedAmount = $block->getCreditRuleData();
+    $isWallet = $block->getWalletInCart();
+if ($creditedAmount > 0 && !$isWallet) {
+    $formattedPrice = $block->getFormattedPrice($creditedAmount);
+    ?>
+<div class="wk_credited_highlight">
+    <span>
+        <?= $block->escapeHtml(
+            __(
+                'If you placed this order from your wallet then total amount %1 will be credited in your wallet.',
+                $formattedPrice
+            )
+        );?>
+    </span>
+</div>
+<?php } ?>

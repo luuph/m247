@@ -1,0 +1,46 @@
+<?php
+$dataHelper    		 = $this->helper('\Magezon\LookBook\Helper\Data');
+$markerType			 = $dataHelper->getMarkerType();
+$markerBgImage       = $dataHelper->getMarkerImage();
+$markerBgColor       = $dataHelper->getMarkerBackgroundColor();
+$markerTitleColor    = $dataHelper->getMarkerTextColor();
+$markerBorderColor   = $dataHelper->getMarkerBorderColor();
+$markerWidth	     = $dataHelper->getMarkerWidth();
+$markerHeight	     = $dataHelper->getMarkerHeight();
+?>
+<style>
+	<?php if ($markerBgColor || $markerTitleColor || $markerBorderColor || $markerWidth || $markerHeight || $markerBgImage) { ?>
+		.field-marker .draggable {
+			<?php if ($markerType == 'image') { ?>
+				background-image: url(<?= $markerBgImage ?>);
+			    background-repeat: no-repeat;
+    			background-size: cover;
+			<?php } else { ?>
+				background: <?= $markerBgColor ?>;
+			<?php } ?>
+			border-color: <?= $markerBorderColor ?>;
+			width: <?= $markerWidth ?>px;
+	        height: <?= $markerHeight ?>px;
+	        line-height: <?= $markerHeight ?>px;
+		}
+		.field-marker .draggable > span, {
+			color: <?= $markerTitleColor ?>;
+		}
+		
+		@keyframes lookbook-pulse {
+		    0% {
+		        box-shadow: 0px 1px 0px 3px transparent, 0px 0px 0px 0px <?= $markerBorderColor ?>;
+		    }
+		    30% {
+		        box-shadow: 0px 1px 0px 3px transparent, 0px 0px 0px 5px <?= $markerBorderColor ?>;
+		    }
+		    70% {
+		        box-shadow: 0px 1px 0px 3px transparent, 0px 0px 0px 15px <?= $markerBorderColor ?>;
+		    }
+		    100% {
+		        box-shadow: 1px 1px 3px 1px transparent, 0px 0px 0px 30px transparent;
+		    }
+		}
+	}
+	<?php } ?>
+</style>

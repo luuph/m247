@@ -1,0 +1,112 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_Affiliate
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+?>
+<?php
+/** @var Mageplaza\Affiliate\Block\Account\Subscribe $block */
+$emailSubcription = $block->getEmailSubcription()
+?>
+<form class="form form-edit-account form-affiliate form-affiliate-setting" id="affiliate-settings" method="post"
+      action="<?= /** @noEscape */ $block->getUrl('*/*/emailsubcription') ?>">
+    <fieldset class="fieldset request">
+        <legend class="legend"><span><?= /* @escapeNotVerified */ __('Affiliate Subscriptions') ?></span></legend>
+        <br>
+        <div class="field choice">
+            <input type="checkbox" name="account[withdraw_completed]" id="email-notification" value="1"
+                   title="<?= /* @escapeNotVerified */
+                   __('Receive Withdraw Completed email') ?>"
+                <?php if (!$emailSubcription || $emailSubcription['withdraw_completed']): ?>
+                checked="checked"<?php endif; ?>
+                   class="checkbox"/>
+            <label class="label" for="email-notification">
+                <span><?= /* @escapeNotVerified */ __('Receive Withdraw Completed email') ?></span>
+            </label>
+        </div>
+
+        <div class="field choice">
+            <input type="checkbox" name="account[withdraw_cancel]" id="withdraw-cancel" value="1"
+                   title="<?= /* @escapeNotVerified */
+                   __('Receive Withdraw Cancel email') ?>"
+                <?php if (!$emailSubcription || $emailSubcription['withdraw_cancel']): ?>
+                   checked="checked"<?php endif; ?>
+                   class="checkbox"/>
+            <label class="label" for="withdraw-cancel">
+                <span><?= /* @escapeNotVerified */ __('Receive Withdraw Cancel email') ?></span>
+            </label>
+        </div>
+
+        <div class="field choice">
+            <input type="checkbox" name="account[update_balance]" id="update-balance" value="1"
+                   title="<?= /* @escapeNotVerified */
+                   __('Receive Update Balance email') ?>"
+                <?php if (!$emailSubcription || $emailSubcription['update_balance']): ?>
+                    checked="checked"<?php endif; ?>
+                   class="checkbox"/>
+            <label class="label" for="update-balance">
+                <span><?= /* @escapeNotVerified */ __('Receive update balance email') ?></span>
+            </label>
+        </div>
+
+        <div class="field choice">
+            <input type="checkbox" name="account[new_campaign]" id="new-campaign" value="1"
+                   title="<?= /* @escapeNotVerified */
+                   __('Receive New Campaign email') ?>"
+                <?php if (!$emailSubcription || $emailSubcription['new_campaign']): ?>
+                    checked="checked"<?php endif; ?>
+                   class="checkbox"/>
+            <label class="label" for="new-campaign">
+                <span><?= /* @escapeNotVerified */ __('Receive New Campaign email') ?></span>
+            </label>
+        </div>
+
+        <div class="field choice">
+            <input type="checkbox" name="account[expired_campaign]" id="exprired-campaign" value="1"
+                   title="<?= /* @escapeNotVerified */
+                   __('Receive Expired Campaign email') ?>"
+                    <?php if (!$emailSubcription || $emailSubcription['expired_campaign']): ?>
+                    checked="checked"<?php endif; ?>
+                   class="checkbox"/>
+            <label class="label" for="exprired-campaign">
+                <span><?= /* @escapeNotVerified */ __('Receive Expired Campaign email') ?></span>
+            </label>
+        </div>
+    </fieldset>
+
+    <?= $block->getChildHtml('affiliate.setting.extra') ?>
+
+    <div class="actions-toolbar affiliate-clear">
+        <div class="primary">
+            <button type="submit" class="action save primary"
+                    title="<?= /* @escapeNotVerified */ __('Save') ?>">
+                    <span><?= /* @escapeNotVerified */ __('Save') ?></span>
+            </button>
+        </div>
+    </div>
+</form>
+<script>
+    require(['jquery'], function ($) {
+        if($("#maincontent").find('.messages')) {
+            setTimeout(function () {
+                $('.messages').fadeOut('slow');
+            }, 2000);
+        }
+    })
+
+</script>

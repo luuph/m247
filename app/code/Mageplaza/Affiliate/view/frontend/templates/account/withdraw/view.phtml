@@ -1,0 +1,151 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_Affiliate
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+/** @var Mageplaza\Affiliate\Block\Account\Withdraw\View $block */
+$withdraw = $block->getWithdraw();
+$tab_current = $block->getTabCurrent();
+?>
+<div class="fieldset affiliate-view-withdraw">
+        <div style="display: flex; align-items: center; margin-bottom: 40px">
+            <div style="font-size: 40px; font-weight: 300"><?= /* @noEscape */
+                __('Request') ?>     <?= /* @noEscape */
+                $block->formatDate($withdraw->getCreatedAt(), \IntlDateFormatter::MEDIUM, false) ?></div>
+            <div id="status_withdraw" style="text-transform: uppercase">  <?= /* @noEscape */
+                $withdraw->getStatusLabel() ?></div>
+        </div>
+
+
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between">
+        <div class="wrap_box_infor_withdraw">
+            <div class="box_info_withdraw">
+                <div class="field amount row-field">
+                    <label class="label bold-text">
+                        <span><?= /* @noEscape */
+                            __('Requested Amount') ?></span>
+                    </label>
+                    <div class="control">
+                        <?= /* @noEscape */
+                        $block->formatPrice($withdraw->getAmount()) ?>
+                    </div>
+                </div>
+                <div class="field fee row-field">
+                    <label class="label bold-text"><span><?= /* @noEscape */
+                            __('Fee') ?></span></label>
+                    <div class="control">
+                        <?= /* @noEscape */
+                        $block->formatPrice($withdraw->getFee()) ?>
+                    </div>
+                </div>
+                <div class="field transfer-amount row-field">
+                    <label class="label bold-text"><span><?= /* @noEscape */
+                            __('Net. Amount') ?></span></label>
+                    <div class="control">
+                        <?= /* @noEscape */
+                        $block->formatPrice($withdraw->getTransferAmount()) ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wrap_box_infor_withdraw">
+            <div class="box_info_withdraw">
+                <div class="field payment-method row-field">
+                    <label class="label bold-text">
+                        <span><?= /* @noEscape */
+                            __('Payment Method') ?></span>
+                    </label>
+                    <div class="control">
+                        <?= /* @noEscape */
+                        $withdraw->getPaymentLabel() ?>
+                    </div>
+                </div>
+
+                <div class="field payment-detail row-field">
+                    <label class="label bold-text" style="margin-right: 15px">
+                        <span><?= /* @noEscape */
+                            __('Payment Detail') ?></span>
+                    </label>
+                    <?php $detail = $block->getPaymentDetail(); ?>
+                    <?php if (count($detail)) : ?>
+                        <div class="control">
+                            <?php foreach ($detail as $key => $value) : ?>
+                                <?= /* @noEscape */
+                                $value['label'] . ': ' . $block->escapeHtml($value['value']) . '</br>' ?>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
+
+            </div>
+        </div>
+        <div class="wrap_box_infor_withdraw">
+            <div class="box_info_withdraw">
+                <div class="field withdraw-description row-field">
+                    <label class="label bold-text" style="margin-right: 15px"><span><?= /* @noEscape */
+                            __('Withdraw Description') ?></span></label>
+                    <div class="control">
+                        <?= $block->escapeHtml($withdraw->getWithdrawDescription()) ?>
+                    </div>
+                </div>
+                <div class="field created-at row-field">
+                    <label class="label bold-text">
+                        <span><?= /* @noEscape */
+                            __('Requested Date') ?></span>
+                    </label>
+                    <div class="control">
+                        <?= /* @noEscape */
+                        $block->formatDate($withdraw->getCreatedAt(), \IntlDateFormatter::MEDIUM, true) ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <?php if ($withdraw->getResolvedAt()) : ?>
+        <div class="field resolved-at">
+            <label class="label">
+                <span><?= /* @noEscape */
+                    __('Resolve Date') ?></span>
+            </label>
+            <div class="control">
+                <?= /* @noEscape */
+                $block->formatTime($withdraw->getResolvedAt(), \IntlDateFormatter::MEDIUM, true) ?>
+            </div>
+        </div>
+    <?php endif; ?>
+</div>
+<div class="buttons-set">
+    <p class="back-link"><a href="<?= $tab_current === 'withdraw' ? $block->escapeUrl($block->getUrl('*/account/withdraw')) :  $block->escapeUrl($block->getUrl('*/account/commissionlogs')) ?>">
+            <small>«</small><?= /* @noEscape */
+            __('Back') ?></a>
+    </p>
+</div>
+<script type="text/javascript">
+    require([
+        "jquery",
+    ], function ($) {
+        var urlWithdraw = "<?= $tab_current === 'withdraw' ? $block->escapeUrl($block->getUrl('*/account/withdraw')) :  $block->escapeUrl($block->getUrl('*/account/commissionlogs')) ?>";
+        var targetLink = $('ul.nav.items li.nav.item a[href="' + urlWithdraw + '"]');
+        if (targetLink.length > 0) {
+            targetLink.closest('li.nav.item').addClass('current');
+        }
+    });
+
+</script>

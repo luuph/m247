@@ -1,0 +1,487 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_Affiliate
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+?>
+<?php
+/** @var Mageplaza\Affiliate\Block\Account\Banner $block */
+
+$affiliateHelper = $block->getAffiliateHelper();
+?>
+<div class="box-account box-info box-affiliate affiliate-refer-content affiliate-block" style="
+    display: inline-block;
+    padding: 0 80px 0 15px;
+    background-color: #FFEDD8;
+    margin-bottom: 25px;
+">
+    <?php
+    if ($blockId = $affiliateHelper->getReferringPage()) {
+        echo /** @noEscape */ $block->loadCmsBlock($blockId);
+    } ?>
+</div>
+<div class="box-account box-info box-affiliate affiliate-refer-type">
+    <div class="request" style="background-color: #f5f5f5; padding: 15px 15px">
+        <h3 style="margin-top: 0"><?= /* @escapeNotVerified */
+            __('Referral Url and Code') ?></h3>
+        <div class="box_wrapper">
+            <div class="field url box_left">
+                <form id="referral_url">
+                    <div class="control">
+                        <input placeholder="Enter a link from our store: product, category or any pages" type="url"
+                               pattern="https?://.+" name="ceate-refer_url" id="create-refer-url"/>
+                    </div>
+                    <div class="affiliate-strength-meter" style="display: flex">
+                        <span>
+                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                  xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_448_3556)">
+                                <path d="M7.33337 4.66732H8.66671V6.00065H7.33337V4.66732ZM7.33337 7.33398H8.66671V11.334H7.33337V7.33398ZM8.00004 1.33398C4.32004 1.33398 1.33337 4.32065 1.33337 8.00065C1.33337 11.6807 4.32004 14.6673 8.00004 14.6673C11.68 14.6673 14.6667 11.6807 14.6667 8.00065C14.6667 4.32065 11.68 1.33398 8.00004 1.33398ZM8.00004 13.334C5.06004 13.334 2.66671 10.9406 2.66671 8.00065C2.66671 5.06065 5.06004 2.66732 8.00004 2.66732C10.94 2.66732 13.3334 5.06065 13.3334 8.00065C13.3334 10.9406 10.94 13.334 8.00004 13.334Z"
+                                      fill="#575757"/>
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_448_3556">
+                                    <rect width="16" height="16" fill="white"/>
+                                </clipPath>
+                            </defs>
+                        </svg>
+                        </span>
+                        <span style="margin-left: 5px">
+                            <?= /** @noEscape */ __('The commission rate for you and discount policy for those you choose to refer will correspond with any available affiliate campaign') ?>
+                        </span>
+                    </div>
+                    <div class="affiliate-clear" style="margin-top: 20px">
+                        <div class="primary">
+                            <button type="button" id="create-refer-url-button" class="action save primary"
+                                    title="<?= /* @escapeNotVerified */
+                                    __('Create Referal Link') ?>">
+                            <span><?= /* @escapeNotVerified */
+                                __('Create Referal Link') ?></span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+            <div class="field code box_right">
+                <form
+                        action=""
+                        method="post"
+                        id="coupon-prefix-form"
+                        data-mage-init='{"validation": {}}'
+
+                >
+                    <div class="control">
+                        <input type="text" class="" name="refer_code" id="refer_code"
+                               value="<?= /** @noEscape */ strtoupper($block->getSharingCode() ?? '') ?>"
+                               title="<?= /** @noEscape */ __('Refer Code') ?>" class="input-text"
+                               disabled="true"
+                               data-validate="{'required-entry':true}"
+                               required
+                        />
+                    </div>
+
+                    <div class="affiliate-strength-meter" style="display: flex">
+                         <span>
+                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                  xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_448_3556)">
+                                <path d="M7.33337 4.66732H8.66671V6.00065H7.33337V4.66732ZM7.33337 7.33398H8.66671V11.334H7.33337V7.33398ZM8.00004 1.33398C4.32004 1.33398 1.33337 4.32065 1.33337 8.00065C1.33337 11.6807 4.32004 14.6673 8.00004 14.6673C11.68 14.6673 14.6667 11.6807 14.6667 8.00065C14.6667 4.32065 11.68 1.33398 8.00004 1.33398ZM8.00004 13.334C5.06004 13.334 2.66671 10.9406 2.66671 8.00065C2.66671 5.06065 5.06004 2.66732 8.00004 2.66732C10.94 2.66732 13.3334 5.06065 13.3334 8.00065C13.3334 10.9406 10.94 13.334 8.00004 13.334Z"
+                                      fill="#575757"/>
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_448_3556">
+                                    <rect width="16" height="16" fill="white"/>
+                                </clipPath>
+                            </defs>
+                        </svg>
+                        </span>
+                        <span style="margin-left: 5px">
+                          <?= /** @noEscape */ __('An auto-generated suffix code for each person you send the referral link to, or you can create a unique one on your own ') ?>
+                        </span>
+                    </div>
+                    <div class="affiliate-clear" style="margin-top: 20px">
+                        <div class="primary">
+                            <button type="button" id="create-edit-code-button" class="btn_close_popup"
+                                    title="<?= /* @escapeNotVerified */
+                                    __('Edit') ?>">
+                            <span><?= /* @escapeNotVerified */
+                                __('Edit') ?></span>
+                            </button>
+
+                            <button type="button" id="saveCouponPrefix" class="btn_close_popup d-none"
+                                    title="<?= /* @escapeNotVerified */
+                                    __('Save') ?>">
+                            <span><?= /* @escapeNotVerified */
+                                __('Save') ?></span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="box_wrapper">
+            <div class="field url box_left">
+                <label class="label" for="refer_url"><span><?= /* @escapeNotVerified */
+                        __('Refer Url') ?></span></label>
+                <div class="control">
+                    <div style="background-color: #E9E9E9; padding: 5px 10px; position: relative">
+                        <div class="d-none copied_text" style="position: absolute; top: -20px; right: 0">
+                            Copied
+                        </div>
+                        <div id="link_referral" class="link_copy"
+                             style=" font-weight: 600; display: flex; align-items: center; justify-content: space-between"
+                        >
+                            <span style="margin-right: 15px" class="text_copy"
+                                  title="<?= /** @noEscape */ $block->getSharingUrl() ?>"> <?= /** @noEscape */ $block->getSharingUrl() ?></span>
+                            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg"
+                                 id="copy_link_ref">
+                                <path d="M17.5455 6H9.36364C8.61364 6 8 6.61364 8 7.36364V16.9091H9.36364V7.36364H17.5455V6ZM19.5909 8.72727H12.0909C11.3409 8.72727 10.7273 9.34091 10.7273 10.0909V19.6364C10.7273 20.3864 11.3409 21 12.0909 21H19.5909C20.3409 21 20.9545 20.3864 20.9545 19.6364V10.0909C20.9545 9.34091 20.3409 8.72727 19.5909 8.72727ZM19.5909 19.6364H12.0909V10.0909H19.5909V19.6364Z"
+                                      fill="#AEAEAE"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="affiliate-strength-meter" style="display: flex">
+                      <span>
+                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                  xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_448_3556)">
+                                <path d="M7.33337 4.66732H8.66671V6.00065H7.33337V4.66732ZM7.33337 7.33398H8.66671V11.334H7.33337V7.33398ZM8.00004 1.33398C4.32004 1.33398 1.33337 4.32065 1.33337 8.00065C1.33337 11.6807 4.32004 14.6673 8.00004 14.6673C11.68 14.6673 14.6667 11.6807 14.6667 8.00065C14.6667 4.32065 11.68 1.33398 8.00004 1.33398ZM8.00004 13.334C5.06004 13.334 2.66671 10.9406 2.66671 8.00065C2.66671 5.06065 5.06004 2.66732 8.00004 2.66732C10.94 2.66732 13.3334 5.06065 13.3334 8.00065C13.3334 10.9406 10.94 13.334 8.00004 13.334Z"
+                                      fill="#575757"/>
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_448_3556">
+                                    <rect width="16" height="16" fill="white"/>
+                                </clipPath>
+                            </defs>
+                        </svg>
+                      </span>
+                    <span style="margin-left: 5px">
+                    <?= /** @noEscape */ __('Referrals that access this URL are connected as referrals once they sign up or place an order.') ?>
+                        </span>
+                </div>
+            </div>
+            <div class="field email box_right">
+                <label class="label" for="refer_email">
+                    <span><?= /* @escapeNotVerified */
+                        __('Refer Email') ?></span>
+                </label>
+                <div class="control">
+                    <div style="background-color: #E9E9E9; padding: 5px 10px; position: relative">
+                        <div class="d-none copied_text" style="position: absolute; top: -20px; right: 0">
+                            Copied
+                        </div>
+                        <div id="email_referral" class="link_copy"
+                             style=" font-weight: 600; display: flex; align-items: center; justify-content: space-between"
+                             title="<?= /** @noEscape */ $block->getSharingEmail() ?>">
+                            <span style="margin-right: 15px" class="text_copy"> <?= /** @noEscape */ $block->getSharingEmail() ?></span>
+                            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg"
+                                 id="copy_email_ref">
+                                <path d="M17.5455 6H9.36364C8.61364 6 8 6.61364 8 7.36364V16.9091H9.36364V7.36364H17.5455V6ZM19.5909 8.72727H12.0909C11.3409 8.72727 10.7273 9.34091 10.7273 10.0909V19.6364C10.7273 20.3864 11.3409 21 12.0909 21H19.5909C20.3409 21 20.9545 20.3864 20.9545 19.6364V10.0909C20.9545 9.34091 20.3409 8.72727 19.5909 8.72727ZM19.5909 19.6364H12.0909V10.0909H19.5909V19.6364Z"
+                                      fill="#AEAEAE"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="affiliate-strength-meter" style="display: flex">
+                         <span>
+                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                  xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_448_3556)">
+                                <path d="M7.33337 4.66732H8.66671V6.00065H7.33337V4.66732ZM7.33337 7.33398H8.66671V11.334H7.33337V7.33398ZM8.00004 1.33398C4.32004 1.33398 1.33337 4.32065 1.33337 8.00065C1.33337 11.6807 4.32004 14.6673 8.00004 14.6673C11.68 14.6673 14.6667 11.6807 14.6667 8.00065C14.6667 4.32065 11.68 1.33398 8.00004 1.33398ZM8.00004 13.334C5.06004 13.334 2.66671 10.9406 2.66671 8.00065C2.66671 5.06065 5.06004 2.66732 8.00004 2.66732C10.94 2.66732 13.3334 5.06065 13.3334 8.00065C13.3334 10.9406 10.94 13.334 8.00004 13.334Z"
+                                      fill="#575757"/>
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_448_3556">
+                                    <rect width="16" height="16" fill="white"/>
+                                </clipPath>
+                            </defs>
+                        </svg>
+                      </span>
+                    <span style="margin-left: 5px">
+                          <?= /** @noEscape */ __('Referrals can enter your e-mail address when signing up affiliate account.') ?>
+                        </span>
+                </div>
+            </div>
+        </div>
+        <?php if ($affiliateHelper->getShareThisPropertyId()
+            && $affiliateHelper->getShareThisOption()): ?>
+            <div class="field social_sharing">
+                <?php if ($affiliateHelper->getShareThisOption() !== 'sticky'): ?>
+                    <label class="label" for="refer_social">
+                        <span><?= /* @escapeNotVerified */
+                            __('Referral Via Social Networks') ?></span>
+                    </label>
+                <?php endif; ?>
+                <div class="control">
+                    <div class="referral-share-this">
+                        <?php if ($affiliateHelper->getShareThisOption() === 'sticky'): ?>
+                            <div class='sharethis-sticky-share-buttons'></div>
+                        <?php elseif ($affiliateHelper->getShareThisOption() === 'both'): ?>
+                            <div class='sharethis-sticky-share-buttons'></div>
+                            <div class="sharethis-inline-share-buttons"></div>
+                        <?php else: ?>
+                            <style>
+                                .st-sticky-share-buttons {
+                                    display: none !important;
+                                }
+                            </style>
+                            <div class="sharethis-inline-share-buttons"></div>
+                        <?php endif; ?>
+                        <script type="text/javascript"
+                                src="//platform-api.sharethis.com/js/sharethis.js#property=<?= /** @noEscape */ $affiliateHelper->getShareThisPropertyId() ?>"></script>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
+    </div>
+    <form action="<?= /** @noEscape */ $block->getSendMailUrl() ?>" method="post" id="form-validate"
+          class="form form-edit-account form-affiliate form-affiliate-refer-send-mail">
+        <div class="request" style="background-color: #f5f5f5; padding: 15px 15px; margin-top: 25px">
+            <h3 class="" style="margin-top: 0"><span><?= /* @escapeNotVerified */
+                    __('Send Invitation') ?></span></h3>
+            <div class="field sharing_subject required">
+                <label class="label" for="refer_subject">
+                    <span><?= /* @escapeNotVerified */
+                        __('Subject') ?></span>
+                </label>
+                <div class="control">
+                    <input id="refer_subject" class="input-text required" data-validate="{required:true}" type="text"
+                           title="<?= /** @noEscape */ __('Subject') ?>" name="subject"
+                           value="<?= /** @noEscape */ $affiliateHelper->getDefaultEmailSubject() ?>"/>
+                </div>
+            </div>
+            <div class="box_wrapper">
+                <div class="field sharing_email required box_left">
+                    <label class="label" for="recipient_list">
+                        <span><?= /* @escapeNotVerified */
+                            __('Your friends\' emails') ?></span>
+                    </label>
+                    <div class="control">
+                    <textarea name="contacts" id="recipient_list" class="affiliate_recipient_list input-text required" placeholder="Enter your friends' email addresses here. You can separate them with commas"
+                              rows="3" data-validate="{required:true}"></textarea>
+                    </div>
+                    <?php if ($affiliateHelper->getCloudsponge() && $affiliateHelper->getCloudspongeKey()): ?>
+                        <script>
+                            (function (u) {
+                                var d = document, s = 'script', a = d.createElement(s),
+                                    m                             = d.getElementsByTagName(s)[0];
+                                a.async                           = 1;
+                                a.src                             = u;
+                                m.parentNode.insertBefore(a, m);
+                            })('//api.cloudsponge.com/widget/<?= /** @noEscape */ $affiliateHelper->getCloudspongeKey() ?>.js');
+                            window.csPageOptions = {textarea_id: "recipient_list"};
+                        </script>
+                        <a class="cs_import"><?= /** @noEscape */ __('Add from Address Book') ?></a>
+                    <?php endif; ?>
+                </div>
+
+                <div class="field sharing_content required box_right">
+                    <label class="label" for="refer_content">
+                        <label><?= /* @escapeNotVerified */
+                            __('Your message') ?></label>
+                    </label>
+                    <div class="control">
+                    <textarea name="content" id="refer_content" class="input-text required affiliate-referral-message"
+                              placeholder="Just your message, no need to put referral URL here."
+                              rows="4" data-validate="{required:true}" cols="80"
+                              title="<?= /** @noEscape */ __('Short Message') ?>"><?= /** @noEscape */ $block->getEmailContent(); ?></textarea>
+                        <p class="note"><span><?= /** @noEscape */ __('Just your message, no need to put Refer Url here.') ?></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="actions-toolbar affiliate-clear">
+                <div class="primary">
+                    <button type="submit" id="refer-sendmail-button" class="action save primary"
+                            title="<?= /* @escapeNotVerified */
+                            __('Send') ?>">
+                        <span><?= /* @escapeNotVerified */
+                            __('Send') ?></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    require([
+        "jquery",
+        "mage/mage"
+    ], function ($) {
+        var dataForm        = $('#form-validate'),
+            referCodeInput  = $('#refer_code');
+
+        dataForm.mage('validation', {
+            errorPlacement: function (error, element) {
+                error.insertAfter(element);
+            }
+        });
+
+        $(document).ready(function () {
+            var createUrlButton = $('#create-refer-url-button'),
+                createUrlInput  = $('#create-refer-url'),
+                referRrl        = $('#link_referral .text_copy'),
+                form            = $('.affiliate-refer-type #form-validate'),
+                form_referral   = $('#referral_url'),
+                param           = '<?= /* @noEscape */ $block->getSharingParam() ?>',
+                editBtn         = $('#create-edit-code-button'),
+                saveBtn         = $('#saveCouponPrefix');
+
+            createUrlButton.click(function () {
+                if (createUrlInput.val() && form_referral[0].checkValidity()) {
+                    referRrl.text(createUrlInput.val() + param);
+                    referRrl.attr('title', createUrlInput.val() + param);
+                } else {
+                    form_referral[0].reportValidity()
+                }
+            });
+
+            editBtn.click(function () {
+                referCodeInput.prop('disabled', false);
+                referCodeInput.focus();
+                editBtn.attr('class', 'btn_close_popup d-none');
+                saveBtn.attr('class', 'btn_close_popup d-block');
+            });
+
+            form.submit(function () {
+                $("<input />").attr("type", "hidden")
+                .attr("name", "refer_url")
+                .attr("value", referRrl.text())
+                .appendTo(form);
+                return true;
+            });
+        });
+
+        $('#coupon-prefix-form').mage('validation');
+        $('#saveCouponPrefix').on('click', function (event) {
+            event.preventDefault(); // Prevent the default form submission
+            if ($('#coupon-prefix-form').valid()) {
+                var ajaxUrl = "<?= /* @noEscape */ $block->getUrl('affiliate/account/savecouponprefix') ?>";
+                var text = $('#refer_code').val().trim();
+                $.ajax({
+                    showLoader: true,
+                    url: ajaxUrl,
+                    data: {form_key: window.FORM_KEY, campaign_coupon_prefix: text},
+                    type: "POST"
+                }).done(function (data) {
+                    referCodeInput.val(text.toUpperCase());
+                    $('.page.messages > div').show();
+                    referCodeInput.prop('disabled', true);
+                    $('#saveCouponPrefix').attr('class', 'btn_close_popup d-none');
+                    $('#create-edit-code-button').attr('class', 'btn_close_popup d-block');
+                    if ($('#maincontent').find('.messages')) {
+                        setTimeout(function () {
+                            $('.page.messages > div').hide();
+
+                        }, 3000);
+                    }
+                });
+            } else {
+                console.log('Form is not valid.');
+            }
+        });
+
+    });
+
+
+</script>
+
+<script type="text/x-magento-init">
+    {
+        "#link_referral": {
+            "Mageplaza_Affiliate/js/action/copy": {
+             "text": "<?= /** @noEscape */ $block->getSharingUrl() ?>",
+            "copyBtn": "#copy_link_ref"
+            }
+        },
+        "#email_referral": {
+            "Mageplaza_Affiliate/js/action/copy": {
+             "text": "<?= /** @noEscape */ $block->getSharingEmail() ?>",
+            "copyBtn": "#copy_email_ref"
+            }
+        }
+    }
+
+
+
+
+
+
+</script>
+
+
+<style>
+    .box_left {
+        width: 48%;
+    }
+
+    .box_right {
+        width: 48%;
+    }
+
+    .box_wrapper {
+        display: flex;
+        justify-content: space-between;
+    }
+
+
+    #refer_code[disabled]:not([value=""]):hover {
+        cursor: not-allowed;
+    }
+    .box-affiliate .field > .label {
+        margin: 25px 0 5px 0 !important;
+    }
+    .field.required > .label:after {
+        content: '*';
+        color: #e02b27;
+        font-size: 1.2rem;
+        margin: 0 0 0 5px;
+    }
+
+    .field > .label {
+        font-weight: 600;
+        display: block;
+        margin: 15px 0;
+    }
+
+    @media (max-width: 768px) {
+        .box_left {
+            width: 100%;
+            margin-bottom: 25px;
+        }
+
+        .box_right {
+            width: 100%;
+        }
+
+        .box_wrapper {
+            display: block;
+        }
+    }
+
+    }
+
+</style>

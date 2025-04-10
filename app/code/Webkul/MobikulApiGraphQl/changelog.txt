@@ -1,0 +1,17 @@
+Legend
+
++ Features
+- Bugs
+
+-------------------------------- Version 5.0.1 -------------------------------
+	+ Watch app support added.
+	- Bug fixes
+
+-------------------------------- Version 5.0.0 -------------------------------
+	+ Compatible with magento 2.4.6 and PHP V8.1
+	- Fixed Bugs
+	+ Added Multi Store Configuration feature
+	
+-------------------------------- Version 4.0.0 -------------------------------
+	+ Mobikul API graphql implemented
+	+ Compatible with magento 2.4

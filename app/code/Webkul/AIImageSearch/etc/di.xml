@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_AIImageSearch
+ * @author    Webkul Software Private Limited
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="\Magento\Catalog\Model\Product">
+        <plugin name="wk_ai_image_search_after_product_save" type="Webkul\AIImageSearch\Plugin\Product"/>
+    </type>
+    <type name="Magento\Framework\Search\AdapterInterface">
+        <plugin name="wk_ai_image_search_modify_search_results" type="Webkul\AIImageSearch\Plugin\Elasticsearch7\SearchAdapter\Adapter" sortOrder="1" />
+    </type>
+    <type name="Magento\CatalogSearch\Block\Result">
+        <plugin name="wk_ai_image_search_after_get_search_query_text" type="Webkul\AIImageSearch\Plugin\SearchTitle" sortOrder="1" />
+    </type> 
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="wk_ai_image_search_create_embeddings_command" xsi:type="object">Webkul\AIImageSearch\Console\CreateProductEmbeddings</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

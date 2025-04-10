@@ -1,2 +1,0 @@
-0000000000000000000000000000000000000000 5155d058f5d263b028a8ff11b18940927007e0f0 Hai Luu <luuph@bsscommerce.com> 1736492122 +0700	branch: Created from HEAD
-5155d058f5d263b028a8ff11b18940927007e0f0 82ad702a9ed9d62bb9e411d60abecafce9746b33 Hai Luu <luuph@bsscommerce.com> 1736492171 +0700	commit: BSupport-7655: Fix send 2 code per 1 order when checkout with paypal

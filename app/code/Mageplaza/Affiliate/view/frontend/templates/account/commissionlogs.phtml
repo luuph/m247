@@ -1,0 +1,48 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_Affiliate
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+/** @var Mageplaza\Affiliate\Block\Account\Commissionlogs $block */
+?>
+
+<div>
+    <div id="reports_sales">
+        <?= /* @noEscape */
+        $block->getChildHtml('commissionlogs.sales') ?>
+    </div>
+    <div id="reports_withdraw" style="margin-top: 70px">
+        <?= /* @noEscape */
+        $block->getChildHtml('commissionlogs.withdraw') ?>
+    </div>
+</div>
+<style>
+    #reports_sales .pager .toolbar-amount, #reports_withdraw .pager .toolbar-amount  {
+        display: none;
+    }
+    #reports_sales .pager, #reports_withdraw .pager {
+        margin-top: 20px;
+    }
+    #reports_sales .pages .items, #reports_withdraw .pages .items  {
+        float: left;
+    }
+    #reports_sales .pages strong.page,  #reports_withdraw .pages strong.page {
+        padding: 1px 13px
+    }
+</style>

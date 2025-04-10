@@ -1,0 +1,80 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Walletsystem
+ * @author    Webkul
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+?>
+<?php
+    $viewModel = $block->getViewModel();
+    $helper = $viewModel->getHelper();
+if ($helper->getWalletenabled()) {
+    $status = 0;
+    $customerId = $helper->getCustomerId();
+    $currency_code = $helper->getCurrentCurrencyCode();
+    $customerCollection = $block->getCustomerCollection();
+    $params = $block->getTransferParameters();
+    ?>
+    <div class="wk_ws_main">
+            <div class='wk_ws_main_head'>
+                <div class="wk_ws_sub_head1">
+                    <img src='
+                    <?=$block->escapeUrl($block->getViewFileUrl(
+                        'Webkul_Walletsystem::images/wallet.png'
+                    ));?>' width="70px" height="55px">
+                </div>
+                <div class="wk_ws_sub_head2"><h2><?=$block->escapeHtml(__('Wallet Details'));?></h2>
+                    <h3>
+                        <span class="wk_ws_price">
+                        <?=$block->escapeHtml($block->getWalletRemainingTotal($customerId))?>
+                        </span>
+                        <?= $block->escapeHtml("(".$currency_code.")")?>
+                    </h3>
+                    <span><?=$block->escapeHtml(__("Your Wallet Balance"))?></span>
+                </div>
+            </div>
+            <div class='wk_ws_body'>
+                <div>
+                    <form action="
+                    <?=$block->escapeUrl($block->getUrl(
+                        'walletsystem/transfer/sendamount/'
+                    ))?>" enctype="multipart/form-data" method="post" id="verify-form" 
+                    class="form"  data-mage-init='{"validation": {}}'>
+                        <fieldset class='wk_ws_fieldset fieldset'>
+                            <input type="hidden" name="amount" value="<?= $block->escapeHtmlAttr($params['amount'])?>"/>
+                            <input type="hidden" name="base_amount"
+                            value="<?= $block->escapeHtmlAttr($params['base_amount'])?>"/>
+                            <input type="hidden" name="reciever_id"
+                            value="<?= $block->escapeHtmlAttr($params['reciever_id'])?>"/>
+                            <input type="hidden" name="sender_id" 
+                            value="<?= $block->escapeHtmlAttr($params['sender_id'])?>"/>
+                        <?=/*@noEscape*/ $block->getBlockHtml('formkey')?>
+                            <div class="field required">
+                                <label class="label required" for="amount">
+                                    <span><?=$block->escapeHtml(__("Enter code"))?></span>
+                                </label>
+                                <div class="control">
+                                    <input type="text" name="code" class="required-entry">
+                                </div>
+                            </div>
+                            <div>
+                                <button type="submit" title="send amount" class="button action primary">
+                                    <span><span><?=$block->escapeHtml(__("Send amount"))?></span></span>
+                                </button>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="resendCode">
+                    <a href="<?=$block->escapeUrl($block->getUrl('walletsystem/transfer/sendcode', $params))?>">
+                        <?=$block->escapeHtml(__("Resend Code"))?>
+                    </a>
+                </div>
+            </div>
+        </div>
+<?php }?>

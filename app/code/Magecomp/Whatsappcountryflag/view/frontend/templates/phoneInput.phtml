@@ -1,0 +1,154 @@
+<?php
+define('BUILD_VERSION', '1.0.1');
+define('DEBUG_MODE', false); // DEBUG
+define('PHONE_INPUT_ELEMENT', 'input[name="telephone"]');
+$isEnabled = $block->isEnabled();
+$getDefualtCountry = $block->getDefualtCountry();
+$getDetectByIp = $block->getDetectByIp();
+$getCustomerIPDetails = $block->getCustomerIPDetails();
+$int_phone_input_element = PHONE_INPUT_ELEMENT;
+$getUrl = $block->getBaseUrl();
+$countryList = json_encode($block->getCountryCodeData());
+?>
+<input type="hidden" value="" id="mobilenumber" name="mobilenumber">
+<input type="hidden" value="" id="countryreg" name="countryreg">
+
+    <?php $scriptString = <<<script
+   require([
+    'jquery',
+    'Magecomp_Whatsappcountryflag/js/intlTelInput.min'
+],
+function($) {
+    var int_phone_input_element = '{$int_phone_input_element}';
+    function Smsresetdata()
+    {
+        if(jQuery(int_phone_input_element).val()==""){
+            $(".field-note").css('color','black');
+            $(".field-note").text('This is a required field.');
+        }
+        
+        jQuery(int_phone_input_element).removeClass('mage-error');
+        jQuery('#smserror').html('');
+    }
+
+    function Smstoggeldata(Elementid)
+    {
+        jQuery(Elementid).toggle();
+    }
+    
+    var checkPhoneInputExist = setInterval(function () {
+        
+        if (jQuery(int_phone_input_element).length) {
+           if($isEnabled){
+                var country_flag = "$getDefualtCountry";
+                if("$getDetectByIp"){
+                    fetch('https://ipinfo.io/json')
+                            .then(response => response.json())
+                            .then(data => {
+                                country_flag = data.country;
+                                localStorage.setItem('country_code', country_flag)
+                            })
+                            .catch(error => {
+                                console.error('Error fetching geolocation data:', error);
+                            });
+                }
+                else{
+                    localStorage.setItem('country_code', country_flag)
+                }
+                var country_code = localStorage.getItem('country_code');
+                
+            jQuery(int_phone_input_element).intlTelInput({
+                initialCountry: country_code
+            });
+            jQuery(int_phone_input_element).removeAttr('placeholder');
+
+            jQuery(int_phone_input_element).keyup(function(){
+                Smsresetdata();
+                var str = jQuery(".selected-flag").attr("title");
+                var countrycodeval =  str.split('+')[1];
+                var mobilelength=jQuery(int_phone_input_element).val().length;
+                jQuery("#mobilenumber").val(jQuery(int_phone_input_element).val());
+                var mobile =  jQuery(int_phone_input_element).val();
+                jQuery("#countryreg").val(countrycodeval);
+                var temp=true;
+                if(mobile == null || mobile == '')
+                {
+                    temp=false;
+                    jQuery(int_phone_input_element).addClass('mage-error');
+                    $(".field-note").css('color','red');
+                    $(".field-note").text($.mage.__('This is a required field.'));
+                    return false;
+                }
+                if(!$.isNumeric(mobile) || mobile.substring(0,1)=='+' || mobile.substring(0,1)=='-')
+                {
+                    temp=false;
+                    jQuery(int_phone_input_element).addClass('mage-error');
+                    $(".field-note").css('color','red');
+                    $(".field-note").text($.mage.__('Please, Enter Valid Mobile Number.'));
+                    return false;
+                }
+                var countrycode = jQuery(".flag-container > .country-list > .active").attr("data-country-code");
+                if(temp==true){
+                    $.ajax({
+                        type: "POST",
+                        url: '{$getUrl}whatsappcountryflag/customer/validatephone',
+                        data:{'mobile':mobile,'countrycode':countrycode,'mobilelength':mobilelength,'country_id':countrycodeval},
+                        success: function(data)
+                        {
+                            if(data.validate==true){
+                                $(".field-note").css('color','black');
+                                 $(".field-note").text("");
+                                //$(".field-note").text('Enter Your Mobile No.');
+                                jQuery('#shipping-method-buttons-container .button.action.continue.primary').prop("disabled", false);
+                                jQuery('.action-save-address').prop("disabled", false);
+                            }
+                            else{
+                                $(".field-note").css('color','red');
+                                if(!data){
+                                    $(".field-note").text("");
+                                    //jQuery('#shipping-method-buttons-container .button.action.continue.primary').prop("disabled", false);
+                                    jQuery('.action-save-address').prop("disabled", true);
+                                }else{
+                                    if(temp==true && data.validate == false){
+                                        $(".field-note").text(data.message);
+                                    }
+                                    //jQuery('#shipping-method-buttons-container .button.action.continue.primary').prop("disabled", true);
+                                    jQuery('.action-save-address').prop("disabled", true);
+                                }
+                                
+                                
+                            }
+                        },
+                        error: function(data) {
+                            $(".field-note").css('color','red');
+                            $(".field-note").html(__('Something went wrong, Try again later.'));
+                        }
+                    });
+                }
+            });
+            jQuery('.country-list li').click(function(){
+                jQuery(int_phone_input_element).val('');
+            });
+            jQuery(int_phone_input_element).blur(function(){
+                var str = jQuery(".selected-flag").attr("title");
+                var countrycodeval =  str.split('+')[1];
+                var mobile = jQuery(int_phone_input_element).val();
+                var strFirstThree = mobile.substring(0,countrycodeval.length);
+                if(mobile.indexOf(countrycodeval) != -1){
+                    mobile.replace(countrycodeval,'');
+                }
+                if(countrycodeval!=strFirstThree){
+                     jQuery(int_phone_input_element).val(countrycodeval+mobile);
+                     jQuery(int_phone_input_element).trigger('change');
+                }
+            });
+        }
+            clearInterval(checkPhoneInputExist);
+        }
+    }, 100); 
+
+}
+);
+script;
+?>
+<?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false) ?>

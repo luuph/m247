@@ -1,0 +1,93 @@
+/**
+ * Webkul Software.
+ *
+ * @category   Webkul
+ * @package    Webkul_AIImageSearch
+ * @author     Webkul Software Private Limited
+ * @copyright  Webkul Software Private Limited (https://webkul.com)
+ * @license    https://store.webkul.com/license.html
+ */
+.wk-ai-search-by-image-main-container {
+    padding: 10px 10px;
+    display: flex;
+    border: 1px solid #c9c9c9;
+    width: 25.3rem;
+}
+.wk-ai-search-by-image-image {
+    display: inline-block;
+}
+.wk-ai-search-by-image-label-button {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.wk-ai-search-by-image-label {
+    font-size: 1.6rem;
+
+}
+.wk-ai-search-by-image-try-again-button {
+    max-width: fit-content;
+    padding-inline: 8px;
+    padding-block: 6px;
+    letter-spacing: -0.013rem;
+    font-size: 12px;
+}
+.wk-ai-search-by-image-browse-button {
+    background: #eeeeee;
+    border-radius: 3px;
+    border: 1px solid #c4c4c4;
+    color: #333333;
+    font-weight: 600;
+    max-width: fit-content;
+    padding-inline: 8px;
+    padding-block: 6px;
+    font-size: 12px;
+}
+.wk-ai-search-by-image-browse-button:hover {
+    color: #333333;
+    background: #e1e1e1;
+    border: 1px solid #cccccc;
+    cursor: pointer;
+}
+.wk-ai-search-by-image-align-label-button-center {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 13px;
+    padding-block: 0;
+    justify-content: space-around;
+}
+.wk-ai-search-by-image-image-name {
+    display: none;
+}
+.wk-ai-search-by-image-orignal-image {
+    display: none;
+}
+.wk-ai-search-by-image-cropped-image {
+    height: 11.12rem;
+    max-height: 100%;
+    object-fit: cover;
+    width: 16rem;
+    aspect-ratio: 1;
+}
+#wk-ai-advanced-image-search-input {
+    display: none;
+}
+.wk-ai-search-by-image-main-label {
+    color: #333333;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-style: normal;
+    line-height: 1.42857143;
+    font-size: 1.4rem;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 1rem 
+}
+
+.modal-popup._inner-scroll .modal-inner-wrap {
+    width: 50%;
+}
+@media only screen and (max-width: 600px) {
+    .modal-popup._inner-scroll .modal-inner-wrap {
+        width: 100%;
+    }
+}

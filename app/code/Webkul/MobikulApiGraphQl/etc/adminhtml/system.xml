@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MobikulCore
+ * @author    Webkul Software Private Limited
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="webkul" translate="label" sortOrder="10" class="wk-config-tab-class">
+            <label>Webkul</label>
+        </tab>
+        <section id="mobikul" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="0" showInStore="0">
+            <group id="cachesettings" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Mobikul Api Cache Settings</label>
+                <field id="enable" translate="label" sortOrder="1" type="select" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Cache</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="ttl" translate="label" sortOrder="4" type="text" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>TTL</label>
+                    <validate>required-entry validate-zero-or-greater</validate>
+                    <comment><![CDATA[Time to live (TTL) invalidates cache after the given number in seconds.]]></comment>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="counter" translate="label" sortOrder="4" type="text" showInDefault="0" showInWebsite="0" showInStore="0">
+                    <label>Refresh cache rate</label>
+                    <validate>required-entry validate-zero-or-greater</validate>
+                    <tooltip>Cache  will be refreshed automatically, after provided number of times when api called.</tooltip>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="clear" translate="label" sortOrder="4" type="button" showInDefault="0" showInWebsite="0" showInStore="0">
+                    <label>Clear Cache</label>
+                    <frontend_model>Webkul\MobikulCore\Block\Adminhtml\Clearcache</frontend_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,266 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Walletsystem
+ * @author    Webkul
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+?>
+<?php
+use \Webkul\Walletsystem\Model\Wallettransaction;
+
+$accountDetailsBlock = $block->getLayout()->createBlock(
+    \Webkul\Walletsystem\Block\Transfer::class
+);
+$viewModel = $block->getViewModel();
+$helper = $viewModel->getHelper();
+$minimumAmount = $helper->getMinimumAmount();
+$maximumAmount = $helper->getMaximumAmount();
+$minimumAmount = $helper->formatAmount($minimumAmount);
+$maximumAmount = $helper->formatAmount($maximumAmount);
+if ($helper->getWalletenabled()):
+    $customerId = $helper->getCustomerId();
+    $currency_code = $helper->getCurrentCurrencyCode();
+    $id = $helper->getWalletProductId(); ?>
+    <div class="wk_ws_main">
+        <div class='wk_ws_main_head'>
+            <div class="wk_ws_sub_head1">
+                <img 
+                src='<?=$block->escapeUrl($block->getViewFileUrl('Webkul_Walletsystem::images/wallet.png'));?>' 
+                width="70px" height="55px"/>
+            </div>
+            <div class="wk_ws_sub_head2">
+                <div class="wk_ws_sub_head_details">
+                    <h2><?=$block->escapeHtml(__('Wallet Details'));?></h2>
+                    <h3>
+                        <span class="wk_ws_price">
+                            <?=$block->escapeHtml($block->getWalletRemainingTotal($customerId))?>
+                        </span><?= $block->escapeHtml("(".$currency_code.")")?>
+                    </h3>
+                    <span><?=$block->escapeHtml(__("Your Wallet Balance"))?></span>
+                </div>
+                <div class="wk_ws_sub_head_transfer button action primary">
+                    <span><?=$block->escapeHtml(__("Transfer Amount to bank account"))?></span>
+                </div>
+            </div>
+        </div>
+        <div class='wk_ws_body'>
+            <fieldset class='wk_ws_fieldset'>
+                <h4><?=$block->escapeHtml(__('Enter Amount to be Added in wallet'))?></h4>
+                <label class="error"></label>
+                <form 
+                action="<?=$block->escapeUrl($block->getUrl('checkout/cart/add/'))?>" 
+                enctype="multipart/form-data" 
+                method="post" 
+                id="form-custom-data">
+                    <?=$block->getBlockHtml('formkey')?>
+                    <input type="hidden"
+                    value='<?=$block->escapeHtmlAttr($id)?>'
+                    name='product'/>
+                    <input type="hidden" value='1' name='qty'/>
+                    <div class='wk_ws_price_outer'>
+                        <input 
+                        type="text" 
+                        min='<?=$block->escapeHtmlAttr($minimumAmount);?>' 
+                        max='<?=$block->escapeHtmlAttr($maximumAmount);?>'
+                        name='price'
+                        id="wk_ws_price"
+                        class="required-entry validate-number validate-greater-than-zero" />
+                    </div>
+                    <div>
+                        <span>[<?=$block->escapeHtml($currency_code);?>]</span>
+                        <button
+                        type="submit"
+                        title="<?=$block->escapeHtml(__("Add Money To Wallet"))?>"
+                        class="button wk_ws_add_payment action primary">
+                            <span><span>
+                                <?=$block->escapeHtml(__("Add Money To Wallet"))?>
+                            </span></span>
+                        </button>
+                    </div>
+                </form>
+            </fieldset>
+        </div>
+        <div class='wk_ws_table'>
+            <h3><?=$block->escapeHtml(__('Last Transactions'))?></h3>
+            <?php $walletCollection = $block->getwalletTransactionCollection();
+            if (count($walletCollection)): ?>
+                <div class='table-wrapper'>
+                    <table class="data table walletorder data table">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="col description">
+                                    <?=$block->escapeHtml(__('Reference'))?>
+                                </th>
+                                <th
+                                scope="col"
+                                class="col debit">
+                                    <?=$block->escapeHtml(__('Debit'))?>
+                                </th>
+                                <th
+                                scope="col"
+                                class="col credit">
+                                    <?=$block->escapeHtml(__('Credit'))?>
+                                </th>
+                                <th 
+                                scope="col"
+                                class="col status">
+                                    <?=$block->escapeHtml(__('Status'))?>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($walletCollection as $record):
+                                $prefix = $helper->getTransactionPrefix($record->getSenderType(), $record->getAction());
+                                ?>
+                                <tr>
+                                    <td
+                                        data-th="<?= $block->escapeHtmlAttr($prefix);?>"
+                                        class="col description"
+                                        >
+                                        <?=$block->escapeHtml($prefix)?>
+                                        <a href="
+                                        <?=$block->escapeUrl($block->getUrl(
+                                            'walletsystem/index/view/',
+                                            ['entity_id'=>$record->getEntityId()]
+                                        ));?>">#<?=$block->escapeHtml($record->getEntityId());?></a>
+                                    </td>
+                                    <?php if ($record->getAction()==Wallettransaction::WALLET_ACTION_TYPE_DEBIT): ?>
+                                        <td data-th="<?=$block->escapeHtml(__("Debit"))?>" class="col debit">
+                                            <?php
+                                                $amt = $helper->getwkconvertCurrency(
+                                                    $record->getBaseCurrencyCode(),
+                                                    $helper->getCurrentCurrencyCode(),
+                                                    $record->getAmount()
+                                                );
+                                            ;?>
+                                           <?= /* @noEscape */ $block->escapeHtml(
+                                               $helper->getFormattedPriceAccToCurrency(
+                                                   $amt,
+                                                   2,
+                                                   $helper->getCurrentCurrencyCode()
+                                               )
+                                           )?>
+                                        </td>
+                                        <td data-th="<?=$block->escapeHtml(__("Credit"))?>" class="col credit">
+                                            <?=$block->escapeHtml(__("-"))?>
+                                        </td>
+                                    <?php else: ?>
+                                        <td data-th="<?=$block->escapeHtml(__("Debit"))?>" class="col debit">
+                                            <?=$block->escapeHtml(__("-"))?>
+                                        </td>
+                                        <td data-th="<?=$block->escapeHtml(__("Credit"))?>" class="col credit">
+                                            <?php
+                                             $amt = $helper->getwkconvertCurrency(
+                                                 $record->getCurrencyCode(),
+                                                 $helper->getCurrentCurrencyCode(),
+                                                 $record->getCurrAmount()
+                                             );
+                                            ?>
+                                             <?= /* @noEscape */  $block->escapeHtml(
+                                                 $helper->getFormattedPriceAccToCurrency(
+                                                     $amt,
+                                                     2,
+                                                     $helper->getCurrentCurrencyCode()
+                                                 )
+                                             )?>
+                                        </td>
+                                    <?php endif; ?>
+                                        <td data-th="<?=$block->escapeHtml(__("Status"))?>" class="col status">
+                                            <?php
+                                            $transactionStatus = "";
+                                            if ($record->getStatus()==
+                                                Wallettransaction::WALLET_TRANS_STATE_PENDING
+                                                ) {
+                                                          $transactionStatus = $block->escapeHtml(__('Pending'));
+                                            } elseif ($record->getStatus()==
+                                                Wallettransaction::WALLET_TRANS_STATE_CANCEL
+                                                ) {
+                                                 $transactionStatus = $block->escapeHtml(__('Cancelled'));
+                                            } else {
+                                                 $transactionStatus = $block->escapeHtml(__('Approved'));
+                                            } ?>
+                                            <?= /* @noEscape */ $transactionStatus; ?>
+                                        </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+                <?php if ($block->getPagerHtml()): ?>
+                    <div class="order-transaction-toolbar toolbar bottom"><?= $block->getPagerHtml(); ?></div>
+                <?php endif ?>
+            <?php else: ?>
+                <h5><?=$block->escapeHtml(__('No records found!'));?></h5>
+            <?php endif; ?>
+        </div>
+    </div>
+    <div class="wk_ws_bank_transfer" >
+        <form id="walletsystem_trasfer_amount" method="post" action="
+        <?=$block->escapeUrl($block->getUrl(
+            'walletsystem/transfer/bankamount',
+            ['_secure' => $block->getIsSecure()]
+        ))?>">
+            <input type="hidden" name="customer_id" value="<?= $block->escapeHtmlAttr($customerId)?>" />
+            <div class="fieldset" >
+                <div class="field required">
+                <label class="label" for="amount"><?=$block->escapeHtml(__("Amount")); ?></label>
+                    <input
+                    type="text"
+                    id="amount"
+                    name="amount"
+                    class="amount"
+                    data-validate="{required:true,'validate-greater-than-zero':true, 'validate-number':true}"/>
+                </div>
+                <div class="field required">
+                    <label class="label" for="bank_details"><?=$block->escapeHtml(__("Account Details")); ?></label>
+                    <?php if ($accountDetailsBlock->getUserAccountData()->getSize()):?>
+                        <select
+                        id="bank_details"
+                        name="bank_details"
+                        class="bank_details"
+                        data-validate="{required:true}">
+                            <?php foreach ($accountDetailsBlock->getUserAccountData() as $accountData):?>
+                                <option
+                                value=<?=$block->escapeHtml($accountData->getEntityId())?>>
+                                <?=$block->escapeHtml($accountData->getHoldername()." ( "
+                                .$accountData->getAccountno().
+                                " )");?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    <?php else: ?>
+                    <p style="color:red"><?=$block->escapeHtml(__('Please configure the account details'));?>
+                    </p>
+                    <style>
+                        .modal-footer .button{display:none;}
+                    </style>
+                    <?php endif;?>
+                </div>
+                <div>
+                    <label for="walletnote"><?=$block->escapeHtml(__("Note")); ?></label>
+                    <textarea id="walletnote" name="walletnote" class="walletnote"></textarea>
+                </div>
+            </div>
+        </form>
+    </div>
+<?php else: ?>
+    <h3><?=$block->escapeHtml(__('Payment method is not enabled.'))?></h3>
+<?php endif; ?>
+<?php
+$formData = [
+    'walletformdata'    =>  '#form-custom-data'
+];
+$serializedFormData = $helper->getJsonHelper()->jsonEncode($formData);
+?>
+<script type="text/x-magento-init">
+{
+    "*": {
+        "Wkwalletsystem": <?=/*@noEscape*/ $serializedFormData; ?>
+    }
+}
+</script>

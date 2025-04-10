@@ -1,0 +1,197 @@
+{
+    "mageplaza_affiliate_transaction": {
+        "column": {
+            "updated_at": true,
+            "transaction_id": true,
+            "account_id": true,
+            "customer_id": true,
+            "action": true,
+            "type": true,
+            "amount": true,
+            "amount_used": true,
+            "current_balance": true,
+            "status": true,
+            "title": true,
+            "order_id": true,
+            "order_increment_id": true,
+            "order_item_id": true,
+            "store_id": true,
+            "campaign_id": true,
+            "created_at": true,
+            "holding_to": true,
+            "extra_content": true,
+            "product_sku": true,
+            "product_qty": true,
+            "affiliate_campaign_id": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "mageplaza_affiliate_account": {
+        "column": {
+            "account_id": true,
+            "customer_id": true,
+            "code": true,
+            "group_id": true,
+            "balance": true,
+            "holding_balance": true,
+            "total_commission": true,
+            "total_paid": true,
+            "status": true,
+            "email_notification": true,
+            "parent": true,
+            "tree": true,
+            "withdraw_method": true,
+            "withdraw_information": true,
+            "created_at": true,
+            "parent_email": true,
+            "description": true,
+            "email_subcription": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_54210566A37ED329302A65DEAF4F6B5B": true
+        }
+    },
+    "mageplaza_affiliate_group": {
+        "column": {
+            "group_id": true,
+            "name": true,
+            "created_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "mageplaza_affiliate_campaign": {
+        "column": {
+            "campaign_id": true,
+            "name": true,
+            "description": true,
+            "status": true,
+            "website_ids": true,
+            "affiliate_group_ids": true,
+            "from_date": true,
+            "to_date": true,
+            "display": true,
+            "sort_order": true,
+            "conditions_serialized": true,
+            "actions_serialized": true,
+            "commission": true,
+            "discount_action": true,
+            "discount_amount": true,
+            "discount_qty": true,
+            "discount_step": true,
+            "discount_description": true,
+            "free_shipping": true,
+            "apply_to_shipping": true,
+            "created_at": true,
+            "updated_at": true,
+            "apply_discount_on_tax": true,
+            "customer_group_ids": true,
+            "stop_rules_processing": true,
+            "pay_commission": true,
+            "use_coupon_code": true,
+            "referral_link": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "mageplaza_affiliate_withdraw": {
+        "column": {
+            "withdraw_id": true,
+            "account_id": true,
+            "customer_id": true,
+            "transaction_id": true,
+            "amount": true,
+            "fee": true,
+            "transfer_amount": true,
+            "status": true,
+            "payment_method": true,
+            "payment_details": true,
+            "resolved_at": true,
+            "created_at": true,
+            "withdraw_description": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "sales_order": {
+        "column": {
+            "affiliate_key": true,
+            "affiliate_commission": true,
+            "affiliate_discount_amount": true,
+            "base_affiliate_discount_amount": true,
+            "affiliate_campaigns": true,
+            "affiliate_shipping_commission": true,
+            "affiliate_earn_commission_invoice_after": true,
+            "affiliate_discount_shipping_amount": true,
+            "affiliate_discount_invoiced": true,
+            "base_affiliate_discount_invoiced": true,
+            "affiliate_discount_refunded": true,
+            "base_affiliate_discount_refunded": true,
+            "affiliate_commission_invoiced": true,
+            "affiliate_commission_refunded": true,
+            "base_affiliate_discount_shipping_amount": true
+        }
+    },
+    "sales_invoice": {
+        "column": {
+            "affiliate_discount_amount": true,
+            "base_affiliate_discount_amount": true
+        }
+    },
+    "sales_creditmemo": {
+        "column": {
+            "affiliate_discount_amount": true,
+            "base_affiliate_discount_amount": true
+        }
+    },
+    "quote": {
+        "column": {
+            "affiliate_key": true,
+            "affiliate_discount_amount": true,
+            "base_affiliate_discount_amount": true,
+            "affiliate_commission": true,
+            "affiliate_shipping_commission": true,
+            "affiliate_discount_shipping_amount": true
+        }
+    },
+    "quote_item": {
+        "column": {
+            "campaign_id": true,
+            "affiliate_discount_amount": true,
+            "base_affiliate_discount_amount": true,
+            "affiliate_commission": true,
+            "affiliate_campaign_id": true
+        }
+    },
+    "sales_order_item": {
+        "column": {
+            "campaign_id": true,
+            "affiliate_discount_amount": true,
+            "base_affiliate_discount_amount": true,
+            "affiliate_commission": true,
+            "affiliate_earn_commission_invoice_after": true,
+            "affiliate_discount_shipping_amount": true,
+            "affiliate_discount_invoiced": true,
+            "base_affiliate_discount_invoiced": true,
+            "affiliate_discount_refunded": true,
+            "base_affiliate_discount_refunded": true,
+            "affiliate_commission_invoiced": true,
+            "affiliate_commission_refunded": true,
+            "base_affiliate_discount_shipping_amount": true,
+            "affiliate_campaign_id": true
+        }
+    },
+    "quote_address": {
+        "column": {
+            "affiliate_discount_amount": true,
+            "base_affiliate_discount_amount": true,
+            "affiliate_shipping_commission": true
+        }
+    }
+}

@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_AIChromaDbClient
+ * @author    Webkul Software Private Limited
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<tab id="webkul" translate="label" sortOrder="10" class="wk-config-tab-class">
+			<label>Webkul</label>
+		</tab>
+		<section id="aichromadbclient" translate="label" type="text" sortOrder="305" showInDefault="1" showInWebsite="1">
+			<label>AI General Configuration</label>
+			<tab>webkul</tab>
+			<resource>Webkul_AIChromaDbClient::config_aichromadbclient</resource>
+			<group id="general" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1">
+				<label>General Settings</label>
+				<field id="chromadb_base_url" translate="label comment tooltip" type="text" sortOrder="100" showInDefault="1" showInWebsite="1">
+					<label>ChromaDB Endpoint</label>
+					<comment>Ex: http://example.com</comment>
+					<validate>required-entry validate-server-protocol</validate>
+					<tooltip>Please specify the port number you are using for Chroma DB Ex:- http://example.com:8000</tooltip>
+				</field>
+				<field id="llm_base_url" translate="label comment tooltip" type="text" sortOrder="200" showInDefault="1" showInWebsite="1">
+					<label>LLM Server Endpoint</label>
+					<comment>Ex: http://example.com</comment>
+					<validate>required-entry validate-server-protocol</validate>
+					<tooltip>Please specify the port number you are using for LLM Ex:- http://example.com:8000</tooltip>
+				</field>
+				<field id="apikey" translate="label comment tooltip" type="obscure" sortOrder="300" showInDefault="1" showInWebsite="1">
+					<label>API KEY</label>
+					<backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+					<validate>required-entry</validate>
+				</field>
+				<field id="delete_collections" translate="label" type="button" sortOrder="300" showInDefault="1" showInWebsite="1">
+                    <frontend_model>Webkul\AIChromaDbClient\Block\Adminhtml\System\Config\DeleteCollections</frontend_model>
+                </field>
+			</group>
+		</section>
+	</system>
+</config>

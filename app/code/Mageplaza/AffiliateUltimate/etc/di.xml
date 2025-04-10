@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_AffiliateUltimate
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="affiliate_bestsellers_listing_data_source" xsi:type="string">Mageplaza\AffiliateUltimate\Model\ResourceModel\Bestsellers\Grid\Collection</item>
+                <item name="affiliate_sales_listing_data_source" xsi:type="string">Mageplaza\AffiliateUltimate\Model\ResourceModel\Sales\Grid\Collection</item>
+                <item name="affiliate_reports_accounts_listing_data_source" xsi:type="string">Mageplaza\AffiliateUltimate\Model\ResourceModel\Accounts\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Mageplaza\Reports\Block\Menu">
+        <arguments>
+            <argument name="girdName" xsi:type="array">
+                <item name="affiliate_transaction_index" xsi:type="string">affiliate_transaction_listing.affiliate_transaction_listing_data_source</item>
+                <item name="affiliate_reports_bestsellers" xsi:type="string">affiliate_bestsellers_listing.affiliate_bestsellers_listing_data_source</item>
+                <item name="affiliate_reports_accounts" xsi:type="string">affiliate_reports_accounts_listing.affiliate_reports_accounts_listing_data_source</item>
+                <item name="affiliate_reports_sales" xsi:type="string">affiliate_sales_listing.affiliate_sales_listing_data_source</item>
+            </argument>
+            <argument name="menuUrls" xsi:type="array">
+                <item name="affiliate/transaction/index" xsi:type="string" translate="true">Affiliate Transaction</item>
+                <item name="affiliate/reports/bestsellers" xsi:type="string" translate="true">Bestsellers Affiliate</item>
+                <item name="affiliate/reports/sales" xsi:type="string" translate="true">Sales Reports Affiliate</item>
+                <item name="affiliate/reports/accounts" xsi:type="string" translate="true">Account Reports Affiliate</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Sales\Api\OrderRepositoryInterface">
+        <plugin name="affiliate_order" type="Mageplaza\AffiliateUltimate\Plugin\OrderGet"/>
+    </type>
+    <type name="Magento\Sales\Api\InvoiceRepositoryInterface">
+        <plugin name="affiliate_invoice" type="Mageplaza\AffiliateUltimate\Plugin\InvoiceGet"/>
+    </type>
+
+    <type name="Magento\Sales\Api\CreditmemoRepositoryInterface">
+        <plugin name="affiliate_invoice" type="Mageplaza\AffiliateUltimate\Plugin\CreditmemoGet"/>
+    </type>
+
+    <!-- change banner image src -->
+    <type name="Mageplaza\AffiliatePro\Block\Account\Banner">
+        <plugin name="affiliate_banner" type="Mageplaza\AffiliateUltimate\Plugin\Banner"/>
+    </type>
+    <type name="Mageplaza\AffiliatePro\Model\ResourceModel\Banner">
+        <plugin name="affiliate_banner_update_ctr" type="Mageplaza\AffiliateUltimate\Plugin\Banner"/>
+    </type>
+
+    <preference for="Mageplaza\AffiliateUltimate\Api\OrderRepositoryInterface" type="Mageplaza\AffiliateUltimate\Model\OrderRepository"/>
+    <preference for="Mageplaza\AffiliateUltimate\Api\Data\AffiliateInterface" type="Mageplaza\AffiliateUltimate\Model\Affiliate"/>
+    <preference for="Mageplaza\AffiliateUltimate\Api\Data\AffiliateItemInterface" type="Mageplaza\AffiliateUltimate\Model\AffiliateItem"/>
+
+    <preference for="Mageplaza\AffiliateUltimate\Api\Data\AffiliateInvoiceInterface" type="Mageplaza\AffiliateUltimate\Model\AffiliateInvoice"/>
+    <preference for="Mageplaza\AffiliateUltimate\Api\Data\AffiliateInvoiceItemInterface" type="Mageplaza\AffiliateUltimate\Model\AffiliateInvoiceItem"/>
+    <preference for="Mageplaza\AffiliateUltimate\Api\InvoiceRepositoryInterface" type="Mageplaza\AffiliateUltimate\Model\InvoiceRepository"/>
+
+    <preference for="Mageplaza\AffiliateUltimate\Api\Data\AffiliateCreditmemoInterface" type="Mageplaza\AffiliateUltimate\Model\AffiliateCreditmemo"/>
+    <preference for="Mageplaza\AffiliateUltimate\Api\Data\AffiliateCreditmemoItemInterface" type="Mageplaza\AffiliateUltimate\Model\AffiliateCreditmemoItem"/>
+    <preference for="Mageplaza\AffiliateUltimate\Api\CreditmemoRepositoryInterface" type="Mageplaza\AffiliateUltimate\Model\CreditmemoRepository"/>
+
+    <preference for="Mageplaza\AffiliateUltimate\Api\TransactionRepositoryInterface" type="Mageplaza\AffiliateUltimate\Model\TransactionRepository"/>
+    <preference for="Mageplaza\AffiliateUltimate\Api\Data\TransactionInterface" type="Mageplaza\AffiliateUltimate\Model\Transaction"/>
+    <preference for="Mageplaza\AffiliateUltimate\Api\Data\TransactionSearchResultInterface" type="Mageplaza\AffiliateUltimate\Model\ResourceModel\Transaction\Collection"/>
+
+    <preference for="Mageplaza\AffiliateUltimate\Api\Data\CampaignInterface" type="Mageplaza\AffiliateUltimate\Model\Campaign"/>
+    <preference for="Mageplaza\AffiliateUltimate\Api\CampaignRepositoryInterface" type="Mageplaza\AffiliateUltimate\Model\CampaignRepository"/>
+    <preference for="Mageplaza\AffiliateUltimate\Api\Data\CampaignSearchResultInterface" type="Mageplaza\AffiliateUltimate\Model\ResourceModel\Campaign\Collection"/>
+
+    <preference for="Mageplaza\AffiliateUltimate\Api\Data\WithdrawInterface" type="Mageplaza\AffiliateUltimate\Model\Withdraw"/>
+    <preference for="Mageplaza\AffiliateUltimate\Api\Data\WithdrawSearchResultInterface" type="Mageplaza\AffiliateUltimate\Model\ResourceModel\Withdraw\Collection"/>
+    <preference for="Mageplaza\AffiliateUltimate\Api\WithdrawRepositoryInterface" type="Mageplaza\AffiliateUltimate\Model\WithdrawRepository"/>
+
+    <preference for="Mageplaza\AffiliateUltimate\Api\Data\AccountInterface" type="Mageplaza\AffiliateUltimate\Model\Account"/>
+    <preference for="Mageplaza\AffiliateUltimate\Api\Data\AccountSearchResultInterface" type="Mageplaza\AffiliateUltimate\Model\ResourceModel\Accounts\Collection"/>
+    <preference for="Mageplaza\AffiliateUltimate\Api\AccountRepositoryInterface" type="Mageplaza\AffiliateUltimate\Model\AccountRepository"/>
+</config>

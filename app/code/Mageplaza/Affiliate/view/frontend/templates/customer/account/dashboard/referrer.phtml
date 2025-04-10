@@ -1,0 +1,42 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_Affiliate
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+/** @var $block \Mageplaza\Affiliate\Block\Customer\Account\Dashboard\Referrer */
+/** @var $escaper \Magento\Framework\Escaper */
+?>
+<?php if ($block->getAffiliateHelper()->isEnableReferInformation() && $block->getParentAccount()->getId()): ?>
+    <div class="block block-dashboard-affiliate-referer">
+        <div class="block-title"><strong style="font-weight: 600"><?= /** @noEscape */__('Affiliate Referral Information') ?></strong></div>
+        <div class="block-content">
+            <div class="box-information">
+                <div class="box-content">
+                    <p>
+                        <?= /** @noEscape */ __(
+                                /** @noEscape */'Your Affiliate account was referred by an affiliate account %1 <%2> - Referral code: %3',
+                                '<strong>' . $escaper->escapeHtml($block->getParentName($block->getParentAccount())) . '</strong>',
+                                '<strong><i>' . $escaper->escapeHtml($block->getParentEmail()) . '</i></strong>',
+                                '<strong>' . $escaper->escapeHtml($block->getParentAccount()->getCode()) . '</strong>'
+                            )?>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>

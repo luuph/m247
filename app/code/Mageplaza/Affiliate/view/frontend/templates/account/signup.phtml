@@ -1,0 +1,97 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_Affiliate
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+?>
+<?php
+/** @var Mageplaza\Affiliate\Block\Account\Signup $block */
+?>
+<?php
+    $affiliateHelper = $block->getAffiliateHelper();
+?>
+<form class="form form-edit-account form-affiliate form-create-affiliate"
+      action="<?= /* @escapeNotVerified */ $block->getSignUpUrl() ?>" method="post" id="form-validate-information" autocomplete="off">
+    <div class="" style="margin-bottom: 40px">
+        <h2 class="legend"><?= /** @noEscape */ __('Affiliate Information') ?></h2>
+        <div class="field">
+            <label for="referred_by"><?= /** @noEscape */ __('Referred By') ?></label>
+            <div class="input-box" style="display: inline-block; width: 350px">
+                <?php
+                $referBy = $affiliateHelper->getCustomerReferBy();
+                $classCss = $referBy ? 'class="affiliate-input-read-only"' : '';
+                ?>
+                <input type="text" name="referred_by" <?= /** @noEscape */ $classCss ?>
+                       title="<?= /** @noEscape */ __('Referred By') ?>" <?= /** @noEscape */ $referBy ? 'value="' . /** @noEscape */ $referBy . '" readonly' : '' ?>
+                       id="display_referred_by" class="input-text"
+                       placeholder="<?= /** @noEscape */ __('Enter your Customer email or Affiliate code here') ?>"
+                       onkeyup="sendValue()"/>
+            </div>
+        </div>
+    </div>
+</form>
+
+<?php if ($affiliateHelper->isEnableTermsAndConditions()): ?>
+    <div class="fields affiliate-clear">
+        <div class="">
+            <h2 for="terms_condition" class="legend"    ><?= /** @noEscape */ $affiliateHelper->getTermsAndConditionsTitle() ?></h2>
+        </div>
+        <div class="terms_condition_textarea">
+            <div class="terms_condition_text"><?= /** @noEscape */ $block->loadCmsBlock($affiliateHelper->getTermsAndConditionsHtml()) ?></div>
+        </div>
+    </div>
+<?php endif; ?>
+
+<form class="form form-edit-account form-affiliate form-create-affiliate"
+      action="<?= /* @escapeNotVerified */ $block->getSignUpUrl() ?>" method="post" id="form-validate-terms-condition" autocomplete="off">
+    <div class="input-box">
+        <?php
+        $referBy = $affiliateHelper->getCustomerReferBy();
+        $classCss = $referBy ? 'class="affiliate-input-read-only"' : '';
+        ?>
+        <input type="text" name="referred_by" <?= /** @noEscape */ $classCss ?>
+               title="<?= /** @noEscape */ __('Referred By') ?>" <?= /** @noEscape */ $referBy ? 'value="' . /** @noEscape */ $referBy . '" readonly' : '' ?>
+               id="referred_by" class="input-text"
+               style="display: none"/>
+        <input type="checkbox" class="required required-entry" name="terms"
+               id="terms_conditions" <?= $affiliateHelper->isCheckedEmailNotification() ? 'checked' : '' ?>/>
+        <label for="terms_conditions"><?= /** @noEscape */ $affiliateHelper->getTermsAndConditionsCheckboxText() ?></label>
+    </div>
+    <div class="actions-toolbar affiliate-clear">
+        <div class="primary">
+            <button type="submit" class="action submit primary" title="<?= /* @escapeNotVerified */ __('Create an Account') ?>"
+                onclick="submitForms()">
+                <span><?= /* @escapeNotVerified */ __('Create an Account') ?></span>
+            </button>
+        </div>
+    </div>
+</form>
+
+<script type="text/javascript">
+    function sendValue () {
+        const displayInputVal = document.getElementById("display_referred_by"),
+              unidsplayInputVal = document.getElementById("referred_by");
+
+        unidsplayInputVal.value = displayInputVal.value;
+    }
+
+    function submitForms () {
+        document.getElementById("form-validate-information").submit();
+        document.getElementById("form-validate-terms-condition").submit();
+    }
+</script>

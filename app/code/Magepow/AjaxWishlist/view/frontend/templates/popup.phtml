@@ -1,0 +1,48 @@
+<?php
+/**
+ * @copyright Copyright © 2021 Magepow. All rights reserved.
+ * @author    Magepow
+ * @category Magepow
+ * @copyright Copyright (c) 2014 Magepow (<https://www.magepow.com>)
+ * @license <https://www.magepow.com/license-agreement.html>
+ * @Author: magepow<support@magepow.com>
+ * @github: <https://github.com/magepow>
+ */
+/**
+ * @var \Magento\Catalog\Block\Product\AbstractProduct $block
+ */
+?>
+
+<?php 
+$helper = $this->helper('Magepow\AjaxWishlist\Helper\Data');
+if(!$helper->getConfigModule('general/enabled')) return;
+$_product = $block->getProduct();
+$imageDisplayArea = 'category_page_grid';
+$productImage = $block->getImage($_product, $imageDisplayArea);
+$message = $helper->getConfigModule('general/message');
+?>
+<div class="mgp-wishlist-popup-border ajaxwishlist-success-box">
+    <div class="ajax-wishlist-image">
+        <a href="<?= $escaper->escapeUrl($_product->getProductUrl()) ?>"
+           class="product photo product-item-photo"
+           tabindex="-1">
+            <?= $productImage->toHtml() ?>
+        </a>
+        <h2 class="product-name"><?php echo $_product->getName() ?></h2>
+    </div>
+    <h3 class="mgp-message-successs"><?php echo $message ? $message : __('You added this product to the wishlist list') ?></h3>
+    <div class="ajaxwishlist-buttons">
+        <button type="button" id="ajaxwishlist_btn_close_popup" class="action primary mgp-wishlist-close" title="<?php echo __('Close') ?>">
+            <span><?php echo __('Close ') ?></span>
+            <?php
+                 if ($popupTTL = $helper->getConfigModule('general/popupttl')) {?>
+                 (<span class="wishlist-autoclose-countdown"><?php echo $popupTTL ?></span>)
+                 <?php }?>
+        </button>
+        <button type="button" id="wishlist_checkout" class="action wishlist primary"
+                title="<?php echo __('View Wishlist') ?>"
+                onClick="window.location='<?php echo $block->getUrl('wishlist'); ?>'">
+            <span><?php echo __('View Wishlist') ?></span>
+        </button>
+    </div>
+</div>

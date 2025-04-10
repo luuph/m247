@@ -1,0 +1,22 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_AIImageSearch
+ * @author    Webkul Software Private Limited
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+$url = $block->getLogoUrl();
+$opacity = '{opacity: 1;}';
+$adminMenu = '.admin__menu .item-aiimagesearch';
+$param = $adminMenu.'>a:before{content: "" !important;background:url("'.$url.'") no-repeat 50% 50%;opacity: 0.5;} ';
+$param .= $adminMenu.':hover>a:before '.$opacity.' '.$adminMenu.'._active>a:before '.$opacity;
+if (!empty($url)) {
+    ?>
+    <?= /* @noEscape */ $secureRenderer
+    ->renderTag('style', [], $param, false); ?>
+    <?php
+}
+?>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_WebAr
+ * @author    Webkul Software Private Limited
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="model_file" xsi:type="array">
+                    <item name="class" xsi:type="string">Webkul\WebAr\Ui\DataProvider\Product\Form\Modifier\File</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+                 <item name="ios_model_file" xsi:type="array">
+                    <item name="class" xsi:type="string">Webkul\WebAr\Ui\DataProvider\Product\Form\Modifier\IosFile</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+</config>

@@ -1,0 +1,30 @@
+<!--@subject {{trans "Expired Campaign Email"}} @-->
+<!--@vars {
+"var account.status":"Account Status",
+"var customer.name":"Account Name"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<p class="greeting">Dear {{trans "%name," name=$name}}</p>
+
+<p>{{trans 'Campaign %campaign_name has expired. There are many campaigns of our store waiting for you to participate.
+    Please join the campaign and introduce it to your friends to receive more commissions and various discounts from our
+    store. For more detailed information about the campaigns please see <a href="%home_affiliate_link">here</a>.'  campaign_name=$campaign_name home_affiliate_link=$home_affiliate_link|raw}}</p>
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td>
+            <table width="100%" class="inner-wrapper" border="0" cellspacing="0" cellpadding="0" align="center">
+                <tr width="100%">
+                    <td bgcolor="#EAEAEA" align="center" style="background:#EAEAEA; text-align:center;">
+                        <p>{{trans "Thank you again" }}</p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

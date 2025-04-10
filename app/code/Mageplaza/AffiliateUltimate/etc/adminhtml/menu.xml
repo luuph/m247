@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_RewardPointsUltimate
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Mageplaza_Affiliate::reports" title="Affiliate Reports" module="Mageplaza_Affiliate" sortOrder="100" resource="Mageplaza_Affiliate::reports" parent="Magento_Reports::report"/>
+        <add id="Mageplaza_Affiliate::bestsellers" title="Bestsellers" module="Mageplaza_Affiliate" sortOrder="10" action="affiliate/reports/bestsellers" resource="Mageplaza_Affiliate::bestsellers" parent="Mageplaza_Affiliate::reports"/>
+        <add id="Mageplaza_Affiliate::reports_accounts" title="Accounts" module="Mageplaza_Affiliate" sortOrder="20" action="affiliate/reports/accounts" resource="Mageplaza_Affiliate::reports_accounts" parent="Mageplaza_Affiliate::reports"/>
+        <add id="Mageplaza_Affiliate::reports_sales" title="Sales" module="Mageplaza_Affiliate" sortOrder="30" action="affiliate/reports/sales" resource="Mageplaza_Affiliate::reports_sales" parent="Mageplaza_Affiliate::reports"/>
+    </menu>
+</config>

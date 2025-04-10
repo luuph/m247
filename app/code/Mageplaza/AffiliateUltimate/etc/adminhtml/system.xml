@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_AffiliateUltimate
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="affiliate">
+            <group id="general">
+            <group id="advance" translate="label" sortOrder="30" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <field id="show_banner_report" translate="label comment" type="select" sortOrder="17"
+                       showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Show Report for Banner on Frontend</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <config_path>affiliate/general/show_banner_report</config_path>
+                    <comment>Show Impressions and Clicks</comment>
+                    <depends>
+                        <field id="enable_banner">1</field>
+                    </depends>
+                </field>
+                <field id="traffic_page" translate="label comment" type="select" sortOrder="28" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Traffic Source Statistics Page Content</label>
+                    <source_model>Mageplaza\AffiliateUltimate\Model\Source\TrafficBlock</source_model>
+                    <config_path>affiliate/general/traffic_page</config_path>
+                </field>
+                <field id="traffic_page_content" translate="label comment" type="textarea" sortOrder="28" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Content</label>
+                    <config_path>affiliate/general/traffic_page_content</config_path>
+                    <depends>
+                        <field id="traffic_page">mp_affiliate_traffic_custom</field>
+                    </depends>
+                </field>
+            </group>
+            </group>
+            <group id="commission">
+                <field id="statistics_total_commission_on_hold" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Total Commission Statistics including On Hold Commissions</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[If yes, commissions that are in On Hold status will also be calculated in the Total Commission column in the Traffic Source Statistic page.
+                        <br>See details <a href="https://docs.mageplaza.com/affiliate-ultimate/index.html" target="_blank">here</a>]]></comment>
+                </field>
+            </group>
+            <group id="credit_balance_chart" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Credit Balance Chart</label>
+                <field id="background_color" translate="label" sortOrder="10" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Background Color</label>
+                    <frontend_model>Mageplaza\Core\Block\Adminhtml\System\Config\ColorPicker</frontend_model>
+                </field>
+                <field id="border_color" translate="label" sortOrder="20" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Border Color</label>
+                    <frontend_model>Mageplaza\Core\Block\Adminhtml\System\Config\ColorPicker</frontend_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

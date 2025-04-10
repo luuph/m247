@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_WebAr
+ * @author    Webkul Software Private Limited
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+ -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+       <css src="Webkul_WebAr::css/wkstyle.css"/>
+    </head>
+    <body>
+     <referenceBlock name="product.info.media.image">
+         <action method="setTemplate">
+            <argument name="template" xsi:type="string">Webkul_WebAr::gallery.phtml</argument>
+         </action>
+         <arguments>
+            <argument name="view_model"
+               xsi:type="object">Webkul\WebAr\ViewModel\DataModel</argument>
+         </arguments>
+      </referenceBlock>
+    </body>
+</page>

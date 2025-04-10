@@ -1,0 +1,60 @@
+<?php
+$product     = $block->getProduct();
+$bottomHtml  = $block->getLayout()->getBlock('ajax.product.bottom')->getChildHtml();
+?>
+<div class="ajaxcart-content">
+	<div class="ajaxcart-content_left">
+		<?= $block->getImage($product, 'product_base_image')->toHtml() ?>
+	</div>
+	<div class="ajaxcart-content_right">
+		<?= $block->getChildHtml('product_info_main') ?>
+	</div>
+</div> 
+<?php if ($bottomHtml) { ?>
+	<div class="ajaxcart-bottom"><?= $bottomHtml ?></div>
+<?php } ?>
+<div class="ajaxcart-footer">
+	<a href="#" class="action-cancel"><?= __('Cancel') ?></a>
+	<button class="action primary lookbook-action-select"><?= __('Select') ?></button>
+</div>
+<script>
+	require(['jquery'], function($) {
+		$('.lookbook-action-select').click(function() {
+			var self = this;
+			var form = $('#product_addtocart_form');
+			var dataOptions = $('#product_addtocart_form').serialize();
+			var data = {
+						product : <?= $product->getId() ?>,
+						type : '<?= $product->getTypeId() ?>',
+						options : dataOptions,
+						mode : 'lookbook'
+					};
+			if (form.valid()) {
+				$('.lookbook-product<?= $product->getId() ?> .options').val($('#product_addtocart_form').serialize());
+				$('.lookbook-action-select').addClass('loading-action-select');
+				$.ajax({
+	           		type: "POST",
+		           	url: "<?= $this->getUrl('lookbook/index/item') ?>",
+		           	dataType: "json",
+	    			data: data,
+		           	success: function(data) {
+		           		$('.lookbook-action-select').removeClass('loading-action-select');
+		           		if (data.options) {
+		           			$('.lookbook-product<?= $product->getId() ?> .item-options-wrapper').html(data.options);
+		           		}
+		           		if (data.status) {
+		           			$.magnificPopup.close();
+		           		}
+		           		if (data.message) {
+	                        alert(data.message);
+	                    }
+		           	}
+	         	});
+			}
+		});
+		$('#lookbook-popup').on('click', '.action-cancel', function(e) {
+            e.preventDefault();
+            $.magnificPopup.close();
+        });
+	});
+</script>

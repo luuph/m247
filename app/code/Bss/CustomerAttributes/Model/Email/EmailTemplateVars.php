@@ -77,12 +77,16 @@ class EmailTemplateVars
             $order->getData('customer_attribute'),
             $order->getStoreId()
         );
-        $transport['bss_billing_address_attributes'] = $this->helper->getAddressVariableGuestEmailHtml(
-            $customerBillingAddress
-        );
-        $transport['bss_shipping_address_attributes'] = $this->helper->getAddressVariableGuestEmailHtml(
-            $customerShippingAddress
-        );
+        if ($customerShippingAddress) {
+            $transport['bss_billing_address_attributes'] = $this->helper->getAddressVariableGuestEmailHtml(
+                $customerBillingAddress
+            );
+        }
+        if ($customerBillingAddress) {
+            $transport['bss_shipping_address_attributes'] = $this->helper->getAddressVariableGuestEmailHtml(
+                $customerShippingAddress
+            );
+        }
     }
 
     /**

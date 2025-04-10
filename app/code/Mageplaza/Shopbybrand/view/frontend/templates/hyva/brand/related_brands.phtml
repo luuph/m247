@@ -1,0 +1,148 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_Shopbybrand
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+/** @var \Mageplaza\Shopbybrand\Block\Brand\View $block */
+
+use Magento\Swatches\Model\Swatch;
+
+$relatedBrands = $block->getRelatedBrands();
+$timeId        = time();
+
+if (!empty($relatedBrands) && $relatedBrands->getSize() > 0) : ?>
+    <?= /** @noEscape */ $block->includeCssLib() ?>
+    <div class="block block-brand-related widget">
+        <div class="block-title">
+            <h2 class="mb-6 pt-5 text-primary font-semibold text-lg" id="compare-sidebar">
+                <?= /** @noEscape */ __('Related Brands') ?></h2>
+        </div>
+        <div class="block-content">
+                <section id="brand-related-carousel" class="splide" aria-label="Related Brands">
+                    <div class="splide__track">
+                        <ul class="splide__list">
+                                <?php foreach ($relatedBrands as $brand) : ?>
+                            <li class="splide__slide">
+                                <a href="<?= /** @noEscape */ $block->helper()->getBrandUrl($brand) ?>">
+                                        <?php if ($brand->getSwatchType() == Swatch::SWATCH_TYPE_VISUAL_COLOR): ?>
+                                            <img class="img-responsive brand-image"
+                                                 style="background-color: <?= /** @noEscape */ $brand->getSwatchValue() ?>"
+                                                 width="<?= /** @noEscape */ $block->getLogoWidth() ?>"
+                                                 height="<?= /** @noEscape */ $block->getLogoHeight() ?>">
+                                            <span><?= /** @noEscape */ $brand->getValue() ?></span>
+                                        <?php else: ?>
+                                            <img class="img-responsive brand-image"
+                                                 src="<?= /** @noEscape */ $block->helper()->getBrandImageUrl($brand) ?>"
+                                                 width="<?= /** @noEscape */ $block->getLogoWidth() ?>"
+                                                 height="<?= /** @noEscape */ $block->getLogoHeight() ?>"
+                                                 alt="<?= /** @noEscape */ $brand->getValue() ?>">
+                                            <span><?= /** @noEscape */ $brand->getValue() ?></span>
+                                        <?php endif; ?>
+                                    </a>
+                            </li>
+                                <?php endforeach; ?>
+                        </ul>
+                    </div>
+                </section>
+        </div>
+    </div>
+    <style>
+        .block.block-brand-related .block-title, .block.block-brand-related .owl-item {
+            text-align: center;
+        }
+        .block-brand-related .block-content img {
+            border-radius: 30px;
+            border: 1px solid #d9d9d9 !important;
+            width: <?= /** @noEscape */ $block->getLogoWidth() . 'px' ?> !important;
+            height: <?= /** @noEscape */ $block->getLogoHeight() . 'px' ?> !important;
+        }
+        .block-brand-related .block-content img:hover {
+            box-shadow: 3px 3px 3px 3px #d9d9d9!important;
+        }
+        .block-brand-related .block-content a {
+            color: #333333 !important;
+            text-align: center;
+            font-size: 16px;
+        }
+        .block-brand-related .block-content a span {
+            display: block;
+            margin-top: 10px !important;
+            font-weight: 600 !important;
+            text-align: center;
+            width: <?= /** @noEscape */ $block->getLogoWidth() . 'px' ?>;
+        }
+    </style>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        if(document.getElementById('brand-related-carousel')) {
+             new Splide('#brand-related-carousel',{
+                 autoStart: true,
+                 start: 1,
+                 perPage: 5,
+                 perMove: 1,
+                 gap: 10,
+                 type: "loop",
+                 drag: "free",
+                 omitEnd: true,
+                 snap: false,
+                 interval: 4000,
+                 arrows: false,
+                 rewind: true,
+                 rewindByDrag: true,
+                 lazyLoad: true,
+                 autoplay: 'play',
+                 autoScroll: {
+                     speed: 2
+                 },
+                 breakpoints: {
+                     768: {
+                         perPage: 2,
+                         snap: true
+                     }
+                 }
+             }).mount();
+        }
+    });
+</script>
+    <style>
+        #brand-related-carousel .splide__arrow--prev {
+            left: -2.5em;
+        }
+
+        #brand-related-carousel .splide__arrow--next {
+            right: -2.5em;
+        }
+        #brand-related-carousel .splide__arrow {
+            background-color: <?= /** @noEscape */ $block->helper()->getBrandConfig('color') ?>;
+        }
+        #brand-related-carousel .splide__arrow svg {
+            fill: #ffffff;
+        }
+        #feature-brand-carousel-<?= /** @noEscape */ $timeId ?>  .splide__pagination__page {
+            background-color: #cccccc;
+        }
+        #feature-brand-carousel-<?= /** @noEscape */ $timeId ?>  .splide__pagination {
+            bottom: -2.5em;
+        }
+        #feature-brand-carousel-<?= /** @noEscape */ $timeId ?>  .splide__pagination__page.is-active {
+            transform: unset;
+            background-color: <?= /** @noEscape */ $block->helper()->getBrandConfig('color') ?>;
+        }
+    </style>
+<?php endif; ?>

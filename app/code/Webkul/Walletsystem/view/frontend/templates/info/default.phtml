@@ -1,0 +1,46 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Walletsystem
+ * @author    Webkul
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+?>
+<?php
+$specificInfo = $block->getSpecificInformation();
+$title = $block->escapeHtml($block->getMethod()->getTitle());
+$orderId = $block->getOrderID();
+$helperBlock = $block->getLayout()->createBlock(Webkul\Walletsystem\Block\Sales\Order\WalletsystemInvoice::class);
+$helper = $helperBlock->getWkHelper();
+$isPartialPay = $helper->isPartialPay($orderId);
+
+if ($isPartialPay) {
+    $title = $title.__(' + Webkul Wallet System');
+}
+?>
+<dl class="payment-method">
+    <dt class="title">
+        <?= /* @noEscape */ $title ?></dt>
+<?php if ($specificInfo): ?>
+    <dd class="content">
+        <table class="data table">
+            <caption class="table-caption"><?= /* @noEscape */ $title ?></caption>
+            <?php foreach ($specificInfo as $label => $value): ?>
+                <tr>
+                    <th scope="row"><?= $block->escapeHtml($label) ?></th>
+                    <td>
+                        <?= /* @noEscape */ nl2br(
+                            $block->escapeHtml(implode("\n", $block->getValueAsArray($value, true)))
+                        ) ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    </dd>
+<?php endif;?>
+</dl>
+<?= $block->getChildHtml() ?>

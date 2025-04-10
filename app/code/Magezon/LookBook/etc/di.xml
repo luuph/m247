@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magezon
+ *
+ * This source file is subject to the Magezon Software License, which is available at https://www.magezon.com/license
+ * Do not edit or add to this file if you wish to upgrade the to newer versions in the future.
+ * If you wish to customize this module for your needs.
+ * Please refer to https://www.magezon.com for more information.
+ *
+ * @category  Magezon
+ * @package   Magezon_LookBook
+ * @copyright Copyright (C) 2021 Magezon (https://www.magezon.com)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magezon\LookBook\Api\Data\ProfileInterface" type="Magezon\LookBook\Model\Profile" />
+    <preference for="Magezon\LookBook\Api\Data\CategoryInterface" type="Magezon\LookBook\Model\Category" />
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="Magezon\LookBook\Api\Data\ProfileInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">mgz_lookbook_profile</item>
+                    <item name="identifierField" xsi:type="string">profile_id</item>
+                </item>
+                <item name="Magezon\LookBook\Api\Data\CategoryInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">mgz_lookbook_category</item>
+                    <item name="identifierField" xsi:type="string">category_id</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\Model\Entity\RepositoryFactory">
+        <arguments>
+            <argument name="entities" xsi:type="array">
+                <item name="Magezon\LookBook\Api\Data\ProfileInterface" xsi:type="string">
+                    Magezon\LookBook\Api\ProfileRepositoryInterface</item>
+                    <item name="Magezon\LookBook\Api\Data\CategoryInterface" xsi:type="string">
+                    Magezon\LookBook\Api\CategoryRepositoryInterface</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\HydratorPool">
+        <arguments>
+            <argument name="hydrators" xsi:type="array">
+                <item name="Magezon\LookBook\Api\Data\ProfileInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+                <item name="Magezon\LookBook\Api\Data\CategoryInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\Operation\ExtensionPool">
+        <arguments>
+            <argument name="extensionActions" xsi:type="array">
+                <item name="Magezon\LookBook\Api\Data\ProfileInterface" xsi:type="array">
+                    <item name="read" xsi:type="array">
+                        <item name="store" xsi:type="string">
+                            Magezon\LookBook\Model\ResourceModel\Profile\Relation\Store\ReadHandler</item>
+                        <item name="category" xsi:type="string">Magezon\LookBook\Model\ResourceModel\Profile\Relation\Category\ReadHandler</item>
+                    </item>
+                    <item name="create" xsi:type="array">
+                        <item name="store" xsi:type="string">
+                            Magezon\LookBook\Model\ResourceModel\Profile\Relation\Store\SaveHandler
+                        </item>
+                        <item name="category" xsi:type="string">Magezon\LookBook\Model\ResourceModel\Profile\Relation\Category\SaveHandler</item>
+                    </item>
+                    <item name="update" xsi:type="array">
+                        <item name="store" xsi:type="string">
+                            Magezon\LookBook\Model\ResourceModel\Profile\Relation\Store\SaveHandler
+                        </item>
+                        <item name="category" xsi:type="string">Magezon\LookBook\Model\ResourceModel\Profile\Relation\Category\SaveHandler</item>
+                    </item>
+                </item>
+                <item name="Magezon\LookBook\Api\Data\CategoryInterface" xsi:type="array">
+                    <item name="read" xsi:type="array">
+                        <item name="store" xsi:type="string">Magezon\LookBook\Model\ResourceModel\Category\Relation\Store\ReadHandler</item>
+                    </item>
+                    <item name="create" xsi:type="array">
+                        <item name="store" xsi:type="string">Magezon\LookBook\Model\ResourceModel\Category\Relation\Store\SaveHandler</item>
+                    </item>
+                    <item name="update" xsi:type="array">
+                        <item name="store" xsi:type="string">Magezon\LookBook\Model\ResourceModel\Category\Relation\Store\SaveHandler</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Catalog\Controller\Product\View">
+        <plugin name="lookbook_popup_load" type="\Magezon\LookBook\Plugin\Controller\Product\View" />
+    </type>
+</config>

@@ -1,0 +1,37 @@
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_WebAr
+ * @author    Webkul Software Private Limited
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+.wk-module-info {
+  padding:10px;
+  background-color:#f8f8f8;
+  border:1px solid #ddd;
+  margin-bottom:7px;
+  color: #000;
+  font-weight:600;
+  font-size:16px;
+}
+
+.admin__page-nav.wk-config-tab-class._collapsed._show ._collapsible strong:before {
+  content: "";
+  background: url(../images/configtab/logo.png) no-repeat scroll 0 0 transparent;
+  width: 100%;
+  height: 26px;
+  display: inline-block;
+  vertical-align: bottom;
+}
+.admin__page-nav.wk-config-tab-class._collapsed._show ._collapsible strong {
+  font-size: 0;
+}
+
+#webar_attribute_settings .use-default .checkbox,
+#webar_general_settings .use-default .checkbox,
+#webar_loading_attribute_settings .use-default .checkbox,
+#webar_lighting_attribute_settings .use-default .checkbox {
+  margin: 0 5px 12px 7px;
+}

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category   Webkul
+ * @package    Webkul_AIImageSearch
+ * @author     Webkul Software Private Limited
+ * @copyright  Webkul Software Private Limited (https://webkul.com)
+ * @license    https://store.webkul.com/license.html
+ */
+-->
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_layout.xsd">
+    <update handle="1column"/>
+    <referenceContainer name="columns">
+        <container name="wk.ai.image.search.sidebar" htmlTag="div" htmlClass="sidebar sidebar-additional" before="main">
+            <block class="Magento\Framework\View\Element\Template" template="Webkul_AIImageSearch::ai_search_by_image.phtml" name="wk.ai.image.search.again">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Webkul\AIImageSearch\ViewModel\ImageSearch</argument>
+                </arguments>
+            </block>
+        </container>
+    </referenceContainer>
+</layout>

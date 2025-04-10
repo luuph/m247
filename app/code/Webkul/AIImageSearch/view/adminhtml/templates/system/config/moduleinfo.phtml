@@ -1,0 +1,54 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_AIImageSearch
+ * @author    Webkul Software Private Limited
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+$moduleversion = $block->getModuleVersion();
+?>
+<tr id ="row_wk_mpauction_mpauction_information_author">
+    <td colspan="4">
+        <h4>
+            <p>
+                <?= $escaper->escapeHtml(__('Author:')); ?> 
+                <a target='_blank' title='<?= $escaper->escapeHtml(__('Webkul Software Private Limited'));?>'
+                href='<?= $escaper->escapeHtml("https://webkul.com/");?>' >
+                <?= $escaper->escapeHtml(__('Webkul'));?></a>
+            </p>
+            <p>
+                <?= $escaper->escapeHtml(__('User Guide:')); ?> 
+                <a target='_blank' href='<?= $escaper->escapeHtml(
+                    'https://webkul.com/blog/magento2-ai-image-search-documentation/'
+                ) ?>' >
+                <?= $escaper->escapeHtml(__('Click here')) ?></a>
+            </p>
+            <p>
+                <?= $escaper->escapeHtml(__('Store Extension:')); ?> 
+                <a target='_blank' href='<?= $escaper->escapeHtml(
+                    'https://store.webkul.com/magento2-ai-image-search.html'
+                );?>' >
+                <?= $escaper->escapeHtml(__('Click here'));?></a>
+            </p>
+            <p>
+                <?= $escaper->escapeHtml(__('Ticket/Customisations:')); ?> 
+                <a target='_blank' href='<?= $escaper->escapeHtml(
+                    'https://webkul.uvdesk.com/en/customer/create-ticket/'
+                );?>' >
+                <?= $escaper->escapeHtml(__('Click here'));?></a>
+            </p>
+            <p>
+                <?= $escaper->escapeHtml(__('Services:')); ?>
+                <a target='_blank' href='<?= $escaper->escapeHtml('https://webkul.com/magento-development/');?>' >
+                <?= $escaper->escapeHtml(__('Click here'));?></a>
+            </p>
+            <p>
+                <?= $escaper->escapeHtml(__('Version: %1', $moduleversion));?>
+            </p>
+        </h4>
+    </td>
+</tr>

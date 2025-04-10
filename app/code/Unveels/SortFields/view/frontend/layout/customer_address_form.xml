@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="customer_address_edit">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Unveels_SortFields::form/edit_address.phtml</argument>
+            </action>
+            <block ifconfig="bss_customer_attribute/general/enable" class="Bss\CustomerAttributes\Block\Form\Edit\EditAddress"
+                    name="bss_customer_address_edit" template="Unveels_SortFields::address/edit.phtml">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">
+                        Bss\CustomerAttributes\ViewModel\Address\CustomAddressHelper
+                    </argument>
+                </arguments>
+            </block>
+            <block ifconfig="bss_customer_attribute/general/enable" class="Bss\CustomerAttributes\Block\Form\Edit\EditAddress"
+                    name="bss_customer_address_edit_for_addresstitle" template="Unveels_SortFields::address/address_title.phtml">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">
+                        Bss\CustomerAttributes\ViewModel\Address\CustomAddressHelper
+                    </argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

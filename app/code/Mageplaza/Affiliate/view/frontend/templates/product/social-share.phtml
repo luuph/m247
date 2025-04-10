@@ -1,0 +1,71 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_Affiliate
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+?>
+<?php
+/** @var \Mageplaza\Affiliate\Block\Product\SocialShare $block */
+/** @var \Magento\Framework\Escaper $escaper */
+
+$affiliateHelper = $block->getAffiliateHelper();
+?>
+
+<?php if ($addThisPubId = $affiliateHelper->getShareThisPropertyId() && $affiliateHelper->getShareThisOption()): ?>
+<?php if ($affiliateHelper->getShareThisOption()  === 'both'):?>
+    <style>
+        @media only screen and (max-width: 1024px) {
+            .sharethis-sticky-share-buttons {
+                display:none !important;
+            }
+        }
+    </style>
+<?php endif; ?>
+        <div id="mp_affiliate_social_sharing" data-bind="scope: 'mp_affiliate_social_sharing'">
+            <!-- ko if: affId -->
+            <div class="field social_sharing">
+                <div class="control">
+                    <div class="referral-share-this">
+                        <?php  if ($affiliateHelper->getShareThisOption() === 'sticky'): ?>
+                            <div class='sharethis-sticky-share-buttons'></div>
+                        <?php elseif ($affiliateHelper->getShareThisOption()  === 'both'):?>
+                            <div class="sharethis-inline-share-buttons"></div>
+                            <div class='sharethis-sticky-share-buttons'></div>
+                        <?php else:?>
+                            <style>
+                                .st-sticky-share-buttons {
+                                    display: none !important;
+                                }
+                            </style>
+                            <div class="sharethis-inline-share-buttons"></div>>
+                        <?php endif;?>
+                        <script type="text/javascript"
+                                src="//platform-api.sharethis.com/js/sharethis.js#property=<?= /** @noEscape */ $affiliateHelper->getShareThisPropertyId() ?>"></script>
+                    </div>
+                </div>
+            </div>
+            <!-- /ko -->
+        </div>
+        <style>
+            #mp_affiliate_social_sharing {
+                position: sticky;
+                bottom: 2%;
+                z-index: 1000;
+            }
+        </style>
+<?php endif; ?>

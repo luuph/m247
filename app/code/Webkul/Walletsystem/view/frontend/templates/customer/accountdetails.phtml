@@ -1,0 +1,135 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Walletsystem
+ * @author    Webkul
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+?>
+<?php
+$viewModel = $block->getViewModel();
+$helper = $viewModel->getHelper();
+$accountDataColection = $block->getUserAccountData();
+?>
+<div class="accoount-details-form">
+    <form action="<?= $escaper->escapeUrl($block->getUrl(
+        'walletsystem/transfer/saveaccountdetails',
+        ["_secure" => $block->getRequest()->isSecure()]
+    )) ?>"
+     enctype="multipart/form-data" method="post" id="fwalletsystem_add_payee" 
+     data-role="walletsystem_add_payee" data-mage-init='{"validation":{}}'>
+        <fieldset class="fieldset info wk-mp-fieldset">
+            <input type="hidden" name="customer_id"
+             value="<?= $block->escapeHtmlAttr($helper->getCustomerId()); ?>">
+            <div class="wk_msg_notification">
+                <h4><?= $block->escapeHtml(__('Add New Account Details')) ?></h4>
+            </div>
+            <?= $block->getBlockHtml('formkey') ?>
+            <div class="field required">
+                <label class="label" for="ac_holder_name">
+                    <span>
+                    <?=$block->escapeHtml(__("A/c Holder Name"))?>
+                    </span>
+                </label>
+            
+                <div class="control">
+                    <input type="text" class="input-text required-entry"
+                     name="holdername" title="A/c Holder Name" value="" id="holdername" />
+                </div>
+            </div>
+            <div class="field required">
+                <label class="label" for="accountno"><?= /* @noEscape */ __('A/c Number') ?> </label>
+                <div class="control">
+                    <input type="text" class="input-text required-entry validate-number" 
+                    name="accountno" title="A/c Number" value="" id="accountno" />
+                </div>
+            </div>
+            <div class="field required">
+                <label class="label" for="bankname"><?= /* @noEscape */ __('Bank Name') ?> </label>
+                <div class="control">
+                <input
+                type="text"
+                id="bankname"
+                name="bankname"
+                class="bankname input-text required-entry">
+                </div>
+            </div>
+            <div class="field required">
+                <label class="label" for="bankcode"><?= /* @noEscape */ __('Bank Code') ?> </label>
+                <div class="control">
+                    <input
+                    type="text"
+                    id="bankcode"
+                    name="bankcode"
+                    class="input-text required-entry"
+                    title="Bank Code">
+                </div>
+            </div>
+            <div class="field additional">
+                <label for="additional"><?=$block->escapeHtml(__('Additional Information'));?></label>
+                <textarea
+                id="additional"
+                name="additional"
+                class="additional"
+                maxlength="100"></textarea>
+            </div>
+            <button class="button wk_ws_sub_add_payee button action primary" 
+            title="<?= /* @noEscape */ __('Submit Bank Details') ?>" type="submit">
+                <span><span><?= /* @noEscape */ __('Submit Bank Details') ?></span></span>
+            </button>
+    </form>
+    </fieldset>
+</div>
+<div class="saved-account-details">
+    <div class="info">
+        <div class="fieldset">
+            <div class="wk_msg_notification">
+                <h4><?= $block->escapeHtml(__('Saved Account Details')) ?></h4>
+            </div>
+            <?php if ($accountDataColection->getSize()): ?>
+                <?php foreach ($accountDataColection as $accountData): ?>
+                    <div class="wk-mp-row">
+                        <div>
+                            <strong><?= $block->escapeHtml(__('A/c Holder Name')); ?>: </strong>
+                            <span><?= $block->escapeHtml($accountData->getHoldername()); ?></span>
+                        </div>
+                        <div>
+                            <strong><?= $block->escapeHtml(__('A/c Number')); ?>: </strong>
+                            <span><?= $block->escapeHtml($accountData->getAccountno()); ?></span>
+                        </div>
+                        <div>
+                            <strong><?= $block->escapeHtml(__('Bank Name')); ?>: </strong>
+                            <span><?= $block->escapeHtml($accountData->getBankname()); ?></span>
+                        </div>
+                        <div>
+                            <strong><?= $block->escapeHtml(__('Bank Code')); ?>: </strong>
+                            <span><?= $block->escapeHtml($accountData->getBankcode()); ?></span>
+                        </div>
+                        <div>
+                            <strong><?= $block->escapeHtml(__('Additional Information')); ?>: </strong>
+                            <span><?= $block->escapeHtml($accountData->getAdditional()); ?></span>
+                        </div>
+                        <a href="<?= $block->escapeUrl($block->getUrl(
+                            'walletsystem/transfer/requestdelete'
+                        )); ?>id/<?= $block->escapeHtml($accountData->getEntityId()); ?>">
+                            Request delete</a>
+                    </div>
+                    <hr />
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p><?= $block->escapeHtml(__('No Data Found')); ?></p>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>
+<script type="text/x-magento-init">
+{
+    "*":{
+        "Wkwalletcustom":{}
+    }
+}
+</script>

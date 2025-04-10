@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+  <table name="mageplaza_affiliate_transaction" resource="default">
+    <column xsi:type="timestamp" name="created_at" on_update="false" nullable="true" default="CURRENT_TIMESTAMP"/>
+  </table>
+  <table name="mageplaza_affiliate_banner" resource="default">
+    <column xsi:type="int" name="click" padding="11" unsigned="false" nullable="true" identity="false" default="0" comment="Banner Click Rate"/>
+    <column xsi:type="int" name="impression" padding="11" unsigned="false" nullable="true" identity="false" default="0" comment="Banner Impression Rate"/>
+    <column xsi:type="float" name="ctr" scale="0" precision="0" unsigned="false" nullable="true" default="0" comment="Banner Click Through Rate"/>
+    <column xsi:type="text" name="token" nullable="true" comment="Banner Token"/>
+  </table>
+</schema>

@@ -1,0 +1,260 @@
+type Query {
+    customerbankaccountdetails(
+        customerToken: String
+    ): Customerbankaccountdetails @resolver(class: "Webkul\\MobikulwalletGraphQl\\Model\\Resolver\\Index\\Customerbankaccountdetails") @doc(description: "Get Customer Bank Account Details.")
+}
+
+type Mutation {
+    Add(
+        qty: Int,
+        price: Float,
+        storeId: Int,
+        productId: Int,
+        currency: String,
+        customerToken: String
+    ): Add @resolver(class: "Webkul\\MobikulwalletGraphQl\\Model\\Resolver\\Index\\Add") @doc(description: "product add to cart")
+
+    Addpayee(
+        storeId: Int,
+        nickName: String,
+        customerEmail: String,
+        customerToken: String
+    ): Addpayee @resolver(class: "Webkul\\MobikulwalletGraphQl\\Model\\Resolver\\Index\\Addpayee") @doc(description: "Add Payee")
+
+    Applypaymentamount(
+        storeId: Int,
+        wallet: String,
+        customerToken: String
+    ): Applypaymentamount @resolver(class: "Webkul\\MobikulwalletGraphQl\\Model\\Resolver\\Index\\Applypaymentamount") @doc(description: "Apply Payment Amount")
+
+    Bankaccount(
+        amount: Float,
+        bankDetails: String,
+        walletNote: String,
+        customerToken: String
+    ): SuccessMessage @resolver(class: "Webkul\\MobikulwalletGraphQl\\Model\\Resolver\\Index\\Bankaccount") @doc(description: "Bank Account")
+
+    Deletepayee(
+        storeId: Int,
+        id: Int,
+        customerToken: String
+    ): SuccessMessage @resolver(class: "Webkul\\MobikulwalletGraphQl\\Model\\Resolver\\Index\\Deletepayee") @doc(description: "Delete Payee.")
+
+    Dashboard(
+        mFactor: Float,
+        customerToken: String
+    ): Dashboard @resolver(class: "Webkul\\MobikulwalletGraphQl\\Model\\Resolver\\Index\\Index") @doc(description: "Dashboard API.")
+
+    Sendamount(
+        code: String,
+        amount: Float,
+        baseAmount: Float,
+        receiverId: Int,
+        walletNote: String,
+        customerToken: String
+    ): Sendamount @resolver(class: "Webkul\\MobikulwalletGraphQl\\Model\\Resolver\\Index\\Sendamount") @doc(description: "Sendamount API.")
+
+    Sendcode(
+        amount: Float,
+        receiverId: Int,
+        base_amount: Float,
+        walletNote: String,
+        customerToken: String
+    ): Sendcode @resolver(class: "Webkul\\MobikulwalletGraphQl\\Model\\Resolver\\Index\\Sendcode") @doc(description: "Sendcode API.")
+
+    Transfer(
+        mFactor: String,
+        currency: String,
+        customerToken: String
+    ): Transfer @resolver(class: "Webkul\\MobikulwalletGraphQl\\Model\\Resolver\\Index\\Transfer") @doc(description: "Transfer API.")
+
+    Updatepayee(
+        storeId: Int,
+        id: Int,
+        nickName: String,
+        customerToken: String
+    ): SuccessMessage @resolver(class: "Webkul\\MobikulwalletGraphQl\\Model\\Resolver\\Index\\Updatepayee") @doc(description: "Updatepayee API.")
+
+    Viewtransaction(
+        transactionId: Int,
+        currency: String,
+        customerToken: String
+    ): Viewtransaction @resolver(class: "Webkul\\MobikulwalletGraphQl\\Model\\Resolver\\Index\\View") @doc(description: "Viewtransaction API.")
+
+    customeraddbankaccountdetails(
+        acholderName: String,
+        acNumber: String,
+        bankName: String,
+        bankCode: String,
+        additionalInformation: String,
+        customerToken: String
+    ): Customeraddbankaccountdetails @resolver(class: "Webkul\\MobikulwalletGraphQl\\Model\\Resolver\\Index\\Customeraddbankaccountdetails") @doc(description: "Add Customer Bank Account Details.")
+
+    placeOrder(
+        wallet: String,
+    ): PlaceOrder @resolver(class: "Webkul\\MobikulApiGraphQl\\Model\\Resolver\\Checkout\\PlaceOrder") @doc(description: "place order request")
+}
+
+type Add {
+    otherError: String,
+    success: Boolean,
+    message: String,
+    cartCount: Int
+}
+
+type Addpayee {
+    otherError: String,
+    success: Boolean,
+    message: String,
+    customerId: Int
+}
+
+type Applypaymentamount {
+    otherError: String,
+    success: Boolean,
+    message: String,
+    walletData: WalletData
+}
+
+type WalletData {
+    formattedLeftInWallet: String,
+    formattedPaymentToMade: String,
+    unformattedLeftInWallet: Float,
+    formattedAmountInWallet: String,
+    unformattedPaymentToMade: Float,
+    formattedLeftAmountToPay: String,
+    unformattedAmountInWallet: Float,
+    unformattedLeftAmountToPay: Float
+}
+
+type SuccessMessage {
+    otherError: String,
+    success: Boolean,
+    message: String
+}
+
+type Dashboard {
+    otherError: String,
+    success: Boolean,
+    message: String,
+    maximumAmount: Float,
+    minimumAmount: Float,
+    logo: String,
+    walletSummaryHeading: String,
+    currencyCode: String,
+    walletAmount: String,
+    walletSummarySubHeading: String,
+    rechargeFieldLabel: String,
+    walletProductId: Int,
+    buttonLabel: String,
+    mainHeading: String,
+    subHeading: [String],
+    transactionList: [TransactionList],
+    accountDetails: [AccountDetail],
+    messageForAccountDetails: String,
+    idd: Int
+}
+
+type TransactionList {
+    viewId: Int,
+    incrementId: String,
+    description: String,
+    debit: String,
+    credit: String,
+    status: String
+}
+
+type AccountDetail {
+    id: Int,
+    accountNumber: String,
+    bankName: String
+    accountHolderName: String
+}
+
+type Sendamount {
+    otherError: String,
+    success: Boolean,
+    message: String,
+    transferValidation: Boolean
+}
+
+type Sendcode {
+    otherError: String,
+    success: Boolean,
+    message: String,
+    base_amount: Float,
+    transferValidation: Boolean
+}
+
+type Transfer {
+    otherError: String,
+    success: Boolean,
+    message: String,
+    logo: String,
+    walletSummaryHeading: String,
+    currencyCode: String,
+    walletAmount: String,
+    walletSummarySubHeading: String,
+    payeeList: [PayeeList]
+}
+
+type PayeeList {
+    id: Int,
+    customerId: Int,
+    name: String,
+    email: String,
+    status: String
+}
+
+type Viewtransaction {
+    otherError: String,
+    success: Boolean,
+    message: String,
+    transactionData: TransactionData
+}
+
+type TransactionData {
+    amount: LabelValue,
+    action: LabelValue,
+    type: LabelValue,
+    date: LabelValue,
+    note: LabelValue,
+    status: LabelValue,
+    bankDetails: LabelValue,
+    order: LabelValue,
+    sender: LabelValue
+}
+
+type LabelValue {
+    label: String,
+    value: String
+}
+
+type OrderListItems {
+    walletReview: Boolean
+}
+
+type Customeraddbankaccountdetails {
+    otherError: String,
+    success: Boolean,
+    message: String
+}
+
+type Customerbankaccountdetails {
+    otherError: String,
+    success: Boolean,
+    message: String,
+    accountDetails: [AccountDetails]
+}
+
+type AccountDetails {
+    id: Int,
+    CustomerName: String,
+    CustomerEmail: String,
+    acholderName: String,
+    acNumber: String,
+    bankName: String,
+    bankCode: String,
+    additionalInformation: String,
+    RequestForDelete: Boolean
+}

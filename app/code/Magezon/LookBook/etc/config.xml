@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magezon
+ *
+ * This source file is subject to the Magezon Software License, which is available at https://www.magezon.com/license.
+ * Do not edit or add to this file if you wish to upgrade the to newer versions in the future.
+ * If you wish to customize this module for your needs.
+ * Please refer to https://www.magezon.com for more information.
+ *
+ * @category  Magezon
+ * @package   Magezon_LookBook
+ * @copyright Copyright (C) 2021 Magezon (https://www.magezon.com)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <mgzlookbook>
+            <general>
+                <enabled>1</enabled>
+                <route>lookbook</route>
+                <main_color>rgba(0, 0, 0, 0.8)</main_color>
+            </general>
+            <permalink>
+                <route>lookbook</route>
+                <profile_route>profile</profile_route>
+                <profile_suffix></profile_suffix>
+                <profile_use_categories>1</profile_use_categories>
+                <category_route>category</category_route>
+                <category_suffix></category_suffix>
+            </permalink>
+            <latest_page>
+                <title>LookBook</title>
+                <page_layout>2columns-left</page_layout>
+                <layout_type>list</layout_type>
+                <number_column>3</number_column>
+                <number_profile_per_page>8</number_profile_per_page>
+            </latest_page>
+            <lookbook_cat_page>
+                <page_layout>1column</page_layout>
+                <layout_type>list</layout_type>
+                <number_column>3</number_column>
+                <number_profile_per_page>8</number_profile_per_page>
+                <carousel_config>
+                    <desktop>1</desktop>
+                    <tablet_l>1</tablet_l>
+                    <tablet_p>1</tablet_p>
+                    <mobie_l>1</mobie_l>
+                    <mobie_p>1</mobie_p>
+                    <number_of_profile>5</number_of_profile>
+                    <nav_btn>1</nav_btn>
+                    <dot_nav>0</dot_nav>
+                    <auto_height>0</auto_height>
+                    <loop>0</loop>
+                    <auto_play>0</auto_play>
+                    <auto_play_timeout>3000</auto_play_timeout>
+                    <pause_on_mouse_hover>0</pause_on_mouse_hover>
+                    <right_to_left>0</right_to_left>
+                </carousel_config>
+            </lookbook_cat_page>
+            <lookbook_page>
+                <enabled_btn>1</enabled_btn>
+                <btn_title>Add all products to cart</btn_title>
+            </lookbook_page>
+            <marker>
+                <marker_bg_color>#ffffff</marker_bg_color>
+                <marker_text_color>#333</marker_text_color>
+                <border>1</border>
+                <border_color>#dddddd</border_color>
+                <width>40</width>
+                <height>40</height>
+                <marker_type>icon</marker_type>
+                <marker_icon>fab mgz-fa-telegram-plane</marker_icon>
+                <marker_image></marker_image>
+            </marker>
+            <sidebar>
+                <sidebar_cat>
+                    <show_cat>1</show_cat>
+                    <sort_cat>time_asc</sort_cat>
+                    <title>Categories</title>
+                    <number_of_cat>5</number_of_cat>
+                </sidebar_cat>
+                <sidebar_profile>
+                    <show_profile>1</show_profile>
+                    <sort_profile>time_asc</sort_profile>
+                    <title>Profiles</title>
+                    <number_of_profile>5</number_of_profile>
+                </sidebar_profile>
+            </sidebar>
+            <profile_product>
+                <enabled>1</enabled>
+                <title>Product Profile</title>
+                <profile_config>
+                    <title_color>#690911</title_color>
+                    <btn_link>1</btn_link>
+                    <btn_color>#ff7b1a</btn_color>
+                </profile_config>
+                <carousel_config>
+                    <desktop>4</desktop>
+                    <tablet_l>4</tablet_l>
+                    <tablet_p>3</tablet_p>
+                    <mobie_l>2</mobie_l>
+                    <mobie_p>2</mobie_p>
+                    <number_of_profile>5</number_of_profile>
+                    <margin>10</margin>
+                    <nav_btn>1</nav_btn>
+                    <dot_nav>0</dot_nav>
+                    <auto_height>0</auto_height>
+                    <loop>0</loop>
+                    <auto_play>0</auto_play>
+                    <auto_play_timeout>3000</auto_play_timeout>
+                    <pause_on_mouse_hover>0</pause_on_mouse_hover>
+                    <right_to_left>0</right_to_left>
+                </carousel_config>
+            </profile_product>
+            <top_navigation>
+                <enabled>1</enabled>
+                <title>LookBook</title>
+                <include_profiles>1</include_profiles>
+                <show_profile_count>0</show_profile_count>
+            </top_navigation>
+        </mgzlookbook>
+    </default>
+</config>

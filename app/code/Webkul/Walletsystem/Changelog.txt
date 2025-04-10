@@ -1,0 +1,85 @@
+Legend
+
++ Features
+- Bugs
+------------------------------- Version 4.0.2-p1 --------------------------------------
+
+	+ Add Wallet payment For Multishipping
+	- Bugs fixed.
+
+------------------------------- Version 4.0.2 --------------------------------------
+
+	+ Compatible With Magento 2.4.6 and above
+	- Bugs fixed.
+
+-------------------------------- Version 4.0.1-p1 --------------------------------------
+
+	- Bugs fixed.
+
+-------------------------------- Version 4.0.1 --------------------------------------
+
+	+ Compatibility issue fixed with Magento 2.4.4.
+	+ Currency issue fixed on the wallet system details and creditrules page.
+	
+
+-------------------------------- Version 4.0.0 --------------------------------------
+
+	+ Version updated for Magento 2.4.x
+	+ Compatible with Paypal for partial payment
+
+-------------------------------- Version 3.0.0 --------------------------------------
+
+	+ Version updated for Magento 2.3.x
+	
+-------------------------------- Version 2.1.0 --------------------------------------
+
+	+ Composer.json updated for Magento2.3.x
+
+-------------------------------- Version 2.0.6 --------------------------------------
+	
+	+ Major schema issues fixed.
+	
+-------------------------------- Version 2.0.5 --------------------------------------
+	
+	+ Customer can add different accounts to transfer wallet money.
+	+ Customer can check the details of transactions in his account.
+	+ Customer can request admin to delete the already saved bank details.
+
+-------------------------------- Version 2.0.4 --------------------------------------
+	
+	+ Customer can add payee in his account to transfer amount in his wallet.
+	+ Admin will receive notification to approve payee and to approve amount transfer to account.
+	+ Admin can restrict to approval required for payees.
+	+ Admin can restrict for customer to use discount codes when adding amount in his wallet.
+	+ Customer can request to transfer their amount in his bank account.
+	+ Admin can export wallet system details in CSV and XML format.
+	- Issues solved.
+
+-------------------------------- Version 2.0.3 --------------------------------------
+	
+	+ Separate email template for all emails.
+	+ Cashback amount is managed in refund of an order.
+	+ Composer.json updated for 2.2.x
+
+-------------------------------- Version 2.0.2 --------------------------------------
+
+	+ Customer can transfer amount to other customer.
+	+ Customer will get a monthly statement mail for the wallet amount.
+
+-------------------------------- Version 2.0.1 --------------------------------------
+
+	+ Admin can create cash back rules for the customer.
+	+ Cash back rules are based on product or on cart.
+	+ Admin can deduct wallet amount from customer's wallet.
+
+-------------------------------- Version 2.0.0 --------------------------------------
+
+	+ The customer can use Wallet Cash during the checkout.
+	+ The customer can easily add credit to their wallet system.
+	+ Admin can set the credit limit for the Wallet System.
+	+ Admin can also do the online refund by the help of Magento Wallet System and credit the amount into the customer’s Wallet System.
+	+ Admin can view the customer details who are using Wallet System for making the online payment.
+	+ Email notification is sent to customer on each transaction.
+	+ Admin can configure the Magento Wallet System to set the limit (maximum and minimum) for Wallet amount.
+	+ Admin and Customer/User can view credit and debit details.
+	+ Admin can add custom wallet amount to customer's wallet.

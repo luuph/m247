@@ -1,0 +1,288 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_Affiliate
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+?>
+<?php
+/** @var Mageplaza\Affiliate\Block\Account\Campaigns\Content $block */
+
+$campaigns    = $block->getCampaigns();
+$couponCode   = $block->getCouponCode();
+$couponSuffix = $block->getCouponSuffix();
+?>
+<div class="box-account box-info box-affiliate-campaign">
+
+    <table class="data-table" id="affiliate-campaigns">
+        <thead>
+        <tr>
+            <th class="col id"><?= /** @noEscape */ __('Campaign') ?> </th>
+
+            <th class="col date"><?= /** @noEscape */ __('Commission') ?></th>
+            <th class="col name"><?= /** @noEscape */ __('Discount') ?></th>
+            <th class="col email" style="white-space: nowrap;"><?= /** @noEscape */ __('Coupon Code') ?></th>
+            <th class="col date" style="white-space: nowrap;"><?= /** @noEscape */ __('Valid time') ?></th>
+            <th class="col date"><?= /** @noEscape */ __('Action') ?></th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php if ($campaigns->getSize()): ?>
+        <?php foreach ($campaigns as $campaign): ?>
+        <tr>
+            <td class="col">
+                <div style="width: 128px; overflow: hidden; text-overflow: ellipsis;white-space: nowrap; ">
+                    <?= /* @noEscape */
+                    $campaign->getName() ?>
+                </div>
+            </td>
+            <td class="col">
+                <?php foreach ($block->formatCommission($campaign->getCommission()) as $commission): ?>
+                    <?= /* @noEscape */
+                    $commission ?>
+                <?php endforeach ?>
+            </td>
+            <td class="col">
+                <?= /* @noEscape */
+                $block->formatDiscountPolicy($campaign->getDiscountAction(),
+                    $campaign->getDiscountAmount()) ?>
+            </td>
+            <td class="col col-coupon-code"><?= /* @noEscape */
+                $couponSuffix ? $couponCode . '-' . $couponSuffix : $couponCode ?></td>
+            <td class="col">
+                <?= /* @noEscape */
+                $block->formatValidDate($campaign->getFromDate(), $campaign->getToDate()) ?>
+            </td>
+            <td class="col" style="position: relative">
+                <div class="d-none copied_text" style="position: absolute; top: -10px; right: 65px">
+                    Copied
+                </div>
+                <button style="margin-bottom:5px" class="action primary get_referral_link" title="<?= /* @noEscape */
+                __('Copy Referral Link') ?>" data-text=" <?= /* @noEscape */
+                $block->getCampaignReferLink($campaign->getReferralLink()) ?>">
+                                <span style="white-space: nowrap;"><?= /* @noEscape */__('Copy Referral Link') ?></span>
+                </button>
+
+                <a style="display: block" href="javascript:void(0)" class="more-details">More details</a>
+
+                <div class="fieldset affiliate-view-campaign" style="display: none">
+                    <div style="font-size: 40px; font-weight: 300; margin-bottom: 40px">
+                        <?= /* @noEscape */
+                        $campaign->getName() ?>
+                    </div>
+                    <div>
+                        <?= /* @noEscape */
+                        $campaign->getDescription() ?>
+                    </div>
+                    <h3>
+                        What do you earn?
+                    </h3>
+
+                    <div class="list_commission">
+                        <?php foreach ($block->formatCommissionView($campaign->getCommission()) as $commission): ?>
+                            <?= /* @noEscape */
+                            $commission ?>
+                        <?php endforeach ?>
+                    </div>
+                    <h3>
+                        Discount policy for referrals
+                    </h3>
+                    <div>
+                        Those you send the affiliate referral link and makes their first purchase using that link will earn
+                        <b><?= /* @noEscape */
+                            $block->formatDiscountPolicy($campaign->getDiscountAction(),
+                                $campaign->getDiscountAmount()) ?> off </b> for
+                        each product item.
+                    </div>
+                    <?php if ($couponCode): ?>
+                        <div style="display: flex; align-items: center">
+                            <h4 style="margin-right: 15px; margin-bottom: 15px; font-weight: bold">Coupon code</h4>
+
+                            <div style="background-color: #E9E9E9; padding: 5px 10px; position: relative; width: 20%; max-width: 50%">
+                                <div class="d-none copied_text" style="position: absolute; top: -20px; right: 0">
+                                    Copied
+                                </div>
+                                <div id="coupon_code_ref" class="link_copy"
+                                     style=" font-weight: 600; display: flex; align-items: center; justify-content: space-between"
+                                     title="<?= /* @noEscape */
+                                     $campaign->getCouponCode() ?>">
+                    <span style="margin-right: 15px" class="text_copy"><?= /* @noEscape */
+                        $couponSuffix ? $couponCode . '-' . $couponSuffix : $couponCode ?></span>
+                                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg"
+                                         class="coupon_code_ref_btn"
+                                         id="coupon_code_ref_btn">
+                                        <path d="M17.5455 6H9.36364C8.61364 6 8 6.61364 8 7.36364V16.9091H9.36364V7.36364H17.5455V6ZM19.5909 8.72727H12.0909C11.3409 8.72727 10.7273 9.34091 10.7273 10.0909V19.6364C10.7273 20.3864 11.3409 21 12.0909 21H19.5909C20.3409 21 20.9545 20.3864 20.9545 19.6364V10.0909C20.9545 9.34091 20.3409 8.72727 19.5909 8.72727ZM19.5909 19.6364H12.0909V10.0909H19.5909V19.6364Z"
+                                              fill="#AEAEAE"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                    <h3>
+                        Valid time
+                    </h3>
+                    <div>
+                        <?= /* @noEscape */
+                        $block->formatValidDate($campaign->getFromDate(), $campaign->getToDate()) ?>
+                    </div>
+                    <div style="margin-top: 15px;text-align: center; position: relative">
+                        <?php if ($campaign->getReferralLink()) : ?>
+                            <div class="d-none copied_text" style="position: absolute; top: -22px; right: 48%;">
+                                Copied
+                            </div>
+                            <button class="action primary get_referral_link"  data-text=" <?= /* @noEscape */ $block->getCampaignReferLink($campaign->getReferralLink()) ?>" title="<?= /* @noEscape */
+                            __('Copy ReferalLink') ?>"
+                            >
+                                <span><?= /* @noEscape */
+                                    __('Copy Referral Link') ?></span>
+                            </button>
+                        <?php endif; ?>
+                    </div>
+
+                </div>
+            </td>
+        </tr>
+
+
+</div>
+<?php endforeach ?>
+    <script type="text/javascript">
+        require([
+            "jquery",
+            "Magento_Ui/js/modal/modal"
+        ], function ($, modal) {
+
+            $(document).ready(function() {
+                $('.get_referral_link').click(function() {
+                    var textToCopy = $(this).data('text');
+                    copyToClipboard(textToCopy);
+                    $(this).parent().find('.copied_text').attr('class', 'copied_text d-block');
+                    setTimeout(() => {
+                        $(this).parent().find('.copied_text').attr('class', 'copied_text d-none');
+                    }, 1000)
+
+                });
+            });
+
+            function copyToClipboard(text) {
+                var $tempTextarea = $('<textarea>');
+                $tempTextarea.val(text);
+                $('body').append($tempTextarea);
+                $tempTextarea.select();
+                document.execCommand('copy');
+                $tempTextarea.remove();
+            }
+
+        });
+
+    </script>
+    <script type="text/x-magento-init">
+    {
+        "#campain_referral": {
+            "Mageplaza_Affiliate/js/action/copy-refferal-link": {
+             "textElement": "#campain_referral .text_copy",
+            "copyBtn": "#campain_referral_btn"
+            }
+        }
+    }
+
+    </script>
+    <div id="modal">
+        <div class="modal-body-content">
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        require([
+            "jquery",
+            "Magento_Ui/js/modal/modal"
+        ],function($, modal) {
+
+            var options = {
+                type: 'slide',
+                responsive: true,
+                title: '',
+                buttons: [],
+                modalClass: 'slide-campaign-view',
+            };
+
+            var popup = modal(options, $('#modal'));
+            $(".more-details").click(function() {
+                var viewCampaign = $(this).siblings('.affiliate-view-campaign').clone();
+                $(".modal-body-content").html(viewCampaign.html());
+                $('.modal-body-content .get_referral_link').click(function() {
+                    var textToCopy = $(this).data('text');
+                    copyToClipboard(textToCopy);
+                    $(this).parent().find('.copied_text').attr('class', 'copied_text d-block');
+                    setTimeout(() => {
+                        $(this).parent().find('.copied_text').attr('class', 'copied_text d-none');
+                    }, 1000)
+
+                });
+                $('.modal-body-content .coupon_code_ref_btn').click(function() {
+                    var textToCopy = "<?= /* @noEscape */ $couponSuffix ? $couponCode . '-' . $couponSuffix : $couponCode ?>";
+                    copyToClipboard(textToCopy);
+                    $(this).parent().parent().find('.copied_text').attr('class', 'copied_text d-block');
+                    $( this ).html(` <path d="M12.0909 10.0918H19.5909V19.6373H12.0909V10.0918Z" fill="#333333"/><path d="M17.5455 6H9.36364C8.61364 6 8 6.61364 8 7.36364V16.9091H9.36364V7.36364H17.5455V6ZM19.5909 8.72727H12.0909C11.3409 8.72727 10.7273 9.34091 10.7273 10.0909V19.6364C10.7273 20.3864 11.3409 21 12.0909 21H19.5909C20.3409 21 20.9545 20.3864 20.9545 19.6364V10.0909C20.9545 9.34091 20.3409 8.72727 19.5909 8.72727ZM19.5909 19.6364H12.0909V10.0909H19.5909V19.6364Z" fill="#333333"/>`);
+                    setTimeout(() => {
+                        $(this).parent().parent().find('.copied_text').attr('class', 'copied_text d-none');
+                        $( this ).html(`<path d="M17.5455 6H9.36364C8.61364 6 8 6.61364 8 7.36364V16.9091H9.36364V7.36364H17.5455V6ZM19.5909 8.72727H12.0909C11.3409 8.72727 10.7273 9.34091 10.7273 10.0909V19.6364C10.7273 20.3864 11.3409 21 12.0909 21H19.5909C20.3409 21 20.9545 20.3864 20.9545 19.6364V10.0909C20.9545 9.34091 20.3409 8.72727 19.5909 8.72727ZM19.5909 19.6364H12.0909V10.0909H19.5909V19.6364Z" fill="#AEAEAE"/>`);
+                    }, 1000)
+
+                });
+                function copyToClipboard(text) {
+                    var $tempTextarea = $('<textarea>');
+                    $tempTextarea.val(text);
+                    $('body').append($tempTextarea);
+                    $tempTextarea.select();
+                    document.execCommand('copy');
+                    $tempTextarea.remove();
+                }
+                $('#modal').modal('openModal');
+            });
+        });
+    </script>
+    <style>
+        .list_commission li {
+            color: #CC6F03;
+            font-size: 14px;
+            margin: 5px 0;
+
+        }
+
+
+        @media only screen and (min-width: 1024px) {
+            .modal-slide.slide-campaign-view { left: calc(100% - 1000px); }
+        }
+    </style>
+    <?php else: ?>
+        <tr>
+            <td colspan="4">
+                <span><?= /** @noEscape */ __('No results found!') ?></span>
+            </td>
+        </tr>
+    <?php endif; ?>
+    </tbody>
+    </table>
+
+    <?= /* @noEscape */
+    $block->getPagerHtml() ?>
+</div>
+
+
+

@@ -1,0 +1,254 @@
+type Query {
+    lasttransactions(
+    customerId: Int @doc(description: "Customer ID")):
+    [LastTransactions] @resolver(class: "Webkul\\Walletsystem\\Model\\Resolver\\LastTransaction") @doc(description: "The testcustomer query returns information about a customer")
+
+    viewtransactions(
+    customerId: Int @doc(description: "Customer ID")
+    entityId: Int @doc(description: "Entity_ID")
+    ):
+    ViewTransactions @resolver(class: "Webkul\\Walletsystem\\Model\\Resolver\\ViewTransaction") @doc(description: "The testcustomer query returns information about a customer")
+
+    viewaccountdetails(
+    customerId: Int @doc(description: "Customer ID")
+    ):
+    [ViewAccountDetails] @resolver(class: "Webkul\\Walletsystem\\Model\\Resolver\\ViewAccountDetails") @doc(description: "The testcustomer query returns information about a customer")
+
+    addedpayeeslist(
+    customerId: Int @doc(description: "Customer ID")
+    ):
+    [AddedPayeesList] @resolver(class: "Webkul\\Walletsystem\\Model\\Resolver\\AddedPayeesList") @doc(description: "Query returns information about a Added Payees List")
+
+    admincustomerwallentdetail(
+    customerId: Int @doc(description: "Customer ID")
+    ):
+    [AdminCustomerWallentDetail] @resolver(class: "Webkul\\Walletsystem\\Model\\Resolver\\AdminCustomerWallentDetail") @doc(description: "Admin Individualdetail Customer Wallent Detail ")
+    
+    adminallcustomerwallent:[AdminAllCustomerWallentDetail] @resolver(class: "Webkul\\Walletsystem\\Model\\Resolver\\AdminAllCustomerWallentDetail") @doc(description: "Admin All Customer Wallent Detail ")
+    adminwallentpayeelist:[AdminWallentPayeelist] @resolver(class: "Webkul\\Walletsystem\\Model\\Resolver\\AdminWallentPayeelist") @doc(description: "Admin Wallet System Payee Details")
+    admincustomeraccountdetails:[AdminCustomerAccountDetails] @resolver(class: "Webkul\\Walletsystem\\Model\\Resolver\\AdminCustomerAccountDetails") @doc(description: "Customer Bank Account Details")
+
+    walletpaymentcheckoutpage(
+    customerId: Int @doc(description: "Customer ID"),
+    productPrice:Int @doc(description: "Product Price  Amount")
+    ):
+    WalletPaymentCheckoutPage @resolver(class: "Webkul\\Walletsystem\\Model\\Resolver\\WalletPaymentCheckoutPage") @doc(description: "Wallet Payment Checkout Page ")
+    
+}
+type Mutation {
+    customerAddAccountDetail (customerId: Int! @doc(description: "Customer Id to load the customer Data"),
+    acholderName: String! @doc(description:"Account Holder Name"),
+    acNumber: String! @doc(description: "Account Number Detail"),
+    bankName: String! @doc(description: "Bank Name Detail"),
+    bankCode: String! @doc(description: "Bank Code Detail"),
+    additionalInformation: String! @doc(description: "Add Additional Informatio")
+    ):
+    CustomerAddAccountDetail @resolver(class: "Webkul\\Walletsystem\\Model\\Resolver\\CustomerAddAccountDetail") @doc(description: "Add the account Detail")
+
+    customerrequestdeleteaccount (entityId: Int! @doc(description: "Entity ID  to request delete Account")
+    ):
+    CustomerRequestDeleteAccount @resolver(class: "Webkul\\Walletsystem\\Model\\Resolver\\CustomerRequestDeleteAccount") @doc(description: "Delete Request Submitted To Admin")
+
+    addpayee (customerId: Int! @doc(description: "Customer ID"),
+    nickName: String! @doc(description:"Nick Name"),
+    customerEmail: String! @doc(description: "Customer Email ID"),
+    confirmEmail: String! @doc(description: "Confirm Email ID")
+    ):
+    AddPayee @resolver(class: "Webkul\\Walletsystem\\Model\\Resolver\\AddPayee") @doc(description: "Added the Payees")
+
+    deletePayee (payeeId: Int! @doc(description: "Payee ID")
+    ):
+    DeletePayee @resolver(class: "Webkul\\Walletsystem\\Model\\Resolver\\DeletePayee") @doc(description: "Delete the Payees")
+
+    sendcodetransferamount (senderId: Int! @doc(description: "Sender ID"),
+    receiverId: Int! @doc(description:"Receiver Id"),
+    amount: String! @doc(description: "Amount"),
+    walletnote: String! @doc(description: "Add Wallet Note")
+    ):
+    SendCodeTransferAmount @resolver(class: "Webkul\\Walletsystem\\Model\\Resolver\\SendCodeTransferAmount") @doc(description: "Get Code Transfer Amount")
+
+    sendtransferamount (senderId: Int! @doc(description: "Sender ID"),
+    receiverId: Int! @doc(description:"Receiver Id"),
+    amount: Int! @doc(description: "Amount"),
+    baseAmount: Int! @doc(description: "Base Amount")
+    code: Int! @doc(description: "Add Wallet Note")
+    ):
+    SendTransferAmount @resolver(class: "Webkul\\Walletsystem\\Model\\Resolver\\SendTransferAmount") @doc(description: "Send Code Transfer Amount")
+    
+    transferamounttobankaccount (customerId: Int! @doc(description: "Customer ID"),
+    amount: Int! @doc(description:"The amount that you want to send to a bank account"),
+    bankDetailsId: String! @doc(description: "Bank account detail id"),
+    walletnote: String! @doc(description: "Note which you want to add with tranfer amount time")
+    ):
+    TransferAmountToBankAccount @resolver(class: "Webkul\\Walletsystem\\Model\\Resolver\\TransferAmountToBankAccount") @doc(description: " Transfer Amount To Bank Account")
+
+    adminapprovetransferamount (entityId: Int! @doc(description: "Entity Id")
+    ):
+    AdminApproveTransferAmount @resolver(class: "Webkul\\Walletsystem\\Model\\Resolver\\AdminApproveTransferAmount") @doc(description: " Admin Approve Transfer Amount")
+
+    admincanceltransactionamount (transactionId: Int! @doc(description: "Transaction Id"),
+    reason: String! @doc(description: "Reason of Cancel"),
+    ):
+    AdminCancelTransaction @resolver(class: "Webkul\\Walletsystem\\Model\\Resolver\\AdminCancelTransaction") @doc(description: " Admin Cancel Transaction")
+    
+    adjustamounttowallet(customerIds: String! @doc(description: "Customer ID"),
+    walletamount: Int! @doc(description: "Wallet Amount"),
+    walletactiontype: String! @doc(description: "Wallet Action Type"),
+    walletnote: String! @doc(description: "Add Wallet Note")
+    ):
+    AdjustAmountToWallet @resolver(class: "Webkul\\Walletsystem\\Model\\Resolver\\AdjustAmountToWallet") @doc(description: " Adjust Amount To Wallet")
+
+    adminsavedeletecreditrules(deleteCreditRule : Int! @doc(description: "Delete Credit Rule Then set 1 or set 0")
+    entityId: Int! @doc(description: "Rule ID"),
+    basedOn: Int! @doc(description: "Based On Cart Or Product"),
+    amount: Int! @doc(description: "Cashback Amount"),
+    minimumAmount: Int! @doc(description: "Minimum Cart Amount"),
+    startDate: String! @doc(description: "Start From Date"),
+    endDate: String! @doc(description: "End Date"),
+    status: Int! @doc(description: "Rule Status Enable or Disable")
+    ):
+    AdminSaveDeleteCreditRules @resolver(class: "Webkul\\Walletsystem\\Model\\Resolver\\AdminSaveDeleteCreditRules") @doc(description: " Admin Save && Delete Credit Rules")
+   
+   adminconfirmwalletorder(orderId: Int! @doc(description: "Order Id")
+    ):
+    AdminConfirmWalletOrder @resolver(class: "Webkul\\Walletsystem\\Model\\Resolver\\AdminConfirmWalletOrder") @doc(description: "Admin Confirm Wallet Order")
+    
+
+    addamounttowallet(qty: Int! @doc(description: "Qty"),
+    price: Int! @doc(description: "Price")
+    ):
+    AddAmountToWallet @resolver(class: "Webkul\\Walletsystem\\Model\\Resolver\\AddAmountToWallet") @doc(description: "Add Amount To Wallet")
+
+}
+
+type CustomerAddAccountDetail @doc(description: "Testcustomer defines the customer name and other details") {
+    message: String
+}
+
+type CustomerRequestDeleteAccount @doc(description: "Delete Request Submitted To Admin") {
+    message: String
+}
+
+type AddPayee @doc(description: "Added the Payees") {
+    message: String
+}
+
+type SendCodeTransferAmount @doc(description: "Send Code Transfer Amount") {
+     transfercode: Int
+     message: String
+}
+
+type SendTransferAmount @doc(description: "Send Transfer Amount") {
+    message: String
+}
+
+type TransferAmountToBankAccount @doc(description: " Transfer Amount To Bank Account") {
+    message: String
+}
+
+type AdminApproveTransferAmount @doc(description: " Admin Approve Transfer Amount") {
+    message: String
+}
+
+type AdminCancelTransaction @doc(description: " Admin Cancel Transaction") {
+    message: String
+}
+
+type AdjustAmountToWallet @doc(description: " Adjust Amount To Wallet") {
+    message: String
+}
+
+type AdminSaveDeleteCreditRules @doc(description: " Admin Save && Delete Credit Rules") {
+     message: String
+}
+
+type AdminConfirmWalletOrder @doc(description: " Admin Confirm Wallet Order") {
+    message: String
+}
+
+type DeletePayee @doc(description: " Delete Payee") {
+    message: String
+}
+
+type AddAmountToWallet @doc(description: " Add Amount To Wallet") {
+     message: String
+}
+
+type LastTransactions @doc(description: "View Last Transactions Details") {
+    reference: String
+    debit: String
+    credit: String
+    status: String
+}
+
+type ViewTransactions @doc(description: "View Transaction Details") {
+    Amount: String
+    Action: String
+    Reference: String
+    Transaction_At: String
+    Transaction_note: String 	
+    Transaction_Status: String	
+    Payment_Method : String
+}
+
+type ViewAccountDetails @doc(description: "View Account Details") {
+    Ac_Holder_Name: String
+    Ac_Number: String
+    Bank_Name: String
+    Bank_Code: String
+    Additional_Information: String 
+}
+
+type AddedPayeesList @doc(description: "Added Payees List") {
+    PayeeId: Int
+    Nick_name: String
+    Email_address: String
+    Status: String
+}
+
+type AdminCustomerWallentDetail @doc(description: "Admin Individualdetail Customer Wallent Detail") {
+    Reference: String
+    Amount: String
+    Action: String
+    TransactionAt : String
+    Note: String
+    Status: String
+}
+
+type AdminAllCustomerWallentDetail @doc(description: "Admin All Customer Wallent Detail") {
+    CustomerName: String
+    TotalAmount: String
+    RemainingAmount: String
+    UsedAmount : String
+    ModifyAt: String
+}
+
+type AdminWallentPayeelist @doc(description: "Admin Wallet System Payee Details") {
+    CustomerName: String
+    PayeeCustomerName: String
+    PayeeCustomerEmail: String
+    Status : String
+}
+
+type AdminCustomerAccountDetails @doc(description: "Customer Bank Account Details") {
+    CustomerName: String
+    CustomerEmail: String
+    HolderName: String
+    BankName :String
+    AdditionalInformation: String
+    BankCode :String
+    RequestForDelete: String
+}
+
+type WalletPaymentCheckoutPage @doc(description: "Wallet Payment Checkout Page") {
+
+    PaymentToBeMade: String
+    AmountInYourWallet: String
+    RemainingAmount: String
+    LeftAmountTobePaid: String
+
+}
+    
+
+
+

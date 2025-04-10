@@ -1,0 +1,76 @@
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MobikulCore
+ * @author    Webkul Software Private Limited
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+
+<div class="page-main-actions">
+    <div class="page-actions" data-ui-id="page-actions-toolbar-content-header">
+        <div class="page-actions-inner" data-title="Joust Duffle Bag">
+            <div class="page-actions-buttons">
+                <button
+                    onclick="printBarcode()"
+                    id="print"
+                    title="Print"
+                    type="button"
+                    class="action- scalable action-secondary">
+                    <span>&#128438;</span>
+                    <?= $block->escapeHtml(__("Print"));?>
+                </button>
+                <a
+                    href="<?= $block->escapeUrl($block->getUrl('catalog/product/index')) ?>"
+                    id="back"
+                    title="Back"
+                    class="action-scalable action-primary">
+                    <span>&#8592;</span>
+                    <?= /* @noEscape*/ __("Back");?>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php
+    $barcodeAttribute  = 'sku';
+    $productCollection = $block->getProductCollection();
+    $productCollection->addAttributeToSelect("name");
+if ($barcodeAttribute != "sku") {
+    $productCollection->addAttributeToSelect($barcodeAttribute);
+}
+    $target = $block->baseUrl()."/"."barcode"."/"."product"."/";
+    $targetDir = $block->mediaPath();
+?>
+
+<div id="printable">
+    <table>
+        <tbody>
+            <?php
+            foreach ($productCollection as $product) {
+                $fileName = str_replace([" ", "#", "/"], "_", $product->getData($barcodeAttribute)).".png";
+                $basePath = $targetDir."/"."barcode"."/"."product"."/".$product->getId()."/";
+                if (!$block->fileDriver->isFile($basePath.$fileName)) {
+                    $block->createDirectory($basePath);
+                    $block->generateBarcode($basePath.$fileName, $product->getData($barcodeAttribute));
+                }
+                echo '<tr>';
+                echo '<td>'.$block->escapeHtml($product->getId()).'</td>';
+                echo '<td>'.$block->escapeHtml($product->getName()).'</td>';
+                echo '<td>'.$block->escapeHtml($product->getData($barcodeAttribute)).'</td>';
+                echo '<td>
+                    <img src="'.$block->escapeHtml($target.$product->getId())."/".$block->escapeHtml($fileName).'"/>
+                    </td>';
+                echo '</tr>';
+            }
+            if (!count($productCollection)) {
+                echo '<tr><td colspan="4">'.$block->escapeHtml(__("No BarCode Found")).'</td></tr>';
+            }
+            ?>
+        </tbody>
+    </table>
+</div>

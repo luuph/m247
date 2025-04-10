@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <whatsappultimate>
+        	<smsgatways>
+        		<dialogapiurl>https://waba.360dialog.io/v1/messages</dialogapiurl>
+        		<contactapiurl>https://waba.360dialog.io/v1/contacts</contactapiurl>
+        	</smsgatways>
+        </whatsappultimate>
+    </default>
+</config>

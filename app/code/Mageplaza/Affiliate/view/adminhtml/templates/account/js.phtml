@@ -1,0 +1,106 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_Affiliate
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+/** @var CheckVersion $block */
+use Mageplaza\Affiliate\Block\Adminhtml\Campaign\CheckVersion;
+
+?>
+<?php if ($block->checkVersionAffiliate()):?>
+<button class="fake-button primary" style="display: none">
+    <span>Add New Campaign</span>
+</button>
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <div class="action-close"><span>close</span></div>
+            <h1 class="model-title" >Attention</h1>
+            <p>Please upgrade your version to use this feature. You can upgrade <a href="https://dashboard.mageplaza.com/license/ ">here</a>.</p>
+        </div>
+    </div>
+<style>
+    #popup.popup {
+        z-index:1000;
+        display: none;
+        position: fixed;
+        top: 0; right: 0; bottom: 0; left: 0;
+        background-color: rgba(0,0,0,0.5);
+    }
+
+    #popup .popup-content {
+        background-color: #FFFFFF;
+        position: fixed;
+        top:15%;
+        width: 27%;
+        height: 15%;
+        left:50%;
+        transform: translate(-50%, -50%);
+    }
+
+    #popup .popup-content p{
+        margin-left: 5%;
+    }
+    #popup .popup-content h1 {
+        margin-left: 5%;
+        margin-top: 5%;
+    }
+
+    .action-close {
+        top: 3%;
+        right: 1%;
+        position: fixed;
+        font-size: 1.6rem;
+        color: black;
+        width: 25px;
+    }
+
+    .page-main-actions .affiliate-button{
+        display: none !important;
+    }
+    .page-main-actions .fake-button{
+        font-size: 1.6rem;
+        float: right;
+        font-weight:600;
+        height: 50px;
+    }
+</style>
+<script>
+    require([
+        'jquery',
+    ], function ($) {
+        $('.page-main-actions').prepend($('.fake-button'));
+        $(".page-main-actions").css("display", "block");
+        $(".fake-button").css("display", "unset");
+        $('.page-main-actions button').click(function (e){
+            $('#popup').show();
+            e.preventDefault();
+        });
+
+        $('.action-close').click(function(){
+            $('#popup').hide();
+        });
+        $(document).mouseup(function(e) {
+            var container = $("#popup");
+            if (container.is(e.target) && container.has(e.target).length === 0) {
+                container.hide();
+            }
+        });
+    });
+</script>
+<?php endif; ?>

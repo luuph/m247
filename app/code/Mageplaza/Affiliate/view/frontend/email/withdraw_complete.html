@@ -1,0 +1,45 @@
+<!--@subject {{trans "Withdraw request complete!"}} @-->
+<!--@vars {
+"var recipient.name":"Customer Name",
+"var withdraw.created_at":"Request Date",
+"var withdraw.amount":"Withdraw Amount",
+"var withdraw.amount_formated":"Withdraw Amount Formated",
+"var withdraw.fee":"Withdraw Fee",
+"var withdraw.transfer_amount_formated":"Withdraw Fee Formated",
+"var withdraw.transfer_amount":"Withdraw .Net Amount",
+"var withdraw.transfer_amount_formated":"Withdraw .Net Formated",
+"var withdraw.status_label":"Withdraw Status",
+"var account.balance":"Account Balance",
+"var account.balance_formated":"Account Balance Formated"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<p class="greeting">Dear {{trans "%name," name=$recipient.name}}</p>
+<p>{{trans "We would like to inform you that your withdraw request,which was created at %request_at has been completed. You will receive money after some days depending on the payment method which you choose."
+    request_at=$withdraw.created_at}}</p>
+<p>{{trans "The withdraw detail"}}</p>
+<ul>
+    <li>{{trans "Withdraw Id: %withdraw_id" withdraw_id=$withdraw.withdraw_id}}</li>
+    <li>{{trans "Transfer Amount: %amount" amount=$withdraw.transfer_amount_formated}}</li>
+    <li>{{trans "Request Amount: %amount" amount=$withdraw.amount_formated}}</li>
+    <li>{{trans "Tax/fee: %fee" fee=$withdraw.fee_amount_formated}}</li>
+    <li>{{trans "Payment Method: %payment" payment=$withdraw.payment_label}}</li>
+</ul>
+<p>{{trans "You can check your withdraw by "}} <a href="{{var this.getUrl($store, 'affiliate/account/withdraw')}}"
+                                                  target="_blank">{{trans "logging into your account"}}</a>.</p>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td>
+            <table width="100%" class="inner-wrapper" border="0" cellspacing="0" cellpadding="0" align="center">
+                <tr width="100%">
+                    <td bgcolor="#EAEAEA" align="center" style="background:#EAEAEA; text-align:center;">
+                        <p>{{trans "Thank you again, %store_name" store_name=$store.getFrontendName()}}</p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

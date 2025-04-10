@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="customer_account"/>
+	<head>
+		<css src="Magecomp_Whatsappultimate::css/whatsappultimate.css"/>
+        <css src="Magecomp_Whatsappultimate::countryflag/css/intlTelInput.css"/>
+	</head>
+    <body>
+        <referenceContainer name="content">
+			<block class="Magecomp\Whatsappultimate\Block\Customer\Update" name="sms_customer_account_update" as="mobile_update" template="Magecomp_Whatsappultimate::customer/update.phtml" cacheable="false" />
+        </referenceContainer>
+    </body>
+</page>

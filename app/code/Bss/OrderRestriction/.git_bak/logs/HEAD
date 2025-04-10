@@ -1,3 +1,0 @@
-0000000000000000000000000000000000000000 3e8e9d0e5ae0e18e931bac66a3a29b7cc5feb614 Hai Luu <luuph@bsscommerce.com> 1743070131 +0700	clone: from ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_order-restriction.git
-3e8e9d0e5ae0e18e931bac66a3a29b7cc5feb614 3e8e9d0e5ae0e18e931bac66a3a29b7cc5feb614 Hai Luu <luuph@bsscommerce.com> 1743135960 +0700	checkout: moving from master to BSupport-7774
-3e8e9d0e5ae0e18e931bac66a3a29b7cc5feb614 878e4f56dd9131945171cd4c6523b263b71cf214 Hai Luu <luuph@bsscommerce.com> 1743135994 +0700	commit: BSupport-7774: fix bug add child product of configurable not limit

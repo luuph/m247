@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Webkul\MobikulCore\Controller\Adminhtml\Carousel\Save" type="Unveels\AddCategoryTypeCarousel\Controller\Adminhtml\Carousel\Save" />
+    <preference for="Webkul\MobikulCore\Model\Carousel\Type" type="Unveels\AddCategoryTypeCarousel\Model\Carousel\Type" />
+    <preference for="Webkul\MobikulCore\Block\Adminhtml\AppCreator\Appcreator" type="Unveels\AddCategoryTypeCarousel\Block\Adminhtml\AppCreator\AppCreator" />
+</config>

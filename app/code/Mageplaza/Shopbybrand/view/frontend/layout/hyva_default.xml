@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Hyvä Themes - https://hyva.io
+ * Copyright © Hyvä Themes 2020-present. All rights reserved.
+ * This product is licensed per Magento install
+ * See https://hyva.io/license
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <script src="Mageplaza_Shopbybrand::js/splide.min.js" />
+        <css src="Mageplaza_Shopbybrand::css/splide.min.css" />
+    </head>
+    <body>
+        <referenceBlock name="topmenu_desktop">
+            <action method="setTemplate" ifconfig="shopbybrand/general/enabled">
+                <argument name="template" xsi:type="string">Mageplaza_Shopbybrand::hyva/position/menu/desktop.phtml</argument>
+            </action>
+        </referenceBlock>
+
+        <referenceBlock name="topmenu_mobile">
+            <action method="setTemplate" ifconfig="shopbybrand/general/enabled">
+                <argument name="template" xsi:type="string">Mageplaza_Shopbybrand::hyva/position/menu/mobile.phtml</argument>
+            </action>
+        </referenceBlock>
+
+        <referenceBlock name="footer-static-links">
+            <action method="setTemplate" ifconfig="shopbybrand/general/enabled">
+                <argument name="template" xsi:type="string">Mageplaza_Shopbybrand::hyva/html/footer/links.phtml</argument>
+            </action>
+            <block class="Mageplaza\Shopbybrand\Block\Link\Footer" name="mpshopbybrand.footerlink" ifconfig="shopbybrand/general/enabled"/>
+        </referenceBlock>
+
+        <referenceContainer name="sidebar.additional">
+            <block
+                name="catalog.compare.sidebar"
+                template="Magento_Catalog::product/compare/sidebar.phtml"
+                ifconfig="catalog/frontend/show_sidebar_in_list"
+            />
+        </referenceContainer>
+
+        <referenceBlock name="cart-drawer">
+            <action method="setTemplate" ifconfig="shopbybrand/general/enabled">
+                <argument name="template" xsi:type="string">Mageplaza_Shopbybrand::hyva/html/cart/cart-drawer.phtml</argument>
+            </action>
+        </referenceBlock>
+
+        <referenceBlock name="checkout.cart.crosssell" remove="true"/>
+
+    </body>
+</page>

@@ -1,0 +1,51 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_AffiliateUltimate
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+/** @var \Mageplaza\AffiliateUltimate\Block\Adminhtml\Reports\Dashboard\Bestsellers $block */
+
+?>
+<div class="dashboard-item-content">
+    <?php
+    if ($block->getAffBestSellers()->getSize() > 0):?>
+        <table class="admin__table-primary dashboard-data" id="lastOrdersGrid_table">
+            <thead>
+            <tr>
+                <th class="data-grid-th col-product no-link col-name"><span><?= /* @noEscape */ __('Product') ?></span></th>
+                <th class="data-grid-th col-product no-link col-name"><span><?= /* @noEscape */ __('SKU') ?></span></th>
+                <th class="data-grid-th  no-link col-price"><span><?= /* @noEscape */ __('Price') ?></span></th>
+                <th class="data-grid-th col-qty no-link col-ordered_qty"><span><?= /* @noEscape */ __('Quantity') ?></span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($block->getAffBestSellers() as $item): ?>
+                <tr>
+                    <td class="col-product col-name "><?= /* @noEscape */ $item->getName() ?></td>
+                    <td class="col-product col-name "><?= /* @noEscape */ $item->getSku() ?></td>
+                    <td class="col-price a-right"><?= /* @noEscape */ $block->formatPrice($item->getBasePrice()) ?></td>
+                    <td class="col-qty col-ordered_qty col-number last "><?= (int)$item->getTotalQty() ?></td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    <?php else: ?>
+        <div class="empty-text"><?= /* @noEscape */ __('We couldn\'t find any records.') ?></div>
+    <?php endif; ?>
+</div>

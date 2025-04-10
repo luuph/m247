@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_Affiliate
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="affiliate_account"/>
+    <body>
+        <referenceContainer name="content">
+            <block class="Mageplaza\AffiliateUltimate\Block\Account\Reports" name="affiliate.account.reports" template="Mageplaza_AffiliateUltimate::account/reports.phtml" cacheable="false">
+                <block class="Mageplaza\AffiliateUltimate\Block\Account\Reports\Traffic" name="affiliate.account.reports.traffic" as="reports.traffic" template="Mageplaza_AffiliateUltimate::account/reports/traffic.phtml"/>
+                <block class="Mageplaza\AffiliateUltimate\Block\Account\Reports\Raw" name="affiliate.account.reports.raw" as="reports.raw" template="Mageplaza_AffiliateUltimate::account/reports/raw.phtml"/>
+
+            </block>
+        </referenceContainer>
+        <referenceBlock name="breadcrumbs">
+            <action method="addCrumb">
+                <argument name="crumbName" xsi:type="string">Reports</argument>
+                <argument name="crumbInfo" xsi:type="array">
+                    <item name="title" xsi:type="string" translate="true">Reports</item>
+                    <item name="label" xsi:type="string" translate="true">Reports</item>
+                </argument>
+            </action>
+        </referenceBlock>
+    </body>
+</page>

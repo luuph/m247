@@ -1,0 +1,29 @@
+{
+    "name": "mageplaza/module-currency-formatter",
+    "description": "Magento 2 Currency Formatter Extension",
+    "require": {
+        "mageplaza/module-core": "^1.4.12",
+        "magento/framework": "^103.0.0",
+        "magento/module-sales": "^103.0.0",
+        "php": ">=7.4 || ~8.1.0 || ~8.2.0"
+    },
+    "type": "magento2-module",
+    "version": "4.0.7",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Mageplaza",
+            "email": "support@mageplaza.com",
+            "homepage": "https://www.mageplaza.com",
+            "role": "Technical Support"
+        }
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Mageplaza\\CurrencyFormatter\\": ""
+        }
+    }
+}

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_AffiliateUltimate
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <affiliate>
+            <module>
+                <user_guide>affiliate-ultimate</user_guide>
+            </module>
+            <general>
+                <show_banner_report>1</show_banner_report>
+                <traffic_page>mp_affiliate_traffic_custom</traffic_page>
+                <traffic_page_content>You can see a detailed report of purchases' traffic sources (referral url and coupon code) here.</traffic_page_content>
+            </general>
+            <credit_balance_chart>
+                <background_color>rgba(0, 0, 0, 0.1)</background_color>
+                <border_color>rgba(255,99,132,1)</border_color>
+            </credit_balance_chart>
+        </affiliate>
+    </default>
+</config>

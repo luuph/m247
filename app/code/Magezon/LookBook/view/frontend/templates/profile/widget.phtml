@@ -1,0 +1,17 @@
+<?php
+/**
+ * @var $block Magezon\LookBook\Block\Widget\ProductList
+ */
+$collection = $this->getCollection();
+?>
+<?php if ($collection->count()) { ?>
+    <?php foreach ($collection as $profile) { ?>
+        <div class="lookbook-profile">
+            <h4 class="lookbook-profile-title" >
+                <i class="fas mgz-fa-angle-double-right"></i>
+                <a href="<?= $profile->getUrl() ?>" title="<?= $this->escapeHtml($profile->getTitle()) ?>"><?= $profile->getTitle() ?>
+                </a>
+            </h4>
+        </div>
+    <?php } ?>
+<?php } ?>

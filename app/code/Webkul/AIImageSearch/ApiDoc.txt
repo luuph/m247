@@ -1,0 +1,47 @@
+End point :  https://<your store url>/graphql
+
+GraphQL API Calls :
+
+-----------------------
+API Type : Query
+-----------------------
+
+1. Search similar products by image base64 content.
+Query :
+query Products {
+    products(
+        search: "base64Image: iVBORw0KGgoAAAANSU......hEAAAAABJRU5ErkJggg=="       /** String */
+    ) {
+        total_count       /** Int */
+        items{
+            sku           /** String */
+            name          /** String */
+            url_key       /** String */
+        }
+    }
+}
+
+Response :
+{
+    "data": {
+        "products": {
+            "total_count": 2,
+            "items": [
+                {
+                    "sku": "WH04",
+                    "name": "Miko Pullover Hoodie",
+                    "url_key": "miko-pullover-hoodie"
+                },
+                {
+                    "sku": "MS06",
+                    "name": "Zoltan Gym Tee",
+                    "url_key": "zoltan-gym-tee"
+                }
+            ]
+        }
+    }
+}
+
+In query: 
+search: "base64Image: iVBORw0KGgoAAAANSU......hEAAAAABJRU5ErkJggg=="
+It is used to search the product by the image base64 content. The 'base64Image: ' is a prefix which you need to attach with your base64 image content.

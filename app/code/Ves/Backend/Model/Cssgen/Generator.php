@@ -55,8 +55,6 @@ class Generator {
 
 	protected $_locale;
 
-	protected $_filesystem;
-
     /**
      * Generator constructor.
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager

@@ -1,0 +1,21 @@
+type Query{
+walkthroughFilter(
+    width: String,
+    store_id: String
+): WalkThrough @resolver(class: "\\Unveels\\WalkthroughStoreview\\Model\\Resolver\\Catalog\\WalkthroughFilter") @doc(description: "walkthrough information")
+}
+
+type WalkThrough {
+    success: Boolean,
+    message: String,
+    walkthroughVersion: Float,
+    walkthroughData: [WalkThroughData]
+}
+
+type WalkThroughData {
+    title: String,
+    content: String,
+    image: String,
+    imageDominantColor: String,
+    colorCode: String
+}

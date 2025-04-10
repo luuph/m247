@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+
+    <route method="POST" url="/V1/whatsappultimate/sendregotp">
+        <service class="Magecomp\Whatsappultimate\Api\UltimateInterface" method="sendRegotp"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route method="POST" url="/V1/whatsappultimate/regotpverify">
+        <service class="Magecomp\Whatsappultimate\Api\UltimateInterface" method="verifyRegotp"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route method="POST" url="/V1/whatsappultimate/sendmobileupdateotp">
+        <service class="Magecomp\Whatsappultimate\Api\UltimateInterface" method="sendMobileUpdateOtp"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route method="POST" url="/V1/whatsappultimate/updateotpverify">
+        <service class="Magecomp\Whatsappultimate\Api\UltimateInterface" method="verifyMobileUpdateOtp"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+     
+    <route method="POST" url="/V1/whatsappultimate/sendregistrationnotification">
+        <service class="Magecomp\Whatsappultimate\Api\UltimateInterface" method="sendRegistrationNotification"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+     <route method="POST" url="/V1/whatsappultimate/sendordernotification">
+        <service class="Magecomp\Whatsappultimate\Api\UltimateInterface" method="sendOrderNotification"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route method="POST" url="/V1/whatsappultimate/sendinvoicenotification">
+        <service class="Magecomp\Whatsappultimate\Api\UltimateInterface" method="sendInvoiceNotification"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route method="POST" url="/V1/whatsappultimate/sendshipmentnotification">
+        <service class="Magecomp\Whatsappultimate\Api\UltimateInterface" method="sendShipmentNotification"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route method="POST" url="/V1/whatsappultimate/sendcreditmemonotification">
+        <service class="Magecomp\Whatsappultimate\Api\UltimateInterface" method="sendCreditmemoNotification"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route method="POST" url="/V1/whatsappultimate/sendcontactnotification">
+        <service class="Magecomp\Whatsappultimate\Api\UltimateInterface" method="sendContactNotification"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route method="GET" url="/V1/whatsappultimate/countrylist">
+        <service class="Magecomp\Whatsappultimate\Api\UltimateInterface" method="getCountryList"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+</routes>

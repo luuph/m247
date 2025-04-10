@@ -1,0 +1,21 @@
+{
+    "name": "webkul/module-web-ar",
+    "description": "Magento2 WebAr",
+    "type": "magento2-module",
+    "license": "proprietary",
+    "require": {
+        "magento/module-config": "101.2.*",
+        "magento/module-backend": "102.0.*",
+        "magento/framework": "103.0.*",
+        "magento/module-ui": "101.2.*"
+    },
+    "version": "5.1.1-p3",
+    "autoload": {
+        "psr-4": {
+            "Webkul\\WebAr\\": ""
+        },
+        "files": [
+            "registration.php"
+        ]
+    }
+}

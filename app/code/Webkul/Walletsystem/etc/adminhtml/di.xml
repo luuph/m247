@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Walletsystem
+ * @author    Webkul
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Ui\Model\Export\MetadataProvider">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="waletsystem_wallet_individual_details" xsi:type="array">
+                    <item name="transaction_at" xsi:type="string">transaction_at</item>
+                </item>
+                <item name="waletsystem_wallet_details" xsi:type="array">
+                    <item name="updated_at" xsi:type="string">updated_at</item>
+                </item>
+                <item name="wallesystem_creditrules" xsi:type="array">
+                    <item name="created_at" xsi:type="string">created_at</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="wallet_cash_back" xsi:type="array">
+                    <item name="class" xsi:type="string">Webkul\Walletsystem\Ui\DataProvider\Product\Form\Modifier\WalletCashBack</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <preference for="Magento\Backend\Block\Widget\Grid\Column\Filter\Select" type="Webkul\Walletsystem\Block\Widget\Grid\Column\Filter\Select"/> 
+    <type name="Magento\Sales\Model\Order">
+        <plugin name="Webkul_Walletsystem::afterCanCreditmemo" type="Webkul\Walletsystem\Plugin\Sales"/>
+    </type>
+    <type name="Webkul\Walletsystem\Ui\Component\MassAction\Status\PayeeStatus">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="urlPath" xsi:type="string">walletsystem/transfer/masspayeeupdate</item>
+                <item name="paramName" xsi:type="string">entity_id</item>
+                <item name="confirm" xsi:type="array">
+                    <item name="title" xsi:type="string" translate="true">Update Payee Status</item>
+                    <item name="message" xsi:type="string" translate="true">Are you sure to update status of selected Payees?</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Webkul\Walletsystem\Ui\Component\MassAction\Status\CreditStatus">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="urlPath" xsi:type="string">walletsystem/creditrules/massUpdate</item>
+                <item name="paramName" xsi:type="string">entity_id</item>
+                <item name="confirm" xsi:type="array">
+                    <item name="title" xsi:type="string" translate="true">Credit Rule Status</item>
+                    <item name="message" xsi:type="string" translate="true">Are you sure to update status of selected Credit Rules?</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Backend\Block\Widget\Container">
+        <plugin name="Webkul_Walletsystem::editInvoiceButton" type="Webkul\Walletsystem\Plugin\Backend\Block\Widget\Container"/>
+    </type>
+</config>

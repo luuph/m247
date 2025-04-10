@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_Affiliate
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" label="Customer My Account (All Pages)" design_abstraction="custom">
+    <body>
+
+        <referenceBlock name="affiliate_navigation">
+            <block class="Magento\Framework\View\Element\Html\Link\Current" name="affiliate-navigation-reports-link">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">Reports</argument>
+                    <argument name="path" xsi:type="string">affiliate/account/reports</argument>
+                    <argument name="sort_order" xsi:type="string">89</argument>
+                    <argument name="active" xsi:type="string">login</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+
+
+    </body>
+</page>

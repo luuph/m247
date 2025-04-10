@@ -1,0 +1,337 @@
+<fieldset class="fieldset create account">
+    <legend class="legend"><span><?= /* @noEscape*/__('Get WhatsApp Updates') ?></span>
+    <div style="font-size:13px;font-weight:bold;margin-top:10px;"><?= /* @noEscape*/__('Receive all your Order Related Notifications Directly on your WhatsApp.') ?></div></legend>
+    <!-- <div class="field"> -->
+         <div class="field <?php if ($block->getCountryFlagEnable()): ?> required <?php endif; ?>">
+        <div class="control">
+            <input type="text" name="getmobilenumber" id="getmobilenumber" title="<?= /* @noEscape*/__('mobilenumber') ?>" class="input-text mobilenumber" autocomplete="off" placeholder="Mobile Number" maxlength="12"  pattern="[0-9]"/>
+        </div>
+        <input type="hidden" value="" id="mobilenumber" name="mobilenumber"/>
+        <input type="hidden" value="" id="countryreg" name="countryreg"/>
+        
+        <?php if ($block->IsSignUpConfirmation()): ?>
+        <div id="otpdiv" class="control">
+            <input type="password" name="otp" id="otp" title="<?= /* @noEscape*/__('otp') ?>" class="input-text" autocomplete="off" placeholder="OTP" maxlength="10" data-validate="{required:true}" data-msg-required="<?= /* @noEscape*/__("Please enter OTP") ?>"/>
+        </div>
+        <div id="waitsmsdiv">
+            <img src='<?= /* @noEscape*/$block->getViewFileUrl('images/loader-1.gif'); ?>' alt="Please Wait..." width="30px" height="30px">
+        </div>
+        <div id="otpbtndiv">
+            <button id="getotpbtn" name="getotpbtn" type="button" class="<?= /* @noEscape*/$block->getButtonclass();?>" title="Get OTP">
+                <span><?= /* @noEscape*/__('Get OTP') ?></span>
+            </button>
+            <button id="resendotpbtn" name="resendotpbtn" type="button" class="<?= /* @noEscape*/$block->getButtonclass();?>" title="Resend OTP">
+                <span><?= /* @noEscape*/__('Resend OTP') ?></span>
+            </button>
+        </div>
+        <?php endif; ?>
+        <?php if (!$block->getCountryFlagEnable()): ?>
+        <div class="comment flagdisableregister" style="float: left;"><?= /* @noEscape*/__('Enter WhatsApp Number With Country code & without any sign. e.g:-(91xxxxxxxx09)') ?></div>
+        <?php endif;?>
+        <div id="smserror" name="smserror" generated="true" class="mage-error"></div>
+    </div>
+</fieldset>
+<?php if ($block->IsSignUpConfirmation()): ?>
+    <script>
+        require(['jquery', 'jquery/ui','Magecomp_Whatsappultimate/countryflag/js/intlTelInput.min'], function($)
+        {
+            function Smsresetdata()
+            {
+                $('#getmobilenumber').removeClass('mage-error');
+                $('#smserror').html('');
+            }
+
+            function Smstoggeldata(Elementid)
+            {
+                $(Elementid).toggle();
+            }
+         $("#send2").prop("disabled", true);
+    
+         <?php if ($block->getCountryFlagEnable()) { ?>
+            jQuery('.country-list li').click(function(){
+                jQuery('#getmobilenumber').val('');
+                jQuery("#getotpbtn").prop("disabled", true);
+                jQuery("#getmobilenumber").attr('maxlength',12);
+            });
+            $("#getotpbtn").prop("disabled", true);
+                var country_flag = "<?= /* @noEscape*/$block->getDefaultContry();?>";
+                <?php if ($block->getCountryFlagDetectByIP()):?>
+                    country_flag = "<?= /* @noEscape*/$block->getGeoCountryCode();?>";
+                <?php endif; ?>
+                $("#getmobilenumber").intlTelInput({
+                    initialCountry: country_flag,
+                    utilsScript: "<?= /* @noEscape*/$block->getViewFileUrl('Magecomp_Whatsappultimate::countryflag/js/utils.js'); ?>"
+                });
+               
+                jQuery("#getmobilenumber").keyup(function(){
+                    $("#getotpbtn").prop("disabled", true);
+                    Smsresetdata();
+                    var str = jQuery(".selected-flag").attr("title");
+                    var countrycode =  str.split('+')[1];
+                    var countrycodeval =  str.split('+')[1];
+                    var mobilelength=$('#getmobilenumber').val().length;
+                    var mobile = countrycode+$('#getmobilenumber').val();
+                    jQuery("#countryreg").val(countrycode);
+                    var temp=true;
+                    if(mobile == null || mobile == '' && mobile == countrycode)
+                    {
+                        temp=false;
+                        $("#getotpbtn").prop("disabled", true);
+                        $('#getmobilenumber').addClass('mage-error');
+                        $('#smserror').html('<?= /* @noEscape*/__('This is a required field.') ?>');
+                        return false;
+                    }
+                    if(!$.isNumeric(mobile) || mobile.substring(0,1)=='+' || mobile.substring(0,1)=='-')
+                    {
+                        temp=false;
+                        $("#getotpbtn").prop("disabled", true);
+                        $('#getmobilenumber').addClass('mage-error');
+                        $('#smserror').html('<?= /* @noEscape*/__('Make sure, you have entered valid WhatsApp Number.') ?>');
+                        return false;
+                    }
+                    var countrycode = jQuery(".flag-container > .country-list > .active").attr("data-country-code");
+                    
+                        $.ajax({
+                            type: "POST",
+                            url: '<?= /* @noEscape*/$block->getUrl('whatsappcountryflag/customer/validatephone')?>',
+                            data:{'mobile':mobile,'countrycode':countrycode,'mobilelength':mobilelength,'country_id':countrycodeval},
+                            success: function(data)
+                            {
+                                jQuery("#getmobilenumber").attr('maxlength',data.digit);
+                                if(data.validate==true){
+                                    $('#smserror').html('<?= /* @noEscape*/__('') ?>');
+                                    $("#getotpbtn").prop("disabled", false);
+                                    return false;
+                                }
+                                else{
+                                    if(temp==true){
+                                        $('#smserror').html(data.message);
+                                    }
+                                    $("#getotpbtn").prop("disabled", true);
+                                }
+                            },
+                            error: function(data) {
+                                $('#smserror').html('<?= /* @noEscape*/__('Something went wrong, Try again later.') ?>');
+                            }
+                        });
+                    
+                });
+                
+           <?php } ?>
+
+          <?php if ($block->getCountryFlagEnable()) { ?>
+
+            $("#getotpbtn").click(function(e)
+            {
+                //Reset Everything
+                Smsresetdata();
+                //Number Validation
+                var str = jQuery(".selected-flag").attr("title");
+                var countrycode =   str.split('+')[1];
+                var mobilelength=$('#getmobilenumber').val().length;
+                var mobile = countrycode+$('#getmobilenumber').val();
+                jQuery("#countryreg").val(countrycode);
+                var tempotp=true;
+                if(mobile == null || mobile == '' && mobile == countrycode)
+                {
+                    tempotp = false;
+                    $('#getmobilenumber').addClass('mage-error');
+                    $('#smserror').html('<?= /* @noEscape*/__('This is a required field.') ?>');
+                    return false;
+                }
+                
+                if(!$.isNumeric(mobile) || mobile.substring(0,1)=='+' || mobile.substring(0,1)=='-')
+                {
+                    tempotp =false;
+                    $('#getmobilenumber').addClass('mage-error');
+                    $('#smserror').html('<?= /* @noEscape*/__('Please, Enter Valid Mobile Number.') ?>');
+                    return false;
+                }
+               
+
+                var countrycode = jQuery(".flag-container > .country-list > .active").attr("data-country-code");
+                $('#mobilenumber').val(mobile);
+                //Send OTP To Number
+                    $.ajax({
+                        type: "POST",
+                        url: '<?= /* @noEscape*/$block->getUrl('whatsappultimate/customer/register')?>',
+                        data:{'mobile':mobile,'countrycode':countrycode,'mobilelength':mobilelength},
+                        beforeSend: function()
+                        {
+                            Smsresetdata();
+                            Smstoggeldata('#getotpbtn');
+                            Smstoggeldata('#waitsmsdiv');
+                        },
+                        success: function(data)
+                        {
+                            if(data.validate==false)
+                            {
+                                $('#smserror').html(data.message);
+                                Smstoggeldata('#waitsmsdiv');
+                                Smstoggeldata('#getotpbtn');
+                            }
+                            else{
+                                if(data == 'success')
+                                {
+                                    Smstoggeldata('#waitsmsdiv');
+                                    Smstoggeldata('#otpdiv');
+                                    Smstoggeldata('#resendotpbtn');
+                                    $('#getmobilenumber').attr('readonly', true);
+                                    $("#send2").prop("disabled", false);
+                                }
+                                else
+                                {
+                                    Smstoggeldata('#waitsmsdiv');
+                                    Smstoggeldata('#getotpbtn');
+                                    $('#smserror').html(data);
+                                }
+                               
+                            }
+                        },
+                        error: function(data) {
+                            Smstoggeldata('#waitsmsdiv');
+                            Smstoggeldata('#getotpbtn');
+                            $('#smserror').html('<?= /* @noEscape*/__('Something went wrong, Try again later.') ?>');
+                        }
+                    });
+            });
+
+            
+
+            $("#resendotpbtn").click(function(e)
+            {
+                //Reset Everything
+                Smsresetdata();
+
+                var str = jQuery(".selected-flag").attr("title");
+                var countrycode =   str.split('+')[1];
+                var mobile = countrycode+$('#getmobilenumber').val();
+                //Re-Send OTP To Number
+                $('#mobilenumber').val(mobile);
+                $.ajax({
+                    type: "POST",
+                    url: '<?= /* @noEscape*/$block->getUrl('whatsappultimate/customer/register')?>',
+                    data:{'mobile':mobile},
+                    beforeSend: function()
+                    {
+                        Smsresetdata();
+                        Smstoggeldata('#resendotpbtn');
+                        Smstoggeldata('#waitsmsdiv');
+                    },
+                    success: function(data)
+                    {
+                        Smstoggeldata('#waitsmsdiv');
+                        if(data != 'success')
+                        {
+                            $("#send2").prop("disabled", false);
+                            $('#smserror').html(data);
+                        }
+                    },
+                    error: function(data) {
+                        Smstoggeldata('#waitsmsdiv');
+                        $('#smserror').html('<?= /* @noEscape*/__('Something went wrong, Try again later.') ?>');
+                    }
+                });
+            });
+
+            <?php } else { ?>
+
+            $("#getotpbtn").click(function(e)
+            {
+                //Reset Everything
+                Smsresetdata();
+
+                //Number Validation
+                var mobile = $('#getmobilenumber').val();
+                $('#mobilenumber').val(mobile);
+                if(mobile == null || mobile == '')
+                {
+                    $('#getmobilenumber').addClass('mage-error');
+                    $('#smserror').html('<?= /* @noEscape*/__('This is a required field.') ?>');
+                    return false;
+                }
+                if(!$.isNumeric(mobile) || mobile.length <= 9)
+                {
+                    $('#getmobilenumber').addClass('mage-error');
+                    $('#smserror').html('<?= /* @noEscape*/__('Please, Enter Valid Mobile Number.') ?>');
+                    return false;
+                }
+
+                //Send OTP To Number
+                $.ajax({
+                    type: "POST",
+                    url: '<?= /* @noEscape*/$block->getUrl('whatsappultimate/customer/register')?>',
+                    data:{'mobile':mobile},
+                    beforeSend: function()
+                    {
+                        Smsresetdata();
+                        Smstoggeldata('#getotpbtn');
+                        Smstoggeldata('#waitsmsdiv');
+                    },
+                    success: function(data)
+                    {
+                        if(data == 'success')
+                        {
+                            Smstoggeldata('#waitsmsdiv');
+                            Smstoggeldata('#otpdiv');
+                            Smstoggeldata('#resendotpbtn');
+                            $('#getmobilenumber').attr('readonly', true);
+                        }
+                        else
+                        {
+                            Smstoggeldata('#waitsmsdiv');
+                            Smstoggeldata('#getotpbtn');
+                            $('#smserror').html(data);
+                        }
+                        $("#send2").prop("disabled", false);
+                    },
+                    error: function() {
+                        Smstoggeldata('#waitsmsdiv');
+                        Smstoggeldata('#getotpbtn');
+                        $('#smserror').html('<?= /* @noEscape*/__('Something went wrong, Try again later.') ?>');
+                    }
+                });
+            });
+
+            $("#resendotpbtn").click(function(e)
+            {
+                //Reset Everything
+                Smsresetdata();
+
+                var mobile = $('#getmobilenumber').val();
+                $('#mobilenumber').val(mobile);
+                //Re-Send OTP To Number
+                $.ajax({
+                    type: "POST",
+                    url: '<?= /* @noEscape*/$block->getUrl('whatsappultimate/customer/register')?>',
+                    data:{'mobile':mobile},
+                    beforeSend: function()
+                    {
+                        Smsresetdata();
+                        Smstoggeldata('#resendotpbtn');
+                        Smstoggeldata('#waitsmsdiv');
+                    },
+                    success: function(data)
+                    {
+                        Smstoggeldata('#waitsmsdiv');
+                        if(data != 'success')
+                        {
+                            $('#smserror').html(data);
+                            $("#send2").prop("disabled", false);
+                        }
+                    },
+                    error: function() {
+                        Smstoggeldata('#waitsmsdiv');
+                        $('#smserror').html('<?= /* @noEscape*/__('Something went wrong, Try again later.') ?>');
+                    }
+                });
+            });
+          <?php } ?>
+        });
+    </script>
+    <style>
+    .intl-tel-input.separate-dial-code.allow-dropdown.iti-sdc-3 .selected-flag {
+	    width: 50px !important;
+    }
+    </style>
+<?php endif; ?>

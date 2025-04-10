@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MobikulCore
+ * @author    Webkul Software Private Limited
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="sales_order_save_after">
+        <observer name="Webkul_MobikulCore_order_change_status_observer" instance="Webkul\MobikulCore\Observer\OrderStatusNotification"/>
+    </event>
+    <event name="checkout_submit_all_after">
+        <observer name="webkul_sales_order_place_after" instance="Webkul\MobikulCore\Observer\OrderPlaceAfter" />
+    </event>
+</config>

@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magezon
+ *
+ * This source file is subject to the Magezon Software License, which is available at https://magezon.com/license/.
+ * Do not edit or add to this file if you wish to upgrade the to newer versions in the future.
+ * If you wish to customize this module for your needs.
+ * Please refer to https://www.magezon.com for more information.
+ *
+ * @category  Magezon
+ * @package   Magezon_LookBook
+ * @copyright Copyright (C) 2021 Magezon (https://magezon.com)
+ */
+-->
+<page layout="empty" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<body>
+		<block class="Magezon\LookBook\Block\Product" name="ajax.product.info" template="Magezon_LookBook::product.phtml"/>
+		<move element="product.info.main" destination="ajax.product.info" as="product_info_main"/>
+		<referenceContainer name="product.info.social" remove="true"/>
+		<referenceBlock name="product.info.review" remove="true"/>
+		<referenceBlock name="product.info.overview" remove="true"/>
+		<referenceBlock name="product.info.addtocart.instantPurchase" remove="true"/>
+		<referenceBlock name="product.info.addtocart.instantPurchase.additional" remove="true"/>
+		<referenceBlock name="product.info.addtocart" remove="true"/>
+		<referenceBlock name="product.info.addtocart.additional" remove="true"/>
+		<block class="Magento\Framework\View\Element\Template" name="ajax.product.bottom"/>
+
+		<referenceBlock name="product.info.bundle.options.top" remove="true"/>
+    	<referenceBlock name="customize.button" remove="true"/>
+    	<move element="bundle.options.container" destination="ajax.product.bottom" before="-" />
+    	<referenceBlock name="product.info.addtocart.bundle" remove="true"/>
+	</body>
+</page>

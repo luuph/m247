@@ -1,0 +1,59 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MobikulCore
+ * @author    Webkul Software Private Limited
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+
+namespace Webkul\MobikulCore\Controller\Adminhtml\Categoryimages;
+
+/**
+ * Class MassDisable controller
+ */
+class MassDisable extends \Webkul\MobikulCore\Controller\Adminhtml\Categoryimages
+{
+    /**
+     * Execute Function for Class MassDisable
+     *
+     * @return jSon
+     */
+    public function execute()
+    {
+        $collection = $this->filter->getCollection($this->collectionFactory->create());
+        $coditionArr = [];
+        $resultRedirect = $this->resultRedirectFactory->create();
+        $featuredcategoriessUpdated = 0;
+        foreach ($collection->getAllIds() as $key => $featuredcategoriesId) {
+            $currentFeaturedcategories = $this->categoryimagesRepository->getById($featuredcategoriesId);
+            $featuredcategoriesData = $currentFeaturedcategories->getData();
+            if (count($featuredcategoriesData)) {
+                $condition = "`id`=".$featuredcategoriesId;
+                array_push($coditionArr, $condition);
+                $featuredcategoriessUpdated++;
+            }
+        }
+        $coditionData = implode(" OR ", $coditionArr);
+        $collection->setCategoryimagesData($coditionData, ["status"=>0]);
+        if ($featuredcategoriessUpdated) {
+            $this->messageManager->addSuccess(
+                __("A total of %1 record(s) were disabled.", $featuredcategoriessUpdated)
+            );
+        }
+        return $resultRedirect->setPath("mobikul/categoryimages/index");
+    }
+
+    /**
+     * Function to check if the controller is allowed
+     *
+     * @return bool
+     */
+    protected function _isAllowed()
+    {
+        return $this->_authorization->isAllowed("Webkul_MobikulCore::categoryimages");
+    }
+}

@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_AIImageSearch
+ * @author    Webkul Software Private Limited
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="webkul" translate="label" sortOrder="10">
+            <label>Webkul</label>
+        </tab>
+        <section id="aichromadbclient" translate="label" type="text" sortOrder="305" showInDefault="1" showInWebsite="1" showInStore="1">
+            <tab>webkul</tab>
+            <resource>Webkul_AIImageSearch::config_aiimagesearch</resource>
+            <group id="ai_image_search_setting" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>AI Image Search Setting</label>
+                <field id="no_of_results" translate="label comment" sortOrder="1" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Number of results</label>
+                    <comment>Number of product items.</comment>
+                    <validate>required-entry integer validate-greater-than-zero</validate>
+                </field>
+                <field id="distance" translate="label comment" sortOrder="1" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Distance</label>
+                    <comment>Value must be greater than 0 and less than or equal to 10 (Represents search accuracy where 1 is highly accurate).</comment>
+                    <validate>required-entry integer validate-greater-than-zero validate-digits-range digits-range-0-10</validate>
+                </field>
+                <field id="author" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label><![CDATA[]]></label>
+                    <frontend_model>Webkul\AIImageSearch\Block\Adminhtml\System\Config\Form\ModuleInfo</frontend_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

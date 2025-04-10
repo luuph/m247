@@ -1,0 +1,8 @@
+type UpdateMobileResponse {
+    response: Boolean
+    message: String
+}
+
+type Mutation {
+    updateCustomerMobile(customerToken: String!, newMobile: String!): UpdateMobileResponse @resolver(class: "Unveels\\UpdateMobileApi\\Model\\Resolver\\UpdateCustomerMobile") @doc(description: "update customer mobile number")
+}

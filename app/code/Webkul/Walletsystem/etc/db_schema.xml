@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Walletsystem
+ * @author    Webkul
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+ -->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="wk_ws_wallet_record" resource="default" engine="innodb" comment="Webkul wallet record table">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity ID"/>
+        <column xsi:type="int" name="customer_id" padding="10" unsigned="true" nullable="false" identity="false" default="0" comment="customer ID"/>
+        <column xsi:type="decimal" name="total_amount" scale="4" precision="12" unsigned="true" nullable="false" default="0" comment="Total Amount"/>
+        <column xsi:type="decimal" name="remaining_amount" scale="4" precision="12" unsigned="true" nullable="false" default="0" comment="Remaining Amount"/>
+        <column xsi:type="decimal" name="used_amount" scale="4" precision="12" unsigned="true" nullable="false" default="0" comment="Used Amount"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="false" nullable="true" comment="Update Time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+        <column name="entity_id"/>
+        </constraint>
+    </table>
+    <table name="wk_ws_wallet_transaction" resource="default" engine="innodb" comment="wk_ws_wallet_transaction Table">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity ID"/>
+        <column xsi:type="int" name="customer_id" padding="10" unsigned="true" nullable="false" identity="false" default="0" comment="Customer ID"/>
+        <column xsi:type="decimal" name="amount" scale="4" precision="12" unsigned="true" nullable="false" default="0" comment="Amount"/>
+        <column xsi:type="int" name="status" padding="10" unsigned="true" nullable="false" identity="false" default="0" comment="Transaction status"/>
+        <column xsi:type="text" name="action" nullable="true" comment="Amount Action"/>
+        <column xsi:type="int" name="order_id" padding="10" unsigned="true" nullable="false" identity="false" default="0" comment="Order Id"/>
+        <column xsi:type="timestamp" name="transaction_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Transaction time" onCreate="migrateDataFrom(transaction_at)"/>
+        <column xsi:type="text" name="currency_code" nullable="true" comment="Currency Code"/>
+        <column xsi:type="decimal" name="curr_amount" scale="4" precision="12" unsigned="true" nullable="false" default="0" comment="Currency Amount"/>
+        <column xsi:type="text" name="transaction_note" nullable="false" comment="Transaction Note"/>
+        <column xsi:type="int" name="sender_id" padding="10" unsigned="true" nullable="false" identity="false" default="0" comment="Sender Id"/>
+        <column xsi:type="int" name="sender_type" padding="10" unsigned="true" nullable="false" identity="false" default="0" comment="Sender type"/>
+        <column xsi:type="text" name="bank_details" nullable="false" comment="bank details to transfer amount"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+        <column name="entity_id"/>
+        </constraint>
+    </table>
+    <table name="quote_address" resource="default">
+        <column xsi:type="decimal" name="wallet_amount" scale="4" precision="12" unsigned="false" nullable="false" comment="wallet amount"/>
+        <column xsi:type="decimal" name="base_wallet_amount" scale="4" precision="12" unsigned="false" nullable="false" comment="wallet amount"/>
+    </table>
+    <table name="sales_order" resource="default">
+        <column xsi:type="decimal" name="wallet_amount" scale="4" precision="12" unsigned="false" nullable="false" comment="wallet amount"/>
+        <column xsi:type="decimal" name="base_wallet_amount" scale="4" precision="12" unsigned="false" nullable="false" comment="wallet amount"/>
+        <column xsi:type="int" name="wallet_invoiced" padding="10" unsigned="true" nullable="false" identity="false" default="0" comment="Wallet Invoiced"/>
+    </table>
+    <table name="quote" resource="default">
+        <column xsi:type="decimal" name="wallet_amount" scale="4" precision="12" unsigned="false" nullable="false" comment="wallet amount"/>
+        <column xsi:type="decimal" name="base_wallet_amount" scale="4" precision="12" unsigned="false" nullable="false" comment="wallet amount"/>
+    </table>
+    <table name="sales_invoice" resource="default">
+        <column xsi:type="decimal" name="wallet_amount" scale="4" precision="12" unsigned="false" nullable="false" comment="wallet amount"/>
+    </table>
+    <table name="wk_ws_credit_rules" resource="default" engine="innodb" comment="Webkul wallet credit rules">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity ID"/>
+        <column xsi:type="decimal" name="amount" scale="4" precision="12" unsigned="true" nullable="false" default="0" comment="Amount"/>
+        <column xsi:type="smallint" name="based_on" padding="6" unsigned="false" nullable="true" identity="false" default="0" comment="Based On field"/>
+        <column xsi:type="decimal" name="minimum_amount" scale="4" precision="12" unsigned="true" nullable="false" default="0" comment="Total minimum amount"/>
+        <column xsi:type="date" name="start_date" comment="Start Date"/>
+        <column xsi:type="date" name="end_date" comment="End Date"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="true" comment="created Time"/>
+        <column xsi:type="smallint" name="status" padding="6" unsigned="false" nullable="true" identity="false" default="0" comment="Credit Rule Status"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+        <column name="entity_id"/>
+        </constraint>
+    </table>
+    <table name="wk_ws_credit_amount" resource="default" engine="innodb" comment="Webkul wallet credit rules Amount">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity ID"/>
+        <column xsi:type="int" name="order_id" padding="10" unsigned="true" nullable="false" identity="false" default="0" comment="Order ID"/>
+        <column xsi:type="decimal" name="amount" scale="4" precision="12" unsigned="true" nullable="false" default="0" comment="Amount"/>
+        <column xsi:type="smallint" name="status" padding="6" unsigned="false" nullable="true" identity="false" default="0" comment="Credit amount Status"/>
+        <column xsi:type="decimal" name="refund_amount" scale="4" precision="12" unsigned="false" nullable="false" default="0" comment="Refund Amount"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+        <column name="entity_id"/>
+        </constraint>
+    </table>
+    <table name="wk_ws_wallet_payee" resource="default" engine="innodb" comment="Webkul wallet payee details">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity ID"/>
+        <column xsi:type="int" name="customer_id" padding="10" unsigned="true" nullable="false" identity="false" default="0" comment="Customer ID"/>
+        <column xsi:type="int" name="website_id" padding="10" unsigned="true" nullable="false" identity="false" default="0" comment="Website ID"/>
+        <column xsi:type="int" name="payee_customer_id" padding="10" unsigned="true" nullable="false" identity="false" default="0" comment="Payee Customer ID"/>
+        <column xsi:type="text" name="nick_name" nullable="false" comment="Customer Nick Name"/>
+        <column xsi:type="smallint" name="status" padding="6" unsigned="false" nullable="true" identity="false" default="0" comment="Payee Status"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+        <column name="entity_id"/>
+        </constraint>
+    </table>
+    <table name="wk_ws_wallet_notification" resource="default" engine="innodb" comment="wk_ws_wallet_notification">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity ID"/>
+        <column xsi:type="int" name="payee_counter" padding="10" unsigned="true" nullable="false" identity="false" default="0" comment="Payee Counter"/>
+        <column xsi:type="int" name="banktransfer_counter" padding="10" unsigned="true" nullable="false" identity="false" default="0" comment="Banktransfer Counter"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+        <column name="entity_id"/>
+        </constraint>
+    </table>
+    <table name="wk_ws_wallet_account_details" resource="default" engine="innodb" comment="wk_ws_wallet_account_details">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity ID"/>
+        <column xsi:type="int" name="customer_id" padding="10" unsigned="true" nullable="false" identity="false" default="0" comment="Customer Id"/>
+        <column xsi:type="int" name="request_to_delete" padding="10" unsigned="true" nullable="false" identity="false" default="0" comment="Request To Delete Flag"/>
+        <column xsi:type="int" name="status" padding="10" unsigned="true" nullable="false" identity="false" default="1" comment="status"/>
+        <column xsi:type="text" name="holdername" nullable="false" comment="Holder Name"/>
+        <column xsi:type="varchar" name="accountno" nullable="false" length="15" comment="Account Number"/>
+        <column xsi:type="text" name="bankname" nullable="false" comment="Bank Name"/>
+        <column xsi:type="text" name="bankcode" nullable="false" comment="Bank Code"/>
+        <column xsi:type="text" name="additional" nullable="false" comment="Additional Information"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+        <column name="entity_id"/>
+        </constraint>
+    </table>
+    <table name="wk_ws_wallet_transaction_data" resource="default" engine="innodb" comment="Transaction Additional Data">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity ID"/>
+        <column xsi:type="int" name="transaction_id" padding="10" unsigned="true" nullable="false" identity="false" default="0" comment="Entity Id from wk_ws_wallet_transaction Table"/>
+        <column xsi:type="text" name="additional" nullable="false" comment="Additional Information"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="WK_WS_WALLET_TRANSACTION_ENTITY_ID_TRANSACTION_ID" table="wk_ws_wallet_transaction_data" column="transaction_id" referenceTable="wk_ws_wallet_transaction" referenceColumn="entity_id" onDelete="CASCADE"/>
+    </table>
+</schema>

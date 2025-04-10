@@ -1,0 +1,41 @@
+
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_AIChromaDbClient
+ * @author    Webkul Software Private Limited
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+?>
+ <script>
+require([
+    'jquery',
+    'Magento_Ui/js/modal/confirm'
+], function($, confirm){
+    $('#delete-collections').click(function () {
+        confirm({
+            title: $.mage.__('Remove All Collections'),
+            content: $.mage.__('Are you sure you want to remove all the ChromaDB collections ?'),
+            actions: {
+                confirm: function(){
+                    $('body').trigger('processStart');
+                    new Ajax.Request('<?= $escaper->escapeUrl($block->getAjaxUrl()) ?>', {
+                        loaderArea: false,
+                        asynchronous: true,
+                        onSuccess: function(transport) {
+                            $('body').trigger('processStop');
+                            var response = JSON.parse(transport.responseText);
+                            location.reload();
+                        }
+                    });
+                },
+                cancel: function(){}
+            }
+        });
+    });
+});
+</script>
+<?= /*@noEscape*/ $block->getButtonHtml() ?>

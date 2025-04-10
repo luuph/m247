@@ -1,0 +1,319 @@
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_Affiliate
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+/* ============ Affiliate Stylesheets ============ */
+.affiliate-clear {
+    clear: both
+}
+
+.terms_condition_text {
+    width: 100%;
+}
+
+.form-affiliate .actions-toolbar {
+    margin-top: 25px
+}
+
+.box-affiliate-withdraw-transaction {
+
+}
+
+.affiliate-strength-meter {
+    line-height: 15px;
+    padding: 0;
+    position: relative;
+    z-index: 1;
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+.affiliate-input-read-only {
+    background-color: #F0F4C3 !important;
+    color: #585555 !important;
+    border: 1px solid #F0F4C3 !important;
+}
+
+/*--style credit information--*/
+.info-account-summary {
+    float: left;
+    width: 100%;
+    height: auto;
+    clear: both;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.underline-head {
+    /*padding: 10px;*/
+    border-bottom: 1px solid #c6c6c6;
+}
+.d-none {
+    display: none;
+}
+.d-block {
+    display: block;
+}
+#balance {
+    width: 245px;
+    margin: auto;
+
+}
+
+#holding-balance {
+    width: 33%;
+    height: auto;
+    background-color: #FFEDD8;
+    padding: 10px 0;
+}
+
+#total-earned {
+    width: 33%;
+    height: auto;
+    background-color: #FFEDD8;
+    padding: 10px 0;
+
+}
+
+#total-paid {
+    width: 33%;
+    height: auto;
+    background-color: #FFEDD8;
+    padding: 10px 0;
+
+}
+
+#title {
+    color: #333333;
+    text-align: center;
+    width: 100%;
+    float: left;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#value-bl {
+    color: #333333;
+    font-size: 32px;
+    text-align: center;
+    width: 25%;
+    float: left;
+    background-color: rgb(99, 210, 151);
+    font-weight: bold;
+    padding: 10px 0;
+}
+
+#value-hl {
+    color: #333333;
+    font-size: 32px;
+    text-align: center;
+    width: 100%;
+    float: left;
+    font-weight: bold;
+    padding-bottom: 8px;
+}
+
+#value-tc {
+    color: #333333;
+    font-size: 32px;
+    text-align: center;
+    width: 100%;
+    float: left;
+    font-weight: bold;
+    padding-bottom: 8px;
+}
+
+#value-tp {
+    color: #333333;
+    font-size: 32px;
+    text-align: center;
+    width: 100%;
+    float: left;
+    font-weight: bold;
+    padding-bottom: 8px;
+}
+#under-hl {
+    border-bottom: 2px solid #F1B509;
+    width: 30px;
+    margin: auto;
+    margin-top: 8px;
+}
+#under-ab {
+    border-bottom: 2px solid #FFFFFF;
+    width: 30px;
+    margin: auto;
+    margin-top: 8px;
+}
+#under-tc {
+    border-bottom: 2px solid #3B7FF3;
+    width: 30px;
+    margin: auto;
+    margin-top: 8px;
+}
+#under-tp {
+    border-bottom: 2px solid #EE1EF2;
+    width: 30px;
+    margin: auto;
+    margin-top: 8px;
+}
+.pager .limiter {
+    float: right !important;
+}
+
+.pager .toolbar-amount {
+    margin-right: 5px;
+}
+
+.credit-balance-chart {
+    clear: both;
+    padding-top: 20px;
+}
+
+.credit-balance-chart .months {
+    width: 140px;
+    float: right;
+}
+
+#credit-chart {
+    width: 100%;
+}
+.wrap-3box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    width: 73%
+}
+@media only screen and (max-width: 767px) {
+    table#affiliate-transactions-history,
+    table#affiliate-withdraws-history {
+        display: block;
+        overflow: auto;
+    }
+    .wrap-3box {
+
+        width: 100%
+    }
+    #balance {
+        width: 100%;
+        float: left;
+        height: auto;
+        margin-right: 20px;
+
+    }
+
+    #holding-balance {
+        width: 100%;
+        float: left;
+        height: auto;
+        border-bottom: 1px solid #d1d1d1;
+    }
+    #holding-balance > div {
+        border-right: 0 !important;
+    }
+    #total-earned > div {
+        border-right: 0 !important;
+
+    }
+    #total-earned {
+        width: 100%;
+        float: left;
+        height: auto;
+        border-bottom: 1px solid #d1d1d1;
+    }
+
+    #total-paid {
+        width: 100%;
+        float: left;
+        height: auto;
+    }
+    #value-bl {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+#affiliate-traffic-statistics {
+    margin-top: 20px;
+}
+
+#affiliate-traffic-statistics tr th,
+#affiliate-traffic-statistics tr td {
+}
+#affiliate-campaigns tr th, #affiliate-withdraws-history tr th, .affiliate-campaigns-list tr th, #affiliate-traffic-statistics tr th {
+    background-color: #FFEDD8;
+}
+.wrap_box_infor_withdraw {
+    padding: 15px 0;
+    width: 48%;
+}
+@media (max-width: 1024px) {
+    .wrap_box_infor_withdraw {
+        width: 100%;
+    }
+}
+.box_info_withdraw {
+    background-color: #F5F5F5;
+    padding: 10px 10px;
+}
+.row-field {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px ;
+}
+.bold-text {
+    font-weight: bold;
+}
+#status_withdraw {
+    padding: 4px 8px;
+    border: 1px solid #AEAEAE;
+    margin-left: 10px;
+    font-size: 14px;
+}
+.btn_close_popup {
+    background-color: #ffffff;
+    color: #1979c3;
+    border-color: #1979c3;
+}
+.btn_close_popup:hover {
+    background-color: #1979c3;
+    color: #ffffff;
+}
+
+.sharethis-sticky-share-buttons .st-toggle {
+  display: none;
+}
+
+.link_copy {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.link_copy svg:hover path {
+    fill: #333333 !important;
+}
+
+.link_copy svg {
+    cursor: pointer;
+}
+.text_copy {
+    width: 75%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

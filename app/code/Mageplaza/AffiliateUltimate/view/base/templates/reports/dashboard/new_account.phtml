@@ -1,0 +1,50 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_AffiliateUltimate
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+/** @var \Mageplaza\AffiliateUltimate\Block\Adminhtml\Reports\Dashboard\NewAccount $block */
+
+?>
+<div class="dashboard-item-content">
+    <?php if ($block->getNewAccount()->getSize() > 0): ?>
+        <table class="admin__table-primary dashboard-data" id="lastOrdersGrid_table">
+            <thead>
+            <tr>
+                <th class="data-grid-th  no-link col-customer"><span><?= /* @noEscape */ __('Name') ?></span></th>
+                <th class="data-grid-th  no-link col-items"><span><?= /* @noEscape */ __('Email') ?></span></th>
+                <th class="data-grid-th  no-link col-total"><span><?= /* @noEscape */ __('Status') ?></span></th>
+                <th class="data-grid-th  no-link col-total"><span><?= /* @noEscape */ __('Register At') ?></span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($block->getNewAccount() as $account): ?>
+                <tr title="<?= /* @noEscape */ $block->getUrl('affiliate/account/edit', ['id' => $account->getId()]) ?>" class="even _clickable">
+                    <td class=" col-customer "><?= /* @noEscape */ $block->getCustomerName($account->getCustomerId()) ?></td>
+                    <td class=" col-customer "><?= /* @noEscape */ $account->getEmail() ?></td>
+                    <td class=" col-items col-number "><?= /* @noEscape */ $block->getStatus($account->getStatus()) ?></td>
+                    <td class=" col-total a-right last"><?= /* @noEscape */ $block->formatDate($account->getCreatedAt()) ?></td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    <?php else: ?>
+        <div class="empty-text"><?= /* @noEscape */ __('We couldn\'t find any records.') ?></div>
+    <?php endif; ?>
+</div>

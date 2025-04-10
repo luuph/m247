@@ -1,0 +1,30 @@
+.intl-tel-input.allow-dropdown input, .intl-tel-input.allow-dropdown input[type=text], .intl-tel-input.allow-dropdown input[type=tel] {
+    padding-right: 6px !important;
+    padding-left: 52px !important;
+    margin-left: 0 !important;
+}
+
+.intl-tel-input {width: 90%;}
+
+.intl-tel-input .flag-container { z-index: 9; }
+.customer-address-form .intl-tel-input .selected-flag {
+    height: auto !important;
+    padding: 30px 0 0 8px !important;
+}
+.int-phone-input-error-msg {
+
+  color: red;
+}
+
+.int-phone-input-valid-msg {
+
+  color: #00C900;
+}
+
+.int-phone-input-.valid-msg, .int-phone-input-error-msg {
+    padding-left: 5px;
+}
+.hide { 
+    display: none;
+}
+

@@ -1,0 +1,13 @@
+<config>
+    <default>
+        <dev>
+            <js>
+                <minify_exclude>
+                    <mainjs>Unveels_Tech/js/main.js</mainjs>
+                    <mainDsySEGKW>main-DsySEGKW.js</mainDsySEGKW>
+                    <scannerWorker>scannerWorker-C0zh0GnA.js</scannerWorker>
+                </minify_exclude>
+            </js>
+        </dev>
+    </default>
+</config>

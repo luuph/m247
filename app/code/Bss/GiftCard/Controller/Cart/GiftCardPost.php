@@ -157,6 +157,20 @@ class GiftCardPost extends CheckoutCart
             return $this->_goBack();
         }
         $quote = $this->cart->getQuote();
+        $items_rewards_discount = $quote->getItemsRewardsDiscount();
+        $coupon_code = $quote->getCouponCode();
+        if ($items_rewards_discount > 0) {
+            $this->messageManager->addErrorMessage(
+                __('Rewards Points are already applied cannot apply other discounts')
+            );
+            return $this->_goBack();
+        }else if($coupon_code){
+            $this->messageManager->addErrorMessage(
+                __('Coupon Code are already applied cannot apply other discounts')
+            );
+            return $this->_goBack();
+        }
+        
         $giftCardCode = trim($this->getRequest()->getParam('bss_giftcard_code'));
         $cartQuote = $this->cart->getQuote();
         $customerSession = $this->customerSession->create();

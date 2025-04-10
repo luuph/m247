@@ -1,0 +1,184 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <whatsappultimate>
+        	<generalsection>
+                <otplength>4</otplength>
+        		<buttonclass>action submit primary</buttonclass>
+                <defaultcountry>IN</defaultcountry>
+        	</generalsection>
+        </whatsappultimate>
+        <usertemplate>
+            <usersignupconfirm>
+                <template>
+Hello
+{{var otp}} is your OTP to Register an Account with Us.
+
+Thank You.
+                </template>
+            </usersignupconfirm>
+            <usersignup>
+                <template>
+Registration Notification
+
+Hello {{var customer.firstname}},
+Thank You for Registering an Account with Us.
+Enjoy the Shopping with Us.
+
+Thank You.
+                </template>
+            </usersignup>
+            <usermobileconfirm>
+                <template>
+OTP at My Account
+
+Hello {{var customer.firstname}},
+{{var otp}} is your OTP to Update the Mobile Number with Us.
+
+Thank You.
+                </template>
+            </usermobileconfirm>
+            <userorderconfirm>
+                <template>
+OTP at Checkout
+Hello {{var customer.firstname}},
+{{var otp}} is your OTP to Checkout.
+
+Thank You.
+                </template>
+            </userorderconfirm>
+            <userorderplace>
+                <template>
+Place Order
+
+Hello {{var customer.firstname}},
+Thank you for placing an order with us
+Your order id is : {{var order.increment_id}},
+We will update you soon with further updates.
+
+Thank You.
+                </template>
+            </userorderplace>
+            <userinvoice>
+                <template>
+Invoice
+
+Hello {{var customer.firstname}},
+Thank you for placing an order with us
+Your invoice id is : {{var invoice.increment_id}},
+We will update you soon with further updates.
+
+Thank You.
+                </template>
+            </userinvoice>
+            <usershipment>
+                <template>
+Shipment
+
+Hello {{var customer.firstname}},
+Your order id {{var order.increment_id}} has been shipped.
+We will update you soon with further updates.
+
+Thank You.
+                </template>
+            </usershipment>
+            <usercreditmemo>
+                <template>
+Credit Memo
+
+Hello {{var customer.firstname}},
+Credit Memo for your order {{var order.increment_id}} has been generated.
+We will update you soon with further updates.
+
+Thank You.
+                </template>
+            </usercreditmemo>
+            <usercontactus>
+                <template>
+                    Contact
+
+                    Hello {{var name}},
+                    Thank you for contacting us.
+                    Someone from our Team will reachout to you soon.
+
+                    Thank You.
+                </template>
+            </usercontactus>
+        </usertemplate>
+        <admintemplate>
+            <adminsignup>
+                <template>
+Admin
+
+Registration Notification
+
+Hello Admin
+You have one new Registration with following details.
+
+Name : {{var customer.firstname}},
+Phone : {{var mobilenumber}}
+
+Thank you.
+                </template>
+            </adminsignup>
+            <adminorderplace>
+                <template>
+Place order
+
+Hello Admin
+You have one new Order with following details.
+Order id : {{var order.increment_id}}
+
+Thank you.
+                </template>
+            </adminorderplace>
+            <admininvoice>
+                <template>
+Invoice
+
+Hello Admin
+You have one new invoice with following details.
+Invoice id : {{var invoice.increment_id}}
+
+Thank you.
+                </template>
+            </admininvoice>
+            <adminshipment>
+                <template>
+Place order
+
+Hello Admin
+You have one new Shipment with following details.
+Shipment id : {{var shipment.increment_id}}
+
+Thank you.
+                </template>
+            </adminshipment>
+            <admincreditmemo>
+                <template>
+Credit memo
+
+Hello Admin
+You have one new credit memo with following details.
+Credit memo id : {{var creditmemo.increment_id}},
+
+Thank you.
+                </template>
+            </admincreditmemo>
+            <admincontactus>
+                <template>
+Contact
+
+Hello Admin
+You have new contact inquiry with following details.
+Name: {{var name}},
+Email : {{var email}},
+Phone: {{var telephone}},
+Message: {{var comment}},
+
+Thank You.
+                </template>
+            </admincontactus>
+        </admintemplate>
+    </default>
+</config>

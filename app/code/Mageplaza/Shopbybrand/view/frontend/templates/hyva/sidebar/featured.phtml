@@ -1,0 +1,88 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_Shopbybrand
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+/** @var \Mageplaza\Shopbybrand\Block\Sidebar\Featured $block */
+
+use Magento\Swatches\Model\Swatch;
+
+$featureBrands = $block->getFeaturedBrand();
+$timeId = time();
+
+if (!empty($featureBrands)) : ?>
+    <?= /** @noEscape */ $block->includeCssLib() ?>
+    <div class="block block-brand-feature widget">
+        <?php if ($block->showTitle()) : ?>
+            <div class="block-title">
+                <h2 class="border-t border-container mb-6 pt-5 text-primary font-semibold text-lg" id="compare-sidebar">
+                    <?= /** @noEscape */ $block->getFeatureTitle() ?></h2>
+            </div>
+        <?php endif; ?>
+        <div class="block-content">
+            <section class="splide brand-carousel"
+                     id="feature-brand-sidebar-<?= /** @noEscape */ $timeId ?>"
+            >
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        <?php foreach ($featureBrands as $brand) : ?>
+                            <li class="relate-content item splide__slide" style="display: flex; justify-content: center">
+                                <a href="<?= /** @noEscape */ $block->helper()->getBrandUrl($brand) ?>" style="width: 50%; height: 100%; display: flex; align-items: center">
+                                    <?php if ($brand->getSwatchType() == Swatch::SWATCH_TYPE_VISUAL_COLOR): ?>
+                                        <img class="img-responsive brand-image" style="background-color: <?= /** @noEscape */ $brand->getSwatchValue() ?>">
+                                    <?php else: ?>
+                                        <img class="img-responsive brand-image"
+                                             src="<?= /** @noEscape */ $block->helper()->getBrandImageUrl($brand) ?>" alt="" >
+                                    <?php endif; ?>
+                                </a>
+
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        if(document.getElementById('feature-brand-sidebar-<?= /** @noEscape */ $timeId ?>')) {
+            new Splide('#feature-brand-sidebar-<?= /** @noEscape */ $timeId ?>',{
+                autoStart: true,
+                start: 1,
+                perPage: 1,
+                perMove: 1,
+                gap: 10,
+                type: "loop",
+                drag: "free",
+                omitEnd: true,
+                snap: false,
+                interval: 4000,
+                pagination: false,
+                rewind: true,
+                rewindByDrag: true,
+                lazyLoad: true,
+                autoplay: 'play',
+                autoScroll: {
+                    speed: 1
+                }
+            }).mount();
+        }
+    });
+</script>
+<?php endif; ?>

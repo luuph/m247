@@ -1,0 +1,867 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MobikulCore
+ * @author    Webkul Software Private Limited
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+
+namespace Webkul\MobikulCore\Helper;
+
+use Webkul\MobikulCore\Model\ConstantRepo;
+
+use Magento\Framework\Oauth\Helper\Oauth as OauthHelper;
+use Magento\Wishlist\Model\Wishlist;
+use Webkul\MobikulCore\Model\Config\Backend\PaymentMethods as MobikulPaymentConfig;
+
+/**
+ * Helper File
+ */
+class Data extends \Magento\Framework\App\Helper\AbstractHelper
+{
+    /**
+     * Cache variable
+     *
+     * @var \Webkul\MobikulCore\Model\CacheFactory
+     */
+    protected $cache;
+    
+    /**
+     * Quote variable
+     *
+     * @var \Magento\Quote\Model\Quote
+     */
+    protected $quote;
+    
+    /**
+     * Country variable
+     *
+     * @var \Magento\Directory\Model\Country
+     */
+    protected $country;
+    
+    /**
+     * Encrypted variable
+     *
+     * @var \Magento\Config\Model\Config\Backend\Encrypted
+     */
+    protected $encrypted;
+    
+    /**
+     * MobiToken variable
+     *
+     * @var \Webkul\Mobikul\Model\OauthToken
+     */
+    protected $mobiToken;
+    
+    /**
+     * OauthHelper variable
+     *
+     * @var OauthHelper
+     */
+    protected $oauthHelper;
+    
+    /**
+     * StoreManager variable
+     *
+     * @var \Magento\Store\Model\StoreManagerInterface
+     */
+    protected $storeManager;
+    
+    /**
+     * DirectoryList variable
+     *
+     * @var \Magento\Framework\Filesystem\DirectoryList
+     */
+    protected $directoryList;
+    
+    /**
+     * CheckoutHelper variable
+     *
+     * @var \Magento\Checkout\Helper\Data
+     */
+    protected $checkoutHelper;
+    
+    /**
+     * SessionManager variable
+     *
+     * @var \Magento\Framework\Session\SessionManagerInterface
+     */
+    protected $sessionManager;
+    
+    /**
+     * CountryCollection variable
+     *
+     * @var \Magento\Directory\Model\ResourceModel\Country\Collection
+     */
+    protected $countryCollection;
+    
+    /**
+     * OauthTokenFactory variable
+     *
+     * @var \Webkul\Mobikul\Model\OauthTokenFactory
+     */
+    protected $oauthTokenFactory;
+    
+    /**
+     * Logger variable
+     *
+     * @var \Psr\Log\LoggerInterface
+     */
+    protected $logger;
+    
+    /**
+     * File variable
+     *
+     * @var \Magento\Framework\Filesystem\Driver\File
+     */
+    protected $file;
+    
+    /**
+     * JsonHelper variable
+     *
+     * @var \Magento\Framework\Json\Helper\Data
+     */
+    protected $jsonHelper;
+    
+    /**
+     * AddressInterface variable
+     *
+     * @var \Magento\Quote\Api\Data\AddressInterface
+     */
+    protected $addressInterface;
+    
+    /**
+     * FileDriver variable
+     *
+     * @var \Magento\Framework\Filesystem\Driver\File
+     */
+    protected $fileDriver;
+    
+    /**
+     * Request variable
+     *
+     * @var \Magento\Framework\App\RequestInterface
+     */
+    protected $request;
+    
+    /**
+     * UrlInterface variable
+     *
+     * @var \Magento\Framework\UrlInterface
+     */
+    protected $urlInterface;
+    
+    /**
+     * ResourceConnection variable
+     *
+     * @var \Magento\Framework\App\ResourceConnection
+     */
+    protected $resourceConnection;
+    
+    /**
+     * OrderFactory variable
+     *
+     * @var \Magento\Sales\Model\OrderFactory
+     */
+    protected $orderFactory;
+
+    /**
+     * Wishlist variable
+     *
+     * @var Wishlist
+     */
+    protected $wishlist;
+
+    /**
+     * MobikulPaymentConfig variable
+     *
+     * @var MobikulPaymentConfig
+     */
+    protected $mobikulPaymentConfig;
+
+    /**
+     * Constructor function for Helper Class
+     *
+     * @param OauthHelper $oauthHelper
+     * @param \Magento\Quote\Model\Quote $quote
+     * @param \Magento\Directory\Model\Country $country
+     * @param \Webkul\MobikulCore\Model\CacheFactory $cache
+     * @param \Magento\Checkout\Helper\Data $checkoutHelper
+     * @param \Magento\Framework\App\Helper\Context $context
+     * @param \Magento\Framework\Filesystem\Driver\File $file
+     * @param \Magento\Framework\Json\Helper\Data $jsonHelper
+     * @param \Webkul\MobikulCore\Model\OauthToken $mobiToken
+     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
+     * @param \Magento\Config\Model\Config\Backend\Encrypted $encrypted
+     * @param \Magento\Quote\Api\Data\AddressInterface $addressInterface
+     * @param \Magento\Framework\Filesystem\DirectoryList $directoryList
+     * @param \Webkul\MobikulCore\Model\OauthTokenFactory $oauthTokenFactory
+     * @param \Magento\Framework\Session\SessionManagerInterface $sessionManager
+     * @param \Magento\Directory\Model\ResourceModel\Country\Collection $countryCollection
+     * @param \Magento\Framework\Filesystem\Driver\File $fileDriver
+     * @param \Magento\Framework\App\RequestInterface $request
+     * @param \Psr\Log\LoggerInterface $logger
+     * @param \Magento\Framework\UrlInterface $urlInterface
+     * @param \Magento\Sales\Model\OrderFactory $orderFactory
+     * @param \Magento\Framework\App\ResourceConnection $resourceConnection
+     * @param MobikulPaymentConfig $mobikulPaymentConfig
+     * @param Wishlist $wishlist
+     */
+    public function __construct(
+        OauthHelper $oauthHelper,
+        \Magento\Quote\Model\Quote $quote,
+        \Magento\Directory\Model\Country $country,
+        \Webkul\MobikulCore\Model\CacheFactory $cache,
+        \Magento\Checkout\Helper\Data $checkoutHelper,
+        \Magento\Framework\App\Helper\Context $context,
+        \Magento\Framework\Filesystem\Driver\File $file,
+        \Magento\Framework\Json\Helper\Data $jsonHelper,
+        \Webkul\MobikulCore\Model\OauthToken $mobiToken,
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
+        \Magento\Config\Model\Config\Backend\Encrypted $encrypted,
+        \Magento\Quote\Api\Data\AddressInterface $addressInterface,
+        \Magento\Framework\Filesystem\DirectoryList $directoryList,
+        \Webkul\MobikulCore\Model\OauthTokenFactory $oauthTokenFactory,
+        \Magento\Framework\Session\SessionManagerInterface $sessionManager,
+        \Magento\Directory\Model\ResourceModel\Country\Collection $countryCollection,
+        \Magento\Framework\Filesystem\Driver\File $fileDriver,
+        \Magento\Framework\App\RequestInterface $request,
+        \Psr\Log\LoggerInterface $logger,
+        \Magento\Framework\UrlInterface $urlInterface,
+        \Magento\Sales\Model\OrderFactory $orderFactory,
+        \Magento\Framework\App\ResourceConnection $resourceConnection,
+        MobikulPaymentConfig $mobikulPaymentConfig,
+        Wishlist $wishlist
+    ) {
+        $this->file = $file;
+        $this->cache = $cache;
+        $this->quote = $quote;
+        $this->country = $country;
+        $this->mobiToken = $mobiToken;
+        $this->encrypted = $encrypted;
+        $this->jsonHelper = $jsonHelper;
+        $this->oauthHelper = $oauthHelper;
+        $this->storeManager = $storeManager;
+        $this->directoryList = $directoryList;
+        $this->checkoutHelper = $checkoutHelper;
+        $this->sessionManager = $sessionManager;
+        $this->addressInterface = $addressInterface;
+        $this->countryCollection = $countryCollection;
+        $this->oauthTokenFactory = $oauthTokenFactory;
+        $this->fileDriver = $fileDriver;
+        $this->request = $request;
+        $this->logger = $logger;
+        $this->resourceConnection = $resourceConnection;
+        $this->orderFactory = $orderFactory;
+        $this->urlInterface = $urlInterface;
+        $this->mobikulPaymentConfig = $mobikulPaymentConfig;
+        $this->wishlist = $wishlist;
+        parent::__construct($context);
+    }
+
+    /**
+     * Function to get Url of directory
+     *
+     * @param string $dir directory
+     *
+     * @return string
+     */
+    public function getUrl($dir)
+    {
+        return $this->storeManager->getStore()->getBaseUrl($dir);
+    }
+
+    /**
+     * Function to authorize the auth key
+     *
+     * @param string $authKey authkey
+     *
+     * @return array auth data
+     */
+    public function isAuthorized($authKey)
+    {
+        $authData = [];
+        $authData["code"] = 2;
+        $authData["token"] = "";
+        $authType = "md5";
+        $apiAuthType = $this->request->getHeader("apiAuthType");
+        if (isset($apiAuthType) && $apiAuthType == "sha256") {
+            $authType = 'sha256';
+        }
+        $apiKey = $this->getPassword();
+        $apiUsername = $this->getConfigData(ConstantRepo::API_USERNAME);
+        $sessionToken = $this->sessionManager->getSessionId();
+        $H1 = hash($authType, $apiUsername.":".$apiKey);
+        $H2 = hash($authType, $H1.":".$sessionToken);
+        if ($authKey == $H2) {
+            $authData["code"] = 1;
+        } else {
+            $authData["token"] = $sessionToken;
+        }
+        return $authData;
+    }
+
+    /**
+     * Function to print logs
+     *
+     * @param array  $data      data
+     * @param string $key       key
+     * @param array  $wholeData wholedata
+     *
+     * @return prints log details
+     */
+    public function log($data, $key, $wholeData)
+    {
+        $flag = $wholeData[$key] ?? 0;
+        $this->printLog($data, $flag);
+    }
+
+    /**
+     * Function to print logs in mobikul.log file
+     *
+     * @param array   $data     data
+     * @param integer $flag     key
+     * @param string  $filename wholedata
+     *
+     * @return prints log in mobikul.log
+     */
+    public function printLog($data, $flag = 1, $filename = "mobikul.log")
+    {
+        if ($flag == 1) {
+            $path = $this->directoryList->getPath("var");
+            $logger = new \Zend_Log();
+            if (!$this->fileDriver->isExists($path."/log/")) {
+                $this->fileDriver->createDirectory($path."/log/", 0777);
+            }
+            $logger->addWriter(new \Zend_Log_Writer_Stream($path."/log/".$filename));
+            if (is_array($data) || is_object($data)) {
+                $data = json_encode($data);
+            }
+            $logger->info($data);
+        }
+    }
+
+    /**
+     * Function to validate keys in wholeData
+     *
+     * @param array  $wholeData wholedata
+     * @param string $key       key to be validated
+     *
+     * @return bool
+     */
+    public function validate($wholeData, $key)
+    {
+        if (isset($wholeData[$key]) && $wholeData[$key] != "") {
+            return $wholeData[$key];
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Function to get Config Data
+     *
+     * @param string                              $path  path
+     * @param \Magento\Store\Model\ScopeInterface $scope scope
+     *
+     * @return integer|string|bool
+     */
+    public function getConfigData($path, $scope = \Magento\Store\Model\ScopeInterface::SCOPE_STORE)
+    {
+        $storeId = $this->storeManager->getStore()->getId();
+        $returnValue = $this->scopeConfig->getValue($path, $scope, $storeId);
+        if($path == "mobikul/mobikulpayment/selectedmethods") {
+            $returnValueArray = explode(',', $returnValue ?? "");
+            $returnValue = "";
+            $mobikulPaymentMethods = $this->mobikulPaymentConfig->mobikulPaymentOptionsArray();
+            foreach($returnValueArray as $configValue) {
+                if(in_array($configValue, $mobikulPaymentMethods)) {
+                    $returnValue = $returnValue == "" ? $configValue : $returnValue.",".$configValue;
+                }
+            }
+        }
+        return $returnValue;
+    }
+
+    /**
+     * Function to check reorder status
+     *
+     * @param \Magento\Sales\Model\Order $order order
+     *
+     * @return integer 0 or 1
+     */
+    public function canReorder(\Magento\Sales\Model\Order $order)
+    {
+        if (!$this->getConfigData(ConstantRepo::REORDER_ALLOW)) {
+            return 0;
+        } else {
+            return $order->canReorder();
+        }
+    }
+
+    /**
+     * Get Password
+     *
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->encrypted->processValue(
+            $this->scopeConfig->getValue(ConstantRepo::API_KEY, \Magento\Store\Model\ScopeInterface::SCOPE_STORE)
+        );
+    }
+
+    /**
+     * Function to get customer token byt customer Details
+     *
+     * @param string  $username   $customer username
+     * @param string  $password   $customer Pass word
+     * @param integer $customerId customer Id
+     *
+     * @return string
+     */
+    public function getTokenByCustomerDetails($username, $password, $customerId, $isSocial = 0)
+    {
+        $token = $this->mobiToken->loadByCustomerId($customerId)->getToken();
+        if (!$token && $username && ($password || $isSocial)) {
+            $token = $this->createCustomerAccessToken($customerId);
+        }
+        return $token;
+    }
+
+    /**
+     * Function to create customer acces token
+     *
+     * @param integer $customerId customer Id
+     *
+     * @return string
+     */
+    public function createCustomerAccessToken($customerId)
+    {
+        $token = $this->oauthTokenFactory->create();
+        $token->setData(
+            [
+                "customer_id" => $customerId,
+                "token" => $this->oauthHelper->generateToken(),
+                "secret" => $this->oauthHelper->generateTokenSecret()
+            ]
+        );
+        $token->save();
+        return $token->getToken();
+    }
+
+    /**
+     * Function to get customer id by provided token
+     *
+     * @param string $token customer token
+     *
+     * @return integer
+     */
+    public function getCustomerByToken($token)
+    {
+        return $this->mobiToken->loadByToken($token)->getCustomerId();
+    }
+
+    /**
+     * Function to get customer Quote
+     *
+     * @param integer $customerId customer id
+     *
+     * @return integer
+     */
+    public function getCustomerQuote($customerId)
+    {
+        $quoteCollection = $this->quote
+            ->getCollection()
+            ->addFieldToFilter("customer_id", $customerId)
+            ->addFieldToFilter("is_active", 1)
+            ->addOrder("updated_at", "DESC");
+        return $quoteCollection->getFirstItem();
+    }
+
+    /**
+     * Get Quote by Id
+     *
+     * @param integer $quoteId quote id
+     *
+     * @return \Magento\Quote\Model\Quote
+     */
+    public function getQuoteById($quoteId)
+    {
+        $activeQuoteCollection = $this->quote
+            ->getCollection()
+            ->addFieldToFilter("entity_id", $quoteId)
+            ->addFieldToFilter("is_active", 1)
+            ->addOrder("updated_at", "DESC");
+        if (!$activeQuoteCollection->getSize()) {
+            $inactiveQuoteCollection = $this->quote
+                ->getCollection()
+                ->addFieldToFilter("entity_id", $quoteId)
+                ->addFieldToFilter("is_active", 0)
+                ->addOrder("updated_at", "DESC");
+            if ($inactiveQuoteCollection->getSize()) {
+                foreach ($inactiveQuoteCollection as $inactiveQuote) {
+                    $inactiveQuote->setIsActive(1)->save();
+                    return $inactiveQuote;
+                }
+            } else {
+                return $this->quote;
+            }
+        } else {
+            return $activeQuoteCollection->getFirstItem();
+        }
+    }
+
+    /**
+     * Function to validate request for cache
+     *
+     * @param string $cacheString cache string
+     * @param string $eTag        etag
+     *
+     * @return bool
+     */
+    public function validateRequestForCache($cacheString, $eTag)
+    {
+        $cacheStatus = (bool)$this->getConfigData("mobikul/cachesettings/enable");
+        if (!$cacheStatus) {
+            return false;
+        }
+        $counter = $this->getConfigData("mobikul/cachesettings/counter");
+        if ($counter == "") {
+            $counter = 5;
+        }
+        $collection = $this->cache->create()
+            ->getCollection()
+            ->addFieldToFilter("request_tag", hash("sha256", $cacheString))
+            ->addFieldToFilter("e_tag", $eTag)
+            ->addFieldToFilter("counter", ["lteq"=>$counter]);
+        if (count($collection)) {
+            foreach ($collection as $eachEntry) {
+                if ($eachEntry->getCounter() == $counter) {
+                    $eachEntry->setCounter(1);
+                    $eachEntry->setId($eachEntry->getId());
+                    $eachEntry->save();
+                    return false;
+                } else {
+                    $eachEntry->setCounter($eachEntry->getCounter()+1);
+                    $eachEntry->setId($eachEntry->getId());
+                    $eachEntry->save();
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Function to update cache
+     *
+     * @param string $cacheString cache string
+     * @param string $eTag        etag
+     *
+     * @return void
+     */
+    public function updateCache($cacheString, $eTag)
+    {
+        $apiName = $this->request->getFullActionName();
+        $cacheStatus = (bool)$this->getConfigData("mobikul/cachesettings/enable");
+        if ($cacheStatus) {
+            $counter = $this->getConfigData("mobikul/cachesettings/counter");
+            if ($counter == "") {
+                $counter = 5;
+            }
+            $collection = $this->cache->create()->getCollection()
+                ->addFieldToFilter("request_tag", hash("sha256", $cacheString));
+            if (count($collection)) {
+                foreach ($collection as $eachEntry) {
+                    $eachEntry->setCounter(1);
+                    $eachEntry->setETag(hash("sha256", $eTag));
+                    $eachEntry->setApiName(strtolower($apiName));
+                    $eachEntry->setId($eachEntry->getId());
+                    $eachEntry->save();
+                }
+            } else {
+                $this->cache->create()
+                    ->setRequestTag(hash("sha256", $cacheString))
+                    ->setCounter(1)
+                    ->setETag(hash("sha256", $eTag))
+                    ->setApiName(strtolower($apiName))
+                    ->save();
+            }
+        }
+    }
+
+    /**
+     * Function to get number of products in count
+     *
+     * @param \Magento\Quote\Model\Quote $quote quote
+     *
+     * @return integer
+     */
+    public function getCartCount($quote)
+    {
+        $quoteObject = new \Magento\Framework\DataObject();
+        if (is_numeric($quote)) {
+            $quoteObject = $this->quote->setStoreId($this->storeManager->getStore()->getId())->load($quote);
+        } else {
+            $quoteObject = $quote;
+        }
+        if ((bool)$this->getConfigData("checkout/cart_link/use_qty")) {
+            return $quoteObject->getItemsQty() * 1;
+        } else {
+            return $quoteObject->getItemsCount() * 1;
+        }
+    }
+
+    /**
+     * Function to get currency converted and formatted price
+     *
+     * @param float $price price
+     *
+     * @return float
+     */
+    public function getCurrencyConvertedFormattedPrice($price)
+    {
+        return strip_tags(
+            $this->checkoutHelper->formatPrice($price)
+        );
+    }
+    
+    /**
+     * Get dominant color from saved file
+     *
+     * @param string $filePath image path
+     *
+     * @return string Dominant color of the image
+     */
+    public function getDominantColor($filePath)
+    {
+        return $this->getConfigData("mobikul/configuration/dominant_color") ?? "#dfdfdf";
+    }
+
+    /**
+     * Function to return color code according to order status
+     *
+     * @param string $status status of order
+     *
+     * @return string color code corresponding to the status
+     */
+    public function getOrderStatusColorCode($status)
+    {
+        $colorCode = '';
+        switch ($status) {
+            case "complete":
+                $colorCode = "#59a500";
+                break;
+            case "pending":
+                $colorCode = "#fead4c";
+                break;
+            case "processing":
+                $colorCode = "#3F51B5";
+                break;
+            case "hold":
+                $colorCode = "#F9A825";
+                break;
+            case "cancel":
+                $colorCode = "#E53935";
+                break;
+            case "new":
+                $colorCode = "#448AFF";
+                break;
+            case "closed":
+                $colorCode = "#e44c53";
+                break;
+            default:
+                $colorCode = "#d5d5d5";
+        }
+        return $colorCode;
+    }
+
+    /**
+     * Function to validate mFactor value
+     *
+     * @param float $mFactor original value of mFactor
+     *
+     * @return integer a valid value for mFactor
+     */
+    public function calcMFactor($mFactor)
+    {
+        if ($mFactor == 0) {
+            $mFactor = 1;
+        }
+        return ceil($mFactor) > 2.5 ? 2.5 : ceil($mFactor);
+    }
+
+    /**
+     * Function to get valid Dimenions of image
+     *
+     * @param float $mFactor this is mFactor that will decide the quality of image
+     * @param int   $length  this can be width or the height of the image
+     *
+     * @return int a valid dimension for the image
+     */
+    public function getValidDimensions($mFactor, $length)
+    {
+        if ($length == 0) {
+            $length = 1000;
+        }
+        $dimension = $mFactor*$length;
+        return floor($dimension > 2500 ? 2500 : $dimension);
+    }
+
+    /**
+     * Function to gte Extra Address Form Elements
+     *
+     * @param \Magento\Customer\Model\Customer $customer customer
+     *
+     * @return array
+     */
+    public function getAddressFormExtraData($customer)
+    {
+        $returnData = [];
+        $showPrefix = $this->getConfigData("customer/address/prefix_show");
+        if ($showPrefix == "req") {
+            $returnData["prefixValue"] = $customer->getPrefix() === null ? "" : $customer->getPrefix();
+            $returnData["isPrefixVisible"] = true;
+            $returnData["isPrefixRequired"] = true;
+        } elseif ($showPrefix == "opt") {
+            $returnData["prefixValue"] = $customer->getPrefix() === null ? "" : $customer->getPrefix();
+            $returnData["isPrefixVisible"] = true;
+        }
+        $prefixOptions = $this->getConfigData("customer/address/prefix_options");
+        if ($prefixOptions != "") {
+            $returnData["prefixOptions"] = explode(";", $prefixOptions);
+            $returnData["prefixHasOptions"] = true;
+        }
+        $showMiddleName = $this->getConfigData("customer/address/middlename_show");
+        if ($showMiddleName == 1) {
+            $returnData["middleName"] = $customer->getMiddlename() === null ? "" : $customer->getMiddlename();
+            $returnData["isMiddlenameVisible"] = true;
+        }
+        $showSuffix = $this->getConfigData("customer/address/suffix_show");
+        if ($showSuffix == "req") {
+            $returnData["suffixValue"] = $customer->getSuffix() === null ? "" : $customer->getSuffix();
+            $returnData["isSuffixVisible"] = true;
+            $returnData["isSuffixRequired"] = true;
+        } elseif ($showSuffix == "opt") {
+            $returnData["suffixValue"] = $customer->getSuffix() === null ? "" : $customer->getSuffix();
+            $returnData["isSuffixVisible"] = true;
+        }
+        $suffixOptions = $this->getConfigData("customer/address/suffix_options");
+        if ($suffixOptions != "") {
+            $returnData["suffixOptions"] = explode(";", $suffixOptions);
+            $returnData["suffixHasOptions"] = true;
+        }
+        $returnData["allowToChooseState"] = (bool)$this->getConfigData("general/region/display_all");
+        return $returnData;
+    }
+
+    /**
+     * Function to get Country Data for address form
+     *
+     * @return array
+     */
+    public function getAddressCountryData()
+    {
+        $countryCollection = $this->countryCollection->loadByStore()->toOptionArray(true);
+        $requiredState = $this->getConfigData("general/region/state_required");
+        $requiredState = explode(",", $requiredState);
+        $optionalZipCountries = $this->getConfigData("general/country/optional_zip_countries");
+        $optionalZipCountries = explode(",", $optionalZipCountries);
+        $returnData = [];
+        foreach ($countryCollection as $country) {
+            $eachCountry = [];
+            $result = [];
+            if ($country["value"]) {
+                $eachCountry["name"] = $country["label"];
+                $eachCountry["country_id"] = $country["value"];
+                $eachCountry["isStateRequired"] = in_array($country["value"], $requiredState);
+                $countryData = $this->country->loadByCode($country["value"]);
+                foreach ($countryData->getRegions() as $region) {
+                    $eachRegion = [];
+                    $eachRegion["code"] = $region->getCode();
+                    $eachRegion["name"] = $region->getName();
+                    $eachRegion["region_id"] = $region->getRegionId();
+                    $eachCountry["isZipOptional"] = in_array($country["value"], $optionalZipCountries);
+                    $result[] = $eachRegion;
+                }
+                if (count($result) > 0) {
+                    $eachCountry["states"] = $result;
+                }
+                $returnData[] = $eachCountry;
+            }
+        }
+        return $returnData;
+    }
+
+    /**
+     * Function to get Meida directory path
+     *
+     * @return string
+     */
+    public function getBaseMediaDirPath()
+    {
+        return $this->directoryList->getRoot()."/pub/media/";
+    }
+
+    /**
+     * Function to get File path
+     *
+     * @param string $url
+     * @return string
+     */
+    public function getDominantColorFilePath($url)
+    {
+        $url = str_replace(
+            '/index.php',
+            '',
+            $url
+        );
+        $baseUrl = str_replace(
+            '/index.php',
+            '',
+            $this->storeManager->getStore()->getBaseUrl()
+        );
+        $url = str_replace(
+            $baseUrl,
+            $this->directoryList->getRoot()."/",
+            $url
+        );
+        return $url;
+    }
+
+    /**
+     * Function to get purchase point
+     *
+     * @param mixed $value
+     * @param mixed $order
+     * @return void
+     */
+    public function setPurchasePoint($value, $order)
+    {
+        $orderId = $order->getEntityId();
+        $orderModel = $this->orderFactory->create()->load($orderId);
+        $orderModel->setPurchasePoint($value);
+        $orderModel->save();
+    }
+
+    /**
+     * GetCustomerWishlist function
+     * 
+     * Returns wishlist according to customer ID.
+     *
+     * @param int $customerId
+     * @return array
+     */
+    public function getCustomerWishlist($customerId) {
+        $customerWishlist = $this->wishlist->loadByCustomerId($customerId)
+            ->getItemCollection()->getData();
+        return array_column($customerWishlist, 'product_id');
+    }
+}

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Walletsystem
+ * @author    Webkul
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"  src_type="url" rel="stylesheet" type="text/css"  />
+       	<css src="Webkul_Walletsystem::css/ws_front.css"/>
+	</head>
+	<update handle="customer_account"/>
+    <body>
+        <referenceContainer name="content">
+            <block class="Webkul\Walletsystem\Block\Transfer" name="walletsystem.transfer.transfer" template="Webkul_Walletsystem::customer/transfer.phtml" cacheable="false">
+            </block>
+        </referenceContainer>
+        <referenceBlock name="walletsystem.transfer.transfer">
+			<arguments>
+				<argument name="view_model" xsi:type="object">Webkul\Walletsystem\ViewModel\ViewModel</argument>
+			</arguments>
+		</referenceBlock>
+    </body>
+</page>

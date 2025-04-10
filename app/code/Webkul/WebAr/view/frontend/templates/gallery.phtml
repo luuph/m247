@@ -1,0 +1,394 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_WebAr
+ * @author    Webkul Software Private Limited
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+$viewModel = $block->getViewModel();
+$display = false;
+$modelUrl = $iosModelUrl = '';
+$imageJson = $block->getGalleryImagesJson();
+$imgJsonArray = $viewModel->getJsonHelper()->jsonDecode($imageJson ?? '{}');
+$imageCount = count($imgJsonArray);
+
+$params = $block->getRequest()->getParams();
+$productId = 0;
+if (isset($params['id'])) {
+    $productId = $params['id'] ?? 0;
+}
+
+$product = $viewModel->getProductData($productId);
+$productType = $product->getTypeId();
+$moduleStatus = $viewModel->isModuleEnabled(); //Get Module Status
+$mediaUrl = $viewModel->getMediaUrl(); //Get Media Url
+
+/// Get Model Variant Attribute/////
+$defaultVariantAttribute = ($productType == "configurable") ? $product->getModelVariantAttribute() : '';
+if ($defaultVariantAttribute == "") {
+    $defaultVariantAttribute = "0";
+}
+/////
+
+//Show Seperate GLB for Configurable Product
+$showSeperateGlb = (int)$product->getAllowGlbInChildProducts();
+$associatedProducts = ($productType == "configurable") ?
+    $viewModel->getAssociatedProductModels($product) : [];
+$associatedProductsJson = $viewModel->getJsonHelper()
+    ->jsonEncode($associatedProducts ?? []);
+//////////////
+
+////Get Button Configurations///
+$btnConfig = $viewModel->getARButtonConfig();
+
+///Lighting And Skybox Attributes Configurations/////
+$lightAttrs = $viewModel->getLightingAndSkyboxAttributesConfig();
+
+///Staging And Cameras Attributes Configurations/////
+$cameraAttrs = $viewModel->getStagingAndCamerasAttributesConfig();
+
+///Image configurations///
+$imagesConfig = $viewModel->getImageAttributesConfig();
+
+///Loading Attributes Configurations/////
+$loading = $viewModel->getModelViewerAttributeValue(
+    'webar/loading_attribute_settings/loading'
+) ?? 'auto';
+
+///Flag to show media gallery images
+$canShowOtherImages = $viewModel->canShowOtherImages();
+
+////Flag to show custom image in AR Model thumbnail in media gallery
+$showCustomImageInThumbnail = $viewModel->canShowCustomImageInThumbnail(
+    $imagesConfig["modelThumbnail"]
+);
+
+///Check can perform Interpolation Decay//////
+$performInterpolationDecay = 0;
+if ($cameraAttrs["autoRotate"] == 0 && $cameraAttrs["interpolationDecay"] != '') {
+    $performInterpolationDecay = 1;
+    ///Set autoRotateDelay 0///
+    $cameraAttrs["autoRotateDelay"] = 0;
+    ///////////////////////////
+}
+//Get AR Model Attributes Json Configurations
+$attrConfigJson = $viewModel->getAttributeConfigJson(
+    $lightAttrs,
+    $cameraAttrs,
+    $imagesConfig,
+    $loading
+);
+////
+
+////Set Flag to verify if product has only placeholder image and 3D model///
+$isPlaceHolderImg = $viewModel->getIsPlaceHolderImg($imageCount, $imgJsonArray);
+///////
+
+//////Set Model Urls///////
+if ($moduleStatus) {
+    $display = true;
+    $check3dEnabled = $viewModel->get3dModelFile($productId);
+    if (!empty($check3dEnabled['model_file'])) {
+        $modelUrl =  $mediaUrl.'catalog/product/glbmodels/'.$check3dEnabled['model_file'];
+    }
+    if (!empty($check3dEnabled['ios_file'])) {
+        $iosModelUrl =  $mediaUrl.'catalog/product/glbmodels/'.'ios/'.$check3dEnabled['ios_file'];
+    }
+}
+/////////////
+if (!$canShowOtherImages) {
+    $imageCount = 0;
+}
+$mainImageData = $viewModel->getMainImageData();
+
+$currentUrl = $_SERVER['REQUEST_URI'];
+
+// if (strpos($currentUrl, '/en/') !== false) {
+//     ////Get Main Image for media gallery///
+//     $mainImageData = $viewModel->getMainImageData();
+// }else {
+//     $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+//     $filesystem = $objectManager->get('Magento\Framework\Filesystem');
+//     $mediaDirectory = $filesystem->getDirectoryRead(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA)->getAbsolutePath();
+
+//     $imageUrl = $product->getImage();
+//     $originalImagePath = 'catalog/product' . $imageUrl;
+//     $originalImageFilePath = $mediaDirectory . $originalImagePath;
+
+//     // Ensure the original image path and cache directory path are correctly formatted
+//     $originalImagePath = ltrim($imageUrl, '/');
+//     $cacheDirectory = 'catalog/product/cache/3f6305969bb855849188278649ceff58/' . dirname($originalImagePath) . '/';
+//     $cacheFilePath = $mediaDirectory . $cacheDirectory . basename($originalImagePath);
+
+//     // Create cache directory if it does not exist
+//     if (!is_dir(dirname($cacheFilePath))) {
+//         mkdir(dirname($cacheFilePath), 0777, true);
+//     }
+
+//     // Copy the image to the Arabic cache directory if it does not exist there
+//     if (!file_exists($cacheFilePath) && file_exists($originalImageFilePath)) {
+//         copy($originalImageFilePath, $cacheFilePath);
+//     }
+
+//     // If you need to use $mainImageData, set it accordingly
+//     $mainImageData = $mediaDirectory . $cacheDirectory . basename($originalImagePath);
+// }
+
+if ($showSeperateGlb == 1 && $modelUrl != "") {
+    $modelUrl = "";
+}
+
+////If modelUrl is empty and showSeperateGlb and module enabled are true, then set modelUrl////
+if ($modelUrl == "" && $showSeperateGlb == 1 && $display && !empty($associatedProducts)) {
+    $modelUrl = $viewModel->getDefault3DModelUrl();
+    $iosModelUrl = $viewModel->getDefault3DIosModelUrl();
+}
+
+//If product is configurable and main product don't have images but associated product has images//
+if ($isPlaceHolderImg && $productType == "configurable") {
+    if ($viewModel->getIsAssociatedProductHasImgFlag()) {
+        $isPlaceHolderImg = 0;
+    }
+}
+//////
+?>
+
+<?php if (($imageCount == 0 || ($imageCount == 1 && $isPlaceHolderImg))
+&& $modelUrl != "" && $display): ?>
+    <div class="load-webar-model">
+        <!-- Use it like any other HTML element -->
+        <model-viewer data-js-focus-visible 
+            src="<?= $block->escapeHtmlAttr($modelUrl) ?>"
+            alt="A 3D model of an product" camera-controls  
+            camera-orbit="33deg 67deg auto" 
+            ar 
+            <?php if ($productType == "configurable" || $product->hasOptions()) {?>
+                ar-modes="webxr quick-look"
+            <?php  } else { ?>
+                ar-modes="scene-viewer webxr quick-look"
+                <?php
+            }
+            ?>
+
+            <?php if ($cameraAttrs["autoRotate"] == 1) {?>
+                auto-rotate 
+                <?php if ($cameraAttrs["autoRotateDelay"] != '') { ?>
+                auto-rotate-delay="<?= $block->escapeHtmlAttr($cameraAttrs["autoRotateDelay"]) ?>" 
+            <?php   }
+            }
+            ?>
+
+            <?php if ($cameraAttrs["disableZoom"] == 1) {?>
+                disable-zoom 
+            <?php }?>
+            <?php if ($cameraAttrs["disableTap"] == 1) {?>
+                disable-tap 
+            <?php }?>
+
+            <?php if ($cameraAttrs["touchAction"] != '') {?>
+                touch-action="<?= $block->escapeHtmlAttr(strtolower($cameraAttrs["touchAction"])) ?>" 
+            <?php }?>
+
+            <?php if ($cameraAttrs["interpolationDecay"] != '') {?>
+                interpolation-decay="<?=$block->escapeHtmlAttr($cameraAttrs["interpolationDecay"]) ?>" 
+            <?php }?>
+
+            <?php if ($lightAttrs["modelShadowIntensity"] != "-1"
+                && $lightAttrs["modelShadowIntensity"] != "") {?>
+                shadow-intensity="<?= $block->escapeHtmlAttr($lightAttrs["modelShadowIntensity"]) ?>" 
+            <?php }?>
+            <?php if ($lightAttrs["modelExposure"] != "-1" && $lightAttrs["modelExposure"] != "") {?>
+                exposure="<?= $block->escapeHtmlAttr($lightAttrs["modelExposure"]) ?>" 
+            <?php }?>
+            <?php if ($lightAttrs["shadowSoftness"] != "-1" && $lightAttrs["shadowSoftness"] != "") {?>
+                shadow-softness="<?= $block->escapeHtmlAttr($lightAttrs["shadowSoftness"]) ?>" 
+            <?php }?>
+
+            <?php if ($lightAttrs["envImg"] != "" && $lightAttrs["envImg"] != 'envurl'
+                && $lightAttrs["applyEnvImg"] == 1) {?>
+                environment-image="<?= $block->escapeHtmlAttr($lightAttrs["envImg"]) ?>" 
+            <?php } elseif ($lightAttrs["envImg"] == 'envurl' && $lightAttrs["envImgUrl"] != ''
+                && $lightAttrs["applyEnvImg"] == 1) {?>
+                environment-image="<?= $block->escapeHtmlAttr($lightAttrs["envImgUrl"]) ?>" 
+            <?php }?>
+
+            <?php if ($imagesConfig["skyImgDirPath"] != '' && $lightAttrs["applySkyImg"] == 1) {?>
+                skybox-image="<?= $block->escapeHtmlAttr($imagesConfig["skyImgDirPath"]) ?>" 
+            <?php }?>
+            
+            <?php if ($loading != '') {?>
+                loading="<?= $block->escapeHtmlAttr($loading) ?>" 
+                reveal="auto" 
+            <?php }?>
+            <?php if ($imagesConfig["posterImgDirPath"] != '') {?>
+                poster="<?= $block->escapeHtmlAttr($imagesConfig["posterImgDirPath"]) ?>" 
+            <?php }?>
+            
+            <?php if (!empty($iosModelUrl)) {?>
+            ios-src="<?= $block->escapeHtmlAttr($iosModelUrl) ?>" 
+            <?php }?>>
+
+            <!--Show Custom AR Button-START-->
+            <?php if ($btnConfig["showCustomButton"]) {?>
+                <button slot="ar-button" id="ar-button">
+                    <?= $block->escapeHtml($btnConfig["configButtonText"]) ?>
+                </button>
+            <?php } ?>
+            <!--Show Custom AR Button-ENDS-->
+
+            <!--Show Associated Products's GLB Models-START-->
+            <?php if (!empty($associatedProducts) && $showSeperateGlb) {
+                foreach ($associatedProducts as $assProId => $assPro) {
+                    $thumbNail = $assPro["thumbnail"] ?? "";
+                    if ($imagesConfig["posterImgDirPath"] != '' && $thumbNail == "") {
+                        $thumbNail = $imagesConfig["posterImgDirPath"] ?? "";
+                    }
+                    ?>
+                <div id="wk-slide-<?=$block->escapeHtmlAttr($assProId) ?>"
+                    class="wk-slide"
+                    data-model="<?= $block->escapeHtmlAttr($assPro["modelUrl"] ?? '') ?>"
+                    data-thumb="<?= $block->escapeHtmlAttr($thumbNail) ?>"
+                    data-ios-model="<?= $block->escapeHtmlAttr($assPro["iosModelUrl"] ?? '') ?>"
+                    data-product-id="<?= $block->escapeHtmlAttr($assProId) ?>">
+                </div>
+                    <?php
+                }
+            } ?>
+            <!--Show Associated Products's GLB Models-ENDS-->
+
+        </model-viewer>
+    </div>
+<?php endif; ?>
+
+<!-- This is added to make this module compatible with QuickProductEdit module -->
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js"></script>
+
+<?php if (count($imgJsonArray) > 0 && $modelUrl == "" && !$isPlaceHolderImg): ?>
+    <div class="gallery-placeholder _block-content-loading" 
+        data-gallery-role="gallery-placeholder">
+        <img
+            alt="main product photo"
+            class="gallery-placeholder__image"
+            src="<?= $block->escapeHtmlAttr($mainImageData) ?>"
+        />
+    </div>
+
+    <script type="text/x-magento-init">
+        {
+            "[data-gallery-role=gallery-placeholder]": {
+                "mage/gallery/gallery": {
+                    "mixins":["magnifier/magnify"],
+                    "magnifierOpts": <?= /* @noEscape */ $block->getMagnifier() ?>,
+                    "data": <?= /* @noEscape */ $block->getGalleryImagesJson() ?>,
+                    "options": <?= /* @noEscape */ $block->getGalleryOptions()->getOptionsJson() ?>,
+                    "fullscreen": <?= /* @noEscape */ $block->getGalleryOptions()->getFSOptionsJson() ?>,
+                    "breakpoints": <?= /* @noEscape */ $block->getBreakpoints() ?>
+                }
+            }
+        }
+    </script>
+
+<?php endif; ?>
+
+<script type="text/x-magento-init">
+    {
+        "*":{
+            "Webkul_WebAr/js/modelViewerConfigurable":{
+                "showSeperateGlb":<?= /* @noEscape */ $showSeperateGlb ?>,
+                "productType":"<?= /* @noEscape */ $productType ?>",
+                "performInterpolationDecay":<?= /* @noEscape */ $performInterpolationDecay ?>,
+                "associatedProducts":<?= /* @noEscape */ $associatedProductsJson ?>,
+                "firstAssociatedProduct": <?= /* @noEscape */ $viewModel->getFirstAssociatedProductId() ?>,
+                "defaultVariantAttribute": <?= /* @noEscape */ $defaultVariantAttribute ?>
+            }
+        }
+    }
+</script>
+
+<?php if ($imageCount > 0 && $modelUrl != "" && !$isPlaceHolderImg): ?>
+    <?php
+        $jsonOption = $viewModel->getJsonHelper()->jsonDecode(
+            $block->getGalleryOptions()->getOptionsJson() ?? '{}'
+        );
+        //Set maxHeight to avoid extra whitespace below fotorama stage
+        $jsonOption["maxheight"] = "498";
+        ////
+        $jsonfinal = $viewModel->getJsonHelper()->jsonEncode($jsonOption ?? []);
+    ?>
+    <div class="gallery-placeholder _block-content-loading" 
+        data-gallery-role="gallery-placeholder">
+        <img
+            alt="main product photo"
+            class="gallery-placeholder__image"
+            src="<?= $block->escapeHtmlAttr($mainImageData) ?>"
+        />
+    </div>
+
+    <script type="text/x-magento-init">
+        {
+            "[data-gallery-role=gallery-placeholder]": {
+                "mage/gallery/gallery": {
+                    "mixins":["magnifier/magnify"],
+                    "magnifierOpts": <?= /* @noEscape */ $block->getMagnifier() ?>,
+                    "data": <?= /* @noEscape */ $block->getGalleryImagesJson() ?>,
+                    "options": <?= /* @noEscape */ $jsonfinal ?>,
+                    "fullscreen": <?= /* @noEscape */ $block->getGalleryOptions()->getFSOptionsJson() ?>,
+                    "breakpoints": <?= /* @noEscape */ $block->getBreakpoints() ?>
+                }
+            }
+        }
+    </script>
+
+    <script type="text/x-magento-init">
+        {
+            "*": {
+                "Webkul_WebAr/js/push3DImages":{
+                    "mainImageData":"<?= /* @noEscape */$mainImageData ?>",
+                    "showCustomImageInThumbnail":<?= /* @noEscape */$showCustomImageInThumbnail ?>,
+                    "modelUrl":"<?= /* @noEscape */ $modelUrl ?>",
+                    "iosModelUrl":"<?= /* @noEscape */ $iosModelUrl ?>",
+                    "displayModel":"<?= /* @noEscape */ $display ?>",
+                    "attributeConfigs":<?= /* @noEscape */ $attrConfigJson ?>,
+                    "productHasOptions": <?= /* @noEscape */ (int)$product->hasOptions() ?? 0 ?>,
+                    "showCustomButton": <?= /* @noEscape */ (int)$btnConfig["showCustomButton"]??0 ?>,
+                    "showCustomButtonText": "<?= /* @noEscape */ $btnConfig["configButtonText"] ?>",
+                    "showSeperateGlb":<?= /* @noEscape */ $showSeperateGlb ?>,
+                    "associatedProducts":<?= /* @noEscape */ $associatedProductsJson ?>,
+                    "productType":"<?= /* @noEscape */ $productType ?>",
+                    "defaultVariantAttribute": <?= /* @noEscape */ $defaultVariantAttribute ?>
+                }
+            }
+        }
+    </script>
+<?php endif; ?>
+
+<?php //For noimage and no 3D model product case////
+if ((($imageCount==1 || $imageCount==0) &&
+    $isPlaceHolderImg==1 &&
+    ($modelUrl == ""))): ?>
+    <div class="gallery-placeholder _block-content-loading" data-gallery-role="gallery-placeholder">
+        <img
+            alt="main product photo"
+            class="gallery-placeholder__image"
+            src="<?= $block->escapeHtmlAttr($mainImageData) ?>"
+        />
+    </div>
+
+     <script type="text/x-magento-init">
+        {
+            "[data-gallery-role=gallery-placeholder]": {
+                "mage/gallery/gallery": {
+                    "mixins":["magnifier/magnify"],
+                    "magnifierOpts": <?= /* @noEscape */ $block->getMagnifier() ?>,
+                    "data": <?= /* @noEscape */ $block->getGalleryImagesJson() ?>,
+                    "options": <?= /* @noEscape */ $block->getGalleryOptions()->getOptionsJson() ?>,
+                    "fullscreen": <?= /* @noEscape */ $block->getGalleryOptions()->getFSOptionsJson() ?>,
+                    "breakpoints": <?= /* @noEscape */ $block->getBreakpoints() ?>
+                }
+            }
+        }
+    </script>
+<?php endif; ?>

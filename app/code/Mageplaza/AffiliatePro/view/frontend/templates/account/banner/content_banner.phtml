@@ -1,0 +1,327 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_AffiliatePro
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+?>
+<?php
+/** @var Mageplaza\AffiliatePro\Block\Account\Banner $block */
+
+?>
+
+<div class="box-account box-info box-affiliate affiliate-banner-content affiliate-block form-edit-account"
+     style="background-color: #F1F1F1;padding: 20px; margin-top: 20px">
+    <?php
+    $banners = $block->getBannersById($block->getCampaignId());
+    if (count($banners)):?>
+        <?php foreach ($banners as $banner): ?>
+        <div class="banner_field banner-<?= /* @noEscape */ $banner->getId() ?>" style="width: 100%;  ">
+            <div>
+                <div>
+                    <div class="header_banner">
+                        <div id="banner-title" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden"><?= /* @escapeNotVerified */
+                            'Banner: ' . $banner->getTitle() ?></div>
+                        <button class="btn-outline get-banner-link" style="padding: 10px 15px"
+                                id="<?= /* @noEscape */ $banner->getId() ?>"><?= /* @noEscape */ __
+                            ('Get banner link') ?></button>
+                    </div>
+
+                    <?php if ($block->isEnableBannerReport()): ?>
+                        <div class="banner-report">
+                            <p class="banner-report-impression">
+                                Impressions: <span style="color: #E57F08"><?= /* @noEscape */ $banner->getImpression() ?></span>
+                            </p>
+                            <p class="banner-report-click">
+                                Click: <span style="color: #E57F08"><?= /* @noEscape */ $banner->getClick() ?></span>
+                            </p>
+                        </div>
+                    <?php endif ?>
+                </div>
+
+            </div>
+
+            <div class="field preview">
+                <?php if ($block->getImageCount($banner->getContentHtml()) > 4): ?>
+                    <div class="control owl-carousel  len-4">
+                        <?= $banner->getContentHtml(); ?>
+                    </div>
+                <?php else: ?>
+                    <div class="control owl-carousel  len-<?= /* @noEscape */ ($block->getImageCount($banner->getContentHtml())) ?> "
+                         style="padding-bottom:20px">
+                        <?= $banner->getContentHtml(); ?>
+                    </div>
+                <?php endif ?>
+
+
+            </div>
+        </div>
+        <div id="bn-link-refer" class="bnlink-refer-<?= /* @noEscape */ $banner->getId() ?>">
+            <div class="bnlink-refer-content">
+                <div id="link-bn">
+                    <div class="field link">
+                        <label class="label">
+                                <span><?= /* @escapeNotVerified */
+                                    __('Link') ?></span></label>
+
+                        <div style="background-color: #E9E9E9; padding: 5px 10px; position: relative; max-width:600px">
+                            <div class="d-none copied_text" style="position: absolute; top: -20px; right: 0">
+                                Copied
+                            </div>
+                            <div class="link_copy"
+                                 style=" font-weight: 600; display: flex; align-items: center; justify-content: space-between; "
+                            title="<?= /* @escapeNotVerified */ $this->getLink($banner) ?>">
+                                <span style="margin-right: 15px" class="text_copy"><?= /* @escapeNotVerified */
+                                    $this->getLink($banner) ?></span>
+                                <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg"
+                                     class="link_ref_btn_<?= /* @noEscape */ $banner->getId() ?>"
+                                    >
+                                    <path
+                                        d="M17.5455 6H9.36364C8.61364 6 8 6.61364 8 7.36364V16.9091H9.36364V7.36364H17.5455V6ZM19.5909 8.72727H12.0909C11.3409 8.72727 10.7273 9.34091 10.7273 10.0909V19.6364C10.7273 20.3864 11.3409 21 12.0909 21H19.5909C20.3409 21 20.9545 20.3864 20.9545 19.6364V10.0909C20.9545 9.34091 20.3409 8.72727 19.5909 8.72727ZM19.5909 19.6364H12.0909V10.0909H19.5909V19.6364Z"
+                                        fill="#AEAEAE"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="coderefer-bn">
+                    <div class="field content">
+                        <label class="label" for="banner-content-<?= /* @noEscape */ $banner->getId() ?>">
+                                <span><?= /* @escapeNotVerified */
+                                    __('Copy and past this source code into your website or forum.') ?></span>
+                        </label>
+                        <div class="control">
+                            <textarea id="banner-content-<?= /* @noEscape */ $banner->getId() ?>"
+                                      class="banner-content" rows="4" readonly="readonly"
+                                      onclick="this.select()"><?= /* @noEscape */ $this->getContentText($banner) ?>
+                            </textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/x-magento-init">
+            {
+                "*": {
+                    "Mageplaza_AffiliatePro/js/banner": {
+                        "bannerId": "<?= /* @noEscape */ $banner->getId() ?>"
+                    }
+                }
+            }
+
+
+        </script>
+        <script type="text/x-magento-init">
+    {
+        "*": {
+            "Mageplaza_Affiliate/js/action/copy": {
+             "text": "<?= /* @escapeNotVerified */ $this->getLink($banner) ?>",
+             "copyBtn": ".link_ref_btn_<?= /* @noEscape */ $banner->getId() ?>"
+            }
+        }
+    }
+
+ </script>
+    <?php endforeach; ?>
+        <script>
+            require([
+                'jquery',
+                'mageplaza/core/owl.carousel'
+            ], function ($) {
+                'use strict';
+                $(document).ready(function () {
+                    $('.len-4.owl-carousel').owlCarousel({
+                        items: 1,
+                        loop: false,
+                        margin: 50,
+                        center: true,
+                        startPosition: 1,
+                        nav: false,
+                        navText: ['<svg class="icon_prev" width="29" height="28" viewBox="0 0 29 28" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="14.5" cy="14" r="11.5" stroke="#1979C3"/><g clip-path="url(#clip0_520_2679)"><path d="M17.3415 17.825L13.5248 14L17.3415 10.175L16.1665 9L11.1665 14L16.1665 19L17.3415 17.825Z" fill="#1979C3"/></g><defs><clipPath id="clip0_520_2679"><rect width="20" height="20" fill="white" transform="translate(4.5 4)"/></clipPath></defs></svg>', '<svg class="icon_next" width="29" height="28" viewBox="0 0 29 28" fill="none" xmlns="http://www.w3.org/2000/svg"> <circle cx="14.5" cy="14" r="11.5" stroke="#1979C3"/> <g clip-path="url(#clip0_520_2679)"> <path d="M11.6582 17.825L15.4749 14L11.6582 10.175L12.8332 9L17.8332 14L12.8332 19L11.6582 17.825Z" fill="#1979C3"/> </g> <defs> <clipPath id="clip0_520_2679"> <rect width="20" height="20" fill="white" transform="translate(4.5 4)"/> </clipPath> </defs> </svg>'],
+                        responsive: {
+                            480: {
+                                items: 1
+
+                            },
+                            // breakpoint from 768 up
+                            600: {
+                                items: 3,
+                                nav: true
+                            }
+                        }
+                    });
+
+                    $('.len-1.owl-carousel').owlCarousel({
+                        items: 1,
+                        loop: false,
+                        margin: 50,
+                        startPosition: 0,
+                        nav: false,
+                        center: true,
+                        responsive: {
+                            480: {
+                                items: 1
+                            },
+                            600: {
+                                items: 2
+                            }
+                        }
+                    });
+
+                    $('.len-2.owl-carousel').owlCarousel({
+                        items: 1,
+                        loop: false,
+                        margin: 50,
+                        startPosition: 0,
+                        nav: false,
+                        responsive: {
+                            480: {
+                                items: 1
+                            },
+                            600: {
+                                items: 2
+                            }
+                        }
+                    });
+
+                    $('.len-3.owl-carousel').owlCarousel({
+                        items: 1,
+                        loop: false,
+                        margin: 50,
+                        startPosition: 1,
+                        nav: false,
+                        responsive: {
+                            480: {
+                                items: 1
+                            },
+                            600: {
+                                items: 3
+                            }
+                        }
+                    });
+
+
+                });
+            });
+        </script>
+    <?php else: ?>
+        <?= /* @noEscape */ __('No banner available'); ?>
+    <?php endif; ?>
+</div>
+
+<style>
+    .field.preview {
+        text-align: center;
+    }
+
+    .banner-report {
+        display: flex;
+        justify-content: center;
+    }
+
+    p.banner-report-click {
+        margin-left: 10px;
+    }
+
+    .banner-report p {
+        background-color: #FFFFFF;
+        padding: 5px;
+    }
+    .banner_field {
+        border-bottom: 1px solid #D0D0D0;
+    }
+    .banner_field:last-of-type {
+        border-bottom: 0 !important;
+    }
+    .header_banner {
+        display: flex; justify-content: space-between; align-items: center
+    }
+    #banner-title {
+        width: 70%;
+    }
+    @media screen and (max-width: 768px) {
+        .header_banner {
+            display: block;
+        }
+        .get-banner-link {
+            margin-bottom: 15px;
+        }
+        #banner-title {
+            width: 100%;
+        }
+        .banner-report {
+            justify-content: flex-start;
+        }
+
+    }
+    @media screen and (max-width: 599px) {
+
+        .len-4 .owl-item.active.center img {
+            transform: translateY(0px) !important;
+            height: auto !important;
+        }
+    }
+</style>
+<style>
+    .owl-prev .icon_prev {
+        width: 25px;
+        height: 25px;
+        position: absolute;
+        top: 35%;
+        font-size: 30px;
+        left: 32%;
+    }
+
+    .owl-next .icon_next {
+        width: 25px;
+        height: 25px;
+        position: absolute;
+        top: 35%;
+        font-size: 30px;
+        right: 32%;
+    }
+
+    .icon_prev:hover circle {
+        fill: #1979C3 !important;
+
+    }
+
+    .icon_prev:hover path {
+        fill: white !important;
+
+    }
+
+    .icon_next:hover circle {
+        fill: #1979C3 !important;
+
+    }
+
+    .icon_next:hover path {
+        fill: white !important;
+
+    }
+
+    .len-4 .owl-item.active.center img {
+        height: 200px;
+        transform: translateY(-30px);
+    }
+
+    .owl-stage {
+        padding-top: 30px
+    }
+</style>

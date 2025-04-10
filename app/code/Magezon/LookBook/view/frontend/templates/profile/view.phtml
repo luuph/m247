@@ -1,0 +1,24 @@
+<?php
+/**
+ * @var $block Magezon\LookBook\Block\Profile\View
+ */
+$coreHelper      = $this->helper('Magezon\Core\Helper\Data');
+$profile         = $this->getCurrentProfile();
+$layoutType      = $this->getLayoutType() ?: $profile->getLayoutType();
+$layoutTypeClass = ($layoutType == 'type2') ? '-type2' : '-df';
+?>
+<div class="lookbook-profile-wraper">
+    <h2 class="lookbook-profile-title"><?= $profile->getTitle() ?></h2>
+    <div class="lookbook-marker lookbook-marker<?= $layoutTypeClass ?>">
+		<?= $block->getProfileHtml() ?>
+	</div>
+    <?= $coreHelper->filter($profile->getDescription()) ?>
+</div>
+<div id="lookbook-popup" class="white-popup mfp-with-anim mfp-hide" data-effect="mfp-zoom-in">
+	<div class="lookbook-popup-wrapper">
+		<div class="lookbook-popup-content"></div>
+	</div>
+    <div class="lookbook-popup-loader">
+        <div class="lookbook-popup-loader-bar"></div>
+    </div>
+</div>

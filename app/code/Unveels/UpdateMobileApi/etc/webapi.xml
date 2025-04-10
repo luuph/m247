@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <!-- Update Customer Mobile by Token -->
+    <route url="/V1/customer/unveels/updatemobile" method="POST" secure="true">
+        <service class="Unveels\UpdateMobileApi\Api\CustomerTokenRepositoryInterface" method="updateCustomerMobile"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+</routes>

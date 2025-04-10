@@ -1,0 +1,49 @@
+<style>
+    .pages{
+        position: inherit !important;
+    }
+    /* .wishlist-toolbar{
+        justify-content: center !important;
+    } */
+    .column.main .toolbar.wishlist-toolbar {  
+       display:block;
+    }
+    .column.main .toolbar.wishlist-toolbar +.toolbar.wishlist-toolbar  {  
+        display:none;
+    }
+    
+ 
+</style>
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magento\Wishlist\Block\Customer\Wishlist\Item\Column\Info $block */
+
+/** @var \Magento\Wishlist\Model\Item $item */
+$item = $block->getItem();
+$product = $item->getProduct();
+$brandName = $product->getAttributeText('brand');
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$brandHelper = $objectManager->get(\Mageplaza\Shopbybrand\Helper\Data::class);
+
+/** Get the brand data using the helper */
+$brandData = $brandHelper->getProductBrand($product);
+$brandUrl = $brandHelper->getBrandUrl($brandData);
+// $brandName = $brandData->getValue();
+?>
+<?php if ($brandName): ?>
+    <div class="product-brand-name">
+        <a href="<?= $brandUrl ?>">
+            <span title="<?= $brandName ?>"><?= $brandName ?></span>
+        </a>
+    </div>
+<?php endif; ?>
+<strong class="product-item-name">
+    <a href="<?= $block->escapeUrl($block->getProductUrl($item)) ?>" title="<?= $block->escapeHtmlAttr($product->getName()) ?>" class="product-item-link">
+        <?= $block->escapeHtml($product->getName()) ?>
+    </a>
+</strong>

@@ -1,0 +1,7 @@
+type Mutation {
+    setMyFatoorahDetails(invoice_id: Int!, order_increment_id: String!, gateway_name: String): SetMyFatoorahDetailsOutput @resolver(class: "Unveels\\SetMyFatoorahDetails\\Model\\Resolver\\SetMyFatoorahDetails")
+}
+
+type SetMyFatoorahDetailsOutput {
+    success: Boolean
+}

@@ -1,0 +1,36 @@
+<?php
+
+namespace MagePsycho\RegionCityPro\Model\Import\City;
+
+/**
+ * @category   MagePsycho
+ * @package    MagePsycho_RegionCityPro
+ * @author     Raj KB <magepsycho@gmail.com>
+ * @website    https://www.magepsycho.com
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+interface RowValidatorInterface extends \Magento\Framework\Validator\ValidatorInterface
+{
+    public const ERROR_COUNTRY_IS_EMPTY        = 'countryEmpty';
+    public const ERROR_INVALID_COUNTRY         = 'invalidCountry';
+
+    public const ERROR_REGION_IS_EMPTY        = 'regionEmpty';
+    public const ERROR_INVALID_REGION         = 'invalidRegion';
+
+    public const ERROR_CODE_IS_EMPTY            = 'codeEmpty';
+    public const ERROR_DEFAULT_NAME_IS_EMPTY    = 'defaultNameEmpty';
+    public const ERROR_INVALID_LOCALE_CODE      = 'invalidLocaleCode';
+
+    public const ERROR_INVALID_DATA        = 'invalidData';
+    public const ERROR_VALUE_IS_REQUIRED   = 'isRequired';
+
+    public const LOCALE_PREFIX = 'locale';
+
+    /**
+     * Initialize validator
+     *
+     * @param \MagePsycho\RegionCityPro\Model\Import\City $context
+     * @return $this
+     */
+    public function init($context);
+}

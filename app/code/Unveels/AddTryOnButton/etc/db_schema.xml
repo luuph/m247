@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="mgz_lookbook_profile" resource="default" engine="innodb" comment="LookBook Table">
+        <column xsi:type="varchar" name="try_on_url" length="255" nullable="true" comment="Try On URL"/>
+    </table>
+    <table name="mobikul_carousel" resource="default" engine="innodb" comment="Mobikul Carousel Table">
+        <column xsi:type="text" name="image_size" nullable="true" comment="Image Size"/>
+    </table>
+</schema>

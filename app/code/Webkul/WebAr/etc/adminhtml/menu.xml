@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_WebAr
+ * @author    Webkul Software Private Limited
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+   <menu>
+   	<add id="Webkul_WebAr::webar" title="WebAr" module="Webkul_WebAr" sortOrder="10" resource="Webkul_WebAr::webar"/>
+      <add id="Webkul_WebAr::menu" title="WebAr" module="Webkul_WebAr" sortOrder="25" parent="Webkul_WebAr::webar" resource="Webkul_WebAr::menu"/>
+     	<add id="Webkul_WebAr::details" parent="Webkul_WebAr::menu" title="Configuration Settings" module="Webkul_WebAr" sortOrder="101" resource="Webkul_WebAr::details" action="adminhtml/system_config/edit/section/webar" />
+    </menu>
+</config>

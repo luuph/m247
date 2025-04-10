@@ -1,0 +1,29 @@
+{
+  "name": "unveels/core",
+  "description": "unveels core to bind all the module together",
+  "require": {
+    "php": "~7.0.0|7.0.2|7.0.4|~7.0.6|~7.1.0|~7.2.0|~7.3.0"
+  },
+  "type": "magento2-module",
+  "version": "1.0.0",
+  "license": [
+    "OSL-3.0",
+    "AFL-3.0"
+  ],
+  "authors": [
+    {
+      "name": "Unveels",
+      "email": "marketplace@unveels.com",
+      "homepage": "https://unveels.com"
+    }
+  ],
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Unveels\\Core\\": ""
+    }
+  }
+
+}

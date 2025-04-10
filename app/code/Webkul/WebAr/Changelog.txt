@@ -1,0 +1,32 @@
+Legend
+
++ Features
+- Bugs
+
+-------------------------------- Version 5.1.1-p3 --------------------------------------
+	- Bug fixes.
+
+-------------------------------- Version 5.1.1-p2 --------------------------------------
+	- Fixed issues.
+	
+-------------------------------- Version 5.1.1-p1 --------------------------------------
+	- Fixed issues.
+	
+-------------------------------- Version 5.1.1 --------------------------------------
+	+ Compatible with multiple store-views.
+	- Fixed issues.
+
+-------------------------------- Version 5.1.0 --------------------------------------
+	+ Allows admin to add different GLB files for configurable products' variants instead of a single GLB(which has variant configurations) in the main product.
+	+ Allows admin to choose to show product image gallery with 3D models for configurable products.
+	
+-------------------------------- Version 5.0.0 --------------------------------------
+	+ Allows admin to choose to show product image gallery with 3D models.
+	+ Allows admin to set model viewer attribute values from the configuration section.
+	+ Allows admin to show custom AR button in 3D Model from configuration section.
+	- Fixed Bugs
+
+-------------------------------- Version 4.0.0 --------------------------------------
+	+ Compatible with Magento 2.4.x
+	+ Allows admin to add 3D models to products (simple, virtual, configurable, downloadable, grouped, and bundle).
+	+ Allows customers to shop products based on 3D model view of products.

@@ -1,0 +1,124 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MobikulCore
+ * @author    Webkul Software Private Limited
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+?>
+<style type="text/css">
+    .eachBanner{
+        display: flex;
+        margin-top: 10px;
+    }
+    .wk-mobikul-categorysmallbanner-delete{
+        vertical-align: bottom;
+    }
+    .categorysmallbannerimage{
+        vertical-align: top;
+    }
+    #wk-mobikul-categorysmallbannerimages{
+        margin-top: 20px;
+    }
+    .inputContainer{
+        font-size: 1.2rem;
+    }
+</style>
+<?php
+$categoryBannerData = $block->getCategoryBannerData();
+$categoryBanners = explode(",", $categoryBannerData->getSmallbanner() ?? "");
+$mediaPath = $block->coreHelper->getUrl("media");
+$imageCount = count($categoryBanners);
+if ($imageCount > 0): ?>
+    <div id="wk-mobikul-category-smallbanner">
+        <label class="admin__field-label">
+            <span><strong><?= $block->escapeHtml(__("Small Banner Image")) ?></strong></span>
+        </label>
+        <small style="display:block;padding-top:5px;">
+            Recommended Dimentions: Add the image in 8:3 ratio, 800 * 300 (width * height)
+        </small>
+        <?php $i = 0; ?>
+        <?php foreach ($categoryBanners as $key => $image): ?>
+            <div class="admin__field categorysmallbanner-image">
+                <input 
+                    type="hidden" 
+                    name="mobikul_categoryimages_smallbanner_rendered" 
+                    form="mobikul_categoryimages_form" 
+                    value="1" 
+                    class="mobikul_categoryimages_rendered_input">
+                <div class="admin__field-control eachBanner" style="display:flex;">
+                    <div class="inputContainer">
+                        <?php if ($image): ?>
+                            <input 
+                                type="hidden" 
+                                name="mobikul_categoryimages_small_exist[]" 
+                                form="mobikul_categoryimages_form" 
+                                value="<?= $block->escapeHtml($image) ?>" 
+                                class="mobikul_categoryimages_exist_input">
+                        <?php endif; ?>
+                        <input 
+                            class="admin__control-file" 
+                            type="file" 
+                            name="mobikul_categoryimages_smallbanner[<?= $block->escapeHtml($i) ?>]" 
+                            form="mobikul_categoryimages_form"><br>
+                        <span><?= $block->escapeHtml(__("Allowed file type: png, jpg, jpeg.")) ?></span>
+                    </div>
+                    <div>
+                        <?php if ($image): ?>
+                            <img 
+                                class="categorysmallbannerimage" 
+                                height="50px" 
+                                width="75px" 
+                                src="<?= $block->escapeUrl($mediaPath."mobikul/categoryimages/smallbanner/".$image) ?>">
+                        <?php endif; ?>
+                        <button class="wk-mobikul-categorysmallbanner-delete"><?= $block->escapeHtml(__("Delete")) ?>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <?php $i++; ?>
+        <?php endforeach; ?>
+    </div>
+<?php endif ; ?>
+<div id="wk-mobikul-categorysmallbannerimages" >
+    <div class="admin__field categorysmallbanner-image" >
+        <button id="wk-mobikul-categorysmallbanner-add-more"><?= $block->escapeHtml(__("Add More")) ?></button>
+    </div>
+</div>
+<script id="wk-categorysmallbanner-template" type="text/x-magento-template">
+    <div class="admin__field categorysmallbanner-image">
+        <div class="admin__field-control eachBanner">
+            <div>
+                <input 
+                    class="admin__control-file" 
+                    type="file" 
+                    name="mobikul_categoryimages_smallbanner[<%- data.index %>]" 
+                    form="mobikul_categoryimages_form"><br>
+                <span><?= $block->escapeHtml(__("Allowed file type: png, jpg, jpeg.")) ?></span>
+            </div>
+            <div>
+                <button class="wk-mobikul-categorysmallbanner-delete"><?= $block->escapeHtml(__("Delete")) ?></button>
+            </div>
+        </div>
+    </div>
+</script>
+<?php
+$optionElements = [
+    "key" => $i
+];
+$serializedData = $block->jsonHelper->jsonEncode($optionElements);
+?>
+<script type="text/x-magento-init">
+    {
+    "*":{
+            "categorySmallbannerImage":<?= /* @noEscape */ $serializedData; ?>
+        }
+    }
+</script>
+<script>
+    require("mage/apply/main").apply();
+</script>

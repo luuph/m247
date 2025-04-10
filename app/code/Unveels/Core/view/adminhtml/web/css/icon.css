@@ -1,0 +1,20 @@
+.admin__menu .level-0.item-core > a:before {
+  content: url('../images/magento-menu-logo.png');
+	height: 27px;
+	width: 61px;
+	margin: 0 auto;
+  display: none;
+
+}
+.config-nav-block.code-config-tab strong::before {
+    background: url(../images/magento-menu-logo.png) no-repeat;
+    width: 53px;
+    height: 20px;
+    content: '';
+    display: none;
+    margin-right: 0px;
+    vertical-align: text-bottom;
+}
+.config-nav-block.code-config-tab strong {
+    font-size: 12px;
+}

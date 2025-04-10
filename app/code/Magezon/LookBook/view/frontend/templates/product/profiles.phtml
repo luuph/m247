@@ -1,0 +1,33 @@
+<?php
+$dataHelper       = $this->helper('Magezon\LookBook\Helper\Data');
+$buttonEnabled    = $dataHelper->getProductPageProfileButtonEnabled();
+$items = $this->getItems();
+$classProfileContent = ($buttonEnabled) ? '' : 'lookbook-not-btn';
+?>
+<?php foreach ($items as $profile) { ?>
+    <div class="profile-item">
+        <div class="profile-item-inner">
+
+            <?php if ($thumbnailUrl = $profile->getImageUrl()) { ?>
+                <div class="profile-item-thumbnail">
+                    <a href="<?= $profile->getUrl() ?>" title="<?= $this->escapeHtml($profile->getTitle()) ?>">
+                        <img src="<?= $thumbnailUrl ?>" alt="<?= $this->escapeHtml($profile->getTitle()) ?>">
+                    </a>
+                </div>
+            <?php } ?>
+
+            <div class="profile-item-content profile-content-animation <?= $classProfileContent ?>">
+                <div class="profile-item-title">
+                	<a href="<?= $profile->getUrl() ?>" title="<?= $this->escapeHtml($profile->getTitle()) ?>">
+	                    <h3><?= $profile->getTitle() ?></h3>
+	                </a>
+                    <?php if ($buttonEnabled) { ?>
+	                    <a class="btn-link" href="<?= $profile->getUrl() ?>" title="<?= $this->escapeHtml($profile->getTitle()) ?>">
+	                        <img src="<?= $dataHelper->getImageProfileTitleButtonProductPage() ?>" alt="">
+	                    </a>
+	                <?php } ?>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php } ?>

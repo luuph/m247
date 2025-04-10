@@ -82,12 +82,18 @@ class Address
         $subject,
         AddressInterface $customerAddress
     ) {
+        $writer = new \Zend_Log_Writer_Stream(BP . '/var/log/custom.log');
+                $logger = new \Zend_Log();
+                $logger->addWriter($writer);
         try {
             if (is_array($customerAddress->getCustomAttributes())
                 && count($customerAddress->getCustomAttributes()) === 0) {
+                    $logger->info('if 1');
                 $attributes = $this->checkoutSession->getCustomerAttributesAddress();
+                $logger->info('attributes: ' . print_r($attributes, true));
                 if (is_array($attributes)) {
                     foreach ($attributes as $attribute) {
+                        $logger->info('attribute value: ' . print_r($attribute, true));
                         if (isset($attribute["value"]) && isset($attribute["attribute_code"])) {
                             $customerAddress->setCustomAttribute($attribute["attribute_code"], $attribute["value"]);
                         }

@@ -1,0 +1,14 @@
+Legend
+
++ Features
+- Bugs
+
+-------------------------------- Version 4.0.1 --------------------------------------
+    + Compatible with Magento 2.4.7 and PHP 8.3
+    + Added validation to upload image.
+    + Compatible with multi stores.
+
+-------------------------------- Version 4.0.0 --------------------------------------
+    + Allows the frontend users to search the products using the related images of the product.
+    + User is able to search using the searchbar and advanced search on the front end.
+    + Also allows to search using the graphql product API.

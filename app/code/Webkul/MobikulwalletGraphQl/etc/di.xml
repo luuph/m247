@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MobikulwalletGraphQl
+ * @author    Webkul Software Private Limited
+ * @copyright Copyright (c)Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Webkul\MobikulApiGraphQl\Model\Resolver\Customer\OrderList">
+        <plugin name="MobikulwalletGraphQlOrderListAfterPlugin" type="Webkul\MobikulwalletGraphQl\Plugin\Model\Resolver\Customer\OrderList" sortOrder="2"/>
+    </type>
+    <type name="Webkul\MobikulApiGraphQl\Model\Resolver\Customer\OrderDetails">
+        <plugin name="MobikulwalletGraphQlOrderDetailsAfterPlugin" type="Webkul\MobikulwalletGraphQl\Plugin\Model\Resolver\Customer\OrderDetails" sortOrder="2"/>
+    </type>
+    <type name="\Webkul\MobikulApiGraphQl\Model\Resolver\Checkout\UpdateCart">
+        <plugin name="Webkul_MobikulwalletGraphQl::beforeUpdateCart" type="Webkul\MobikulwalletGraphQl\Plugin\Model\Resolver\Checkout\UpdateCart" sortOrder="1"/>
+    </type>
+    <type name="\Webkul\MobikulApiGraphQl\Model\Resolver\Checkout\AddToCart">
+        <plugin name="Webkul_MobikulwalletGraphQl::beforeAddToCart" type="Webkul\MobikulwalletGraphQl\Plugin\Model\Resolver\Checkout\AddToCart" sortOrder="1"/>
+    </type>
+    <type name="\Webkul\MobikulApiGraphQl\Model\Resolver\Customer\ReOrder">
+        <plugin name="Webkul_MobikulwalletGraphQl::beforeReOrder" type="Webkul\MobikulwalletGraphQl\Plugin\Model\Resolver\Customer\ReOrder" sortOrder="1"/>
+    </type>
+    <type name="\Webkul\MobikulApiGraphQl\Model\Resolver\Customer\WishlistToCart">
+        <plugin name="Webkul_MobikulwalletGraphQl::beforeWishlistAddToCart" type="Webkul\MobikulwalletGraphQl\Plugin\Model\Resolver\Customer\WishlistAddToCart" sortOrder="1"/>
+    </type>
+    <type name="\Webkul\MobikulApiGraphQl\Model\Resolver\Checkout\CartDetails">
+        <plugin name="Webkul_MobikulwalletGraphQl::afterGetCartDetails" type="Webkul\MobikulwalletGraphQl\Plugin\Model\Resolver\Checkout\GetCartDetails" sortOrder="1"/>
+    </type>
+    <type name="\Webkul\MobikulApiGraphQl\Model\Resolver\Checkout\PlaceOrder">
+        <plugin name="Webkul_MobikulwalletGraphQl::aroundPlaceOrder" type="Webkul\MobikulwalletGraphQl\Plugin\Model\Resolver\Checkout\PlaceOrder" sortOrder="2"/>
+    </type>
+
+    <preference for="Webkul\MobikulwalletGraphQl\Api\AccountdetailsInterface"
+                type="Webkul\MobikulwalletGraphQl\Model\Accountdetails" />
+    <preference for="Webkul\MobikulwalletGraphQl\Api\ResponseInterface"
+                type="Webkul\MobikulwalletGraphQl\Model\WalletResponse"/>
+</config>

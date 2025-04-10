@@ -1,0 +1,170 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_Shopbybrand
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+use Magento\Catalog\Block\Product\ProductList\Toolbar;
+use Magento\Framework\Escaper;
+
+/** @var Escaper $escaper */
+/** @var Toolbar $block */
+
+$uniqueId = '_' . uniqid();
+$additionalOptions = ['page' => 'p'];
+?>
+<script>
+    function initToolbar<?= /** @noEscape */  $uniqueId ?>() {
+        let loader = document.querySelector('.modal-view-brand #ln_overlay');
+        return {
+            options: <?= /* @noEscape */ $block->getWidgetOptionsJson($additionalOptions) ?>.productListToolbarForm || {},
+            getUrlParams: function () {
+                let decode = window.decodeURIComponent,
+                    urlPaths = this.options.url.split('?'),
+                    urlParams = urlPaths[1] ? urlPaths[1].split('&') : [],
+                    params = {},
+                    parameters, i;
+
+                for (i = 0; i < urlParams.length; i++) {
+                    parameters = urlParams[i].split('=');
+                    params[decode(parameters[0])] = parameters[1] !== undefined ?
+                        decode(parameters[1].replace(/\+/g, '%20')) :
+                        '';
+                }
+
+                return params;
+            },
+            getCurrentLimit: function () {
+                return this.getUrlParams()[this.options.limit] || this.options.limitDefault;
+            },
+            getCurrentPage: function () {
+                return this.getUrlParams()[this.options.page] || 1;
+            },
+            changeUrl(paramName, paramValue, defaultValue) {
+                let urlPaths = this.options.url.split('?'),
+                    baseUrl = urlPaths[0],
+                    paramData = this.getUrlParams(),
+                    currentPage = this.getCurrentPage(),
+                    newPage;
+
+                if (currentPage > 1 && paramName === this.options.limit) {
+                    newPage = Math.floor(this.getCurrentLimit() * (currentPage - 1) / paramValue) + 1;
+
+                    if (newPage > 1) {
+                        paramData[this.options.page] = newPage;
+                    } else {
+                        delete paramData[this.options.page];
+                    }
+                }
+
+                paramData[paramName] = paramValue;
+
+                if (this.options.post) {
+                    hyva.postForm({action: baseUrl, data: paramData, skipUenc: true});
+                } else {
+                    if (paramValue === defaultValue.toString()) {
+                        delete paramData[paramName];
+                    }
+                    paramData = Object.keys(paramData).length === 0
+                        ? ''
+                        : '?' + (new URLSearchParams(paramData));
+                    if(!loader) {
+                        location.href = baseUrl + paramData;
+                        return;
+                    }
+                    loader.style.display = 'block';
+                    fetch(baseUrl + paramData, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded',
+                                'X-Requested-With': 'XMLHttpRequest',
+                            },
+                        }
+                    ).then(response => {
+                        return response.json();
+                        }
+                    ).then(data => {
+                        let relatedProEl = document.querySelector('.related-product-modal-content');
+                        if(relatedProEl) {
+                            relatedProEl.innerHTML = data.products;
+                            hyva.activateScripts(relatedProEl);
+                        }
+                        loader.style.display = 'none';
+                    }).catch((e) => {
+                        console.log(e.error);
+                    })
+                }
+            },
+            initChangePage(el) {
+                let listPage = el.querySelectorAll('.pages .pages-items li a');
+                listPage.forEach(page =>{
+                    page.addEventListener('click',(e)=>{
+                        e.preventDefault();
+                       let url = e.currentTarget.href;
+                       if(url) {
+                           if(!loader) {
+                               location.href = url;
+                               return;
+                           }
+                           loader.style.display = 'block';
+                           fetch(url, {
+                                   method: 'POST',
+                                   headers: {
+                                       'Content-Type': 'application/x-www-form-urlencoded',
+                                       'X-Requested-With': 'XMLHttpRequest',
+                                   },
+                               }
+                           ).then(response => {
+                                   return response.json();
+                               }
+                           ).then(data => {
+
+                               let relatedProEl = document.querySelector('.related-product-modal-content');
+                               if(relatedProEl) {
+                                   relatedProEl.innerHTML = data.products;
+                                   hyva.activateScripts(relatedProEl);
+                               } else {
+                                   location.href = url
+                               }
+                               loader.style.display = 'none';
+                           }).catch((e) => {
+                               console.log(e.error);
+                           })
+                       }
+                    })
+                })
+            }
+        }
+    }
+</script>
+<?php if ($block->getCollection()->getSize()): ?>
+    <div x-data="initToolbar<?= /** @noEscape */ $uniqueId ?>()"
+         class="toolbar toolbar-products grid grid-cols-4 sm:grid-cols-8 md:grid-cols-4
+            lg:grid-cols-8  grid-flow-row gap-2 items-center"
+    x-init="initChangePage($el)">
+        <?php if ($block->getIsBottom()): ?>
+            <?= /** @noEscape */  $block->fetchView($block->getTemplateFile('Magento_Catalog::product/list/toolbar/amount.phtml')) ?>
+            <?= $block->getPagerHtml() ?>
+            <?= /** @noEscape */ $block->fetchView($block->getTemplateFile('Magento_Catalog::product/list/toolbar/limiter.phtml')) ?>
+        <?php else: ?>
+            <?php if ($block->isExpanded()): ?>
+                <?= /** @noEscape */ $block->fetchView($block->getTemplateFile('Magento_Catalog::product/list/toolbar/viewmode.phtml')) ?>
+                <?= /** @noEscape */ $block->fetchView($block->getTemplateFile('Magento_Catalog::product/list/toolbar/sorter.phtml')) ?>
+            <?php endif ?>
+        <?php endif ?>
+    </div>
+<?php endif ?>

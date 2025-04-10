@@ -1,0 +1,103 @@
+
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_Affiliate
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+/** @var Mageplaza\Affiliate\Block\Account\Commissionlogs\Commissions $block */
+$transactions = $block->getTransactions();
+?>
+<div class="box-account box-info box-affiliate box-affiliate-withdraw-transaction">
+        <h2 class="legend"><?= /* @noEscape */ __('Commission Logs') ?></h2>
+
+    <table class="data-table" id="affiliate-withdraws-history">
+        <thead>
+        <tr>
+            <th class="col requested_at"><?= /* @noEscape */ __('Time') ?></th>
+            <th class="col amount"><?= /* @noEscape */ __('Campaigns') ?></th>
+            <th class="col fee"><?= /* @noEscape */ __('Status') ?></th>
+            <th class="col payment_method"><?= /* @noEscape */ __('Customer Ordered') ?></th>
+            <th class="col payment_method"><?= /* @noEscape */ __('Product') ?></th>
+            <th class="col status"><?= /* @noEscape */ __('Total sales') ?></th>
+            <th class="col action"><?= /* @noEscape */ __('Commission') ?></th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php if (count($transactions)) : ?>
+            <?php foreach ($transactions as $transaction) : ?>
+                <tr>
+                    <td class="col">
+                        <span class="nobr"><?= /* @noEscape */ $block->formatDate($transaction->getCreatedAt(), \IntlDateFormatter::MEDIUM, false) ?></span>
+                    </td>
+                    <td class="col a-right">
+                        <span class="price"><?= /* @noEscape */ $block->getCampaignName($transaction->getCampaignId()) ?></span>
+                    </td>
+                    <td class="col a-right">
+                        <span class="price"><?= /* @noEscape */ $transaction->getStatusLabel() ?></span>
+                    </td>
+                    <td class="col"><?= /* @noEscape */ $block->getCustomerOrdered($transaction->getOrderIncrementId()) ?></td>
+                    <td class="col"><?= /** @noEscape */ $block->getProductName($transaction->getProductSku()) ?></td>
+                    <td class="col"><em><?= /* @noEscape */ $block->getOrder($transaction->getOrderIncrementId(),$transaction->getOrderItemId() ) ?></em></td>
+                    <td class="col">
+                        <?= /* @noEscape */ $block->formatPrice($transaction->getAmount()) ?>
+                    </td>
+                </tr>
+            <?php endforeach ?>
+        <?php else : ?>
+            <tr>
+                <td colspan="7">
+                    <span><?= /* @noEscape */ __('No withdraw found!') ?></span>
+                </td>
+            </tr>
+        <?php endif; ?>
+        </tbody>
+    </table>
+    <?= /* @noEscape */ $block->getPagerHtml() ?>
+</div>
+<script>
+    require(['jquery', 'mage/apply/main'], function ($,mage) {
+        $(document).ready(function () {
+            $('#reports_sales #limiter').on('change', function (event) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                let selectedValue = $(this).val();
+                $.ajax({
+                    showLoader: true,
+                    url: selectedValue + '&type=sales',
+                    type: "GET"
+                }).done(function (data) {
+                    $('#reports_sales').html(data.html);
+                });
+            });
+
+            $('#reports_sales .items.pages-items .item a').on('click', function (event) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                let selectedValue = $(this).attr('href'); // Use attr('href') to get the href attribute
+                $.ajax({
+                    showLoader: true,
+                    url: selectedValue + '&type=sales',
+                    type: "GET"
+                }).done(function (data) {
+                    $('#reports_sales').html(data.html);
+                });
+            });
+        });
+    });
+</script>

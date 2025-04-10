@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="customer_register_success">
+        <observer name="sms_customer_register_success" instance="Magecomp\Whatsappultimate\Observer\Customer\RegisterSuccessObserver" />
+    </event>
+    <event name="controller_action_predispatch_checkout_index_index">
+        <observer name="sms_before_checkout" instance="Magecomp\Whatsappultimate\Observer\Customer\CheckoutLoadObserver" />
+    </event>
+    <event name="checkout_onepage_controller_success_action">
+        <observer name="sms_sales_order_save_after" instance="Magecomp\Whatsappultimate\Observer\Customer\OrderSaveObserver" />
+    </event>
+    <event name="multishipping_checkout_controller_success_action">
+        <observer name="sms_multishipping_observer" instance="Magecomp\Whatsappultimate\Observer\Customer\MultiShippingPlaceOrder"/>
+    </event>
+    <event name="sales_order_invoice_save_after">
+        <observer name="sms_sales_order_invoice_save_after" instance="Magecomp\Whatsappultimate\Observer\Customer\InvoiceSaveObserver" />
+    </event>
+    <event name="sales_order_shipment_save_after">
+        <observer name="sms_sales_order_shipment_save_after" instance="Magecomp\Whatsappultimate\Observer\Customer\ShipmentSaveObserver" />
+    </event>
+    <event name="sales_order_creditmemo_save_after">
+        <observer name="sms_sales_order_creditmemo_save_after" instance="Magecomp\Whatsappultimate\Observer\Customer\CreditmemoSaveObserver" />
+    </event>
+    <event name="controller_action_postdispatch_contact_index_post">
+        <observer name="sms_contact_index_post" instance="Magecomp\Whatsappultimate\Observer\Customer\ContactPostObserver" />
+    </event>
+</config>

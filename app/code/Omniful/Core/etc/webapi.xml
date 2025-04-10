@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <!-- STORE APIs -->
+    <route url="/V2/store/info" method="GET">
+        <service class="Omniful\Core\Api\Store\InfoInterface" method="getStoreInfo"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- Update Config -->
+    <route url="/V2/omniful/config" method="GET">
+        <service class="Omniful\Core\Api\Config\ConfigurationsInterface" method="getOmnifulConfigs"/>
+        <resources>
+            <resource ref="Magento_Config::config_admin" />
+        </resources>
+    </route>
+    <route url="/V2/store/config" method="PUT">
+        <service class="Omniful\Core\Api\Config\ConfigurationsInterface" method="updateConfig"/>
+        <resources>
+            <resource ref="Magento_Config::config_admin" />
+        </resources>
+    </route>
+
+    <!-- STOCK SOURCE -->
+    <route url="/V2/stock/sources" method="GET">
+        <service class="Omniful\Core\Api\Stock\StockSourcesInterface" method="getStockSources"/>
+        <resources>
+            <resource ref="Magento_Config::catalog_inventory" />
+        </resources>
+    </route>
+
+    <!-- CATEGORY APIs -->
+    <route url="/V2/categories" method="GET">
+        <service class="Omniful\Core\Api\Catalog\CategoryInterface" method="getCategories" />
+        <resources>
+            <resource ref="Magento_Catalog::categories" />
+        </resources>
+    </route>
+    <route url="/V2/category/:id" method="GET">
+        <service class="Omniful\Core\Api\Catalog\CategoryInterface" method="getCategoryById" />
+        <resources>
+            <resource ref="Magento_Catalog::categories" />
+        </resources>
+    </route>
+
+    <!-- PRODUCT APIs -->
+    <route url="/V2/products" method="GET">
+        <service class="Omniful\Core\Api\Catalog\ProductInterface" method="getProducts" />
+        <resources>
+            <resource ref="Magento_Catalog::products" />
+        </resources>
+    </route>
+    <route url="/V2/product/:identifier" method="GET">
+        <service class="Omniful\Core\Api\Catalog\ProductInterface" method="getProductByIdentifier" />
+        <resources>
+            <resource ref="Magento_Catalog::products" />
+        </resources>
+    </route>
+    <route url="/V2/product/stock" method="PUT">
+        <service class="Omniful\Core\Api\Catalog\ProductInterface" method="updateProductsInventory" />
+        <resources>
+            <resource ref="Magento_Catalog::products" />
+        </resources>
+    </route>
+    <route url="/V2/product/bulk/stock" method="PUT">
+        <service class="Omniful\Core\Api\Catalog\ProductInterface" method="updateBulkProductsInventory" />
+        <resources>
+            <resource ref="Magento_Catalog::products" />
+        </resources>
+    </route>
+
+    <route url="/V2/product/stock/source" method="PUT">
+        <service class="Omniful\Core\Api\Catalog\ProductInterface" method="updateProductsInventorySource" />
+        <resources>
+            <resource ref="Magento_Catalog::products" />
+        </resources>
+    </route>
+
+    <route url="/V2/product/bulk/stock/source" method="PUT">
+        <service class="Omniful\Core\Api\Catalog\ProductInterface" method="updateBulkProductsInventorySource" />
+        <resources>
+            <resource ref="Magento_Catalog::products" />
+        </resources>
+    </route>
+
+    <!-- ORDER APIs -->
+    <route url="/V2/orders" method="GET">
+        <service class="Omniful\Core\Api\Sales\OrderInterface" method="getOrders"/>
+        <resources>
+            <resource ref="Magento_Sales::products" />
+        </resources>
+    </route>
+    <route url="/V2/order/:id" method="GET">
+        <service class="Omniful\Core\Api\Sales\OrderInterface" method="getOrderById"/>
+        <resources>
+            <resource ref="Magento_Sales::products" />
+        </resources>
+    </route>
+    <route url="/V2/order/:id/status" method="PUT">
+        <service class="Omniful\Core\Api\Sales\StatusInterface" method="processUpdateOrder"/>
+        <resources>
+            <resource ref="Magento_Sales::products" />
+        </resources>
+    </route>
+    <route url="/V2/order/:id/tracking/info" method="POST">
+        <service class="Omniful\Core\Api\Sales\ShipmentInterface" method="processShipment"/>
+        <resources>
+            <resource ref="Magento_Sales::products" />
+        </resources>
+    </route>
+    <route url="/V2/order/:id/cancel" method="POST">
+        <service class="Omniful\Core\Api\Sales\CancelInterface" method="processCancel"/>
+        <resources>
+            <resource ref="Magento_Sales::products" />
+        </resources>
+    </route>
+    <route url="/V2/order/:id/refund" method="POST">
+        <service class="Omniful\Core\Api\Sales\RefundInterface" method="processRefund"/>
+        <resources>
+            <resource ref="Magento_Sales::products" />
+        </resources>
+    </route>
+</routes>

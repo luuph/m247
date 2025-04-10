@@ -150,7 +150,6 @@ class AutoGenerateCode implements ObserverInterface
     public function execute(Observer $observer)
     {
         $order = $observer->getOrder();
-        $payment = $order->getPayment();
         $invoice = $observer->getEvent()->getInvoice();
         $data = [];
         $storeId = $invoice->getStoreId();
@@ -167,6 +166,10 @@ class AutoGenerateCode implements ObserverInterface
                 $amount = $this->configurationHelper->renderAmount($infoBuyRequest);
                 $product = $this->productRepository->getById($orderItem->getProductId());
                 $data['amount'] = $amount;
+                if (!$amount && $product->getTypeId() == "bss_giftcard") {
+                    $amount = $item->getBasePrice();
+                    $data['amount'] = $amount;
+                }
                 $patternId = $product->getBssGiftCardCodePattern();
                 $codeModel = $this->codeFactory->create();
                 $pattern = $this->loadPattern($patternId);
@@ -212,7 +215,7 @@ class AutoGenerateCode implements ObserverInterface
                     $patterns[] = $pattern;
                     $datas[] = $data;
                     $varses[] = $vars;
-                    if (!$data['order_id'] && $payment->getMethod() !== "paypal_express") {
+                    if (!$data['order_id']) {
                         $order->setPatterns($patterns);
                         $order->setCustomDatas($datas);
                         $order->setVarses($varses);

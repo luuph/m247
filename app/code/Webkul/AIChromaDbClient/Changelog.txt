@@ -1,0 +1,11 @@
+Legend
+
+- Bugs
++ Features
+
+-------------------------------- Version 4.0.0 --------------------------------------
+    + Compatible with Magento 2.4.7 and PHP 8.3
+    + Connect with Chroma Database Server.
+    + Connect with LLM Server.
+    + Create and Manage Collection of Chroma Database.
+    + Create Text and Image Embedding using the LLM.

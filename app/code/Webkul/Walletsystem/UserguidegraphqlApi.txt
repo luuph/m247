@@ -1,0 +1,769 @@
+Module's blog url: https://webkul.com/blog/wallet-system-for-magento2/
+
+Graph QL API
+
+For Testing can use the application 'Altair GraphQL' :- https://altair.sirmuel.design/ or Postman
+
+End point :  https://<your store url>/graphql
+
+
+# To Get Authentication Token :
+
+Request:
+
+    mutation {
+        generateCustomerToken(
+            email: <Enter Register Email ID>
+            password: <Enter the Password>
+        ) {
+            token
+        }
+    }
+
+Response: 
+
+{
+    "data": {
+        "generateCustomerToken": {
+            "token": <Get Token>
+        }
+    }
+}
+
+1.List of LastTransaction of wallet
+
+Request:
+
+query {
+  lasttransactions(customerId:<customerId>) {
+    reference
+    debit
+    credit
+    status
+  }
+}
+
+Response:
+
+{
+    "data": {
+        "lasttransactions": [
+            {
+                "reference": <reference ID>,
+                "debit": "<Debit Amount If Purchase Somthing From The Wallet Amount>",
+                "credit": "<Credit Amount If Add Amount To The Wallet>",
+                "status": <Status:Pending,Approve,Cancel>
+            }
+        ]
+    }
+}
+
+2.List of ViewTransaction 
+
+Request:
+
+query {
+  viewtransactions(customerId: <customerId>, entityId: <ID>) {
+    Amount
+    Action
+    Reference
+    Transaction_At
+    Transaction_note
+    Transaction_Status
+    Payment_Method
+  }
+}
+
+Response:
+
+{
+    "data": {
+        "viewtransactions": {
+            "Amount": <Amount>,
+            "Action": <Credit,Debit>,
+            "Reference":<Order ID>,
+            "Transaction_At": <Transaction Date>,
+            "Transaction_note": <Transaction Note>,
+            "Transaction_Status": <Status:Pending,Approve,Cancel>,
+            "Payment_Method": <Payment Method>
+        }
+    }
+}
+
+3.List of View Account Details:
+
+Request:
+
+query {
+  viewaccountdetails(customerId: <customerId>) {
+    Ac_Holder_Name                            
+    Ac_Number
+    Bank_Name
+    Bank_Code
+    Additional_Information
+  }
+}
+
+Response:
+
+{
+    "data": {
+        "viewaccountdetails": [
+            {
+                "Ac_Holder_Name": <Account Holder Name>,
+                "Ac_Number": <Account Number>,
+                "Bank_Name": <Bank Name>,
+                "Bank_Code": <Bank Code>,
+                "Additional_Information": <Additional Information Here>
+            },
+            {
+                "Ac_Holder_Name": <Account Holder Name>,
+                "Ac_Number": <Account Number>,
+                "Bank_Name": <Bank Name>,
+                "Bank_Code": <Bank Code>,
+                "Additional_Information": <Additional Information Here>
+            }
+        ]
+      }
+}
+
+4.List of AddedPayees:
+
+Request:
+
+query {
+  addedpayeeslist(customerId: <customerId>) {
+    Nick_name
+    Email_address
+    Status
+  }
+}
+
+Response:
+
+{
+    "data": {
+        "addedpayeeslist": [
+            {
+                "Nick_name": <NickName>,
+                "Email_address": <EmailAddress>,
+                "Status": <Status:(Pending,Approve,Cancel)>
+            }
+        ]
+    }
+}
+
+
+5.Add Customer Account Detail:
+
+Request:
+
+mutation {
+  customerAddAccountDetail(
+      customerId: <Enter Here Customer ID>,
+      acholderName: <Enter Account Holder Name>,
+      acNumber: <Enter Account Number>,
+      bankName: <Enter Bank Name>,
+      bankCode: <Enter Bank Code>
+      additionalInformation: <Add Additional Information>
+  ){
+      message
+  }
+}
+
+Response:
+
+{
+    "data": {
+        "customerAddAccountDetail": {
+            "message": "Account Information Saved Successfully"
+        }
+    }
+}
+
+
+6.Submit Request To Admin To Delete Account:
+
+Request:
+
+mutation {
+  customerrequestdeleteaccount(
+      entityId: < Customer ID>
+  ){
+      message
+  }
+}
+
+Response:
+
+{
+    "data": {
+        "customerrequestdeleteaccount": {
+            "message": "Request Has Been Submitted To Admin"
+        }
+    }
+}
+
+7.Add Payee:
+
+Request:
+
+mutation {
+  addpayee(
+      customerId: <Customer ID>,
+      nickName:<NickName>,
+      customerEmail:<Customer Email ID That You Want To Add>,
+      confirmEmail: <Confirm Customer Email ID>
+  ){
+      message
+  }
+}
+
+Response:
+
+ (1) If Payee Added Successfully:
+        {
+            "data": {
+                "addpayee": {
+                    "message": "Payee <Email_address> is added in your list"
+                }
+            }
+        }
+
+ (2) If Payee Already Added:
+        {
+            "data": {
+                "addpayee": {
+                    "message": "Customer with  <Email_address> email address id already present in payee list"
+                }
+            }
+        }
+
+(3) If No Customer Found With Email Address :
+        {
+            "data": {
+                "addpayee": {
+                    "message": "No customer found with email address <Email_address>"
+                }
+            }
+        }
+
+
+8.To Add Amount in the Wallet:
+
+Request:
+
+#Note : Please add the Authentication Token before execute
+
+mutation {
+  addVirtualProductsToCart(
+    input: {
+      cart_id: "H6gNCxOO0JzRoyUGYqzlI2mM51ytV0kE", => [To Get Cart_id Check Below GraphQL API No:9]
+      cart_items: [
+        {
+          data: {
+            quantity: 1              => [Change the qty according your requirement]
+            sku: "wk_wallet_amount"  => [Use Sku : wk_wallet_amount]
+          }
+        }
+       ]
+    }
+  ) {
+    cart {
+      items {
+        product {
+          name
+        }
+        quantity
+      }
+      prices {
+        grand_total {
+          value
+          currency
+        }
+      }
+    }
+  }
+}
+
+
+Response:
+
+
+{
+    "data": {
+        "addVirtualProductsToCart": {
+            "cart": {
+                "items": [
+                    {
+                        "product": {
+                            "name": "Wallet Amount"
+                        },
+                        "quantity": 1
+                    }
+                ],
+                "prices": {
+                    "grand_total": {
+                        "value": 10,
+                        "currency": "USD"
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+9. To Get Cart_id:
+
+Request :
+
+#Note : Please add the Authentication Token before execute
+
+{
+  customerCart{
+    id
+    email
+    items{
+      id
+      quantity
+      product{
+        id
+        sku
+        name
+      }
+      }
+    }
+  }
+
+  Response :
+
+  {
+    "data": {
+        "customerCart": {
+            "id": "H6gNCxOO0JzRoyUGYqzlI2mM51ytV0kE",
+            "email": <Email ID>,
+            "items": []
+        }
+    }
+}
+
+10. Transfer Amount To The Bank Account
+
+Request :
+
+mutation {
+  transferamounttobankaccount(
+    customerId: < customer Id>
+    amount:<Enter Amount That Want To Send>
+    bankDetailsId:<Transfer Account ID >,
+    walletnote:"<Add Wallet Note>
+  ) {
+    message
+  }
+}
+
+Response :
+   {
+    "data": {
+        "transferamounttobankaccount": {
+            "message": "Amount transfer request has been sent!"
+        }
+    }
+}
+
+11. Admin See Individual Customer Wallet Details
+
+Request:
+
+query {
+  admincustomerwallentdetail(customerId: 3) {
+    Reference
+    Amount
+    Action
+    TransactionAt
+    Note
+    Status
+  }
+}
+
+Response :
+
+{
+    "data": {
+        "admincustomerwallentdetail": [
+            {
+                "Reference": "Wallet amount transferred to bank",
+                "Amount": "20.0000",
+                "Action": "debit",
+                "TransactionAt": "2023-02-15 06:14:11",
+                "Note": "Transfer amount 20 to Customer",
+                "Status": "Pending"
+            }
+        ]
+    }
+}
+
+12. Admin See All Customer Wallet Details
+
+Request:
+
+query {
+  adminallcustomerwallent{
+    CustomerName
+    TotalAmount
+    RemainingAmount
+    UsedAmount
+    ModifyAt
+  }
+}
+
+Response :
+
+{
+    "data": {
+        "adminallcustomerwallent": [
+            {
+                "CustomerName": < Customer Name >,
+                "TotalAmount": "110.0000",
+                "RemainingAmount": "60.0000",
+                "UsedAmount": "50.0000",
+                "ModifyAt": "2023-02-15 06:14:11"
+            }
+        ]
+    }
+}
+
+13. Admin Approve The Transaction
+
+Request:
+
+  mutation {
+  adminapprovetransferamount(
+    entityId: < Enter The Transaction Id >
+  ) {
+    message
+  }
+}
+
+Response :
+
+{
+    "data": {
+        "adminapprovetransferamount": {
+            "message": "Transaction status is updated."
+        }
+    }
+}
+
+14. Admin Cancel The Transaction
+
+  Request:
+     
+     mutation {
+        admincanceltransactionamount(
+          transactionId: <Transaction Id>
+          reason:"On the request of Cancellation"
+        ) {
+          message
+        }
+     }
+
+ Response :
+
+    {
+      "data": {
+          "admincanceltransactionamount": {
+              "message": "Transaction status is updated."
+          }
+      }
+    }    
+
+15. Adjust Amount To Wallet
+
+     Request:
+
+      mutation {
+        adjustamounttowallet(
+          customerIds:"1,2,3,4" => <Pass Customer IDs in string comma format> 
+          walletamount:100  => <Adjust Amount >
+          walletactiontype:"debit"  => <Wallet Action Type : debit or credit>
+          walletnote:"Note for the transaction"  => < Add the wallet note>
+        ) {
+          message
+        }
+      }
+    
+    Response:
+
+      {
+    "data": {
+        "adjustamounttowallet": {
+            "message": "Total of'.4.' Customer(s) wallet are updated"
+        }
+    }
+}
+     
+
+16. Add / Edit and Delete Credit Rule
+
+   Request:
+
+    mutation {
+      adminsavedeletecreditrules(
+          deleteCreditRule:0 => <Set value = 0 if not delete && value = 1 if delete>,  
+          entityId:0 => <Credit Rule Id set 0 for Add New Credit rule && value > 0 then Update and Delete>
+          basedOn:0 => <Set basedOn value = 0 for Card && 1 for Product> 
+          amount:90  => <Cashback Amount>
+          minimumAmount:70 => <Minimum Amount value>
+          startDate: "2023-02-17" => <Start Date of Credit Rule> <Date format :yyyy-mm-dd >
+          endDate: "2023-02-20" => <End Date of Credit Rule>  <Date format :yyyy-mm-dd >
+          status:1 => <Set Status 1 for Enable && 0 for Disable> 
+      ) {
+        message
+      }
+   }
+
+   Response:
+
+   # For Delete :
+   {
+    "data": {
+        "adminsavecreditrules": {
+            "message": "Credit Rule successfully deleted."
+        }
+     }
+   }
+  # For Save && Update :
+  
+   {
+    "data": {
+        "adminsavecreditrules": {
+            "message": "Credit Rule successfully saved."
+        }
+    }
+}
+
+17. Admin Wallent Added Payees List
+
+    Request:
+
+      query {
+        adminwallentpayeelist{
+          CustomerName
+          PayeeCustomerName
+          PayeeCustomerEmail
+          Status
+        }
+      }
+
+    Response:
+
+      {
+    "data": {
+        "adminwallentpayeelist": [
+            {
+                "CustomerName": <Customer Name>,
+                "PayeeCustomerName":<Payee Customer Name>,
+                "PayeeCustomerEmail":<Payee Customer Email>,
+                "Status": <Status>
+            }
+        ]
+    }
+ }
+
+ 18. Admin Confirm Wallet Order
+
+   Request : 
+
+    mutation {
+        adminconfirmwalletorder
+        (
+          orderId:<Add Order Id>
+        ){
+          message
+        }
+   }
+
+   Response :
+
+    {
+    "data": {
+        "adminconfirmwalletorder": {
+            "message": "Wallet Amount Updated"
+        }
+    }
+}
+
+19. Admin Customer Bank Account Details
+
+  Request:
+
+    query {
+    admincustomeraccountdetails{
+      CustomerName
+      CustomerEmail
+      HolderName
+      BankName
+      AdditionalInformation
+      BankCode
+      RequestForDelete
+    }
+  }
+
+  Response:
+
+    {
+    "data": {
+        "admincustomeraccountdetails": [
+            {
+                "CustomerName": "<CustomerName>",
+                "CustomerEmail": "<CustomerEmail>",
+                "HolderName": "Test Webkul Demo",
+                "BankName": "State Bank of India",
+                "AdditionalInformation": "Additional Information \r\n",
+                "BankCode": "123121",
+                "RequestForDelete": "No"
+            },
+            {
+                "CustomerName": "Test",
+                "CustomerEmail": "testdemo@gmail.com",
+                "HolderName": "Test New Account",
+                "BankName": "Bank of India",
+                "AdditionalInformation": "Bank of India Bank of India",
+                "BankCode": "589568",
+                "RequestForDelete": "No"
+            }
+        ]
+    }
+}
+
+20 . show the Wallet payment option in checkout as the website
+
+    Request :
+
+      query {
+        walletpaymentcheckoutpage(
+            customerId:<CustomerID> => 2
+            productPrice:<Price of Product> => 61
+            ) {
+          PaymentToBeMade
+          AmountInYourWallet
+          RemainingAmount
+          LeftAmountTobePaid
+        }
+     }
+
+     Response : 
+
+        {
+          "data": {
+              "walletpaymentcheckoutpage": {
+                  "PaymentToBeMade": "61",
+                  "AmountInYourWallet": "100.0000",
+                  "RemainingAmount": "39",
+                  "LeftAmountTobePaid": "0"
+              }
+          }
+      }
+
+ 21 .  API for deleting "Payee " 
+
+  Request:
+
+    mutation {
+      deletePayee(
+          payeeId:3
+          ) {
+        message
+      }
+    }
+
+    Response :
+
+    {
+    "data": {
+        "deletePayee": {
+            "message": "Payee is successfully deleted"
+        }
+    }
+   }
+
+   23 . Generate the code for transfer Amount " 
+
+
+Request:
+
+   mutation {
+  sendcodetransferamount(
+      senderId:3 
+      receiverId:2 
+      amount:10
+      walletnote:"Test Api to send amount"
+      ) {
+    transfercode
+    message
+  }
+}
+
+Response:
+
+{
+    "data": {
+        "sendcodetransferamount": {
+            "transfercode": 362634,
+            "message": "Code has been successfully generated"
+        }
+    }
+}
+
+23 . Transfer Amount To Payee
+
+Request :
+
+mutation {
+  sendtransferamount(
+      senderId:3
+      receiverId:2
+      amount:10
+      baseAmount:10
+      code:387045
+      ) {
+    transfercode
+    message
+  }
+}
+
+
+Response :
+
+{
+    "data": {
+        "sendtransferamount": {
+            "message": "Amount transferred successfully"
+        }
+    }
+}
+
+24 . Add Amount to Wallent:
+
+Request :
+
+ mutation {
+  addamounttowallet(
+      qty:3
+      price:2
+      ) {
+    message
+  }
+}
+
+Response :
+
+{
+    "data": {
+        "addamounttowallet": {
+            "message": "Wallet Amount Added Successfully"
+        }
+    }
+}

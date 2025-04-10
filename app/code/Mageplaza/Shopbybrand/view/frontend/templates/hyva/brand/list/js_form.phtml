@@ -1,0 +1,60 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_Shopbybrand
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+?>
+<script>
+    function initMpFormAddToCart(el) {
+        return {
+            isLoading: false,
+            addToCart() {
+                let formData = new FormData(el),
+                    url = el.action;
+                this.isLoading = true;
+                fetch(url, {
+                    method: "POST",
+                    headers: {
+                        "X-Requested-With": "XMLHttpRequest"
+                    },
+                    body: formData,
+                    mode: "cors",
+                    credentials: "include"
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        debugger;
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    return response.json()
+                }).then(res => {
+                    window.dispatchEvent(new CustomEvent('reload-customer-section-data'));
+                    setTimeout(() =>{
+                        window.dispatchEvent(new Event('clear-messages'))
+                    }, 3000)
+
+                })
+                .catch(error => {
+                    console.log(error.message);
+                }).finally(()=>{
+                    this.isLoading = false;
+                });
+            }
+        };
+    }
+</script>

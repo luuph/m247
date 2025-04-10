@@ -1,0 +1,218 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_Affiliate
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+?>
+<?php
+/** @var Mageplaza\Affiliate\Block\Account\Banner $block */
+
+$affiliateHelper = $block->getAffiliateHelper();
+(!!$block->getEnabledBanner());
+?>
+<?php if (!!$block->getEnabledBanner()): ?>
+    <div id="accordion" data-mage-init='{
+        "accordion":{
+            "active": [0],
+            "collapsible": true,
+            "openedState": "active",
+            "multipleCollapsible": false,
+              "icons": {"header": "plus", "activeHeader": "minus"}
+        }}'>
+        <div data-role="collapsible">
+            <div data-role="trigger" style="position: relative">
+                <h2 style="padding-bottom: 10px; border-bottom: 1px solid #c6c6c6">Affiliates Links</h2>
+                <div class="icon-up">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="14" cy="14" r="11.5" stroke="#333333"/>
+                        <g clip-path="url(#clip0_511_1577)">
+                            <path d="M10.175 16.841L14 13.0243L17.825 16.841L19 15.666L14 10.666L9 15.666L10.175 16.841Z"
+                                  fill="#333333"/>
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_511_1577">
+                                <rect width="20" height="20" fill="white" transform="translate(4 4)"/>
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="icon-down">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="14" cy="14" r="11.5" stroke="#333333"/>
+                        <g clip-path="url(#clip0_511_2291)">
+                            <path d="M10.175 11.1582L14 14.9749L17.825 11.1582L19 12.3332L14 17.3332L9 12.3332L10.175 11.1582Z"
+                                  fill="#333333"/>
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_511_2291">
+                                <rect width="20" height="20" fill="white" transform="translate(4 4)"/>
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <div data-role="content" id="affiliate_links">
+            <?= /* @noEscape */
+            $block->getChildHtml('affiliate.account.banner.affiliate_links') ?>
+        </div>
+        <div data-role="collapsible" style="margin-top: 25px">
+            <div data-role="trigger" style="position: relative">
+                <h2 style="padding-bottom: 10px; border-bottom: 1px solid #c6c6c6">Banners</h2>
+                <div class="icon-up">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="14" cy="14" r="11.5" stroke="#333333"/>
+                        <g clip-path="url(#clip0_511_1577)">
+                            <path d="M10.175 16.841L14 13.0243L17.825 16.841L19 15.666L14 10.666L9 15.666L10.175 16.841Z"
+                                  fill="#333333"/>
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_511_1577">
+                                <rect width="20" height="20" fill="white" transform="translate(4 4)"/>
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="icon-down">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="14" cy="14" r="11.5" stroke="#333333"/>
+                        <g clip-path="url(#clip0_511_2291)">
+                            <path d="M10.175 11.1582L14 14.9749L17.825 11.1582L19 12.3332L14 17.3332L9 12.3332L10.175 11.1582Z"
+                                  fill="#333333"/>
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_511_2291">
+                                <rect width="20" height="20" fill="white" transform="translate(4 4)"/>
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <div data-role="content" style="display: none">
+            <?php try {
+                if ($block->getListCampaign() && $block->getListCampaign()->getSize()): ?>
+
+                    <div style="text-align: center;display: flex; justify-content: center"
+                         class="banner-affiliate-campaigns-list">
+                        <label style="font-weight:600; margin-right: 20px; padding-top: 5px"
+                               for="banner-affiliate-campaigns-list">Select Campaign </label>
+                        <div id="wrap_select_size">
+                            <?php if ($block->getListCampaign()->getSize() > 5): ?>
+                                <select style=" height: auto;max-width: 250px;text-overflow: ellipsis;"
+                                        id="banner-affiliate-campaigns-list"
+                                        onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();'
+                                >
+                                    <?php foreach ($block->getListCampaign() as $campaign) : ?>'
+                                        <option style="max-width: 250px;white-space: nowrap;overflow: hidden !important;text-overflow: ellipsis;"
+                                                value="<?= /* @noEscape */ $campaign->getId() ?>"><span><?= /* @noEscape */ $campaign->getName() ?></span>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
+                            <?php else: ?>
+                                <select style=" height: auto;max-width: 250px;text-overflow: ellipsis;"
+                                        id="banner-affiliate-campaigns-list"
+                                >
+                                    <?php foreach ($block->getListCampaign() as $campaign) : ?>'
+                                        <option style="max-width: 250px;white-space: nowrap;overflow: hidden !important;text-overflow: ellipsis;"
+                                                value="<?= /* @noEscape */ $campaign->getId() ?>"><span><?= /* @noEscape */ $campaign->getName() ?></span>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
+                            <?php endif ?>
+
+                        </div>
+
+                    </div>
+                <?php endif;
+            } catch (\Magento\Framework\Exception\LocalizedException $e) {
+            } ?>
+            <div id="content_banner">
+                <?= /* @noEscape */
+                $block->getChildHtml('affiliate.account.banner.banner') ?>
+            </div>
+
+        </div>
+    </div>
+<?php else: ?>
+    <div id="affiliate_links">
+        <?= /* @noEscape */
+        $block->getChildHtml('affiliate.account.banner.affiliate_links') ?>
+    </div>
+<?php endif ?>
+
+
+
+<style>
+    #accordion > div.active .icon-down {
+        display: none;
+    }
+
+    #accordion > div.active .icon-up {
+        display: block;
+    }
+
+    #accordion > div .icon-down {
+        display: block;
+        cursor: pointer;
+    }
+
+    #accordion > div .icon-up {
+        display: none;
+        cursor: pointer;
+    }
+
+    .icon-up {
+        position: absolute;
+        top: 0;
+        right: 10px;
+    }
+
+    .icon-down {
+        position: absolute;
+        top: 0;
+        right: 10px
+    }
+
+    #accordion > div h2:hover {
+        cursor: pointer;
+    }
+
+    #wrap_select_size select[size="5"] {
+        background: #ffffff;
+    }
+</style>
+<script type="text/javascript">
+
+
+    require(['jquery', 'mage/apply/main'], function ($, mage) {
+        $('#banner-affiliate-campaigns-list').on('change', function () {
+            var ajaxUrl = "<?= /* @noEscape */ $block->getUrl('affiliate/account/getContentBanner') ?>";
+            $.ajax({
+                showLoader: true,
+                url: ajaxUrl + '?campaign_id=' + this.value,
+                type: "GET"
+            }).done(function (data) {
+                $('#content_banner').html(data.html);
+                if (mage) {
+                    mage.apply();
+                }
+            });
+        });
+    });
+</script>

@@ -1,0 +1,234 @@
+{
+    "sales_order": {
+        "column": {
+            "purchase_point": true
+        }
+    },
+    "sales_order_grid": {
+        "column": {
+            "purchase_point": true
+        }
+    },
+    "mobikul_bannerimage": {
+        "column": {
+            "id": true,
+            "filename": true,
+            "status": true,
+            "type": true,
+            "pro_cat_id": true,
+            "store_id": true,
+            "sort_order": true,
+            "created_datetime": true,
+            "updated_datetime": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "mobikul_notification": {
+        "column": {
+            "id": true,
+            "title": true,
+            "content": true,
+            "type": true,
+            "filename": true,
+            "collection_type": true,
+            "filter_data": true,
+            "pro_cat_id": true,
+            "store_id": true,
+            "status": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "mobikul_featuredcategories": {
+        "column": {
+            "id": true,
+            "filename": true,
+            "category_id": true,
+            "store_id": true,
+            "sort_order": true,
+            "status": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "mobikul_userimage": {
+        "column": {
+            "id": true,
+            "profile": true,
+            "banner": true,
+            "customer_id": true,
+            "is_social": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "mobikul_categoryimages": {
+        "column": {
+            "id": true,
+            "icon": true,
+            "banner": true,
+            "smallbanner": true,
+            "category_id": true,
+            "category_name": true,
+            "store_id": true,
+            "status": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "mobikul_devicetoken": {
+        "column": {
+            "id": true,
+            "customer_id": true,
+            "token": true,
+            "email": true,
+            "os": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "mobikul_oauth_token": {
+        "column": {
+            "entity_id": true,
+            "customer_id": true,
+            "token": true,
+            "secret": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "MOBIKUL_OAUTH_TOKEN_CUSTOMER_ID_CUSTOMER_ENTITY_ENTITY_ID": true,
+            "PRIMARY": true
+        }
+    },
+    "mobikul_sales_order": {
+        "column": {
+            "id": true,
+            "order_id": true,
+            "real_order_id": true,
+            "store_id": true,
+            "customer_id": true,
+            "customer_name": true,
+            "order_total": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "mobikul_carouselimage": {
+        "column": {
+            "id": true,
+            "filename": true,
+            "type": true,
+            "title": true,
+            "pro_cat_id": true,
+            "status": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "mobikul_walkthrough": {
+        "column": {
+            "id": true,
+            "title": true,
+            "description": true,
+            "color_code": true,
+            "image": true,
+            "status": true,
+            "sort_order": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "mobikul_carousel": {
+        "column": {
+            "id": true,
+            "title": true,
+            "type": true,
+            "filename": true,
+            "color_code": true,
+            "images": true,
+            "image_ids": true,
+            "product_ids": true,
+            "store_id": true,
+            "status": true,
+            "sort_order": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "mobikul_cache": {
+        "column": {
+            "id": true,
+            "request_tag": true,
+            "api_name": true,
+            "e_tag": true,
+            "counter": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "mobikul_appcreator": {
+        "column": {
+            "id": true,
+            "layout_id": true,
+            "label": true,
+            "position": true,
+            "type": true,
+            "created_at": true,
+            "updated_at": true,
+            "website_id": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "mobikul_watchtoken": {
+        "column": {
+            "id": true,
+            "customer_id": true,
+            "firebase_id": true,
+            "encfirebase_id": true,
+            "qr_url": true,
+            "customer_token": true,
+            "os": true,
+            "status": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

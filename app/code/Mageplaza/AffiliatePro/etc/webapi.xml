@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_AffiliatePro
+ * @copyright   Copyright (c) Mageplaza (http://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+ -->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <!--=========================================== BANNER AFFILIATE =================================================-->
+    <route url="/V1/mpAffiliate/banners/:id" method="GET">
+        <service class="Mageplaza\AffiliatePro\Api\BannerRepositoryInterface" method="get"/>
+        <resources>
+            <resource ref="Mageplaza_Affiliate::affiliate"/>
+        </resources>
+    </route>
+    <route url="/V1/mpAffiliate/banners" method="GET">
+        <service class="Mageplaza\AffiliatePro\Api\BannerRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Mageplaza_Affiliate::affiliate"/>
+        </resources>
+    </route>
+    <route url="/V1/mpAffiliate/banners/:id" method="DELETE">
+        <service class="Mageplaza\AffiliatePro\Api\BannerRepositoryInterface" method="delete"/>
+        <resources>
+            <resource ref="Mageplaza_Affiliate::affiliate"/>
+        </resources>
+    </route>
+    <route url="/V1/mpAffiliate/mine/banners" method="GET">
+        <service class="Mageplaza\AffiliatePro\Api\BannerRepositoryInterface" method="getAffiliateBanner"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+    </route>
+</routes>

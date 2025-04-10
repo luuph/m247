@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magezon
+ *
+ * This source file is subject to the Magezon Software License, which is available at https://www.magezon.com/license.
+ * Do not edit or add to this file if you wish to upgrade the to newer versions in the future.
+ * If you wish to customize this module for your needs.
+ * Please refer to https://www.magezon.com for more information.
+ *
+ * @category  Magezon
+ * @package   Magezon_LookBook
+ * @copyright Copyright (C) 2021 Magezon (https://www.magezon.com)
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="mgz_lookbook_profile" resource="default" engine="innodb" comment="LookBook Table">
+        <column xsi:type="smallint" name="profile_id" padding="6" unsigned="false" nullable="false" identity="true" comment="Profile ID"/>
+        <column xsi:type="smallint" name="is_active" padding="6" unsigned="false" nullable="false" identity="false" default="1" comment="Is LookBook Active"/>
+        <column xsi:type="varchar" name="identifier" nullable="false" length="255" comment="LookBook String Identifier"/>
+        <column xsi:type="varchar" name="title" nullable="false" length="255" comment="LookBook Title"/>
+        <column xsi:type="text" name="description" nullable="true" comment="LookBook Description"/>
+        <column xsi:type="varchar" name="page_layout" nullable="false" length="255" default="empty" comment="Page Layout"/>
+        <column xsi:type="blob" name="marker" nullable="true" comment="List serialize marker"/>
+        <column xsi:type="varchar" name="image" nullable="true" length="255" comment="LookBook Image"/>
+        <column xsi:type="text" name="custom_layout_update_xml" nullable="true" comment="Custom layout update xml"/>
+        <column xsi:type="text" name="layout_type" nullable="true" comment="Layout type"/>
+        <column xsi:type="mediumtext" name="meta_title" nullable="true" comment="LookBook Meta Title"/>
+        <column xsi:type="mediumtext" name="meta_keywords" nullable="true" comment="Meta Keywords"/>
+        <column xsi:type="mediumtext" name="meta_description" nullable="true" comment="Meta Description"/>
+        <column xsi:type="mediumtext" name="conditions_serialized" nullable="true" comment="Conditions Serialized"/>
+        <column xsi:type="timestamp" name="creation_time" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Creation time LookBook"/>
+        <column xsi:type="timestamp" name="update_time" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Update time LookBook"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="profile_id"/>
+        </constraint>
+    </table>
+    <table name="mgz_lookbook_profile_product" resource="default" engine="innodb" comment="LOOKBOOK PROFILE PRODUCT">
+        <column xsi:type="smallint" name="profile_id" padding="6" unsigned="false" nullable="false" comment="Profile ID"/>
+        <column xsi:type="varchar" name="sku" length="255" nullable="true" comment="SKU"/>
+        <column xsi:type="int" name="position" padding="11" unsigned="false" nullable="false" identity="false"
+                default="0" comment="Position"/>
+        <constraint xsi:type="foreign" referenceId="MGZ_LOOKBOOK_PROFILE_PRODUCT_PROFILE_ID_MGZ_LOOKBOOK_PROFILE_PROFILE_ID"
+                    table="mgz_lookbook_profile_product"
+                    column="profile_id" referenceTable="mgz_lookbook_profile" referenceColumn="profile_id" onDelete="CASCADE"/>
+    </table>
+    <table name="mgz_lookbook_profile_store" resource="default" engine="innodb" comment="LOOKBOOK PROFILE STORE">
+        <column xsi:type="smallint" name="profile_id" padding="6" unsigned="false" nullable="false" comment="LookBook ID"/>
+        <column xsi:type="smallint" name="store_id" padding="5" nullable="false" unsigned="true" comment="Store ID"/>
+        <constraint xsi:type="foreign" referenceId="MGZ_LOOKBOOK_PROFILE_STORE_PROFILE_ID_MGZ_LOOKBOOK_PROFILE_PROFILE_ID" table="mgz_lookbook_profile_store"
+                    column="profile_id" referenceTable="mgz_lookbook_profile" referenceColumn="profile_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="MGZ_LOOKBOOK_STORE_PROFILE_ID_STORE_STORE_ID" table="mgz_lookbook_profile_store"
+                    column="store_id" referenceTable="store" referenceColumn="store_id" onDelete="CASCADE"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="profile_id"/>
+            <column name="store_id"/>
+        </constraint>
+    </table>
+    <table name="mgz_lookbook_category" resource="default" engine="innodb" comment="Category Table">
+        <column xsi:type="smallint" name="category_id" padding="6" unsigned="false" nullable="false" identity="true" comment="Category ID"/>
+        <column xsi:type="varchar" name="identifier" nullable="false" length="255" comment="Identifier"/>
+        <column xsi:type="varchar" name="title" nullable="false" length="255" comment="Category Title"/>
+        <column xsi:type="smallint" name="is_active" padding="6" unsigned="false" nullable="false" default="1" comment="Is Active"/>
+        <column xsi:type="smallint" name="position" padding="6" nullable="true" comment="Position"/>
+        <column xsi:type="smallint" name="include_in_menu" nullable="true" default="null" comment="Include In Menu"/>
+        <column xsi:type="varchar" name="canonical_url" nullable="true" length="255" comment="Canonical Url"/>
+        <column xsi:type="varchar" name="image" nullable="true" length="255" comment="Category Image"/>
+        <column xsi:type="text" name="description" nullable="true" comment="Category Description"/>
+        <column xsi:type="varchar" name="meta_title" nullable="true" length="255" comment="Category Meta Title"/>
+        <column xsi:type="text" name="meta_keywords" nullable="true" comment="Category Meta Keywords"/>
+        <column xsi:type="text" name="meta_description" nullable="true" comment="Category Meta Description"/>
+        <column xsi:type="varchar" name="page_layout" length="255" comment="Page Layout"/>
+        <column xsi:type="timestamp" name="creation_time" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Category Creation Time"/>
+        <column xsi:type="timestamp" name="update_time" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Category Modification Time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="category_id"/>
+        </constraint>
+        <index referenceId="LOOKBOOK_PROFILE_CATEGORY_ID" indexType="fulltext">
+            <column name="title"/>
+            <column name="identifier"/>
+            <column name="meta_keywords"/>
+            <column name="meta_description"/>
+        </index>
+    </table>
+    <table name="mgz_lookbook_category_store" resource="default" engine="innodb" comment="LookBook Category To Store Linkage Table">
+        <column xsi:type="smallint" name="category_id" padding="6" unsigned="false" nullable="false" comment="Category ID"/>
+        <column xsi:type="smallint" name="store_id" padding="5" unsigned="true" nullable="false" comment="Store ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="category_id"/>
+            <column name="store_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="LOOKBOOK_CATEGORY_STORE_CATEGORY_ID_LOOKBOOK_CATEGORY_CATEGORY_ID" table="mgz_lookbook_category_store" column="category_id" referenceTable="mgz_lookbook_category" referenceColumn="category_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="LOOKBOOK_CATEGORY_STORE_STORE_ID_STORE_STORE_ID" table="mgz_lookbook_category_store" column="store_id" referenceTable="store" referenceColumn="store_id" onDelete="CASCADE"/>
+        <index referenceId="LOOKBOOK_CATEGORY_STORE_STORE_ID" indexType="btree">
+            <column name="store_id"/>
+        </index>
+    </table>
+    <table name="mgz_lookbook_profile_category" resource="default" engine="innodb" comment="Lookbook To Category Table">
+        <column xsi:type="smallint" name="category_id" padding="6" unsigned="false" nullable="false" comment="Category ID"/>
+        <column xsi:type="smallint" name="profile_id" padding="6" unsigned="false" nullable="false" identity="false" comment="Profile ID"/>
+        <column xsi:type="smallint" name="position" padding="6" nullable="true" default="0" comment="Position"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="category_id"/>
+            <column name="profile_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="MGZ_LOOKBOOK_PROFILE_CATEGORY_PROFILE_ID" table="mgz_lookbook_profile_category" column="profile_id" referenceTable="mgz_lookbook_profile" referenceColumn="profile_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="MGZ_LOOKBOOK_PROFILE_CATEGORY_CATEGORY_ID" table="mgz_lookbook_profile_category" column="category_id" referenceTable="mgz_lookbook_category" referenceColumn="category_id" onDelete="CASCADE"/>
+        <index referenceId="MGZ_LOOKBOOK_PROFILE_CATEGORY_PROFILE_ID_CATEGORY_ID" indexType="btree">
+            <column name="category_id"/>
+        </index>
+    </table>
+</schema>

@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_AffiliateUltimate
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Api/etc/extension_attributes.xsd">
+    <extension_attributes for="Magento\Sales\Api\Data\OrderInterface">
+        <attribute code="mp_affiliate" type="Mageplaza\AffiliateUltimate\Api\Data\AffiliateInterface"/>
+    </extension_attributes>
+    <extension_attributes for="Magento\Sales\Api\Data\OrderItemInterface">
+        <attribute code="mp_affiliate" type="Mageplaza\AffiliateUltimate\Api\Data\AffiliateItemInterface"/>
+    </extension_attributes>
+    <extension_attributes for="Magento\Sales\Api\Data\InvoiceInterface">
+        <attribute code="mp_affiliate" type="Mageplaza\AffiliateUltimate\Api\Data\AffiliateInvoiceInterface"/>
+    </extension_attributes>
+    <extension_attributes for="Magento\Sales\Api\Data\InvoiceItemInterface">
+        <attribute code="mp_affiliate" type="Mageplaza\AffiliateUltimate\Api\Data\AffiliateInvoiceItemInterface"/>
+    </extension_attributes>
+    <extension_attributes for="Magento\Sales\Api\Data\CreditmemoInterface">
+        <attribute code="mp_affiliate" type="Mageplaza\AffiliateUltimate\Api\Data\AffiliateCreditmemoInterface"/>
+    </extension_attributes>
+    <extension_attributes for="Magento\Sales\Api\Data\CreditmemoItemInterface">
+        <attribute code="mp_affiliate" type="Mageplaza\AffiliateUltimate\Api\Data\AffiliateCreditmemoItemInterface"/>
+    </extension_attributes>
+</config>

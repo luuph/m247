@@ -1,0 +1,104 @@
+type Mutation {
+    sendotp(
+        mobilenumber: String @doc(description: "mobile number of the customer")
+        countrycode: String @doc(description: "country code")
+        isresend: Boolean @doc(description: "resend otp")
+        storeid : String @doc(description: "Store Id")
+    ): Response
+    @resolver(class:"Magecomp\\WhatsappultimateGraphQl\\Model\\Resolver\\SendOtp")
+    
+    verifyotp(
+        mobilenumber: String @doc(description: "mobile number of the customer")
+        countrycode: String @doc(description: "country code")
+        otp: String @doc(description: "otp for verification")
+        storeid : String @doc(description: "Store Id")
+    ): Response
+    @resolver(class:"Magecomp\\WhatsappultimateGraphQl\\Model\\Resolver\\VerifyOtp")
+    
+    sendMobileUpdateOtp(
+        newmobilenumber: String @doc(description: "current mobile number of the customer")
+        oldmobilenumber: String @doc(description: "New mobile number of the customer")
+        countrycode: String @doc(description: "country code")
+        customer_id: Int @doc(description: "customer id")
+        isresend: Boolean @doc(description: "resend otp")
+        storeid : String @doc(description: "Store Id")
+    ): Response
+    @resolver(class:"Magecomp\\WhatsappultimateGraphQl\\Model\\Resolver\\SendUpdateOtp")
+    
+    verifyMobileUpdateOtp(
+        newmobilenumber: String @doc(description: "current mobile number of the customer")
+        oldmobilenumber: String @doc(description: "New mobile number of the customer")
+        countrycode: String @doc(description: "country code")
+        customer_id: Int @doc(description: "customer id")
+        otp: String @doc(description: "otp for verification")
+        storeid : String @doc(description: "Store Id")
+    ): Response
+    @resolver(class:"Magecomp\\WhatsappultimateGraphQl\\Model\\Resolver\\VerifyUpdateOtp") 
+    
+    sendRegistrationSuccessMsg(
+        email : String @doc(description: "email address of the customer")
+        password: String @doc(description: "password for authantication")
+        mobilenumber: String @doc(description: "mobile number of the customer")
+        countrycode: String @doc(description: "country code")
+        otp : String @doc(description: "otp for verification")
+        storeId: Int @doc(description: "Store Id")
+    ): Response
+    @resolver(class:"Magecomp\\WhatsappultimateGraphQl\\Model\\Resolver\\SendRegMessage") 
+    
+    sendOrderNotification(
+        orderId: Int @doc(description: "Order Id")
+        isresend: Boolean @doc(description: "Resend Order Notification")
+    ): Response
+    @resolver(class:"Magecomp\\WhatsappultimateGraphQl\\Model\\Resolver\\OrderNotifier") 
+    
+    sendInvoiceNotification(
+        invoiceId: Int @doc(description: "Invoice Id")
+        isresend: Boolean @doc(description: "Resend Order Notification")
+    ): Response
+    @resolver(class:"Magecomp\\WhatsappultimateGraphQl\\Model\\Resolver\\InvoiceNotifier")
+    
+    sendShipmentNotification(
+        shipmentId: Int @doc(description: "Shipment Id")
+        isresend: Boolean @doc(description: "Resend Order Notification")
+    ): Response
+    @resolver(class:"Magecomp\\WhatsappultimateGraphQl\\Model\\Resolver\\ShipmentNotifier")
+    
+    sendCreditmemoNotification(
+        creditmemoId: Int @doc(description: "Creditmemo Id")
+        isresend: Boolean @doc(description: "Resend Order Notification")
+    ): Response
+    @resolver(class:"Magecomp\\WhatsappultimateGraphQl\\Model\\Resolver\\CreditmemoNotifier")
+    
+    sendContactNotification(
+        name: String @doc(description: "Contact Name")
+        email: String @doc(description: "Contact Email")
+        mobilenumber: String @doc(description: "Contact Mobile Number")
+        countrycode: String @doc(description: "country code")
+        comment: String @doc(description: "Query Descreption")
+        storeid: Int @doc(description: "Store Id")
+    ): Response
+    @resolver(class:"Magecomp\\WhatsappultimateGraphQl\\Model\\Resolver\\ContactNotifier")
+     createCustomerAccount(
+        email : String @doc(description: "email address of the customer")
+        password: String @doc(description: "password for authantication")
+        firstname: String @doc(description: "First Name")
+        lastname: String @doc(description: "Last Name")
+        storeid: Int @doc(description: "Store Id")
+    ): Response
+    @resolver(class:"Magecomp\\WhatsappultimateGraphQl\\Model\\Resolver\\CreateCustomer")
+}
+}
+type Response {
+    success: Boolean
+    message: String
+}
+type Query {
+    countryList (
+        status: Boolean @doc(description: "Status")
+    ): CountryListOutput @resolver(class: "Magecomp\\WhatsappultimateGraphQl\\Model\\Resolver\\Countrylist") @doc(description:"Get Country List")
+}
+type CountryListOutput {
+    status: Boolean
+    country: String
+    message: String
+}

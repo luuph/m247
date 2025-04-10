@@ -1,0 +1,20 @@
+{
+    "name": "webkul/module-mobikul-api-graphql",
+    "description": "Module mobikul Api graphql",
+    "type": "magento2-module",
+    "license": "proprietary",
+    "require": {
+        "webkul/module-graph-ql": "100.*.*",
+        "webkul/module-mobikul-api": "5.*.*",
+        "webkul/module-mobikul-core": "5.*.*"
+    },
+    "version": "5.0.1",
+    "autoload": {
+        "psr-4": {
+            "Webkul\\MobikulApiGraphql\\": ""
+        },
+        "files": [
+            "registration.php"
+        ]
+    }
+}

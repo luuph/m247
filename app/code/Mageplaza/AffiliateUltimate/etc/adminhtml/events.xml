@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_AffiliateUltimate
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="mp_affiliate_transaction">
+        <observer name="mp_affiliate_add_menu_report" instance="Mageplaza\AffiliateUltimate\Observer\MpAffiliateAddMenuReport"/>
+    </event>
+    <event name="sales_order_save_after">
+        <observer name="mp_sales_order_save_after" instance="Mageplaza\AffiliateUltimate\Observer\OrderSaveAfter"/>
+    </event>
+    <event name="create_banner_form_before">
+        <observer name="mp_before_create_banner_form" instance="Mageplaza\AffiliateUltimate\Observer\Form"/>
+    </event>
+</config>

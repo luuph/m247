@@ -1,0 +1,140 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MobikulApi
+ * @author    Webkul Software Private Limited
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+
+declare(strict_types=1);
+
+namespace Webkul\MobikulApiGraphQl\Model\Resolver\Customer;
+
+use Magento\Framework\GraphQl\Config\Element\Field;
+use Magento\Framework\GraphQl\Query\ResolverInterface;
+use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
+
+/**
+ * ReviewList resolver
+ */
+class ReviewList extends AbstractCustomer implements ResolverInterface
+{
+    /**
+     * ForDashboard variable
+     *
+     * @var mixed
+     */
+    protected $forDashboard;
+
+    /**
+     * @inheritdoc
+     */
+    public function resolve(
+        Field $field,
+        $context,
+        ResolveInfo $info,
+        array $value = null,
+        array $args = null
+    ) {
+        $this->wholeData = $args;
+        try {
+            $this->verifyRequest();
+            $environment = $this->emulate->startEnvironmentEmulation(
+                $this->storeId,
+                \Magento\Framework\App\Area::AREA_FRONTEND,
+                true
+            );
+            $reviewCollection = $this->reviewCollection
+                ->create()
+                ->setDateOrder()
+                ->addStoreFilter($this->storeId)
+                ->addCustomerFilter($this->customerId);
+            // Applying pagination //////////////////////////////////////////////////
+            if ($this->pageNumber >= 0) {
+                $this->returnArray["totalCount"] = $reviewCollection->getSize();
+                $pageSize = $this->helperCatalog->getPageSize();
+                $reviewCollection->setPageSize($pageSize)
+                    ->setCurPage($this->pageNumber);
+            }
+            // applying pagination for dashboard ////////////////////////////////////
+            if ($this->forDashboard) {
+                $reviewCollection->setPageSize(5)->setCurPage($this->pageNumber);
+            }
+            // Creating Review List /////////////////////////////////////////////////
+            $reviewList = [];
+            foreach ($reviewCollection as $key => $review) {
+                $product = $this->productFactory->create()->load($review->getEntityPkValue());
+                $eachReview = [];
+                $eachReview["id"] = $key;
+                $eachReview["productId"] = (int)$product->getId();
+                $eachReview["thumbNail"] = $this->helperCatalog->getImageUrl($product, $this->width/3);
+                $eachReview["productName"] = $this->helperCatalog->stripTags($product->getName());
+                $eachReview["dominantColor"] = $this->helper->getDominantColor(
+                    $this->helper->getDominantColorFilePath($eachReview["thumbNail"])
+                );
+                $ratingCollection = $this->vote
+                    ->getResourceCollection()
+                    ->setReviewFilter($review->getReviewId())
+                    ->addRatingInfo($this->storeId)
+                    ->setStoreFilter($this->storeId)
+                    ->load();
+                $totalRating = 0;
+                $ratingCount = 0;
+                foreach ($ratingCollection as $rating) {
+                    if($rating->getPercent()){
+                        $totalRating += $rating->getPercent();
+                    }
+                    else{
+                        $totalRating += 0;
+                    }
+                    $ratingCount++;
+                }
+                if ($ratingCount == 0) {
+                    $eachReview["customerRating"] = 0;
+                } else {
+                    $eachReview["customerRating"] = (float) (($totalRating/$ratingCount)/20);
+                }
+                $reviewList[] = $eachReview;
+            }
+            $this->returnArray["reviewList"] = $reviewList;
+            $this->returnArray["success"] = true;
+            $this->emulate->stopEnvironmentEmulation($environment);
+            return $this->returnArray;
+        } catch (\Exception $e) {
+            $this->returnArray["message"] = __($e->getMessage());
+            $this->helper->printLog($this->returnArray);
+            return $this->returnArray;
+        }
+    }
+
+    /**
+     * Verify Request function to verify the request
+     *
+     * @return void|jSon
+     */
+    protected function verifyRequest()
+    {
+        if ($this->getRequest()->getMethod() == "POST") {
+            $this->eTag = $this->wholeData["eTag"] ?? "";
+            $this->width = $this->wholeData["width"] ?? 1000;
+            $this->storeId = $this->wholeData["storeId"] ?? 1;
+            $this->pageNumber = $this->wholeData["pageNumber"] ?? 1;
+            $this->forDashboard = $this->wholeData["forDashboard"] ?? false;
+            $this->customerToken = $this->wholeData["customerToken"] ?? "";
+            $this->customerId = $this->helper->getCustomerByToken($this->customerToken);
+            // Checking customer token //////////////////////////////////////////////
+            if (!$this->customerId && $this->customerToken != "") {
+                $this->returnArray["otherError"] = "customerNotExist";
+                throw new \Magento\Framework\Exception\LocalizedException(
+                    __("As customer you are requesting does not exist, so you need to logout.")
+                );
+            }
+        } else {
+            throw new \BadMethodCallException(__("Invalid Request"));
+        }
+    }
+}

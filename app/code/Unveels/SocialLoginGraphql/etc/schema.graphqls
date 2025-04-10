@@ -1,0 +1,14 @@
+type Mutation {
+    socialLogin(token: String!, type: String!): KeyOutput 
+        @resolver(class: "Unveels\\SocialLoginGraphql\\Model\\Resolver\\SocialLoginResolver") 
+        @doc(description: "Login for other devices")
+    
+    appleLogin(token: String!, firstName: String, lastName: String): KeyOutput 
+        @resolver(class: "Unveels\\SocialLoginGraphql\\Model\\Resolver\\AppleSocialLoginResolver") 
+        @doc(description: "Login for Apple devices")
+}
+
+type KeyOutput {
+    token: String @doc(description: "Login token")
+    customerToken: String @doc(description: "customer token")
+}

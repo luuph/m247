@@ -25,30 +25,35 @@ $addressCollection = $block->getData('customerAddressCollection');
 $finalDependentArr = [];
 $dependentArr = [];
 $attributeValues = [];
-foreach ($block->getAddressAttribute() as $key => $value) {
-    $attrId = $block->getAttributeByCode($value->getAttributeCode())->getData()[0]['attribute_id'];
-    $dependentData = $block->decodeFunction($block->getAddressDependentAttribute($attrId)->getData('dependents_data'));
-    if ($dependentData && count($dependentData) > 0) {
-        foreach ($dependentData as $dependentDataKey => $dependentDataKeyValue):
-            array_push($dependentArr, $dependentDataKeyValue['attribute-values']['dependent_attribute']['value']);
-            $almostDependentArr = (array_unique($dependentArr));
-        endforeach;
-    }
-    if (!empty($block->getAddressDependentAttribute($attrId)->getData()) && $block->getAddressDependentAttribute($attrId)->getData('dependents_data') !== 'null') {
-        array_push($attributeValues, $block->getAddressDependentAttribute($attrId)->setData('attr_code', $value->getAttributeCode())->getData());
+$viewModel = $block->getData('viewModel');
+if ($block->getAddressAttribute()) {
+    foreach ($block->getAddressAttribute() as $key => $value) {
+        $attrId = $block->getAttributeByCode($value->getAttributeCode())->getData()[0]['attribute_id'];
+        $dependentData = $block->decodeFunction($block->getAddressDependentAttribute($attrId)->getData('dependents_data'));
+        if ($dependentData && count($dependentData) > 0) {
+            foreach ($dependentData as $dependentDataKey => $dependentDataKeyValue):
+                array_push($dependentArr, $dependentDataKeyValue['attribute-values']['dependent_attribute']['value']);
+                $almostDependentArr = (array_unique($dependentArr));
+            endforeach;
+        }
+        if (!empty($block->getAddressDependentAttribute($attrId)->getData()) && $block->getAddressDependentAttribute($attrId)->getData('dependents_data') !== 'null') {
+            array_push($attributeValues, $block->getAddressDependentAttribute($attrId)->setData('attr_code', $value->getAttributeCode())->getData());
+        }
     }
 }
 
-foreach ($block->getAddressAttribute() as $key => $value) {
-    if (!$value->isVisible()) {
-        array_push($finalDependentArr, $key);
-    }
-    if ($block->isEnableCustomerAttributeDependency() == '1' && isset($almostDependentArr)) {
-        foreach ($almostDependentArr as $almostKey => $almostValue):
-            if ($value->getAttributeCode() === $almostValue) {
-                array_push($finalDependentArr, $almostValue);
-            }
-        endforeach;
+if ($block->getAddressAttribute()) {
+    foreach ($block->getAddressAttribute() as $key => $value) {
+        if (!$value->isVisible()) {
+            array_push($finalDependentArr, $key);
+        }
+        if ($block->isEnableCustomerAttributeDependency() == '1' && isset($almostDependentArr)) {
+            foreach ($almostDependentArr as $almostKey => $almostValue):
+                if ($value->getAttributeCode() === $almostValue) {
+                    array_push($finalDependentArr, $almostValue);
+                }
+            endforeach;
+        }
     }
 }
 $addressArray = [];
@@ -82,7 +87,7 @@ if ($block->getIsShipping()):
 script;
     ?>
     <?= /* @noEscape */
-    $block->renderTag('script', [], $scriptString, false) ?>
+    $viewModel->renderTag('script', [], $scriptString, false) ?>
 <?php
 else:
     $_fieldsContainerId = 'order-billing_address_fields';
@@ -95,7 +100,7 @@ else:
 script;
     ?>
     <?= /* @noEscape */
-    $block->renderTag('script', [], $scriptString, false) ?>
+    $viewModel->renderTag('script', [], $scriptString, false) ?>
 <?php
 endif; ?>
 
@@ -115,7 +120,7 @@ endif; ?>
                 <label for="order-shipping_same_as_billing" class="admin__field-label">
                     <?= $block->escapeHtml(__('Same As Billing Address')) ?>
                 </label>
-                <?= $block->renderEventListenerAsTag(
+                <?= $viewModel->renderEventListenerAsTag(
                     'onclick',
                     "order.setShippingAsBilling(this.checked)",
                     'input#order-shipping_same_as_billing'
@@ -142,7 +147,7 @@ endif; ?>
                     <?php endforeach; ?>
                 </select>
                 <?= /* @noEscape */
-                $block->renderEventListenerAsTag(
+                $viewModel->renderEventListenerAsTag(
                     'onchange',
                     "order.selectAddress(this, '" . $block->escapeJs($_fieldsContainerId) . "')",
                     'select#' . $block->escapeJs($_id),
@@ -175,7 +180,7 @@ endif; ?>
         <span><?= $block->escapeHtml(__('You don\'t need to select a shipping address.')) ?></span>
     </div>
     <?= /* @noEscape */
-    $block->renderStyleAsTag(
+    $viewModel->renderStyleAsTag(
         "display: none;",
         'div#' . /* @noEscape */ $hideElement
     ) ?>
@@ -198,17 +203,17 @@ script;
 script;
     ?>
     <?= /* @noEscape */
-    $block->renderTag('script', [], $scriptString, false) ?>
+    $viewModel->renderTag('script', [], $scriptString, false) ?>
 </fieldset>
-<?php if (!isset($attributeValues) || $block->isEnableCustomerAttributeDependency() == '0') {
+<?php if (!isset($attributeValues) || $viewModel->isEnableCustomerAttributeDependency() == '0') {
     $attributeValues = [];
 } ?>
 <script type="text/x-magento-init">
     {
         "*": {
             "Bss_CustomerAttributes/js/address":{
-            "attrValues" :"<?= $block->escapeJs($block->encodeFunction($attributeValues)) ?>",
-            "finalDependentArr" :"<?= $block->escapeJs($block->encodeFunction($finalDependentArr)) ?>",
+            "attrValues" :"<?= $block->escapeJs($viewModel->encodeFunction($attributeValues)) ?>",
+            "finalDependentArr" :"<?= $block->escapeJs($viewModel->encodeFunction($finalDependentArr)) ?>",
             "displayValues" :"0"
             }
         }

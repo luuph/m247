@@ -1,0 +1,118 @@
+<?php
+
+namespace Lof\CustomerAvatar\Model\Resolver;
+
+use Magento\Framework\App\Filesystem\DirectoryList;
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Filesystem;
+use Magento\Framework\GraphQl\Query\ResolverInterface;
+use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
+use Magento\Customer\Api\CustomerRepositoryInterface;
+use Magento\Framework\UrlInterface;
+use Magento\Framework\App\ResourceConnection;
+
+class SaveCustomerAvatar implements ResolverInterface
+{
+    private $customerRepository;
+    private $mediaDirectory;
+    private $urlBuilder;
+    private $resourceConnection;
+
+    public function __construct(
+        CustomerRepositoryInterface $customerRepository,
+        Filesystem $filesystem,
+        UrlInterface $urlBuilder,
+        ResourceConnection $resourceConnection
+    ) {
+        $this->customerRepository = $customerRepository;
+        $this->mediaDirectory = $filesystem->getDirectoryWrite(DirectoryList::MEDIA);
+        $this->urlBuilder = $urlBuilder;
+        $this->resourceConnection = $resourceConnection;
+    }
+
+    public function resolve(
+        \Magento\Framework\GraphQl\Config\Element\Field $field,
+        $context,
+        ResolveInfo $info,
+        array $value = null,
+        array $args = null
+    ) {
+        $customerId = $args['customer_id'] ?? null;
+        $base64Image = $args['base64_image'] ?? null;
+
+        if (!$customerId || !$base64Image) {
+            throw new LocalizedException(__('Customer ID and image data are required.'));
+        }
+
+        try {
+            $base64Image = preg_replace('/^data:image\/(png|jpeg|gif);base64,/', '', $base64Image);
+            $imageData = base64_decode($base64Image);
+
+            if (!$imageData) {
+                throw new LocalizedException(__('Invalid base64 image data.'));
+            }
+
+            $imageSize = getimagesizefromstring($imageData);
+            if ($imageSize === false) {
+                throw new LocalizedException(__('Invalid image data.'));
+            }
+
+            $mimeType = $imageSize['mime'];
+            $ext = substr($mimeType, 6);
+
+            if (!in_array($ext, ['png', 'jpeg', 'gif'])) {
+                throw new LocalizedException(__('Unsupported image type.'));
+            }
+
+            $fileName = 'customer_' . $customerId . '_' . time() . '.' . $ext;
+
+            $subDir = substr($fileName, 0, 1) . '/' . substr($fileName, 1, 1);
+            $relativePath = 'customer/' . $subDir . '/' . $fileName;
+            $savePath = '/'.$subDir . '/' . $fileName;
+            $fullPath = $this->mediaDirectory->getAbsolutePath($relativePath);
+            
+            $this->mediaDirectory->create(dirname($fullPath));
+
+            file_put_contents($fullPath, $imageData);
+
+            $connection = $this->resourceConnection->getConnection();
+            $tableName = $connection->getTableName('customer_entity_varchar');
+
+            $data = [
+                'attribute_id' => $this->getAttributeIdByCode('profile_picture'),
+                'entity_id' => $customerId,
+                'value' => $savePath,
+            ];
+
+            $connection->insertOnDuplicate($tableName, $data);
+
+            $mediaBaseUrl = $this->urlBuilder->getBaseUrl(['_type' => UrlInterface::URL_TYPE_WEB]) . 'media/';
+            $avatarUrl = $mediaBaseUrl . $relativePath;
+
+            return [
+                'success' => true,
+                'message' => 'Avatar saved successfully.',
+                'avatar_url' => $avatarUrl,
+            ];
+        } catch (\Exception $e) {
+            throw new LocalizedException(__('Failed to save customer avatar: %1', $e->getMessage()));
+        }
+    }
+
+    private function getAttributeIdByCode($attributeCode)
+    {
+        $connection = $this->resourceConnection->getConnection();
+        $select = $connection->select()
+            ->from(['ea' => $connection->getTableName('eav_attribute')], ['attribute_id'])
+            ->join(
+                ['eac' => $connection->getTableName('eav_entity_attribute')],
+                'ea.attribute_id = eac.attribute_id',
+                []
+            )
+            ->where('ea.attribute_code = ?', $attributeCode)
+            ->where('eac.entity_type_id = ?', 1);
+
+        $result = $connection->fetchOne($select);
+        return $result;
+    }
+}

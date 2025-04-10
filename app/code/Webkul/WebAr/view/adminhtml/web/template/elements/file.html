@@ -1,0 +1,32 @@
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_WebAr
+ * @author    Webkul Software Private Limited
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<input class="admin__control-file" type="file" data-bind="
+    hasFocus: focused,
+    attr: {
+        name: inputName,
+        placeholder: placeholder,
+        'aria-describedby': noticeId,
+        id: uid,
+        disabled: disabled,
+        form: formId
+    }"
+></input>
+<!-- ko if: $parent.source.data.product[code] -->
+<span>
+    <a attr="href: window.customUrl+'catalog/product/glbmodels/'+$parent.source.data.product[code]" 
+        text="$parent.source.data.product[code]"></a>
+    <label attr="for: uid+'_delete'">
+        <input type="checkbox" attr="name: 'product['+code + '_delete]', id: uid+'_delete', form: formId">
+        <span data-bind="i18n:window.deleteText"></span>
+    </label>
+</span>
+<!-- /ko -->

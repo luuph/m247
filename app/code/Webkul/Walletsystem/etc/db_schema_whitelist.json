@@ -1,0 +1,136 @@
+{
+    "wk_ws_wallet_record": {
+        "column": {
+            "entity_id": true,
+            "customer_id": true,
+            "total_amount": true,
+            "remaining_amount": true,
+            "used_amount": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "wk_ws_wallet_transaction": {
+        "column": {
+            "entity_id": true,
+            "customer_id": true,
+            "amount": true,
+            "status": true,
+            "action": true,
+            "order_id": true,
+            "transaction_at": true,
+            "currency_code": true,
+            "curr_amount": true,
+            "transaction_note": true,
+            "sender_id": true,
+            "sender_type": true,
+            "bank_details": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "quote_address": {
+        "column": {
+            "wallet_amount": true,
+            "base_wallet_amount": true
+        }
+    },
+    "sales_order": {
+        "column": {
+            "wallet_amount": true,
+            "base_wallet_amount": true,
+            "wallet_invoiced": true
+        }
+    },
+    "quote": {
+        "column": {
+            "wallet_amount": true,
+            "base_wallet_amount": true
+        }
+    },
+    "sales_invoice": {
+        "column": {
+            "wallet_amount": true
+        }
+    },
+    "wk_ws_credit_rules": {
+        "column": {
+            "entity_id": true,
+            "amount": true,
+            "based_on": true,
+            "minimum_amount": true,
+            "start_date": true,
+            "end_date": true,
+            "created_at": true,
+            "status": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "wk_ws_credit_amount": {
+        "column": {
+            "entity_id": true,
+            "order_id": true,
+            "amount": true,
+            "status": true,
+            "refund_amount": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "wk_ws_wallet_payee": {
+        "column": {
+            "entity_id": true,
+            "customer_id": true,
+            "website_id": true,
+            "payee_customer_id": true,
+            "nick_name": true,
+            "status": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "wk_ws_wallet_notification": {
+        "column": {
+            "entity_id": true,
+            "payee_counter": true,
+            "banktransfer_counter": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "wk_ws_wallet_account_details": {
+        "column": {
+            "entity_id": true,
+            "customer_id": true,
+            "request_to_delete": true,
+            "status": true,
+            "holdername": true,
+            "accountno": true,
+            "bankname": true,
+            "bankcode": true,
+            "additional": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "wk_ws_wallet_transaction_data": {
+        "column": {
+            "entity_id": true,
+            "transaction_id": true,
+            "additional": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_AB42CFB8735A5FDF3CCA8FAF659701AE": true
+        }
+    }
+}

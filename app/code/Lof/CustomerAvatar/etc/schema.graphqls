@@ -1,0 +1,24 @@
+type Query {
+    getCustomerAvatar(customer_id: Int!): CustomerAvatar @resolver(class: "Lof\\CustomerAvatar\\Model\\Resolver\\GetCustomerAvatar")
+}
+
+type CustomerAvatar {
+    customer_id: Int
+    avatar_url: String
+}
+
+type Mutation {
+    saveCustomerAvatar(customer_id: Int!, base64_image: String!): SaveAvatarResponse @resolver(class: "Lof\\CustomerAvatar\\Model\\Resolver\\SaveCustomerAvatar")
+    deleteCustomerAvatar: DeleteCustomerAvatarOutput @resolver(class: "Lof\\CustomerAvatar\\Model\\Resolver\\DeleteCustomerAvatar")
+}
+
+type SaveAvatarResponse {
+    success: Boolean!
+    message: String
+    avatar_url: String
+}
+
+type DeleteCustomerAvatarOutput {
+    success: Boolean!
+    message: String
+}

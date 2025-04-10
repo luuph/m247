@@ -31,6 +31,10 @@ class BeforeAddressSaveObserverFE implements ObserverInterface
      */
     public function execute(Observer $observer)
     {
+        $writer = new \Zend_Log_Writer_Stream(BP . '/var/log/custom.log');
+                $logger = new \Zend_Log();
+                $logger->addWriter($writer);
+                $logger->info('BeforeAddressSaveObserverFE');
         $saveData = $observer->getCustomerAddress()->getData();
         foreach ($saveData as $key => $value) {
             if ($value === false) {

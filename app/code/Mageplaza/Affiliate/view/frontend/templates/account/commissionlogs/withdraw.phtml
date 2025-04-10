@@ -1,0 +1,254 @@
+
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_Affiliate
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+/** @var Mageplaza\Affiliate\Block\Account\Withdraw\Transaction $block */
+$withdraws = $block->getWithdraws();
+?>
+<div class="box-account box-info box-affiliate box-affiliate-withdraw-transaction">
+        <h2 class="legend"><?= /* @noEscape */ __('Withdraw History') ?></h2>
+
+    <table class="data-table" id="affiliate-withdraws-history">
+        <thead>
+        <tr>
+            <th class="col id">#</th>
+            <th class="col requested_at"><?= /* @noEscape */ __('Requested Date') ?></th>
+            <th class="col amount"><?= /* @noEscape */ __('Amount') ?></th>
+            <th class="col fee"><?= /* @noEscape */ __('Fee') ?></th>
+            <th class="col payment_method"><?= /* @noEscape */ __('Withdraw Method') ?></th>
+            <th class="col payment_method"><?= /* @noEscape */ __('Withdraw Description') ?></th>
+            <th class="col status"><?= /* @noEscape */ __('Status') ?></th>
+            <th class="col action"><?= /* @noEscape */ __('Action') ?></th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php if (count($withdraws)) : ?>
+            <?php foreach ($withdraws as $_withdraw) : ?>
+                <tr>
+                    <td class="col a-right first"><?= /* @noEscape */ $_withdraw->getId() ?></td>
+                    <td class="col">
+                        <span class="nobr"><?= /* @noEscape */ $block->formatDate($_withdraw->getCreatedAt(), \IntlDateFormatter::MEDIUM, true) ?></span>
+                    </td>
+                    <td class="col a-right">
+                        <span class="price"><?= /* @noEscape */ $block->formatPrice($_withdraw->getAmount()) ?></span>
+                    </td>
+                    <td class="col a-right">
+                        <span class="price"><?= /* @noEscape */ $block->formatPrice($_withdraw->getFee()) ?></span>
+                    </td>
+                    <td class="col"><?= /* @noEscape */ $_withdraw->getPaymentLabel() ?></td>
+                    <td class="col"><?= $block->escapeHtml($_withdraw->getWithdrawDescription()) ?></td>
+                    <td class="col"><em><?= /* @noEscape */ $_withdraw->getStatusLabel() ?></em></td>
+                    <td class="col">
+                        <a href="javascript:void(0)" class="view-withdraw">
+                            <?= /* @noEscape */ __('View') ?>
+                        </a>
+                        <div style="display: none" class="fieldset affiliate-view-withdraw">
+                            <div style="display: flex; align-items: center; margin-bottom: 40px">
+                                <div style="font-size: 40px; font-weight: 300"><?= /* @noEscape */
+                                    __('Request') ?>     <?= /* @noEscape */
+                                    $block->formatDate($_withdraw->getCreatedAt(), \IntlDateFormatter::MEDIUM, false) ?></div>
+                                <div id="status_withdraw" style="text-transform: uppercase">  <?= /* @noEscape */
+                                    $_withdraw->getStatusLabel() ?></div>
+                            </div>
+                            <div style="display: flex; flex-wrap: wrap; justify-content: space-between">
+                                <div class="wrap_box_infor_withdraw">
+                                    <div class="box_info_withdraw">
+                                        <div class="field amount row-field">
+                                            <label class="label bold-text">
+                        <span><?= /* @noEscape */
+                            __('Requested Amount') ?></span>
+                                            </label>
+                                            <div class="control">
+                                                <?= /* @noEscape */
+                                                $block->formatPrice($_withdraw->getAmount()) ?>
+                                            </div>
+                                        </div>
+                                        <div class="field fee row-field">
+                                            <label class="label bold-text"><span><?= /* @noEscape */
+                                                    __('Fee') ?></span></label>
+                                            <div class="control">
+                                                <?= /* @noEscape */
+                                                $block->formatPrice($_withdraw->getFee()) ?>
+                                            </div>
+                                        </div>
+                                        <div class="field transfer-amount row-field">
+                                            <label class="label bold-text"><span><?= /* @noEscape */
+                                                    __('Net. Amount') ?></span></label>
+                                            <div class="control">
+                                                <?= /* @noEscape */
+                                                $block->formatPrice($_withdraw->getTransferAmount()) ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="wrap_box_infor_withdraw">
+                                    <div class="box_info_withdraw">
+                                        <div class="field payment-method row-field">
+                                            <label class="label bold-text">
+                        <span><?= /* @noEscape */
+                            __('Payment Method') ?></span>
+                                            </label>
+                                            <div class="control">
+                                                <?= /* @noEscape */
+                                                $_withdraw->getPaymentLabel() ?>
+                                            </div>
+                                        </div>
+
+                                        <div class="field payment-detail row-field">
+                                            <label class="label bold-text" style="margin-right: 15px">
+                        <span><?= /* @noEscape */
+                            __('Payment Detail') ?></span>
+                                            </label>
+                                            <?php $detail = $_withdraw->getPaymentModel()->getPaymentDetail(); ?>
+                                            <?php if (count($detail)) : ?>
+                                                <div class="control">
+                                                    <?php foreach ($detail as $key => $value) : ?>
+                                                        <?= /* @noEscape */
+                                                        $value['label'] . ': ' . $block->escapeHtml($value['value']) . '</br>' ?>
+                                                    <?php endforeach; ?>
+                                                </div>
+                                            <?php endif; ?>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="wrap_box_infor_withdraw">
+                                    <div class="box_info_withdraw">
+                                        <div class="field withdraw-description row-field">
+                                            <label class="label bold-text" style="margin-right: 15px"><span><?= /* @noEscape */
+                                                    __('Withdraw Description') ?></span></label>
+                                            <div class="control">
+                                                <?= $block->escapeHtml($_withdraw->getWithdrawDescription()) ?>
+                                            </div>
+                                        </div>
+                                        <div class="field created-at row-field">
+                                            <label class="label bold-text">
+                        <span><?= /* @noEscape */
+                            __('Requested Date') ?></span>
+                                            </label>
+                                            <div class="control">
+                                                <?= /* @noEscape */
+                                                $block->formatDate($_withdraw->getCreatedAt(), \IntlDateFormatter::MEDIUM, true) ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <?php if ($_withdraw->getResolvedAt()) : ?>
+                                <div class="field resolved-at">
+                                    <label class="label">
+                <span><?= /* @noEscape */
+                    __('Resolve Date') ?></span>
+                                    </label>
+                                    <div class="control">
+                                        <?= /* @noEscape */
+                                        $block->formatTime($_withdraw->getResolvedAt(), \IntlDateFormatter::MEDIUM, true) ?>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                        <?php if ($_withdraw->canCancel()) : ?>
+                            |
+                            <a href="<?= $block->escapeUrl($block->getUrl('affiliate/account_withdraw/cancel', ['id' => $_withdraw->getId()])) ?>"
+                               onclick="return confirm('<?= /* @noEscape */ __('Are you sure you want to cancel this withdraw?') ?>')">
+                                <?= /* @noEscape */ __('Cancel') ?>
+                            </a>
+                        <?php endif; ?>
+                    </td>
+                </tr>
+            <?php endforeach ?>
+        <?php else : ?>
+            <tr>
+                <td colspan="7">
+                    <span><?= /* @noEscape */ __('No withdraw found!') ?></span>
+                </td>
+            </tr>
+        <?php endif; ?>
+        </tbody>
+    </table>
+    <?= /* @noEscape */ $block->getPagerHtml() ?>
+</div>
+
+<script>
+    require(['jquery', 'mage/apply/main'], function ($,mage) {
+        $(document).ready(function () {
+            $('#reports_withdraw #limiter').on('change', function (event) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                let selectedValue = $(this).val();
+                $.ajax({
+                    showLoader: true,
+                    url: selectedValue + '&type=withdraw',
+                    type: "GET"
+                }).done(function (data) {
+                    $('#reports_withdraw').html(data.html);
+                });
+            });
+
+            $('#reports_withdraw .items.pages-items .item a').on('click', function (event) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                let selectedValue = $(this).attr('href'); // Use attr('href') to get the href attribute
+                $.ajax({
+                    showLoader: true,
+                    url: selectedValue + '&type=withdraw',
+                    type: "GET"
+                }).done(function (data) {
+                    $('#reports_withdraw').html(data.html);
+                });
+            });
+        });
+    });
+</script>
+<div id="modal-view-withdraw">
+    <div class="modal-body-content">
+    </div>
+</div>
+<script type="text/javascript">
+    require([
+        "jquery",
+        "Magento_Ui/js/modal/modal"
+    ],function($, modal) {
+
+        var options = {
+            type: 'slide',
+            responsive: true,
+            title: '',
+            buttons: [],
+            modalClass: 'slide-withdraw-view',
+        };
+
+        var popup = modal(options, $('#modal-view-withdraw'));
+        $(".view-withdraw").click(function() {
+            var viewCampaign = $(this).siblings('.affiliate-view-withdraw').clone();
+            $(".modal-body-content").html(viewCampaign.html());
+
+            $('#modal-view-withdraw').modal('openModal');
+        });
+    });
+</script>
+<style>
+    @media only screen and (min-width: 1024px) {
+        .modal-slide.slide-withdraw-view { left: calc(100% - 1000px); }
+    }
+
+</style>

@@ -1,0 +1,53 @@
+<!--@subject {{trans "New Campaign Email"}} @-->
+<!--@vars {
+"var account.status":"Account Status",
+"var customer.name":"Account Name"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<p class="greeting">Dear {{trans "%name," name=$name}}</p>
+
+<p>{{trans "We want to inform you that our store is having a new campaign called %campaign_name. Find out and join this campaign to receive various commissions and discounts from the store." campaign_name=$campaign_name}}</p>
+<p>{{trans "Campaign details"}}</p>
+
+<div style="display: flex; margin-bottom: 15px">
+    <div style="margin-right:10px; width: 30%">{{trans "Campaign Name : "}} </div>
+    <div>{{trans " %campaign_name" campaign_name=$campaign_name}}</div>
+</div>
+<div style="display: flex; margin-bottom: 15px ">
+    <div style="margin-right:10px; width: 30%">{{trans "Description: "}} </div>
+    <div>{{trans " %description" description=$description}}</div>
+</div>
+<div style="display: flex">
+    <div style="margin-right:10px; width: 30%">{{trans "Commission: " }} </div>
+    <div>
+        {{trans "%commissions" commissions=$commissions|raw}}
+
+    </div>
+</div>
+<div style="display: flex; margin-bottom: 15px">
+    <div style="margin-right:10px; width: 30%">{{trans "Discount policy: "}} </div>
+    <div>{{trans " %discount_policy" discount_policy=$discount_policy}}</div>
+</div>
+<div style="display: flex; margin-bottom: 15px">
+    <div style="margin-right:10px; width: 30%">{{trans "Valid Date: "}} </div>
+    <div>{{trans " %valid_date" valid_date=$valid_date}}</div>
+</div>
+<p>{{trans 'You can see detailed campaign information <a href="%home_affiliate_link">here</a>.' home_affiliate_link=$home_affiliate_link|raw}} </p>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td>
+            <table width="100%" class="inner-wrapper" border="0" cellspacing="0" cellpadding="0" align="center">
+                <tr width="100%">
+                    <td bgcolor="#EAEAEA" align="center" style="background:#EAEAEA; text-align:center;">
+                        <p>{{trans "Thank you again" }}</p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

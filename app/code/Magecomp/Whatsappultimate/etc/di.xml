@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Quote\Model\QuoteManagement">
+        <plugin name="magecomp_sms_guest_customer_verification" type="Magecomp\Whatsappultimate\Plugin\QuoteManagement" sortOrder="10" disabled="false" />
+    </type>
+	<type name="Magento\Checkout\Block\Checkout\LayoutProcessor">
+    	<plugin name="rewrite-checkout-fields" type="Magecomp\Whatsappultimate\Model\Checkout\LayoutProcessorplugin" sortOrder="10"/>
+    </type>
+    <type name="Magento\Customer\Controller\Account\CreatePost">
+        <plugin name="Magecomp_Whatsappultimate::smsbeforeotp" type="Magecomp\Whatsappultimate\Plugin\PluginConfirmRegistration"/>
+    </type>
+ <!--    <type name="Magento\Customer\Controller\Account\CreatePost">
+        <plugin name="Magecomp_Whatsappultimate::smsbeforeotp" type="Magecomp\Whatsappultimate\Plugin\PluginConfirmRegistrationhyva"/>
+    </type> -->
+   <!--   <type name="Magento\Customer\Model\ResourceModel\Customer">
+        <plugin name="save_mobile_number_plugin" type="Magecomp\Whatsappultimate\Plugin\SaveMobileNumberPlugin"/>
+    </type> -->
+    <preference for="Magecomp\Whatsappultimate\Api\UltimateInterface" type="Magecomp\Whatsappultimate\Model\Ultimatepost" />
+</config>
+

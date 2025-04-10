@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Walletsystem
+ * @author    Webkul
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Webkul_Walletsystem::walletsystem" title="Wallet System" module="Webkul_Walletsystem" sortOrder="10" resource="Webkul_Walletsystem::walletsystem"/>
+        <add id="Webkul_Walletsystem::wallet" title="Customer Wallet Details" module="Webkul_Walletsystem" sortOrder="1" parent="Webkul_Walletsystem::walletsystem" action="walletsystem/wallet" resource="Webkul_Walletsystem::wallet"/>
+        <add id="Webkul_Walletsystem::banktransfer" title="Bank Transfer Details" module="Webkul_Walletsystem" sortOrder="2" parent="Webkul_Walletsystem::walletsystem" action="walletsystem/wallet/bankdetails/sender_type/5" resource="Webkul_Walletsystem::banktransfer"/>
+        <add id="Webkul_Walletsystem::walletamount" title="Adjust Amount to Wallet" module="Webkul_Walletsystem" sortOrder="3" parent="Webkul_Walletsystem::walletsystem" action="walletsystem/wallet/addamount" resource="Webkul_Walletsystem::walletamount"/>
+        <add id="Webkul_Walletsystem::walletcreditrules" title="Wallet System Credit Rules" module="Webkul_Walletsystem" sortOrder="4" parent="Webkul_Walletsystem::walletsystem" action="walletsystem/creditrules/creditrules" resource="Webkul_Walletsystem::walletcreditrules"/>
+        <add id="Webkul_Walletsystem::walletpayee" title="Wallet System Payee Details" module="Webkul_Walletsystem" sortOrder="5" parent="Webkul_Walletsystem::walletsystem" action="walletsystem/transfer/payeelist" resource="Webkul_Walletsystem::walletpayee"/>
+        <add id="Webkul_Walletsystem::accountdetails" title="Customer Bank Account Details" module="Webkul_Walletsystem" sortOrder="5" parent="Webkul_Walletsystem::walletsystem" action="walletsystem/transfer/accountcustomerlist" resource="Webkul_Walletsystem::accountdetails"/>
+        
+        <add id="Webkul_Walletsystem::walletsystem_support" title="Support" module="Webkul_Walletsystem" sortOrder="200" parent="Webkul_Walletsystem::walletsystem" resource="Webkul_Walletsystem::walletsystem_support"/>
+
+        <add id="Webkul_Walletsystem::walletsystem_userguide" title="User Guide" module="Webkul_Walletsystem" sortOrder="100" parent="Webkul_Walletsystem::walletsystem_support" target="_blank" action="walletsystem/support/blog" resource="Webkul_Walletsystem::walletsystem_userguide"/>
+
+        <add id="Webkul_Walletsystem::walletsystem_extension" title="Store Extension" module="Webkul_Walletsystem" sortOrder="200" parent="Webkul_Walletsystem::walletsystem_support" target="_blank" action="walletsystem/support/store" resource="Webkul_Walletsystem::walletsystem_extension"/>
+
+        <add id="Webkul_Walletsystem::walletsystem_uvdesk" title="Ticket/Customisations" module="Webkul_Walletsystem" sortOrder="300" parent="Webkul_Walletsystem::walletsystem_support" target="_blank" action="walletsystem/support/uvdesk" resource="Webkul_Walletsystem::walletsystem_uvdesk"/>
+
+        <add id="Webkul_Walletsystem::walletsystem_services" title="Services" module="Webkul_Walletsystem" sortOrder="300" parent="Webkul_Walletsystem::walletsystem_support" target="_blank" action="walletsystem/support/services" resource="Webkul_Walletsystem::walletsystem_services"/>
+
+        <add id="Webkul_Walletsystem::walletsystem_reviews" title="Reviews" module="Webkul_Walletsystem" sortOrder="300" parent="Webkul_Walletsystem::walletsystem_support" target="_blank" action="walletsystem/support/storereview" resource="Webkul_Walletsystem::walletsystem_reviews"/>
+    </menu>
+</config>

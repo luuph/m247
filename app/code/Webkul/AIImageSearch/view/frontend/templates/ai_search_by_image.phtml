@@ -1,0 +1,77 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category   Webkul
+ * @package    Webkul_AIImageSearch
+ * @author     Webkul Software Private Limited
+ * @copyright  Webkul Software Private Limited (https://webkul.com)
+ * @license    https://store.webkul.com/license.html
+ */
+?>
+<?php
+$viewModel = $block->getViewModel();
+$session = $viewModel->getSession();
+$catalogSearchUrl = $viewModel->getBaseUrl() . 'catalogsearch/result/?q=';
+$catalogSearchFilterUrl = $viewModel->getBaseUrl() . 'catalogsearch/result/index/?';
+$length = strlen($catalogSearchUrl);
+$catalogFilterUrllength = strlen($catalogSearchFilterUrl);
+$currentUrl = $viewModel->getCurrentUrl();
+if ($catalogSearchFilterUrl == substr($currentUrl, 0, $catalogFilterUrllength) ||
+    $catalogSearchUrl == substr($currentUrl, 0, $length)
+) {
+    $session->start();
+    $requestParams = $viewModel->getRequerstParams();
+    if (!empty($requestParams['q']) &&
+        $requestParams['q'] != $session->getWkAIImageSearchOrignalFileName()
+    ) {
+        $session->unsWkAIImageSearch();
+        $session->unsWkAIImageSearchFileName();
+        $session->unsWkAIImageSearchCroppedImage();
+        $session->unsWkAIImageSearchOrignalImage();
+    }
+    $imageSearch = $session->getWkAIImageSearch();
+    $imageName = $session->getWkAIImageSearchFileName();
+    $croppedImagePath = $session->getWkAIImageSearchCroppedImage();
+    $orignalImagePath = $session->getWkAIImageSearchOrignalImage();
+    if ($imageSearch && !empty($croppedImagePath)) {
+        $mediapath = $viewModel->getMediaDirectoryUrl();
+        $croppedImage = 'data:image/jpeg;base64,' . $viewModel->getFileInBase64Encode($mediapath . $croppedImagePath);
+        $orignalImage = 'data:image/jpeg;base64,' . $viewModel->getFileInBase64Encode($mediapath . $orignalImagePath);
+        ?>
+        <div class="block wk-ai-search-by-image-main-container">
+            <div class="wk-ai-search-by-image-image">
+                <img class="wk-ai-search-by-image-orignal-image" 
+                src="<?= $escaper->escapeHtml($orignalImage) ?>" alt="Orignal Image">
+                <span class="wk-ai-search-by-image-image-name"><?= $escaper->escapeHtml($imageName) ?></span>
+                <img class="wk-ai-search-by-image-cropped-image" 
+                src="<?= $escaper->escapeHtml($croppedImage) ?>" alt="Cropped Image">
+            </div>
+            <div class="wk-ai-search-by-image-align-label-button-center">
+                <div class="wk-ai-search-by-image-label-button">
+                    <label class="wk-ai-search-by-image-label">
+                        <?= $escaper->escapeHtml(__('AI Search By Image')) ?>
+                    </label>
+                    <button class="wk-ai-search-by-image-try-again-button">
+                        <?= $escaper->escapeHtml(__('Try Again')) ?>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- This css is for special case only. -->
+        <style>
+            .search .block {
+                display: none;
+            }
+        </style>
+        <?php
+    }
+}
+?>
+<script type="text/x-magento-init">
+    {
+    "*" : {
+            "Webkul_AIImageSearch/js/ai-search-by-image": {}
+        }
+    }
+</script>

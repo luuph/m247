@@ -1,0 +1,25 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category   Webkul
+ * @package    Webkul_AIImageSearch
+ * @author     Webkul Software Private Limited
+ * @copyright  Webkul Software Private Limited (https://webkul.com)
+ * @license    https://store.webkul.com/license.html
+ */
+?>
+<div id="wk_ai_image_search_icon" class="action wk-ai-image-search">
+    <img class="wk-ai-image-search-logo" src="<?= $escaper->escapeHtml(
+        $block->getViewFileUrl('Webkul_AIImageSearch::images/camera.svg')
+    )?>" alt="Image Icon" width="16" height="16">
+</div>
+<input id="image-input" type="file" name="name" 
+style="display: none;" accept="image/png, image/gif, image/jpg, image/jpeg" />
+<script type="text/x-magento-init">
+{
+    "*" : {
+        "Webkul_AIImageSearch/js/script": {}
+    }
+}
+</script>

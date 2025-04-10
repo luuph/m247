@@ -1,0 +1,476 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magezon
+ *
+ * This source file is subject to the Magezon Software License, which is available at https://www.magezon.com/license.
+ * Do not edit or add to this file if you wish to upgrade the to newer versions in the future.
+ * If you wish to customize this module for your needs.
+ * Please refer to https://www.magezon.com for more information.
+ *
+ * @category  Magezon
+ * @package   Magezon_LookBook
+ * @copyright Copyright (C) 2021 Magezon (https://www.magezon.com)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="mgzlookbook" translate="label" sortOrder="100" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Lookbook</label>
+            <tab>magezon</tab>
+            <resource>Magezon_LookBook::settings</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Settings</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Lookbook</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="version" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Current Version</label>
+                    <frontend_model>Magezon\LookBook\Block\Adminhtml\Renderer\Config\Version</frontend_model>
+                </field>
+                <field id="main_color" translate="label comment" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Theme Color</label>
+                    <frontend_model>Magezon\LookBook\Block\Adminhtml\System\Config\Form\Field\Minicolors</frontend_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="permalink" translate="label" type="text" sortOrder="68" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Permalink Settings</label>
+                <field id="route" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Lookbook Route</label>
+                    <validate>required-entry validate-identifier</validate>
+                </field>
+                <field id="profile_route" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Profile Route</label>
+                    <validate>required-entry validate-identifier</validate>
+                </field>
+                <field id="profile_suffix" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Profile URL Suffix</label>
+                </field>
+                <field id="profile_use_categories" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Use Categories Path for Profile URLs</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="category_route" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Category Route</label>
+                    <comment><![CDATA[htpps://domain.com/{blog_route}/{category_route}/{category_identifier}]]></comment>
+                    <validate>validate-identifier</validate>
+                </field>
+                <field id="category_suffix" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Category URL Suffix</label>
+                </field>
+                <depends>
+                    <field id="mgzlookbook/general/enabled">1</field>
+                </depends>
+            </group>
+            <group id="latest_page" translate="label" type="text" sortOrder="68" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Lookbook HomePage</label>
+                <field id="title" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Title</label>
+                    <validate>required-entry</validate>
+                </field>
+                <field id="page_layout" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Page Layout</label>
+                    <source_model>Magento\Cms\Model\Page\Source\PageLayout</source_model>
+                </field>
+                <field id="layout_type" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Layout Type</label>
+                    <source_model>Magezon\LookBook\Ui\Component\Form\Field\HomeLayoutType</source_model>
+                </field>
+                <field id="number_column" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Number of Columns</label>
+                    <validate>validate-digits</validate>
+                    <comment>The maximum column number is 6 columns. If you leave the field blank, it will use the default value as 3 columns.</comment>
+                </field>
+                <field id="number_profile_per_page" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Number of Profiles Per Page</label>
+                    <validate>validate-digits</validate>
+                    <comment>The number of profiles per page. If you leave the field blank, it will use the default value as 8 profiles.</comment>
+                    <depends>
+                        <field id="mgzlookbook/latest_page/layout_type" separator=",">grid</field>
+                    </depends>
+                </field>
+                <depends>
+                    <field id="mgzlookbook/general/enabled">1</field>
+                </depends>
+            </group>
+            <group id="lookbook_cat_page" translate="label" type="text" sortOrder="68" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Category Page</label>
+                <field id="page_layout" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Page Layout</label>
+                    <source_model>Magento\Cms\Model\Page\Source\PageLayout</source_model>
+                </field>
+                <field id="layout_type" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Layout Type</label>
+                    <source_model>Magezon\LookBook\Ui\Component\Form\Field\CategoryLayoutType</source_model>
+                </field>
+                <field id="number_column" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Number of Columns</label>
+                    <validate>validate-digits</validate>
+                    <comment>The maximum column number is 6 columns. If you leave the field blank, it will use the default value as 3 columns.</comment>
+                    <depends>
+                        <field id="mgzlookbook/lookbook_cat_page/layout_type" separator=",">grid</field>
+                    </depends>
+                </field>
+                <field id="number_profile_per_page" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Number of Profiles Per Page</label>
+                    <validate>validate-digits</validate>
+                    <comment>The number of profiles per page. If you leave the field blank, it will use the default value as 8 profiles.</comment>
+                    <depends>
+                        <field id="mgzlookbook/lookbook_cat_page/layout_type" separator=",">grid</field>
+                    </depends>
+                </field>
+                <group id="carousel_config" translate="label" type="text" sortOrder="68" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Carousel Config</label>
+                    <field id="desktop" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Desktop</label>
+                        <validate>validate-digits</validate>
+                        <comment> > 1200 px</comment>
+                    </field>
+                    <field id="tablet_l" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Tablet Landscape</label>
+                        <validate>validate-digits</validate>
+                        <comment>992px - 1199px</comment>
+                    </field>
+                    <field id="tablet_p" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Tablet Portrait</label>
+                        <validate>validate-digits</validate>
+                        <comment>768px - 991px</comment>
+                    </field>
+                    <field id="mobie_l" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Mobile Landscape</label>
+                        <validate>validate-digits</validate>
+                        <comment>576px - 767px</comment>
+                    </field>
+                    <field id="mobie_p" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Mobile Portrait</label>
+                        <validate>validate-digits</validate>
+                        <comment>576px - 0</comment>
+                    </field>
+                    <field id="number_of_profile" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Number of Profiles</label>
+                        <validate>validate-digits</validate>
+                        <comment>The profile numbers you view. If you leave the field blank, all profiles will be displayed.</comment>
+                    </field>
+                    <field id="nav_btn" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Navigation Buttons</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="dot_nav" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Dots Navigation</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="auto_height" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Auto Height</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="loop" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Loop</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="auto_play" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Auto Play</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="auto_play_timeout" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Auto Play Timeout</label>
+                        <validate>validate-digits</validate>
+                        <comment>3000 (3s)</comment>
+                    </field>
+                    <field id="pause_on_mouse_hover" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Pause on Mouse Hover</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="right_to_left" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Right To Left</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <depends>
+                        <field id="mgzlookbook/lookbook_cat_page/layout_type" separator=",">carousel</field>
+                    </depends>
+                </group>
+                <depends>
+                    <field id="mgzlookbook/general/enabled">1</field>
+                </depends>
+            </group>
+            <group id="lookbook_page" translate="label" type="text" sortOrder="68" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Profile Page</label>
+                <field id="enabled_btn" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Button Add All Product</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="btn_title" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Button Title</label>
+                    <depends>
+                        <field id="mgzlookbook/lookbook_page/enabled_btn">1</field>
+                    </depends>
+                </field>
+                <depends>
+                    <field id="mgzlookbook/general/enabled">1</field>
+                </depends>
+            </group>
+            <group id="marker" translate="label" type="text" sortOrder="68" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Marker</label>
+                <field id="marker_bg_color" translate="label comment" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Background Color</label>
+                    <frontend_model>Magezon\LookBook\Block\Adminhtml\System\Config\Form\Field\Minicolors</frontend_model>
+                </field>
+                <field id="marker_text_color" translate="label comment" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Text color</label>
+                    <frontend_model>Magezon\LookBook\Block\Adminhtml\System\Config\Form\Field\Minicolors</frontend_model>
+                </field>
+                <field id="border" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Border</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="border_color" translate="label comment" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Border Color</label>
+                    <frontend_model>Magezon\LookBook\Block\Adminhtml\System\Config\Form\Field\Minicolors</frontend_model>
+                    <depends>
+                        <field id="border">1</field>
+                    </depends>
+                </field>
+                <field id="width" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Width</label>
+                    <validate>validate-digits</validate>
+                </field>
+                <field id="height" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Height</label>
+                    <validate>validate-digits</validate>
+                </field>
+                <field id="marker_type" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Marker Type</label>
+                    <source_model>Magezon\LookBook\Ui\Component\Form\Field\MarkerType</source_model>
+                </field>
+                <field id="marker_icon" translate="label" sortOrder="10" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Marker Icon</label>
+                    <frontend_model>Magezon\LookBook\Block\Adminhtml\System\Config\Form\Field\Icons</frontend_model>
+                    <depends>
+                        <field id="marker_type" separator=",">icon</field>
+                    </depends>
+                </field>
+                <field id="marker_image" translate="label comment" type="image" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Marker Image</label>
+                    <backend_model>Magezon\LookBook\Model\Config\Backend\Image</backend_model>
+                    <base_url type="media" scope_info="1">banner</base_url>
+                    <comment><![CDATA[Allowed file types: jpg, jpeg, gif, png]]></comment>
+                    <depends>
+                        <field id="marker_type" separator=",">image</field>
+                    </depends>
+                </field>
+                <depends>
+                    <field id="mgzlookbook/general/enabled">1</field>
+                </depends>
+            </group>
+            <group id="sidebar" translate="label" type="text" sortOrder="68" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Sidebar</label>
+                <group id="sidebar_cat" translate="label" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Categories</label>
+                    <field id="show_cat" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Show Categories</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="sort_cat" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Sort Categories</label>
+                        <source_model>Magezon\LookBook\Ui\Component\Form\Field\SortCatSidebar</source_model>
+                        <depends>
+                            <field id="show_cat">1</field>
+                        </depends>
+                    </field>
+                    <field id="title" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Title</label>
+                        <validate>required-entry</validate>
+                        <depends>
+                            <field id="show_cat">1</field>
+                        </depends>
+                    </field>
+                    <field id="number_of_cat" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Number of Categories</label>
+                        <validate>validate-digits</validate>
+                        <depends>
+                            <field id="show_cat">1</field>
+                        </depends>
+                    </field>
+                </group>
+                <group id="sidebar_profile" translate="label" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Profiles</label>
+                    <field id="show_profile" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Show Profiles</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="sort_profile" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Sort Profiles</label>
+                        <source_model>Magezon\LookBook\Ui\Component\Form\Field\SortProfileSidebar</source_model>
+                        <depends>
+                            <field id="show_profile">1</field>
+                        </depends>
+                    </field>
+                    <field id="title" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Title</label>
+                        <validate>required-entry</validate>
+                        <depends>
+                            <field id="show_profile">1</field>
+                        </depends>
+                    </field>
+                    <field id="number_of_profile" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Number of Profiles</label>
+                        <validate>validate-digits</validate>
+                        <depends>
+                            <field id="show_profile">1</field>
+                        </depends>
+                    </field>
+                </group>
+                <depends>
+                    <field id="mgzlookbook/general/enabled">1</field>
+                </depends>
+            </group>
+            <group id="profile_product" translate="label" type="text" sortOrder="68" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Product Page</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="title" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Title</label>
+                    <depends>
+                        <field id="mgzlookbook/profile_product/enabled">1</field>
+                    </depends>
+                </field>
+                <group id="profile_config" translate="label" type="text" sortOrder="68" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Profile Config</label>
+                    <field id="title_color" translate="label comment" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Title Color</label>
+                        <frontend_model>Magezon\LookBook\Block\Adminhtml\System\Config\Form\Field\Minicolors</frontend_model>
+                    </field>
+                    <field id="btn_link" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Button Link</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="btn_color" translate="label comment" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Button Color</label>
+                        <frontend_model>Magezon\LookBook\Block\Adminhtml\System\Config\Form\Field\Minicolors</frontend_model>
+                        <depends>
+                            <field id="mgzlookbook/profile_product/profile_config/btn_link">1</field>
+                        </depends>
+                    </field>
+                    <depends>
+                        <field id="mgzlookbook/profile_product/enabled">1</field>
+                    </depends>
+                </group>
+                <group id="carousel_config" translate="label" type="text" sortOrder="68" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Carousel Config</label>
+                    <field id="desktop" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Desktop</label>
+                        <validate>validate-digits</validate>
+                        <comment> > 1200 px</comment>
+                    </field>
+                    <field id="tablet_l" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Tablet Landscape</label>
+                        <validate>validate-digits</validate>
+                        <comment>992px - 1199px</comment>
+                    </field>
+                    <field id="tablet_p" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Tablet Portrait</label>
+                        <validate>validate-digits</validate>
+                        <comment>768px - 991px</comment>
+                    </field>
+                    <field id="mobie_l" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Mobile Landscape</label>
+                        <validate>validate-digits</validate>
+                        <comment>576px - 767px</comment>
+                    </field>
+                    <field id="mobie_p" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Mobile Portrait</label>
+                        <validate>validate-digits</validate>
+                        <comment>576px - 0</comment>
+                    </field>
+                    <field id="number_of_profile" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Number of Profiles</label>
+                        <validate>validate-digits</validate>
+                        <comment>The profile numbers you view. If you leave the field blank, all profiles will be displayed.</comment>
+                    </field>
+                    <field id="margin" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Margin</label>
+                        <validate>validate-digits</validate>
+                        <comment>Space between elements in product page. If empty, space between elements in product page is 10px. PLEASE enter a valid number in this field.</comment>
+                    </field>
+                    <field id="nav_btn" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Navigation Buttons</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="dot_nav" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Dots Navigation</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="auto_height" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Auto Height</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="loop" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Loop</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="auto_play" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Auto Play</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="auto_play_timeout" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Auto Play Timeout</label>
+                        <validate>validate-digits</validate>
+                        <comment>3000 (3s)</comment>
+                    </field>
+                    <field id="pause_on_mouse_hover" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Pause on Mouse Hover</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="right_to_left" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Right To Left</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <depends>
+                        <field id="mgzlookbook/profile_product/enabled">1</field>
+                    </depends>
+                </group>
+                <depends>
+                    <field id="mgzlookbook/general/enabled">1</field>
+                </depends>
+            </group>
+            <group id="top_navigation" translate="label" type="text" sortOrder="68" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Category Top Navigation</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="title" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Title</label>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="include_profiles" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Include Lookbook Categories</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="show_profile_count" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Profile Count</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                        <field id="include_profiles">1</field>
+                    </depends>
+                </field>
+                <depends>
+                    <field id="mgzlookbook/general/enabled">1</field>
+                </depends>
+            </group>
+        </section>
+    </system>
+</config>

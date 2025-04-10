@@ -1,0 +1,42 @@
+<?php
+$profileCollection = $this->getProfileCollection();
+$layoutType = $this->getLayoutType();
+?>
+<div class="lookbook-home-wraper lookbook-layout-<?= $layoutType ?>">
+	<?php if ($layoutType == "masonry") { ?>
+		<?php $categoryCollection = $this->getCategoryCollection(); ?>
+		<div class="lookbook-button-group lookbook-filters-button-group">
+		    <button class="lookbook-button active" data-filter="*"><?= __('All') ?></button>
+		    <?php foreach ($categoryCollection as $category) { ?>
+		        <button data-filter=".cat-<?= $category->getIdentifier() ?>"><?= $category->getTitle() ?></button>
+		    <?php } ?>
+		</div>
+		<?= $this->getProfilesHtml($profileCollection) ?>
+		<script type="text/javascript">
+		    require([ 'jquery', 'Magezon_LookBook/js/isotope/isotope.pkgd.min'], function($, Isotope) {
+		        var filters = {};
+		        var iso = Isotope.data('.lookbook-profiles');
+		        $('.lookbook-filters-button-group').on('click', 'button', function () {
+
+		            $('.lookbook-filters-button-group').find('.active').removeClass('active');
+		            $( this ).addClass('active');
+		            var $this = $(this);
+		            var $buttonGroup = $this.parents('.lookbook-button-group');
+		            var filterGroup = $buttonGroup.attr('data-filter-group');
+		            filters[ filterGroup ] = $this.attr('data-filter');
+		            var filterValue = concatValues( filters );
+		            iso.arrange({ filter: filterValue });
+		        });
+		        function concatValues( obj ) {
+		            var value = '';
+		            for ( var prop in obj ) {
+		                value += obj[ prop ];
+		            }
+		            return value;
+		        }
+		    });
+		</script>
+	<?php } else { ?>
+		<?= $this->getProfileListHtml() ?>
+	<?php } ?>
+</div>

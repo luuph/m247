@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance dc" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+   	<head>
+		<css src="Magecomp_Whatsappultimate::css/whatsappultimate.css"/>
+		<css src="Magecomp_Whatsappultimate::countryflag/css/intlTelInput.css"/>
+	</head>
+	<body>
+		<referenceContainer name="form.additional.info">
+            <block class="Magecomp\Whatsappultimate\Block\Customer\Register" name="customer_register_sms" template="Magecomp_Whatsappultimate::customer/register.phtml" ifconfig="whatsappultimate/general/enable" />
+        </referenceContainer>
+	</body>		
+</page>

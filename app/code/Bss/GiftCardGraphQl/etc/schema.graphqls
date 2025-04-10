@@ -1,0 +1,269 @@
+# BSS Commerce Co.
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the EULA
+# that is bundled with this package in the file LICENSE.txt.
+# It is also available through the world-wide-web at this URL:
+# http://bsscommerce.com/Bss-Commerce-License.txt
+#
+# @category   BSS
+# @package    Bss_GiftCardGraphQl
+# @author     Extension Team
+# @copyright  Copyright (c) 2020-2022 BSS Commerce Co. ( http://bsscommerce.com )
+# @license    http://bsscommerce.com/Bss-Commerce-License.txt
+
+type Query {
+    bssGiftCardStoreConfig(store_view: Int): ModuleConfigs @resolver(class: "\\Bss\\GiftCardGraphQl\\Model\\Resolver\\GetModuleConfigs") @doc(description:"Get all configs of module.")
+    bssGiftCardTemplates: [GiftCardTemplate] @doc(description: "List all templates") @resolver(class: "\\Bss\\GiftCardGraphQl\\Model\\Resolver\\GetTemplatesResolver")
+    bssCustomerGiftCards: [CustomerGiftCardCode] @doc(description: "List all ordered gift card") @resolver(class: "\\Bss\\GiftCardGraphQl\\Model\\Resolver\\GetCustomerGiftCardsResolver")
+    bssGetListTimezone: [Timezone] @doc(description: "List all timezone") @resolver(class: "\\Bss\\GiftCardGraphQl\\Model\\Resolver\\GetTimezonesResolver")
+    bssPreviewGiftCard(input: PreviewGiftCardInput): PreviewContent @doc(description: "List all timezone") @resolver(class: "\\Bss\\GiftCardGraphQl\\Model\\Resolver\\PreviewGiftCardResolver")
+    bssCheckGiftCode(giftCode: String): checkGiftCode @resolver(class: "\\Bss\\GiftCardGraphQl\\Model\\Resolver\\CheckGiftCode") @doc(description:"Check gift code.")
+}
+
+type Mutation {
+    addGiftCardProductsToCart(input: AddGiftCardProductsToCartInput): AddGiftCardProductsToCartOutput @resolver(class: "Magento\\QuoteGraphQl\\Model\\Resolver\\AddSimpleProductsToCart")
+    addGiftCardProductsToWishList(wishlistId: ID!, wishlistItems: [WishlistItemInput!]!): AddGiftCardProductsToWishListOutput @resolver(class: "Bss\\GiftCardGraphQl\\Model\\Resolver\\AddProductsToWishlist")
+    applyGiftCardCodeToCart(input: ApplyGiftCardCodeToCartInput @doc(description: "An input object that defines the gift card code to apply to the cart.")): ApplyGiftCardCodeToCartOutput @resolver(class: "\\Bss\\GiftCardGraphQl\\Model\\Resolver\\ApplyGiftCardCodeToCart") @doc(description:"Apply a pre-defined coupon code to the specified cart.")
+    removeGiftCardCodeFromCart(input: RemoveGiftCardCodeFromCartInput @doc(description: "An input object that defines which gift card code to remove from the cart.")): RemoveGiftCardCodeFromCartOutput @resolver(class: "\\Bss\\GiftCardGraphQl\\Model\\Resolver\\RemoveGiftCardCodeFromCart") @doc(description:"Remove a previously-applied gift card code from the cart. The cart must contain at least one item in order to remove the gift card code.")
+}
+
+input AddGiftCardProductsToCartInput {
+    cart_id: String!
+    cart_items: [GiftCardProductCartItemInput!]!
+}
+
+input WishlistItemInput @doc(description: "Defines the items to add to a wish list.") {
+    sku: String! @doc(description: "The SKU of the product to add. For complex product types, specify the child product SKU.")
+    quantity: Float! @doc(description: "The amount or number of items to add.")
+    giftcard_options: GiftCardOptionInputWishList @doc(description: "Choose option Bss Gift card.")
+    customizable_options: [CustomizableOptionInput!] @doc(description: "Choose custom option Bss Gift card.")
+}
+
+input PreviewGiftCardInput {
+    product_id: Int!
+    giftcard_options: GiftCardOptionInput
+}
+
+type PreviewContent {
+    content: String
+}
+
+type AddGiftCardProductsToCartOutput {
+    cart: Cart!
+}
+
+type checkGiftCode @doc(description: "Check gift code information") {
+    code: String @doc(description: "Gift code")
+    value: String @doc(description: "Value gift code")
+    origin_value: String @doc(description: "Origin value gift code")
+    status: String @doc(description: "Gift code status")
+    created_at: String @doc(description: "Created gift code")
+    updated_at: String @doc(description: "Update gift code")
+}
+
+type AddGiftCardProductsToWishListOutput @doc(description: "Contains the customer's wish list and any errors encountered.") {
+    wishlist: Wishlist! @doc(description: "Contains the wish list with all items that were successfully added.")
+    user_errors:[WishListUserInputError!]! @doc(description: "An array of errors encountered while adding products to a wish list.")
+}
+
+type CustomerGiftCardCode @doc(description: "Get ordered gift card") {
+    code: String @doc(description: "Pattern code")
+    value: Float @doc(description: "Gift card value")
+    expire_date: String
+    status: StatusProp
+    order_id: Int
+}
+
+type StatusProp @doc(description: "Status property") {
+    value: Int
+    label: String
+}
+
+type Timezone @doc(description: "Timezone") {
+    value: String
+    label: String
+}
+
+type BssGiftCardItem implements CartItemInterface {
+    customizable_options: [SelectedCustomizableOption] @resolver(class: "Magento\\QuoteGraphQl\\Model\\Resolver\\CustomizableOptions")
+    giftcard_option: GiftCardOption @resolver(class: "Bss\\GiftCardGraphQl\\Model\\Cart\\CartGiftCardOption") @doc(description:"Information of giftcard in cart.")
+}
+
+type GiftCardOption @doc(description: "Giftcard information"){
+    giftcard_value: Float
+    giftcard_sender_name: String
+    giftcard_sender_email: String
+    giftcard_recipient_name: String
+    giftcard_recipient_email: String
+    giftcard_template_name: String
+    giftcard_image: GiftCartImage
+    giftcard_message: String
+    giftcard_delivery_date: String
+    giftcard_timezone: String
+}
+
+type GiftCartImage @doc(description: "GiftCart Image") {
+    origin: String @doc(description: "Origin uploaded size")
+    base: String @doc(description: "Module base image size")
+    thumbnail: String @doc(description: "Image thumbnail")
+}
+
+input GiftCardProductCartItemInput {
+    data: CartItemInput!
+    giftcard_options: GiftCardOptionInput!
+    customizable_options:[CustomizableOptionInput!]
+}
+
+input GiftCardOptionInput {
+    bss_giftcard_amount: String! @doc(description: "Bss Gift Card Value. Input 'custom' then can use amount_dynamic for dynamic price")
+    bss_giftcard_amount_dynamic: Float @doc(description: "Bss Gift Card Dynamic Amount Value")
+    bss_giftcard_template: Int! @doc(description: "Bss Gift Card Template")
+    bss_giftcard_selected_image: Int! @doc(description: "Bss Gift Card Image")
+    bss_giftcard_sender_name: String! @doc(description: "Bss Gift Card Sender Name")
+    bss_giftcard_recipient_name: String! @doc(description: "Bss Gift Card Recipient Name")
+    bss_giftcard_sender_email: String @doc(description: "Bss Gift Card Sender Email")
+    bss_giftcard_recipient_email: String @doc(description: "Bss Gift Card Recipient Email")
+    bss_giftcard_message_email: String @doc(description: "Bss Gift Card Message")
+    bss_giftcard_delivery_date: String @doc(description: "Bss Gift Card Delivery Date")
+    bss_giftcard_timezone: String @doc(description: "Bss Gift Card Timezone")
+}
+
+input GiftCardOptionInputWishList {
+    bss_giftcard_amount: String @doc(description: "Bss Gift Card Value. Input 'custom' then can use amount_dynamic for dynamic price")
+    bss_giftcard_amount_dynamic: Float @doc(description: "Bss Gift Card Dynamic Amount Value")
+    bss_giftcard_template: Int @doc(description: "Bss Gift Card Template")
+    bss_giftcard_selected_image: Int @doc(description: "Bss Gift Card Image")
+    bss_giftcard_sender_name: String @doc(description: "Bss Gift Card Sender Name")
+    bss_giftcard_recipient_name: String @doc(description: "Bss Gift Card Recipient Name")
+    bss_giftcard_sender_email: String @doc(description: "Bss Gift Card Sender Email")
+    bss_giftcard_recipient_email: String @doc(description: "Bss Gift Card Recipient Email")
+    bss_giftcard_message_email: String @doc(description: "Bss Gift Card Message")
+    bss_giftcard_delivery_date: String @doc(description: "Bss Gift Card Delivery Date")
+    bss_giftcard_timezone: String @doc(description: "Bss Gift Card Timezone")
+}
+
+type BssGiftCardProduct implements ProductInterface @doc(description: "A Gift cards for customers to purchase and give their acquaintances as a present on special occasions.")
+{
+    giftcard_options: GiftCardOptions @doc(description: "Options of gifcard.") @resolver(class: "Bss\\GiftCardGraphQl\\Model\\Resolver\\GiftCardOptions")
+    giftcard_option: GiftCardOption @resolver(class: "\\Bss\\GiftCardGraphQl\\Model\\Wishlist\\GiftCardOptions") @doc(description:"Information of giftcard in wishlist.")
+}
+
+type GiftCardOptions @doc(description: "Gifcard options") {
+    type: Int @doc(description: "Card type id")
+    amount: [AmountByWebsite] @doc(description: "An array of linked card amount by website")
+    dynamic_price: DynamicPrice @doc(description: "Dynamic price")
+    template: [GiftCardTemplate] @doc(description: "An array of linked Card Template")
+    pattern: GiftCardPattern @doc(description: "Card Pattern")
+    message: Int @doc(description: "Allow customers to send messages to recipients along gift cards")
+    expires_at: String @doc(description: "A number of days which specify the valid time to use the gift card. Gift codes which are automatically created after customers purchase Gift Cards have valid time auto following settings of this Expires After (days) section.")
+}
+
+type AmountByWebsite @doc(description: "Card amount by website") {
+    id: Int @doc(description: "Amount value id")
+    website: Int @doc(description: "Website Id")
+    value: Float @doc(description: "Card Value")
+    price: Float @doc(description: "Card Price")
+}
+
+type DynamicPrice @doc(description: "Dynamic price") {
+    enable: Int @doc(description: "Is dynamic price")
+    min_value: String @doc(description: "Min card value")
+    max_value: String @doc(description: "Max card value")
+    percentage_price_type: Int @doc(description: "Percentage Price Type")
+    percentage_price_value: String @doc(description: "Percentage Price Value")
+}
+
+type GiftCardTemplate @doc(description: "Card Template") {
+    template_id: Int @doc(description: "Template Id")
+    name: String @doc(description: "Template Name")
+    status: Int @doc(description: "Template status")
+    code_color: String @doc(description: "Gift Code Color")
+    message_color: String @doc(description: "Gift Card Message Text Color")
+    images: [TemplateImage] @doc(description: "An array of linked images")
+}
+
+type TemplateImage @doc(description: "Template Images") {
+    id: Int @doc(description: "Image Id")
+    url: String @doc(description: "Image full width")
+    thumbnail: String @doc(description: "Image thumbnail")
+    alt: String @doc(description: "Image label")
+    position: Int @doc(description: "Image position")
+}
+
+type GiftCardPattern @doc(description: "Card Pattern") {
+    id: Int @doc(description: "Pattern Id")
+    name: String @doc(description: "Pattern name")
+    pattern: String @doc(description: "Pattern")
+    qty: Int @doc(description: "Code Quantity")
+    unused: Int @doc(description: "Code Unused")
+    qty_max: Int @doc(description: "Max qty code")
+    codes: [Code] @doc(description: "An array of linked codes")
+}
+
+type Code @doc(description: "Pattern Code") {
+    code_id: Int
+    code: String
+    value: Float
+    origin_value: Float
+    order_id: Int
+    product_id: Int
+    sent: Int
+    send_at: String
+    status: Int
+    sender_name: String
+    recipient_name: String
+    recipient_email: String
+    sender_email: String
+    message: String
+    image_id: Int
+    expiry_day: String
+    website_id: Int
+    sent_expire_notify: Int @doc(description: "Was sent Notification Email about Expire code")
+    store_id: Int
+}
+
+type ModuleConfigs @doc(description: "Module configs") {
+    active: Int @doc(description: "Active or disabled module")
+    active_to_sender: Int @doc(description: "Send Email to Sender")
+    sender_identity: String @doc(description: "Email Sender")
+    to_sender: String @doc(description: "Email Template to Sender")
+    to_recipient: String @doc(description: "Email Template to Recipient")
+    notify_to_recipient: String @doc(description: "Notification Email Template of Expiration to Recipient")
+    day_before_notify_expire: String @doc(description: "Send Notification Mail of Expiration before number of days")
+    expire_day: String @doc(description: "Expiry Day")
+    number_character: String @doc(description: "Number of Characters Shown in Gift Code")
+    replace_character: String @doc(description: "Replace Hidden Character by")
+    max_time_limit: String @doc(description: "Allowed Maximum Time (s) to Enter Gift Code Incorrectly	")
+}
+
+input ApplyGiftCardCodeToCartInput @doc(description: "Specifies the gift card code to apply to the cart.") {
+    masked_cart_id: String! @doc(description: "The unique masked ID of a `Cart` object.")
+    gift_card_code: String! @doc(description: "A valid gift card code.")
+}
+
+input RemoveGiftCardCodeFromCartInput @doc(description: "Specifies the gift card code to remove to the cart.") {
+    masked_cart_id: String! @doc(description: "The unique masked ID of a `Cart` object.")
+    gift_card_quote_code: String! @doc(description: "A valid gift card code.")
+}
+
+type ApplyGiftCardCodeToCartOutput @doc(description: "Contains details about the cart after applying a gift card code.") {
+    cart: Cart! @doc(description: "The cart after applying a gift card code.")
+}
+
+type RemoveGiftCardCodeFromCartOutput @doc(description: "Contains details about the cart after removing a gift card code.") {
+    cart: Cart! @doc(description: "The cart after removing a gift card code.")
+}
+
+type Cart {
+    gift_card_codes: [AppliedGiftCardCodes] @resolver(class: "\\Bss\\GiftCardGraphQl\\Model\\Resolver\\AppliedGiftCardCodes")
+}
+
+type AppliedGiftCardCodes {
+    id : String
+    quote_id : String
+    giftcard_code : String
+    base_giftcard_amount : String
+    giftcard_amount :String
+}

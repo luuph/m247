@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!-- Custom admin layout file -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="editor"/>
+    <head>
+        <css src="Magezon_Core::css/fontawesome5.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Magento\Backend\Block\Template" name="profile.head" template="Magezon_LookBook::head.phtml"/>
+            <uiComponent name="lookbook_profile_form"/>
+        </referenceContainer>
+        
+        <referenceContainer name="main.top">
+            <block class="Magezon\LookBook\Block\Adminhtml\TopMenu" name="page.title" template="Magezon_Core::menu.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

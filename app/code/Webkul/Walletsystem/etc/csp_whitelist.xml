@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Walletsystem
+ * @author    Webkul
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+ -->
+<csp_whitelist xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Csp:etc/csp_whitelist.xsd">
+    <policies>
+        <policy id="script-src">
+            <values>
+                <value id="www_paypal" type="host">*/walletsystem/index/applypaymentamount</value>
+            </values>
+        </policy>
+        <policy id="style-src">
+            <values>
+                <value id="unsafe_inline" type="host">unsafe-inline</value>
+            </values>
+        </policy>
+        <policy id="style-src">
+            <values>
+                <value id="cdn" type="host">http://cdnjs.cloudflare.com/ajax/libs/</value>
+            </values>
+        </policy>
+        <policy id="font-src">
+            <values>
+                <value id="font" type="host">http://cdnjs.cloudflare.com/ajax/libs/</value>
+            </values>
+        </policy>
+     </policies>
+</csp_whitelist>

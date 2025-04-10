@@ -1,0 +1,185 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_Affiliate
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+/** @var Mageplaza\Affiliate\Block\Account\Campaigns\View $block */
+$campaign     = $block->getCampaign();
+$commissions  = $block->formatCommission($campaign->getCommission());
+$couponCode   = $block->getCouponCode();
+$couponSuffix = $block->getCouponSuffix();
+?>
+<div class="fieldset affiliate-view-withdraw">
+    <div style="font-size: 40px; font-weight: 300; margin-bottom: 40px">
+        <?= /* @noEscape */
+        $campaign->getName() ?>
+    </div>
+    <div>
+        <?= /* @noEscape */
+        $campaign->getDescription() ?>
+    </div>
+    <h3>
+        What do you earn?
+    </h3>
+
+    <div class="list_commission">
+        <?php foreach ($commissions as $commission): ?>
+            <?= /* @noEscape */
+            $commission ?>
+        <?php endforeach ?>
+    </div>
+    <h3>
+        Discount policy for referrals
+    </h3>
+    <div>
+        Those you send the affiliate referral link and makes their first purchase using that link will earn
+        <b><?= /* @noEscape */
+            $block->formatDiscountPolicy($campaign->getDiscountAction(),
+                $campaign->getDiscountAmount()) ?> off </b> for
+        each product item.
+    </div>
+    <?php if ($couponCode): ?>
+        <div style="display: flex; align-items: center; margin-top: 15px">
+            <h4 style="margin-right: 15px; margin-bottom: 15px">Coupon code</h4>
+
+            <div style="background-color: #E9E9E9; padding: 5px 10px; position: relative; width: 20%; max-width: 50%">
+                <div class="d-none copied_text" style="position: absolute; top: -20px; right: 0">
+                    Copied
+                </div>
+                <div id="coupon_code_ref" class="link_copy"
+                     style=" font-weight: 600; display: flex; align-items: center; justify-content: space-between"
+                     title="<?= /* @noEscape */
+                     $campaign->getCouponCode() ?>">
+                    <span style="margin-right: 15px" class="text_copy"><?= /* @noEscape */
+                        $couponSuffix ? $couponCode . '-' . $couponSuffix : $couponCode ?></span>
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
+                         xmlns="http://www.w3.org/2000/svg"
+                         id="coupon_code_ref_btn">
+                        <path d="M17.5455 6H9.36364C8.61364 6 8 6.61364 8 7.36364V16.9091H9.36364V7.36364H17.5455V6ZM19.5909 8.72727H12.0909C11.3409 8.72727 10.7273 9.34091 10.7273 10.0909V19.6364C10.7273 20.3864 11.3409 21 12.0909 21H19.5909C20.3409 21 20.9545 20.3864 20.9545 19.6364V10.0909C20.9545 9.34091 20.3409 8.72727 19.5909 8.72727ZM19.5909 19.6364H12.0909V10.0909H19.5909V19.6364Z"
+                              fill="#AEAEAE"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+    <h3>
+        Valid time
+    </h3>
+    <div>
+        <?= /* @noEscape */
+        $block->formatValidDate($campaign->getFromDate(), $campaign->getToDate()) ?>
+    </div>
+    <div style="margin-top: 15px;text-align: center">
+        <?php if ($campaign->getReferralLink()) : ?>
+            <button class="action primary" id="get_referral_link" title="<?= /* @noEscape */
+            __('Get ReferalLink') ?>"
+            >
+                                <span><?= /* @noEscape */
+                                    __('Get Referral Link') ?></span>
+            </button>
+        <?php endif; ?>
+    </div>
+    <div id="modal-content" style="display: none">
+        <div style="margin-top: 15px; margin-bottom: 15px">Here is your campaign referral link</div>
+        <div style="background-color: #E9E9E9; width: 50%; max-width: 70%; padding: 5px 10px; position: relative">
+            <div class="d-none copied_text" style="position: absolute; top: -20px; right: 0">
+                Copied
+            </div>
+            <div id="campain_referral" class="link_copy"
+                 style=" font-weight: 600; display: flex; align-items: center; justify-content: space-between"
+                 title="<?= /** @noEscape */ $block->getCampaignReferLink($campaign->getReferralLink()) ?>">
+                <span style="margin-right: 15px" class="text_copy">    <?= /* @noEscape */
+                    $block->getCampaignReferLink($campaign->getReferralLink()) ?></span>
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
+                     xmlns="http://www.w3.org/2000/svg"
+                     id="campain_referral_btn">
+                    <path d="M17.5455 6H9.36364C8.61364 6 8 6.61364 8 7.36364V16.9091H9.36364V7.36364H17.5455V6ZM19.5909 8.72727H12.0909C11.3409 8.72727 10.7273 9.34091 10.7273 10.0909V19.6364C10.7273 20.3864 11.3409 21 12.0909 21H19.5909C20.3409 21 20.9545 20.3864 20.9545 19.6364V10.0909C20.9545 9.34091 20.3409 8.72727 19.5909 8.72727ZM19.5909 19.6364H12.0909V10.0909H19.5909V19.6364Z"
+                          fill="#AEAEAE"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="buttons-set">
+    <p class="back-link"><a href="<?= $block->escapeUrl($block->getUrl('*/account/campaigns')) ?>">
+            <small>«</small><?= /* @noEscape */
+            __('Back') ?></a>
+    </p>
+</div>
+<script type="text/javascript">
+    require([
+        "jquery",
+        "Magento_Ui/js/modal/modal"
+    ], function ($, modal) {
+
+        var options = {
+            type: 'popup',
+            responsive: true,
+            title: 'Referral Link',
+            buttons: [{
+                text: $.mage.__('Close'),
+                class: 'close action btn_close_popup',
+                click: function () {
+                    this.closeModal();
+                }
+            }]
+        };
+
+        var popup = modal(options, $('#modal-content'));
+        $("#get_referral_link").click(function () {
+            $('#modal-content').modal('openModal');
+        });
+        var urlCampaigns = "<?= $block->escapeUrl($block->getUrl('*/account/campaigns')) ?>";
+        var targetLink   = $('ul.nav.items li.nav.item a[href="' + urlCampaigns + '"]');
+        if (targetLink.length > 0) {
+            targetLink.closest('li.nav.item').addClass('current');
+        }
+    });
+
+</script>
+<script type="text/x-magento-init">
+    {
+        "#campain_referral": {
+            "Mageplaza_Affiliate/js/action/copy": {
+             "text": "<?= /** @noEscape */ $block->getCampaignReferLink($campaign->getReferralLink()) ?>",
+            "copyBtn": "#campain_referral_btn"
+            }
+        }
+    }
+
+</script>
+<script type="text/x-magento-init">
+    {
+         "#coupon_code_ref": {
+            "Mageplaza_Affiliate/js/action/copy": {
+             "text": "<?= /* @noEscape */ $couponSuffix ? $couponCode . '-' . $couponSuffix : $couponCode ?>",
+            "copyBtn": "#coupon_code_ref_btn"
+            }
+        }
+    }
+
+</script>
+<style>
+    .list_commission li {
+        color: #CC6F03;
+        font-size: 14px;
+        margin: 5px 0;
+
+    }
+</style>

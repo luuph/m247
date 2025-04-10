@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="customer.wishlist.items">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Unveels_BrandNameOnWishlist::item/list.phtml</argument>
+            </action>
+        </referenceBlock>
+        <referenceBlock name="customer.wishlist.item.name">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Unveels_BrandNameOnWishlist::item/column/name.phtml</argument>
+            </action>
+        </referenceBlock>
+    </body>
+</page>

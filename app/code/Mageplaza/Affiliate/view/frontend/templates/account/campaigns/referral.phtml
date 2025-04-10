@@ -1,0 +1,70 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_Affiliate
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+?>
+<?php
+/** @var Mageplaza\Affiliate\Block\Account\Campaigns $block */
+$campaigns = $block->getCampaigns();
+?>
+<?php if ($block->isAvailableAccount()): ?>
+    <div class="box-account box-info box-affiliate-summary" style="position: relative">
+        <div class="copy_referral_link" >
+            <div class="d-none copied_text" style="position: absolute; top: -15px; right: 60px">Copied</div>
+            <button style="padding: 10px 15px" id="copyButton" class="btn-outline"><?= /** @noEscape */ __('Copy Referral Link') ?></button>
+            <textarea id="copyTextarea" style="display: none;"><?= /** @noEscape */ $block->getSharingUrl() ?></textarea>
+
+        </div>
+    </div>
+
+    <script>
+        require(['jquery', 'mage/apply/main'], function ($,mage) {
+            $(document).ready(function() {
+                $('#copyButton').click(function() {
+                    var textToCopy = $('#copyTextarea').val();
+                    copyToClipboard(textToCopy);
+                });
+            });
+
+            function copyToClipboard(text) {
+                var $tempTextarea = $('<textarea>');
+                $tempTextarea.val(text);
+                $('body').append($tempTextarea);
+                $tempTextarea.select();
+                document.execCommand('copy');
+                $tempTextarea.remove();
+                $('.copied_text').attr('class', 'copied_text d-block');
+                setTimeout(() => {
+                    $('.copied_text').attr('class', 'copied_text d-none');
+                }, 1000)
+            }
+        });
+    </script>
+<?php endif; ?>
+<style>
+    .copy_referral_link {
+        position: absolute; bottom: 45px; right: 0
+    }
+
+    @media (max-width: 768px) {
+        .copy_referral_link {
+            bottom: 15px;
+        }
+    }
+</style>

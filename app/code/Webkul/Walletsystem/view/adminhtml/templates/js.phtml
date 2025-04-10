@@ -1,0 +1,49 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Walletsystem
+ * @author    Webkul
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+?>
+<?php
+$userHasWallet = $block->getUserHasWallet();
+
+$formData = [
+    'userHasWallet' => $userHasWallet,
+    'requestUrl' => $block->getUrl('walletsystem/wallet/refund/')
+];
+$serializedFormData = $block->getHelper()->jsonEncode($formData);
+?>
+<script>
+    require([
+        "jquery",
+        "mage/mage",
+        'domReady!'
+    ], function($){
+        $('body').trigger('contentUpdated');
+        var input = document.createElement("INPUT");
+        input.setAttribute("name", "creditmemo[wallet_refund]");
+        input.setAttribute("type", "hidden");
+        input.setAttribute("value", "1");
+        var creditmemoDoOffline = document.querySelector("#creditmemo_do_offline");
+        var refundButton = document.querySelector("#wk-wallet-refund-button");
+        if (refundButton) {
+            refundButton.addEventListener("click", function() {
+                creditmemoDoOffline.parentElement.insertBefore(input,creditmemoDoOffline);
+                disableElements('submit-button');
+                submitCreditMemoOffline();
+            });
+        }
+    });
+</script>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "WkWalletsystem": <?=/*@noEscape*/ $serializedFormData; ?>
+        }
+    }
+</script>

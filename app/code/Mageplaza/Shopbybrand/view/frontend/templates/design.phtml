@@ -1,0 +1,177 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_Shopbybrand
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+use Mageplaza\Shopbybrand\Block\Design;
+use Mageplaza\Shopbybrand\Model\Config\Source\BrandListDisplay;
+
+/** @var Design $block */
+$helper = $block->helper();
+?>
+<style type="text/css">
+    .block-brand-list .brand-list-content li.product-item {
+        margin-left: 0;
+        padding: 5px;
+    }
+
+    .block-brand-list .brand-list-content .product-item-info .product-image-photo {
+        width: <?= /** @noEscape */ $block->getLogoWidth() . 'px' ?>;
+        height: <?= /** @noEscape */ $block->getLogoHeight() . 'px' ?>;
+        border-radius: 20px;
+        border: 1px solid #e6e6e6;
+    }
+
+    .block-brand-feature .block-content .brand-image {
+        width: <?= /** @noEscape */ $block->getLogoWidth() . 'px' ?>;
+        height: <?= /** @noEscape */ $block->getLogoHeight() . 'px' ?>;
+        border-radius: 20px;
+        display: inline-block;
+    }
+
+    .block-brand-feature .block-content .brand-image:hover {
+        border: 1px solid #000;
+        border-radius: 20px;
+    }
+
+    .owl-carousel.brand-carousel .owl-item img {
+        height: 150px;
+    }
+
+    /*===================================================================
+    |                            Configuration Style                    |
+    ====================================================================*/
+    <?php if ($color = $helper->getBrandConfig('color')) : ?>
+    .block-brand-list ul.brand-options li.active {
+        background-color: <?= /** @noEscape */ $color ?>;
+        border: 1px solid <?= /** @noEscape */ $color ?> !important;
+        pointer-events: none;
+    }
+    .block-brand-list ul.brand-options li.active:hover{
+
+    }
+
+    .category-nav-list li.active {
+        background-color: <?= /** @noEscape */ $color ?>;
+        float: left;
+    }
+    .modal-header {
+        background: <?= /** @noEscape */ $color ?>;
+        padding-top: 24px !important;
+    }
+
+        <?php if ($helper->getSearchConfig('background_image')) : ?>
+        .block-brand-search {
+            background-image: url(<?= /** @noEscape */ $helper->getBackgroundImageUrl() ?>);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        <?php else : ?>
+        .block-brand-search {
+            background-color: <?= /** @noEscape */ $color ?>;
+            border: 1px solid <?= /** @noEscape */ $color ?> !important;
+        }
+        <?php endif; ?>
+
+
+        <?php if ($helper->enableSearch()): ?>
+        .block-brand-feature .block-title {
+            padding-top: 40px;
+        }
+        <?php endif; ?>
+
+    <?php endif; ?>
+    <?php if (!$helper->getBrandConfig('brand_filter/enabled_alpha_filter') && !$helper->getBrandConfig('brand_filter/enabled_cat_filter')) : ?>
+    .block-brand-list .block-title {
+        display: none;
+    }
+    <?php endif; ?>
+
+
+    <?php if ($helper->enableSearch() || $helper->enableFeature()) : ?>
+    .page-title-wrapper {
+        display: none
+    }
+
+    <?php endif; ?>
+    /*===================================================================
+    |                           Custom STYLE                             |
+    ====================================================================*/
+    <?= /** @noEscape */ $block->getCustomCss() ?>
+        /*===================================================================
+        |           Brand Page product List Responsive Design                |
+        ====================================================================*/
+    .brand-list-content li {
+        width: <?= $helper->getBrandConfig('display') === BrandListDisplay::DISPLAY_LABEL
+        ? '33%' : '20% !important' ?>;
+    }
+
+
+    @media (min-width: 900px) {
+        .related-product-modal-content li.product-item {
+            width: 33% !important;
+        }
+    }
+    @media (max-width: 1080px) {
+        .brand-list-content li {
+            width: 32.3% !important;
+        }
+
+    }
+
+    @media (max-width: 640px) {
+        .brand-list-content li {
+            width: 49% !important;
+        }
+    }
+
+    @media (max-width: 360px) {
+        .related-product-modal-content li.product-item {
+            width: 100% !important;
+        }
+    }
+
+    .quickview_popup a:hover {
+        color: <?= /** @noEscape */ $helper->getBrandConfig('color') ?>;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .mix {
+        position: relative;
+    }
+
+    .modal-header .modal-title {
+        color: #fff;
+        font-weight: 600;
+        font-size: 24px;
+        border-bottom: none;
+    }
+
+    .action-close {
+        top: 14px !important;
+        right: 4px !important;
+    }
+
+    .action-close::before {
+        color: #fff !important;
+        font-size: 16px !important;
+        font-weight: bold !important;
+    }
+</style>

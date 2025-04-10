@@ -1,0 +1,638 @@
+<?php
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_CustomerAttributes
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2018-2019 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+
+/** @var \Magento\Customer\Block\Address\Edit $block */
+/** @var $viewModel \Bss\CustomerAttributes\ViewModel\Address\CustomAddressHelper */
+// @codingStandardsIgnoreFile
+
+?>
+
+<?php $viewModel = $block->getViewModel(); ?>
+<?php $attributeHelper = $viewModel->getAttributeHelper(); ?>
+<?php $attributeCollection = $attributeHelper->getAddressCollection(); ?>
+<?php $hasField = false; ?>
+<?php
+$addressEntityType = 'customer_address';
+?>
+<?php
+$attributeCollectionData=$attributeCollection->getData();
+$almostDependentArr= $block->getListDependentAttributeCode($attributeCollectionData);
+$notAvailableAttribute= $block->getListDisableAttribute($attributeCollectionData);
+$finalDependentArr =  $block->getListAttributeIdNotShow($attributeCollectionData);
+?>
+<!--        Custom Address Attributes-->
+
+<?php $attributeValues = []; ?>
+<?php if ($attributeCollection->getSize() > 0) : ?>
+    <fieldset class="fieldset info" id="info">
+        <!-- For all user defined attributes -->
+        <?php foreach ($attributeCollection as $attribute) : ?>
+            <?php
+            if ($attribute->getAttributeCode() == 'address_title') {
+                continue;
+            }    
+            ?>
+            <?php
+            $values = $block->getAddressAttributeValues($attribute);
+            if ($values !== null) {
+                $attributeValues[] = $values;
+            }
+            ?>
+
+            <!-- For all user defined attributes which are set for customer edit account  -->
+            <?php if ($attributeHelper->isAddressShowInBook($attribute->getAttributeCode()) &&
+                $attributeHelper->isVisible($attribute->getAttributeCode())): ?>
+                <?php if (!$hasField): ?>
+                    <?php $hasField = true; ?>
+                    <legend class="legend"><span><?php echo $attributeHelper->getTitle() ?></span></legend><br>
+                <?php endif ?>
+
+                <?php $frontEndLabel = $attribute->getStoreLabel($attributeHelper->getStoreId()); ?>
+                <?php $getAttributeCodeFunction = "get" . str_replace(' ', '', ucwords(str_replace('_', ' ', $attribute->getAttributeCode()))); ?>
+                <?php $fieldRequiredClass = ($attribute->getIsRequired()) ? 'data-validate="{required:true}"' : '' ?>
+                <?php $fieldFrontendClass = ($attribute->getFrontendClass()) ? $attribute->getFrontendClass() : '' ?>
+                <?php
+                $fieldValue = '';
+                if ($block->getAddress()->getCustomAttribute($attribute->getAttributeCode()) !== null) {
+                    $fieldValue = $block->getAddress()->getCustomAttribute($attribute->getAttributeCode())->getValue();
+                } elseif ($attribute->getDefaultValue()) {
+                    $fieldValue = $attribute->getDefaultValue();
+                }
+                ?>
+                <?php if ($attribute->getFrontendInput() == 'text'): ?>
+
+                    <div
+                        class="field <?php echo $attribute->getAttributeCode(); ?> <?php if ($attribute->getIsRequired()): ?>required<?php endif; ?>"
+                        id="<?php echo $attribute->getData('attribute_id'); ?>"
+
+                    >
+                        <label for="<?php echo $attribute->getAttributeCode(); ?>"
+                               class="label"><span><?php /* @escapeNotVerified */
+                                echo __($frontEndLabel) ?></span></label>
+                        <div class="control">
+                            <input type="text" name="<?php echo $attribute->getAttributeCode(); ?>"
+                                   id="<?php echo $attribute->getAttributeCode(); ?>"
+                                   value="<?php echo $block->escapeHtml($fieldValue) ?>"
+                                   title="<?php echo __($frontEndLabel) ?>"
+                                   class="input-text <?php echo $fieldFrontendClass; ?>" <?php echo $fieldRequiredClass; ?>>
+                        </div>
+                    </div>
+                <?php elseif ($attribute->getFrontendInput() == 'textarea'): ?>
+
+                    <div
+                        class="field <?php echo $attribute->getAttributeCode(); ?> <?php if ($attribute->getIsRequired()): ?>required<?php endif; ?>"
+                        id="<?php echo $attribute->getData('attribute_id'); ?>"
+
+                    >
+                        <label for="<?php echo $attribute->getAttributeCode(); ?>"
+                               class="label"><span><?php /* @escapeNotVerified */
+                                echo __($frontEndLabel) ?></span></label>
+                        <div class="control">
+                            <textarea class="textarea" cols="15" rows="2" title="<?php echo __($frontEndLabel); ?>"
+                                      name="<?php echo $attribute->getAttributeCode(); ?>"
+                                      id="<?php echo $attribute->getAttributeCode(); ?>" <?php echo $fieldRequiredClass; ?>><?php echo $block->escapeHtml($fieldValue); ?></textarea>
+                        </div>
+                    </div>
+                <?php elseif ($attribute->getFrontendInput() == 'date'): ?>
+                    <?php
+                    if ($fieldValue) {
+                        $date = $attributeHelper->formatDate($fieldValue);
+                    } else {
+                        $date = "";
+                    }
+                    ?>
+                    <div
+                        class="field <?php echo $attribute->getAttributeCode(); ?> <?php if ($attribute->getIsRequired()): ?>required<?php endif; ?>"
+                        id="<?php echo $attribute->getData('attribute_id'); ?>"
+
+                    >
+                        <label for="<?php echo $attribute->getAttributeCode(); ?>"
+                               class="label"><span><?php /* @escapeNotVerified */
+                                echo __($frontEndLabel) ?></span></label>
+                        <div class="control">
+                            <input type="text" class="input-text" title="<?php echo __($frontEndLabel); ?>"
+                                   value="<?php echo $block->escapeHtml($date) ?>"
+                                   id="<?php echo $attribute->getAttributeCode(); ?>"
+                                   name="<?php echo $attribute->getAttributeCode(); ?>" <?php echo $fieldRequiredClass; ?>>
+                            <script type="text/x-magento-init">
+                        {
+                            "#<?php echo $attribute->getAttributeCode(); ?>": {
+                                "Bss_CustomerAttributes/js/date": {
+                                }
+                            }
+                        }
+
+
+                            </script>
+                        </div>
+                    </div>
+                <?php elseif ($attribute->getFrontendInput() == 'boolean'): ?>
+                    <div
+                        class="field <?php echo $attribute->getAttributeCode(); ?> <?php if ($attribute->getIsRequired()): ?>required<?php endif; ?>"
+                        id="<?php echo $attribute->getData('attribute_id'); ?>"
+
+                    >
+                        <label for="<?php echo $attribute->getAttributeCode(); ?>"
+                               class="label"><span><?php /* @escapeNotVerified */
+                                echo __($frontEndLabel) ?></span></label>
+                        <div class="control">
+                            <select id="<?php echo $attribute->getAttributeCode(); ?>"
+                                    name="<?php echo $attribute->getAttributeCode(); ?>"
+                                    title="<?php echo __($frontEndLabel); ?>" <?php echo $fieldRequiredClass; ?>>
+                                <?php $options = $attributeHelper->getAddressAttributeOptions($attribute->getAttributeCode()); ?>
+                                <?php foreach ($options as $option): ?>
+                                    <option
+                                        value="<?php echo $option['value'] ?>"<?php if ($option['value'] == $fieldValue) {
+                                    echo ' selected="selected"';
+                                } ?> id="<?php echo $option['value']; ?>"><?php echo $option['label']->getText(); ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                <?php elseif ($attribute->getFrontendInput() == 'radio'): ?>
+                    <?php $fieldRequiredClass = ($attribute->getIsRequired()) ? 'data-validate="{\'validate-one-required-by-name\':true}"' : '' ?>
+                    <div
+                        class="field <?php echo $attribute->getAttributeCode(); ?> <?php if ($attribute->getIsRequired()): ?>required<?php endif; ?>"
+                        id="<?php echo $attribute->getData('attribute_id'); ?>"
+                    >
+                        <label for="<?php echo $attribute->getAttributeCode(); ?>"
+                               class="label"><span><?php /* @escapeNotVerified */
+                                echo __($frontEndLabel) ?></span></label>
+                        <div class="control">
+                            <?php $options = $attributeHelper->getAddressAttributeOptions($attribute->getAttributeCode()); ?>
+                            <?php foreach ($options as $option): ?>
+                                <?php if (!$option['value']) {
+                                    continue;
+                                } ?>
+                                <div class="field choice" id="<?php echo $option['value']; ?>">
+                                    <input type="radio"
+                                           class="radio <?php echo $attribute->getAttributeCode() ?>"
+                                           id="<?php echo $attribute->getAttributeCode() . $option['value']; ?>"
+                                        <?php echo $fieldRequiredClass; ?>
+                                           name="<?php echo $attribute->getAttributeCode(); ?>"
+                                           data-selector="<?php echo $attribute->getAttributeCode(); ?>"
+                                        <?php if ($option['value'] == $fieldValue) {
+                                    echo ' checked="checked"';
+                                } ?>
+                                           value="<?php echo $option['value'] ?>"/>
+                                    <label class="label"
+                                           for="<?php echo $attribute->getAttributeCode() . $option['value']; ?>">
+                                        <span><?php echo $option['label']; ?></span>
+                                    </label>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                <?php elseif ($attribute->getFrontendInput() == 'select'): ?>
+                    <div
+                        class="field <?php echo $attribute->getAttributeCode(); ?> <?php if ($attribute->getIsRequired()): ?>required<?php endif; ?>"
+                        id="<?php echo $attribute->getData('attribute_id'); ?>"
+
+                    >
+                        <label for="<?php echo $attribute->getAttributeCode(); ?>"
+                               class="label"><span><?php /* @escapeNotVerified */
+                                echo __($frontEndLabel) ?></span></label>
+                        <div class="control">
+                            <select id="<?php echo $attribute->getAttributeCode(); ?>"
+                                    name="<?php echo $attribute->getAttributeCode(); ?>"
+                                    title="<?php echo __($frontEndLabel); ?>" <?php echo $fieldRequiredClass; ?>>
+                                <?php $options = $attributeHelper->getAddressAttributeOptions($attribute->getAttributeCode()); ?>
+                                <?php foreach ($options as $option): ?>
+                                    <option
+                                        value="<?php echo $option['value'] ?>"<?php if ($option['value'] == $fieldValue) {
+                                    echo ' selected="selected"';
+                                } ?> id="<?php echo $option['value']; ?>"><?php echo $option['label']; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                <?php elseif ($attribute->getFrontendInput() == 'multiselect'): ?>
+                    <div
+                        class="field <?php echo $attribute->getAttributeCode(); ?> <?php if ($attribute->getIsRequired()): ?>required<?php endif; ?>"
+                        id="<?php echo $attribute->getData('attribute_id'); ?>"
+
+                    >
+                        <label for="<?php echo $attribute->getAttributeCode(); ?>"
+                               class="label"><span><?php /* @escapeNotVerified */
+                                echo __($frontEndLabel) ?></span></label>
+                        <div class="control">
+                            <select multiple="multiple" size="5" id="<?php echo $attribute->getAttributeCode(); ?>"
+                                    name="<?php echo $attribute->getAttributeCode(); ?>[]"
+                                    title="<?php echo __($frontEndLabel); ?>"
+                                    class="multiselect" <?php echo $fieldRequiredClass; ?>>
+                                <?php $options = $attributeHelper->getAddressAttributeOptions($attribute->getAttributeCode()); ?>
+                                <?php foreach ($options as $option): ?>
+                                    <?php $selectedOptions = is_array($fieldValue) ? $fieldValue : explode(',', $fieldValue); ?>
+                                    <?php if (!$option['value'] || !$option['label']) {
+                                    continue;
+                                } ?>
+                                    <option value="<?php echo $option['value'] ?>" id="<?php echo $option['value']; ?>"
+                                        <?php if (in_array($option['value'], $selectedOptions)) {
+                                    echo ' selected="selected"';
+                                } ?>>
+                                        <?php echo $option['label']; ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                <?php elseif ($attribute->getFrontendInput() == 'checkboxs'): ?>
+                    <?php $fieldRequiredClass = ($attribute->getIsRequired()) ? 'data-validate="{\'validate-one-required-by-name\':true}"' : '' ?>
+                    <div
+                        class="field <?php echo $attribute->getAttributeCode(); ?> <?php if ($attribute->getIsRequired()): ?>required<?php endif; ?>"
+                        id="<?php echo $attribute->getData('attribute_id'); ?>"
+
+                    >
+                        <label for="<?php echo $attribute->getAttributeCode(); ?>"
+                               class="label"><span><?php /* @escapeNotVerified */
+                                echo __($frontEndLabel) ?></span></label>
+                        <div class="control">
+                            <?php $options = $attributeHelper->getAddressAttributeOptions($attribute->getAttributeCode()); ?>
+                            <?php foreach ($options as $option): ?>
+                                <?php if (!$option['value']) {
+                                    continue;
+                                } ?>
+                                <?php $selectedOptions = is_array($fieldValue) ? $fieldValue : explode(',', $fieldValue); ?>
+                                <div class="field choice" id="<?php echo $option['value']; ?>"
+                                >
+                                    <input type="checkbox"
+                                           class="checkbox <?php echo $attribute->getAttributeCode() ?>"
+                                           id="<?php echo $attribute->getAttributeCode() . $option['value']; ?>"
+                                        <?php echo $fieldRequiredClass; ?>
+                                           name="<?php echo $attribute->getAttributeCode(); ?>[]"
+                                           data-selector="<?php echo $attribute->getAttributeCode(); ?>"
+                                        <?php if (in_array($option['value'], $selectedOptions)) {
+                                    echo ' checked="checked"';
+                                } ?>
+                                           value="<?php echo $option['value'] ?>"/>
+                                    <label class="label"
+                                           for="<?php echo $attribute->getAttributeCode() . $option['value']; ?>">
+                                        <span><?php echo $option['label']; ?></span>
+                                    </label>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                <?php elseif ($attribute->getFrontendInput() == 'file'): ?>
+                    <?php $fieldRequiredClass = ($attribute->getIsRequired()) ? 'data-validate="{required:true}"' : '' ?>
+                    <div
+                        class="field <?php echo $attribute->getAttributeCode(); ?> <?php if ($attribute->getIsRequired()): ?>required<?php endif; ?>"
+                        id="<?php echo $attribute->getData('attribute_id'); ?>"
+
+                    >
+                        <label for="<?php echo $attribute->getAttributeCode(); ?>"
+                               class="label"><span><?php /* @escapeNotVerified */
+                                echo __($frontEndLabel); ?></span></label>
+                        <div class="control">
+                            <?php $checkFile = 0; ?>
+                            <?php if ($fieldValue): ?>
+                                <div class="cusstomer-images">
+                                    <?php if (preg_match("/\.(gif|png|jpg)$/", $fieldValue)) : ?>
+                                        <?php $checkFile = 1; ?>
+                                        <?php if ($attributeHelper->getConfig("bss_customer_attribute/general/allow_download_file")) : ?>
+                                            <a href="<?php echo $attributeHelper->getViewFile($fieldValue, $addressEntityType); ?>" target="_blank">
+                                        <?php endif; ?>
+                                        <img
+                                            src="<?php echo $attributeHelper->getViewFile($fieldValue, $addressEntityType); ?>"
+                                            alt="<?php echo $attributeHelper->getFileName($fieldValue); ?>"
+                                            width="200"/>
+                                        <?php if ($attributeHelper->getConfig("bss_customer_attribute/general/allow_download_file")) : ?>
+                                            </a>
+                                        <?php endif; ?>
+                                    <?php elseif (preg_match("/\.(mp4|3gb|mov|mpeg)$/", $fieldValue)) : ?>
+                                        <?php $checkFile = 1; ?>
+                                        <video width="400"
+                                               controls <?php if (!$attributeHelper->getConfig("bss_customer_attribute/general/allow_download_file")) : ?>
+                                            controlsList="nodownload"
+                                        <?php endif; ?>
+                                        >
+                                            <source
+                                                src="<?php echo $attributeHelper->getViewFile($fieldValue, $addressEntityType) ?>"
+                                                type="video/mp4">
+                                            <source
+                                                src="<?php echo $attributeHelper->getViewFile($fieldValue, $addressEntityType) ?>"
+                                                type="video/ogg">
+                                            Your browser does not support HTML5 video.
+                                        </video>
+                                    <?php elseif (preg_match("/\.(mp3|ogg|wav)$/", $fieldValue)) : ?>
+                                        <?php $checkFile = 1; ?>
+                                        <audio
+                                            controls <?php if (!$attributeHelper->getConfig("bss_customer_attribute/general/allow_download_file")) : ?> controlsList="nodownload" <?php endif; ?>>
+                                            <source
+                                                src="<?php echo $attributeHelper->getViewFile($fieldValue, $addressEntityType) ?>"
+                                                type="audio/mpeg">
+                                            <source
+                                                src="<?php echo $attributeHelper->getViewFile($fieldValue, $addressEntityType) ?>"
+                                                type="audio/ogg">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                    <?php else : ?>
+                                        <?php $checkFile = 1; ?>
+                                        <a href="<?php echo $attributeHelper->getViewFile($fieldValue, $addressEntityType) ?>" <?php if (!$attributeHelper->getConfig("bss_customer_attribute/general/allow_download_file")) : ?>
+                                            class="disabled"<?php endif; ?>
+                                           target="_blank"
+                                        >
+                                            <?php echo $attributeHelper->getFileName($fieldValue); ?>
+                                        </a>
+                                    <?php endif; ?>
+                                </div>
+                            <?php endif; ?>
+                            <input type="file" id="<?php echo $attribute->getAttributeCode() ?>"
+                                   name="<?= /* @escapeNotVerified */
+                                   $attribute->getAttributeCode() ?>"
+                                   value="" <?php if ($checkFile == 0) : ?>
+                                <?php echo $fieldRequiredClass; endif; ?>
+                                   class="input-file <?php echo $attribute->getAttributeCode() . "size" ?> <?php echo $attribute->getAttributeCode() . "extension" ?> ">
+                            <?php $getDataCustomerAttributes = $attributeHelper->getDataCustomerAttributes($attribute); ?>
+                            <script type="text/x-magento-init">
+                            {
+                            "#<?php echo $attribute->getAttributeCode(); ?>": {
+                                "Bss_CustomerAttributes/js/file": {
+                                "fileSize" : "<?= $getDataCustomerAttributes['fileSize'] ?>",
+                                "fileExtension" : "<?= $getDataCustomerAttributes['fileExtension']; ?>",
+                                "validatorSize" : "<?= $getDataCustomerAttributes['validatorSize']; ?>",
+                                "validatorExtensions" : "<?= $getDataCustomerAttributes['validatorExtensions']; ?>",
+                                "id" : "<?= $attribute->getAttributeCode(); ?>"
+                                    }
+                                }
+                            }
+
+
+                            </script>
+                            <input type="hidden" id="<?php echo $attribute->getAttributeCode() ?>_value"
+                                   name="<?= /* @escapeNotVerified */
+                                   $attribute->getAttributeCode() ?>_value" value="<?= /* @escapeNotVerified */
+                            $block->escapeHtml($attributeHelper->getViewFile($fieldValue, $addressEntityType)) ?>"
+                                   <?php if ($attribute->getIsRequired()): ?>data-validate="{required:true}" <?php endif; ?>/>
+                        </div>
+                    </div>
+                <?php endif; ?>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    </fieldset>
+<?php endif; ?>
+<?php if (!isset($attributeValues) || $block->isEnableCustomerAttributeDependency() == '0') {
+                                $attributeValues = [];
+                            } else {
+                                $attributeValues=$block->validateDependentAttributeInfo($attributeValues, $attributeCollectionData);
+                            }
+?>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Bss_CustomerAttributes/js/dependent": {
+            "attrValues" :"<?= $block->escapeJs($block->encodeFunction($attributeValues)) ?>",
+            "finalDependentArr" :"<?= $block->escapeJs($block->encodeFunction($finalDependentArr)) ?>",
+            "displayValues" : "0"
+            }
+        }
+    }
+
+</script>
+
+<!-- End custom Address Attribute-->
+
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magento\Customer\Block\Address\Edit $block */
+/** @var \Magento\Customer\ViewModel\Address $viewModel */
+/** @var \Magento\Framework\Escaper $escaper */
+/** @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer */
+/** @var \Magento\Customer\ViewModel\Address\RegionProvider $regionProvider */
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$attributeRepository = $objectManager->get(\Magento\Customer\Api\AddressMetadataInterface::class);
+$viewModel = $objectManager->create(\Magento\Customer\ViewModel\Address::class);
+$regionProvider = $objectManager->get(\Magento\Customer\ViewModel\Address\RegionProvider::class);
+// $viewModel = $block->getViewModel();
+// $regionProvider = $block->getRegionProvider();
+?>
+
+<?php
+define('BUILD_VERSION', '1.0.1');
+define('DEBUG_MODE', false); // DEBUG
+define('PHONE_INPUT_ELEMENT', 'input[name="telephone"]');
+$mage_block= $block->getLayout()->createBlock('Magecomp\Whatsappcountryflag\Block\Intphoneinput');
+?>
+<?php if (DEBUG_MODE): ?>
+<pre>
+                DetectByIp: <?= /* @noEscape*/ $mage_block->getDetectByIp(); ?>
+        <br />
+                CurrentIP: <?php print_r($mage_block->getCustomerIPDetails()); ?>
+    </pre>
+<?php endif; ?>
+<script type="text/javascript">
+var int_phone_input_element = '<?= /* @noEscape*/ PHONE_INPUT_ELEMENT; ?>';
+</script>
+<script>
+require([
+        'jquery',
+        'Magecomp_Whatsappcountryflag/js/intlTelInput.min'
+    ],
+    function($) {
+
+        $(document).ready(function () {
+            let errorDiv = $('<div>', {
+                id: 'smserror',
+                name: 'smserror',
+                generated: 'true',
+                class: 'mage-error',
+                css: { marginTop: '-15px' }
+            });
+
+            $(".field.telephone.required").after(errorDiv); // Insert after the telephone field
+        });
+
+        function Smsresetdata() {
+            jQuery(int_phone_input_element).removeClass('mage-error');
+            jQuery('#smserror').html('');
+        }
+
+        function Smstoggeldata(Elementid) {
+            jQuery(Elementid).toggle();
+        }
+        <?php if ($mage_block->isEnabled()): ?>
+        var country_flag = "<?= /* @noEscape*/ $mage_block->getDefualtCountry();?>";
+        <?php if ($mage_block->getDetectByIp()):?>
+        country_flag = "<?= /* @noEscape*/ $mage_block->getCustomerIPDetails();?>";
+        <?php endif; ?>
+
+        jQuery(int_phone_input_element).intlTelInput({
+            initialCountry: country_flag
+        });
+        jQuery(int_phone_input_element).removeAttr('placeholder');
+
+        jQuery('#telephone').keyup(function() {
+            Smsresetdata();
+            var str = jQuery(".selected-flag").attr("title");
+            var countrycodeval = str.split('+')[1];
+            var mobilelength = jQuery(int_phone_input_element).val().length;
+            var mobile = countrycodeval + jQuery(int_phone_input_element).val();
+
+            jQuery("#countryreg").val(countrycodeval);
+            var temp = true;
+            if (mobile == null || mobile == '') {
+                temp = false;
+                jQuery(int_phone_input_element).addClass('mage-error');
+                $('#smserror').html('<?= /* @noEscape*/ __('This is a required field.') ?>');
+            }
+            if (!$.isNumeric(mobile) || mobile.substring(0, 1) == '+' || mobile.substring(0, 1) == '-') {
+                temp = false;
+                jQuery(int_phone_input_element).addClass('mage-error');
+                $('#smserror').html(
+                    '<?= /* @noEscape*/ __('Make sure, you have entered valid WhatsApp Number.') ?>');
+            }
+            var countrycode = jQuery(".flag-container > .country-list > .active").attr("data-country-code");
+            if(countrycode == undefined || countrycode == "")
+            {
+                const element = document.querySelector('.iti-flag');
+                if (element) {
+                    const classList = element.className.split(' '); 
+                    countrycode = classList[classList.indexOf('iti-flag') + 1]; 
+                }
+            }
+            $.ajax({
+                type: "POST",
+                url: '<?= /* @noEscape*/ $block->getUrl('whatsappcountryflag/customer/validatephone')?>',
+                data: {
+                    'mobile': mobile,
+                    'countrycode': countrycode,
+                    'mobilelength': mobilelength,
+                    'country_id': countrycodeval
+                },
+                success: function(data) {
+                    if (data.validate == true) {
+                        $('#smserror').html('<?= /* @noEscape*/ __('') ?>');
+                        jQuery('button.action.save.primary[data-action="save-address"]').prop(
+                            "disabled", false);
+                    } else {
+                        if (temp == true) {
+                            $('#smserror').html(data.message);
+                        }
+                        jQuery('button.action.save.primary[data-action="save-address"]').prop(
+                            "disabled", true);
+                    }
+                },
+                error: function(data) {
+                    $('#smserror').html(
+                        '<?= /* @noEscape*/ __('Something went wrong, Try again later.') ?>'
+                        );
+                }
+            });
+        });
+        jQuery('.country-list li').click(function() {
+            jQuery(int_phone_input_element).val('');
+        });
+        jQuery(document).on('click', '.form-address-edit .actions-toolbar .action.save.primary', function(event) {
+            var countryList = { 
+                        'AF': '93', 'AX': '358', 'AL': '355', 'DZ': '213',
+                        'AS': '1', 'AD': '376', 'AO': '244', 'AI': '1',
+                        'AQ': '672', 'AG': '1', 'AR': '54', 'AM': '374',
+                        'AU': '61', 'AT': '43', 'AZ': '994', 'BS': '1',
+                        'BH': '973', 'BD': '880', 'BB': '1', 'BY': '375',
+                        'BE': '32', 'BZ': '501', 'BJ': '229', 'BM': '1',
+                        'BT': '975', 'BO': '591', 'BA': '387', 'BW': '267',
+                        'BR': '55', 'BG': '359', 'BF': '226', 'BI': '257',
+                        'KH': '855', 'CM': '237', 'CA': '1', 'CV': '238',
+                        'CF': '236', 'TD': '235', 'CL': '56', 'CN': '86',
+                        'CO': '57', 'KM': '269', 'CG': '242', 'CD': '243',
+                        'CR': '506', 'CI': '225', 'HR': '385', 'CU': '53',
+                        'CY': '357', 'CZ': '420', 'DK': '45', 'DJ': '253',
+                        'DM': '1', 'DO': '1', 'EC': '593', 'EG': '20',
+                        'SV': '503', 'GQ': '240', 'ER': '291', 'EE': '372',
+                        'ET': '251', 'FI': '358', 'FR': '33', 'DE': '49',
+                        'GH': '233', 'GR': '30', 'IN': '91', 'US': '1',
+                        'AW': '297', 'BV': null, 'IO': '246', 'VG': '1',
+                        'BN': '673', 'BQ': '599', 'KY': '1',  'CX': '61',
+                        'CC': '61', 'CK': '682', 'CW': '599', 'SZ': '268',
+                        'FK': '500', 'FO': '298', 'FJ': '679',
+                        'GF': '594', 'PF': '689', 'TF': null, 'GA': '241',
+                        'GM': '220', 'GE': '995', 'GI': '350', 'GL': '299',
+                        'GD': '1', 'GP': '590', 'GU': '1', 'GT': '502',
+                        'GG': '44', 'GN': '224', 'GW': '245', 'GY': '592',
+                        'HT': '509', 'HM': null, 'HN': '504', 'HK': '852',
+                        'HU': '36', 'IS': '354', 'ID': '62', 'IR': '98',
+                        'IQ': '964', 'IE': '353', 'IM': '44', 'IL': '972',
+                        'IT': '39', 'JM': '1', 'JP': '81', 'JE': '44',
+                        'JO': '962', 'KZ': '7', 'KE': '254', 'KI': '686',
+                        'KW': '965', 'KG': '996', 'LA': '856', 'LV': '371',
+                        'LB': '961', 'LS': '266', 'LR': '231', 'LY': '218',
+                        'LI': '423', 'LT': '370', 'LU': '352', 'MO': '853',
+                        'MG': '261', 'MW': '265', 'MY': '60', 'MV': '960',
+                        'ML': '223', 'MT': '356', 'MH': '692', 'MQ': '596',
+                        'MR': '222', 'MU': '230', 'YT': '262', 'MX': '52',
+                        'FM': '691', 'MD': '373', 'MC': '377', 'MN': '976',
+                        'ME': '382', 'MS': '1', 'MA': '212', 'MZ': '258',
+                        'MM': '95', 'NA': '264', 'NR': '674', 'NP': '977',
+                        'NL': '31', 'NC': '687', 'NZ': '64', 'NI': '505',
+                        'NE': '227', 'NG': '234', 'NU': '683', 'NF': '672',
+                        'KP': '850', 'MK': '389', 'MP': '1', 'NO': '47',
+                        'OM': '968', 'PK': '92', 'PW': '680', 'PS': '970',
+                        'PA': '507', 'PG': '675', 'PY': '595', 'PE': '51',
+                        'PH': '63', 'PN': '872', 'PL': '48', 'PT': '351',
+                        'PR': '1', 'QA': '974', 'RE': '262', 'RO': '40',
+                        'RU': '7', 'RW': '250', 'WS': '685', 'SM': '378',
+                        'ST': '239', 'SA': '966', 'SN': '221', 'RS': '381',
+                        'SC': '248', 'SL': '232', 'SG': '65', 'SX': '1',
+                        'SK': '421', 'SI': '386', 'SB': '677', 'SO': '252',
+                        'ZA': '27', 'GS': null, 'KR': '82', 'SS': '211',
+                        'ES': '34', 'LK': '94', 'BL': '590', 'KN': '1',
+                        'LC': '1', 'MF': '590', 'PM': '508', 'VC': '1',
+                        'SD': '249', 'SR': '597', 'SJ': '47', 'SE': '46',
+                        'CH': '41', 'SY': '963', 'TW': '886', 'TJ': '992',
+                        'TZ': '255', 'TH': '66', 'TL': '670', 'TG': '228',
+                        'TK': '690', 'TO': '676', 'TT': '1', 'TN': '216',
+                        'TR': '90', 'TM': '993', 'TC': '1', 'TV': '688',
+                        'UG': '256', 'UA': '380', 'AE': '971', 'GB': '44',
+                        'UM': '1', 'UY': '598', 'UZ': '998', 'VU': '678',
+                        'VA': '379', 'VE': '58', 'VN': '84', 'WF': '681',
+                        'EH': '212', 'YE': '967', 'ZM': '260', 'ZW': '263'
+                    };
+
+            var mobile = jQuery('input[name="telephone"]').val();
+            if (Object.values(countryList).includes(mobile)) {
+                jQuery(int_phone_input_element).addClass('mage-error');
+                $('#smserror').html('<?= /* @noEscape*/ __('This is a required field.') ?>');
+                event.preventDefault();
+
+            }
+
+        });
+        jQuery(int_phone_input_element).blur(function() {
+            var str = jQuery(".selected-flag").attr("title");
+            var countrycodeval = str.split('+')[1];
+            var mobile = jQuery(int_phone_input_element).val();
+            var strFirstThree = mobile.substring(0, countrycodeval.length);
+            if (mobile.indexOf(countrycodeval) != -1) {
+                mobile.replace(countrycodeval, '');
+            }
+            if (countrycodeval != strFirstThree) {
+                jQuery(int_phone_input_element).val(countrycodeval + mobile);
+            }
+
+        });
+        <?php endif; ?>
+
+    });
+</script>

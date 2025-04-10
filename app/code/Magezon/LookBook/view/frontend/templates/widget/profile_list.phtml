@@ -1,0 +1,19 @@
+<?php
+/**
+ * @var $block Magezon\LookBook\Block\Widget\ProfileList
+ */
+$title = $this->getData('title');
+$html  = $this->getProfileListHtml();
+?>
+<?php if ($html) { ?>
+    <div class="lookbook-widget">
+        <?php if ($title) { ?>
+            <div class="lookbook-widget-title">
+                <h3><?= $this->escapeHtml($title) ?></h3>
+            </div>
+        <?php } ?>
+        <div class="lookbook-profies">
+            <?= $html ?>
+        </div>
+    </div>
+<?php } ?>

@@ -1,0 +1,29 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Walletsystem
+ * @author    Webkul
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+?>
+<div class="wk_ws_main">
+    <div class="wk_ws_reasonbody" id="wk_ws_reasonbody">
+        <form id="wallet_reason_form" method="get" enctype="multipart/form-data"
+        action="<?=$block->escapeUrl($block->getUrl('walletsystem/wallet/disapprove'))?>">
+            <?= $block->getBlockHtml('formkey')?>
+            <h4 class="modal-title"><?=$block->escapeHtml(__('Reason for Cancel:')) ?></h4>
+            <textarea class="wk_ws_textarea_reason" name="reason" required></textarea>
+            <input type="hidden" name="entity_id" id="wk_ws_transaction_id" value="0"/>
+        </form>
+    </div>
+</div>
+<script type="text/x-magento-init">
+{
+    "*": {
+        "WkWalletsystemTransactionCancel": "{}"
+    }
+}
+</script>

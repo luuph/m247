@@ -1,0 +1,58 @@
+"Affiliate Links and Banners","Affiliate Links and Banners"
+"Save Banner","Save Banner"
+"Save and Continue Edit","Save and Continue Edit"
+"Edit Banner ""%1""","Edit Banner ""%1"""
+"New Banner","New Banner"
+"Banner Information","Banner Information"
+Title,Title
+Content,Content
+"Redirect Url","Redirect Url"
+"If empty, home page will be used.","If empty, home page will be used."
+"Related Campaign","Related Campaign"
+"Only affiliates who are in above campaign can see this banner.","Only affiliates who are in above campaign can see this banner."
+"Rel Nofollow","Rel Nofollow"
+"Put the rel=""nofollow"" attribute on the link.","Put the rel=""nofollow"" attribute on the link."
+Status,Status
+"The Banner has been deleted.","The Banner has been deleted."
+"Something went wrong while deleting banner data. Please review the action log and try again.","Something went wrong while deleting banner data. Please review the action log and try again."
+"We cannot find a banner to delete.","We cannot find a banner to delete."
+"This banner no longer exists.","This banner no longer exists."
+Banners,Banners
+"Edit Banner","Edit Banner"
+"Cannot delete the banner #%1","Cannot delete the banner #%1"
+"A total of %1 record(s) have been deleted.","A total of %1 record(s) have been deleted."
+"This banner does not exist.","This banner does not exist."
+"You saved the banner.","You saved the banner."
+"We cannot save the banner.","We cannot save the banner."
+"We cannot delete campaign.","We cannot delete campaign."
+Enabled,Enabled
+Disabled,Disabled
+"Banner id required","Banner id required"
+"Requested entity doesn't exist","Requested entity doesn't exist"
+"Could not delete the banner: %1","Could not delete the banner: %1"
+"The extension is disabled.","The extension is disabled."
+"The customer %1 has not become an affiliate","The customer %1 has not become an affiliate"
+name,name
+Delete,Delete
+Add,Add
+Action,Action
+label,label
+"Delete ""%1""","Delete ""%1"""
+"Are you sure?","Are you sure?"
+"Get banner link","Get banner link"
+Link,Link
+"Copy and past this source code into your website or forum.","Copy and past this source code into your website or forum."
+"No banner available","No banner available"
+"Link and Script Refer Banner","Link and Script Refer Banner"
+"Enable Banner","Enable Banner"
+"Allow banner feature for affiliate","Allow banner feature for affiliate"
+"Add New Banner","Add New Banner"
+"Delete Banners","Delete Banners"
+"Are you sure you want to delete selected banners?","Are you sure you want to delete selected banners?"
+ID,ID
+URL,URL
+Campaign,Campaign
+Created,Created
+"Add New Campaign","Add New Campaign"
+"Delete Campaigns","Delete Campaigns"
+"Are you sure you wan't to delete selected Campaigns?","Are you sure you wan't to delete selected Campaigns?"

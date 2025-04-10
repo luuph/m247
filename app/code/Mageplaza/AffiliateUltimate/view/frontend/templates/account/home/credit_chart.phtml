@@ -1,0 +1,78 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_AffiliateUltimate
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+/** @var \Mageplaza\AffiliateUltimate\Block\Account\Home\CreditChart $block */
+
+?>
+<?php if ($block->getAffiliateHelper()->getCurrentAffiliate()->getId()): ?>
+    <div class="credit-balance-chart">
+        <div class="box-head underline-head">
+            <h2><?= /* @noEscape */
+                __('Balance Report') ?></h2>
+        </div>
+        <div class="months" style="margin-top: 20px">
+            <select class="select-month-number">
+                <?php foreach ($block->getSelectedMonthNumber() as $month) : ?>
+                    <option value="<?= /* @noEscape  */ $month['value'] ?>" >
+                        <?= /* @noEscape  */ $month['label']  ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <div class="dashboard-item-content-chart">
+            <canvas id="<?= /* @noEscape  */ $block->getComponentName() ?>"></canvas>
+        </div>
+    </div>
+    <script type="text/javascript">
+        require(['jquery',  'mage/translate', 'Mageplaza_AffiliateUltimate/js/create-chart'], function($, $t){
+            $(document).ready(function(){
+                ajaxChart(6);
+                $('.select-month-number').change(function (){
+                    ajaxChart(this.value);
+                });
+            });
+
+            function ajaxChart(month) {
+                $.ajax({
+                    url: '<?= /* @noEscape */ $block->getUrl('*/account/credit') ?>',
+                    type: 'POST',
+                    data: {'month' : month},
+                    dataType: 'json',
+                    showLoader: true,
+                    success: function (response) {
+                        $.mageplaza.affiliateChart(
+                            {
+                                'chartData' : response,
+                                'chartElement' : '<?= /* @noEscape  */ $block->getComponentName() ?>'}
+                        )
+                    },
+                    error: function (error) {
+                        alert({
+                            title: $t('Request Error'),
+                            content: error.status + ' ' + error.statusText
+                        });
+                    }
+                });
+            }
+        });
+    </script>
+<?php endif; ?>
+

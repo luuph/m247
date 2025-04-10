@@ -1,0 +1,32 @@
+type Query {
+  lookBookCategories: [LookBookCategory] @resolver(class: "Unveels\\LookBookApi\\Model\\Resolver\\LookBookCategories")
+}
+
+type LookBookCategory {
+  category_id: Int
+  identifier: String
+  title: String
+  is_active: Int
+  position: Int
+  include_in_menu: Int
+  canonical_url: String
+  image: String
+  description: String
+  meta_title: String
+  meta_keywords: String
+  meta_description: String
+  store_id: [Int]
+  profiles: [Profile]
+}
+
+type Profile {
+  profile_id: Int
+  identifier: String
+  name: String
+  description: String
+  image: String
+  marker: String
+  page_layout: String
+  try_on_url: String
+  store_id: [Int]
+}

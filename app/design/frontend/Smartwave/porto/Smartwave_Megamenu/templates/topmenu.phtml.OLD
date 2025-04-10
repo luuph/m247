@@ -1,0 +1,61 @@
+<?php
+/**
+ * Top menu for store
+ *
+ * @see \Smartwave\Megamenu\Block\Topmenu
+ */
+?>
+
+<?php
+    $_helper = $this->helper('Smartwave\Megamenu\Helper\Data');
+    $_config = $_helper->getConfig('sw_megamenu');
+    $columnsLimit = 0;
+    $header_type = $_helper->getConfig('porto_settings/header/header_type');
+
+    if ($_config['general']['enable']) {
+        // Get the megamenu HTML
+        $_menu = $block->getMegamenuHtml();
+        
+        // Modify the menu to remove the dropdown (submenu), toggle, and parent class for "Blog"
+        $_menu = preg_replace_callback('/<li class="ui-menu-item level0 fullwidth parent" role="presentation">(.*?)<\/li>/s', function ($matches) {
+            // Check if the menu item is 'Blog'
+            if (strpos($matches[1], 'Blog') !== false) {
+                // Remove the submenu <div class="level0 submenu"> and toggle <div class="open-children-toggle">
+                $matches[1] = preg_replace('/<div class="level0 submenu">(.*?)<\/div>/s', '', $matches[1]);
+                $matches[1] = preg_replace('/<div class="open-children-toggle"><\/div>/s', '', $matches[1]);
+                // Remove the "parent" class from the <li> element
+                return '<li class="ui-menu-item level0 fullwidth" role="presentation">' . $matches[1] . '</li>';
+            }
+            return $matches[0]; // return the original li if it's not "Blog"
+        }, $_menu);
+?>
+
+<nav class="navigation sw-megamenu <?php if ($header_type == 7 || $header_type == 8 || $header_type == 18 || $header_type == 22 || $header_type == 25): ?>side-megamenu<?php endif; ?>" role="navigation">
+    <ul>
+        <?php echo $_menu; ?>
+    </ul>
+</nav>
+
+<script type="text/javascript">
+    require([
+        'jquery',
+        'Smartwave_Megamenu/js/sw_megamenu'
+    ], function ($) {
+        $(".sw-megamenu").swMegamenu();
+    });
+</script>
+
+<?php
+    } else {
+        $_menu = $block->getHtml('level-top', 'submenu', $columnsLimit);
+?>
+
+<nav class="navigation sw-megamenu" role="navigation">
+    <ul data-mage-init='{"menu":{"responsive":true, "expanded":true, "position":{"my":"left top","at":"left bottom"}}}'>
+        <?php /* @escapeNotVerified */ echo $_menu; ?>
+    </ul>
+</nav>
+
+<?php
+    }
+?>

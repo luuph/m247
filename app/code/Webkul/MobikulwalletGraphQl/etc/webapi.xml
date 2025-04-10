@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--/**
+* Webkul Software.
+*
+* @category  Webkul
+* @package   Webkul_MobikulwalletGraphQl
+* @author    Webkul Software Private Limited
+* @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+* @license   https://store.webkul.com/license.html
+*/-->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/customer/accontdetails/" method="GET">
+        <service class="Webkul\MobikulwalletGraphQl\Api\AccountdetailsInterface" method="getAccountDetails"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="/V1/customer/request-delete/" method="GET">
+        <service class="Webkul\MobikulwalletGraphQl\Api\AccountdetailsInterface" method="deleteRequest"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="/V1/customer/save-account-information/" method="GET">
+        <service class="Webkul\MobikulwalletGraphQl\Api\AccountdetailsInterface" method="saveAccountDetails"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+</routes>

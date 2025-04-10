@@ -1,0 +1,12 @@
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="sms_verify">
+        <column xsi:type="int" name="sms_verify_id"  unsigned="true" identity="true" nullable="false" comment="ID"/>
+        <column xsi:type="varchar" name="mobile_number" length="15" nullable="false" comment="Mobile Number"/>
+        <column xsi:type="varchar" name="otp" length="12" nullable="false" comment="Otp"/>
+        <column xsi:type="smallint" name="isverify"  unsigned="true" nullable="false" default="0"  comment="Is Verify"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="sms_verify_id"/>
+        </constraint>
+    </table>
+</schema>    

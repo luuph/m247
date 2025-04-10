@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Checkout\Model\ShippingInformationManagement">
+        <plugin name="Unveels_OrderDetails_Plugin_Model_Checkout_ShippingInformationManagementPlugin" sortOrder="1"
+                type="Unveels\OrderDetails\Plugin\Model\Checkout\ShippingInformationManagementPlugin" />
+    </type>
+    <type name="Magento\Checkout\Model\PaymentInformationManagement">
+        <plugin name="Unveels_OrderDetails_Plugin_Model_Checkout_PaymentInformationManagementPlugin" sortOrder="1"
+                type="Unveels\OrderDetails\Plugin\Model\Checkout\PaymentInformationManagementPlugin" />
+    </type>
+    <type name="Magento\Checkout\Model\GuestPaymentInformationManagement">
+        <plugin name="Unveels_OrderDetails_Magento_Quote_Model_GuestPaymentInformationManagementPlugin" sortOrder="1"
+                type="Unveels\OrderDetails\Plugin\Model\Checkout\GuestPaymentInformationManagementPlugin" />
+    </type>
+</config>

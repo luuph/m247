@@ -1,0 +1,21 @@
+{
+  "name": "bsscommerce/gift-card-graph-ql",
+  "version": "1.0.4",
+  "description": "Magento 2 Gift Card GraphQL API Module",
+  "type": "magento2-module",
+  "require": {
+    "magento/framework": "*",
+    "bsscommerce/gift-card": "1.0.*"
+  },
+  "license": [
+    ""
+  ],
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Bss\\GiftCardGraphQl\\": ""
+    }
+  }
+}

@@ -1,0 +1,52 @@
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_AffiliateUltimate
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+fieldset#banner_statistic .admin__field.field{
+    display: inline-block;
+    margin: 0 10px;
+    padding: 15px 0;
+    width: 30%;
+    font-size: 25px;
+    color: #fff;
+    font-weight: 600;
+    line-height: 1.33
+}
+
+fieldset#banner_statistic .note.admin__field-note {
+    color: #fff;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+fieldset#banner_statistic .admin__field-control.control {
+    margin-left: 25px;
+}
+
+.admin__field.field.field-ctr.with-note.no-label {
+    background-color: #00bcd0;
+}
+
+.admin__field.field.field-click.with-note.no-label {
+    background-color: #ff9f39;
+}
+
+.admin__field.field.field-impression.with-note.no-label {
+    background-color: #42b05a;
+}

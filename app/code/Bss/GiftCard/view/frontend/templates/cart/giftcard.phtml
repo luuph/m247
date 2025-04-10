@@ -20,6 +20,17 @@
 
 ?>
 
+<?php
+    /** @var \Magento\Checkout\Model\Session $checkoutSession */
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $checkoutSession = $objectManager->get('Magento\Checkout\Model\Session');
+
+    /** @var \Magento\Quote\Model\Quote $quote */
+    $quote = $checkoutSession->getQuote();
+    $items_rewards_discount = $quote->getItemsRewardsDiscount();
+    $coupon_code = $quote->getCouponCode();
+?>
+
 <?php /** @var  $block \Bss\GiftCard\Block\Cart\GiftCard */?>
 
 <?php $giftCardApply = $block->getGiftCardApply(); ?>
@@ -33,67 +44,91 @@
                 <?= $block->escapeHtml(__('Gift Card Options')) ?>
             </strong>
         </div>
-
-        <div class="content" data-role="content" aria-labelledby="block-bss-giftcard-heading">
-            <div>
-                <?php if (!empty($giftCardApply)) : ?>
-                    <?php foreach ($giftCardApply as $info) : ?>
-                        <div>
-                            <span class="title title-gift-code"><?= $block->escapeHtml($info['giftcard_code']) ?></span>
-                            <a class="bss-giftcard-remove" href="<?= $block->escapeHtml($block->getRemoveUrl($info)) ?>"></a>
-                        </div>
-                    <?php endforeach; ?>
-                <?php endif; ?>
+        <?php if($coupon_code || $items_rewards_discount > 0): ?>
+            <div class="content" data-role="content" aria-labelledby="block-bss-giftcard-heading">
+                <h5>You cannot Apply more then One Discount</h5>
             </div>
-            <form id="bss-giftcard-form"
-                  action="<?= $block->escapeHtml($block->getUrl('giftcard/cart/giftCardPost')) ?>"
-                  method="post"
-                  data-mage-init='{"Bss_GiftCard/js/giftcard":{}}'>
-                <?php echo $this->getBlockHtml('formkey')?>
-                <div id="bss-giftcard-code-info" data-bind="scope:'bss-giftcard-code-info'">
-                    <!-- ko template: getTemplate() --><!-- /ko -->
-                    <script type="text/x-magento-init">
-                    {
-                        "#bss-giftcard-code-info": {
-                            "Magento_Ui/js/core/app": {
-                               "components": {
-                                    "bss-giftcard-code-info": {
-                                        "component": "Bss_GiftCard/js/view/cart/code-info"
+        <?php else: ?>
+            <div class="content" data-role="content" aria-labelledby="block-bss-giftcard-heading">
+                <div>
+                    <?php if (!empty($giftCardApply)) : ?>
+                        <?php foreach ($giftCardApply as $info) : ?>
+                            <div>
+                                <span class="title title-gift-code"><?= $block->escapeHtml($info['giftcard_code']) ?></span>
+                                <a class="bss-giftcard-cancel" href="<?= $block->escapeHtml($block->getRemoveUrl($info)) ?>">&#10006; Cancel</a>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </div>
+
+                <?php if (empty($giftCardApply)) : ?>
+                    <form id="bss-giftcard-form"
+                        action="<?= $block->escapeHtml($block->getUrl('giftcard/cart/giftCardPost')) ?>"
+                        method="post"
+                        data-mage-init='{"Bss_GiftCard/js/giftcard":{}}'>
+                        <?php echo $this->getBlockHtml('formkey')?>
+                        <div id="bss-giftcard-code-info" data-bind="scope:'bss-giftcard-code-info'">
+                            <!-- ko template: getTemplate() --><!-- /ko -->
+                            <script type="text/x-magento-init">
+                            {
+                                "#bss-giftcard-code-info": {
+                                    "Magento_Ui/js/core/app": {
+                                    "components": {
+                                            "bss-giftcard-code-info": {
+                                                "component": "Bss_GiftCard/js/view/cart/code-info"
+                                            }
+                                        }
                                     }
                                 }
                             }
-                        }
-                    }
-                    </script>
-                </div>
-
-                <div class="fieldset bss-giftcard">
-                    <input type="hidden" name="remove" id="remove-bss-giftcard" value="0" />
-                    <div class="field">
-                        <label for="bss-giftcard" class="label">
-                            <span><?= $block->escapeHtml(__('Enter Value')) ?></span>
-                        </label>
-                        <div class="control">
-                            <input type="text"
-                                class="input-text"
-                                id="bss-giftcard-code"
-                                name="bss_giftcard_code"
-                                value=""
-                                placeholder="<?= $block->escapeHtml(__('Enter Gift Code'));?>" />
+                            </script>
                         </div>
-                    </div>
-                    <div class="bss-gc-actions-toolbar">
-                        <button class="action bss-giftcard-apply primary"
-                            type="button" value="<?= $block->escapeHtml(__('Apply')) ?>">
-                            <span><?= $block->escapeHtml(__('Apply')) ?></span>
-                        </button>
-                        <button class="action bss-giftcard-check primary"
-                            type="button" value="<?= $block->escapeHtml(__('Check Status')) ?>">
-                            <span><?= $block->escapeHtml(__('Check Status')) ?></span>
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
+
+                        <div class="fieldset bss-giftcard">
+                            <input type="hidden" name="remove" id="remove-bss-giftcard" value="0" />
+                            <div class="field">
+                                <label for="bss-giftcard" class="label">
+                                    <span><?= $block->escapeHtml(__('Enter Value')) ?></span>
+                                </label>
+                                <div class="control">
+                                    <input type="text"
+                                        class="input-text"
+                                        id="bss-giftcard-code"
+                                        name="bss_giftcard_code"
+                                        value=""
+                                        placeholder="<?= $block->escapeHtml(__('Enter Gift Code'));?>" />
+                                </div>
+                            </div>
+                            <div class="bss-gc-actions-toolbar">
+                                <button class="action bss-giftcard-apply primary"
+                                    type="button" value="<?= $block->escapeHtml(__('Apply')) ?>">
+                                    <span><?= $block->escapeHtml(__('Apply')) ?></span>
+                                </button>
+                                <button class="action bss-giftcard-check primary"
+                                    type="button" value="<?= $block->escapeHtml(__('Check Status')) ?>">
+                                    <span><?= $block->escapeHtml(__('Check Status')) ?></span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                <?php endif;?>
+            </div>
+        <?php endif;?>
     </div>
 <?php endif; ?>
+<style>
+    .bss-giftcard-cancel{
+        background-color: white;
+        color: #ff0f0f;
+        border: 1px solid #ff0f0f;
+        padding: 8px 16px;
+        border-radius: 4px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background-color 0.3s, color 0.3s;
+        margin-left: 10%;
+    }
+</style>

@@ -144,14 +144,9 @@ class Validate extends \Magento\Backend\App\Action
             0,
             30
         );
-        // If $code is null, a code will be generated based on the attribute creation time.
-        if (!$code) {
-            $code = substr(time(), 0, 8);
-        }
         if (!preg_match('/^[a-z][a-z_0-9]{0,29}[a-z0-9]$/', $code)) {
-            $code = 'attr_' . substr($code, 0, 25);
+            $code = 'attr_' . ($code ?: substr(time(), 0, 8));
         }
-        $code = trim($code, '_');
         return $code;
     }
 }

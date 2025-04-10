@@ -1,0 +1,129 @@
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_WebAr
+ * @author    Webkul Software Private Limited
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+model-viewer {
+    width: 100%;
+    height: 400px;
+}
+
+model-viewer {
+    margin:80px auto;
+}
+@media (max-width: 425px) and (min-width: 325px){
+    model-viewer {
+        margin:0px auto
+    }
+}
+@media (max-width: 324px){
+    model-viewer {
+        margin:-60px auto
+    }
+}
+
+/* This keeps child nodes hidden while the element loads */
+:not(:defined)>* {
+    display: none;
+}
+
+#ar-button {
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    background-position: 12px 50%;
+    background-color: #fff;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    bottom: 16px;
+    padding: 0px 20px 0px 20px;
+    font-family: Roboto Regular, Helvetica Neue, sans-serif;
+    font-size: 14px;
+    color: #4285f4;
+    height: 36px;
+    line-height: 36px;
+    border-radius: 18px;
+    border: 1px solid #DADCE0;
+}
+
+#ar-button:active {
+    background-color: #E8EAED;
+}
+
+#ar-button:focus {
+    outline: none;
+}
+
+#ar-button:focus-visible {
+    outline: 1px solid #4285f4;
+}
+
+@keyframes circle {
+    from {
+        transform: translateX(-50%) rotate(0deg) translateX(50px) rotate(0deg);
+    }
+
+    to {
+        transform: translateX(-50%) rotate(360deg) translateX(50px) rotate(-360deg);
+    }
+}
+
+@keyframes elongate {
+    from {
+        transform: translateX(100px);
+    }
+
+    to {
+        transform: translateX(-100px);
+    }
+}
+
+model-viewer>#ar-prompt {
+    position: absolute;
+    left: 50%;
+    bottom: 75px;
+    animation: elongate 2s infinite ease-in-out alternate;
+    display: none;
+}
+
+model-viewer[ar-status="session-started"]>#ar-prompt {
+    display: block;
+}
+
+model-viewer>#ar-prompt>img {
+    animation: circle 4s linear infinite;
+}
+/****CSS ADDED FOR PRODUCT PAGE***/
+#error {
+    background-color: red;
+    border-radius: 16px;
+    padding: 16px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    transition: opacity 5.s;
+}
+#error.hide {
+    opacity: 1;
+    visibility: show;
+    transition: visibility 2s, opacity 1s 1s;
+}
+.fotorama__stage.fotorama__shadows--right:after,
+.fotorama__nav.fotorama__shadows--right:after {
+    background-image: none;
+    background-position: 100% 0, 100% 0;
+    right: 0;
+}
+.fotorama__stage.fotorama__shadows--left:before,
+.fotorama__nav.fotorama__shadows--left:before {
+    background-image: none;
+    background-position: 0 0, 0 0;
+    top: 0;
+}
+/*******/

@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Walletsystem
+ * @author    Webkul
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="sales_transactions.grid.container">
+            <referenceBlock name="sales.transactions.grid">
+                <referenceBlock name="sales.transactions.grid.columnSet">
+                    <block class="Webkul\Walletsystem\Block\Adminhtml\MethodColumn" name="method" as="method">
+                        <arguments>
+                            <argument name="id" xsi:type="string">method</argument>
+                            <argument name="header" xsi:type="string" translate="true">Payment Method</argument>
+                            <argument name="type" xsi:type="string">options</argument>
+                            <argument name="index" xsi:type="string">method</argument>
+                            <argument name="options" xsi:type="options" model="Magento\Payment\Model\ResourceModel\Grid\TypeList"/>
+                            <argument name="option_groups" xsi:type="options" model="Magento\Payment\Model\ResourceModel\Grid\GroupList"/>
+                            <argument name="header_css_class" xsi:type="string">col-method</argument>
+                            <argument name="column_css_class" xsi:type="string">col-method</argument>
+                        </arguments>
+                    </block>
+                </referenceBlock>
+            </referenceBlock>
+        </referenceBlock>
+    </body>
+</page>

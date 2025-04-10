@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+   <head>
+         <script src="Unveels_Password::js/password.js"/>
+         <css src="Unveels_Password::css/password.css"/>
+   </head>
+    <body>
+      <referenceContainer name="login.footer">
+        <block class="Unveels\Password\Block\Password" name="password.eye" as="password.eye" template="Unveels_Password::password.phtml"/>
+      </referenceContainer>
+    </body>
+</page>

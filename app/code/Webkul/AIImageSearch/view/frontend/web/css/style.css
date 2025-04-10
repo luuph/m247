@@ -1,0 +1,125 @@
+/**
+ * Webkul Software.
+ *
+ * @category   Webkul
+ * @package    Webkul_AIImageSearch
+ * @author     Webkul Software Private Limited
+ * @copyright  Webkul Software Private Limited (https://webkul.com)
+ * @license    https://store.webkul.com/license.html
+ */
+.action.wk-ai-image-search {
+    cursor: pointer;
+    display: inline-block;
+    background-image: none;
+    background-color: white;
+    color: darkgrey;
+    background: none;
+	box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    border: 0;
+    box-shadow: none;
+    line-height: inherit;
+    margin: 8px;
+    padding: 0;
+    text-decoration: none;
+    text-shadow: none;
+    font-weight: 400;
+    font-size: 10px;
+    position: absolute;
+    right: 35px;
+    top: 7px;
+    z-index: 1;
+	margin-top: 2px;
+}
+
+#wk-ai-recently-searched-image {
+	height: 130px ;
+	width: 100px;
+}
+
+#wk-ai-recent-search {
+	display: flex; 
+	padding-left: 145px; 
+	padding-top: 80px; 
+	position: absolute;
+}
+
+#wk-ai-image-search {
+    max-height: 160px;
+	display: flex; 
+	flex-direction: column;
+}
+
+#wk-ai-recently-orignal-searched-image {
+	display: none;
+}
+
+#wk-ai-searched-image-name {
+	display: none;
+}
+
+#wk-ai-image-search-again-btn {
+	padding: .5em .30em; 
+	border-radius: 2px;
+	background: #cccccc; 
+	cursor: pointer; 
+	user-select: none; 
+	text-align: center;
+	color: #000000;
+}
+
+.crop_image {
+	margin-top: 10px;
+	width: fit-content;
+}
+
+.wk-ai-search-by-image-page {
+	margin: 1em auto;
+	max-width: 800px;
+	display: flex;
+	flex-direction: column;
+    align-content: space-around;
+	flex-wrap: wrap;
+	height: 100%;
+}
+
+.wk-ai-search-by-image-box-2 {
+	text-align: center;
+	padding: 0.5em;
+	max-width: 300px;
+}
+
+#search {
+	padding-right: 100px;
+}
+
+.modal-popup._inner-scroll .modal-inner-wrap {
+    width: 50%;
+}
+
+.wk-ai-image-search-logo {
+    opacity: 0.3;
+    margin-top: -1px;
+}
+
+@media only screen and (max-width: 768px) {
+	.wk-ai-image-search-logo {
+		margin-top: 1.5rem;
+		margin-right: 4.5rem;
+		opacity: 0.6;
+		width: 2rem;
+	}
+	#wk_ai_image_search_icon {
+		margin-right: 50px;
+		width: 20px;	
+	}
+}
+@media only screen and (max-width: 600px) {
+	.modal-popup._inner-scroll .modal-inner-wrap {
+		width: 100%;
+	}
+}
+
+button#search-voice-input {
+    margin-right: 9% !important;
+}

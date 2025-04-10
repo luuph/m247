@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_Shopbybrand
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="page.main.title">
+            <block class="Mageplaza\Shopbybrand\Block\Product\Logo" name="brand.product.logo" before="-" template="product/logo.phtml"/>
+        </referenceContainer>
+        <referenceBlock name="product.info.details">
+            <block class="Mageplaza\Shopbybrand\Block\Product\TabProduct" name="related.brand.product.tab" template="Mageplaza_Shopbybrand::product/tabproduct.phtml" group="detailed_info"
+                   ifconfig="shopbybrand/brandpage/related_products/enabled">
+                <block class="Mageplaza\Shopbybrand\Block\Product\TabProduct" name="related.brand.product.tab.detail"
+                       as="related_product" template="Mageplaza_Shopbybrand::product/tabproduct/list.phtml">
+                </block>
+            </block>
+        </referenceBlock>
+        <referenceContainer name="content.aside">
+            <block class="Mageplaza\Shopbybrand\Block\Product\ProductList\Related" name="catalog.product.related" template="Mageplaza_Shopbybrand::product/list/items.phtml">
+                <arguments>
+                    <argument name="type" xsi:type="string">related</argument>
+                    <argument name="view_model" xsi:type="object">Magento\Catalog\ViewModel\Product\Listing\PreparePostData</argument>
+                </arguments>
+                <block class="Mageplaza\Shopbybrand\Block\Product\ProductList\Related" name="catalog.product.related.brand" template="Mageplaza_Shopbybrand::product/list/items.phtml"/>
+                <block class="Magento\Catalog\Block\Product\ProductList\Item\Container" name="related.product.addto" as="addto">
+                    <block class="Magento\Catalog\Block\Product\ProductList\Item\AddTo\Compare"
+                           name="related.product.addto.compare" as="compare"
+                           template="Magento_Catalog::product/list/addto/compare.phtml"/>
+                </block>
+            </block>
+            <block class="Mageplaza\Shopbybrand\Block\Product\ProductList\Upsell" name="product.info.upsell" template="Mageplaza_Shopbybrand::product/list/items.phtml">
+                <arguments>
+                    <argument name="type" xsi:type="string">upsell</argument>
+                    <argument name="view_model" xsi:type="object">Magento\Catalog\ViewModel\Product\Listing\PreparePostData</argument>
+                </arguments>
+                <block class="Magento\Catalog\Block\Product\ProductList\Item\Container" name="upsell.product.addto" as="addto">
+                    <block class="Magento\Catalog\Block\Product\ProductList\Item\AddTo\Compare"
+                           name="upsell.product.addto.compare" as="compare"
+                           template="Magento_Catalog::product/list/addto/compare.phtml"/>
+                </block>
+            </block>
+            <block class="Magento\Catalog\Block\Product\View\Additional" name="product.info.additional" as="product_additional_data"/>
+        </referenceContainer>
+    </body>
+</page>

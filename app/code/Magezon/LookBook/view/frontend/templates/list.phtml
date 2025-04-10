@@ -1,0 +1,103 @@
+<?php
+$dataHelper       	  = $this->helper('Magezon\LookBook\Helper\Data');
+$layoutType   	  	  = $this->getLayoutType() ?: '';
+$column 		      = $this->getNumberOfCollumn() ?: 3;
+$collection   	  	  = $block->getCollection();
+$reponsiveDesktop     = $dataHelper->getCategoryPageCarouselDesktop();
+$reponsiveTabletL     = $dataHelper->getCategoryPageCarouselTabletL();
+$reponsiveTabletP     = $dataHelper->getCategoryPageCarouselTabletP();
+$reponsiveMobieL      = $dataHelper->getCategoryPageCarouselMobieL();
+$reponsiveMobieP      = $dataHelper->getCategoryPageCarouselMobieP();
+$numberProfileProduct = $dataHelper->getCategoryPageCarouselNumberProfile();
+$navButton            = $dataHelper->getCategoryPageCarouselNavButton();
+$navDot               = $dataHelper->getCategoryPageCarouselDotNav();
+$autoHeight           = $dataHelper->getCategoryPageCarouselAutoHeight();
+$loop                 = $dataHelper->getCategoryPageCarouselLoop();
+$autoPlay             = $dataHelper->getCategoryPageCarouselAutoPlay();
+$autoPlayTimeOut      = $dataHelper->getCategoryPageCarouselAutoPlayTimeout();
+$pauseOnMouseHover    = $dataHelper->getCategoryPageCarouselPauseOnMouseHover();
+$rightToLeft          = $dataHelper->getCategoryPageCarouselRightToLeft();
+?>
+<?php if ($collection->count()) { ?>
+	<?php if ($layoutType == 'grid' || $layoutType == 'masonry') { ?>
+		<div class="lookbook-body-wraper">
+		    <div class="lookbook-profiles mgz-grid-col-xl-<?= $column ?> mgz-grid-col-lg-<?= $column ?> mgz-grid-col-md-<?= $column ?>">
+		        <?php foreach ($collection as $profile) { ?>
+		        	<?php $categoryList = $profile->getCategoryList();
+				    $classes = '';
+				    foreach ($categoryList as $key => $category) {
+				        $classes .= 'cat-' . $category->getIdentifier();
+				        isset($categoryList[$key + 1]) ? $classes .= ' ' : '';
+				    }
+					?>
+					<div class="lookbook-profile <?= $classes ?>">
+						<div class="lookbook-profile-inner">
+							<div class="profile-image">
+								<a href="<?= $profile->getUrl() ?>">
+									<img src="<?= $profile->getImageUrl() ?>" alt="<?= $block->escapeHtml($profile->getTitle()) ?>">
+								</a>
+							</div>
+							<div class="profile-content">
+								<div class="profile-title">
+									<a href="<?= $profile->getUrl() ?>"><h3><?= $profile->getTitle() ?></h3></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				<?php } ?>
+		    </div>
+		</div>
+		<?php if ($block->getShowPager()) { ?>
+		    <div class="lookbook-pagination">
+		        <?= $this->getPagerHtml() ?>
+		    </div>
+		<?php } ?>
+		<?php if ($layoutType == "masonry") { ?>
+			<script>
+				require([ 'jquery', 'Magezon_LookBook/js/isotope/isotope.pkgd.min'], function($, Isotope) {
+			        new Isotope('.lookbook-profiles', {
+			            percentPosition: true,
+			            itemSelector: '.lookbook-profile',
+			            transitionDuration: 500,
+			            resize: true
+			        });
+			    });
+			</script>
+		<?php } ?>
+	<?php } else { ?>
+		<div class="lookbook-carousel owl-carousel">
+			<?php foreach ($collection as $profile) { ?>
+				<?= $this->getProfileHtml($profile) ?>
+			<?php } ?>
+		</div>
+		<script>
+			require(['jquery', 'Magezon_Core/js/owl.carousel.min'], function($) {
+		        $(".lookbook-carousel").owlCarousel({
+		        	lazyLoad: false,
+		            items: <?= $numberProfileProduct ?>,
+		            nav: <?= $navButton ?>,
+		            dots: <?= $navDot ?>,
+		            autoHeight: <?= $autoHeight ?>,
+		            loop: <?= $loop ?>,
+		            autoplay: <?= $autoPlay ?>,
+		            autoplayTimeout: <?= $autoPlayTimeOut ?>,
+		            autoplayHoverPause: <?= $pauseOnMouseHover ?>,
+		            rtl: <?= $rightToLeft ?>,
+		            navText : [
+		                '<i class="fas mgz-fa-chevron-left" aria-hidden="true"></i>',
+		                '<i class="fas mgz-fa-chevron-right" aria-hidden="true"></i>'
+		            ],
+		            responsive: {
+		                0: {'items': <?= $reponsiveMobieP ?>},    
+		                544: {'items': <?= $reponsiveMobieL ?>},
+		                768: {'items': <?= $reponsiveTabletP ?>},
+		                992: {'items': <?= $reponsiveTabletL ?>},
+		                1200: {'items': <?= $reponsiveDesktop ?>}
+		            }
+		        });
+		    });
+		</script>
+	<?php } ?>
+<?php } else { ?>
+	<h3><?= __('You have no profiles in this category.') ?></h3>
+<?php } ?>

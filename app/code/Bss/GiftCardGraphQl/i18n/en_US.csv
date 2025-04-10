@@ -1,0 +1,7 @@
+'The wishlist configuration is currently disabled.','The wishlist configuration is currently disabled.'
+'The current user cannot perform operations on wishlist','The current user cannot perform operations on wishlist'
+'The wishlist was not found.','The wishlist was not found.'
+'Could not find a product with SKU "%sku"','Could not find a product with SKU "%sku"'
+'The quantity of a wish list item cannot be 0','The quantity of a wish list item cannot be 0'
+'Could not add the product with SKU "%sku" to the wishlist:: %message','Could not add the product with SKU "%sku" to the wishlist:: %message'
+'"itemModel" should be a "%instance" instance','"itemModel" should be a "%instance" instance'

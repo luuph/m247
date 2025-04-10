@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category   Webkul
+ * @package    Webkul_AIImageSearch
+ * @author     Webkul Software Private Limited
+ * @copyright  Webkul Software Private Limited (https://webkul.com)
+ * @license    https://store.webkul.com/license.html
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Webkul_AIImageSearch::css/style.css"/>
+        <css src="Webkul_AIImageSearch::css/ai-search-by-image.css"/>
+        <css src="https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.4/cropper.min.css" src_type="url"/>
+    </head>
+    <body>
+        <referenceBlock name="top.search">
+            <block class="Magento\Framework\View\Element\Template" template="Webkul_AIImageSearch::image_search.phtml" name="wk.ai.image.search.icon">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Webkul\AIImageSearch\ViewModel\ImageSearch</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

@@ -1,0 +1,83 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_AffiliateUltimate
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+use Mageplaza\AffiliateUltimate\Model\Source\TrafficBlock;
+
+/** @var \Mageplaza\AffiliateUltimate\Block\Account\Reports\Traffic $block */
+$data = $block->getTrafficData();
+?>
+<div class="box-account box-info box-affiliate-transaction">
+    <h2 class="legend"><?= /* @noEscape */ __('Traffic Source Statistics') ?></h2>
+    <?php if ($block->getBlock() === TrafficBlock::CUSTOM_BLOCK_LABEL): ?>
+        <div class="box-head">
+            <span><?= $block->escapeHtml(__($block->getCustomBlockContent())) ?></span>
+        </div>
+    <?php else: ?>
+        <div class="box-head" style="padding-bottom: 50px">
+            <?= /* @noEscape */ $block->getCmsBlockContent($block->getBlock()) ?>
+        </div>
+    <?php endif; ?>
+    <table class="data-table" id="affiliate-traffic-statistics">
+        <thead>
+        <tr>
+            <th class="col source"><?= /* @noEscape */ __('Source') ?></th>
+            <th class="col order_count"><?= /* @noEscape */ __('Order Count') ?></th>
+            <th class="col ordered_item_quantity"><?= /* @noEscape */ __('Ordered Item Quantity') ?></th>
+            <th class="col total_invoiced"><?= /* @noEscape */ __('Total Invoiced') ?></th>
+            <th class="col refunded"><?= /* @noEscape */ __('Commission Refunded') ?></th>
+            <th class="col canceled"><?= /* @noEscape */ __('Commission Canceled') ?></th>
+            <th class="col grand_total"><?= /* @noEscape */ __('Total Commission') ?></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td class="col"><?= /* @noEscape */ __('Refer Url') ?></td>
+            <td class="col"><?= /* @noEscape */ $data['refer_url']['order_count'] ?></td>
+            <td class="col"><?= /* @noEscape */ $data['refer_url']['order_item_qty'] ?></td>
+            <td class="col"><?= /* @noEscape */ $data['refer_url']['total_invoiced'] ?></td>
+            <td class="col a-right">
+                <span class="price"><?= /* @noEscape */ $block->formatPrice($data['refer_url']['refunded']) ?></span>
+            </td>
+            <td class="col">
+                <span class="price"><?= /* @noEscape */ $block->formatPrice($data['refer_url']['canceled']) ?></span>
+            </td>
+            <td class="col">
+                <span class="price"><?= /* @noEscape */ $block->formatPrice($data['refer_url']['grand_total']) ?></span>
+            </td>
+        </tr>
+        <tr>
+            <td class="col" style="white-space: nowrap"><?= /* @noEscape */ __('Coupon Code') ?></td>
+            <td class="col"><?= /* @noEscape */ $data['coupon_code']['order_count'] ?></td>
+            <td class="col"><?= /* @noEscape */ $data['coupon_code']['order_item_qty'] ?></td>
+            <td class="col"><?= /* @noEscape */ $data['coupon_code']['total_invoiced'] ?></td>
+            <td class="col a-right">
+                <span class="price"><?= /* @noEscape */ $block->formatPrice($data['coupon_code']['refunded']) ?></span>
+            </td>
+            <td class="col">
+                <span class="price"><?= /* @noEscape */ $block->formatPrice($data['coupon_code']['canceled']) ?></span>
+            </td>
+            <td class="col">
+                <span class="price"><?= /* @noEscape */ $block->formatPrice($data['coupon_code']['grand_total']) ?></span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

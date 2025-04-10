@@ -1,0 +1,37 @@
+<textarea name="marker" data-bind="text: result" rows="10" style="width: 100%; display: none"></textarea>
+<ul class="lookbook-products">
+	<each args="{ data: items, as: 'item'}">
+		<li data-bind="event: { mouseover: $parent.enableDetails, mouseout: $parent.disableDetails }" ko-style="{ 'transform': 'translateY(' + marginTop() + ')', 'transition': 'all .2s ease'}">
+			<p>Sku: <span data-bind="text: sku"></span></p>
+			<p>Marker Label: <span data-bind="text: marker_label"></span></p>
+			<p>Title: <span data-bind="text: title"></span></p>
+			<p>Description: <span data-bind="text: description"></span></p>
+			<p>Popup Position: <span data-bind="text: popup"></span></p>
+		</li>
+	</each>
+</ul>
+
+<div data-bind="attr: {id : uid}">
+<!-- ko if: imgSrc -->
+<div class="wrapper" data-bind="css: { profitWarning: imgSrc() }">
+	<!-- ko if: dragged -->
+		<div class="overlay"></div>
+	<!-- /ko -->
+	
+	<div class="content" data-bind="style: { backgroundImage: 'url('+ imgSrc() +')', 'width': imgWidth() + 'px', 'height': imgHeight() + 'px' }">
+		<each args="{ data: items, as: 'item'}" render="$parent.markerTmpl" >
+		</each>
+	</div>
+</div>
+<div class="btn-action">
+	<button type="button" class="add-marker" data-bind="click: addMarker, i18n: 'Add Marker'"></button>
+</div>
+<!-- /ko -->
+<button class="action-default scalable action-secondary" data-bind="attr: {for: uid}, text: chooseBtnLabel, click: $data.chooseImage, i18n: 'Select Image'"></button>
+<input type="text" data-bind="attr: {id : uid + '-input'}, event: {change: updatedImage}, style: { display: 'none'}"/>
+<img class="preview-image" event="load: onPreviewLoad" attr="src: imgSrc" data-bind="style: { display: 'none'}">
+
+<!-- ko if: imgSrc -->
+	<button type="button" class="del-marker" data-bind="click: deleteImage, i18n: 'Delete Image'"></button>
+<!-- /ko -->
+</div>

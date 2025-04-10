@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_AffiliatePro
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="affiliate_banner_listing_data_source" xsi:type="string">Mageplaza\AffiliatePro\Model\ResourceModel\Banner\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <preference for="Mageplaza\Affiliate\Block\Adminhtml\Campaign\Edit\Tab\Commissions\Arraycommission" type="Mageplaza\AffiliatePro\Plugin\Arraycommission"/>
+
+    <preference for="Mageplaza\AffiliatePro\Api\BannerRepositoryInterface" type="Mageplaza\AffiliatePro\Model\BannerRepository"/>
+    <preference for="Mageplaza\AffiliatePro\Api\Data\BannerInterface" type="Mageplaza\AffiliatePro\Model\Api\Banner"/>
+    <preference for="Mageplaza\AffiliatePro\Api\Data\BannerSearchResultInterface" type="Mageplaza\AffiliatePro\Model\ResourceModel\Banner\Api\Collection"/>
+
+    <type name="Mageplaza\Affiliate\Model\Campaign">
+        <plugin name="affiliate_customer_campaigns" type="Mageplaza\AffiliatePro\Plugin\Model\Campaign"/>
+    </type>
+</config>

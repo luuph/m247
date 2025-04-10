@@ -1,0 +1,295 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MobikulApiGraphql
+ * @author    Webkul Software Private Limited
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+
+declare(strict_types=1);
+
+namespace Webkul\MobikulApiGraphQl\Model\Resolver\Extra;
+
+use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Framework\GraphQl\Config\Element\Field;
+use Magento\Framework\GraphQl\Exception\GraphQlInputException;
+use Magento\Framework\GraphQl\Exception\GraphQlNoSuchEntityException;
+use Magento\Framework\GraphQl\Query\ResolverInterface;
+use Magento\Framework\App\RequestInterface;
+use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
+
+/**
+ * SearchSuggestion resolver
+ */
+class SearchSuggestion extends AbstractMobikul implements ResolverInterface
+{
+    /**
+     * CategoryId variable
+     *
+     * @var mixed
+     */
+    protected $categoryId;
+
+    /**
+     * Currency variable
+     *
+     * @var string
+     */
+    protected $currency;
+
+    /**
+     * @inheritdoc
+     */
+    public function resolve(
+        Field $field,
+        $context,
+        ResolveInfo $info,
+        array $value = null,
+        array $args = null
+    ) {
+        $this->wholeData = $args;
+        try {
+            $this->verifyRequest();
+            $environment = $this->emulate->startEnvironmentEmulation(
+                $this->storeId,
+                \Magento\Framework\App\Area::AREA_FRONTEND,
+                true
+            );
+            $this->store->setCurrentCurrencyCode($this->currency);
+            $helper = $this->searchSuggestionHelper;
+            $query = is_array($this->searchQuery) ? "" : trim($this->searchQuery);
+            $maxQueryLength = $this->helper->getConfigData("catalog/search/max_query_length");
+            $query = substr($this->searchQuery, 0, (int)$maxQueryLength);
+            $tagArray = [];
+            $productArray = [];
+            if ($helper->displayTags()) {
+                $tagCollection = $this->queryCollection
+                    ->addFieldToFilter("store_id", [["finset"=>[$this->storeId]]])
+                    ->setPopularQueryFilter($this->storeId)
+                    ->addFieldToFilter("query_text", ["like"=>"%".$query."%"])
+                    ->setPageSize($helper->getNumberOfTags())
+                    ->load()
+                    ->getItems();
+                foreach ($tagCollection as $item) {
+                    $tagArray[] = [
+                        "term" => $query,
+                        "title" => $item->getQueryText(),
+                        "count" => $item->getNumResults()
+                    ];
+                }
+            }
+            if ($helper->displayProducts()) {
+                $productCollection = $this->productCollection;
+                if ($this->categoryId > 0) {
+                    $productCollection = $this->categoryFactory->create()->load($this->categoryId)
+                        ->getProductCollection()
+                        ->addAttributeToFilter("status", ["in"=>$this->productStatus->getVisibleStatusIds()])
+                        ->addAttributeToFilter("visibility", ["in"=>[2, 3, 4]])
+                        ->addAttributeToFilter(
+                            [
+                                ["attribute"=>"sku", "like"=>"%".$query."%"],
+                                ["attribute"=>"name", "like"=>"%".$query."%"],
+                            ]
+                        );
+                } else {
+                    $productCollection
+                    ->addStoreFilter($this->storeId)
+                    ->addAttributeToSelect(["sku", "name", "description", "short_description", "price", "special_price", "final_price","special_from_date","special_to_date","image"])
+                    ->addAttributeToFilter("status", ["in" => $this->productStatus->getVisibleStatusIds()])
+                    ->addAttributeToFilter(
+                        [
+                            ["attribute" => "sku", "like" => "%" . $query . "%"],
+                            ["attribute" => "name", "like" => "%" . $query . "%"],
+                        ]
+                    )
+                    ->addAttributeToFilter("visibility", ["in" => [2, 3, 4]]);
+                }
+                $this->eventManager->dispatch(
+                    'mobikul_product_collection_filter_event',
+                    ['collection' => $productCollection]
+                );
+                $productCollection->setPageSize($helper->getNumberOfProducts());
+                $productArray = $this->getProductArray($productCollection, $query);
+            }
+            $suggestData = [$tagArray, $productArray];
+            $suggestProductArray = $this->getSuggestedProductArray($suggestData);
+            $this->returnArray["success"] = true;
+            $this->returnArray["suggestProductArray"] = $suggestProductArray;
+            if (count($this->returnArray["suggestProductArray"]) == 0) {
+                $this->returnArray["suggestProductArray"] = new \stdClass();
+            }
+            $this->emulate->stopEnvironmentEmulation($environment);
+            return $this->returnArray;
+        } catch (\Exception $e) {
+            $this->returnArray["message"] = __($e->getMessage());
+            $this->helper->printLog($this->returnArray);
+            return $this->returnArray;
+        }
+    }
+
+    /**
+     * Function to get Product Array
+     *
+     * @param \Magento\Catalog\Model\ResourceModel\Product\Collection $productCollection product collection
+     * @param string                                                  $query             querys
+     *
+     * @return array
+     */
+    public function getProductArray($productCollection, $query)
+    {
+        $productArray = [];
+        foreach ($productCollection as $item) {
+            $price = number_format((float)$item->getPrice(), 2);
+            $isSalePrice = $this->searchSuggestionHelper->isOnSale($item);
+            $imgSrc = $this->imageHelper->init($item, "product_page_image_large")->resize(144, 144)->getUrl();
+            if ($isSalePrice == true) {
+                $specialPrice = number_format((float)$item->getSpecialPrice(), 2);
+            } else {
+                $specialPrice = 0;
+            }
+            $bundleFromPrice = 0;
+            $bundleToPrice = 0;
+            
+            if ($item->getTypeId() == "grouped") {
+                $minPrice = 0;
+                if ($item->getMinimalPrice() == "") {
+                    $associatedProducts = $item->getTypeInstance(true)->getAssociatedProducts($item);
+                    $minPriceArr = [];
+                    foreach ($associatedProducts as $associatedProduct) {
+                        if ($ogPrice = $associatedProduct->getPrice()) {
+                            $minPriceArr[] = $ogPrice;
+                        }
+                    }
+                    if (!empty($minPriceArr)) {
+                        $minPrice = min($minPriceArr);
+                    }
+                    $price = $minPrice;
+                } else {
+                    $minPrice = $item->getMinimalPrice();
+                    $price = $minPrice;
+                }
+            }
+            if ($item->getTypeId() == "bundle") {
+                $bundlePriceModel = $this->bundlePriceModel;
+                $bundleFromPrice = $this->helperCatalog->stripTags(
+                    $this->pricingHelper->currency($bundlePriceModel->getTotalPrices($item, "min", 1))
+                );
+                $bundleToPrice = $this->helperCatalog->stripTags(
+                    $this->pricingHelper->currency($bundlePriceModel->getTotalPrices($item, "max", 1))
+                );
+                $price = $bundleFromPrice." - ".$bundleToPrice;
+                $productArray[] = [
+                    "term" => $query,
+                    "type" => $item->getTypeId(),
+                    "title" => $item->getName(),
+                    "image" => $imgSrc,
+                    "price" => $bundleFromPrice." - ".$bundleToPrice,
+                    "productId" => $item->getId(),
+                    "specialPrice" => $specialPrice
+                ];
+                continue;
+            }
+
+            if ($item->getTypeId() == "configurable") {
+                $regularPrice = $item->getPriceInfo()->getPrice("regular_price");
+                $price = $regularPrice->getAmount()->getBaseAmount();
+                $specialPrice = $item->getSpecialPrice();
+            } elseif (empty($price)) {
+                $price = 0.0;
+            }
+
+            $productArray[] = [
+                "term" => $query,
+                "type" => $item->getTypeId(),
+                "title" => $item->getName(),
+                "image" => $imgSrc,
+                "price" => $price,
+                "productId" => $item->getId(),
+                "specialPrice" => $specialPrice
+            ];
+
+        }
+        return $productArray;
+    }
+
+    /**
+     * Function to get suggested data
+     *
+     * @param array $suggestData suggest Data
+     *
+     * @return array
+     */
+    public function getSuggestedProductArray($suggestData)
+    {
+        $suggestProductArray = [];
+        if (count($suggestData[0]) != 0 || count($suggestData[1]) != 0) {
+            foreach ($suggestData[0] as $index => $item) {
+                $eachSuggestion = [];
+                $term = htmlspecialchars_decode($item["term"]);
+                $title = htmlspecialchars_decode($item["title"]);
+                $tagName = htmlspecialchars_decode($item["title"]);
+                $len = strlen($term);
+                $str = $this->searchSuggestionHelper->matchString($term, $tagName);
+                $tagName = $this->searchSuggestionHelper->getBoldName($tagName, $str, $term);
+                $eachSuggestion["label"] = $tagName;
+                $eachSuggestion["count"] = $item["count"];
+                $suggestProductArray["tags"][] = $eachSuggestion;
+            }
+            if (count($suggestData[1]) > 0) {
+                foreach ($suggestData[1] as $index => $item) {
+                    $eachSuggestion = [];
+                    $term = htmlspecialchars_decode($item["term"]);
+                    if ($item["type"] != 'bundle') {
+                        $formattedPrice = strip_tags($this->cataloghelper->formatPrice($item["price"]));
+                    } else {
+                        $formattedPrice = $item["price"];
+                    }
+                    $imgUrl = htmlspecialchars_decode($item["image"]);
+                    $productName = htmlspecialchars_decode($item["title"]);
+                    $specialPrice = htmlspecialchars_decode((string)$item["specialPrice"]);
+                    $title = htmlspecialchars_decode($item["title"]);
+                    
+                    $eachSuggestion["price"] = $this->helperCatalog->stripTags(
+                        $this->cataloghelper->formatPrice($item["price"]));
+                    $eachSuggestion["thumbnail"] = $imgUrl;
+                    $eachSuggestion["productId"] = $item["productId"];
+                    $eachSuggestion["productName"] = $productName;
+                    $eachSuggestion["specialPrice"] =  $this->helperCatalog->stripTags(
+                        $this->pricingHelper->currency(0,1));
+                    $eachSuggestion["hasSpecialPrice"] = false;
+                    if ($specialPrice > 0) {
+                        $eachSuggestion["hasSpecialPrice"] = true;
+                        $eachSuggestion["specialPrice"] = $this->helperCatalog->stripTags(
+                            $this->pricingHelper->currency($specialPrice,1));
+                    }
+                    $suggestProductArray["products"][] = $eachSuggestion;
+                }
+            }
+        }
+        return $suggestProductArray;
+    }
+
+    /**
+     * Function verify Request to authenticate the request
+     *
+     * Authenticates the request and logs the result for invalid requests
+     *
+     * @return Json
+     */
+    public function verifyRequest()
+    {
+        if ($this->getRequest()->getMethod() == "POST" && $this->wholeData) {
+            $this->storeId = $this->wholeData["storeId"] ?? 1;
+            $this->categoryId = $this->wholeData["categoryId"] ?? 0;
+            $this->searchQuery = $this->wholeData["searchQuery"] ?? "";
+            $this->currency = $this->wholeData["currency"] ?? $this->store->getCurrentCurrencyCode();
+            $this->currency = $this->getRequest()->getHeader(self::CURRENT_CURRENCY) ?? $this->currency;
+        } else {
+            throw new \BadMethodCallException(__("Invalid Request"));
+        }
+    }
+}

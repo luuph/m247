@@ -1,0 +1,24 @@
+<?php
+/**
+ * @var $block Magezon\LookBook\Block\Sidebar\Profiles
+ */
+$dataHelper = $this->helper(Magezon\LookBook\Helper\Data::class);
+$status     = $dataHelper->getShowSidebarProfile();
+$title      = $dataHelper->getSidebarProfileTitle();
+$collection = $this->getCollection();
+?>
+<?php if ($status) { ?>
+    <div class="lookbook-sidebar block-compare">
+        <div class="block-title">
+            <strong role="heading" aria-level="2"><?= $title ?></strong>
+        </div>
+        <ul>
+            <?php foreach ($collection as $profile) { ?>
+                <li>
+                    <a href="<?= $profile->getUrl() ?>" title="<?= $this->escapeHtml($profile->getTitle()) ?>"><?= $profile->getTitle() ?>
+                    </a>
+                </li>
+            <?php } ?>
+        </ul>
+    </div>
+<?php } ?>

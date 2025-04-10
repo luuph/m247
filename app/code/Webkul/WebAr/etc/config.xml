@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_WebAr
+ * @author    Webkul Software Private Limited
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <webar>
+            <general_settings>
+                <enable>0</enable>
+                <show_other_images>0</show_other_images>
+                <model_thumbnail>main_image</model_thumbnail>
+            </general_settings>
+            <attribute_settings>
+                <auto_rotate>1</auto_rotate>
+                <auto_rotate_delay>0</auto_rotate_delay>
+                <interpolation_decay>50</interpolation_decay>
+                <touch_action>pan-y</touch_action>
+                <disable_zoom>0</disable_zoom>
+                <disable_tap>0</disable_tap>
+            </attribute_settings>
+            <loading_attribute_settings>
+                <loading>auto</loading>
+                <poster>default_poster.gif</poster>
+            </loading_attribute_settings>
+            <lighting_attribute_settings>
+                <apply_skybox>0</apply_skybox>
+                <skybox_image>nature_HDR.hdr</skybox_image>
+                <apply_env>0</apply_env>
+                <environment_image>neutral</environment_image>
+                <shadow_intensity>1</shadow_intensity>
+                <shadow_softness>1</shadow_softness>
+                <exposure>1</exposure>
+            </lighting_attribute_settings>
+            <ar_button_settings>
+                <button_type>default_button</button_type>
+                <button_text>View in your Space</button_text>
+            </ar_button_settings>
+        </webar>
+    </default>
+</config>

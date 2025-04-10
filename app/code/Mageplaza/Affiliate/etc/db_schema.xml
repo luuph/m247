@@ -1,0 +1,201 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_Affiliate
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+  <table name="mageplaza_affiliate_transaction" engine="innodb" comment="Transaction Table" resource="default">
+    <column xsi:type="timestamp" name="updated_at" on_update="false" nullable="true" default="CURRENT_TIMESTAMP" comment="Updated At"/>
+    <column xsi:type="int" name="transaction_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Transaction ID"/>
+    <column xsi:type="int" name="account_id" padding="11" unsigned="false" nullable="true" identity="false" comment="Affiliate Account"/>
+    <column xsi:type="int" name="customer_id" padding="11" unsigned="false" nullable="true" identity="false" comment="Customer ID"/>
+    <column xsi:type="varchar" name="action" nullable="true" length="255" comment="Action"/>
+    <column xsi:type="int" name="type" padding="11" unsigned="false" nullable="true" identity="false" comment="Action Type"/>
+    <column xsi:type="decimal" name="amount" scale="4" precision="12" unsigned="false" nullable="true" comment="Amount"/>
+    <column xsi:type="decimal" name="amount_used" scale="4" precision="12" unsigned="false" nullable="true" comment="Amount Used"/>
+    <column xsi:type="decimal" name="current_balance" scale="4" precision="12" unsigned="false" nullable="true" comment="Current Balance"/>
+    <column xsi:type="int" name="status" padding="11" unsigned="false" nullable="true" identity="false" comment="Status"/>
+    <column xsi:type="text" name="title" nullable="true" comment="Title"/>
+    <column xsi:type="varchar" name="order_id" nullable="true" length="255" comment="Order ID"/>
+    <column xsi:type="varchar" name="order_increment_id" nullable="true" length="255" comment="Order ID"/>
+    <column xsi:type="varchar" name="order_item_id" nullable="true" length="255" comment="Sales Order Item"/>
+    <column xsi:type="int" name="store_id" padding="11" unsigned="false" nullable="true" identity="false" comment="Store ID"/>
+    <column xsi:type="varchar" name="campaign_id" nullable="true" length="255" comment="Campaign"/>
+    <column xsi:type="timestamp" name="created_at" on_update="false" nullable="true" comment="Created At"/>
+    <column xsi:type="datetime" name="holding_to" on_update="false" nullable="true" comment="Holding Time"/>
+    <column xsi:type="text" name="extra_content" nullable="true" comment="Content"/>
+    <column xsi:type="text" name="product_sku" nullable="true" comment="Product Sku"/>
+    <column xsi:type="int" name="product_qty" nullable="true" comment="Product Qty"/>
+    <column xsi:type="varchar" name="affiliate_campaign_id" nullable="true" length="255" comment="Campaign" disabled="true"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="transaction_id"/>
+    </constraint>
+  </table>
+  <table name="mageplaza_affiliate_account" resource="default" engine="innodb" comment="Account Table">
+    <column xsi:type="int" name="account_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Account ID"/>
+    <column xsi:type="int" name="customer_id" padding="11" unsigned="false" nullable="true" identity="false" comment="Account Customer ID"/>
+    <column xsi:type="varchar" name="code" nullable="true" length="255" comment="Account Affiliate Code"/>
+    <column xsi:type="int" name="group_id" padding="10" unsigned="true" nullable="false" identity="false" default="1" comment="Account Affiliate Group"/>
+    <column xsi:type="decimal" name="balance" scale="4" precision="12" unsigned="false" nullable="true" default="0" comment="Account Balance"/>
+    <column xsi:type="decimal" name="holding_balance" scale="4" precision="12" unsigned="false" nullable="true" default="0" comment="Account Holding Balance"/>
+    <column xsi:type="decimal" name="total_commission" scale="4" precision="12" unsigned="false" nullable="true" default="0" comment="Account Total Commission"/>
+    <column xsi:type="decimal" name="total_paid" scale="4" precision="12" unsigned="false" nullable="true" default="0" comment="Account Total Paid"/>
+    <column xsi:type="int" name="status" padding="11" unsigned="false" nullable="true" identity="false" comment="Account Status"/>
+    <column xsi:type="int" name="email_notification" padding="11" unsigned="false" nullable="true" identity="false" comment="Account Email Notification"/>
+    <column xsi:type="int" name="parent" padding="11" unsigned="false" nullable="true" identity="false" comment="Account Referred By"/>
+    <column xsi:type="text" name="tree" nullable="true" comment="Account Tier Path"/>
+    <column xsi:type="text" name="withdraw_method" nullable="true" comment="Withdraw method"/>
+    <column xsi:type="text" name="withdraw_information" nullable="true" comment="Withdraw information"/>
+    <column xsi:type="timestamp" name="created_at" on_update="false" nullable="true" comment="Account Created At"/>
+    <column xsi:type="varchar" name="parent_email" nullable="true" length="255" default="" comment="Email of parent affiliate"/>
+    <column xsi:type="varchar" name="description" nullable="true" length="255" default="" comment="Description transaction of withdraw history"/>
+    <column xsi:type="varchar" name="email_subcription" nullable="true" length="255" default=""
+            comment="Subscriptions Email"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="account_id"/>
+    </constraint>
+    <constraint xsi:type="foreign" referenceId="FK_54210566A37ED329302A65DEAF4F6B5B" table="mageplaza_affiliate_account" column="group_id" referenceTable="mageplaza_affiliate_group" referenceColumn="group_id" onDelete="NO ACTION"/>
+  </table>
+  <table name="mageplaza_affiliate_group" resource="default" engine="innodb" comment="Group Table">
+    <column xsi:type="int" name="group_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Group ID"/>
+    <column xsi:type="varchar" name="name" nullable="true" length="255" comment="Group Name"/>
+    <column xsi:type="timestamp" name="created_at" on_update="false" nullable="true" comment="Group Created At"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="group_id"/>
+    </constraint>
+  </table>
+  <table name="mageplaza_affiliate_campaign" resource="default" engine="innodb" comment="Campaign Table">
+    <column xsi:type="int" name="campaign_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Campaign ID"/>
+    <column xsi:type="varchar" name="name" nullable="true" length="255" comment="Campaign Name"/>
+    <column xsi:type="text" name="description" nullable="true" comment="Campaign Description"/>
+    <column xsi:type="int" name="status" padding="11" unsigned="false" nullable="true" identity="false" comment="Campaign Status"/>
+    <column xsi:type="text" name="website_ids" nullable="true" comment="Campaign Website IDs"/>
+    <column xsi:type="text" name="affiliate_group_ids" nullable="true" comment="Campaign Affiliate Groups"/>
+    <column xsi:type="datetime" name="from_date" on_update="false" nullable="true" comment="Campaign Active From Date"/>
+    <column xsi:type="datetime" name="to_date" on_update="false" nullable="true" comment="Campaign Active To Date"/>
+    <column xsi:type="int" name="display" padding="11" unsigned="false" nullable="true" identity="false" comment="Campaign Display"/>
+    <column xsi:type="int" name="sort_order" padding="11" unsigned="false" nullable="true" identity="false" comment="Campaign Sort Order"/>
+    <column xsi:type="text" name="conditions_serialized" nullable="true" comment="Campaign Conditions Serialized"/>
+    <column xsi:type="text" name="actions_serialized" nullable="true" comment="Campaign Actions Serialized"/>
+    <column xsi:type="text" name="commission" nullable="true" comment="Campaign Commission"/>
+    <column xsi:type="varchar" name="discount_action" nullable="true" length="255" comment="Campaign Discount Action"/>
+    <column xsi:type="decimal" name="discount_amount" scale="4" precision="12" unsigned="false" nullable="true" default="0" comment="Campaign Discount Amount"/>
+    <column xsi:type="int" name="discount_qty" padding="11" unsigned="false" nullable="true" identity="false" default="0" comment="Campaign Discount Qty"/>
+    <column xsi:type="int" name="discount_step" padding="11" unsigned="false" nullable="true" identity="false" default="0" comment="Campaign Discount Step"/>
+    <column xsi:type="text" name="discount_description" nullable="true" comment="Campaign Discount Description"/>
+    <column xsi:type="int" name="free_shipping" padding="11" unsigned="false" nullable="true" identity="false" comment="Campaign Free Shipping"/>
+    <column xsi:type="int" name="apply_to_shipping" padding="11" unsigned="false" nullable="true" identity="false" comment="Campaign Apply To Shipping"/>
+    <column xsi:type="timestamp" name="created_at" on_update="false" nullable="true" comment="Campaign Created At"/>
+    <column xsi:type="timestamp" name="updated_at" on_update="false" nullable="true" comment="Campaign Updated At"/>
+    <column xsi:type="boolean" name="apply_discount_on_tax" nullable="true" comment="Apply discount on tax"/>
+    <column xsi:type="varchar" name="customer_group_ids" nullable="true" length="255" default="0,1" comment="Customer Group Ids" disabled="true"/>
+    <column xsi:type="smallint" name="stop_rules_processing" padding="6" unsigned="false" nullable="true" identity="false" default="0" comment="Discard subsequent rules"/>
+    <column xsi:type="varchar" name="pay_commission" nullable="true" length="255" comment="Pay Per Commission"/>
+    <column xsi:type="varchar" name="use_coupon_code" nullable="true" length="255"
+            comment="Use Coupon Code"/>
+    <column xsi:type="varchar" name="referral_link" nullable="true" length="255" comment="Refer Link"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="campaign_id"/>
+    </constraint>
+  </table>
+  <table name="mageplaza_affiliate_withdraw" resource="default" engine="innodb" comment="Withdraw Table">
+    <column xsi:type="int" name="withdraw_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Withdraw ID"/>
+    <column xsi:type="int" name="account_id" padding="11" unsigned="false" nullable="true" identity="false" comment="Withdraw Account"/>
+    <column xsi:type="int" name="customer_id" padding="11" unsigned="false" nullable="true" identity="false" comment="Withdraw Customer"/>
+    <column xsi:type="int" name="transaction_id" padding="11" unsigned="false" nullable="true" identity="false" comment="Withdraw Transaction ID"/>
+    <column xsi:type="decimal" name="amount" scale="4" precision="12" unsigned="false" nullable="true" comment="Withdraw Amount"/>
+    <column xsi:type="decimal" name="fee" scale="4" precision="12" unsigned="false" nullable="true" comment="Withdraw Fee"/>
+    <column xsi:type="decimal" name="transfer_amount" scale="4" precision="12" unsigned="false" nullable="true" comment="Withdraw Transaction Amount"/>
+    <column xsi:type="int" name="status" padding="11" unsigned="false" nullable="true" identity="false" comment="Withdraw Status"/>
+    <column xsi:type="text" name="payment_method" nullable="true" comment="Withdraw Payment Method"/>
+    <column xsi:type="text" name="payment_details" nullable="true" comment="Withdraw Payment Details"/>
+    <column xsi:type="varchar" name="resolved_at" nullable="true" length="255" comment="Withdraw Resolved At"/>
+    <column xsi:type="timestamp" name="created_at" on_update="false" nullable="true" comment="Withdraw Created At"/>
+    <column xsi:type="mediumtext" name="withdraw_description" nullable="true" comment="Withdraw Description"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="withdraw_id"/>
+    </constraint>
+  </table>
+  <table name="sales_order" resource="default">
+    <column xsi:type="varchar" name="affiliate_key" nullable="true" length="255" comment="Affiliate Key"/>
+    <column xsi:type="varchar" name="affiliate_commission" nullable="true" length="255" comment="Affiliate Commission"/>
+    <column xsi:type="decimal" name="affiliate_discount_amount" scale="4" precision="12" unsigned="false" nullable="true" default="0" comment="Affiliate Discount Amount"/>
+    <column xsi:type="decimal" name="base_affiliate_discount_amount" scale="4" precision="12" unsigned="false" nullable="true" default="0" comment="Base Affiliate Discount Amount"/>
+    <column xsi:type="varchar" name="affiliate_campaigns" nullable="true" length="255" comment="Affiliate Campaign Ids"/>
+    <column xsi:type="varchar" name="affiliate_shipping_commission" nullable="true" length="255" comment="affiliate_shipping_commission"/>
+    <column xsi:type="varchar" name="affiliate_earn_commission_invoice_after" nullable="true" length="255" comment="affiliate_shipping_commission"/>
+    <column xsi:type="decimal" name="affiliate_discount_shipping_amount" scale="4" precision="12" unsigned="false" nullable="true" comment="Affiliate Discount Shipping Amount"/>
+    <column xsi:type="decimal" name="affiliate_discount_invoiced" scale="4" precision="12" unsigned="false" nullable="true" comment="Affiliate Discount Invoiced"/>
+    <column xsi:type="decimal" name="base_affiliate_discount_invoiced" scale="4" precision="12" unsigned="false" nullable="true" comment="Base Affiliate Discount Invoiced"/>
+    <column xsi:type="decimal" name="affiliate_discount_refunded" scale="4" precision="12" unsigned="false" nullable="true" comment="Affiliate Discount Refunded"/>
+    <column xsi:type="decimal" name="base_affiliate_discount_refunded" scale="4" precision="12" unsigned="false" nullable="true" comment="Base Affiliate Discount Refunded"/>
+    <column xsi:type="varchar" name="affiliate_commission_invoiced" nullable="true" length="255" comment="Affiliate Commission Invoiced"/>
+    <column xsi:type="varchar" name="affiliate_commission_refunded" nullable="true" length="255" comment="Affiliate Commission Refund"/>
+    <column xsi:type="decimal" name="base_affiliate_discount_shipping_amount" scale="4" precision="12" unsigned="false" nullable="true" comment="Base Affiliate Discount Shipping Amount"/>
+  </table>
+  <table name="sales_invoice" resource="default">
+    <column xsi:type="decimal" name="affiliate_discount_amount" scale="4" precision="12" unsigned="false" nullable="true" default="0" comment="Affiliate Discount Amount"/>
+    <column xsi:type="decimal" name="base_affiliate_discount_amount" scale="4" precision="12" unsigned="false" nullable="true" default="0" comment="Base Affiliate Discount Amount"/>
+  </table>
+  <table name="sales_creditmemo" resource="default">
+    <column xsi:type="decimal" name="affiliate_discount_amount" scale="4" precision="12" unsigned="false" nullable="true" default="0" comment="Affiliate Discount Amount"/>
+    <column xsi:type="decimal" name="base_affiliate_discount_amount" scale="4" precision="12" unsigned="false" nullable="true" default="0" comment="Base Affiliate Discount Amount"/>
+  </table>
+  <table name="quote" resource="default">
+    <column xsi:type="text" name="affiliate_key" nullable="true" comment="Affiliate Key"/>
+    <column xsi:type="decimal" name="affiliate_discount_amount" scale="4" precision="12" unsigned="false" nullable="true" comment="Affiliate Discount Amount"/>
+    <column xsi:type="decimal" name="base_affiliate_discount_amount" scale="4" precision="12" unsigned="false" nullable="true" comment="Base Affiliate Discount Amount"/>
+    <column xsi:type="varchar" name="affiliate_commission" nullable="true" length="255" comment="Affiliate Commission"/>
+    <column xsi:type="varchar" name="affiliate_shipping_commission" nullable="true" length="255" comment="Affiliate Shipping Commission"/>
+    <column xsi:type="decimal" name="affiliate_discount_shipping_amount" scale="4" precision="12" unsigned="false" nullable="true" comment="Affiliate Discount Shipping Amount"/>
+  </table>
+  <table name="quote_item" resource="default">
+    <column xsi:type="int" name="campaign_id"  unsigned="false" nullable="true"
+            comment="Campaign ID"/>
+    <column xsi:type="decimal" name="affiliate_discount_amount" scale="4" precision="12" unsigned="false" nullable="true" comment="Affiliate Discount Amount"/>
+    <column xsi:type="decimal" name="base_affiliate_discount_amount" scale="4" precision="12" unsigned="false" nullable="true" comment="Base Affiliate Discount Amount"/>
+    <column xsi:type="varchar" name="affiliate_commission" nullable="true" length="255" comment="Affiliate Commission"/>
+    <column xsi:type="int" name="affiliate_campaign_id"  unsigned="false" nullable="true"
+          comment="Campaign ID" disabled="true"/>
+  </table>
+  <table name="sales_order_item" resource="default">
+    <column xsi:type="int" name="campaign_id" unsigned="false" nullable="true"
+            comment="Campaign ID"/>
+    <column xsi:type="decimal" name="affiliate_discount_amount" scale="4" precision="12" unsigned="false" nullable="true" comment="Sales Order Item"/>
+    <column xsi:type="decimal" name="base_affiliate_discount_amount" scale="4" precision="12" unsigned="false" nullable="true" comment="Base Affiliate Discount Amount"/>
+    <column xsi:type="varchar" name="affiliate_commission" nullable="true" length="255" comment="Affiliate Commission"/>
+    <column xsi:type="varchar" name="affiliate_earn_commission_invoice_after" nullable="true" length="255" comment="affiliate_shipping_commission"/>
+    <column xsi:type="decimal" name="affiliate_discount_shipping_amount" scale="4" precision="12" unsigned="false" nullable="true" comment="Affiliate Discount Shipping Amount"/>
+    <column xsi:type="decimal" name="affiliate_discount_invoiced" scale="4" precision="12" unsigned="false" nullable="true" comment="Affiliate Discount Invoiced"/>
+    <column xsi:type="decimal" name="base_affiliate_discount_invoiced" scale="4" precision="12" unsigned="false" nullable="true" comment="Base Affiliate Discount Invoiced"/>
+    <column xsi:type="decimal" name="affiliate_discount_refunded" scale="4" precision="12" unsigned="false" nullable="true" comment="Affiliate Discount Refunded"/>
+    <column xsi:type="decimal" name="base_affiliate_discount_refunded" scale="4" precision="12" unsigned="false" nullable="true" comment="Base Affiliate Discount Refunded"/>
+    <column xsi:type="varchar" name="affiliate_commission_invoiced" nullable="true" length="255" comment="Affiliate Commission Invoiced"/>
+    <column xsi:type="varchar" name="affiliate_commission_refunded" nullable="true" length="255" comment="Affiliate Commission Refund"/>
+    <column xsi:type="decimal" name="base_affiliate_discount_shipping_amount" scale="4" precision="12" unsigned="false" nullable="true" comment="Base Affiliate Discount Shipping Amount"/>
+    <column xsi:type="int" name="affiliate_campaign_id" unsigned="false" nullable="true"
+          comment="Campaign ID" disabled="true"/>
+  </table>
+  <table name="quote_address" resource="default">
+    <column xsi:type="decimal" name="affiliate_discount_amount" scale="4" precision="12" unsigned="false" nullable="true" comment="Affiliate Discount Amount"/>
+    <column xsi:type="decimal" name="base_affiliate_discount_amount" scale="4" precision="12" unsigned="false" nullable="true" comment="Base Affiliate Discount Amount"/>
+    <column xsi:type="varchar" name="affiliate_shipping_commission" nullable="true" length="255" comment="affiliate_shipping_commission"/>
+  </table>
+</schema>

@@ -1,0 +1,77 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Walletsystem
+ * @author    Webkul
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+?>
+<?php
+$viewModel = $block->getViewModel();
+$helper = $viewModel->getHelper();
+$isEnabled = $helper->getWalletenabled();
+$magentoCurrentUrl = $block->getCurrentUrl();
+?>
+<?php
+if ($isEnabled) { ?>
+    <li
+    class="walletsystemnav nav item <?= $block->escapeHtml(strpos($magentoCurrentUrl, 'walletsystem')
+        !== false ? "current":"");?>">
+        <?php if (strpos($magentoCurrentUrl, 'walletsystem') !== false) { ?>
+            <strong><?=$block->escapeHtml(__('My Wallet')) ?></strong>
+            <?php
+        } else { ?>
+            <a href="#"><?=$block->escapeHtml(__('My Wallet')) ?></a>
+        <?php } ?>
+        <ul class="nav items">
+            <li 
+            class="nav item <?= $block->escapeHtml(strpos($magentoCurrentUrl, 'walletsystem/index/index')
+             !== false ? "current":"");?>">
+           <?php
+            if (strpos($magentoCurrentUrl, 'walletsystem/index/index') !== false) { ?>
+                <strong><?=$block->escapeHtml(__('Manage Wallet Amount')) ?></strong>
+                <?php
+            } else { ?>
+                <a href="<?=$block->escapeUrl($block->getUrl('walletsystem/index/index')); ?>">
+                    <?=$block->escapeHtml(__('Manage Wallet Amount')) ?>
+                </a>
+                <?php
+            } ?>
+            </li>
+            <li
+            class="nav item <?= $block->escapeHtml(strpos($magentoCurrentUrl, 'walletsystem/transfer/index')
+            !== false ? "current":"");?>">
+           <?php
+            if (strpos(
+                $magentoCurrentUrl,
+                'walletsystem/transfer/index'
+            ) !== false) { ?>
+                <strong><?=$block->escapeHtml(__('Transfer Wallet Amount')) ?></strong>
+                <?php
+            } else { ?>
+                <a href="<?=$block->escapeUrl($block->getUrl('walletsystem/transfer/index')); ?>">
+                    <?=$block->escapeHtml(__('Transfer Wallet Amount')) ?>
+                </a>
+                <?php
+            } ?>
+            </li>
+            <li class="nav item <?=$block->escapeHtml(strpos($magentoCurrentUrl, 'walletsystem/transfer/accountdetails')
+                !== false ? "current":"");?>">
+           <?php
+            if (strpos($magentoCurrentUrl, 'walletsystem/transfer/accountdetails') !== false) { ?>
+                <strong><?=$block->escapeHtml(__('Add Account Details')) ?></strong>
+                <?php
+            } else { ?>
+                <a href="<?=$block->escapeUrl($block->getUrl('walletsystem/transfer/accountdetails')); ?>">
+                    <?=$block->escapeHtml(__('Add Account Details')) ?>
+                </a>
+                <?php
+            } ?>
+            </li>
+        </ul>
+    </li>
+<?php }?>

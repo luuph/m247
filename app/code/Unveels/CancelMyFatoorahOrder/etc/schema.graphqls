@@ -1,0 +1,9 @@
+type Mutation {
+    cancelMyFatoorahOrder(order_increment_id: String!): CancelMyFatoorahOrderResponse 
+    @resolver(class: "Unveels\\CancelMyFatoorahOrder\\Model\\Resolver\\CancelMyFatoorahOrder")
+}
+
+type CancelMyFatoorahOrderResponse {
+    success: Boolean
+    message: String
+}

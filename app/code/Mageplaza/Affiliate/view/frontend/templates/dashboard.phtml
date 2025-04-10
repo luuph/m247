@@ -1,0 +1,189 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_Affiliate
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+/** @var \Mageplaza\Affiliate\Block\Dashboard $block */
+?>
+<?php
+
+?>
+<?= /* @noEscape */
+$block->getChildHtml('affiliate.account.campaigns.referral') ?>
+<?= /* @noEscape */
+$block->getChildHtml('affiliate.account.home') ?>
+<?= /* @noEscape */
+$block->getChildHtml('dashboard.extra') ?>
+
+<?php if ($block->isAvailableAccount()): ?>
+    <div id="accordion" data-mage-init='{
+        "accordion":{
+         "active": [1],
+            "collapsible": true,
+            "openedState": "active",
+            "multipleCollapsible": false,
+              "icons": {"header": "plus", "activeHeader": "minus"}
+        }}'
+         style="margin-top:30px; clear: both"
+    >
+        <div data-role="collapsible">
+            <div data-role="trigger" style="position: relative">
+                <h2 style="padding-bottom: 10px; border-bottom: 1px solid #c6c6c6">Policy</h2>
+                <div class="icon-up">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="14" cy="14" r="11.5" stroke="#333333"/>
+                        <g clip-path="url(#clip0_511_1577)">
+                            <path d="M10.175 16.841L14 13.0243L17.825 16.841L19 15.666L14 10.666L9 15.666L10.175 16.841Z"
+                                  fill="#333333"/>
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_511_1577">
+                                <rect width="20" height="20" fill="white" transform="translate(4 4)"/>
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="icon-down">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="14" cy="14" r="11.5" stroke="#333333"/>
+                        <g clip-path="url(#clip0_511_2291)">
+                            <path d="M10.175 11.1582L14 14.9749L17.825 11.1582L19 12.3332L14 17.3332L9 12.3332L10.175 11.1582Z"
+                                  fill="#333333"/>
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_511_2291">
+                                <rect width="20" height="20" fill="white" transform="translate(4 4)"/>
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <div data-role="content" style="display: none">
+            <div class="page-content">
+                <?php if ($blockId = $block->getAffiliateHelper()->getPolicyPage()) : ?>
+                    <?= /* @noEscape */
+                    $block->loadCmsBlock($blockId) ?>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+    <style>
+        #accordion > div.active .icon-down {
+            display: none;
+        }
+
+        #accordion > div.active .icon-up {
+            display: block;
+        }
+
+        #accordion > div .icon-down {
+            display: block;
+            cursor: pointer;
+        }
+
+        #accordion > div .icon-up {
+            display: none;
+            cursor: pointer;
+        }
+
+        .icon-up {
+            position: absolute;
+            top: 0;
+            right: 10px;
+        }
+
+        .icon-down {
+            position: absolute;
+            top: 0;
+            right: 10px
+        }
+
+        #accordion > div h2:hover {
+            cursor: pointer;
+        }
+
+
+    </style>
+<?php else: ?>
+    <div class="page-content">
+        <?php if ($blockId = $block->getAffiliateHelper()->getDefaultPage()) : ?>
+            <?= /* @noEscape */
+            $block->loadCmsBlock($blockId) ?>
+        <?php endif; ?>
+    </div>
+    <?php
+    $campaigns  = $block->getCampaigns();
+    $codeLength = $block->getAffiliateHelper()->getCodeLength();
+    ?>
+
+    <div class="affiliate-campaigns-list" style="margin-top: 15px">
+        <table>
+            <tr>
+                <th scope="col" class="col id"><?= $block->escapeHtml(__('Campaigns')) ?></th>
+                <th scope="col" class="col date"><?= $block->escapeHtml(__('Comission')) ?></th>
+                <th scope="col" class="col total"><?= $block->escapeHtml(__('Discount')) ?></th>
+                <th scope="col" class="col status"><?= $block->escapeHtml(__('Valid Time')) ?></th>
+            </tr>
+
+            <tbody>
+            <?php if ($campaigns->getSize()) : ?>
+                <?php foreach ($campaigns as $campaign): ?>
+                    <tr>
+                        <td data-th="<?= $block->escapeHtml(__('Campaigns')) ?>"
+                            class="col id">
+                            <div style="width: 128px; overflow: hidden; text-overflow: ellipsis;white-space: nowrap; ">
+                                <?= /* @noEscape */
+                                $campaign->getName() ?>
+                            </div>
+                        </td>
+                        <td data-th="<?= $block->escapeHtml(__('Comission')) ?>"
+                            class="col date">
+                            <?php foreach ($block->formatCommission($campaign->getCommission()) as $commission): ?>
+                                <?= /* @noEscape */$commission ?>
+                            <?php endforeach ?>
+                        </td>
+                        <td data-th="<?= $block->escapeHtml(__('Discount')) ?>" class="col total">
+                            <?= /* @noEscape */
+                            $block->formatDiscountPolicy($campaign->getDiscountAction(),
+                                $campaign->getDiscountAmount()) ?>
+                        </td>
+                        <td data-th="<?= $block->escapeHtml(__('Valid Time')) ?>"
+                            class="col status">
+                            <?= /* @noEscape */
+                            $block->formatValidDate($campaign->getFromDate(), $campaign->getToDate()) ?>
+                        </td>
+
+                    </tr>
+                <?php endforeach ?>
+            <?php else: ?>
+                <tr>
+                    <td colspan="4">
+                        <span><?= /** @noEscape */__('No results found!') ?></span>
+                    </td>
+                </tr>
+            <?php endif; ?>
+
+            </tbody>
+        </table>
+
+    </div>
+<?php endif; ?>
+
+

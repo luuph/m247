@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Walletsystem
+ * @author    Webkul
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Webkul_Walletsystem::css/ws_front.css"/>
+    </head>
+    <referenceContainer name="payment_methods_after">
+        <block name="multiShippingCheckout.walletsystem">
+            <arguments>
+                <argument name="view_model" xsi:type="object">Webkul\Walletsystem\ViewModel\ViewModel</argument>
+            </arguments>
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Webkul_Walletsystem::multiShippingCheckout/walletsystem.phtml</argument>
+            </action>
+        </block>
+    </referenceContainer>
+</page>

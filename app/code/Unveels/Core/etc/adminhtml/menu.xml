@@ -1,0 +1,5 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Backend/etc/menu.xsd">
+    <menu>
+        <add id="Unveels_Core::core" title="Unveels Extensions" module="Unveels_Core" sortOrder="60" resource="Unveels_Core::core"/>
+    </menu>
+</config>

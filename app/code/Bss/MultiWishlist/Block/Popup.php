@@ -7,7 +7,7 @@
  * @category   BSS
  * @package    Bss_MultiWishlist
  * @author     Extension Team
- * @copyright  Copyright (c) 2018-2019 BSS Commerce Co. ( http://bsscommerce.com )
+ * @copyright  Copyright (c) 2018-2024 BSS Commerce Co. ( http://bsscommerce.com )
  * @license    http://bsscommerce.com/Bss-Commerce-License.txt
  */
 namespace Bss\MultiWishlist\Block;
@@ -34,6 +34,11 @@ class Popup extends Template
      * @var Session
      */
     protected $customerSession;
+
+    /**
+     * @var string[]
+     */
+    private $listRadioType = ["movefromcart", "move"];
 
     /**
      * Popup constructor.
@@ -133,5 +138,18 @@ class Popup extends Template
     public function getUrlCreateWishList()
     {
         return $this->getUrl("multiwishlist/index/create/ajax/1");
+    }
+
+    /**
+     * Get select type
+     *
+     * @return string
+     */
+    public function getSelectType()
+    {
+        if (in_array($this->getActionWl(), $this->listRadioType)) {
+            return "radio";
+        }
+        return "checkbox";
     }
 }

@@ -1,0 +1,32 @@
+# pack-refs with: peeled fully-peeled sorted 
+11314d89b7b7506f076266edeab4e17e44507ab3 refs/remotes/origin/M2MinOrderAmountCG-10
+0d1113a9bbc2cc35ad7e030e7706ad4343e43357 refs/remotes/origin/M2MinOrderAmountCG-12
+fee02f4f2592cbbb6e84a5afbf446f94ee902cad refs/remotes/origin/M2MinOrderAmountCG-15
+20fae8dfe7942bc98ac642271aea24113c50dc70 refs/remotes/origin/M2MinOrderAmountCG-20
+42dd986b54df85d96be791db216265c14df4931b refs/remotes/origin/M2MinOrderAmountCG-21
+d625ecb302332ffcf58373a965360c4fe0cccd30 refs/remotes/origin/M2MinOrderAmountCG-22_new
+b53b2c3cd3ec30a3d0d73831f15bf3556a6ed220 refs/remotes/origin/M2MinOrderAmountCG-25
+54b84aa4a3e2cc27c2d89cd33af56047f9a32ffd refs/remotes/origin/M2MinOrderAmountCG-27
+67ed91210068b96283745eea5db5a85af870a4d7 refs/remotes/origin/M2MinOrderAmountCG-29
+ec1a29e50b343ae88716465a883516952583988d refs/remotes/origin/M2MinOrderAmountCG-31
+3afab9f47ab2f4a02e352615c13da4306a04c36b refs/remotes/origin/b2b-2a-dev
+3afab9f47ab2f4a02e352615c13da4306a04c36b refs/remotes/origin/b2b-2a-test
+749b2b508594f5a9552d56b0af7ab286f7f4e35a refs/remotes/origin/hotfix.v1.1.5
+bbcbc2a677b2d1b7c3ac94b885643468f51df1a0 refs/remotes/origin/magento22x
+fb8b227d81ed4bdee128dd7c2496b586049d44f0 refs/remotes/origin/master
+ddb8f4d23e20395b8ec1f940662db13330c75f60 refs/tags/v1.0.9
+^58e1681d44dc1e69938459ded6f17bde25e7ef83
+3548c494cf7b1d6c4d522e5268966f4f8fa93f28 refs/tags/v1.1.0
+^8fa362bc006d3c415db88ba957989f95e39f3cea
+e14b90ba2b08d7e140da98c223f6b732c487b00e refs/tags/v1.1.1
+^3afab9f47ab2f4a02e352615c13da4306a04c36b
+2e94b8da2ec84362266d3f239d67dcfdacadb2c5 refs/tags/v1.1.2
+^51d44f850f5f29d5998ff11e8c67d3e06ad54564
+4455d6615a54a6aef668c13e3805c5ed613c795e refs/tags/v1.1.3
+^a8ee953a675eb022862efacf19dc739a06b97772
+fcfde67409c320075bbafe93d7a8054c8f9103f3 refs/tags/v1.1.4
+^743eeeeab0760ac92bcb33ac65ef04f99faaafd9
+f002f759de2858030e169430999136957e233b9a refs/tags/v1.1.5
+^19412cd318740542490a90f7a92dfa70656ff6fa
+e6a38cc893df48345422dccf03e2e54b1e41f4e1 refs/tags/v1.1.6
+^fb8b227d81ed4bdee128dd7c2496b586049d44f0

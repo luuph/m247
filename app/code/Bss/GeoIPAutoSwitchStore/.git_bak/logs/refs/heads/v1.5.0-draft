@@ -1,0 +1,3 @@
+0000000000000000000000000000000000000000 024d97a85598852f10f31950695c493e5a212c2d Hai Luu <luuph@bsscommerce.com> 1745826297 +0700	branch: Created from HEAD
+024d97a85598852f10f31950695c493e5a212c2d 48b3025f2ed932a37adefc56a4a8b9b7904092a0 Hai Luu <luuph@bsscommerce.com> 1745838450 +0700	pull origin v1.5.0-draft: Fast-forward
+48b3025f2ed932a37adefc56a4a8b9b7904092a0 c8593903f0e164b4cb35abb0e52ec4a21f872272 Hai Luu <luuph@bsscommerce.com> 1745839056 +0700	commit: Upgrade Changelog, upgrade version module to v1.5.0

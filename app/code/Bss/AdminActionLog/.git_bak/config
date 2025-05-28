@@ -12,3 +12,4 @@
 [branch "M2AdminLog-42"]
 	remote = origin
 	merge = refs/heads/M2AdminLog-42
+	vscode-merge-base = origin/M2AdminLog-42

@@ -3,3 +3,6 @@ bf666950fe6cb6f0ee9b246849f6a2fc1af6fec8 bf666950fe6cb6f0ee9b246849f6a2fc1af6fec
 bf666950fe6cb6f0ee9b246849f6a2fc1af6fec8 689e9b765e3973136a68f653e9e28ed070fee0a7 Hai Luu <luuph@bsscommerce.com> 1738902758 +0700	commit: M2SEOSuite-259: Fix Link for Google incorrect store view
 689e9b765e3973136a68f653e9e28ed070fee0a7 bf666950fe6cb6f0ee9b246849f6a2fc1af6fec8 Hai Luu <luuph@bsscommerce.com> 1738903077 +0700	checkout: moving from M2SEOSuite-259 to master
 bf666950fe6cb6f0ee9b246849f6a2fc1af6fec8 bf666950fe6cb6f0ee9b246849f6a2fc1af6fec8 Hai Luu <luuph@bsscommerce.com> 1738903093 +0700	checkout: moving from master to v1.2.1-draft
+bf666950fe6cb6f0ee9b246849f6a2fc1af6fec8 cd5eacc3b4dfc0b91e3d5e34d461663390002b8f Hai Luu <luuph@bsscommerce.com> 1745478033 +0700	pull origin v1.2.1-draft: Fast-forward
+cd5eacc3b4dfc0b91e3d5e34d461663390002b8f cf285d0ce855e14f245cd603f293a5579fe1bd9b Hai Luu <luuph@bsscommerce.com> 1745478487 +0700	commit: Upgrade version module to v1.2.1
+cf285d0ce855e14f245cd603f293a5579fe1bd9b 742cab4a0a3ec9b17f9c72502238a55993c33842 Hai Luu <luuph@bsscommerce.com> 1745568997 +0700	commit: Update CHANGELOG.md

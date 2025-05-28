@@ -1,5 +1,6 @@
 ce47c4c28a6a91df36c936a0857a43bb001db844		branch 'master' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-force-login
 60c2477516a2a5fadaa2429a24a5712b4982c637	not-for-merge	branch 'BCProject-1468' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-force-login
+f958b00d8b21be772d2282970c365afc7ae816ef	not-for-merge	branch 'BSupport-7427' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-force-login
 7a3fb1bedb8b99aafe6953619402b4f4905673be	not-for-merge	branch 'BSupport-7555' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-force-login
 135be757394dc4a5baa1d72162f1536487d2264a	not-for-merge	branch 'BSupport-7555-v2' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-force-login
 ef8042d3dc1885783abcef2ada51e9e719cd1eac	not-for-merge	branch 'BSupport-7678-v119' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-force-login

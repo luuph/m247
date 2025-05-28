@@ -165,7 +165,12 @@
                                                                     <item name="component" xsi:type="string">Bss_OneStepCheckout/js/view/summary/item/details/message</item>
                                                                     <item name="displayArea" xsi:type="string">item_message</item>
                                                                 </item>
+                                                                <item name="message-error" xsi:type="array">
+                                                                    <item name="component" xsi:type="string">Bss_OneStepCheckout/js/view/summary/item/details/message-error</item>
+                                                                    <item name="displayArea" xsi:type="string">item_message_error</item>
+                                                                </item>
                                                             </item>
+                            
                                                         </item>
                                                     </item>
                                                 </item>

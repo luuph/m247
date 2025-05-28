@@ -26,7 +26,7 @@ class ProductRepository
     /**
      * @var AssignTemplateToProduct
      */
-    private AssignTemplateToProduct $assignTemplateToProduct;
+    private $assignTemplateToProduct;
 
     /**
      * @param AssignTemplateToProduct $assignTemplateToProduct

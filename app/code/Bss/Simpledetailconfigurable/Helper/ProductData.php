@@ -238,7 +238,7 @@ class ProductData extends AbstractHelper
         $parentPrice = 0;
         $options = $product->getTypeInstance()->getUsedProducts($product);
         foreach ($options as $simpleProduct) {
-            $childProduct = $this->getChildDetail($simpleProduct, $product);
+            $childProduct = $this->getChildDetail($simpleProduct);
             $result['child'][$simpleProduct->getId()] = $childProduct;
             $parentPrice = $childProduct['price']['finalPrice'];
         }
@@ -258,7 +258,7 @@ class ProductData extends AbstractHelper
      * @return array|bool
      * @throws \Exception
      */
-    public function getChildDetail($child, $parent = null)
+    public function getChildDetail($child)
     {
         if ($child instanceof \Magento\Catalog\Model\Product) {
             $id = $child->getId();
@@ -268,7 +268,7 @@ class ProductData extends AbstractHelper
         try {
             // Reload child product additional data and meta data
             $childProduct = $this->productRepository->getById($id);
-            $result = $this->getDetailData($childProduct, $parent);
+            $result = $this->getDetailData($childProduct);
             $this->getDetailStock($result);
             $this->getDetailPrice($childProduct, $result);
             return $result;
@@ -283,7 +283,7 @@ class ProductData extends AbstractHelper
      * @return array
      * @throws \Exception
      */
-    public function getDetailData($product, $parent = null)
+    public function getDetailData($product)
     {
         $data = [];
         $productDesc = $product->getDescription() ?: '';
@@ -303,15 +303,9 @@ class ProductData extends AbstractHelper
                 $data['is_in_stock'] = $stockItem->getIsInStock();
             }
         }
-        if ($this->moduleConfig->isChangeMetaData() && $product->getMetaTitle()){
-            $data['meta_data']['meta_title'] = $product->getMetaTitle();
-        } else {
-            $data['meta_data']['meta_title'] = $product->getTypeId() == 'configurable'
-                ? $product->getName()
-                : $parent->getName() ?? null;
-        }
-        $data['meta_data']['meta_keyword'] = $product->getMetaKeyword();
-        $data['meta_data']['meta_description'] = $product->getMetaDescription();
+        $data['meta_data']['meta_title'] = $product->getMetaTitle() ?: $product->getName();
+        $data['meta_data']['meta_keyword'] = $product->getMetaKeyword() ?: "";
+        $data['meta_data']['meta_description'] = $product->getMetaDescription() ?: "";
         $data['additional_info'] = $this->getAdditionalInfo($product);
         $data['image'] = $this->getGalleryImages($product);
         $data['has_custom_options'] = $product->hasCustomOptions();

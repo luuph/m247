@@ -116,13 +116,13 @@ class ParamOverriderCartId
         try {
             if ($this->userContext->getUserType() === UserContextInterface::USER_TYPE_CUSTOMER) {
                 $customerId = $this->userContext->getUserId();
-                if ($this->checkoutSession->getCheckoutIsQuoteExtension()) {
-                    return $this->checkoutSession->getCheckoutIsQuoteExtension();
+                if ($this->checkoutSession->getCheckoutIdQuoteExtension()) {
+                    return $this->checkoutSession->getCheckoutIdQuoteExtension();
                 }
 
                 $referer = $this->request->getHeader('Referer') ?? '';
-                if (strpos($referer, 'quoteextension') !== false && $this->checkoutSession->getIsQuoteExtension()) {
-                    return $this->checkoutSession->getIsQuoteExtension();
+                if (strpos($referer, 'quoteextension') !== false && $this->checkoutSession->getIdQuoteExtension()) {
+                    return $this->checkoutSession->getIdQuoteExtension();
                 }
 
                 $urlHttpReferer = $this->request->getServer('HTTP_REFERER');
@@ -145,12 +145,10 @@ class ParamOverriderCartId
                     return $cart->getId();
                 }
             } else {
-                if ($this->checkoutSession->getCheckoutIsQuoteExtension()) {
-                    return $this->checkoutSession->getCheckoutIsQuoteExtension();
+                if ($this->checkoutSession->getIdQuoteExtension()) {
+                    return $this->checkoutSession->getIdQuoteExtension();
                 }
-                if ($this->checkoutSession->getIsQuoteExtension()) {
-                    return $this->checkoutSession->getIsQuoteExtension();
-                }
+                return null;
             }
         } catch (NoSuchEntityException $e) {
             $this->logger->critical($e);

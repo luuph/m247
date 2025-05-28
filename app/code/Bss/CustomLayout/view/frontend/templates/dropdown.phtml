@@ -1,0 +1,10 @@
+<?php if ($links = $block->getAccountLinks()): ?>
+    <div class="account-dropdown">
+        <button class="account-toggle">My Account</button>
+        <ul class="account-menu">
+            <?php foreach ($links as $link): ?>
+                <li><a href="<?= $link->getUrl() ?>"><?= $link->getLabel() ?></a></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php endif; ?>

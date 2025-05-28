@@ -1,0 +1,23 @@
+# pack-refs with: peeled fully-peeled sorted 
+55bfc120270bc844f713c815cc5e4f5c58fb3d9d refs/remotes/origin/BDemo-125
+5e45ad1a3adc9d3bd1e8e852f54c4811058ef0f6 refs/remotes/origin/BSupport-7075
+034f1698461c13850ee7e0c184a21322e8186ac6 refs/remotes/origin/M2LogInAsCustomer-1
+7facc5bb9bd0175b01440446c206092de6fd929e refs/remotes/origin/M2LogInAsCustomer-12
+ab71ffce64d6c35ea4aeb593b0200a8ee4e57c11 refs/remotes/origin/M2LogInAsCustomer-15
+6520efe279f1b813f0df0b7eddef92791db93afd refs/remotes/origin/M2LogInAsCustomer-5
+677cbe36c4fddb6706400ac2095589272174a291 refs/remotes/origin/M2LogInAsCustomer-7
+cd75c65b0773f263c961d276a9a437ad4b449f1b refs/remotes/origin/M2LogInAsCustomer-8
+a676ae80a115f2d28af9bae8147da7f0531d6fcc refs/remotes/origin/M2LogInAsCustomer-9
+61505ae2a5a9dae95f953f2d3b939734c772510c refs/remotes/origin/M2SalesRep-31
+e7bad14886797badaa374f39b4dcca507c1043c0 refs/remotes/origin/hotfix-v1.0.5
+ab71ffce64d6c35ea4aeb593b0200a8ee4e57c11 refs/remotes/origin/master
+c8f1b5db657082babee6e7f6511d037eee72c770 refs/tags/v1.0.1
+^12f9d6ec9935e0383eec8235f031a014f98e7f44
+dc5442069bae2bcf0ebec3ed7afa7ddf4c85c072 refs/tags/v1.0.2
+^9bac0eae9300dfe240d597e8561af6476b51ce6a
+19e2af37bb1a0592a05955f789eb9d6d2210c587 refs/tags/v1.0.3
+^a676ae80a115f2d28af9bae8147da7f0531d6fcc
+9324a2642b4a82de7e486b14f9ba826bd4d67a72 refs/tags/v1.0.4
+^f770bc039038ae1b2366ac9161d18d137a0bb1b4
+04eff152326471ea60f5bfe6b3e4395f49f1bb6b refs/tags/v1.0.5
+^f6273172fb81a94b0551ac1b932ddb42ebe380a5

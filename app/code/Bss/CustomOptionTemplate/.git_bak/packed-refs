@@ -1,7 +1,8 @@
 # pack-refs with: peeled fully-peeled sorted 
 968f8b1daa566a49aa4183a7b0581a7a5d02fda0 refs/remotes/origin/BCProject-1774
 cace4112353d4febf68dc0323ef02b285a9cfa98 refs/remotes/origin/BCProject-2192
-053348e9db85297dff04fb74d37566ddd2271fad refs/remotes/origin/M2.4.7
+a3e2795978e9681e2a1ef8cf6c336446943f6f50 refs/remotes/origin/M2.4.7
+21f5539c0048a30e4b241a0a9c9e2ac44c6495df refs/remotes/origin/M2.4.7-draft
 f04535bb1c8ca743d65d0e5d179ca7b5e49494f1 refs/remotes/origin/M2AdvancedCustomOption-4
 78b0d8f22a306add65d6c026d479c428364f0627 refs/remotes/origin/M2COAPriceQty-56
 7a833442612638db8855bd88c37b78cc55649105 refs/remotes/origin/M2COAPriceQty-56s
@@ -34,6 +35,7 @@ c7c1ba999e5ab116cf2e2b93f6ce78c41d1f5d15 refs/remotes/origin/M2COTemplate-55
 0c3d0d94c1f11201537b2e0e2405ebc2677d1e0b refs/remotes/origin/M2COTemplate-59
 d04f7fbeb7e94aa5e20de421ac2a6ad4300818f5 refs/remotes/origin/M2COTemplate-60
 36dc94dab9c651cde472b78ec79aea24f29a0233 refs/remotes/origin/M2COTemplate-60-m247
+af2e7946e60e630eadaddc98492e968a1beae040 refs/remotes/origin/M2COTemplate-65
 0cdd5ef24ced8e4ba3849da20f49705b23e6e443 refs/remotes/origin/M2DependentCO-36
 b78fed0eadc906e96987901075a43a8ff52a43fe refs/remotes/origin/M2DependentCO-36-1
 dce4d31e6b7e46e8641ded73bfd689626d9502db refs/remotes/origin/M2DependentCO-80
@@ -43,6 +45,7 @@ fd62ea5b81627b3cffb2c0c0480f0edea3d9c935 refs/remotes/origin/hotfix-v1.1.7
 bceb57af65fe30d8b1077d2b5fc859120cbacce1 refs/remotes/origin/hotfix-v1.1.7-7366
 c84323a07e09939e9ad3f680510cbeef0fa09b90 refs/remotes/origin/master
 6a3b739a53c871cfb22c2778d5c69f8f84ceeaa6 refs/remotes/origin/test
+4e1ca203402d83854a1aade73f2e1231148edd78 refs/remotes/origin/v1.2.1-draft
 6f275ef1fa3474ef70744f66877723a00db19d2f refs/tags/v1.0.3
 ^52b4ba5cca9620045b0436747edd603a8d4fe480
 80f134b0a5f6c88c5bef5a4fc5e9c9d507efa2d7 refs/tags/v1.0.4
@@ -72,3 +75,4 @@ d3fa3ec782d501f5e2c762c4df6ffdd64e3c1247 refs/tags/v1.1.4
 211aec07cd784bae76c7822246f22a568dbbf85b refs/tags/v1.1.7
 5f7381b473624c308b81e3989241af3287dcd6fe refs/tags/v1.1.9
 c84323a07e09939e9ad3f680510cbeef0fa09b90 refs/tags/v1.2.0
+a3e2795978e9681e2a1ef8cf6c336446943f6f50 refs/tags/v1.2.1

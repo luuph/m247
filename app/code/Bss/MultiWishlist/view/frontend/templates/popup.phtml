@@ -7,7 +7,7 @@
  * @category   BSS
  * @package    Bss_MultiWishlist
  * @author     Extension Team
- * @copyright  Copyright (c) 2018-2019 BSS Commerce Co. ( http://bsscommerce.com )
+ * @copyright  Copyright (c) 2018-2024 BSS Commerce Co. ( http://bsscommerce.com )
  * @license    http://bsscommerce.com/Bss-Commerce-License.txt
  */
 // @codingStandardsIgnoreFile
@@ -16,7 +16,11 @@
 <?php
 /* @var $block Bss\MultiWishlist\Block\Popup */
 ?>
-<?php $labels = $block->getMyWishlist(); ?>
+<?php
+$labels = $block->getMyWishlist();
+$selectType = $block->getSelectType();
+?>
+
 <div id="wishlist_container">
     <a id="fancybox_div" href="#output_wishlist_div"></a>
     <div id="output_wishlist_div">
@@ -31,7 +35,7 @@
                 <?php if (($block->getUnwishlist() && $block->getUnwishlist() != 0 || $block->getActionWl() == 'add') || $block->getActionWl() == false || $block->getActionWl() == 'movefromcart'): ?>
                     <li>
                         <label>
-                            <input type="checkbox" name="wishlist_id[]" id="wishlist_id_0" value="0" />
+                            <input type="<?=$selectType?>" name="wishlist_id[]" id="wishlist_id_0" value="0" />
                             <?php echo __('Main') ?>
                         </label>
                     </li>
@@ -44,7 +48,7 @@
                     ?>
                     <li>
                         <label>
-                            <input type="checkbox" name="wishlist_id[]" id="wishlist_id_<?php echo $label->getId() ?>" class="wishlist_id" value="<?php echo $label->getId() ?>"/>
+                            <input type="<?=$selectType?>" name="wishlist_id[]" id="wishlist_id_<?php echo $label->getId() ?>" class="wishlist_id" value="<?php echo $label->getId() ?>"/>
                             <span class="wishlist_label_<?php echo $label->getId() ?>"><?php echo $block->escapeHtml($label->getWishlistName()) ?></span>
                         </label>
                     </li>

@@ -2,7 +2,7 @@
     "name": "bsscommerce/google-xml-sitemap",
     "description": "BSS Google XML SiteMap",
     "type": "magento2-module",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "extra": {
         "suite": "seo-suite"
     },

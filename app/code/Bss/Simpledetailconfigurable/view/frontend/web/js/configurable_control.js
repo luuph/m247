@@ -895,8 +895,11 @@ define([
                 }
                 if ($metaData['meta_title'] != null) {
                     document.title = $metaData['meta_title'];
+                    $('head meta[name="title"]').attr('content', $metaData['meta_title']);
                 } else {
+
                     document.title = $parentMetaData['meta_title'];
+                    $('head meta[name="title"]').attr('content', $parentMetaData['meta_title']);
                 }
             }
         },

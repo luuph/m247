@@ -1,7 +1,8 @@
-c84323a07e09939e9ad3f680510cbeef0fa09b90		branch 'master' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-custom-option-template
 968f8b1daa566a49aa4183a7b0581a7a5d02fda0	not-for-merge	branch 'BCProject-1774' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-custom-option-template
 cace4112353d4febf68dc0323ef02b285a9cfa98	not-for-merge	branch 'BCProject-2192' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-custom-option-template
-053348e9db85297dff04fb74d37566ddd2271fad	not-for-merge	branch 'M2.4.7' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-custom-option-template
+3534393fc18a90c6fa379f063f4f462d791c6715	not-for-merge	branch 'BSupport-7793' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-custom-option-template
+a3e2795978e9681e2a1ef8cf6c336446943f6f50	not-for-merge	branch 'M2.4.7' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-custom-option-template
+21f5539c0048a30e4b241a0a9c9e2ac44c6495df	not-for-merge	branch 'M2.4.7-draft' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-custom-option-template
 f04535bb1c8ca743d65d0e5d179ca7b5e49494f1	not-for-merge	branch 'M2AdvancedCustomOption-4' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-custom-option-template
 78b0d8f22a306add65d6c026d479c428364f0627	not-for-merge	branch 'M2COAPriceQty-56' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-custom-option-template
 7a833442612638db8855bd88c37b78cc55649105	not-for-merge	branch 'M2COAPriceQty-56s' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-custom-option-template
@@ -42,5 +43,6 @@ dce4d31e6b7e46e8641ded73bfd689626d9502db	not-for-merge	branch 'M2DependentCO-80'
 aa4e6c14d6696b3bebeb6c07fc148e54b9279d06	not-for-merge	branch 'hotfix-v1.1.6' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-custom-option-template
 fd62ea5b81627b3cffb2c0c0480f0edea3d9c935	not-for-merge	branch 'hotfix-v1.1.7' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-custom-option-template
 bceb57af65fe30d8b1077d2b5fc859120cbacce1	not-for-merge	branch 'hotfix-v1.1.7-7366' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-custom-option-template
+c84323a07e09939e9ad3f680510cbeef0fa09b90	not-for-merge	branch 'master' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-custom-option-template
 6a3b739a53c871cfb22c2778d5c69f8f84ceeaa6	not-for-merge	branch 'test' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-custom-option-template
-68f5601fd4ab169181c78ccf91950575a0bc6a9f	not-for-merge	branch 'v1.2.1-draft' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-custom-option-template
+4e1ca203402d83854a1aade73f2e1231148edd78	not-for-merge	branch 'v1.2.1-draft' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-custom-option-template

@@ -1,0 +1,4 @@
+0000000000000000000000000000000000000000 4adb01236545a78ab0ac5f113afc1565ecb17188 Hai Luu <luuph@bsscommerce.com> 1744358529 +0700	clone: from ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-shipping-payment-customer-group.git
+4adb01236545a78ab0ac5f113afc1565ecb17188 4adb01236545a78ab0ac5f113afc1565ecb17188 Hai Luu <luuph@bsscommerce.com> 1744604644 +0700	checkout: moving from master to BSupport-7788
+4adb01236545a78ab0ac5f113afc1565ecb17188 65e83e1285f2da261c9700932667c89a7541ef52 Hai Luu <luuph@bsscommerce.com> 1744604685 +0700	commit: BSupport-7788: Fix display method not avaiable in BE
+65e83e1285f2da261c9700932667c89a7541ef52 65e83e1285f2da261c9700932667c89a7541ef52 Hai Luu <luuph@bsscommerce.com> 1744704738 +0700	reset: moving to HEAD

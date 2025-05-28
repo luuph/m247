@@ -18,3 +18,26 @@ b2c96d92f46afb9b95433b3dafad3cb0d6ea50f6 b2c96d92f46afb9b95433b3dafad3cb0d6ea50f
 b2c96d92f46afb9b95433b3dafad3cb0d6ea50f6 bd47b52af36a05f24413a5bdde937a9b7a425fcc Hai Luu <luuph@bsscommerce.com> 1743150188 +0700	commit: Request4quote-239: Fix load manage quote grid with DB setup table_prefix
 bd47b52af36a05f24413a5bdde937a9b7a425fcc b2c96d92f46afb9b95433b3dafad3cb0d6ea50f6 Hai Luu <luuph@bsscommerce.com> 1743150287 +0700	checkout: moving from Request4quote-239 to master
 b2c96d92f46afb9b95433b3dafad3cb0d6ea50f6 b2c96d92f46afb9b95433b3dafad3cb0d6ea50f6 Hai Luu <luuph@bsscommerce.com> 1743150314 +0700	checkout: moving from master to v1.3.6-draft
+b2c96d92f46afb9b95433b3dafad3cb0d6ea50f6 b2c96d92f46afb9b95433b3dafad3cb0d6ea50f6 Hai Luu <luuph@bsscommerce.com> 1745207851 +0700	checkout: moving from v1.3.6-draft to master
+b2c96d92f46afb9b95433b3dafad3cb0d6ea50f6 ebee94f968f61ae50adcff6c964b69979f3eed09 Hai Luu <luuph@bsscommerce.com> 1745207862 +0700	checkout: moving from master to BSupport-7625
+ebee94f968f61ae50adcff6c964b69979f3eed09 b2c96d92f46afb9b95433b3dafad3cb0d6ea50f6 Hai Luu <luuph@bsscommerce.com> 1745308656 +0700	checkout: moving from BSupport-7625 to master
+b2c96d92f46afb9b95433b3dafad3cb0d6ea50f6 b2c96d92f46afb9b95433b3dafad3cb0d6ea50f6 Hai Luu <luuph@bsscommerce.com> 1745312975 +0700	checkout: moving from master to BSupport-7771
+b2c96d92f46afb9b95433b3dafad3cb0d6ea50f6 6972cabaeca36679175fd70b5a51d8b005a58188 Hai Luu <luuph@bsscommerce.com> 1745313252 +0700	commit: Fix change custom price quote
+6972cabaeca36679175fd70b5a51d8b005a58188 b2c96d92f46afb9b95433b3dafad3cb0d6ea50f6 Hai Luu <luuph@bsscommerce.com> 1745313316 +0700	checkout: moving from BSupport-7771 to master
+b2c96d92f46afb9b95433b3dafad3cb0d6ea50f6 ebee94f968f61ae50adcff6c964b69979f3eed09 Hai Luu <luuph@bsscommerce.com> 1745313467 +0700	checkout: moving from master to BSupport-7625
+ebee94f968f61ae50adcff6c964b69979f3eed09 ebee94f968f61ae50adcff6c964b69979f3eed09 Hai Luu <luuph@bsscommerce.com> 1745313521 +0700	checkout: moving from BSupport-7625 to BSupport-7771
+ebee94f968f61ae50adcff6c964b69979f3eed09 09c73cc84e27a3a83454efa0580d5b843762764d Hai Luu <luuph@bsscommerce.com> 1745313576 +0700	commit: Fix change custom price quote
+09c73cc84e27a3a83454efa0580d5b843762764d ebee94f968f61ae50adcff6c964b69979f3eed09 Hai Luu <luuph@bsscommerce.com> 1745461656 +0700	checkout: moving from BSupport-7771 to BSupport-7625
+ebee94f968f61ae50adcff6c964b69979f3eed09 95ec5a912c87535aaa76561f72c31b3401de557d Hai Luu <luuph@bsscommerce.com> 1745461668 +0700	pull origin BSupport-7625: Fast-forward
+95ec5a912c87535aaa76561f72c31b3401de557d 09c73cc84e27a3a83454efa0580d5b843762764d Hai Luu <luuph@bsscommerce.com> 1745461724 +0700	checkout: moving from BSupport-7625 to BSupport-7771
+09c73cc84e27a3a83454efa0580d5b843762764d 548de9dfd58d99556323464494ffa2cec7d65758 Hai Luu <luuph@bsscommerce.com> 1745461744 +0700	merge BSupport-7625: Merge made by the 'ort' strategy.
+548de9dfd58d99556323464494ffa2cec7d65758 b2c96d92f46afb9b95433b3dafad3cb0d6ea50f6 Hai Luu <luuph@bsscommerce.com> 1745479401 +0700	checkout: moving from BSupport-7771 to v1.3.6-draft
+b2c96d92f46afb9b95433b3dafad3cb0d6ea50f6 dfb36e94e4eab7155bd2fc67a8c38a3914709eec Hai Luu <luuph@bsscommerce.com> 1745479412 +0700	pull origin v1.3.6-draft: Fast-forward
+dfb36e94e4eab7155bd2fc67a8c38a3914709eec dfb36e94e4eab7155bd2fc67a8c38a3914709eec Hai Luu <luuph@bsscommerce.com> 1745893549 +0700	checkout: moving from v1.3.6-draft to v1.3.6-draft
+dfb36e94e4eab7155bd2fc67a8c38a3914709eec a2164f459e0d49879f7bfcfcf9ec79462c8f2412 Hai Luu <luuph@bsscommerce.com> 1745893557 +0700	pull origin v1.3.6-draft: Fast-forward
+a2164f459e0d49879f7bfcfcf9ec79462c8f2412 a2164f459e0d49879f7bfcfcf9ec79462c8f2412 Hai Luu <luuph@bsscommerce.com> 1745893605 +0700	checkout: moving from v1.3.6-draft to v1.3.7-draft
+a2164f459e0d49879f7bfcfcf9ec79462c8f2412 a2164f459e0d49879f7bfcfcf9ec79462c8f2412 Hai Luu <luuph@bsscommerce.com> 1745893653 +0700	checkout: moving from v1.3.7-draft to v1.3.6-draft
+a2164f459e0d49879f7bfcfcf9ec79462c8f2412 5342897d61af0808b49245824ab70280e1882a14 Hai Luu <luuph@bsscommerce.com> 1745893763 +0700	reset: moving to 5342897
+5342897d61af0808b49245824ab70280e1882a14 5afb22a0cd5d94f760a4b1cad3cfda26161aa8f4 Hai Luu <luuph@bsscommerce.com> 1745894243 +0700	commit: Upgrade version module to v1.3.6
+5afb22a0cd5d94f760a4b1cad3cfda26161aa8f4 b2c96d92f46afb9b95433b3dafad3cb0d6ea50f6 Hai Luu <luuph@bsscommerce.com> 1746413180 +0700	checkout: moving from v1.3.6-draft to master
+b2c96d92f46afb9b95433b3dafad3cb0d6ea50f6 b2c96d92f46afb9b95433b3dafad3cb0d6ea50f6 Hai Luu <luuph@bsscommerce.com> 1746427709 +0700	checkout: moving from master to M2OSC-286

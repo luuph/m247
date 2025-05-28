@@ -59,7 +59,7 @@ class Action
             if (!$router) {
                 $router = 'onestepcheckout';
             }
-            $quoteId = $this->checkoutSession->create()->getIsQuoteExtension();
+            $quoteId = $this->checkoutSession->create()->getIdQuoteExtension();
             return $subject->getUrl($router,['_query' =>
                 [
                     'quoteextension' => '1',

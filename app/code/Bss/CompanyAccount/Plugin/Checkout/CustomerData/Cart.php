@@ -1,4 +1,20 @@
 <?php
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_CompanyAccount
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2025 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
 namespace Bss\CompanyAccount\Plugin\Checkout\CustomerData;
 
 use Bss\CompanyAccount\Api\SubUserQuoteRepositoryInterface;
@@ -54,26 +70,42 @@ class Cart
      * @return array
      * @throws LocalizedException
      */
-    public function afterGetSectionData($subject, $result)
+    public function afterGetSectionData($subject, array $result): array
     {
         if (!$this->helper->isEnable()) {
+            return $this->setCheckoutQuoteFlag($result, false);
+        }
+
+        $currentQuoteId = $this->checkoutSession->getQuote()->getId();
+        $subQuote = $this->subQuoteRepository->getByQuoteId($currentQuoteId);
+
+        $isCheckoutQuote = $subQuote &&
+            in_array(
+                $subQuote->getQuoteStatus(),
+                [Data::SUB_QUOTE_APPROVED, Data::SUB_QUOTE_WAITING],
+                true
+            );
+
+        return $this->setCheckoutQuoteFlag($result, $isCheckoutQuote);
+    }
+
+    /**
+     * Helper function to set 'isCheckoutQuote' flag for items
+     *
+     * @param array $result
+     * @param bool $flag
+     * @return array
+     */
+    private function setCheckoutQuoteFlag(array $result, bool $flag): array
+    {
+        if (!isset($result['items'])) {
             return $result;
         }
-        $currentQuote = $this->checkoutSession->getQuote();
-        if (isset($result['items'])) {
-            $currentQuoteId = $currentQuote->getId();
-            $subQuote = $this->subQuoteRepository->getByQuoteId($currentQuoteId);
-            $items = $result['items'];
-            foreach ($items as &$item) {
-                if ($subQuote && ($subQuote->getQuoteStatus() == Data::SUB_QUOTE_APPROVED
-                        || $subQuote->getQuoteStatus() == Data::SUB_QUOTE_WAITING)) {
-                    $item['isCheckoutQuote'] = true;
-                } else {
-                    $item['isCheckoutQuote'] = false;
-                }
-            }
-            $result['items'] = $items;
+
+        foreach ($result['items'] as &$item) {
+            $item['isCheckoutQuote'] = $flag;
         }
+
         return $result;
     }
 }

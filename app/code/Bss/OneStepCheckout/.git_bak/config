@@ -10,3 +10,11 @@
 	remote = origin
 	merge = refs/heads/master
 	vscode-merge-base = origin/master
+[branch "BSupport-7791"]
+	vscode-merge-base = origin/master
+[branch "M2OSC-286"]
+	vscode-merge-base = origin/master
+	remote = origin
+	merge = refs/heads/M2OSC-286
+[branch "v2.4.3-draft"]
+	vscode-merge-base = origin/master

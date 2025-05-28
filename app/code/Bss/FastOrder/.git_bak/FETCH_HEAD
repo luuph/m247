@@ -1,4 +1,4 @@
-ae0f93ac05ec6733dc7bb2dc9e15f3bdb9f5a26d		branch 'master' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_wholesale-fast-order-magento2
+3fb14c56c7e7c980aea01a6c4f82fa62db763eb0		branch 'master' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_wholesale-fast-order-magento2
 4664a8dd67706f60d61a6ac04fad733bee14f313	not-for-merge	branch 'BCP-2208' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_wholesale-fast-order-magento2
 034a9315aa15dd97fc48435eebb4b19d52da417a	not-for-merge	branch 'BCProject-1781' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_wholesale-fast-order-magento2
 1a9d8208640273c3da57e52c2e5378ff3b8a532b	not-for-merge	branch 'BCProject-2208' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_wholesale-fast-order-magento2
@@ -54,6 +54,7 @@ ac11d365fce3abf111dec40b4948014634538fea	not-for-merge	branch 'M2FastOrder-173' 
 7782fb19880cd76c5b6755486c7ede1ec9fce205	not-for-merge	branch 'M2FastOrder-179' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_wholesale-fast-order-magento2
 db7364574bbc839e93c08ec5d55c511a045a8918	not-for-merge	branch 'M2FastOrder-180' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_wholesale-fast-order-magento2
 1212788f2c8b907a9aabd7fcbc3f1fca0fad0b8d	not-for-merge	branch 'M2FastOrder-181' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_wholesale-fast-order-magento2
+23d9490ba74a23ac060cca9da41cbf0139bb99f2	not-for-merge	branch 'M2FastOrder-182' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_wholesale-fast-order-magento2
 bb54ecf4d7d4e22f2f53867380c230465f1d54d3	not-for-merge	branch 'M2FastOrder-34' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_wholesale-fast-order-magento2
 970d94134cee47b0518df0497d64725a1c586439	not-for-merge	branch 'M2FastOrder-35' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_wholesale-fast-order-magento2
 a0ab9e202ab3afc5919f3455215764943396b7fb	not-for-merge	branch 'M2FastOrder-36' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_wholesale-fast-order-magento2
@@ -88,4 +89,3 @@ e4e24daa649bf6b1a66db2a5a79955b2e1335edf	not-for-merge	branch 'hotfix-v1.4.1' of
 18181a358e134b8db314890855c25a3772ef24f0	not-for-merge	branch 'hotfix-v1.4.3' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_wholesale-fast-order-magento2
 a5561800694658b8117915dca9acc7d0ffe09ee3	not-for-merge	branch 'temp' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_wholesale-fast-order-magento2
 7c93992bafdb593966e2e69395ad13df59cc6a6b	not-for-merge	branch 'v1.4.6-draft' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_wholesale-fast-order-magento2
-97d40f005c65cbf4f5f93c523f11efd2a561153a	not-for-merge	branch 'v1.4.7-draft' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_wholesale-fast-order-magento2

@@ -9,3 +9,4 @@
 [branch "2.4"]
 	remote = origin
 	merge = refs/heads/2.4
+	vscode-merge-base = origin/2.4

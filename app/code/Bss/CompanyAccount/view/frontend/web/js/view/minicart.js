@@ -34,6 +34,9 @@ define([
                 customerData.reload(sections, true);
                 return Boolean(customerData.get('bssSubuserRoleOrder')._latestValue.approved_quote);
             },
+            isApprovedRole: function () {
+                return Boolean(customerData.get('bssSubuserRoleOrder')._latestValue.check_order_role);
+            },
             backToCart: function () {
                 $.ajax({
                     url: urlBuilder.build('companyaccount/checkout/backtoquote'),

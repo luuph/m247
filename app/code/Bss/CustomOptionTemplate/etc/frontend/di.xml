@@ -23,7 +23,4 @@
     <type name="Magento\Catalog\Model\Product\Option\Type\DefaultType">
         <plugin name="bss-template-remove-require-for-option" type="Bss\CustomOptionTemplate\Plugin\Model\Product\Option\Type\DefaultType" sortOrder="10" />
     </type>
-    <type name="Magento\Catalog\Helper\Product\Configuration">
-        <plugin name="bss-template-remove-option-store-view" type="Bss\CustomOptionTemplate\Plugin\Helper\Product\Configuration" sortOrder="10" />
-    </type>
 </config>

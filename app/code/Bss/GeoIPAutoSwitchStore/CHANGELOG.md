@@ -1,5 +1,9 @@
 [Release Note](https://bsscommerce.com/magento-2-geoip-auto-switch-store-extension.html)
 =============
+v1.5.0 (Apr 28, 2025)
+=============
+* Fix bug compatible with Magento v2.4.7-p5: remove code disable table.
+
 v1.4.9 (Mar 27, 2025)
 =============
 * Fix bug customer use only IPv6

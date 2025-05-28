@@ -99,6 +99,7 @@ class GetActiveQuote
                     $this->modelOnePage->setQuote($quote);
                 }
             } catch (\Exception $exception) {
+                throw new \Exception(__('An error occurred during checkout.'));
                 $this->logger->critical($exception);
             }
         }

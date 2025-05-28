@@ -17,24 +17,25 @@
 var config = {
     map: {
         '*': {
-            bss_configurable_control: 'Bss_Simpledetailconfigurable/js/configurable_control',
             bssPriceOptions: 'Bss_Simpledetailconfigurable/js/bss-price-option',
             "Magento_Review/js/process-reviews": 'Bss_Simpledetailconfigurable/js/process-reviews',
-            'priceBox' : 'Bss_Simpledetailconfigurable/js/price-box'
+            'priceBox': 'Bss_Simpledetailconfigurable/js/price-box'
         }
     },
     config: {
         mixins: {
-            "Magento_Swatches/js/swatch-renderer" : {
-                "Bss_Simpledetailconfigurable/js/swatch-renderer": true
+            "Magento_Swatches/js/swatch-renderer": {
+                "Bss_Simpledetailconfigurable/js/swatch-renderer-mixin": true
             },
-            "Magento_Catalog/js/price-options" : {
+            "Magento_Catalog/js/price-options": {
                 "Bss_Simpledetailconfigurable/js/price-options-mixin": true
             },
-            "Magento_Catalog/js/price-option-date" : {
+            "Magento_Catalog/js/price-option-date": {
                 "Bss_Simpledetailconfigurable/js/price-option-date-mixin": true
+            },
+            'Magento_ConfigurableProduct/js/configurable': {
+                'Bss_Simpledetailconfigurable/js/configurable-mixin': true
             }
-        },
-
-    },
+        }
+    }
 };

@@ -73,7 +73,7 @@ class Duplicate extends \Magento\Backend\App\Action
         \Magento\Backend\App\Action\Context $context,
         \Bss\CustomOptionTemplate\Model\TemplateFactory $templateFactory,
         \Bss\CustomOptionTemplate\Model\OptionFactory $bssOption,
-        \Bss\CustomOptionTemplate\Model\Option\ValueFactory $bssOptionValue,
+        \Bss\CustomOptionTemplate\Model\Option\ValueFactory $bssOptionValue
     ) {
         $this->json = $json;
         parent::__construct($context);

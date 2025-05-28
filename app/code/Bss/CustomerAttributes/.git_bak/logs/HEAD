@@ -6,3 +6,4 @@
 fcba2cc26470464fcf2f8303c2a575cb67fbfb60 fcba2cc26470464fcf2f8303c2a575cb67fbfb60 Hai Luu <luuph@bsscommerce.com> 1743653507 +0700	checkout: moving from master to BSupport-5475
 fcba2cc26470464fcf2f8303c2a575cb67fbfb60 335dfdc3c172e9b21489f14126618b1035f7a802 Hai Luu <luuph@bsscommerce.com> 1743653656 +0700	commit: BSupport-5475: Fix generate attr code invalid
 335dfdc3c172e9b21489f14126618b1035f7a802 bdf99cd095c80b046fd5c5ad6358b958e2a4d18e Hai Luu <luuph@bsscommerce.com> 1743665516 +0700	commit: BSupport-5475: Fix review code generate attr code invalid
+bdf99cd095c80b046fd5c5ad6358b958e2a4d18e bdf99cd095c80b046fd5c5ad6358b958e2a4d18e X-LuuPH <luuph@bsscommerce.com> 1744271964 +0000	reset: moving to HEAD

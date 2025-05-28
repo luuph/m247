@@ -1,0 +1,58 @@
+<?php
+$adminUrl = $block->getUrl('admin');
+$frontendUrl = $block->getBaseUrl('');
+?>
+
+<div class="chill-vortex-trigger"></div> <!-- vùng hover bên phải -->
+<div class="chill-vortex-icons">
+    <a href="<?= $adminUrl ?>" title="Go to Admin" target="_blank">🛠️</a>
+    <a href="<?= $frontendUrl ?>" title="Go to Frontend" target="_blank">🏠</a>
+</div>
+
+<style>
+    /* Vùng kích hoạt mỏng sát phải màn hình */
+    .chill-vortex-trigger {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 60px;
+        height: 100%;
+        z-index: 9998;
+    }
+
+    /* Container icon ban đầu ẩn sát mép phải */
+    .chill-vortex-icons {
+        position: fixed;
+        top: 50%;
+        right: -60px;
+        /* ẩn ra ngoài */
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        z-index: 9999;
+        padding: 10px 5px;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 8px 0 0 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        transition: right 0.3s ease;
+    }
+
+    /* Khi hover vào vùng kích hoạt, icon trượt ra */
+    .chill-vortex-trigger:hover+.chill-vortex-icons,
+    .chill-vortex-icons:hover {
+        right: 0;
+    }
+
+    .chill-vortex-icons a {
+        font-size: 24px;
+        color: #333;
+        text-decoration: none;
+        transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    .chill-vortex-icons a:hover {
+        color: #007bff;
+        transform: scale(1.2);
+    }
+</style>

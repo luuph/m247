@@ -69,6 +69,4 @@
             <column name="geoip_id"/>
         </index>
     </table>
-    <table name="bss_geoip_maxmind" disabled="true" resource="default"/>
-    <table name="bss_geoip_maxmind_ipv6" disabled="true" resource="default"/>
 </schema>

@@ -10,8 +10,9 @@
 5f47a645859fce414d2d2fc297a830c0c74467da	not-for-merge	branch 'BSupport-7555' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-request-to-quote
 0a4fafe89dad1d3a55396715359fb7af2fc3c118	not-for-merge	branch 'BSupport-7560' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-request-to-quote
 e853149ba8349443a4beaedfcb37a09f6852affd	not-for-merge	branch 'BSupport-7615' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-request-to-quote
-027958fcfb9f31714caf84fbea17b071c0e4aac0	not-for-merge	branch 'BSupport-7625' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-request-to-quote
+95ec5a912c87535aaa76561f72c31b3401de557d	not-for-merge	branch 'BSupport-7625' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-request-to-quote
 e47b65d80cbd2a1bd56c1df0aec27461f4de63c4	not-for-merge	branch 'BSupport-7691' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-request-to-quote
+548de9dfd58d99556323464494ffa2cec7d65758	not-for-merge	branch 'BSupport-7771' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-request-to-quote
 b692670209ae5e2ea6dd8785bb10785966e246ef	not-for-merge	branch 'Hotfix-BSupport-7373' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-request-to-quote
 49c73db0217ddc645bfd40b975e55a7ef5ea3665	not-for-merge	branch 'HuyBackup' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-request-to-quote
 1911936c2f32bf4178fa36746fbb9dc2ab17a42b	not-for-merge	branch 'M08-170' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-request-to-quote
@@ -33,7 +34,9 @@ a786686d7dbd0c176780bb778c59470fbf8b1b5f	not-for-merge	branch 'M2CompanyAccount-
 663b6d3de7a1358d050b306998292bac6897c097	not-for-merge	branch 'M2CompanyAccount97s' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-request-to-quote
 1837deb761475d26610aacc3b22df86958feff9b	not-for-merge	branch 'M2Request4quote-190' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-request-to-quote
 ad1a408da7fc58fca902c4cb41d068fce26ac604	not-for-merge	branch 'M2SalesRep-27' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-request-to-quote
-14fb282460e4a7a77eaaee6b848db4e5969f281e	not-for-merge	branch 'M2tươngthích-3' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-request-to-quote
+d586d75823798f36f349b49c54f86830ab3d6783	not-for-merge	branch 'M2tươngthích-3' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-request-to-quote
+14fb282460e4a7a77eaaee6b848db4e5969f281e	not-for-merge	branch 'M2tươngthích-3-test' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-request-to-quote
+15025a39c654e7c0c2e9fe4cb6a47d2aabc3b817	not-for-merge	branch 'M2tươngthích-3-v2' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-request-to-quote
 9ff040214696b6dce024f11db566ee1a0a5601bc	not-for-merge	branch 'Request4quote-101' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-request-to-quote
 0528ec0c10ebe074f91b5ff87df5fa37ef4ec112	not-for-merge	branch 'Request4quote-107' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-request-to-quote
 64b8b7e2958fddda5bdaef01b5f29545eebe87be	not-for-merge	branch 'Request4quote-108' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-request-to-quote
@@ -99,8 +102,10 @@ c573fe23b1103e8b8c85ad5e6ee11f7d01e43bba	not-for-merge	branch 'Request4quote-228
 8512978e25fa7396407a49eec2cc40c4980f2644	not-for-merge	branch 'Request4quote-231' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-request-to-quote
 0c137ece69359187bb65e34541b0327d4d1b7557	not-for-merge	branch 'Request4quote-232' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-request-to-quote
 4f21262ee9a0dd9905b419c83029b95b698e655d	not-for-merge	branch 'Request4quote-234' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-request-to-quote
+943fa9e15275f95a6f5483db424549b03cf82fdd	not-for-merge	branch 'Request4quote-235' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-request-to-quote
 e47b65d80cbd2a1bd56c1df0aec27461f4de63c4	not-for-merge	branch 'Request4quote-236' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-request-to-quote
 30b81ee0551575cdfb35b239e8497223d8230fb4	not-for-merge	branch 'Request4quote-237' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-request-to-quote
+9285099b51fc565d080b09438bec73222d238f74	not-for-merge	branch 'Request4quote-238' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-request-to-quote
 bd47b52af36a05f24413a5bdde937a9b7a425fcc	not-for-merge	branch 'Request4quote-239' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-request-to-quote
 91290fd2a14fb21382b5d4b56b15f25df598ff1b	not-for-merge	branch 'Request4quote-28' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-request-to-quote
 f4022b8fdcc40339df91bbbfa5644eb13aaa6b3d	not-for-merge	branch 'Request4quote-34' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-request-to-quote
@@ -157,4 +162,5 @@ c3e880f3f7f794257c53cd188c1b3a46e4beff04	not-for-merge	branch 'hotfix-v1.3.2' of
 b2c96d92f46afb9b95433b3dafad3cb0d6ea50f6	not-for-merge	branch 'master' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-request-to-quote
 fc309496f9ecca962dcd7b39a3624618b0de6e7d	not-for-merge	branch 'v1.3.4-draft' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-request-to-quote
 84d7afda12872ccf1456b7f7cb9e03ae94a1decd	not-for-merge	branch 'v1.3.5-draft' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-request-to-quote
-5342897d61af0808b49245824ab70280e1882a14	not-for-merge	branch 'v1.3.6-draft' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-request-to-quote
+5afb22a0cd5d94f760a4b1cad3cfda26161aa8f4	not-for-merge	branch 'v1.3.6-draft' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-request-to-quote
+a2164f459e0d49879f7bfcfcf9ec79462c8f2412	not-for-merge	branch 'v1.3.7-draft' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-request-to-quote

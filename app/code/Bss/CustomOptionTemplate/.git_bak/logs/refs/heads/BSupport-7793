@@ -1,0 +1,2 @@
+0000000000000000000000000000000000000000 c84323a07e09939e9ad3f680510cbeef0fa09b90 Hai Luu <luuph@bsscommerce.com> 1745223037 +0700	branch: Created from HEAD
+c84323a07e09939e9ad3f680510cbeef0fa09b90 3534393fc18a90c6fa379f063f4f462d791c6715 Hai Luu <luuph@bsscommerce.com> 1745223113 +0700	commit: Fix bug compatible with php version < 7.3

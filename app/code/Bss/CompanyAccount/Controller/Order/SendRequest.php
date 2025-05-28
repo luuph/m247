@@ -145,7 +145,7 @@ class SendRequest extends Action
     public function execute()
     {
         if ($this->checkQuoteRequestOrder()) {
-            $quoteId = $this->checkoutSession->getData('is_quote_extension');
+            $quoteId = $this->checkoutSession->getIdQuoteExtension();
             $quote = $this->quoteEntity->create()->load($quoteId);
             $this->cart->setQuote($quote);
         }

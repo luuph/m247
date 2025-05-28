@@ -197,12 +197,6 @@ class ProductInitObserver implements ObserverInterface
         $moduleConfig = $this->productData->getModuleConfig()->getAllConfig();
         $product->setSdcpPriceInfo($child->getPriceInfo());
         $product->setSdcpId($pathInfo);
-        if ($moduleConfig['sku']) {
-            $product->setSku($child->getSku());
-        }
-        if ($moduleConfig['name']) {
-            $product->setName($child->getName());
-        }
         if ($moduleConfig['meta_data']) {
             if ($child->hasMetaTitle()) {
                 $product->setMetaTitle($child->getMetaTitle());
@@ -213,6 +207,16 @@ class ProductInitObserver implements ObserverInterface
             if ($child->hasMetaDescription()) {
                 $product->setMetaDescription($child->getMetaDescription());
             }
+        } else {
+            if (!$product->hasMetaTitle()) {
+                $product->setMetaTitle($product->getName());
+            }
+        }
+        if ($moduleConfig['sku']) {
+            $product->setSku($child->getSku());
+        }
+        if ($moduleConfig['name']) {
+            $product->setName($child->getName());
         }
         $this->replaceInitImage($product, $child, $moduleConfig['images']);
     }

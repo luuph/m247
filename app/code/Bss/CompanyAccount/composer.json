@@ -2,7 +2,7 @@
     "name": "bsscommerce/company-account",
     "description": "Module Company Account for magento 2",
     "type": "magento2-module",
-    "version": "1.3.1",
+    "version": "1.3.2",
     "license": [
         "OSL-3.0",
         "AFL-3.0"
@@ -12,5 +12,8 @@
         "psr-4": {
             "Bss\\CompanyAccount\\": ""
         }
+    },
+    "require": {
+        "bsscommerce/core": "*"
     }
 }

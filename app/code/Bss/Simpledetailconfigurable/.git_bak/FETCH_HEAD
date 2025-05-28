@@ -5,9 +5,10 @@ b3834fbb25032be7959396958abefa52e4b07870	not-for-merge	branch 'BCProject-1797-el
 fa51a51fc4893963f62b025da371c27e3304258e	not-for-merge	branch 'BPModulesAPI-19' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-simple-details-configurable-product
 8e846222761bfcba853835c55e748dbc6eb79d05	not-for-merge	branch 'BSS-EXM2-CPWD-102' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-simple-details-configurable-product
 c5f6df56690e0fb0ea2094aae2d55e7281c05c75	not-for-merge	branch 'BSupport-5682' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-simple-details-configurable-product
-76d86c5a78b475c07d279f94c83a6416012f9bde	not-for-merge	branch 'BSupport-7408-v153' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-simple-details-configurable-product
+d5187227763574185b1ac6808d09a3ac899cdad4	not-for-merge	branch 'BSupport-7408-v153' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-simple-details-configurable-product
 9893c857aa51a8d2b6cffb6600f4ab92ebe68daf	not-for-merge	branch 'BSupport-7434-v1.5.3' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-simple-details-configurable-product
 30af8cab2ac0eb74eed0bfa55905c2a7638f1523	not-for-merge	branch 'BSupport-7648' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-simple-details-configurable-product
+02b6089ac2cd1448bec084dcc17d322a74a4420b	not-for-merge	branch 'BSupport-7683' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-simple-details-configurable-product
 68ce87fa72588cebb5512edef99d0840f2133679	not-for-merge	branch 'Fixed<M234' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-simple-details-configurable-product
 84187212e3a7789c78159d58b61bb9c119754153	not-for-merge	branch 'M2.2-M2.3.2' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-simple-details-configurable-product
 837b05c19f155d1c692c19f663ffa3e1be0af65d	not-for-merge	branch 'M2COTemplate-36' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-simple-details-configurable-product
@@ -107,6 +108,7 @@ f8de2e10d924092b30aced7ea1c7df505eeb7723	not-for-merge	branch 'M2SDCP-93' of ssh
 63ac5f9be182a4677289f647fea9d0a6375fe4a1	not-for-merge	branch 'M2SDCP-95' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-simple-details-configurable-product
 ed8f6c889884f723bba9f6600dfc3191db5ed32e	not-for-merge	branch 'M2SDCP-96' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-simple-details-configurable-product
 fea56e14e41935a0ffc42c5acc10f9cace4ce5cb	not-for-merge	branch 'M2SDCP-98' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-simple-details-configurable-product
+60ae48b550aaab185e1d56280cedd68edaf4a40f	not-for-merge	branch 'M2StockNoti-196' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-simple-details-configurable-product
 1152113b9caddfa8051514f8792ea6337f2850dc	not-for-merge	branch 'Optimize_code' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-simple-details-configurable-product
 a738311eddd51a9bddf80450c0c848e3168b9b15	not-for-merge	branch 'bs4907' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-simple-details-configurable-product
 fc4df7aa70069070f52ab00514908ee388378e27	not-for-merge	branch 'hotfix-1.4.4' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-simple-details-configurable-product
@@ -129,3 +131,4 @@ f63ea936099fc373a5eea4e52b026120830260bd	not-for-merge	branch 'hotfix.v1.3.9' of
 7832c6be848a447c0f3d60cc5425122fa97c88ab	not-for-merge	branch 'optimize' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-simple-details-configurable-product
 151689bae2f092c32449a1cd21b41d6cd42b189a	not-for-merge	branch 'test-bs' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-simple-details-configurable-product
 a0f0fe39a5935435069c2cd8492edf285d11b593	not-for-merge	branch 'v1.5.4-draft' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-simple-details-configurable-product
+3619dd32fbdf840335058c3da921299260ca3961	not-for-merge	branch 'v1.5.5-draft' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-simple-details-configurable-product

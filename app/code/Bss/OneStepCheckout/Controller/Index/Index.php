@@ -1,4 +1,5 @@
 <?php
+
 /**
  * BSS Commerce Co.
  *
@@ -37,6 +38,7 @@ use Magento\Framework\View\LayoutFactory;
 use Magento\Framework\View\Result\LayoutFactory as ResultLayout;
 use Magento\Framework\View\Result\PageFactory;
 use Magento\Quote\Api\CartRepositoryInterface;
+use Magento\Framework\Exception\LocalizedException;
 
 /**
  * Class Index
@@ -137,30 +139,37 @@ class Index extends Onepage
      */
     public function execute()
     {
-        $storeId = $this->configHelper->getStoreId();
-        if (!$this->configHelper->isEnabled() || !$this->configHelper->isCanCheckout($storeId)) {
-            return $this->resultRedirectFactory->create()->setPath('checkout');
-        }
+        try {
+            $storeId = $this->configHelper->getStoreId();
+            if (!$this->configHelper->isEnabled() || !$this->configHelper->isCanCheckout($storeId)) {
+                return $this->resultRedirectFactory->create()->setPath('checkout');
+            }
 
-        if (!$this->checkoutHelper->canOnepageCheckout()) {
-            $this->messageManager->addErrorMessage(__('One-page checkout is turned off.'));
+            if (!$this->checkoutHelper->canOnepageCheckout()) {
+                $this->messageManager->addErrorMessage(__('One-page checkout is turned off.'));
+                return $this->resultRedirectFactory->create()->setPath('checkout/cart');
+            }
+            if (!$this->isQuoteCanOrder()) {
+                $this->messageManager->addErrorMessage(__('Cannot checkout with this quote'));
+                return $this->resultRedirectFactory->create()->setPath('quoteextension/quote/history');
+            }
+            $this->getActiveQuote();
+            $this->_customerSession->regenerateId();
+            $this->checkoutSession->setCartWasUpdated(false);
+            $this->getOnepage()->initCheckout();
+            $resultPage = $this->resultPageFactory->create();
+            $title = __('One Step Checkout');
+            if ($this->configHelper->getGeneral('title')) {
+                $title = trim($this->configHelper->getGeneral('title'));
+            }
+            $resultPage->getConfig()->getTitle()->set($title);
+            return $resultPage;
+        } catch (LocalizedException $e) {
+            $this->messageManager->addErrorMessage($e->getMessage());
+            return $this->resultRedirectFactory->create()->setPath('checkout/cart');
+        } catch (\Exception $e) {
             return $this->resultRedirectFactory->create()->setPath('checkout/cart');
         }
-        if (!$this->isQuoteCanOrder()) {
-            $this->messageManager->addErrorMessage(__('Cannot checkout with this quote'));
-            return $this->resultRedirectFactory->create()->setPath('quoteextension/quote/history');
-        }
-        $this->getActiveQuote();
-        $this->_customerSession->regenerateId();
-        $this->checkoutSession->setCartWasUpdated(false);
-        $this->getOnepage()->initCheckout();
-        $resultPage = $this->resultPageFactory->create();
-        $title = __('One Step Checkout');
-        if ($this->configHelper->getGeneral('title')) {
-            $title = trim($this->configHelper->getGeneral('title'));
-        }
-        $resultPage->getConfig()->getTitle()->set($title);
-        return $resultPage;
     }
 
     /**
@@ -172,13 +181,14 @@ class Index extends Onepage
     {
         $quote = $this->getOnepage()->getQuote();
         if (!$quote->hasItems() || $quote->getHasError() || !$quote->validateMinimumAmount()) {
-            return $this->resultRedirectFactory->create()->setPath('checkout/cart');
+            throw new \Exception(__('Your cart is invalid. Please check your items.'));
         }
-        if (!$this->_customerSession->isLoggedIn() && !$this->checkoutHelper->isAllowedGuestCheckout($quote) &&
+        if (
+            !$this->_customerSession->isLoggedIn() && !$this->checkoutHelper->isAllowedGuestCheckout($quote) &&
             !$this->configHelper->isShowBssCheckoutPage()
         ) {
             $this->messageManager->addErrorMessage(__('Guest checkout is disabled.'));
-            return $this->resultRedirectFactory->create()->setPath('checkout/cart');
+            throw new \Exception(__('Guest checkout is disabled.'));
         }
     }
 
@@ -187,7 +197,8 @@ class Index extends Onepage
      *
      * @return bool
      */
-    public function isQuoteCanOrder(){
+    public function isQuoteCanOrder()
+    {
         return true;
     }
 }

@@ -15,3 +15,4 @@
 [branch "v1.1.4-draft"]
 	remote = origin
 	merge = refs/heads/v1.1.4-draft
+	vscode-merge-base = origin/v1.1.4-draft

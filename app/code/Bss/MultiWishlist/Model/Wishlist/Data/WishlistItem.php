@@ -1,4 +1,5 @@
 <?php
+
 /**
  * BSS Commerce Co.
  *
@@ -13,7 +14,7 @@
 
 namespace Bss\MultiWishlist\Model\Wishlist\Data;
 
-class WishlistItem
+class WishlistItem extends \Magento\Wishlist\Model\Wishlist\Data\WishlistItem
 {
     /**
      * @var float
@@ -70,6 +71,15 @@ class WishlistItem
         array $selectedOptions = null,
         array $enteredOptions = null
     ) {
+        parent::__construct(
+            $quantity,
+            $sku,
+            $parentSku,
+            $id,
+            $description,
+            $selectedOptions,
+            $enteredOptions
+        );
         $this->quantity = $quantity;
         $this->sku = $sku;
         $this->parentSku = $parentSku;

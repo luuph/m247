@@ -31,7 +31,7 @@
                 <field id="Enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Enable</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                    <comment><![CDATA[Version 1.5.3]]></comment>
+                    <comment><![CDATA[Version 1.5.4]]></comment>
                 </field>
             </group>
             <group id="SDCP_details" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">

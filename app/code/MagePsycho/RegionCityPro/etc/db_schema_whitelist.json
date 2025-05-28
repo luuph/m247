@@ -1,0 +1,32 @@
+{
+    "directory_country_region_city": {
+        "column": {
+            "city_id": true,
+            "country_id": true,
+            "region_id": true,
+            "code": true,
+            "default_name": true
+        },
+        "index": {
+            "DIRECTORY_COUNTRY_REGION_CITY_COUNTRY_ID": true,
+            "DIRECTORY_COUNTRY_REGION_CITY_REGION_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "directory_country_region_city_name": {
+        "column": {
+            "locale": true,
+            "city_id": true,
+            "name": true
+        },
+        "index": {
+            "DIRECTORY_COUNTRY_REGION_CITY_NAME_CITY_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_4437144965A71845F344D1DF887724B8": true
+        }
+    }
+}

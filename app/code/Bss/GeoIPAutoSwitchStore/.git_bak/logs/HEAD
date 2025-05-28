@@ -9,3 +9,10 @@ ad0a4076d9f026c96dc66f2daaf173245aa67d15 4b1d380a066c238c32eb5982efd34e2dffc5cba
 9eddda7e80527dbf3d33518d24a6b9c3cd94ae1e be52fa2fa51a36acb94e7b8706758e2de6b857fb Hai Luu <luuph@bsscommerce.com> 1743061214 +0700	commit: Update version module to v1.4.9
 be52fa2fa51a36acb94e7b8706758e2de6b857fb 9eddda7e80527dbf3d33518d24a6b9c3cd94ae1e Hai Luu <luuph@bsscommerce.com> 1743061383 +0700	reset: moving to 9eddda7
 9eddda7e80527dbf3d33518d24a6b9c3cd94ae1e a0187c1dcc6bbf937d7fce69a3896ccae13ca4f3 Hai Luu <luuph@bsscommerce.com> 1743061394 +0700	commit: Update version module to v1.4.9
+a0187c1dcc6bbf937d7fce69a3896ccae13ca4f3 37e97c2a2b10b8a55255e8f96f7a4aa9729e41cd Hai Luu <luuph@bsscommerce.com> 1745823817 +0700	checkout: moving from v1.4.9-draft to M2Geoipautoswitchstore-150
+37e97c2a2b10b8a55255e8f96f7a4aa9729e41cd 9cd270aafd35967b2f2beb8a365b8204819837a3 Hai Luu <luuph@bsscommerce.com> 1745824105 +0700	commit: M2Geoipautoswitchstore-150: Fix review code - remove code disable table
+9cd270aafd35967b2f2beb8a365b8204819837a3 9df3b35b522386af4c008979f670ff29c0905188 Hai Luu <luuph@bsscommerce.com> 1745826271 +0700	checkout: moving from M2Geoipautoswitchstore-150 to master
+9df3b35b522386af4c008979f670ff29c0905188 024d97a85598852f10f31950695c493e5a212c2d Hai Luu <luuph@bsscommerce.com> 1745826279 +0700	pull origin master: Fast-forward
+024d97a85598852f10f31950695c493e5a212c2d 024d97a85598852f10f31950695c493e5a212c2d Hai Luu <luuph@bsscommerce.com> 1745826297 +0700	checkout: moving from master to v1.5.0-draft
+024d97a85598852f10f31950695c493e5a212c2d 48b3025f2ed932a37adefc56a4a8b9b7904092a0 Hai Luu <luuph@bsscommerce.com> 1745838450 +0700	pull origin v1.5.0-draft: Fast-forward
+48b3025f2ed932a37adefc56a4a8b9b7904092a0 c8593903f0e164b4cb35abb0e52ec4a21f872272 Hai Luu <luuph@bsscommerce.com> 1745839056 +0700	commit: Upgrade Changelog, upgrade version module to v1.5.0

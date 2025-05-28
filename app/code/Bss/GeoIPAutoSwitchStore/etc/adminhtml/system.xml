@@ -34,7 +34,7 @@
                 <field id="enable" translate="label" type="select" sortOrder="0" showInDefault="1" showInWebsite="0"
                        showInStore="0">
                     <label>Enable</label>
-                    <comment><![CDATA[Version 1.4.9]]></comment>
+                    <comment><![CDATA[Version 1.5.0]]></comment>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
 

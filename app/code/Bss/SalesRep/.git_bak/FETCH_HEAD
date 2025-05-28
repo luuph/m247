@@ -2,6 +2,7 @@
 7d08386700cd4cf0fb6dab41cb1fc51df1d77eb9	not-for-merge	branch 'BSupport-7185' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_sales-rep
 7c6070a55f8a7a1a2527fc75cd3c41e267897b89	not-for-merge	branch 'BSupport-7555' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_sales-rep
 d1a92e8e0fc399acf96b4fe0a6d2c7e47705af5c	not-for-merge	branch 'BSupport-7615' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_sales-rep
+7f8f0142762831ea1a8a2eb18c37ebcc9cd1bf5c	not-for-merge	branch 'M2B2BExtensions-196-KIENTV' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_sales-rep
 b93b099e2d84e57d5df3f67e2fd6ce60768607d6	not-for-merge	branch 'M2B2BExtensions-94' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_sales-rep
 c1bfece157f242e8de5dbeaed8a3d294971600c0	not-for-merge	branch 'M2CompanyAccount-27' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_sales-rep
 96937559c964f675598e3e2dec5db9a58ac2b5bf	not-for-merge	branch 'M2SalesRep-18' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_sales-rep
@@ -35,3 +36,4 @@ d53115edce988af8d55258b5f8f0afa63110b883	not-for-merge	branch 'dev-phase2-2' of 
 72e2fa4410fd5869c8dd79e0110a1f31b8efea02	not-for-merge	branch 'hotfix-v1.1.3' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_sales-rep
 eb82209a35865b52f3c4ddf2e1434723d9d16cac	not-for-merge	branch 'master' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_sales-rep
 b0e3215f5264b040b6d58d9620244af6ee60b468	not-for-merge	branch 'test-manhnd' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_sales-rep
+7f8f0142762831ea1a8a2eb18c37ebcc9cd1bf5c	not-for-merge	branch 'v1.1.5-draft' of ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_sales-rep

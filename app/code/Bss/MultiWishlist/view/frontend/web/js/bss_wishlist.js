@@ -253,6 +253,7 @@ define([
             }
             if ($this.hasClass('action-towishlist')) {
                 url = url + 'action/movefromcart';
+                window.multiWishlistAction = "movefromcart"
             }
             if ($this.hasClass('copy_to_wishlist')) {
                 var wishlist_id = $this.parents('.tabs-wishlist').find('.wishlist-id').first().val();
@@ -322,15 +323,20 @@ define([
             $('#output_wishlist_div input').each(function(){
                 checkboxValues[$(this).attr('id')] = $(this).is(":checked");
             });
+            let createWishlistElement = $('#create_wishlist');
+            let data = createWishlistElement.serialize();
+            if (window.multiWishlistAction) {
+                data += `&action_wl=${window.multiWishlistAction}`;
+            }
             if ($('#wishlist-form-validation').length) {
                 var url = $('#wishlist-form-validation').attr('action');
-                $('#create_wishlist').attr('action',url);
-                $('#create_wishlist').submit();
+                createWishlistElement.attr('action',url);
+                createWishlistElement.submit();
             } else {
                 $.ajax({
                     type: 'post',
-                    url: $('#create_wishlist').attr('action'),
-                    data: $('#create_wishlist').serialize(),
+                    url: createWishlistElement.attr('action'),
+                    data: data,
                     dataType: 'json',
                     success: function (response) {
                         var result = $(response.html).find('#list-wishlist').html();

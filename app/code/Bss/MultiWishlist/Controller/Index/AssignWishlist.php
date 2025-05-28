@@ -223,6 +223,11 @@ class AssignWishlist extends \Magento\Framework\App\Action\Action
     {
         $var = $wishlistIds = [];
         $wishlistIds = $this->returnWishlistIds($params);
+        $isAddFromReorder = false;
+        if (isset($params['is_reorder']) && $params['is_reorder']) {
+            $isAddFromReorder = true;
+            $wishlistIds = explode(',', $wishlistIds);
+        }
         $items = $this->returnProducts($params);
         $customerData = $this->customerSession->getCustomer();
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
@@ -230,6 +235,7 @@ class AssignWishlist extends \Magento\Framework\App\Action\Action
         $wishlist = $this->coreWishlist->create()->loadByCustomerId($customerData->getId(), true);
         try {
             $productName = $wishlistName = [];
+
             foreach ($items as $item) {
                 $product = $item->getProduct();
                 if ($this->checkError($product->getId(), $wishlistIds)) {
@@ -252,7 +258,7 @@ class AssignWishlist extends \Magento\Framework\App\Action\Action
                     $this->buyRequest = [];
                     //check if $this->>buyRequest is empty => set value for buyRequest
                     $this->returnBuyRequest($data);
-
+                    $this->setQtyFromReorder($isAddFromReorder, $item->getId());
                     $result = $wishlist->addNewItem($product, $this->buyRequest, false);
                     $this->saveWishlist($result, $wishlist);
                     $wishlistName[$wishlistId] = $this->helper->getWishlistName($wishlistId);
@@ -272,6 +278,7 @@ class AssignWishlist extends \Magento\Framework\App\Action\Action
                     $this->buyRequest = [];
                     //check if $this->>buyRequest is empty => set value for buyRequest
                     $this->returnBuyRequest($data);
+                    $this->setQtyFromReorder($isAddFromReorder, $item->getId());
                     $result = $wishlist->addNewItem($product, $this->buyRequest, false);
                     $this->saveWishlist($result, $wishlist);
                     $wishlistName[] = $this->helper->getWishlistName($wishlistId);
@@ -285,8 +292,8 @@ class AssignWishlist extends \Magento\Framework\App\Action\Action
             $this->messageManager->addSuccessMessage(
                 __(
                     "%1 has been added to wish list %2.",
-                    implode(',', $productName),
-                    implode(',', $wishlistName)
+                    implode(', ', $productName),
+                    implode(', ', $wishlistName)
                 )
             );
         } catch (\Magento\Framework\Exception\LocalizedException $e) {
@@ -302,6 +309,20 @@ class AssignWishlist extends \Magento\Framework\App\Action\Action
         $this->getBeforeWishlist($session, $resultRedirect, $wishlist);
         $var = $this->getUrlWishlist($var);
         return $this->setData($var, $resultRedirect, $wishlist, $params);
+    }
+
+    /**
+     * Set qty from reorder form
+     *
+     * @param bool $isAddFromReorder
+     * @param string|int $itemId
+     * @return void
+     */
+    public function setQtyFromReorder($isAddFromReorder, $itemId)
+    {
+        if ($isAddFromReorder && $itemId && isset($this->params[$itemId])) {
+            $this->buyRequest->setData('qty', $this->params[$itemId]);
+        }
     }
 
     /**

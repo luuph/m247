@@ -1,3 +1,29 @@
 0000000000000000000000000000000000000000 fe8adeb85cbebb7b7e827941be8003484bc281fc Hai Luu <luuph@bsscommerce.com> 1731315194 +0700	clone: from ssh://x-gitlab.bsscommerce.com:2224/bsssupport/package_m2_magento2-one-step-checkout.git
 fe8adeb85cbebb7b7e827941be8003484bc281fc 1e1c2c0c0742d638a248dc5e230f08ef4219773d Hai Luu <luuph@bsscommerce.com> 1732698756 +0700	pull origin master: Fast-forward
 1e1c2c0c0742d638a248dc5e230f08ef4219773d 27a05a422daf820706059129732746054e0bb9df Hai Luu <luuph@bsscommerce.com> 1740724765 +0700	pull origin master: Fast-forward
+27a05a422daf820706059129732746054e0bb9df 27a05a422daf820706059129732746054e0bb9df Hai Luu <luuph@bsscommerce.com> 1744774209 +0700	checkout: moving from master to BSupport-7791
+27a05a422daf820706059129732746054e0bb9df ccf9e94d9be0c679fe8488d1da2b56b105a64fac Hai Luu <luuph@bsscommerce.com> 1744774273 +0700	commit: BSupport-7791: Update case checkout when cart has products unsalable
+ccf9e94d9be0c679fe8488d1da2b56b105a64fac 27a05a422daf820706059129732746054e0bb9df Hai Luu <luuph@bsscommerce.com> 1744791551 +0700	reset: moving to 27a05a4
+27a05a422daf820706059129732746054e0bb9df b6c8060b2edd6dbe50573555386342c585565454 Hai Luu <luuph@bsscommerce.com> 1744791568 +0700	commit: BSupport-7791: Update case checkout when cart has products unsalable
+b6c8060b2edd6dbe50573555386342c585565454 07a2dc7d93e6f3745889a25e12f7fbb3f9a5d4b4 Hai Luu <luuph@bsscommerce.com> 1744796493 +0700	commit: BSupport-7791: Fix load osc page when quote empty
+07a2dc7d93e6f3745889a25e12f7fbb3f9a5d4b4 07a2dc7d93e6f3745889a25e12f7fbb3f9a5d4b4 Hai Luu <luuph@bsscommerce.com> 1744796504 +0700	reset: moving to HEAD
+07a2dc7d93e6f3745889a25e12f7fbb3f9a5d4b4 07a2dc7d93e6f3745889a25e12f7fbb3f9a5d4b4 Hai Luu <luuph@bsscommerce.com> 1744796508 +0700	reset: moving to HEAD
+07a2dc7d93e6f3745889a25e12f7fbb3f9a5d4b4 07a2dc7d93e6f3745889a25e12f7fbb3f9a5d4b4 Hai Luu <luuph@bsscommerce.com> 1744796946 +0700	reset: moving to HEAD
+07a2dc7d93e6f3745889a25e12f7fbb3f9a5d4b4 ef3efa00a3325d3c680dd5bc08873b096b64d4ac Hai Luu <luuph@bsscommerce.com> 1744883595 +0700	commit: BSupport-7791: Fix review code rever getActiveQuote
+ef3efa00a3325d3c680dd5bc08873b096b64d4ac 07a2dc7d93e6f3745889a25e12f7fbb3f9a5d4b4 Hai Luu <luuph@bsscommerce.com> 1744884501 +0700	reset: moving to 07a2dc7
+07a2dc7d93e6f3745889a25e12f7fbb3f9a5d4b4 8074679383f3b534c2bef10a33cf063a7a9754c9 Hai Luu <luuph@bsscommerce.com> 1744884510 +0700	commit: BSupport-7791: Fix review code rever getActiveQuote
+8074679383f3b534c2bef10a33cf063a7a9754c9 b6dda7761726610adcb855a72150920f9c1dfe01 Hai Luu <luuph@bsscommerce.com> 1744889077 +0700	commit: BSupport-7791: Fix review code
+b6dda7761726610adcb855a72150920f9c1dfe01 27a05a422daf820706059129732746054e0bb9df Hai Luu <luuph@bsscommerce.com> 1745642048 +0700	checkout: moving from BSupport-7791 to master
+27a05a422daf820706059129732746054e0bb9df 27a05a422daf820706059129732746054e0bb9df Hai Luu <luuph@bsscommerce.com> 1745642312 +0700	checkout: moving from master to M2OSC-286
+27a05a422daf820706059129732746054e0bb9df 40abe1efed0feb96e3d73846dd6c44a918f4ccc7 Hai Luu <luuph@bsscommerce.com> 1745649642 +0700	commit: M2OSC-286: Update messgage + foucus item unsalable, fix bug open onestepchechout when empty cart
+40abe1efed0feb96e3d73846dd6c44a918f4ccc7 40abe1efed0feb96e3d73846dd6c44a918f4ccc7 Hai Luu <luuph@bsscommerce.com> 1745832216 +0700	reset: moving to HEAD
+40abe1efed0feb96e3d73846dd6c44a918f4ccc7 27a05a422daf820706059129732746054e0bb9df Hai Luu <luuph@bsscommerce.com> 1745832226 +0700	reset: moving to 27a05a4
+27a05a422daf820706059129732746054e0bb9df 7f295cbf33d0cc62c517a806617f3740f91b0803 Hai Luu <luuph@bsscommerce.com> 1745832511 +0700	commit: M2OSC-286: fix bug open onestepchechout when empty cart && cart has product unsalable
+7f295cbf33d0cc62c517a806617f3740f91b0803 27a05a422daf820706059129732746054e0bb9df Hai Luu <luuph@bsscommerce.com> 1745892921 +0700	checkout: moving from M2OSC-286 to master
+27a05a422daf820706059129732746054e0bb9df 27a05a422daf820706059129732746054e0bb9df Hai Luu <luuph@bsscommerce.com> 1745892961 +0700	checkout: moving from master to v2.4.3-draft
+27a05a422daf820706059129732746054e0bb9df 316a11128df05cd203fd572d1db8ecb20f4080a3 Hai Luu <luuph@bsscommerce.com> 1746411410 +0700	pull origin v2.4.3-draft: Fast-forward
+316a11128df05cd203fd572d1db8ecb20f4080a3 27a05a422daf820706059129732746054e0bb9df Hai Luu <luuph@bsscommerce.com> 1746416721 +0700	checkout: moving from v2.4.3-draft to master
+27a05a422daf820706059129732746054e0bb9df 316a11128df05cd203fd572d1db8ecb20f4080a3 Hai Luu <luuph@bsscommerce.com> 1746418893 +0700	checkout: moving from master to v2.4.3-draft
+316a11128df05cd203fd572d1db8ecb20f4080a3 27a05a422daf820706059129732746054e0bb9df Hai Luu <luuph@bsscommerce.com> 1746421635 +0700	checkout: moving from v2.4.3-draft to master
+27a05a422daf820706059129732746054e0bb9df 316a11128df05cd203fd572d1db8ecb20f4080a3 Hai Luu <luuph@bsscommerce.com> 1746427189 +0700	checkout: moving from master to v2.4.3-draft
+316a11128df05cd203fd572d1db8ecb20f4080a3 b6dda7761726610adcb855a72150920f9c1dfe01 Hai Luu <luuph@bsscommerce.com> 1748314564 +0700	checkout: moving from v2.4.3-draft to BSupport-7791

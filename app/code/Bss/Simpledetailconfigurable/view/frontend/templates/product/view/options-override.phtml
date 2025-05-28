@@ -29,7 +29,7 @@
             "priceOptions": {
                 "optionConfig": <?= /* @noEscape */ $block->getJsonConfig() ?>,
                 "controlContainer": ".field",
-                "priceHolderSelector": ".price-box[data-role=priceBox]"
+                "priceHolderSelector": "[data-product-id='<?= $block->escapeHtml($_productId) ?>'][data-role=priceBox]"
             }
         }
     }

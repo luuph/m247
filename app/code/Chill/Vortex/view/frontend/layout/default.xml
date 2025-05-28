@@ -4,5 +4,9 @@
         <referenceBlock name="header.links">
             <block class="Chill\Vortex\Block\AdminLink" name="admin_link" template="Chill_Vortex::admin_link.phtml"/>
         </referenceBlock>
+        <referenceContainer name="after.body.start">
+            <block class="Magento\Framework\View\Element\Template" name="chill.vortex.quicklinks"
+                   template="Chill_Vortex::quicklinks.phtml"/>
+        </referenceContainer>
     </body>
 </page>

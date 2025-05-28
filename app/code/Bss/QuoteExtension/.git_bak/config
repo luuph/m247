@@ -19,3 +19,9 @@
 	vscode-merge-base = origin/master
 [branch "v1.3.6-draft"]
 	vscode-merge-base = origin/master
+[branch "BSupport-7771"]
+	vscode-merge-base = origin/master
+[branch "v1.3.7-draft"]
+	vscode-merge-base = origin/master
+[branch "M2OSC-286"]
+	vscode-merge-base = origin/master

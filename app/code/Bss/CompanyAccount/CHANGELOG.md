@@ -1,7 +1,13 @@
 [Release Note](https://bsscommerce.com/magento-2-company-account-extension.html)
 =============
+v1.3.2 (Feb 28, 2025)
+=============
+* Fix not sending mail when delete sub-user & customer.
+* Fix bug minicart when config disable module
+* Fix bug button Send Order for Company Admin approve in mini cart display for role admin
+* Fix compatible module [Request for Quote](https://bsscommerce.com/magento-2-request-for-quote-extension.html)
 
-v1.3.1 (Jan 03, 2024)
+v1.3.1 (Jan 03, 2025)
 =============
 * Fix email sending errors when change password.
 * Remove all code sections that use customer session in the email flow.

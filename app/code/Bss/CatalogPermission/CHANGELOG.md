@@ -1,0 +1,64 @@
+[Release Note](https://bsscommerce.com/magento-2-catalog-permission-extension.html)
+=============
+## v1.2.5 (Feb 5, 2025)
+- Fix bug: show error when config disable catalog homepage.
+## v1.2.4 (Jan 9, 2025)
+- Add permission settings for home page like cms page.
+## v1.2.3 (Jul 21, 2023)
+- Update: Compatible with Adobe Commerce
+## v1.2.2 (Jun 27, 2023)
+- Fix bugs: Cannot search when using together with BSS M2 Quick Order
+- Fix bugs: Compatibility issue with Elastic Search
+## GraphQL Add-on v1.0.0 (May 25, 2023)
+- Update GraphQL APIs to support PWA.
+## v1.2.1 (May 11, 2023)
+- Update: Compatible with Magento 2.4.6 & PHP8.2
+## v1.2.0 (Feb 22, 2023)
+- Fix bug: not assigning customer group when creating category via API (endpoints: /rest/V1/categories).
+## v1.1.9 (Dec 15, 2022)
+- Update: Compatible with elastic search.
+## v1.1.8 (Oct 20, 2022)
+- Update: Rest API create permison in catagory, cmsPage. Fix bug API try access to swagger.
+## v1.1.7 (Jul 31, 2022)
+- Add logic catalog permission in advanced search page. 
+- Fix bug cannot disable category link due to enabling Flat Catalog; Die when disabling Flat Catalog; Site does not have param store_id resulting in errors when creating new CMS page. 
+- Optimize code and make compatible with PHP8.1/M2.4.4.
+## v1.1.6 (Apr 07, 2021)
+- Fix SQL Error when other modules try to create CMS pages
+## v1.1.5 (Nov 04, 2020)
+- Fix logic config "Use Category Permission for Products Belonging to" Set "No"
+## v1.1.4 (August 5, 2020)
+- Fix product search issue when setting permission; 
+- Fix bug of changes not applied when changing customer group setting; 
+- Fix compatibility with M2 Wholesale Fast Order by BSS Commerce
+## v1.1.3 (July 9, 2020)
+- Fix bug of inaccessable of product page when disabling the module; Fix bug with config Redirect to Page
+## v1.1.2 (May 14, 2020)
+- Fix bug when creating new category in admin
+## v1.1.1 (May 12, 2020)
+- Add config select page, custom url for store config; 
+- Add config redirect type, select page, custom url, error message for category and page; 
+- Compatible with Magento 2.3.5
+## v1.0.9 (Apr 09, 2020)
+- Fix exception error when adding categories in CMS page editor; Fix wrong permission message issue
+## v1.0.8 (Oct 31, 2019)
+- Fix unserialize bug when value is null
+## v1.0.7 (Oct 23, 2019)
+- Update instruction for the module's configuration
+## v1.0.6 (Jun 17, 2019)
+- Compatible with Magento 2.3
+## v1.0.5 (Mar 11, 2019)
+- Compatible with Magento 2.2.7; 
+- Update logic of setting permission for category in multiple storeview website; 
+- Fix bug with config Product Restricted; 
+- Add note for config Redirect Link for category and CMS page
+## v1.0.4 (Jan 10, 2019)
+- Fix bug with Product Restricted; Optimize code
+## v1.0.3 (Nov 23, 2018)
+- Add Product Restricted config
+## v1.0.2 (Nov 02, 2018)
+- Update logic of hiding category when being set permission
+## v1.0.1 (Jul 28, 2018)
+- Fix message error when redirect cms page
+## v1.0.0 (Jun 20, 2018)
+- First Release

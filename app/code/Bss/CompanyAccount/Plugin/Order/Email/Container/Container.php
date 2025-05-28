@@ -64,17 +64,12 @@ class Container
      */
     public function afterGetCustomerEmail(\Magento\Sales\Model\Order\Email\Container\Container $subject, $result)
     {
-        /** 
-         * Session is used for the case where a sub-user places an order, and the email is sent before the event 
-         * checkout_submit_all_after ở \Magento\Checkout\Model\Type\Onepage::saveOrder
-         */
-        $subUserEmail = '';
-        $subUserEmail = $this->getSubUserEmail();
-        if($subUser = $this->customerSession->getSubUser()) {
-            $subUserEmail = $subUser->getSubEmail();
+        if ($this->getSubUserEmail()) {
+            return $this->getSubUserEmail();
         }
-        if ($subUserEmail) {
-            return $subUserEmail;
+        $subUser = $this->customerSession->getSubUser();
+        if ($subUser && $subUser->getSubStatus()) {
+            return $subUser->getSubEmail();
         }
         return $result;
     }
@@ -82,7 +77,7 @@ class Container
     /**
      * Get registered sub-user
      *
-     * @return \Bss\CompanyAccount\Api\Data\SubUserInterface
+     * @return string
      */
     protected function getSubUserEmail()
     {
